@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title></title>
+    <!-- Path to Framework7 Library CSS-->
+    <link rel="stylesheet" href="css/framework7.material.min.css">
+    <link rel="stylesheet" href="css/framework7.material.colors.min.css">
+    <!-- Path to your custom app styles-->
+    <link rel="stylesheet" href="css/my-app.css">
+	<script type="text/javascript" src="js/register.js"/>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <!-- Status bar overlay for fullscreen mode-->
+    <div class="statusbar-overlay"></div>
+    <!-- Panels overlay-->
+    <div class="panel-overlay"></div>
+    <!-- Left panel with reveal effect-->
+    <div class="panel panel-left panel-reveal">
+      <div class="content-block">
+        <p>Left panel content goes here</p>
+      </div>
+    </div>
+    <!-- Right panel with cover effect-->
+    <div class="panel panel-right panel-cover">
+      <div class="content-block">
+        <p>Right panel content goes here</p>
+      </div>
+    </div>
+    <!-- Views-->
+    <div class="views">
+      <!-- Your main view, should have "view-main" class-->
+      <div class="view view-main">
+        <!-- Top Navbar-->
+        <div class="navbar">
+          <div class="navbar-inner">
+            <!-- We have home navbar without left link-->
+            <div class="center sliding"></div>
+			<!--Back Icon Coding-->
+			<div class="left"><a href="logo.html" class="back link icon-only"><i class="icon icon-back"></i></a></div>
+
+            <div class="right">
+              <!-- Right link contains only icon - additional "icon-only" class--><a href="#" class="link icon-only open-panel"> <i class="icon icon-bars"></i></a>
+            </div>
+          </div>
+        </div>
+        <!-- Pages, because we need fixed-through navbar and toolbar, it has additional appropriate classes-->
+        <div class="pages navbar-through toolbar-through">
+          <!-- Page, data-page contains page name-->
+          <div data-page="index" class="page">
+            <!-- Scrollable page content--><br>
+            <div class="page-content">
+			<form id="myform" name="myform" method="POST">
+              <div class="list-block input-lists">
+					<ul>
+					<!-- Text inputs -->
+					<li>
+						<div class="item-content">
+						<div class="item-media"><i class="icon icon-form-name"></i></div>
+						<div class="item-inner">
+						<!--<div class="item-title floating-label">Your name</div>-->
+						<div class="item-input">
+						<input required type="text" name="name" id="name" placeholder="Enter Your Name">
+						</div>
+						</div>
+						</div>
+					</li>
+					<li>
+						<div class="item-content">
+						<div class="item-media"><i class="icon icon-form-name"></i></div>
+						<div class="item-inner">
+						
+						<div class="item-input">
+						
+						<input type="password" name="password"  id="password"   placeholder="Please Enter Password" title="Minimum 8 characters, one number, one uppercase and one lowercase letter"  required pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*"  aria-required=”true”/> 
+              <p class="validation01">
+						<span class="invalid">Minimum 8 characters, one number, one uppercase letter and one lowercase letter</span>
+						<span class="valid">Your password meets our requirements, thank you.</span>
+					</p>
+						
+						
+						<!--<input type="password" placeholder="Enter Password">-->
+						</div>
+						</div>
+						</div>
+					</li>
+					<li>
+						<div class="item-content">
+						<div class="item-media"><i class="icon icon-form-name"></i></div>
+						<div class="item-inner">
+						
+						<div class="item-input">
+						
+						
+						<input type="number" name="mobileno"  id="mobileno" pattern="\d{10}" placeholder="Please enter a ten digit phone number" required aria-required=”true”/>
+						<p class="validation01">
+						<span class="invalid">No spaces or brackets e.g. 0390001234</span>
+						<span class="valid">That's what we wanted!</span>
+						</p>
+						
+						
+						
+						
+						
+						<!--<input type="number" placeholder="Enter A 10 Digit Mobile Number">-->
+						</div>
+						</div>
+						</div>
+					</li>
+					
+					<li>
+						<div class="item-content">
+							<div class="item-media"><i class="icon icon-form-email"></i></div>
+							<div class="item-inner">
+							
+							<div class="item-input">
+							
+							<input type="email" name="emailid" id="emailid" placeholder="Enter E-mail Id" title="Please enter a valid email" required aria-required=”true” />
+						<p class="validation01">
+						<span class="invalid">Please enter a valid email address e.g. ryan@example.com</span>
+						<span class="valid">Thank you for entering a valid email</span>
+						</p>
+							
+							<!--<input type="email" placeholder="Enter Your E-mail Id">-->
+						</div>
+					</div>
+					</div>
+					</li>
+					
+					<li>
+					<center><a href="#" class="button button-fill color-red" name="signup" onclick="signup()" >SIGN UP</a></center>
+					</li>
+					<br>
+					<li><center>OR</center></li>
+					<br>
+					<li>
+					<center><a href="https://in.linkedin.com/" class="button button-fill color-blue" >SIGN UP WITH LINKED IN</a></center>
+					</li>
+					<br>
+					<li>
+					<center><i><a href="login.html">Skip</a></i></center>
+					</li>
+				</ul>					
+			  </div>
+			   
+              
+                  
+				</form>
+				
+				
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Bottom Toolbar-->
+
+      </div>
+    </div>
+    <!-- Path to Framework7 Library JS-->
+	
+    <script type="text/javascript" src="js/framework7.min.js"></script>
+    <!-- Path to your app js-->
+    <script type="text/javascript" src="js/my-app.js"></script>
+  </body>
+</html>
