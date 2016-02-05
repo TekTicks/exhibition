@@ -10,14 +10,14 @@
 			             {document.location='/Exhibition/ckvInsert';
 			             });
                              
-              //  response.sendRedirect("/Exhibition/ckvDemoServlet");
+                //  response.sendRedirect("/Exhibition/ckvDemoServlet");
                 }
                 else
                 {
                      $("#otpMsgBox").html('Please Enter valid OTP').addClass('myerror').fadeTo(900,1,function()
 			             {
 			             });
-                                     //document.location='ckvOtp.jsp';
+                //document.location='ckvOtp.jsp';
                 }
                    }	
    
