@@ -1,0 +1,34 @@
+ // Ajax validation for user name already exist.
+ function GetXmlHttpObject()
+        {
+            if (window.XMLHttpRequest)
+              {
+	  return new XMLHttpRequest();
+              }
+            else if (window.ActiveXObject)
+              {
+	// code for IE6, IE5
+	  return new ActiveXObject("Microsoft.XMLHTTP");
+              }
+            return null;
+        }
+
+ // User name function 
+ var XMLHttpUsername=false;
+ function UserCheckAvail1(contact)
+ {
+    XMLHttpUsername=GetXmlHttpObject();   
+    if (XMLHttpUsername==null){
+      alert ("Your browser does not support AJAX!");
+      return;
+    }
+    XMLHttpUsername.open("GET","/Exhibition/ckvDemoServlet?contact="+contact,true);
+    XMLHttpUsername.onreadystatechange = function(){
+       if (XMLHttpUsername.readyState==4 && XMLHttpUsername.status == 200){
+          document.getElementById('userChange1').innerHTML=XMLHttpUsername.responseText; 
+        }  
+    }
+    XMLHttpUsername.send(null); 
+
+
+}

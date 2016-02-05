@@ -1,16 +1,9 @@
-<%-- 
-    Document   : ckvindex
-    Created on : Jan 22, 2016, 4:48:07 PM
-    Author     : Admin
---%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
   <head>
     <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
     <meta charset="utf-8" />
-    <title>Pages - Admin Dashboard UI Kit - Form Wizard</title>
+    <title>Pages - Admin Dashboard UI Kit - Google Maps</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no" />
     <link rel="apple-touch-icon" href="pages/ico/60.png">
     <link rel="apple-touch-icon" sizes="76x76" href="pages/ico/76.png">
@@ -28,24 +21,14 @@
     <link href="assets/plugins/jquery-scrollbar/jquery.scrollbar.css" rel="stylesheet" type="text/css" media="screen" />
     <link href="assets/plugins/bootstrap-select2/select2.css" rel="stylesheet" type="text/css" media="screen" />
     <link href="assets/plugins/switchery/css/switchery.min.css" rel="stylesheet" type="text/css" media="screen" />
-    <link href="assets/plugins/bootstrap-timepicker/bootstrap-timepicker.min.css" rel="stylesheet" type="text/css" media="screen">
-    <link href="assets/plugins/pace/pace-theme-flash.css" rel="stylesheet" type="text/css" />
-    <link href="assets/plugins/boostrapv3/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="assets/plugins/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css" />
-    <link href="assets/plugins/jquery-scrollbar/jquery.scrollbar.css" rel="stylesheet" type="text/css" media="screen" />
-    <link href="assets/plugins/bootstrap-select2/select2.css" rel="stylesheet" type="text/css" media="screen" />
-    <link href="assets/plugins/switchery/css/switchery.min.css" rel="stylesheet" type="text/css" media="screen" />
-    <link href="assets/plugins/bootstrap3-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css" />
-    <link href="assets/plugins/bootstrap-tag/bootstrap-tagsinput.css" rel="stylesheet" type="text/css" />
-    <link href="assets/plugins/dropzone/css/dropzone.css" rel="stylesheet" type="text/css" />
-    <link href="assets/plugins/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet" type="text/css" media="screen">
-    <link href="assets/plugins/summernote/css/summernote.css" rel="stylesheet" type="text/css" media="screen">
-    <link href="assets/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" media="screen">
     <link href="pages/css/pages-icons.css" rel="stylesheet" type="text/css">
     <link class="main-stylesheet" href="pages/css/pages.css" rel="stylesheet" type="text/css" />
-    
+    <!--[if lte IE 9]>
+	<link href="assets/plugins/codrops-dialogFx/dialog.ie.css" rel="stylesheet" type="text/css" media="screen" />
+	<![endif]-->
   </head>
-  <body class="fixed-header ">
+  <body class="fixed-header no-header">
+    <!-- BEGIN SIDEBPANEL-->
     <nav class="page-sidebar" data-pages="sidebar">
       <!-- BEGIN SIDEBAR MENU TOP TRAY CONTENT-->
       <div class="sidebar-overlay-slide from-top" id="appMenu">
@@ -85,92 +68,282 @@
       <!-- START SIDEBAR MENU -->
       <div class="sidebar-menu">
         <!-- BEGIN SIDEBAR MENU ITEMS-->
-        <ul class="menu-items"> 
-            <li class="">
-            <a href="ckvindex.jsp" class="detailed">
+        <ul class="menu-items">
+          <li class="m-t-30 ">
+            <a href="index.html" class="detailed">
               <span class="title">Dashboard</span>
-              <span class="details">No items</span>
+              <span class="details">12 New Updates</span>
             </a>
             <span class="bg-success icon-thumbnail"><i class="pg-home"></i></span>
           </li>
           <li class="">
-            <a href="ckvProfile.jsp" class="detailed">
-              <span class="title">Profile</span>
-              <span class="details">No items</span>
+            <a href="http://pages.revox.io/dashboard/2.1.0/html/widget.html" class="detailed">
+              <span class="title">Widgets</span>
+              <span class="details">19 items</span>
             </a>
-            <span class="icon-thumbnail">P</span>
+            <span class="icon-thumbnail">W</span>
+          </li>
+          <li class="">
+            <a href="email.html" class="detailed">
+              <span class="title">Email</span>
+              <span class="details">234 New Emails</span>
+            </a>
+            <span class="icon-thumbnail"><i class="pg-mail"></i></span>
+          </li>
+          <li class="">
+            <a href="social.html"><span class="title">Social</span></a>
+            <span class="icon-thumbnail"><i class="pg-social"></i></span>
           </li>
           <li>
-            <a href="javascript:;"><span class="title">Exhibitions</span>
+            <a href="javascript:;"><span class="title">Calendar</span>
             <span class=" arrow"></span></a>
-            <span class="bg-success icon-thumbnail"><i class="pg-home"></i></span>
+            <span class="icon-thumbnail"><i class="pg-calender"></i></span>
             <ul class="sub-menu">
               <li class="">
-                <a href="ckvProfile.jsp">Add Exhibitions</a>
-                <span class="icon-thumbnail">P</span>
-              </li>
-           
-              <li class="">
-                <a href="ckvProfile.jsp">Modify Exhibitions</a>
-                <span class="icon-thumbnail">Me</span>
+                <a href="calendar.html">Basic</a>
+                <span class="icon-thumbnail">c</span>
               </li>
               <li class="">
-                <a href="ckvAddadmin.jsp">Add Administrator</a>
-                <span class="icon-thumbnail">Mv</span>
+                <a href="calendar_lang.html">Languages</a>
+                <span class="icon-thumbnail">L</span>
               </li>
-           </ul>
+              <li class="">
+                <a href="calendar_month.html">Month</a>
+                <span class="icon-thumbnail">M</span>
+              </li>
+              <li class="">
+                <a href="calendar_lazy.html">Lazy load</a>
+                <span class="icon-thumbnail">La</span>
+              </li>
+              <li class="">
+                <a href="http://pages.revox.io/dashboard/2.1.0/doc/#calendar" target="_blank">Documentation</a>
+                <span class="icon-thumbnail">D</span>
+              </li>
+            </ul>
           </li>
-          
-          
-           <li>
-            <a href="javascript:;"><span class="title">Exhibitors</span>
+          <li class="">
+            <a href="builder.html">
+              <span class="title">Builder</span>
+            </a>
+            <span class="icon-thumbnail"><i class="pg-layouts"></i></span>
+          </li>
+          <li>
+            <a href="javascript:;"><span class="title">Layouts</span>
             <span class=" arrow"></span></a>
-            <span class="bg-success icon-thumbnail"><i class="pg-home"></i></span>
+            <span class="icon-thumbnail"><i class="pg-layouts2"></i></span>
             <ul class="sub-menu">
               <li class="">
-                <a href="ckvProfile.jsp">Add Exhibitors</a>
-                <span class="icon-thumbnail">P</span>
+                <a href="default_layout.html">Default</a>
+                <span class="icon-thumbnail">dl</span>
               </li>
-           
-              
-           </ul>
+              <li class="">
+                <a href="secondary_layout.html">Secondary</a>
+                <span class="icon-thumbnail">sl</span>
+              </li>
+              <li class="">
+                <a href="boxed_layout.html">Boxed</a>
+                <span class="icon-thumbnail">bl</span>
+              </li>
+              <li class="">
+                <a href="sidemenu_and_horizontal_menu.html">Horizontal Menu</a>
+                <span class="icon-thumbnail">hm</span>
+              </li>
+              <li class="">
+                <a href="rtl_layout.html">RTL</a>
+                <span class="icon-thumbnail">rl</span>
+              </li>
+              <li class="">
+                <a href="builder.html#tabContent">Columns</a>
+                <span class="icon-thumbnail">cl</span>
+              </li>
+            </ul>
           </li>
-          
-          
-            <li>
-            <a href="javascript:;"><span class="title">Visitors</span>
+          <li>
+            <a href="javascript:;"><span class="title">UI Elements</span>
             <span class=" arrow"></span></a>
-            <span class="bg-success icon-thumbnail"><i class="pg-home"></i></span>
+            <span class="icon-thumbnail">Ui</span>
             <ul class="sub-menu">
               <li class="">
-                <a href="ckvProfile.jsp">Add Exhibitors</a>
-                <span class="icon-thumbnail">P</span>
+                <a href="color.html">Color</a>
+                <span class="icon-thumbnail">c</span>
               </li>
-           
-              
-           </ul>
+              <li class="">
+                <a href="typography.html">Typography</a>
+                <span class="icon-thumbnail">t</span>
+              </li>
+              <li class="">
+                <a href="icons.html">Icons</a>
+                <span class="icon-thumbnail">i</span>
+              </li>
+              <li class="">
+                <a href="buttons.html">Buttons</a>
+                <span class="icon-thumbnail">b</span>
+              </li>
+              <li class="">
+                <a href="notifications.html">Notifications</a>
+                <span class="icon-thumbnail">n</span>
+              </li>
+              <li class="">
+                <a href="modals.html">Modals</a>
+                <span class="icon-thumbnail">m</span>
+              </li>
+              <li class="">
+                <a href="progress.html">Progress &amp; Activity</a>
+                <span class="icon-thumbnail">pa</span>
+              </li>
+              <li class="">
+                <a href="tabs_accordian.html">Tabs &amp; Accordions</a>
+                <span class="icon-thumbnail">ta</span>
+              </li>
+              <li class="">
+                <a href="sliders.html">Sliders</a>
+                <span class="icon-thumbnail">s</span>
+              </li>
+              <li class="">
+                <a href="tree_view.html">Tree View</a>
+                <span class="icon-thumbnail">tv</span>
+              </li>
+              <li class="">
+                <a href="nestables.html">Nestable</a>
+                <span class="icon-thumbnail">ns</span>
+              </li>
+            </ul>
           </li>
-          
-             <li class="">
-            <a href="ckvNotification.jsp" class="detailed">
-              <span class="title">Notification</span>
-              <span class="details">12 New Notification</span>
+          <li>
+            <a href="javascript:;">
+              <span class="title">Forms</span>
+              <span class=" arrow"></span>
             </a>
-            <span class="icon-thumbnail">N</span>
+            <span class="icon-thumbnail"><i class="pg-form"></i></span>
+            <ul class="sub-menu">
+              <li class="">
+                <a href="form_elements.html">Form Elements</a>
+                <span class="icon-thumbnail">fe</span>
+              </li>
+              <li class="">
+                <a href="form_layouts.html">Form Layouts</a>
+                <span class="icon-thumbnail">fl</span>
+              </li>
+              <li class="">
+                <a href="form_wizard.html">Form Wizard</a>
+                <span class="icon-thumbnail">fw</span>
+              </li>
+            </ul>
           </li>
-        
-           <li class="">
-            <a href="ckvNotification.jsp" class="detailed">
-              <span class="title">Reports</span>
+          <li class="">
+            <a href="portlets.html">
+              <span class="title">Portlets</span>
             </a>
-            <span class="icon-thumbnail">R</span>
+            <span class="icon-thumbnail"><i class="pg-grid"></i></span>
           </li>
-          
-           <li class="">
-            <a href="ckvNotification.jsp" class="detailed">
-              <span class="title">Privacy</span>
+          <li class="">
+            <a href="views.html">
+              <span class="title">Views</span>
             </a>
-            <span class="icon-thumbnail">P</span>
+            <span class="icon-thumbnail"><i class="pg pg-ui"></i></span>
+          </li>
+          <li>
+            <a href="javascript:;"><span class="title">Tables</span>
+            <span class=" arrow"></span></a>
+            <span class="icon-thumbnail"><i class="pg-tables"></i></span>
+            <ul class="sub-menu">
+              <li class="">
+                <a href="tables.html">Basic Tables</a>
+                <span class="icon-thumbnail">bt</span>
+              </li>
+              <li class="">
+                <a href="datatables.html">Data Tables</a>
+                <span class="icon-thumbnail">dt</span>
+              </li>
+            </ul>
+          </li>
+          <li class="open active">
+            <a href="javascript:;"><span class="title">Maps</span> 
+            <span class=" open  arrow"></span></a>
+            <span class="icon-thumbnail"><i class="pg-map"></i></span>
+            <ul class="sub-menu">
+              <li class="">
+                <a href="google_map.html">Google Maps</a>
+                <span class="icon-thumbnail">gm</span>
+              </li>
+              <li class="">
+                <a href="vector_map.html">Vector Maps</a>
+                <span class="icon-thumbnail">vm</span>
+              </li>
+            </ul>
+          </li>
+          <li class="">
+            <a href="charts.html"><span class="title">Charts</span></a>
+            <span class="icon-thumbnail"><i class="pg-charts"></i></span>
+          </li>
+          <li>
+            <a href="javascript:;"><span class="title">Extra</span>
+            <span class=" arrow"></span></a>
+            <span class="icon-thumbnail"><i class="pg-bag"></i></span>
+            <ul class="sub-menu">
+              <li class="">
+                <a href="invoice.html">Invoice</a>
+                <span class="icon-thumbnail">in</span>
+              </li>
+              <li class="">
+                <a href="404.html">404 Page</a>
+                <span class="icon-thumbnail">pg</span>
+              </li>
+              <li class="">
+                <a href="500.html">500 Page</a>
+                <span class="icon-thumbnail">pg</span>
+              </li>
+              <li class="active">
+                <a href="blank_template.html">Blank Page</a>
+                <span class="icon-thumbnail">bp</span>
+              </li>
+              <li class="">
+                <a href="login.html">Login</a>
+                <span class="icon-thumbnail">l</span>
+              </li>
+              <li class="">
+                <a href="register.html">Register</a>
+                <span class="icon-thumbnail">re</span>
+              </li>
+              <li class="">
+                <a href="lock_screen.html">Lockscreen</a>
+                <span class="icon-thumbnail">ls</span>
+              </li>
+              <li class="">
+                <a href="gallery.html">Gallery</a>
+                <span class="icon-thumbnail">gl</span>
+              </li>
+              <li class="">
+                <a href="timeline.html">Timeline</a>
+                <span class="icon-thumbnail">t</span>
+              </li>
+            </ul>
+          </li>
+          <li class="">
+            <a href="javascript:;"><span class="title">Menu Levels</span>
+            <span class="arrow"></span></a>
+            <span class="icon-thumbnail"><i class="pg-menu_lv"></i></span>
+            <ul class="sub-menu">
+              <li>
+                <a href="javascript:;">Level 1</a>
+                <span class="icon-thumbnail">L1</span>
+              </li>
+              <li>
+                <a href="javascript:;"><span class="title">Level 2</span>
+                <span class="arrow"></span></a>
+                <span class="icon-thumbnail">L2</span>
+                <ul class="sub-menu">
+                  <li>
+                    <a href="javascript:;">Sub Menu</a>
+                    <span class="icon-thumbnail">Sm</span>
+                  </li>
+                  <li>
+                    <a href="ujavascript:;">Sub Menu</a>
+                    <span class="icon-thumbnail">Sm</span>
+                  </li>
+                </ul>
+              </li>
+            </ul>
           </li>
         </ul>
         <div class="clearfix"></div>
@@ -182,7 +355,7 @@
     <!-- START PAGE-CONTAINER -->
     <div class="page-container ">
       <!-- START HEADER -->
-      <div class="header ">
+      <div class="header transparent">
         <!-- START MOBILE CONTROLS -->
         <div class="container-fluid relative">
           <!-- LEFT SIDE -->
@@ -385,391 +558,43 @@
       </div>
       <!-- END HEADER -->
       <!-- START PAGE CONTENT WRAPPER -->
-      <div class="page-content-wrapper ">
+      <div class="page-content-wrapper full-height">
         <!-- START PAGE CONTENT -->
-        <div class="content ">
-          <!-- START CONTAINER FLUID -->
-          <div class="container-fluid container-fixed-lg">
-            <div id="rootwizard" class="m-t-50">
-              <!-- Nav tabs -->
-              <ul class="nav nav-tabs nav-tabs-linetriangle nav-tabs-separator nav-stack-sm">
-               
-                <li class="">
-                  <a data-toggle="tab" href="#tab1"><i class="fa fa-truck tab-icon"></i> <span>Owner Profile</span></a>
-                </li>
-                
-                <li class="">
-                  <a data-toggle="tab" href="#tab2"><i class="fa fa-truck tab-icon"></i> <span>Company Info</span></a>
-                </li>
-                
-                  <li class="">
-                  <a data-toggle="tab" href="#tab3"><i class="fa fa-truck tab-icon"></i> <span>Address Information</span></a>
-                </li>
-                
-                <li class="">
-                  <a data-toggle="tab" href="#tab4"><i class="fa fa-truck tab-icon"></i> <span>Representative</span></a>
-                </li>
-               
-                <li class="">
-                  <a data-toggle="tab" href="#tab5"><i class="fa fa-check tab-icon"></i> <span>About</span></a>
-                </li>
-              </ul>
-              <!-- Tab panes -->
-              <div class="tab-content">
-<!----------------------------------------------------------------------------------------------------------------------------------------------------->
-                <div class="tab-pane slide-left padding-20" id="tab1">
-                  <div class="row row-same-height">
-                    <div class="col-md-5 b-r b-dashed b-grey ">
-                      <div class="padding-30 m-t-50">
-                        <div class="col-lg-7 col-md-6 col-md-height col-middle bg-white">
-                      <!-- START PANEL -->
-                      <div class="full-height">
-                        <div class="panel-body text-center">
-                          <img class="image-responsive-height demo-mw-500" src="assets/img/demo/typography_hero.gif" alt="">
-                        </div>
-                      </div>
-                      <!-- END PANEL -->
-                    </div>
-                      </div>
-                    </div>
-                    <div class="col-md-7">
-                      <div class="padding-30">
-                        <form action="ckvProfileSave.jsp" method="post" role="form">
-                                
-                                               
-                            <div class="form-group form-group-default required">
-                              <label>NAME</label>
-                              <input type="text" name="name" class="form-control" required>
-                            </div>
-                         
-                          <div class="form-group form-group-default required">
-                              <label>Primary Email</label>
-                              <input type="text" name="p_email" class="form-control" required>
-                            </div>
-                          
-                          <div class="form-group form-group-default required">
-                              <label>Secondary Email</label>
-                              <input type="text" name="s_email" class="form-control" required>
-                            </div>
-                          
-                            <div class="form-group form-group-default required">
-                              <label>About</label>
-                               <input type="text" name="about" class="form-control" placeholder="Current address" required>
-                               
-                            </div> 
-                              
-                            
-                            <div class="form-group form-group-default input-group">
-                              <span class="input-group-addon">
-                                            <select class="cs-select cs-skin-slide cs-transparent" data-init-plugin="cs-select">
-                                            <option data-countryCode="GB" value="44" Selected>UK (+44)</option>
-                                            <option data-countryCode="US" value="1">USA (+1)</option>
-                                            <option data-countryCode="AR" value="54">Argentina (+54)</option>
-                                            <option data-countryCode="AU" value="61">Australia (+61)</option>
-                                            <option data-countryCode="AT" value="43">Austria (+43)</option>
-                                            <option data-countryCode="BE" value="32">Belgium (+32)</option>
-                                            <option data-countryCode="BZ" value="501">Belize (+501)</option>
-                                            <option data-countryCode="CN" value="86">China (+86)</option>
-                                            <option data-countryCode="IS" value="354">Iceland (+354)</option>
-                                            <option data-countryCode="IN" value="91">India (+91)</option>
-                                            <option data-countryCode="MY" value="60">Malaysia (+60)</option>
-                                            <option data-countryCode="ZW" value="263">Zimbabwe (+263)</option>
-                                        </select>
-                                        </span>
-                              <label>Primary Contact</label>
-                              <input type="text" name="p_contact" class="form-control" placeholder="For verification purpose">
-                            </div>
-                             
-                             <div class="form-group form-group-default required">
-                               <label>Secondary Contact</label>
-                              <input type="text" name="s_contact" class="form-control" required>
-                            </div>
-                              
-                               <div class="form-group form-group-default required">
-                              <label>Website</label>
-                              <input type="text" name="website" class="form-control" required>
-                            </div>
-                              <br>
-                            <!--  <div class="m-t-15">
-                                  <center>
-                                      <button class="btn btn-info btn-cons m-b-10" type="button"><i class="fa fa-paste"></i> <span class="bold">Edit</span>
-                                        </button>
-                                      <button class="btn btn-primary btn-cons m-b-10" type="button"><i class="pg-form"></i> <span class="bold">Submit</span>
-                                        </button>
-                                  </center>
-                      
-                               </div>-->
-                             <center> 
-                                 <button class="btn btn-success" type="submit">Submit</button>
-                                 <button class="btn btn-default"><i class="pg-close"></i> Clear</button> 
-                             </center>
-  
-                         
-                        </form>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-    <!----------------------------------------------------------------------------------------------------------------------------------------------------->
-        <div class="tab-pane slide-left padding-20" id="tab2">
-                    
-                  <div class="col-md-8">
-                <!-- START PANEL -->
-                <div class="panel panel-default">
-                  <div class="panel-heading">
-                    <div class="panel-title">
-                      Company Information
-                    </div>
-                  </div>
-                  <div class="panel-body">
-                   
-                    <form class="" role="form">
-                      <div class="form-group form-group-default required ">
-                        <label>Name of the Company :</label>
-                        <input type="email" class="form-control" required>
-                      </div>
-                      <div class="form-group form-group-default">
-                            <label class="label-lg">Address</label>
-                            <input type="text" placeholder="" class="form-control input-lg">
-                          </div>
-                      
-                      <div class="form-group  form-group-default required">
-                        <label>Email-Id</label>
-                        <input type="email" class="form-control" placeholder="ex: some@example.com" required>
-                      </div>
-                      <div class="form-group form-group-default disabled">
-                        <label>Disabled</label>
-                        <input type="email" class="form-control" value="You can put anything here" disabled>
-                      </div>
-                        <br>
-                              <div class="m-t-15">
-                                  <!--<center>
-                                      <button class="btn btn-info btn-cons m-b-10" type="button"><i class="fa fa-paste"></i> <span class="bold">Edit</span>
-                                        </button>
-                                      <button class="btn btn-primary btn-cons m-b-10" type="button"><i class="pg-form"></i> <span class="bold">Submit</span>
-                                        </button>
-                                  </center>-->
-                                   <center> <button class="btn btn-success" type="submit">Submit</button>
-                          <button class="btn btn-default"><i class="pg-close"></i> Clear</button> </center>
-                      
-                               </div>
-                    </form>
-                  </div>
-                </div>
-                <!-- END PANEL -->
-              </div>
-            
-            
-              
-                    
-                </div>
-                            
- <!----------------------------------------------------------------------------------------------------------------------------------------------------->
-    
-    
-    <div class="tab-pane slide-left padding-20" id="tab3">
-                     <div class="col-md-7">
-                      <div class="padding-30">
-                        <form action="ckvAddressSave.jsp" method="post" role="form">
-                          
-                         
-                          <div class="form-group-attached">
-                                <div class="form-group">
-                                    <label>Address 1</label>
-                                      <input type="text" name="address1" id="tin" class="form-control">
-                                     </div>
-                               
-                             <div class="form-group">
-                                    <label>Address 2</label>
-                                      <input type="text" name="address2"id="tin" class="form-control">
-                                     </div>
-                            <div class="row clearfix">
-                            
-                               <div class="form-group">
-                                    <label>Zip Code</label>
-                                      <input type="text" name="zipcode"id="tin" class="form-control">
-                                     </div>
-                            </div>
-                             <div class="form-group">
-                                    <label>Landmark</label>
-                                      <input type="text" name="landmark"id="tin" class="form-control">
-                                     </div>
-                              <br>
-                              <div class="form-group">
-                                    <label>Map Link</label>
-                                      <input type="text" name="maplink"id="tin" class="form-control">
-                                     </div>
-                              <br>
-                              <br>
-                              <div class="form-group">
-                               <center> <button class="btn btn-success" type="submit">Submit</button>
-                          <button class="btn btn-default"><i class="pg-close"></i> Clear</button> </center>
-                          </div>
-                          </div>    
-                        </form>
-                      </div>
-                    </div>
-                </div>
-                  
- 
-   <!----------------------------------------------------------------------------------------------------------------------------------------------------->
-        <div class="tab-pane slide-left padding-20" id="tab4">
-                    
-            
-                  <div class="container-fluid container-fixed-lg bg-white">
-            <div class="row">
-              <div class="col-sm-5">
-                <!-- START PANEL -->
-                <div class="panel panel-transparent">
-                  <div class="panel-heading">
-                    <div class="panel-title">Represntatives
-                    </div>
-                  </div>
-                  <div class="panel-body">
-                    <h3>Keep in Touch
-							&amp; Create Contemporary feels</h3>
-                    <p>Despite the UI, We thought of the User experience, With attached From Layouts you can simply categories Important fields and prioritize them.</p>
-                    <br>
-                    <div>
-                      <div class="profile-img-wrapper m-t-5 inline">
-                        <img width="35" height="35" src="assets/img/profiles/avatar_small.jpg" alt="" data-src="assets/img/profiles/avatar_small.jpg" data-src-retina="assets/img/profiles/avatar_small2x.jpg">
-                        <div class="chat-status available">
-                        </div>
-                      </div>
-                      <div class="inline m-l-10">
-                        <p class="small hint-text">VIA senior product manage
-                          <br> for UI/UX at REVOX</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- END PANEL -->
-              </div>
-              <div class="col-sm-7">
-                <!-- START PANEL -->
-                <div class="panel panel-transparent">
-                  <div class="panel-body">
-                    <form action="ckvRepresentativeSave.jsp" method="post" id="form-project" role="form" autocomplete="off">
-                            <p>Basic Information</p>
-                            <div class="form-group form-group-default required">
-                              <label>Title</label>
-                              <input type="text" name="title1" class="form-control"  required>
-                            </div>
-                            <div class="form-group-attached">
-                            <div class="row clearfix">
-                                <div class="col-sm-6">
-                                <div class="form-group form-group-default required">
-                                     <label>First name</label>
-                                     <input type="text" name="fname" class="form-control" name="firstName" required>
-                                </div>
-                                </div>
-                                <div class="col-sm-6">
-                                 <div class="form-group form-group-default">
-                                     <label>Last name</label>
-                                     <input type="text" name="lname" class="form-control" name="lastName">
-                                </div>
-                                </div>
-                            </div>
-                            </div>
-                                 <p class="m-t-10">Other Information</p>
-                            <div class="form-group">
-                                <label>Email</label>
-                                <span class="help">e.g. "some@example.com"</span>
-                                <input type="email" name="email" class="form-control" placeholder="ex: some@example.com" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Gender</label>
-                                <div class="radio radio-success">
-                                <input type="radio" value="0" name="optionyes" id="male">
-                                <label for="male">Male</label>
-                                <input type="radio" checked="checked" value="1" name="optionyes" id="female">
-                                <label for="female">Female</label>
-                                </div>
-                            </div>  
-                     
-                             <div class="form-group">
-                      <label>Date of Birth</label>
-                      <span class="help">e.g. "25/12/2013"</span>
-                      <input type="date" name="dateofbirth" id="date" class="form-control">
-                    </div>
-                   
-                      <div class="form-group">
-                      <label>Designation</label>
-                      <input type="text" name="designation" id="phone" class="form-control">
-                    </div>
-                          
-                        <div class="form-group">
-                      <label>Telephone</label>
-                      <span class="help">e.g. "(324) 234-3243"</span>
-                      <input type="text" name="telephone" id="phone" class="form-control">
-                    </div>
-                                        
-                    <div class="form-group">
-                        <label>Mobile number</label>
-                      <span class="help">e.g. "23-4324324"</span>
-                      <input type="text" name="mobileno" id="tin" class="form-control">
-                    </div>
-                     
-                </div>
-                      <br>
-                      <center> <button class="btn btn-success" type="submit">Submit</button>
-                          <button class="btn btn-default"><i class="pg-close"></i> Clear</button> </center>
-                    </form>
-                  </div>
-                </div>
-                <!-- END PANEL -->
-              </div>
-            </div>
-         
-                    
-                    
-            
-            
-            
-                </div>
-<!----------------------------------------------------------------------------------------------------------------------------------------------------->                  
-                <div class="tab-pane slide-left padding-20" id="tab5">
-                    
-                    <div class="row-xs-height">
-                                <div class="social-user-profile col-xs-height text-center col-top">
-                                  <div class="thumbnail-wrapper d48 circular bordered b-white">
-                                    <img alt="Avatar" width="55" height="55" data-src-retina="assets/img/profiles/avatar_small2x.jpg" data-src="assets/img/profiles/avatar.jpg" src="assets/img/profiles/avatar.jpg">
-                                  </div>
-                                  <br>
-                                  <i class="fa fa-check-circle text-success fs-16 m-t-10"></i>
-                                </div>
-                                <div class="col-xs-height p-l-20">
-                                  <h3 class="no-margin">David Nester</h3>
-                                  <p class="no-margin fs-16">is excited about the new pages design framework
-                                  </p>
-                                  <p class="hint-text m-t-5 small">San Fransisco Bay | CEO at Pages.inc
-                                  </p>
-                                </div>
-                              </div>
-                    
-                    
-                </div>
-                
-                
+        <div class="content full-width full-height overlay-footer">
+          <!-- START CONTENT INNER -->
+          <div class="map-controls">
+            <div class="pull-left">
+              <div class="btn-group btn-group-vertical" data-toggle="buttons-radio">
+                <button id="map-zoom-in" class="btn btn-success btn-xs"><i class="fa fa-plus"></i>
+                </button>
+                <button id="map-zoom-out" class="btn btn-success btn-xs"><i class="fa fa-minus"></i>
+                </button>
               </div>
             </div>
           </div>
-          <!-- END CONTAINER FLUID -->
+          <!-- Map -->
+          <div class="map-container full-width full-height">
+            <div id="google-map" class="full-width full-height"></div>
+          </div>
+          <!-- END CONTENT INNER -->
         </div>
         <!-- END PAGE CONTENT -->
         <!-- START COPYRIGHT -->
         <!-- START CONTAINER FLUID -->
-        <!-- START CONTAINER FLUID -->
-        <div class="container-fluid container-fixed-lg footer">
-          <div class="copyright sm-text-center">
-            <p class="small no-margin pull-left sm-pull-reset">
-              <span class="hint-text">Copyright &copy; 2014 </span>
+        <div class="container-fluid container-fixed-lg pull-bottom hidden-xs">
+          <div class="copyright no-border">
+            <p class="small no-margin pull-left"><span class="hint-text">Copyright &copy; 2014</span>
               <span class="font-montserrat">REVOX</span>.
-              <span class="hint-text">All rights reserved. </span>
-              <span class="sm-block"><a href="#" class="m-l-10 m-r-10">Terms of use</a> | <a href="#" class="m-l-10">Privacy Policy</a></span>
+              <span class="hint-text">All rights reserved.</span>
+              <span>
+                <a class="m-l-10" href="#">Terms of use</a>
+                <a class="m-l-10" href="#">Privacy Policy</a>
+            </span>
             </p>
-            <p class="small no-margin pull-right sm-pull-reset">
-              <a href="#">Hand-crafted</a> <span class="hint-text">&amp; Made with Love ®</span>
+            <p class="small no-margin pull-right">
+              <a href="#"> Hand-crafted</a>
+              <span class="hint-text">&amp; Made with Love
+            &copy;</span>
             </p>
             <div class="clearfix"></div>
           </div>
@@ -2051,24 +1876,13 @@
     <script type="text/javascript" src="assets/plugins/bootstrap-select2/select2.min.js"></script>
     <script type="text/javascript" src="assets/plugins/classie/classie.js"></script>
     <script src="assets/plugins/switchery/js/switchery.min.js" type="text/javascript"></script>
-    <script src="assets/plugins/bootstrap3-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
-    <script type="text/javascript" src="assets/plugins/jquery-autonumeric/autoNumeric.js"></script>
-    <script type="text/javascript" src="assets/plugins/dropzone/dropzone.min.js"></script>
-    <script type="text/javascript" src="assets/plugins/bootstrap-tag/bootstrap-tagsinput.min.js"></script>
-    <script type="text/javascript" src="assets/plugins/jquery-inputmask/jquery.inputmask.min.js"></script>
-    <script src="assets/plugins/boostrap-form-wizard/js/jquery.bootstrap.wizard.min.js" type="text/javascript"></script>
-    <script src="assets/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
-    <script src="assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
-    <script src="assets/plugins/summernote/js/summernote.min.js" type="text/javascript"></script>
-    <script src="assets/plugins/moment/moment.min.js"></script>
-    <script src="assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
-    <script src="assets/plugins/bootstrap-timepicker/bootstrap-timepicker.min.js"></script>
     <!-- END VENDOR JS -->
     <!-- BEGIN CORE TEMPLATE JS -->
     <script src="pages/js/pages.min.js"></script>
     <!-- END CORE TEMPLATE JS -->
     <!-- BEGIN PAGE LEVEL JS -->
-    <script src="assets/js/form_wizard.js" type="text/javascript"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp" type="text/javascript"></script>
+    <script src="assets/js/google_map.js" type="text/javascript"></script>
     <script src="assets/js/scripts.js" type="text/javascript"></script>
     <!-- END PAGE LEVEL JS -->
   </body>

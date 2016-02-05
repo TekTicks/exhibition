@@ -1,26 +1,26 @@
-
-<%-- 
-    Document   : ckvRegister
-    Created on : Jan 22, 2016, 6:56:24 PM
+<%--  
+    Document   : ckvOtp
+    Created on : Feb 1, 2016, 12:09:14 PM
     Author     : Admin
 --%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <!DOCTYPE html>
 <html>
   <head>
- 
     <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
     <meta charset="utf-8" />
-    <title>Owner Registration Page</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <link rel="apple-touch-icon" href="pages/ico/60.png"> 
+    <title>OTP Verification</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no" />
+    <link rel="apple-touch-icon" href="pages/ico/60.png">
     <link rel="apple-touch-icon" sizes="76x76" href="pages/ico/76.png">
     <link rel="apple-touch-icon" sizes="120x120" href="pages/ico/120.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="pages/ico/152.png"> 
+    <link rel="apple-touch-icon" sizes="152x152" href="pages/ico/152.png">
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
     <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta content="" name="description" />
     <meta content="" name="author" />
@@ -32,13 +32,8 @@
     <link href="assets/plugins/switchery/css/switchery.min.css" rel="stylesheet" type="text/css" media="screen" />
     <link href="pages/css/pages-icons.css" rel="stylesheet" type="text/css">
     <link class="main-stylesheet" href="pages/css/pages.css" rel="stylesheet" type="text/css" />
-    <link href="pages/css/ie9.css" rel="stylesheet" type="text/css" />
     <link href="pages/css/ckvajax.css" rel="stylesheet" type="text/css" />   
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script src="pages/js/jquery-1.4.2.min.js"></script>
-    <script src="pages/js/regValidation.js"></script>
-    <script src="pages/js/regVerification.js"></script>
-    
+    <script src="pages/js/checkOtp.js"></script>
 
   </head>
   <body class="fixed-header ">
@@ -46,86 +41,25 @@
       <div class="container-sm-height full-height">
         <div class="row row-sm-height">
           <div class="col-sm-12 col-sm-height col-middle">
-           <h1><b> Sign up </h1>
-           <h3>Pages makes it easy to enjoy what matters the most in your life</h3>
+            <h1><b> Verification </h1>
+            <h3>Enter the One Time Password sent to your mobile number or Email ID.</h3>
             
-            <form name="login_frm" id="login_frm" class="p-t-15"  >
+            <form id="form-register" class="p-t-15" role="form">
             
-                <div class="row">
-                 <div class="col-sm-12">
-                  <div class="form-group form-group-default">
-                    <label>Company Name</label>
-                    <input type="text" name="cname" id="cname" placeholder="" class="form-control" required>
-                    <div id="msgbox"></div> 
-                  </div>
-                 </div>
-                </div>
-                
-                <div class="row">
-                 <div class="col-sm-12">
-                  <div class="form-group form-group-default">
-                    <label>Email</label>
-                    <input type="text" name="email" id="email" placeholder="We will send loging details to you" class="form-control" >
-                     <div id="msgbox1"></div> <div id="msgbox8"></div>
-                  </div>
-                </div>
-               </div>
-
-                <div class="form-group form-group-default input-group">
-                    <span class="input-group-addon">
-                    <select class="cs-select cs-skin-slide cs-transparent" id="prefix" data-init-plugin="cs-select">
-                    <option data-countryCode="GB" value="44" Selected>UK (+44)</option>
-                    <option data-countryCode="US" value="1">USA (+1)</option>
-                    <option data-countryCode="AR" value="54">Argentina (+54)</option>
-                    <option data-countryCode="AU" value="61">Australia (+61)</option>
-                    <option data-countryCode="AT" value="43">Austria (+43)</option>
-                    <option data-countryCode="BE" value="32">Belgium (+32)</option>
-                    <option data-countryCode="BZ" value="501">Belize (+501)</option>
-                    <option data-countryCode="CN" value="86">China (+86)</option>
-                    <option data-countryCode="IN" value="91">India (+91)</option>
-                    <option data-countryCode="MY" value="60">Malaysia (+60)</option>
-                    <option data-countryCode="ZW" value="263">Zimbabwe (+263)</option>
-                    </select>
-                    </span>
-                    <label>Contact Number</label>
-                    <input type="text" name="phone" id="phone" class="form-control" placeholder="" >
-                </div><div id="msgbox2"></div><div id="msgbox5"></div><div id="msgbox6"></div><div id="msgbox7"></div><div id="msgbox13"></div>
-
-                                
-                <div class="row">
-                 <div class="col-sm-12">
-                  <div class="form-group form-group-default">
-                    <label>Password</label>
-                    <input type="password" name="password" id="password" placeholder="Minimum of 6 Charactors" minlength="6" class="form-control" required>
-                  <div id="msgbox9"></div><div id="msgbox10"></div>
-                  </div>
-                 </div>
-                </div>
-                
-                <div class="row">
-                 <div class="col-sm-12">
-                  <div class="form-group form-group-default">
-                    <label> Confirm Password</label>
-                    <input type="password" name="cpassword" placeholder="Minimum of 6 Charactors" minlength="6" class="form-control" required>
-                     <div id="msgbox3"></div><div id="msgbox11"></div><div id="msgbox12"></div>
-                  </div>
-                 </div>
-                </div>
-
-                <div class="row m-t-10">
-                <div class="col-md-6">
-                </div>
-                <div class="col-md-6 text-right">
-                  <a href="https://www.facebook.com/" class="text-info small">Help? Contact Support</a>
-                </div>
-                </div>
-                
-                 <center> 
-                 <button class="btn btn-success" type="submit"  onclick="return val();">Submit</button>
-                 <button class="btn btn-default"><i class="pg-close"></i> Cancel</button> 
-                 </center>
+             <div class="form-group">
+                <label>Enter OTP</label>
+                <input type="text" id="enteredOTP" name="enteredOTP" maxlength="4" class="form-control"  onblur="check()" required>
+                <div id="otpMsgBox"></div> 
+             </div>
+             <br>
+             <br>
+            <center>
+                <button class="btn btn-rounded btn-primary m-b-10" type="submit">Submit</button>
+                <button class="btn btn-rounded btn-primary m-b-10" onclick="location.href='ckvRegister.jsp'">Cancel</button>
+            </center>
   
             </form>
+  
           </div>
         </div>
       </div>
@@ -133,6 +67,7 @@
       
       
 <!--*******************************************************Template Content ***********************************************************-->      
+
     <div class=" full-width">
       <div class="register-container m-b-10 clearfix">
         <div class="inline pull-left">
@@ -143,6 +78,8 @@
         </div>
       </div>
     </div>
+      
+       
     <!-- START OVERLAY -->
     <div class="overlay hide" data-pages="search">
       <!-- BEGIN Overlay Content !-->
@@ -298,6 +235,12 @@
     <script src="assets/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
     <!-- END VENDOR JS -->
     <script src="pages/js/pages.min.js"></script>
-   
+    <script>
+    $(function()
+    {
+      $('#form-register').validate()
+    })
+    </script>
   </body>
 </html>
+
