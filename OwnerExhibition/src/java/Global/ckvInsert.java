@@ -46,7 +46,7 @@ public class ckvInsert extends HttpServlet {
             ps1.setString(7,"");
             ps1.executeUpdate();
             
-            response.sendRedirect("/Exhibition/html/ckvThankyou.jsp");
+            response.sendRedirect("/Exhibition/html/ownerRegThankyou.jsp");
           
          }
         catch(Exception ee)

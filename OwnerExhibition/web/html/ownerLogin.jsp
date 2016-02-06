@@ -31,115 +31,11 @@
     <link href="pages/css/ie9.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="pages/js/jquery-1.4.2.min.js"></script>
-    <script src="pages/js/loginValidation.js"></script>
-    
-    <script type="text/javascript">
-	$(document).ready(function(){
-		$("#login_frm").submit(function(){
+    <script src="pages/js/ownerloginValidation.js"></script>
+     <script src="pages/js/ownerLoginVerification.js"></script>
+    <link href="pages/css/ownerLoginAjax.css" rel="stylesheet" type="text/css" />   
 
-			 //remove previous class and add new "myinfo" class
-	        $("#msgbox").removeClass().addClass('myinfo').text('Validating Your Login ').fadeIn(1000);
 
-			
-			this.timer = setTimeout(function () {
-				$.ajax({
-		          	url: '/Exhibition/AdminLoginCheck',
-		          	data: 'un='+ $('#login_id').val() +'&pw=' + $('#password').val(),
-		          	type: 'post',
-		   		success: function(msg){
-                                  
-                                if(msg != 'ERROR') // Message Sent, check and redirect
-				{
-                                    if(msg == 'emailinvalid')
-                                    {
-                                             	$("#msgbox1").fadeTo(200,0.1,function() //start fading the messagebox
-                                        {
-			                  //add message and change the class of the box and start fading
-			                 $(this).html('Invalid Email Id').removeClass().addClass('myerror').fadeTo(900,10);
-                                      });
- 
-
-                                    }
-                                    else if(msg =='passwordinvalid')
-                                    {
-                                               
-                                               	$("#msgbox2").fadeTo(200,0.1,function() //start fading the messagebox
-		                {
-			                  //add message and change the class of the box and start fading
-			                 $(this).html('Sorry, Wrong Password.').removeClass().addClass('myerror').fadeTo(900,1);
-                                 });
- 
-                                    }
-                                    else
-                                    {
-                                          $("#msgbox3").html('Login Verified, Logging in.....').addClass('myinfo').fadeTo(900,1,function()
-			             {
-			                 //redirect to secure page
-			                 document.location='/Exhibition/html/index.html';
-			             });
-                                        
-                                    }
-                                
-                                }
-				else
-				{
-					$("#msgbox3").fadeTo(200,0.1,function() //start fading the messagebox
-		                {
-			                 $(this).html('Sorry, Wrong Combination Of Username And Password.').removeClass().addClass('myerror').fadeTo(900,1);
-                                 });
-                                }
-				}
-				
-				});
-			}, 200);
-			return false;
- 		});		
-
-	});
-   </script>  
-   
-<style>
-#exists{display:none}
-#cross{display:none}
-.myinfo
-{
-	margin: 5px auto;
-	background:#d6e3f5;
-	border: 1px #0010ac solid;
-	padding:5px;
-	color:#0010ac;
-	font-size:12px;
-	width:350px;
-	min-height:0px;
-	-moz-border-radius:4px;
-	-webkit-border-radius:4px;
-	text-align: center;
-}
-
-.myerror
-{
-	margin: 5px auto;
-	background:#FFDFDF;
-	border: 1px #FF0000 solid;
-	padding:5px;
-	color:#FF0000;
-	font-size:12px;
-	width:350px;
-	min-height:0px;
-	-moz-border-radius:4px;
-	-webkit-border-radius:4px;
-	text-align: center;
-}
-</style>
-
-<script type="text/javascript">
-    window.onload = function()
-    {
-      // fix for windows 8
-      if (navigator.appVersion.indexOf("Windows NT 6.2") != -1)
-        document.head.innerHTML += '<link rel="stylesheet" type="text/css" href="pages/css/windows.chrome.fix.css" />'
-    }
-</script>
 </head>
    <body class="fixed-header   ">
         <div class="login-wrapper ">
@@ -157,47 +53,44 @@
          <div class="login-container bg-white">
          <div class="p-l-50 m-l-20 p-r-50 m-r-20 p-t-50 m-t-30 sm-p-l-15 sm-p-r-15 sm-p-t-40">
          <p class="p-t-35"><h2><b>Owner Login</b></h2>
-         
          <!-- START Login Form -->
          <form name="login_frm" id="login_frm" action="" method="post" class="p-t-15" >
-            
              <!-- START Form Control-->
              <div class="form-group form-group-default">
              <label>Email</label>
              <div class="controls">
-             <input type="text" name="login_id" id="login_id" placeholder="Enter Email Id" class="form-control" >
+             <input type="email" name="login_id" id="login_id" placeholder="Enter Email Id" class="form-control" required>
              </div>
             </div>
-              <div id="msgbox1"></div><div id="msgbox4"></div><div id="msgbox5"></div>
+              <div id="msgbox1"></div>
             <!-- END Form Control-->
-            
             <!-- START Form Control-->
             <div class="form-group form-group-default">
               <label>Password</label>
               <div class="controls">
-              <input type="password" class="form-control" id="password" name="password"  placeholder="Enter Password" >
+              <input type="password" class="form-control" id="password" minlength="6" name="password"  placeholder="Enter Password" required>
               </div>
             </div>
-              
+            <!-- END Form Control-->
             <div id="msgbox2"></div>
             <div id="msgbox3"></div><div id="msgbox6"></div><div id="msgbox7"></div>
-
             <!-- START Form Control-->
             <div class="row">
             <div class="col-md-6 no-padding">
             <div class="checkbox ">
-                
-              <!--    <input type="checkbox" value="1" id="checkbox1">
-                  <label for="checkbox1">Keep Me Signed in</label>-->
-            <a href="/Exhibition/html/ckvEnteremail.jsp" class="text-info small"><b>Forgot Password..?</a>
+                 <input type="checkbox" value="1" id="checkbox1">
+                  <label for="checkbox1">Keep Me Signed in</label> </div> </div>
             </div>
+            <!-- END Form Control-->  
+            <div align="right">
+                <a href="/Exhibition/html/ownerLoginEmailVerify.jsp" class="text-info small"><font size="2.5"><b>Forgot Password..?</font></a>
             </div>
-            </div>
-            <!-- END Form Control-->
-            
+            <br>
+            <br>
+            <center>
             <button class="btn btn-primary btn-cons m-t-10" name="login" id="login"  type="submit" onclick="return val1();">Sign in</button>
             <button class="btn btn-primary btn-cons m-t-10" name="clear" id="clear"  type="reset">Clear</button>
-
+            </center>
           </form>
           <!--END Login Form-->
           

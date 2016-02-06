@@ -23,7 +23,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Admin
  */
-public class AdminLoginCheck extends HttpServlet {
+public class OwnerLoginCheck extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

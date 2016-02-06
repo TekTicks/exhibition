@@ -33,96 +33,35 @@
     <link class="main-stylesheet" href="pages/css/pages.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="pages/js/jquery-1.4.2.min.js"></script>
-    <script src="pages/js/loginOtpValidation.js"></script>
-
+    <link href="pages/css/ownerLoginAjax.css" rel="stylesheet" type="text/css" />   
     
-     <script type="text/javascript">
-               $(document).ready(function(){
-		$("#login_frm").submit(function(){
-	      
-			this.timer = setTimeout(function () {
-				$.ajax({
-		          	url: '/Exhibition/AdminLoginCheck',
-		          	data: 'un='+ $('#emailid').val(),
-		          	type: 'post',
-		   		success: function(msg){
-                                   
-                                if(msg != 'ERROR') // Message Sent, check and redirect
-				{
-                                    if(msg == 'emailinvalid')
-                                    {
-                                             	$("#msgbox1").fadeTo(200,0.1,function() //start fading the messagebox
-                                        {
-			                  //add message and change the class of the box and start fading
-			                 $(this).html('invalid email....').removeClass().addClass('myerror').fadeTo(900,1);
-                                        // document.location='/Exhibition/html/exhibitionAdminLog.jsp?user='+msg;
-                                      });
- 
-
-                                    }
-                                   
-                                    else
-                                    {
-                                          $("#msgbox2").html('valid Email id .....').addClass('myinfo').fadeTo(900,1,function()
-			             {
-			                 //redirect to secure page
-			                 document.location='/Exhibition/html/receiveOTP.jsp';
+    
+    <script type="text/javascript">
+    
+                   function check()
+                   {
+                     var generatedOTP = 1234;
+                     var enteredOTP=document.getElementById('enteredOTP').value;
+                if(generatedOTP==enteredOTP)
+                {
+                    //alert(" OTP match");
+                    $("#otpMsgBox").html('OTP match').addClass('myinfo').fadeTo(900,1,function()
+			             {document.location='/Exhibition/html/ownerLoginChangePassword.jsp';
 			             });
-                                        
-                                    }
-                                
-                                }
-				else
-				{
-					$("#msgbox3").fadeTo(200,0.1,function() //start fading the messagebox
-		                {
-			                  //add message and change the class of the box and start fading
-			                 $(this).html('Sorry, Email id doesnt exists.').removeClass().addClass('myerror').fadeTo(900,1);
-                                        // document.location='/Exhibition/html/exhibitionAdminLog.jsp?user';
-                                 });
-                                }
-				}
-				
-				});
-			}, 200);
-			return false;
- 		});		
-
-	});
-   </script>   
-   <style>
-#exists{display:none}
-#cross{display:none}
-.myinfo
-{
-	margin: 5px auto;
-	background:#d6e3f5;
-	border: 1px #0010ac solid;
-	padding:5px;
-	color:#0010ac;
-	font-size:12px;
-	width:350px;
-	min-height:0px;
-	-moz-border-radius:4px;
-	-webkit-border-radius:4px;
-	text-align: center;
-}
-
-.myerror
-{
-	margin: 5px auto;
-	background:#FFDFDF;
-	border: 1px #FF0000 solid;
-	padding:5px;
-	color:#FF0000;
-	font-size:12px;
-	width:350px;
-	min-height:0px;
-	-moz-border-radius:4px;
-	-webkit-border-radius:4px;
-	text-align: center;
-}
-</style>
+                             
+                }
+                else
+                {
+                     $("#otpMsgBox").html('Please Enter valid OTP').addClass('myerror').fadeTo(900,1,function()
+			             {
+			             });
+                                     //document.location='ckvOtp.jsp';
+                }
+                   }	
+   
+    </script>
+    
+    
     <script type="text/javascript">
     window.onload = function()
     {
@@ -132,46 +71,41 @@
     }
     </script>
   </head>
-  
   <body class="fixed-header ">
     <div class="login-wrapper ">
-        
-        
-        <!-- START Login Background Pic Wrapper-->
-        <div class="bg-pic">
+      <!-- START Login Background Pic Wrapper-->
+      <div class="bg-pic">
         <!-- START Background Pic-->
         <img src="assets/img/demo/new-york-city-buildings-sunrise-morning-hd-wallpaper.jpg" data-src="assets/img/demo/new-york-city-buildings-sunrise-morning-hd-wallpaper.jpg" data-src-retina="assets/img/demo/new-york-city-buildings-sunrise-morning-hd-wallpaper.jpg" alt="" class="lazy">
         <!-- END Background Pic-->
+        <!-- START Background Caption-->
+        <div class="bg-caption pull-bottom sm-pull-bottom text-white p-l-20 m-b-20">
+          <h2 class="semi-bold text-white">
         </div>
-        <!-- END Login Background Pic Wrapper-->
+        <!-- END Background Caption-->
+      </div>
+      <!-- END Login Background Pic Wrapper-->
       
-        <!-- START Login Right Container-->
-        <div class="login-container bg-white">
+      
+      
+      <!-- START Login Right Container-->
+      <div class="login-container bg-white">
         <div class="p-l-50 m-l-20 p-r-50 m-r-20 p-t-50 m-t-30 sm-p-l-15 sm-p-r-15 sm-p-t-40">
         <h2><b> OTP Generation<b/></h2>
-        
-        
-        <!-- START Login Form -->
-        <form id="login_frm" class="p-t-15" role="form" >
+          <!-- START Login Form -->
+          <form id="form-register" class="p-t-15" role="form">
             <div class="form-group form-group-default">
-            <label>Email ID</label>
-            
-                <input type="text" name="emailid"  id="emailid" placeholder="Enter Your Email ID to receive OTP" class="form-control" >
-          
+                <label>Enter OTP</label>
+                <input type="text" id="enteredOTP" name="enteredOTP" maxlength="4" class="form-control"  onblur="check()" required>
             </div>
-           
-            <div id="msgbox1"></div>
-            <div id="msgbox2"></div>
-            <div id="msgbox3"></div>  
-            <div id="msgbox4"></div>  <div id="msgbox5"></div>
-            
-           
-            <center>   
-                  <button class="btn btn-primary btn-cons m-t-10" type="submit" onclick="return val2();" >Send</button>
-                        <button class="btn btn-primary btn-cons m-t-10" onclick="location.href='ownerLogin.jsp'" >cancel</button>
-            </center>  
-          
-        </form>
+            <div id="otpMsgBox"></div>
+             <br>
+             <br>
+            <center>
+                <button class="btn btn-primary btn-cons m-t-10" type="submit" onblur="check();" >Send</button>
+                <button class="btn btn-primary btn-cons m-t-10" onclick="location.href='ownerLogin.jsp'" >cancel</button>
+            </center>
+          </form>
           <!--END Login Form-->
           
           
@@ -179,12 +113,12 @@
           
           
           
-          
-          
-          
-          
-          
-          
+          <div class="pull-bottom sm-pull-bottom">
+            <div class="m-b-30 p-r-80 sm-m-t-20 sm-p-r-15 sm-p-b-20 clearfix">
+              <div class="col-sm-3 col-md-2 no-padding">
+            </div>
+          </div>
+        </div>
           <div class="pull-bottom sm-pull-bottom">
             <div class="m-b-30 p-r-80 sm-m-t-20 sm-p-r-15 sm-p-b-20 clearfix">
               <div class="col-sm-3 col-md-2 no-padding">
@@ -199,16 +133,10 @@
 
             </div>
           </div>
-        </div>
-        <!-- END Login Right Container-->
-        </div>
-        
-        
-        
-        
-        
-        
-        <!-- START OVERLAY -->
+      </div>
+      <!-- END Login Right Container-->
+    </div>
+    <!-- START OVERLAY -->
     <div class="overlay hide" data-pages="search">
       <!-- BEGIN Overlay Content !-->
       <div class="overlay-content has-results m-t-20">

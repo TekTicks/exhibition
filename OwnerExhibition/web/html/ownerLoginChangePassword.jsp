@@ -1,9 +1,8 @@
-<%--  
-    Document   : ckvOtp
-    Created on : Feb 1, 2016, 12:09:14 PM
+<%-- 
+    Document   : ckvLogin
+    Created on : Jan 22, 2016, 6:34:27 PM
     Author     : Admin
 --%>
-
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -12,7 +11,7 @@
   <head>
     <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
     <meta charset="utf-8" />
-    <title>OTP Verification</title>
+    <title>Pages - Admin Dashboard UI Kit - Lock Screen</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no" />
     <link rel="apple-touch-icon" href="pages/ico/60.png">
     <link rel="apple-touch-icon" sizes="76x76" href="pages/ico/76.png">
@@ -32,54 +31,82 @@
     <link href="assets/plugins/switchery/css/switchery.min.css" rel="stylesheet" type="text/css" media="screen" />
     <link href="pages/css/pages-icons.css" rel="stylesheet" type="text/css">
     <link class="main-stylesheet" href="pages/css/pages.css" rel="stylesheet" type="text/css" />
-    <link href="pages/css/ckvajax.css" rel="stylesheet" type="text/css" />   
-    <script src="pages/js/checkOtp.js"></script>
+    <script src="pages/js/ownerloginValidation.js"></script>
+    <link href="pages/css/ownerLoginAjax.css" rel="stylesheet" type="text/css" />   
+
 
   </head>
   <body class="fixed-header ">
-    <div class="register-container full-height sm-p-t-30">
-      <div class="container-sm-height full-height">
-        <div class="row row-sm-height">
-          <div class="col-sm-12 col-sm-height col-middle">
-            <h1><b> Verification </h1>
-            <h3>Enter the One Time Password sent to your mobile number or Email ID.</h3>
+    <div class="login-wrapper ">
+      <!-- START Login Background Pic Wrapper-->
+      <div class="bg-pic">
+        <!-- START Background Pic-->
+        <img src="assets/img/demo/new-york-city-buildings-sunrise-morning-hd-wallpaper.jpg" data-src="assets/img/demo/new-york-city-buildings-sunrise-morning-hd-wallpaper.jpg" data-src-retina="assets/img/demo/new-york-city-buildings-sunrise-morning-hd-wallpaper.jpg" alt="" class="lazy">
+        <!-- END Background Pic-->
+        <!-- START Background Caption-->
+        <div class="bg-caption pull-bottom sm-pull-bottom text-white p-l-20 m-b-20">
+          <h2 class="semi-bold text-white">
+        </div>
+        <!-- END Background Caption-->
+      </div>
+      <!-- END Login Background Pic Wrapper-->
+      
+      
+      
+      
+      <!-- START Login Right Container-->
+      <div class="login-container bg-white">
+        <div class="p-l-50 m-l-20 p-r-50 m-r-20 p-t-50 m-t-30 sm-p-l-15 sm-p-r-15 sm-p-t-40">
+        <h2><b> Change Password<b/></h2>
+          <!-- START Login Form -->
+          <form id="login_frm" class="p-t-15" role="form" action="/Exhibition/changePassword" method="post">
+            <div class="form-group form-group-default">
+              <label>New Password</label>
+              <div class="controls">
+                <input type="password" name="newpassword" id="newpassword" minlength="6" placeholder="Enter new password" class="form-control" required>
+              </div>
+            </div>
+            <div id="msgbox1"></div><div id="msgbox2"></div>
+            <div class="form-group form-group-default">
+              <label>Confirm Password</label>
+              <div class="controls">
+                <input type="password" name="confirmPassword" id="confirmPassword" minlength="6" placeholder="Enter Confirm password" class="form-control" required>
+              </div>
+            </div>
+              <br>
+            <div id="msgbox3"></div> <div id="msgbox4"></div><div id="msgbox5"></div>
+              <div class="row">
             
-            <form id="form-register" class="p-t-15" role="form">
-            
-             <div class="form-group">
-                <label>Enter OTP</label>
-                <input type="text" id="enteredOTP" name="enteredOTP" maxlength="4" class="form-control"  onblur="check()" required>
-                <div id="otpMsgBox"></div> 
-             </div>
-             <br>
-             <br>
             <center>
-                <button class="btn btn-rounded btn-primary m-b-10" type="submit">Submit</button>
-                <button class="btn btn-rounded btn-primary m-b-10" onclick="location.href='ckvRegister.jsp'">Cancel</button>
-            </center>
-  
-            </form>
-  
-          </div>
-        </div>
-      </div>
-    </div>
-      
-      
-<!--*******************************************************Template Content ***********************************************************-->      
-
-    <div class=" full-width">
-      <div class="register-container m-b-10 clearfix">
-        <div class="inline pull-left">
-          <img src="assets/img/demo/pages_icon.png" alt="" class="m-t-5 " data-src="assets/img/demo/pages_icon.png" data-src-retina="assets/img/demo/pages_icon_2x.png" width="60" height="60">
-        </div>
-        <div class="col-md-10 m-t-15">
-          <p class="hinted-text small inline ">No part of this website or any of its contents may be reproduced, copied, modified or adapted, without the prior written consent of the author, unless otherwise indicated for stand-alone materials.</p>
-        </div>
-      </div>
-    </div>
-      
+                <button class="btn btn-primary btn-cons m-t-10" type="submit" onclick="return val2();" >Submit</button>
+                <button class="btn btn-primary btn-cons m-t-10" onclick="location.href='ownerLogin.jsp'" >cancel</button>
+            </center>  
+           </div>
+          </form>
+          <!--END Login Form-->
        
+          
+          
+          
+          
+          
+          <div class="pull-bottom sm-pull-bottom">
+            <div class="m-b-30 p-r-80 sm-m-t-20 sm-p-r-15 sm-p-b-20 clearfix">
+              <div class="col-sm-3 col-md-2 no-padding">
+               <img alt="" class="m-t-5" data-src="assets/img/demo/pages_icon.png" data-src-retina="assets/img/demo/pages_icon_2x.png" height="60" src="assets/img/demo/pages_icon.png" width="60">
+              </div>
+              <div class="col-sm-9 no-padding m-t-10">
+                <p><small>
+		 Create a pages account. If you have a facebook account, log into it for this process. Sign in with <a href="#" class="text-info">Facebook</a> or <a href="#" class="text-info">Google</a></small>
+                </p>
+              </div>
+                        <div id="error_box"></div>
+
+            </div>
+          </div>
+      </div>
+      <!-- END Login Right Container-->
+    </div>
     <!-- START OVERLAY -->
     <div class="overlay hide" data-pages="search">
       <!-- BEGIN Overlay Content !-->
@@ -238,9 +265,8 @@
     <script>
     $(function()
     {
-      $('#form-register').validate()
+      $('#form-login').validate()
     })
     </script>
   </body>
 </html>
-

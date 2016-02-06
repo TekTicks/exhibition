@@ -11,7 +11,7 @@
   <head>
     <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
     <meta charset="utf-8" />
-    <title>Pages - Admin Dashboard UI Kit - Lock Screen</title>
+    <title>OTP Verification</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no" />
     <link rel="apple-touch-icon" href="pages/ico/60.png">
     <link rel="apple-touch-icon" sizes="76x76" href="pages/ico/76.png">
@@ -31,111 +31,110 @@
     <link href="assets/plugins/switchery/css/switchery.min.css" rel="stylesheet" type="text/css" media="screen" />
     <link href="pages/css/pages-icons.css" rel="stylesheet" type="text/css">
     <link class="main-stylesheet" href="pages/css/pages.css" rel="stylesheet" type="text/css" />
-    <script src="pages/js/loginValidation.js"></script>
-  <style>
-#exists{display:none}
-#cross{display:none}
-.myinfo
-{
-	margin: 5px auto;
-	background:#d6e3f5;
-	border: 1px #0010ac solid;
-	padding:5px;
-	color:#0010ac;
-	font-size:12px;
-	width:350px;
-	min-height:0px;
-	-moz-border-radius:4px;
-	-webkit-border-radius:4px;
-	text-align: center;
-}
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="pages/js/jquery-1.4.2.min.js"></script>
+    <link href="pages/css/ownerLoginAjax.css" rel="stylesheet" type="text/css" />   
 
-.myerror
-{
-	margin: 5px auto;
-	background:#FFDFDF;
-	border: 1px #FF0000 solid;
-	padding:5px;
-	color:#FF0000;
-	font-size:12px;
-	width:350px;
-	min-height:0px;
-	-moz-border-radius:4px;
-	-webkit-border-radius:4px;
-	text-align: center;
-}
-</style>
+     <script type="text/javascript">
+               $(document).ready(function(){
+		$("#login_frm").submit(function(){
+                                $("#msgbox3").removeClass().addClass('myinfo').text('Checking Your Verfication........ ').fadeIn(1000);
+			this.timer = setTimeout(function () {
+				$.ajax({
+		          	url: '/Exhibition/AdminLoginCheck',
+		          	data: 'un='+ $('#emailid').val(),
+		          	type: 'post',
+		   		success: function(msg){
+                                   
+                                if(msg != 'ERROR') // Message Sent, check and redirect
+				{
+                                    if(msg == 'emailinvalid')
+                                    {
+                                             	$("#msgbox3").fadeTo(200,0.1,function() //start fading the messagebox
+                                        {
+			                  //add message and change the class of the box and start fading
+			                 $(this).html('invalid email....').removeClass().addClass('myerror').fadeTo(900,1);
+                                        // document.location='/Exhibition/html/exhibitionAdminLog.jsp?user='+msg;
+                                      });
+ 
 
+                                    }
+                                   
+                                    else
+                                    {
+                                          $("#msgbox3").html('Valid Email id .....').addClass('myinfo').fadeTo(900,1,function()
+			             {
+			                 //redirect to secure page
+			                 document.location='/Exhibition/html/ownerLoginOtpVerify.jsp';
+			             });
+                                        
+                                    }
+                                
+                                }
+				else
+				{
+					$("#msgbox3").fadeTo(200,0.1,function() //start fading the messagebox
+		                {
+			                  //add message and change the class of the box and start fading
+			                 $(this).html('Sorry, Email id doesnt exists.').removeClass().addClass('myerror').fadeTo(900,1);
+                                        // document.location='/Exhibition/html/exhibitionAdminLog.jsp?user';
+                                 });
+                                }
+				}
+				
+				});
+			}, 200);
+			return false;
+ 		});		
 
-    <script type="text/javascript">
+	});
+   </script>  
+   
+  
+
+<script type="text/javascript">
     window.onload = function()
     {
       // fix for windows 8
       if (navigator.appVersion.indexOf("Windows NT 6.2") != -1)
         document.head.innerHTML += '<link rel="stylesheet" type="text/css" href="pages/css/windows.chrome.fix.css" />'
     }
-    </script>
+</script>
   </head>
+  
   <body class="fixed-header ">
     <div class="login-wrapper ">
-      <!-- START Login Background Pic Wrapper-->
-      <div class="bg-pic">
+        <!-- START Login Background Pic Wrapper-->
+        <div class="bg-pic">
         <!-- START Background Pic-->
         <img src="assets/img/demo/new-york-city-buildings-sunrise-morning-hd-wallpaper.jpg" data-src="assets/img/demo/new-york-city-buildings-sunrise-morning-hd-wallpaper.jpg" data-src-retina="assets/img/demo/new-york-city-buildings-sunrise-morning-hd-wallpaper.jpg" alt="" class="lazy">
         <!-- END Background Pic-->
-        <!-- START Background Caption-->
-        <div class="bg-caption pull-bottom sm-pull-bottom text-white p-l-20 m-b-20">
-          <h2 class="semi-bold text-white">
-          
         </div>
-        <!-- END Background Caption-->
-      </div>
-      <!-- END Login Background Pic Wrapper-->
-      <!-- START Login Right Container-->
-      <div class="login-container bg-white">
+        <!-- END Login Background Pic Wrapper-->
+      
+        <!-- START Login Right Container-->
+        <div class="login-container bg-white">
         <div class="p-l-50 m-l-20 p-r-50 m-r-20 p-t-50 m-t-30 sm-p-l-15 sm-p-r-15 sm-p-t-40">
-  
-      <h2><b> Change Password<b/></h2>
-          <!-- START Login Form -->
-         
-          <form id="login_frm" class="p-t-15" role="form" action="/Exhibition/changePassword" method="post">
-           
-              
-               <div class="form-group form-group-default">
-              <label>New Password</label>
-              <div class="controls">
-                <input type="text" name="newpassword" id="newpassword" placeholder="Enter new password" class="form-control" required>
-              </div>
-            </div>
-               <div id="msgbox1"></div><div id="msgbox2"></div>
-              
-              <br>
-            <div class="form-group form-group-default">
-              <label>Confirm Password</label>
-              <div class="controls">
-                <input type="text" name="confirmPassword" id="confirmPassword" placeholder="confirm password" class="form-control" required>
-              </div>
-            </div>
-            <div id="msgbox3"></div> <div id="msgbox4"></div><div id="msgbox5"></div>
-              <div class="row">
-            <!--   <div class="col-md-6 no-padding"> -->
-            <!-- END Form Control-->
-            <center>     <button class="btn btn-primary btn-cons m-t-10" type="submit" onclick="return val2();" >Submit</button>
-                        <button class="btn btn-primary btn-cons m-t-10" onclick="location.href='ownerLogin.jsp'" >cancel</button>
-            </center>  
-              
-           </div>
-            
-          </form>
-          
-          
-          
-          
-          
-          
-          
+        <h2><b> Email Verification<b/></h2>
+        
+        
+        <!-- START Login Form -->
+        <form id="login_frm" class="p-t-15" role="form" >
+          <div class="form-group form-group-default">
+          <label>Email ID</label>
+            <input type="email" name="emailid"  id="emailid" placeholder="Enter Your Email ID to receive OTP" class="form-control" required>
+          </div>
+          <div id="msgbox3"></div>  
+          <center>   
+            <button class="btn btn-primary btn-cons m-t-10" type="submit" onclick="return val2();" >Send</button>
+            <button class="btn btn-primary btn-cons m-t-10" onclick="location.href='ownerLogin.jsp'" >cancel</button>
+          </center>  
+        </form>
           <!--END Login Form-->
-       
+          
+          
+          
+
           
           <div class="pull-bottom sm-pull-bottom">
             <div class="m-b-30 p-r-80 sm-m-t-20 sm-p-r-15 sm-p-b-20 clearfix">
@@ -144,17 +143,18 @@
               </div>
               <div class="col-sm-9 no-padding m-t-10">
                 <p><small>
-		 Create a pages account. If you have a facebook account, log into it for this process. Sign in with <a href="#" class="text-info">Facebook</a> or <a href="#" class="text-info">Google</a></small>
+		        		Create a pages account. If you have a facebook account, log into it for this process. Sign in with <a href="#" class="text-info">Facebook</a> or <a href="#" class="text-info">Google</a></small>
                 </p>
               </div>
                         <div id="error_box"></div>
 
             </div>
           </div>
-      </div>
-      <!-- END Login Right Container-->
-    </div>
-    <!-- START OVERLAY -->
+        </div>
+        <!-- END Login Right Container-->
+        </div>
+   
+        <!-- START OVERLAY -->
     <div class="overlay hide" data-pages="search">
       <!-- BEGIN Overlay Content !-->
       <div class="overlay-content has-results m-t-20">

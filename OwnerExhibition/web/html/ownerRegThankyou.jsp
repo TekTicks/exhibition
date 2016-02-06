@@ -18,6 +18,6 @@
         <br>
     <center><h1>Thank you</h1></center>
     <center><h4>Account has been created successfully..!!</h4>
-        <center> <p>click here to<a href="/Exhibition/html/exhibitionAdminLog.jsp">Login</a></p></center>
+        <center> <p>click here to<a href="/Exhibition/html/ownerLogin.jsp">Login</a></p></center>
     </body>
 </html>

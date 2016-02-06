@@ -24,12 +24,14 @@ public class ckvDemoServlet extends HttpServlet {
             String EMAIL=request.getParameter("emailid");
             Global.global.email1=EMAIL; 
             String PHONE=request.getParameter("contact");
+             Global.global.contact1=PHONE;
             String PASSWORD=request.getParameter("password");
             Global.global.password1=PASSWORD;
             String COUNTRYCODE=request.getParameter("ccode");
-            COUNTRYCODE=COUNTRYCODE+PHONE;
-            Global.global.contact1=COUNTRYCODE;
-                 
+            //COUNTRYCODE=COUNTRYCODE+PHONE;
+           // Global.global.contact1=COUNTRYCODE;
+            
+           
             Class.forName("com.mysql.jdbc.Driver"); 
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Exhibition","root","12345"); 
             Statement stat=con.createStatement();

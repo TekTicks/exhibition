@@ -7,20 +7,21 @@ package Global;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.*;
+import static java.lang.System.out;
+import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import javax.servlet.http.*;
- 
 /**
  *
  * @author Admin
  */
-public class ForgotPasswordServlet extends HttpServlet {
+public class OwnerLoginchangePassword extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,20 +34,15 @@ public class ForgotPasswordServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
+        response.setContentType("text/html;charset=UTF-8");
         try
         {
              String  password=request.getParameter("newpassword");
-                     
-       HttpSession session=request.getSession(false);
-        String mob = (String)session.getAttribute("demoid");
-        
-        
+             String mob=Global.global.un;
                            Class.forName("com.mysql.jdbc.Driver"); 
-                          Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/exhibition","root","123"); 
+                          Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Exhibition","root","12345"); 
                         
-                       String query = "update exhibitionAdmin set password ='"+password+"' where mobileNo='"+mob+"'";
+                       String query = "update owner set password ='"+password+"' where userName='"+mob+"'";
                       PreparedStatement ps = con.prepareStatement(query);
                        
                       // ps.setString(1,password);
@@ -54,9 +50,7 @@ public class ForgotPasswordServlet extends HttpServlet {
                      int i =  ps.executeUpdate();
                      if(i>0)
                      {
-                         out.println("<script type=\"text/JavaScript\">");
-                out.println("alert(\"data updated successfully..\")");
-                out.println("</script>");
+                       response.sendRedirect("/Exhibition/html/ownerLoginThankyou.jsp");
                      } 
                      else
                      {
@@ -67,6 +61,7 @@ public class ForgotPasswordServlet extends HttpServlet {
         {
            out.println("error"+ee.toString());
         }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -95,9 +90,7 @@ public class ForgotPasswordServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-      //  processRequest(request, response);
-        
-        
+        processRequest(request, response);
     }
 
     /**

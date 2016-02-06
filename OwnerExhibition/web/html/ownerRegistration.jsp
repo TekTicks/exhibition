@@ -1,6 +1,7 @@
+
 <%-- 
-    Document   : ckvLogin
-    Created on : Jan 22, 2016, 6:34:27 PM
+    Document   : ckvRegister
+    Created on : Jan 22, 2016, 6:56:24 PM
     Author     : Admin
 --%>
 
@@ -9,17 +10,17 @@
 <!DOCTYPE html>
 <html>
   <head>
+ 
     <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
     <meta charset="utf-8" />
-    <title>Pages - Admin Dashboard UI Kit - Lock Screen</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no" />
-    <link rel="apple-touch-icon" href="pages/ico/60.png">
+    <title>Owner Registration Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link rel="apple-touch-icon" href="pages/ico/60.png"> 
     <link rel="apple-touch-icon" sizes="76x76" href="pages/ico/76.png">
     <link rel="apple-touch-icon" sizes="120x120" href="pages/ico/120.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="pages/ico/152.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="pages/ico/152.png"> 
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-touch-fullscreen" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta content="" name="description" />
     <meta content="" name="author" />
@@ -31,92 +32,118 @@
     <link href="assets/plugins/switchery/css/switchery.min.css" rel="stylesheet" type="text/css" media="screen" />
     <link href="pages/css/pages-icons.css" rel="stylesheet" type="text/css">
     <link class="main-stylesheet" href="pages/css/pages.css" rel="stylesheet" type="text/css" />
-    <!--[if lte IE 9]>
-        <link href="pages/css/ie9.css" rel="stylesheet" type="text/css" />
-    <![endif]-->
-    <script type="text/javascript">
-    window.onload = function()
-    {
-      // fix for windows 8
-      if (navigator.appVersion.indexOf("Windows NT 6.2") != -1)
-        document.head.innerHTML += '<link rel="stylesheet" type="text/css" href="pages/css/windows.chrome.fix.css" />'
-    }
-    </script>
+    <link href="pages/css/ie9.css" rel="stylesheet" type="text/css" />
+    <link href="pages/css/ckvajax.css" rel="stylesheet" type="text/css" />   
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="pages/js/jquery-1.4.2.min.js"></script>
+    <script src="pages/js/ownerRegValidation.js"></script>
+    <script src="pages/js/ownerRegVerification.js"></script>
+    
+
   </head>
   <body class="fixed-header ">
-    <div class="login-wrapper ">
-      <!-- START Login Background Pic Wrapper-->
-      <div class="bg-pic">
-        <!-- START Background Pic-->
-        <img src="assets/img/demo/new-york-city-buildings-sunrise-morning-hd-wallpaper.jpg" data-src="assets/img/demo/new-york-city-buildings-sunrise-morning-hd-wallpaper.jpg" data-src-retina="assets/img/demo/new-york-city-buildings-sunrise-morning-hd-wallpaper.jpg" alt="" class="lazy">
-        <!-- END Background Pic-->
-        <!-- START Background Caption-->
-        <div class="bg-caption pull-bottom sm-pull-bottom text-white p-l-20 m-b-20">
-          <h2 class="semi-bold text-white">
-          
-        </div>
-        <!-- END Background Caption-->
-      </div>
-      <!-- END Login Background Pic Wrapper-->
-      <!-- START Login Right Container-->
-      <div class="login-container bg-white">
-        <div class="p-l-50 m-l-20 p-r-50 m-r-20 p-t-50 m-t-30 sm-p-l-15 sm-p-r-15 sm-p-t-40">
-    <!--   <img src="assets/img/login.png" alt="logo" data-src="assets/img/login.png" data-src-retina="assets/img/logo_2x.png" width="178" height="42">
-      -->
-      <h1><b> Owner Login <b/></h1>
-            <p class="p-t-35">Sign into your pages account</p>
-          <!-- START Login Form -->
-          <form id="form-login" class="p-t-15" role="form" action="ckvindex.jsp">
-            <!-- START Form Control-->
-            <div class="form-group form-group-default">
-              <label>Login</label>
-              <div class="controls">
-                <input type="text" name="username" placeholder="User Name" class="form-control" required>
-              </div>
-            </div>
-            <!-- END Form Control-->
-            <!-- START Form Control-->
-            <div class="form-group form-group-default">
-              <label>Password</label>
-              <div class="controls">
-                <input type="password" class="form-control" name="password" placeholder="Credentials" required>
-              </div>
-            </div>
-            <!-- START Form Control-->
-            <div class="row">
-              <div class="col-md-6 no-padding">
-                <div class="checkbox ">
-                  <input type="checkbox" value="1" id="checkbox1">
-                  <label for="checkbox1">Keep Me Signed in</label>
+    <div class="register-container full-height sm-p-t-30">
+      <div class="container-sm-height full-height">
+        <div class="row row-sm-height">
+          <div class="col-sm-12 col-sm-height col-middle">
+           <h1><b> Sign up </h1>
+           <h3>Pages makes it easy to enjoy what matters the most in your life</h3>
+            
+            <form name="login_frm" id="login_frm" class="p-t-15"  >
+            
+                <div class="row">
+                 <div class="col-sm-12">
+                  <div class="form-group form-group-default">
+                    <label>Company Name</label>
+                    <input type="text" name="cname" id="cname" placeholder="" class="form-control" required>
+                    <div id="msgbox"></div> 
+                  </div>
+                 </div>
                 </div>
-              </div>
-              <div class="col-md-6 text-right">
-                <a href="#" class="text-info small">Help? Contact Support</a>
-              </div>
-            </div>
-            <!-- END Form Control-->
-            <button class="btn btn-primary btn-cons m-t-10" type="submit">Sign in</button>
-          </form>
-          <!--END Login Form-->
-          <div class="pull-bottom sm-pull-bottom">
-            <div class="m-b-30 p-r-80 sm-m-t-20 sm-p-r-15 sm-p-b-20 clearfix">
-              <div class="col-sm-3 col-md-2 no-padding">
-               <!-- <img alt="" class="m-t-5" data-src="assets/img/demo/pages_icon.png" data-src-retina="assets/img/demo/pages_icon_2x.png" height="60" src="assets/img/demo/pages_icon.png" width="60">
-              --></div>
-              <div class="col-sm-9 no-padding m-t-10">
-                <p>
-                <!--  <small>
-									Create a pages account. If you have a facebook account, log into it for this
-									process. Sign in with <a href="#" class="text-info">Facebook</a> or <a href="#"
-									                                                                       class="text-info">Google</a>
-								</small> -->
-                </p>
-              </div>
-            </div>
+                
+                <div class="row">
+                 <div class="col-sm-12">
+                  <div class="form-group form-group-default">
+                    <label>Email</label>
+                    <input type="email" name="email" id="email" placeholder="We will send loging details to you" class="form-control" required>
+                     <div id="msgbox1"></div> <div id="msgbox8"></div>
+                  </div>
+                </div>
+               </div>
+
+                <div class="form-group form-group-default input-group">
+                    <span class="input-group-addon">
+                    <select class="cs-select cs-skin-slide cs-transparent" id="prefix" data-init-plugin="cs-select">
+                    <option data-countryCode="GB" value="44" Selected>UK (+44)</option>
+                    <option data-countryCode="US" value="1">USA (+1)</option>
+                    <option data-countryCode="AR" value="54">Argentina (+54)</option>
+                    <option data-countryCode="AU" value="61">Australia (+61)</option>
+                    <option data-countryCode="AT" value="43">Austria (+43)</option>
+                    <option data-countryCode="BE" value="32">Belgium (+32)</option>
+                    <option data-countryCode="BZ" value="501">Belize (+501)</option>
+                    <option data-countryCode="CN" value="86">China (+86)</option>
+                    <option data-countryCode="IN" value="91">India (+91)</option>
+                    <option data-countryCode="MY" value="60">Malaysia (+60)</option>
+                    <option data-countryCode="ZW" value="263">Zimbabwe (+263)</option>
+                    </select>
+                    </span>
+                    <label>Contact Number</label>
+                    <input type="tel" name="phone" id="phone" maxlength="10" minlength="10" class="form-control" placeholder="" required>
+                </div><div id="msgbox2"></div><div id="msgbox5"></div><div id="msgbox6"></div><div id="msgbox7"></div><div id="msgbox13"></div>
+
+                                
+                <div class="row">
+                 <div class="col-sm-12">
+                  <div class="form-group form-group-default">
+                    <label>Password</label>
+                    <input type="password" name="password" id="password" placeholder="Minimum of 6 Charactors" minlength="6" class="form-control" required>
+                  <div id="msgbox9"></div><div id="msgbox10"></div>
+                  </div>
+                 </div>
+                </div>
+                
+                <div class="row">
+                 <div class="col-sm-12">
+                  <div class="form-group form-group-default">
+                    <label> Confirm Password</label>
+                    <input type="password" name="cpassword" placeholder="Minimum of 6 Charactors" minlength="6" class="form-control" required>
+                     <div id="msgbox3"></div><div id="msgbox11"></div><div id="msgbox12"></div>
+                  </div>
+                 </div>
+                </div>
+
+              <!--  <div class="row m-t-10">
+                <div class="col-md-6">
+                </div>
+                <div class="col-md-6 text-right">
+                  <a href="https://www.facebook.com/" class="text-info small">Help? Contact Support</a>
+                </div>
+                </div>-->
+              <br>
+                 
+                <button class="btn btn-primary btn-cons m-t-10" type="submit" onclick="return val();">Submit</button>
+                <button class="btn btn-primary btn-cons m-t-10" >Cancel</button> 
+              
+                 
+  
+                <input type="hidden" name="country"  id="abc" >
+            </form>
           </div>
         </div>
       </div>
-      <!-- END Login Right Container-->
+    </div>
+      
+      
+<!--*******************************************************Template Content ***********************************************************-->      
+    <div class=" full-width">
+      <div class="register-container m-b-10 clearfix">
+        <div class="inline pull-left">
+          <img src="assets/img/demo/pages_icon.png" alt="" class="m-t-5 " data-src="assets/img/demo/pages_icon.png" data-src-retina="assets/img/demo/pages_icon_2x.png" width="60" height="60">
+        </div>
+        <div class="col-md-10 m-t-15">
+          <p class="hinted-text small inline ">No part of this website or any of its contents may be reproduced, copied, modified or adapted, without the prior written consent of the author, unless otherwise indicated for stand-alone materials.</p>
+        </div>
+      </div>
     </div>
     <!-- START OVERLAY -->
     <div class="overlay hide" data-pages="search">
@@ -273,11 +300,6 @@
     <script src="assets/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
     <!-- END VENDOR JS -->
     <script src="pages/js/pages.min.js"></script>
-    <script>
-    $(function()
-    {
-      $('#form-login').validate()
-    })
-    </script>
+   
   </body>
 </html>
