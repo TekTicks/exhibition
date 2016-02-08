@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title></title>
+    <!-- Path to Framework7 Library CSS-->
+    <link rel="stylesheet" href="css/framework7.material.min.css">
+    <link rel="stylesheet" href="css/framework7.material.colors.min.css">
+	<!-- Path to your custom app styles-->
+    <link rel="stylesheet" href="css/my-app.css">
+	
+	<style>
+	.demo-card-header-pic .card-header {
+    height: 20vw;
+    background-size: cover;
+    background-position: center;
+	}
+	</style>
+	
+  </head>
+  <body>
+    <!-- Status bar overlay for fullscreen mode-->
+    <div class="statusbar-overlay"></div>
+    <!-- Panels overlay-->
+    <div class="panel-overlay"></div>
+    <!-- Left panel with reveal effect-->
+    <div class="panel panel-left panel-reveal">
+      <div class="content-block">
+        <p>Left panel content goes here</p>
+      </div>
+    </div>
+    <!-- Right panel with cover effect-->
+    <div class="panel panel-right panel-cover">
+      <div class="content-block">
+        <p>Right panel content goes here</p>
+      </div>
+    </div>
+    <!-- Views-->
+    <div class="views ">
+      <!-- Your main view, should have "view-main" class-->
+      <div class="view view-main">
+	 <!-- <div data-page="index" class="page">-->
+        <!-- Top Navbar-->
+        <div class="navbar">
+          <div class="navbar-inner">
+            <!-- We have home navbar without left link-->
+            <div class="center sliding" ></div>
+			<!--Back Icon Coding-->
+			<div class="left"><a href="logo.html" class="back link icon-only"><i class="icon icon-back"></i></a></div>
+            <div class="right">
+              <!-- Right link contains only icon - additional "icon-only" class--><a href="#" class="link icon-only open-panel"> <i class="icon icon-bars"></i></a>
+            </div>
+          </div>
+        </div>
+        <!-- Pages, because we need fixed-through navbar and toolbar, it has additional appropriate classes-->
+        <div class="pages navbar-through toolbar-through ">
+		
+          <!-- Page, data-page contains page name-->
+          <div data-page="index" class="page">
+            <!-- Scrollable page content--><br><br><br>
+            <div class="page-content" >
+              <div class="content-block">
+					<div class="card demo-card-header-pic">
+					<div class="swiper-container swiper-init" data-speed="400" data-space-between="40" data-pagination=".swiper-pagination">
+					<div class="swiper-pagination"></div>
+						<div class="swiper-wrapper">
+							<div class="swiper-slide"><span><div style="background-image:url(http://lorempixel.com/1000/400/)"  valign="bottom" class="card-header color-white no-border" ></div></span></div>
+							
+							<div class="swiper-slide"><span><div style="background-image:url(http://lorempixel.com/1000/401/)"  valign="bottom" class="card-header color-white no-border" ></div></span></div>
+							
+							<div class="swiper-slide"><span><div style="background-image:url(http://lorempixel.com/1000/402/)"  valign="bottom" class="card-header color-white no-border" ></div></span></div>
+							
+							<div class="swiper-slide"><span><div style="background-image:url(http://lorempixel.com/1000/403/)"  valign="bottom" class="card-header color-white no-border" ></div></span></div>
+						</div>
+						<br>
+						<div class="swiper-pagination"></div>
+					</div>
+					</div>
+			  </div>
+			   <div class="content-block">
+                
+                  <center><a href="#" class="button button-fill color-blue" >REGISTER NOW</a></center>
+                </div>
+              
+              <div class="content-block">
+			  <div class="row">
+			  
+				
+                  <a href="#"><img src="img/calendar53.png" width="64px" height="64px"><br>&nbsp;&nbsp;&nbsp;NEWS</img></a>
+				
+				  
+				
+                  <a href="#"  ><img src="img/business133.png" width="64px" height="64px"><br>EXHIBITORS</img></a>
+				
+				  
+				
+                  <a href="#"><img src="img/newspaper11.png" width="64px" height="64px"><br>&nbsp;&nbsp;&nbsp;EVENTS</img></a>
+				
+                
+				
+				
+                  <a href="#" ><img src="img/pin56.png" width="64px" height="64px"><br>&nbsp;&nbsp;&nbsp;MAP</img></a>
+				
+				  
+				
+                  <a href="#" ><img src="img/photos13.png" width="64px" height="64px">GALLERY</img></a>
+				
+			
+			
+				  
+                  <a href="#" ><img src="img/ecologism1.png" width="64px" height="64px"><br>FLASHBACK</img></a>
+				 
+				 
+				<a href="#" ><img src="img/man235.png" width="64px" height="64px"><br>FACILITIES</img></a>
+				 
+				 
+				 <a href="#" ><img src="img/oil-industry.png" width="64px" height="64px"><br>ABOUT</img></a>
+				 
+				 
+				 <a href="#" ><img src="img/marketing8.png" width="64px" height="64px"><br>CONTACT</img></a>
+				 </div>
+			  </div>
+            </div>
+          </div>
+		  
+        </div>
+        <!-- Bottom Toolbar-->
+       
+      <!--</div>-->
+    </div>
+	</div>
+    <!-- Path to Framework7 Library JS-->
+    <script type="text/javascript" src="js/framework7.min.js"></script>
+    <!-- Path to your app js-->
+    <script type="text/javascript" src="js/my-app.js"></script>
+  </body>
+</html>
