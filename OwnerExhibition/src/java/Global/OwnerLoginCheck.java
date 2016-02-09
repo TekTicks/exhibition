@@ -71,6 +71,7 @@ public class OwnerLoginCheck extends HttpServlet {
         try
         { 
                            String uname=request.getParameter("un");
+                           out.print(uname);
                            String pass=request.getParameter("pw");
                           
                            Class.forName("com.mysql.jdbc.Driver"); 

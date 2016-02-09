@@ -411,33 +411,19 @@
                       
              <div class="col-md-70">
                       <div class="padding-30">
-                        <form action="/Exhibition/ownerProfileAddressSave" method="post" role="form">
-                          
-                         
-                          <div class="form-group-attached">
-                                <div class="form-group form-group-default required">
-                                    <label>Address 1</label>
-                                    <input type="text" name="address1" id="tin" class="form-control" required>
-                                     </div>
-                               
-                             <div class="form-group form-group-default">
-                                    <label>Address 2</label>
-                                      <input type="text" name="address2"id="tin" class="form-control">
-                                     </div>
-                            
-                               <div class="form-group form-group-default required">
-                                    <label>Zip Code</label>
-                                      <input type="text" name="zipcode"id="tin" class="form-control" required>
-                                     </div>
-                            
+                        <form action="/Exhibition/ownerProfileSocialMediaSave" method="post" role="form">
                              <div class="form-group form-group-default required">
-                                    <label>Landmark</label>
-                                      <input type="text" name="landmark"id="tin" class="form-control" required>
-                                     </div>
-                              <br>
+                                 <label>Select Social Media</label>
+                                 <select class="full-width" name="socialmedia" data-init-plugin="select2">
+                                  <option value="fb">Facebook.</option>
+                                  <option value="tw">Twitter.</option>
+                            </select>
+                     
+                            </div>  
+                            <br>
                               <div class="form-group form-group-default required">
-                                    <label>Map Link</label>
-                                      <input type="text" name="maplink"id="tin" class="form-control" required>
+                                    <label>Social Media Link</label>
+                                      <input type="text" name="socialmedialink"id="tin" class="form-control" required>
                                      </div>
                               <br>
                               <br>

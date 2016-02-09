@@ -1,8 +1,9 @@
-<%-- 
-    Document   : ckvLogin
-    Created on : Jan 22, 2016, 6:34:27 PM
+<%--  
+    Document   : ckvOtp
+    Created on : Feb 1, 2016, 12:09:14 PM
     Author     : Admin
 --%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -31,90 +32,54 @@
     <link href="assets/plugins/switchery/css/switchery.min.css" rel="stylesheet" type="text/css" media="screen" />
     <link href="pages/css/pages-icons.css" rel="stylesheet" type="text/css">
     <link class="main-stylesheet" href="pages/css/pages.css" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script src="pages/js/jquery-1.4.2.min.js"></script>
-    <link href="pages/css/ownerLoginAjax.css" rel="stylesheet" type="text/css" />   
-    
-    
-    <script type="text/javascript">
-    
-                   function check()
-                   {
-                     var generatedOTP = 1234;
-                     var enteredOTP=document.getElementById('enteredOTP').value;
-                if(generatedOTP==enteredOTP)
-                {
-                    //alert(" OTP match");
-                    $("#otpMsgBox").html('OTP match').addClass('myinfo').fadeTo(900,1,function()
-			             {document.location='/Exhibition/html/ownerLoginChangePassword.jsp';
-			             });
-                             
-                }
-                else
-                {
-                     $("#otpMsgBox").html('Please Enter valid OTP').addClass('myerror').fadeTo(900,1,function()
-			             {
-			             });
-                                     //document.location='ckvOtp.jsp';
-                }
-                   }	
-   
-    </script>
-    
-    
-    <script type="text/javascript">
-    window.onload = function()
-    {
-      // fix for windows 8
-      if (navigator.appVersion.indexOf("Windows NT 6.2") != -1)
-        document.head.innerHTML += '<link rel="stylesheet" type="text/css" href="pages/css/windows.chrome.fix.css" />'
-    }
-    </script>
+    <link href="pages/css/ckvajax.css" rel="stylesheet" type="text/css" />   
+    <script src="pages/js/ownerRegCheckOtp.js"></script>
+
   </head>
   <body class="fixed-header ">
-    <div class="login-wrapper ">
-      <!-- START Login Background Pic Wrapper-->
-      <div class="bg-pic">
-        <!-- START Background Pic-->
-        <img src="assets/img/demo/new-york-city-buildings-sunrise-morning-hd-wallpaper.jpg" data-src="assets/img/demo/new-york-city-buildings-sunrise-morning-hd-wallpaper.jpg" data-src-retina="assets/img/demo/new-york-city-buildings-sunrise-morning-hd-wallpaper.jpg" alt="" class="lazy">
-        <!-- END Background Pic-->
-        <!-- START Background Caption-->
-        <div class="bg-caption pull-bottom sm-pull-bottom text-white p-l-20 m-b-20">
-          <h2 class="semi-bold text-white">
-        </div>
-        <!-- END Background Caption-->
-      </div>
-      <!-- END Login Background Pic Wrapper-->
-      
-      
-      
-      <!-- START Login Right Container-->
-    <div class="login-container bg-white">
-      <div class="p-l-50 m-l-20 p-r-50 m-r-20 p-t-50 m-t-30 sm-p-l-15 sm-p-r-15 sm-p-t-40">
-        <h2><b> OTP Generation<b/></h2>
-          <!-- START Login Form -->
-          <form id="form-register" class="p-t-15" role="form">
-            <div class="form-group form-group-default">
+    <div class="register-container full-height sm-p-t-30">
+      <div class="container-sm-height full-height">
+        <div class="row row-sm-height">
+          <div class="col-sm-12 col-sm-height col-middle">
+            <h1><b> Verification </h1>
+            <h3>Enter the One Time Password sent to your mobile number or Email ID.</h3>
+            
+            <form id="form-register" class="p-t-15" role="form">
+            
+             <div class="form-group">
                 <label>Enter OTP</label>
                 <input type="text" id="enteredOTP" name="enteredOTP" maxlength="4" class="form-control"  onblur="check()" required>
-            </div>
-            <div id="otpMsgBox"></div>
+                <div id="otpMsgBox"></div> 
+             </div>
              <br>
              <br>
             <center>
-                <button class="btn btn-primary btn-cons m-t-10" type="submit" onblur="check();" >Send</button>
-                <button class="btn btn-primary btn-cons m-t-10" onclick="location.href='ownerLogin.jsp'" >cancel</button>
+                <button class="btn btn-primary btn-cons m-t-10" type="submit">Submit</button>
+                <button class="btn btn-primary btn-cons m-t-10" onclick="location.href='ownerRegistration.jsp'">Cancel</button>
             </center>
-          </form>
-          <!--END Login Form-->
+  
+            </form>
+  
+          </div>
+        </div>
       </div>
-      <!-- END Login Right Container-->
     </div>
       
       
+<!--*******************************************************Template Content ***********************************************************-->      
+
+    <div class=" full-width">
+      <div class="register-container m-b-10 clearfix">
+        <div class="inline pull-left">
+          <img src="assets/img/demo/pages_icon.png" alt="" class="m-t-5 " data-src="assets/img/demo/pages_icon.png" data-src-retina="assets/img/demo/pages_icon_2x.png" width="60" height="60">
+        </div>
+        <div class="col-md-10 m-t-15">
+          <p class="hinted-text small inline ">No part of this website or any of its contents may be reproduced, copied, modified or adapted, without the prior written consent of the author, unless otherwise indicated for stand-alone materials.</p>
+        </div>
+      </div>
+    </div>
       
-      
-      
+       
     <!-- START OVERLAY -->
     <div class="overlay hide" data-pages="search">
       <!-- BEGIN Overlay Content !-->
@@ -273,8 +238,9 @@
     <script>
     $(function()
     {
-      $('#form-login').validate()
+      $('#form-register').validate()
     })
     </script>
   </body>
 </html>
+
