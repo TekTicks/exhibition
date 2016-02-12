@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>signup form</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script type="text/javascript" src="signup.js"></script>
+    <script type="text/javascript" src="cors.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    </head>
+    <body>
+        <form method="POST">
+        name:<input type="text"  name="name"  id="name"/><br>
+        Mobile number:<input type="text" name="mobileNo"  id="mobileNo"/><br>
+        email:<input type="email" name="emailId" id="emailId"/><br>
+        password: <input type="password" name="password"  id="password"/><br>
+        <input type="button" value="submit" onclick="signup()"/>
+        </form>
+    </body>
+</html>

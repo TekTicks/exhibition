@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.*;
+import org.json.JSONObject;
 
 import sun.net.www.http.HttpClient;
 //import org.json.JSONObject;
@@ -32,7 +33,7 @@ import javax.json.stream.JsonParser;
        import org.apache.http.impl.client.DefaultHttpClient;
  //parser technique       
 import org.json.simple.parser.JSONParser;
-import org.json.simple.JSONObject;
+
 
 import com.jayway.restassured.RestAssured.*;
 import static com.jayway.restassured.RestAssured.given;
@@ -50,6 +51,7 @@ import org.json.JSONException;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import static java.lang.System.out;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -100,10 +102,72 @@ public class pass extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
     
-        new JavaHttpUrlConnectionReader();
+        //new JavaHttpUrlConnectionReader();
         
   }
         
+    
+     protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+    
+         try
+    {
+        
+        
+        
+        
+        
+        
+        
+        /*String queryString = request.getQueryString();
+	JSONObject jo = new JSONObject(queryString);
+        
+        String name = jo.getString("name");
+	String password = jo.getString("password");
+        String mobileNo= jo.getString("mobileNo");
+        String emailId = jo.getString("emailId");
+        
+        */
+        StringBuffer jb = new StringBuffer();
+            String line = null;
+         try 
+         {
+            BufferedReader reader = request.getReader();
+             while ((line = reader.readLine()) != null)
+                 jb.append(line);
+          } 
+         catch (Exception e) 
+         { e.printStackTrace(); }
+        
+        try {
+            JSONObject myobj = JSONObject(jb);
+            
+    //JSONObject jsonObject = JSONObject.fromObject(jb.toString());
+  } catch (ParseException e) {
+    
+    throw new IOException("Error parsing JSON request string");
+  }
+
+         
+         
+         
+         
+         PrintWriter writer = response.getWriter();
+
+        writer.write("<html><body>"+name+" "+password+" "+mobileNo+" "+emailId+"</body></html>");
+	writer.close();
+    }
+    catch(Exception e)
+    {
+        e.printStackTrace();
+    }
+         
+         
+         
+         
+        //new JavaHttpUrlConnectionReader();
+        
+  }
         
     }
 

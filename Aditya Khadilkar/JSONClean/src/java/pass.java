@@ -10,9 +10,11 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import static java.lang.System.out;
 import java.net.HttpURLConnection;
+import java.net.Socket;
 import java.net.URL;
 import java.net.URLEncoder;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,6 +28,7 @@ import org.json.simple.parser.JSONParser;
  *
  * @author Admin
  */
+@WebServlet(urlPatterns={"/pass"},name="pass")
 public class pass extends HttpServlet {
 
     /**
@@ -66,8 +69,8 @@ public class pass extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-try
-{
+//try
+//{
     
     //String myUrl = "http://localhost:8080/jsondem/pass";
         
@@ -100,7 +103,7 @@ try
 
               JSONObject json1 = (JSONObject)new JSONParser().parse(json);*/
            
-            PrintWriter out = response.getWriter();
+         /*   PrintWriter out = response.getWriter();
          String queryString = request.getQueryString();
             JSONObject json1 = new JSONObject(queryString);
         
@@ -112,12 +115,12 @@ try
                 out.println("Name: " + name);
                 out.println("password: " + password);
                 out.println("mobile number: " + mobileNo);
-                out.println("emailId: " + emailId);     
-}
-catch(Exception e)
-{
-    out.println(e);
-}
+                out.println("emailId: " + emailId);    */ 
+//}
+//catch(Exception e)
+//{
+    //e.printStackTrace();
+//}
         
     }
 
@@ -132,7 +135,53 @@ catch(Exception e)
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        System.out.println("got the request");
+        
+        
+        try (BufferedReader br = request.getReader()) {
+            String s = br.readLine();
+            while (s!=null) {
+                System.out.println("read line is " + s);
+                s = br.readLine();
+            }
+            //try
+//{
+            //String myUrl = "http://localhost:8080/jsondem/pass";
+            //  myUrl = URLEncoder.encode(myUrl, "UTF-8");
+            /*URL url = new URL(myUrl);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+            connection.setDoOutput(true);
+            connection.setReadTimeout(15*1000);
+            connection.connect();*/
+            // BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            // BufferedReader reader = new BufferedReader(new InputStreamReader(new URL(myUrl).openStream(), "UTF-8"));
+            /*DefaultHttpClient defaultClient = new DefaultHttpClient();
+            HttpPost httpPostRequest = new HttpPost("http://localhost:8080/JSONClean/pass");
+            HttpResponse httpResponse = defaultClient.execute(httpPostRequest);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(httpResponse.getEntity().getContent(),"UTF-8"));
+            String json = reader.readLine();
+            JSONObject json1 = (JSONObject)new JSONParser().parse(json);*/
+            /*PrintWriter out = response.getWriter();
+            String queryString = request.getQueryString();
+            JSONObject json1 = new JSONObject(queryString);
+            String name = json1.getString("name");
+            String password = json1.getString("password");
+            String mobileNo = json1.getString("mobileNo");
+            String emailId = json1.getString("emailId");
+            out.println("Name: " + name);
+            out.println("password: " + password);
+            out.println("mobile number: " + mobileNo);
+            out.println("emailId: " + emailId); */
+//}
+//catch(Exception ee)
+//{
+            //ee.printStackTrace();
+//}
+        }
+        
+        
+        
     }
 
     /**

@@ -1,3 +1,12 @@
+function isNumber(evt) {
+    evt = (evt) ? evt : window.event;
+    var charCode = (evt.which) ? evt.which : evt.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+        return false;
+    }
+    return true;
+}
+
 function validatePhone(phone)  
 {  
   var phoneno = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
@@ -20,19 +29,25 @@ function validatePhone(phone)
  function validateOtp(otp)  
 {  
   var no = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+  var letters = /^[A-Za-z]+$/;
 	if(otp == "")
 	{
 		$("#otpError").text("Please enter OTP");
         return false;
+	} 
+	else if (otp.length < 4)
+	{
+		$("#otpError").text("OTP Should Contain 4 Characters");
+		return false;
 	}
-	else if(otp.match(no))  
+	else if(otp.match(letters))  
      {  
-		return true;
+		$("#otpError").text("Please enter a valid OTP");
+		return false;
      }  
    else  
      {  
-       $("#otpError").text("Please enter a valid OTP number");
-       return false;  
+       return true;  
      }  
  }
 

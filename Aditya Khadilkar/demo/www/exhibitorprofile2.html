@@ -1,213 +1,108 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <title></title>
-    <!-- Path to Framework7 Library CSS-->
-    <link rel="stylesheet" href="css/framework7.material.min.css">
-    <link rel="stylesheet" href="css/framework7.material.colors.min.css">
-    <!-- Path to your custom app styles-->
-    <link rel="stylesheet" href="css/my-app.css">
-	
-	
-	<style>
-	.demo-card-header-pic .card-header {
-    height: 30vw;
-    background-size: cover;
-    background-position: center;
-	}
-	</style>
-  </head>
-  <body>
-    <!-- Status bar overlay for fullscreen mode-->
-    <div class="statusbar-overlay"></div>
-    <!-- Panels overlay-->
-    <div class="panel-overlay"></div>
-    <!-- Left panel with reveal effect-->
-    <div class="panel panel-left panel-reveal">
-      <div class="content-block">
-        <p>Left panel content goes here</p>
-      </div>
+
+<div data-page="lazy-load" class="page">
+  <div class="navbar">
+    <div class="navbar-inner">
+      <div class="left"><a href="logo.html" class="back link icon-only"><i class="icon icon-back"></i></a></div>
+      <div class="center">Exhibitor Profile 2</div>
+      <div class="right"><a href="#" class="open-panel link icon-only"><i class="icon icon-bars"></i></a></div>
     </div>
-    <!-- Right panel with cover effect-->
-    <div class="panel panel-right panel-cover">
-      <div class="content-block">
-        <p>Right panel content goes here</p>
-      </div>
-    </div>
-    <!-- Views-->
-    <div class="views">
-      <!-- Your main view, should have "view-main" class-->
-      <div class="view view-main">
-        <!-- Top Navbar-->
-        <div class="navbar">
-          <div class="navbar-inner">
-            <!-- We have home navbar without left link-->
-            <div class="center sliding"></div>
-			<!--Back Icon Coding-->
-			<div class="left"><a href="logo.html" class="back link icon-only"><i class="icon icon-back"></i></a></div>
-            <div class="right">
-              <!-- Right link contains only icon - additional "icon-only" class--><a href="#" class="link icon-only open-panel"> <i class="icon icon-only"></i></a>
-              <!-- Right link contains only icon - additional "icon-only" class--><a href="#" class="link icon-only open-panel"> <i class="icon icon-only"></i></a>
-            </div>
-          </div>
-        </div>
-        <!-- Pages, because we need fixed-through navbar and toolbar, it has additional appropriate classes-->
-        <div class="pages navbar-through toolbar-through">
-          <!-- Page, data-page contains page name-->
-          <div data-page="index" class="page">
-            <!-- Scrollable page content-->
-            <div class="page-content">
-              
-              <div class="content-block">
-                <div class="content-block-inner">
-                  
-				  
-				 <div class="list-block media-list border-top">
-					<ul>
-					<li>
-					<a href="eachexhibition.html" class="item-link item-content">
-					<div class="item-media"><img src="https://pbs.twimg.com/profile_images/671322830282207232/vyTgsEkk_400x400.png" width="300"></div>
-					<div class="item-inner">
-					<div class="item-title-row">
-					<div class="item-title"><h2>Tekticks</h2></div>
-					<div class="item-after"></div>
-					</div>
-					<div class="item-subtitle">IT Organization</div>
-					<div class="item-text">Mumbai</div>
-					<div class="item-text">9820765812</div>
-					</div>
-					</a>
-					</li>
-					</ul>
-					</div> 
-				  
-				  
-				   <div class="card">
-				<div class="card-content">
-				<center><h2> Follow TekTicks </h2></center>
-				<div class="row">
-			  
-				<div class="col-33">
-                  <center><a href="#"><img src="http://icons.iconarchive.com/icons/dtafalonso/android-l/512/WhatsApp-icon.png" width="64px" height="64px" alt="News"><br>Whatsapp</img></a></center>
-				</div>
-				  
-				<div class="col-33">
-                  <center><a href="#"  ><img src="http://icons.iconarchive.com/icons/yootheme/social-bookmark/512/social-facebook-button-blue-icon.png" width="64px" height="64px"><br>Facebook</img></a></center>
-				</div>
-				  
-				<div class="col-33">
-                  <center><a href="#"><img src="http://icons.iconarchive.com/icons/dakirby309/windows-8-metro/256/Web-Twitter-alt-2-Metro-icon.png" width="64px" height="64px"><br>Twitter</img></a></center>
-				</div>
-				</div>
-				</div>
-				</div>
-				  
-				  <div class="card">
-  <div class="card-content">
+  </div>
+  <div class="page-content infinite-scroll">
   
-<div class="row">
-	  <div class="col-20"> <p class="buttons-row" ><a href="#" class="button button-fill color-cyan" align="center"> Visited </a></p>  </div>
-	  <div class="col-20" >  <p class="buttons-row" ><a href="#" class="button button-fill color-cyan" align="center"> Like </a></p> </div> 
-	  <div class="col-20" >  <p class="buttons-row" ><a href="#" class="button button-fill color-cyan" align="center"> Notes </a></p> </div> 
-	  <div class="col-20" >  <p class="buttons-row" ><a href="#" class="button button-fill color-cyan" align="center"> Photos </a></p> </div> 
-	  <div class="col-20" >  <p class="buttons-row" ><a href="#" class="button button-fill color-cyan" align="center"> Share </a></p> </div> 
-	  </div>
-	  </div>
-	  </div>
-	  
-	  <div class="card">
-  <div class="card-content">
-<div class="row">
-<h1 align="left">About </h1>
-<p>TekTicks is a prominent Technology Solutions provider in Mumbai, founded in 2009. We specialize in development and management of eCommerce portal, mobile applications and web-portals.
-
-We have successfully worked with large corporate clients, small and medium businesses as well as startups.</p>
-<p>As an ecommerce website development company, we provide 360° services including Venture Consulting, Ideation & Research, Frontend Design & Development, CMS development, Search Engine Optimization, SEM, Social Media Marketing, Cloud Architecture based Development, Complete Implementation and Extensive Support for your venture.</p> </div> </div> </div>
-	  
-	  
-	  <div class="card">
-  <div class="card-content">
-<div class="row">
- <div class="item-title"> <h1 align="left"><center>Contact Us</center> </h1></div>
-</div>
-<div class="row">
-<p><b>Address:</b>
-
-313, Zest Business Plex, M.G.Road, Ghatkopar (East), Mumbai – 400075</p>
-</div>
-<div class="row">
-<p><b>Phone number:</b>
-+91-9820817928</p>
-</div>
-<div class="row">
-<p><b>Email:</b>
-sales@tekticks.com</p> </center></div>
-</div></div>
-</div> 
-
-
-
-				  
- 
-				
+	<div class="list-block" style="margin:0px 0px">
+		<ul>
+			<li>
+				<a href="eachExhibition.html" class="item-link item-content">
+				<div class="item-media"><img src="https://pbs.twimg.com/profile_images/671322830282207232/vyTgsEkk_400x400.png" width="300"></div>
+				<div class="item-inner">
+					<div class="item-title-row">
+						<div class="item-title"><h2>Tekticks</h2></div>
+						<div class="item-subtitle">IT Organization</div>
+						<div class="item-text">Mumbai</div>
+						<div class="item-text">9820765812</div>
+					</div>
+				</div>
+				</a>
+			</li>
+		</ul>
+    </div>
+	
+	<div class="card" style="padding:10px">
+		<div class="card-content">
+			<center><h2> Follow TekTicks </h2></center>
+			<div class="row">
+				<div class="col-25">
+					<center><a href="#"><img src="http://icons.iconarchive.com/icons/dtafalonso/android-l/512/WhatsApp-icon.png" width="64px" height="64px" alt="News"><br>Whatsapp</img></a></center>
 				</div>
 				  
-						</div>
-						
+				<div class="col-25">
+					<center><a href="#"  ><img src="img/facebook.png" width="64px" height="64px"><br>Facebook</img></a></center>
+				</div>
+				  
+				<div class="col-25">
+					<center><a href="#"><img src="http://icons.iconarchive.com/icons/dakirby309/windows-8-metro/256/Web-Twitter-alt-2-Metro-icon.png" width="64px" height="64px"><br>Twitter</img></a></center>
+				</div>
+				<div class="col-25">
+					<center><a href="#"><img src="img/LinkedIn.png" width="64px" height="64px"><br>Linked In</img></a></center>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="card" style="padding:10px">
+		<div class="card-content">
+			<div class="row">
+				<div class="col-20"> <p class="buttons-row" ><a href="#" class="button button-fill color-green" align="center"> Visited </a></p>  </div>
+				<div class="col-20" >  <p class="buttons-row" ><a href="#" class="button button-fill color-green" align="center"> Like </a></p> </div> 
+				<div class="col-20" >  <p class="buttons-row" ><a href="#" class="button button-fill color-green" align="center"> Notes </a></p> </div> 
+				<div class="col-20" >  <p class="buttons-row" ><a href="#" class="button button-fill color-green" align="center"> Photos </a></p> </div> 
+				<div class="col-20" >  <p class="buttons-row" ><a href="#" class="button button-fill color-green" align="center"> Share </a></p> </div> 
+			</div>
+		</div>
+	</div>
+	
+	<div class="card" style="padding:10px">
+		<div class="card-content">
+			<div class="row">
+				<h1 align="left">About </h1>
+				<p>&nbsp;&nbsp;TekTicks is a prominent Technology Solutions provider in Mumbai, founded in 2009. We specialize in development and management of eCommerce portal, mobile applications and web-portals.
 
-					
-                
-              
-			 
-              
-			  <!--<div class="content-block-title">What about simple navigation?</div>
-              <div class="list-block">
-                <ul>
-                  <li><a href="about.html" class="item-link">
-                      <div class="item-content">
-                        <div class="item-inner"> 
-                          <div class="item-title">About</div>
-                        </div>
-                      </div></a></li>
-                  <li><a href="services.html" class="item-link">
-                      <div class="item-content"> 
-                        <div class="item-inner">
-                          <div class="item-title">Services</div>
-                        </div>
-                      </div></a></li>
-                  <li><a href="form.html" class="item-link">
-                      <div class="item-content"> 
-                        <div class="item-inner">
-                          <div class="item-title">Form</div>
-                        </div>
-                      </div></a></li>
-                </ul>
-              </div>
-              <div class="content-block-title">Side panels</div>
-              <div class="content-block">
-                <div class="row">
-                  <div class="col-50"><a href="#" data-panel="left" class="button open-panel">Left Panel</a></div>
-                  <div class="col-50"><a href="#" data-panel="right" class="button open-panel">Right Panel</a></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>-->
-        <!-- Bottom Toolbar-->
-        
-      </div>
-	  </div>
-	  </div>
-	  </div>
-	  </div>
+				We have successfully worked with large corporate clients, small and medium businesses as well as startups.</p>
+				<p>As an ecommerce website development company, we provide 360° services including Venture Consulting, Ideation & Research, Frontend Design & Development, CMS development, Search Engine Optimization, SEM, Social Media Marketing, Cloud Architecture based Development, Complete Implementation and Extensive Support for your venture.</p> 
+			</div> 
+		</div>
+	</div>
+	
+	<div class="card" style="padding:10px">
+		<div class="card-content">
+			<div class="row">
+				<div class="item-title"> <h1 align="left"><center>Contact Us</center> </h1></div>
+			</div>
+			<div class="row">
+				<p><b>Address:</b>
+
+				313, Zest Business Plex, M.G.Road, Ghatkopar (East), Mumbai – 400075</p>
+			</div>
+			<div class="row">
+				<p><b>Phone number:</b>
+				+91-9820817928</p>
+			</div>
+			<div class="row">
+				<p><b>Email:</b>
+				sales@tekticks.com</p> </center>
+			</div>
+		</div>
+	</div>
+	
+	</div></div>
+
     
-    <!-- Path to Framework7 Library JS-->
-    <script type="text/javascript" src="js/framework7.min.js"></script>
-    <!-- Path to your app js-->
-    <script type="text/javascript" src="js/my-app.js"></script>
-  </body>
-</html>
+
+   
+  
+	
+
+	
+	
+	
+  

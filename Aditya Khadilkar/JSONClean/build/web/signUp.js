@@ -1,6 +1,6 @@
 function signup()
 {
-   var request = createCORSRequest( 'GET', 'http://localhost:8080/JSONClean/pass');
+   /*var request = createCORSRequest( 'post', 'http://localhost:8080/JSONClean/pass');*/
     var name = document.getElementById('name').value;
     var mobileNo = document.getElementById('mobileNo').value;
     var emailId = document.getElementById('emailId').value;
@@ -9,16 +9,21 @@ function signup()
     alert(mobileNo);
     alert(emailId);
     alert(password);
-    var data ={"name":name,"password":password,"mobileNo":mobileNo,"emailId":emailId};
+    var data ={
+        "name" : name,
+        "password" : password,
+        "mobileNo" : mobileNo,
+        "emailId" : emailId
+    };
     /*var obj = JSON.parse(data);*/
     /*obj['signUp'].push();*/
    /*data = JSON.stringify(obj);*/
-	alert(JSON.stringify(data));
+	
 	var sendData = function(data){   
-	alert(JSON.stringify(data));
+	alert("sending: "+JSON.stringify(data));
       $.ajax({
      url:'http://localhost:8080/JSONClean/pass',
-     type: 'GET',
+     type: 'POST',
      contentType: 'application/json',
     data: JSON.stringify(data),
 	success: function(response)
@@ -26,12 +31,11 @@ function signup()
              //JSON.parse(data);
            // alert("data parsed");
             //alert(data);
-            alert('hieeeee');
             alert(response);
 	},
         error: function(response)
         {
-          alert('error'+response);
+          alert('error'+JSON.stringify(response));
         }
 });
 };

@@ -1,6 +1,6 @@
 function signup()
 {
-   var request = createCORSRequest( "GET", "http://localhost:8080/jsondem/pass" );
+   var request = createCORSRequest( 'POST', 'http://localhost:8080/jsondem/pass' );
     var name = document.getElementById('name').value;
     var mobileNo = document.getElementById('mobileNo').value;
     var emailId = document.getElementById('emailId').value;
@@ -18,7 +18,7 @@ function signup()
 	alert(JSON.stringify(data));
       $.ajax({
      url:'http://localhost:8080/jsondem/pass',
-     type: 'GET',
+     type: 'POST',
      contentType: 'application/json',
     data: JSON.stringify(data),
 	success: function(response)
