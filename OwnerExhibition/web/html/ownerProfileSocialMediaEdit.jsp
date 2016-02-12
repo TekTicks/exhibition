@@ -4,6 +4,11 @@
     Author     : Admin
 --%>
 
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.Connection"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -411,27 +416,57 @@
                       
              <div class="col-md-70">
                       <div class="padding-30">
-                        <form action="/Exhibition/ownerProfileSocialMediaSave" method="post" role="form">
-                             <div class="form-group form-group-default required">
+                        <form action="/Exhibition/ownerProfileSocialMediaUpdate" method="post" role="form">
+                            
+                          <%  
+                              try{
+                                 
+                              
+                              String s_type="",s_link="";
+                             String id=request.getParameter("myid");
+                             out.print(id);
+                          Class.forName("com.mysql.jdbc.Driver"); 
+                         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Exhibition","root","12345"); 
+                         Statement stat=con.createStatement();
+                         ResultSet rs=stat.executeQuery("select a.*,b.* from socialMedia a,ownerSocialMedia b where a.id=b.socialMediaId and b.id='"+id+"'");
+                         %>
+                         <%
+                             if(!rs.next())
+                         {
+                             out.print("Sory");
+                         }
+                         else
+                         {
+                       %>
+                         <% String abc=(rs.getString(2));%>
+                           <div class="form-group form-group-default required">
                                  <label>Select Social Media</label>
-                                 <select class="full-width" name="socialmedia" data-init-plugin="select2">
-                                  <option value="facebook">Facebook</option>
-                                  <option value="twitter">Twitter.</option>
-                                  <option value="Google+">Google+.</option>
-                                  <option value="Linkdin">Linkdin.</option>
+                                 <select class="full-width"  name="socialmedia" data-init-plugin="select2">
+                                     <option value="<%= abc %>"<%= abc %> ></option>
+                                  <option value="tw"></option>
+                                 
                             </select>
                      
                             </div>  
                             <br>
                               <div class="form-group form-group-default required">
                                     <label>Social Media Link</label>
-                                      <input type="text" name="socialmedialink"id="tin" class="form-control" required>
+                                      <input type="text" value="<%out.print(rs.getString(9));%>"name="socialmedialink"id="tin" class="form-control" required>
                                      </div>
-                              <br>
+                                      <%
+                                          }      
+                         }
+                        catch(Exception ee)
+                           {
+                               out.println("error"+ee);
+                         
+                           }
+                           %>
+                                     <br>
                               <br>
                               <div class="form-group">
-                              <button class="btn btn-primary btn-cons m-t-10" type="submit">Submit</button>
-                              <button class="btn btn-primary btn-cons m-t-10" onclick="document.location.href='/Exhibition/html/ownerProfile.jsp';"> Cancel</button> 
+                             <button class="btn btn-primary btn-cons m-t-10" type="submit">Update</button>
+                          <button class="btn btn-primary btn-cons m-t-10" onclick="document.location.href='/Exhibition/html/ownerProfile.jsp';"> Cancel</button> 
                           </div>
                           </div>    
                         </form>

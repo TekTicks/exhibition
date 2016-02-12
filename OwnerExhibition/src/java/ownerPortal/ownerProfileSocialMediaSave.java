@@ -31,10 +31,11 @@ public class ownerProfileSocialMediaSave extends HttpServlet {
                                  ps.setInt(3,1);
                                  ps.executeUpdate();
                             
-                                 PreparedStatement ps1=con.prepareStatement("insert into ownerSocialMedia(socialMediaId,link,createdBy,modifiedBy,iconMediaId)values((select id from socialMedia where id=1),?,(select id from owner where id=1),(select id from owner where id=1),(select id from media where id=1))");
-                                 ps1.setString(1,socialMediaLink);
+                                 PreparedStatement ps1=con.prepareStatement("insert into ownerSocialMedia(socialMediaId,link,createdBy,modifiedBy,iconMediaId)values((select id from socialMedia where socialMedia=?),?,(select id from owner where id=1),(select id from owner where id=1),(select id from media where id=1))");
+                                 ps1.setString(1,socialMedia);
+                                  ps1.setString(2,socialMediaLink);
                                  ps1.executeUpdate();
-                                 out.print("<center>data saved</center>");
+                                response.sendRedirect("/Exhibition/html/ownerProfile.jsp"); 
                            }
                            catch(Exception ee)
                            {

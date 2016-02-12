@@ -37,7 +37,7 @@ public class ownerProfileAddressSave extends HttpServlet {
                                  ps.setString(5, maplink);
                                  ps.executeUpdate();
                             
-                                 out.print("<center>data saved</center>");
+                                  response.sendRedirect("/Exhibition/html/ownerProfile.jsp");
                            }
                            catch(Exception ee)
                            {

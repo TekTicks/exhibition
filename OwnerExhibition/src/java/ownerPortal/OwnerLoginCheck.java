@@ -8,6 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 public class OwnerLoginCheck extends HttpServlet 
 {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -17,30 +18,62 @@ public class OwnerLoginCheck extends HttpServlet
         try
         { 
                            String uname=request.getParameter("un");
-                        
                            String pass=request.getParameter("pw");
                           
                            Class.forName("com.mysql.jdbc.Driver"); 
                            java.sql.Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Exhibition","root","12345"); 
                            Statement stat=con.createStatement();
-                           ResultSet rs=stat.executeQuery("select * from owner where userName='"+uname+"' or password='"+pass+"'");
+                           //ResultSet rs=stat.executeQuery("select a.* from owner a where a.userName='"+uname+"' and a.password='"+pass+"'");
+                           ResultSet rs=stat.executeQuery("select a.*,b.*,c.* from owner a,ownerProfile b,industry c where a.userName='"+uname+"' and a.password='"+pass+"'");
                            int count=0;
                            while(rs.next())
                            {
-                               String un=rs.getString("userName");
-                               ownerPortal.Global.un=un;
-                               String pw=rs.getString("password");
-                               ownerPortal.Global.pw=pw;
-                               count++;
+                               String un1=rs.getString("userName");
+                               //ownerPortal.Global.un=un1;
+                               String pw1=rs.getString("password");
+                               String cname=rs.getString("name");
+                               String primEmail=rs.getString("primEmail");
+                               String secEmail=rs.getString("secEmail");  
+                               String primContact=rs.getString("primContact");
+                               String secContact=rs.getString("secContact");
+                                String about=rs.getString("about");
+                                 String website=rs.getString("website");
+                                 String industry=rs.getString("industryName");
+                              // ownerPortal.Global.pw=pw1;
+                                HttpSession ss=request.getSession();
+                                  ss.setAttribute("username",un1);
+                                  ss.setAttribute("password",pw1);
+                                  ss.setAttribute("cname",cname);
+                                  ss.setAttribute("primEmail1",primEmail);
+                                  ss.setAttribute("secEmail1",secEmail);
+                                  ss.setAttribute("primContact1",primContact);
+                                  ss.setAttribute("secContact1",secContact);
+                                  ss.setAttribute("about1",about);
+                                   ss.setAttribute("website1",website);
+                                    ss.setAttribute("industry1",industry);
+                             /* ownerPortal.Global.ownerId=rs.getString("id");
+                              ownerPortal.Global.companyname=rs.getString("name"); 
+                              ownerPortal.Global.primaryemail=rs.getString("primEmail");
+                              ownerPortal.Global.secondaryemail=rs.getString("secEmail");
+                              ownerPortal.Global.primarycontact=rs.getString("primContact");
+                              ownerPortal.Global.secondarycontact=rs.getString("secContact");
+                              ownerPortal.Global.about=rs.getString("about");
+                              ownerPortal.Global.website=rs.getString("website");*/
+                              
+                              count++;
                            }
                            if(count>0)
                            {
-                               if( !uname.equals(ownerPortal.Global.un))
+                                HttpSession ss=request.getSession();
+                                  String username1=(String)ss.getAttribute("username");
+                                 
+                                  String password1=(String)ss.getAttribute("password");
+                               if( !uname.equals(username1))
                                {
                                     out.print("emailinvalid");        
 
                                }
-                               else if(! pass.equals(ownerPortal.Global.pw))
+                               else if(! pass.equals(password1))
                                {
                                    out.print("passwordinvalid");        
 
@@ -58,6 +91,28 @@ public class OwnerLoginCheck extends HttpServlet
                               
                            } 
                            
+                           /* ResultSet rs1=stat1.executeQuery("select * from ownerProfile");
+                           int count1=0;
+                           while(rs1.next())
+                           {
+                               String companyname=rs.getString(2);
+                               ownerPortal.Global.companyname=companyname;
+                               String primaryemail=rs.getString(3);
+                               ownerPortal.Global.primaryemail=primaryemail;
+                               String secemail=rs.getString(4);
+                               ownerPortal.Global.secondaryemail=secemail;
+                               String primarycontact=rs.getString(5);
+                               ownerPortal.Global.primarycontact=primarycontact;
+                               String seccontact=rs.getString(6);
+                               ownerPortal.Global.secondarycontact=seccontact;
+                               String about=rs.getString(7);
+                               ownerPortal.Global.about=about;
+                               String website=rs.getString(8);
+                               ownerPortal.Global.website=website;
+                               ownerPortal.Global.profileId=rs.getString("id");
+                               count1++;
+                           }
+                           */
         }
         catch(Exception ee)
         {

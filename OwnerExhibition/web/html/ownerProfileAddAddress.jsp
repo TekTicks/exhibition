@@ -442,8 +442,8 @@
                               <br>
                               <br>
                               <div class="form-group">
-                               <center> <button class="btn btn-success" type="submit">Submit</button>
-                          <button class="btn btn-default"><i class="pg-close"></i> Clear</button> </center>
+                              <button class="btn btn-primary btn-cons m-t-10" type="submit">Submit</button>
+                          <button class="btn btn-primary btn-cons m-t-10" onclick="document.location.href='/Exhibition/html/ownerProfile.jsp';"> Cancel</button> 
                           </div>
                           </div>    
                         </form>

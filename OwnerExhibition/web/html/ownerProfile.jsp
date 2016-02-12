@@ -10,7 +10,7 @@
   <head>
     <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
     <meta charset="utf-8" />
-    <title>Pages - Admin Dashboard UI Kit - Form Wizard</title>
+    <title>Owner Profile</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no" />
     <link rel="apple-touch-icon" href="pages/ico/60.png">
     <link rel="apple-touch-icon" sizes="76x76" href="pages/ico/76.png">
@@ -45,6 +45,7 @@
     <link class="main-stylesheet" href="pages/css/pages.css" rel="stylesheet" type="text/css" />
     
   </head>
+
   <body class="fixed-header ">
     <nav class="page-sidebar" data-pages="sidebar">
       <!-- BEGIN SIDEBAR MENU TOP TRAY CONTENT-->
@@ -435,24 +436,39 @@
                     <div class="col-md-7">
                       <div class="padding-30">
                         <form action="/Exhibition/ownerProfileDemo" method="post" role="form">
+                            <% 
+                                  HttpSession ss=request.getSession();
+                                  String username1=(String)ss.getAttribute("username");
+                                 
+                                  String password1=(String)ss.getAttribute("password");
+                                  String cname=(String)ss.getAttribute("cname");
+                                   String primEmail=(String)ss.getAttribute("primEmail1");
+                                    String secEmail=(String)ss.getAttribute("secEmail1");
+                                     String primContact=(String)ss.getAttribute("primContact1");
+                                      String secContact=(String)ss.getAttribute("secContact1");
+                                   String about=(String)ss.getAttribute("about1");
+                                   out.print(about);
+                                   String website=(String)ss.getAttribute("website1");
+                                    String industry=(String)ss.getAttribute("industry1");
+                                %>
                                 
                             <div class="form-group form-group-default disabled">
                                <label>User Name</label>
-                               <input type="email" name="uname" class="form-control" value="You can put anything here" disabled>
+                               <input type="email" name="uname" value="<%out.print(username1);%>" class="form-control" value="You can put anything here" disabled>
                             </div>                  
                             <div class="form-group form-group-default required">
                               <label>Company Name</label>
-                              <input type="text" name="cname" id="cname" class="form-control" required>
+                              <input type="text" value="<%out.print(cname);%>" name="cname" id="cname" class="form-control" required>
                             </div>
                          
                           <div class="form-group form-group-default required">
                               <label>Primary Email</label>
-                              <input type="email" name="p_email" id="p_email" class="form-control" required>
+                              <input type="email" name="p_email"  value="<%out.print(primEmail);%>" id="p_email" class="form-control" required>
                             </div>
                           
                           <div class="form-group form-group-default required">
                               <label>Secondary Email</label>
-                              <input type="email" name="s_email" id="s_email" class="form-control" required>
+                              <input type="email" name="s_email" value="<%out.print(secEmail);%>" id="s_email" class="form-control" required>
                             </div>
                            
                             <div class="form-group form-group-default input-group required">
@@ -473,7 +489,7 @@
                                         </select>
                                         </span>
                               <label>Primary Contact</label>
-                              <input type="text" name="p_contact" id="p_contact" maxlength="10" minlength="10" class="form-control" placeholder="" required>
+                              <input type="text" name="p_contact" id="p_contact" value="<%out.print(primContact);%>" maxlength="10" minlength="10" class="form-control" placeholder="" required>
                             </div>
                            
                             <div class="form-group form-group-default input-group ">
@@ -494,7 +510,7 @@
                                         </select>
                                         </span>
                               <label>Secondary Contact</label>
-                              <input type="text" name="s_contact" id="s_contact" class="form-control" placeholder="">
+                              <input type="text" name="s_contact" value="<%out.print(secContact);%>"  id="s_contact" class="form-control" placeholder="">
                             </div>
                                
                            
@@ -505,19 +521,20 @@
                             
                              <div class="form-group form-group-default required">
                               <label>About</label>
-                          <textarea class="form-control" name="about" id="about" placeholder="Briefly Describe your Abilities"required></textarea>
+                          <textarea class="form-control" name="about"  id="about" value="<%out.print(about);%>" placeholder="Briefly Describe your Abilities" required></textarea>
                             </div> 
                               
                             <div class="form-group form-group-default required">
                               <label>Website</label>
-                              <input type="text" name="website" id="website" class="form-control" required>
+                              <input type="text" value="<%out.print(website);%>" name="website" id="website"  class="form-control" required>
                             </div>
                             
                             
                             <div class="form-group form-group-default required">
                                  <label>Industry</label>
-                            <select class="full-width" name="industry" data-init-plugin="select2">
-                                  <option value="AK">Alaska</option>
+                            <select class="full-width" value="<%out.print(industry);%>" name="industry" data-init-plugin="select2">
+                                <option value="AK">------- </option>  
+                                <option value="AK">Alaska</option>
                                   <option value="HI">Hawaii</option>
                             </select>
                      
@@ -533,12 +550,13 @@
                                   </center>
                       
                                </div>-->
-                             <center> 
+                          
                                  <!--<button class="btn btn-success" type="submit">Submit</button>
                                  <button class="btn btn-default"><i class="pg-close"></i> Clear</button> -->
                                    <button class="btn btn-primary btn-cons m-t-10" type="submit">Submit</button>
+                                   <button class="btn btn-primary btn-cons m-t-10" onclick="document.location.href='/Exhibition/html/ownerProfileUpdate.jsp';" >Update</button> 
                                    <button class="btn btn-primary btn-cons m-t-10" >Cancel</button> 
-                             </center>
+                       
   
                          
                         </form>
@@ -591,59 +609,65 @@
                 <div class="clearfix"></div>
               </div>
               <div class="panel-body">
-                <table class="table table-hover demo-table-dynamic" id="tableWithDynamicRows">
-                  <thead>
-                    <tr>
-                      <th>Date</th>
-                      <th>Social Media</th>
-                      <th>Link</th>
-                      <th>Update/Delete.  </th>
-                    </tr>
+                  
+              
+              
+              
+               <table class="table table-hover demo-table-search" id="tableWithSearch">
+                     <%@page import="java.io.*;" %>
+                     <%@page import="java.sql.*;" %>
+                     <%@page import="java.sql.DriverManager;" %>
+                     <thead>
+                        <tr>
+                            <th>ID</th>
+                        <th>Date</th>
+                        <th>Social Media</th>        
+                        <th>Link</th>
+                        <th>Update/Delete.</th>
+                        </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td class="v-align-middle">
-                        <p>Hyperlapse</p>
-                      </td>
-                      <td class="v-align-middle">
-                        <p>Description goes here</p>
-                      </td>
-                      <td class="v-align-middle">
-                        <p>FREE</p>
-                      </td>
-                       <td class="v-align-middle">
-                        <div class="btn-group">
-                         
-                          <button type="button" class="btn btn-success"><i class="fa fa-pencil"></i>
-                          </button>
-                          <button type="button" class="btn btn-success"><i class="fa fa-trash-o"></i>
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                   
-                    
-                    <tr>
-                      <td class="v-align-middle">
-                        <p>Angry Birds</p>
-                      </td>
-                      <td class="v-align-middle">
-                        <p>Description goes here</p>
-                      </td>
-                      <td class="v-align-middle">
-                        <p>FREE</p>
-                      </td>
-                           <td class="v-align-middle">
-                             <div class="btn-group">
-                         
-                          <button type="button" class="btn btn-success"><i class="fa fa-pencil"></i>
-                          </button>
-                          <button type="button" class="btn btn-success"><i class="fa fa-trash-o"></i>
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  </tbody>
+                    <%   
+                         Class.forName("com.mysql.jdbc.Driver"); 
+                         Connection con1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/Exhibition","root","12345"); 
+                         Statement stat1=con1.createStatement();
+                         ResultSet rs1=stat1.executeQuery("select a.*,b.* from socialMedia a,ownerSocialMedia b where a.id=b.socialMediaId;");
+                         int count1=0;
+                        
+                         while(rs1.next())
+                         {
+                            count1++;
+                            out.println("<tr>");
+                            out.println("<td class='v-align-middle semi-bold'><p>"+rs1.getString(7)+"</p></td>");
+                            out.println("<td class='v-align-middle semi-bold'><p>"+rs1.getString(3)+"</p></td>");
+                            out.println("<td class='v-align-middle semi-bold'><p>"+rs1.getString(2)+"</p></td>");
+                            out.println("<td class='v-align-middle semi-bold'><p>"+rs1.getString(9)+"</p></td>");
+                            String kv=rs1.getString(7);
+                            String kv1=rs1.getString(2);
+                            String kv2=rs1.getString(3);
+                            String kv3=rs1.getString(9);out.print(kv3);
+                            
+                             HttpSession ss1=request.getSession();
+                                  ss1.setAttribute("id",kv);
+                                  ss1.setAttribute("date",kv2);
+                                  ss1.setAttribute("socialmedia1",kv1);
+                                  ss1.setAttribute("link1",kv3);
+                                  
+                            
+                           %>
+                          
+                             <td>
+                                 <div class="btn-group">
+                                 <button  type="button" class="btn btn-success" onclick="document.location.href='/Exhibition/html/ownerProfileSocialMediaEdit.jsp?myid=<%= kv %>';"><i class="fa fa-pencil"></i></button>
+                                 <button type="button" class="btn btn-success"  onclick="document.location.href='/Exhibition/OwnerProfileSocialMediaDelete?myid=<%= kv %>';"><i class="fa fa-trash-o"></i>
+                                 </button>
+                                 </div>
+                            </td><%
+                            out.println(" </tr>");
+                        }
+                       
+                   %>   
+                   </tbody>
                 </table>
               </div>
             </div>
@@ -682,47 +706,7 @@
     
     
     <div class="tab-pane slide-left padding-20" id="tab3">
-    <!--               <div class="col-md-7">
-                      <div class="padding-30">
-                        <form action="ckvAddressSave.jsp" method="post" role="form">
-                          
-                         
-                          <div class="form-group-attached">
-                                <div class="form-group">
-                                    <label>Address 1</label>
-                                      <input type="text" name="address1" id="tin" class="form-control">
-                                     </div>
-                               
-                             <div class="form-group">
-                                    <label>Address 2</label>
-                                      <input type="text" name="address2"id="tin" class="form-control">
-                                     </div>
-                            <div class="row clearfix">
-                            
-                               <div class="form-group">
-                                    <label>Zip Code</label>
-                                      <input type="text" name="zipcode"id="tin" class="form-control">
-                                     </div>
-                            </div>
-                             <div class="form-group">
-                                    <label>Landmark</label>
-                                      <input type="text" name="landmark"id="tin" class="form-control">
-                                     </div>
-                              <br>
-                              <div class="form-group">
-                                    <label>Map Link</label>
-                                      <input type="text" name="maplink"id="tin" class="form-control">
-                                     </div>
-                              <br>
-                              <br>
-                              <div class="form-group">
-                               <center> <button class="btn btn-success" type="submit">Submit</button>
-                          <button class="btn btn-default"><i class="pg-close"></i> Clear</button> </center>
-                          </div>
-                          </div>    
-                        </form>
-                      </div>
-                    </div>-->
+   
     
     <!-- START CONTAINER FLUID -->
           <div class="container-fluid container-fixed-lg">
@@ -740,67 +724,49 @@
                 <div class="clearfix"></div>
               </div>
               <div class="panel-body">
-                <table class="table table-hover demo-table-dynamic" id="tableWithDynamicRows">
-                  <thead>
-                    <tr>
-                      <th>Date</th>
-                      <th>Title</th>
-                      <th>Address</th>
-                      <th>MapLink</th>
-                      <th>Update/Delete.  </th>
-                    </tr>
+               
+                  <table class="table table-hover demo-table-search" id="tableWithSearch">
+                     <%@page import="java.io.*;" %>
+                     <%@page import="java.sql.*;" %>
+                     <%@page import="java.sql.DriverManager;" %>
+                     <thead>
+                        <tr>
+                        <th>Date</th>
+                        <th>Title</th>
+                        <th>Address</th>        
+                        <th>MapLink</th>
+                        <th>Update/Delete.</th>
+                        </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td class="v-align-middle">
-                        <p>Hyperlapse</p>
-                      </td>
-                      <td class="v-align-middle">
-                        <p>Description goes here</p>
-                      </td>
-                      <td class="v-align-middle">
-                        <p>FREE</p>
-                      </td>
-                      <td class="v-align-middle">
-                        <p>Notes go here</p>
-                      </td>
-                       <td class="v-align-middle">
-                        <div class="btn-group">
-                         
-                          <button type="button" class="btn btn-success"><i class="fa fa-pencil"></i>
-                          </button>
-                          <button type="button" class="btn btn-success"><i class="fa fa-trash-o"></i>
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                   
-                    
-                    <tr>
-                      <td class="v-align-middle">
-                        <p>Angry Birds</p>
-                      </td>
-                      <td class="v-align-middle">
-                        <p>Description goes here</p>
-                      </td>
-                      <td class="v-align-middle">
-                        <p>FREE</p>
-                      </td>
-                      <td class="v-align-middle">
-                        <p>Notes go here</p>
-                      </td>
-                       <td class="v-align-middle">
-                             <div class="btn-group">
-                         
-                          <button type="button" class="btn btn-success"><i class="fa fa-pencil"></i>
-                          </button>
-                          <button type="button" class="btn btn-success"><i class="fa fa-trash-o"></i>
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  </tbody>
+                    <%   
+                         Class.forName("com.mysql.jdbc.Driver"); 
+                           Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Exhibition","root","12345"); 
+                         Statement stat=con.createStatement();
+                         ResultSet rs=stat.executeQuery("select * from ownerAddress");
+                         int count=0;
+                         while(rs.next())
+                         {
+                            count++;
+                            out.println("<tr>");
+                            out.println("<td class='v-align-middle semi-bold'><p>"+rs.getString(8)+"</p></td>");
+                            out.println("<td><p> "+rs.getString(2)+"</p></td>");
+                            out.println("<td><p> "+rs.getString(3)+"</p></td>");
+                            out.println("<td><p> "+rs.getString(7)+"</p></td>");
+                           %>
+                             <td>
+                                 <div class="btn-group">
+                                 <button type="button" class="btn btn-success" onclick="document.location.href='/Exhibition/html/ownerProfileAddressUpdate.jsp';"><i class="fa fa-pencil"></i></button>
+                                 <button type="button" class="btn btn-success" onclick="document.location.href='/Exhibition/OwnerProfileAddressDelete';"><i class="fa fa-trash-o"></i>
+                                 </button>
+                                 </div>
+                            </td><%
+                            out.println(" </tr>");
+                        }
+                   %>   
+                   </tbody>
                 </table>
+                   
               </div>
             </div>
             <!-- END PANEL -->
@@ -979,6 +945,7 @@
                 </div>
                       <br>
                        <button class="btn btn-primary btn-cons m-t-10" type="submit">Submit</button>
+                         <button class="btn btn-primary btn-cons m-t-10" onclick="document.location.href='/Exhibition/html/ownerProfileContactPersonUpdate.jsp';">Update</button> 
                                    <button class="btn btn-primary btn-cons m-t-10" >Cancel</button> 
                     </form>
                   </div>

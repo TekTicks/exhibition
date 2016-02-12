@@ -411,27 +411,39 @@
                       
              <div class="col-md-70">
                       <div class="padding-30">
-                        <form action="/Exhibition/ownerProfileSocialMediaSave" method="post" role="form">
+                        <form action="/Exhibition/OwnerProfileAddressUpdate" method="post" role="form">
+                          
+                         
+                          <div class="form-group-attached">
+                                <div class="form-group form-group-default required">
+                                    <label>Address 1</label>
+                                    <input type="text" name="address1" id="tin" class="form-control" required>
+                                     </div>
+                               
+                             <div class="form-group form-group-default">
+                                    <label>Address 2</label>
+                                      <input type="text" name="address2"id="tin" class="form-control">
+                                     </div>
+                            
+                               <div class="form-group form-group-default required">
+                                    <label>Zip Code</label>
+                                      <input type="text" name="zipcode"id="tin" class="form-control" required>
+                                     </div>
+                            
                              <div class="form-group form-group-default required">
-                                 <label>Select Social Media</label>
-                                 <select class="full-width" name="socialmedia" data-init-plugin="select2">
-                                  <option value="facebook">Facebook</option>
-                                  <option value="twitter">Twitter.</option>
-                                  <option value="Google+">Google+.</option>
-                                  <option value="Linkdin">Linkdin.</option>
-                            </select>
-                     
-                            </div>  
-                            <br>
+                                    <label>Landmark</label>
+                                      <input type="text" name="landmark"id="tin" class="form-control" required>
+                                     </div>
+                              <br>
                               <div class="form-group form-group-default required">
-                                    <label>Social Media Link</label>
-                                      <input type="text" name="socialmedialink"id="tin" class="form-control" required>
+                                    <label>Map Link</label>
+                                      <input type="text" name="maplink"id="tin" class="form-control" required>
                                      </div>
                               <br>
                               <br>
                               <div class="form-group">
-                              <button class="btn btn-primary btn-cons m-t-10" type="submit">Submit</button>
-                              <button class="btn btn-primary btn-cons m-t-10" onclick="document.location.href='/Exhibition/html/ownerProfile.jsp';"> Cancel</button> 
+                              <button class="btn btn-primary btn-cons m-t-10" type="submit">Update</button>
+                          <button class="btn btn-primary btn-cons m-t-10" onclick="document.location.href='/Exhibition/html/ownerProfile.jsp';"> Cancel</button> 
                           </div>
                           </div>    
                         </form>

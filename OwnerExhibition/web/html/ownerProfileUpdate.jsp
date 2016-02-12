@@ -411,29 +411,102 @@
                       
              <div class="col-md-70">
                       <div class="padding-30">
-                        <form action="/Exhibition/ownerProfileSocialMediaSave" method="post" role="form">
+                        <form action="/Exhibition/OwnerProfileUpdate" method="post" role="form">
+                                
+                            <div class="form-group form-group-default disabled">
+                               <label>User Name</label>
+                               <input type="email" name="uname" value="<%out.print(ownerPortal.Global.un);%>" class="form-control" value="You can put anything here" disabled>
+                            </div>                  
+                            <div class="form-group form-group-default required">
+                              <label>Company Name</label>
+                              <input type="text" name="cname" value="<%out.print(ownerPortal.Global.companyname);%>" id="cname" class="form-control" required>
+                            </div>
+                         
+                          <div class="form-group form-group-default required">
+                              <label>Primary Email</label>
+                              <input type="email" name="p_email" value="<%out.print(ownerPortal.Global.primaryemail);%>" id="p_email" class="form-control" required>
+                            </div>
+                          
+                          <div class="form-group form-group-default required">
+                              <label>Secondary Email</label>
+                              <input type="email" name="s_email" value="<%out.print(ownerPortal.Global.secondaryemail);%>" id="s_email" class="form-control" required>
+                            </div>
+                           
+                            <div class="form-group form-group-default input-group required">
+                              <span class="input-group-addon">
+                                            <select class="cs-select cs-skin-slide cs-transparent" data-init-plugin="cs-select">
+                                            <option data-countryCode="GB" value="44" Selected>UK (+44)</option>
+                                            <option data-countryCode="US" value="1">USA (+1)</option>
+                                            <option data-countryCode="AR" value="54">Argentina (+54)</option>
+                                            <option data-countryCode="AU" value="61">Australia (+61)</option>
+                                            <option data-countryCode="AT" value="43">Austria (+43)</option>
+                                            <option data-countryCode="BE" value="32">Belgium (+32)</option>
+                                            <option data-countryCode="BZ" value="501">Belize (+501)</option>
+                                            <option data-countryCode="CN" value="86">China (+86)</option>
+                                            <option data-countryCode="IS" value="354">Iceland (+354)</option>
+                                            <option data-countryCode="IN" value="91">India (+91)</option>
+                                            <option data-countryCode="MY" value="60">Malaysia (+60)</option>
+                                            <option data-countryCode="ZW" value="263">Zimbabwe (+263)</option>
+                                        </select>
+                                        </span>
+                              <label>Primary Contact</label>
+                              <input type="text" name="p_contact" value="<%out.print(ownerPortal.Global.primarycontact);%>" id="p_contact" maxlength="10" minlength="10" class="form-control" placeholder="" required>
+                            </div>
+                           
+                            <div class="form-group form-group-default input-group ">
+                              <span class="input-group-addon">
+                                            <select class="cs-select cs-skin-slide cs-transparent" data-init-plugin="cs-select">
+                                            <option data-countryCode="GB" value="44" Selected>UK (+44)</option>
+                                            <option data-countryCode="US" value="1">USA (+1)</option>
+                                            <option data-countryCode="AR" value="54">Argentina (+54)</option>
+                                            <option data-countryCode="AU" value="61">Australia (+61)</option>
+                                            <option data-countryCode="AT" value="43">Austria (+43)</option>
+                                            <option data-countryCode="BE" value="32">Belgium (+32)</option>
+                                            <option data-countryCode="BZ" value="501">Belize (+501)</option>
+                                            <option data-countryCode="CN" value="86">China (+86)</option>
+                                            <option data-countryCode="IS" value="354">Iceland (+354)</option>
+                                            <option data-countryCode="IN" value="91">India (+91)</option>
+                                            <option data-countryCode="MY" value="60">Malaysia (+60)</option>
+                                            <option data-countryCode="ZW" value="263">Zimbabwe (+263)</option>
+                                        </select>
+                                        </span>
+                              <label>Secondary Contact</label>
+                              <input type="text" name="s_contact" value="<%out.print(ownerPortal.Global.secondarycontact);%>" id="s_contact" class="form-control" placeholder="">
+                            </div>
+                               
+                           
+                            <div class="form-group form-group-default disabled">
+                               <label>Mobile Number</label>
+                               <input type="email" class="form-control"  value="<%out.print(ownerPortal.Global.phoneno);%>" name="mobileno" id="mobileno" value="You can put anything here" disabled>
+                            </div> 
+                            
                              <div class="form-group form-group-default required">
-                                 <label>Select Social Media</label>
-                                 <select class="full-width" name="socialmedia" data-init-plugin="select2">
-                                  <option value="facebook">Facebook</option>
-                                  <option value="twitter">Twitter.</option>
-                                  <option value="Google+">Google+.</option>
-                                  <option value="Linkdin">Linkdin.</option>
+                              <label>About</label>
+                          <textarea class="form-control" name="about" value="<%out.print(ownerPortal.Global.about);%>" id="about" placeholder="Briefly Describe your Abilities"required></textarea>
+                            </div> 
+                              
+                            <div class="form-group form-group-default required">
+                              <label>Website</label>
+                              <input type="text" name="website" value="<%out.print(ownerPortal.Global.website);%>" id="website" class="form-control" required>
+                            </div>
+                            
+                            
+                            <div class="form-group form-group-default required">
+                                 <label>Industry</label>
+                            <select class="full-width" name="industry" value="<%out.print(ownerPortal.Global.industry);%>"data-init-plugin="select2">
+                                  <option value="AK">Alaska</option>
+                                  <option value="HI">Hawaii</option>
                             </select>
                      
-                            </div>  
-                            <br>
-                              <div class="form-group form-group-default required">
-                                    <label>Social Media Link</label>
-                                      <input type="text" name="socialmedialink"id="tin" class="form-control" required>
-                                     </div>
+                            </div>
+                              
                               <br>
-                              <br>
-                              <div class="form-group">
-                              <button class="btn btn-primary btn-cons m-t-10" type="submit">Submit</button>
-                              <button class="btn btn-primary btn-cons m-t-10" onclick="document.location.href='/Exhibition/html/ownerProfile.jsp';"> Cancel</button> 
-                          </div>
-                          </div>    
+                            
+                                 <button class="btn btn-primary btn-cons m-t-10" TYPE="submit" >Update</button> 
+                                   <button class="btn btn-primary btn-cons m-t-10" >Cancel</button> 
+                       
+  
+                         
                         </form>
                       </div>
                     </div>
@@ -461,20 +534,7 @@
         <!-- START COPYRIGHT -->
         <!-- START CONTAINER FLUID -->
         <!-- START CONTAINER FLUID -->
-        <div class="container-fluid container-fixed-lg footer">
-          <div class="copyright sm-text-center">
-            <p class="small no-margin pull-left sm-pull-reset">
-              <span class="hint-text">Copyright &copy; 2014 </span>
-              <span class="font-montserrat">REVOX</span>.
-              <span class="hint-text">All rights reserved. </span>
-              <span class="sm-block"><a href="#" class="m-l-10 m-r-10">Terms of use</a> | <a href="#" class="m-l-10">Privacy Policy</a></span>
-            </p>
-            <p class="small no-margin pull-right sm-pull-reset">
-              <a href="#">Hand-crafted</a> <span class="hint-text">&amp; Made with Love ®</span>
-            </p>
-            <div class="clearfix"></div>
-          </div>
-        </div>
+       
         <!-- END COPYRIGHT -->
       </div>
       <!-- END PAGE CONTENT WRAPPER -->

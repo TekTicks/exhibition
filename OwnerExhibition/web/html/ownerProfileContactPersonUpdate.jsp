@@ -411,30 +411,120 @@
                       
              <div class="col-md-70">
                       <div class="padding-30">
-                        <form action="/Exhibition/ownerProfileSocialMediaSave" method="post" role="form">
-                             <div class="form-group form-group-default required">
-                                 <label>Select Social Media</label>
-                                 <select class="full-width" name="socialmedia" data-init-plugin="select2">
-                                  <option value="facebook">Facebook</option>
-                                  <option value="twitter">Twitter.</option>
-                                  <option value="Google+">Google+.</option>
-                                  <option value="Linkdin">Linkdin.</option>
+                         <form action="/Exhibition/ownerProfileContactperson" method="post" id="form-project" role="form" autocomplete="off">
+                        <p>Basic Information</p>
+                            <div class="form-group form-group-default required">
+                                 <label>Title</label>
+                                 <select class="full-width" name="title" data-init-plugin="select2">
+                                  <option value="AK">Mr.</option>
+                                  <option value="HI">Mrs.</option>
                             </select>
                      
-                            </div>  
-                            <br>
-                              <div class="form-group form-group-default required">
-                                    <label>Social Media Link</label>
-                                      <input type="text" name="socialmedialink"id="tin" class="form-control" required>
-                                     </div>
-                              <br>
-                              <br>
-                              <div class="form-group">
-                              <button class="btn btn-primary btn-cons m-t-10" type="submit">Submit</button>
-                              <button class="btn btn-primary btn-cons m-t-10" onclick="document.location.href='/Exhibition/html/ownerProfile.jsp';"> Cancel</button> 
+                            </div>
+                            <div class="form-group-attached">
+                            <div class="row clearfix">
+                                <div class="col-sm-6">
+                                <div class="form-group form-group-default required">
+                                     <label>First name</label>
+                                     <input type="text" name="fname" class="form-control" name="firstName" required>
+                                </div>
+                                </div>
+                                <div class="col-sm-6">
+                                 <div class="form-group form-group-default">
+                                     <label>Last name</label>
+                                     <input type="text" name="lname" class="form-control" name="lastName">
+                                </div>
+                                </div>
+                                <div class="row">
+                        <div class="col-sm-12">
+                          <div class="form-group form-group-default">
+                            <label>Email</label>
+                            <input type="email" class="form-control" name="email" placeholder="" required>
                           </div>
-                          </div>    
-                        </form>
+                        </div>
+                      </div>
+                            </div>
+                            </div>
+                            <p>Other Information</p>
+                                   <div class="row">
+                        <div class="col-sm-12">
+                          <div class="form-group form-group-default">
+                           <label>Gender</label></div>
+                                <div class="radio radio-success">
+                                    &nbsp;&nbsp;&nbsp;<input type="radio" value="0" name="gender" id="male">
+                                <label for="male">Male</label>
+                                <input type="radio" checked="checked" value="1" name="gender" id="female">
+                                <label for="female">Female</label>
+                                
+                          </div>
+                        </div>
+                      </div> 
+                                 
+                 
+                           <div class="row clearfix">
+                          <div class="col-sm-12">
+                            <div class="form-group form-group-default required">
+                                <label> Date of Birth</label>
+                              <input id="start-date" type="date" class="form-control date" name="dob"  prequired>
+                            </div>
+                          </div>
+                        </div>
+                             <div class="row clearfix">    
+                             <div class="col-sm-12">
+                                <div class="form-group form-group-default required">
+                                     <label>Designation</label>
+                                     <input type="text"  class="form-control" name="designation" required>
+                                </div>
+                                </div>
+                      </div>
+                        <div class="form-group form-group-default input-group required">
+                              <span class="input-group-addon">
+                                            <select class="cs-select cs-skin-slide cs-transparent" data-init-plugin="cs-select">
+                                            <option data-countryCode="GB" value="44" Selected>UK (+44)</option>
+                                            <option data-countryCode="US" value="1">USA (+1)</option>
+                                            <option data-countryCode="AR" value="54">Argentina (+54)</option>
+                                            <option data-countryCode="AU" value="61">Australia (+61)</option>
+                                            <option data-countryCode="AT" value="43">Austria (+43)</option>
+                                            <option data-countryCode="BE" value="32">Belgium (+32)</option>
+                                            <option data-countryCode="BZ" value="501">Belize (+501)</option>
+                                            <option data-countryCode="CN" value="86">China (+86)</option>
+                                            <option data-countryCode="IS" value="354">Iceland (+354)</option>
+                                            <option data-countryCode="IN" value="91">India (+91)</option>
+                                            <option data-countryCode="MY" value="60">Malaysia (+60)</option>
+                                            <option data-countryCode="ZW" value="263">Zimbabwe (+263)</option>
+                                        </select>
+                                        </span>
+                              <label>Telephone Number</label>
+                              <input type="text" name="phoneno" class="form-control" placeholder="" required>
+                            </div>
+                                        
+                     <div class="form-group form-group-default input-group required">
+                              <span class="input-group-addon">
+                                            <select class="cs-select cs-skin-slide cs-transparent" data-init-plugin="cs-select">
+                                            <option data-countryCode="GB" value="44" Selected>UK (+44)</option>
+                                            <option data-countryCode="US" value="1">USA (+1)</option>
+                                            <option data-countryCode="AR" value="54">Argentina (+54)</option>
+                                            <option data-countryCode="AU" value="61">Australia (+61)</option>
+                                            <option data-countryCode="AT" value="43">Austria (+43)</option>
+                                            <option data-countryCode="BE" value="32">Belgium (+32)</option>
+                                            <option data-countryCode="BZ" value="501">Belize (+501)</option>
+                                            <option data-countryCode="CN" value="86">China (+86)</option>
+                                            <option data-countryCode="IS" value="354">Iceland (+354)</option>
+                                            <option data-countryCode="IN" value="91">India (+91)</option>
+                                            <option data-countryCode="MY" value="60">Malaysia (+60)</option>
+                                            <option data-countryCode="ZW" value="263">Zimbabwe (+263)</option>
+                                        </select>
+                                        </span>
+                              <label>Mobile Number</label>
+                              <input type="text" name="mobileno" class="form-control" placeholder="" required>
+                            </div>
+                     
+                </div>
+                      <br>
+                       <button class="btn btn-primary btn-cons m-t-10" type="submit">Submit</button>
+                         <button class="btn btn-primary btn-cons m-t-10" onclick="document.location.href='/Exhibition/html/ownerProfileContactPersonUpdate.jsp';">Update</button> 
+                                   <button class="btn btn-primary btn-cons m-t-10" >Cancel</button> 
+                    </form>
                       </div>
                     </div>
                                
@@ -461,20 +551,7 @@
         <!-- START COPYRIGHT -->
         <!-- START CONTAINER FLUID -->
         <!-- START CONTAINER FLUID -->
-        <div class="container-fluid container-fixed-lg footer">
-          <div class="copyright sm-text-center">
-            <p class="small no-margin pull-left sm-pull-reset">
-              <span class="hint-text">Copyright &copy; 2014 </span>
-              <span class="font-montserrat">REVOX</span>.
-              <span class="hint-text">All rights reserved. </span>
-              <span class="sm-block"><a href="#" class="m-l-10 m-r-10">Terms of use</a> | <a href="#" class="m-l-10">Privacy Policy</a></span>
-            </p>
-            <p class="small no-margin pull-right sm-pull-reset">
-              <a href="#">Hand-crafted</a> <span class="hint-text">&amp; Made with Love ®</span>
-            </p>
-            <div class="clearfix"></div>
-          </div>
-        </div>
+       
         <!-- END COPYRIGHT -->
       </div>
       <!-- END PAGE CONTENT WRAPPER -->

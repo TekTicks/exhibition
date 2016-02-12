@@ -1,8 +1,13 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package ownerPortal;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import static java.lang.System.out;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -11,41 +16,45 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ *
+ * @author Admin
+ */
+public class OwnerProfileAddressUpdate extends HttpServlet {
 
-public class ownerProfileContactperson extends HttpServlet {
-
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-       PrintWriter out = response.getWriter();
-         try
-                           {
-                            String title=request.getParameter("title");
-                            String firstname=request.getParameter("fname");
-                            String lastname =request.getParameter("lname");
-                            String email =request.getParameter("email");
-                            String gender =request.getParameter("gender");
-                            String dateofbirth =request.getParameter("dob");
-                            String designation =request.getParameter("designation");
-                            String phoneno =request.getParameter("phoneno");
-                            String mobileno =request.getParameter("mobileno");
-                            Class.forName("com.mysql.jdbc.Driver");
+          PrintWriter out = response.getWriter();
+        try  {
+                            String address1 =request.getParameter("address1");;
+                            String address2 =request.getParameter("address2");
+                            String zipcode =request.getParameter("zipcode");
+                            String landmark =request.getParameter("landmark");
+                            String maplink =request.getParameter("maplink");
+                           Class.forName("com.mysql.jdbc.Driver");
                             Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/Exhibition","root","12345");
-                            PreparedStatement ps=con.prepareStatement("insert into ownerContactPerson(title,firstName,lastName,photoMediaId,gender,dateOfBirth,degination,phoneNo,mobileNo,email,createdBy,modifiedBy)values(?,?,?,(select id from media where id=1),?,?,?,?,?,?,(select id from owner where id=1),(select id from owner where id=1))");
-                                 ps.setString(1,title);
-                                 ps.setString(2,firstname);
-                                 ps.setString(3, lastname);
-                                 ps.setString(4, gender); 
-                                 ps.setString(5, dateofbirth);
-                                 ps.setString(6, designation);
-                                 ps.setString(7, phoneno); 
-                                 ps.setString(8, mobileno); 
-                                 ps.setString(9, email); 
+                                 
+                                PreparedStatement ps=con.prepareStatement("update ownerAddress set address1=?,address2=?,landmark=?,pincode=?,mapLink=? where id=?");
+                                 ps.setString(1, address1);
+                                 ps.setString(2,address1);
+                                 ps.setString(3, address2);
+                                 ps.setString(4, landmark);
+                                 ps.setString(5, zipcode);
+                                 ps.setString(6, maplink);
+                                 ps.setString(7, address1);
                                  ps.executeUpdate();
-                            
-                            
-                                response.sendRedirect("/Exhibition/html/ownerProfile.jsp"); 
-                           }
+                                 response.sendRedirect("/Exhibition/html/ownerProfile.jsp"); 
+        }
                            catch(Exception ee)
                            {
                                out.println("error"+ee);
