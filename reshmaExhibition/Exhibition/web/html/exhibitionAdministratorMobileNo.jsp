@@ -1,4 +1,3 @@
-
 <%-- 
     Document   : Admin
     Created on : Dec 8, 2015, 4:36:02 PM
@@ -32,43 +31,53 @@
     <link href="pages/css/ie9.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="pages/js/jquery-1.4.2.min.js"></script>
- 
+
     <script type="text/javascript">
 	$(document).ready(function(){
 		$("#login_frm").submit(function(){
 
 			 //remove previous class and add new "myinfo" class
-	     //   $("#msgbox").removeClass().addClass('myinfo').text('Validating Your Login ').fadeIn(1000);
+	        $("#msgbox").removeClass().addClass('myinfo').text('Validating Your Login ').fadeIn(1000);
 
 			
 			this.timer = setTimeout(function () {
 				$.ajax({
-		          	url: '/Exhibition/exhibitionAdministratorForgotPassword',
-		          	data: 'un='+ $('#newpassword').val() +'&pw='+ $('#confirmpassword').val() ,
+		          	url: '/Exhibition/exhibitionAdministratorMobileNo',
+		          	data: 'un='+ $('#mobileNo').val() ,
 		          	type: 'post',
 		   		success: function(msg){
-                                    alert(msg);
-                                if(msg != 'wrong') // Message Sent, check and redirect
+                                if(msg != 'ERROR') // Message Sent, check and redirect
 				{
-                                   
-                                             	$("#msgbox1").fadeTo(100,1,function() //start fading the messagebox
+                                    if(msg == 'wrong')
+                                    {
+                                       	$("#msgbox1").fadeTo(200,1,function() //start fading the messagebox
                                         {
 			                  //add message and change the class of the box and start fading
-			                 $(this).html('password updated successfully...').removeClass().addClass('myinfo').fadeTo(300,1);
-                                        // document.location='/Exhibition/html/exhibitionAdminLog.jsp?user='+msg;
-                                      });
-                                     }
-                                          else
+			                 $(this).html('mobile no should be 10 digits only....').removeClass().addClass('myerror').fadeTo(300,1);
+                                      //document.location='/Exhibition/html/exhibitionAdministratorMobileNo.jsp';
+                                      });     
+                                    }
+                                   
+                                    else
                                     {
-                                          $("#msgbox1").html('invalid password.').addClass('myerror').fadeTo(300,1,function()
+                                        
+                                       $("#msgbox1").html('Mobile no Verified.....').addClass('myinfo').fadeTo(300,1,function()
 			             {
 			                 //redirect to secure page
-			               //document.location='/Exhibition/html/exhibitionAdministratorFogotPassword.jsp';
-			             });
-                                        
-                                    }
-                                
+			                 document.location='/Exhibition/html/exhibitionAdministratorReceiveOtp.jsp';
+			             });  
+                                     }
+                                     }
+				else
+				{
+					$("#msgbox3").fadeTo(200,1,function() //start fading the messagebox
+		                {
+			                  //add message and change the class of the box and start fading
+			                 $(this).html('Mobile no is not in database & it should be 10 digits').removeClass().addClass('myerror').fadeTo(300,1);
+                                         //document.location='/Exhibition/html/exhibitionAdminLog.jsp?user';
+                                 });
                                 }
+				}
 				
 				});
 			}, 200);
@@ -77,7 +86,7 @@
 
 	});
    </script>  
-   
+   </script>  
 <style>
 #exists{display:none}
 #cross{display:none}
@@ -142,31 +151,35 @@
       <div class="login-container bg-white">
         <div class="p-l-50 m-l-20 p-r-50 m-r-20 p-t-50 m-t-30 sm-p-l-15 sm-p-r-15 sm-p-t-40">
          <!-- <img src="assets/img/logo.png" alt="logo" data-src="assets/img/logo.png" data-src-retina="assets/img/logo_2x.png" width="78" height="22"> -->
-         <p class="p-t-35"><h2><b> Forgot Password</b></h2>
+         <p class="p-t-35"><h2><b> Enter Mobile No </b></h2>
           <!-- START Login Form -->
-             <!-- START Login Form -->
-          <form id="login_frm" name="login_frm" class="p-t-15" role="form" action="" >
+         <form name="login_frm" id="login_frm" action="" method="post" class="p-t-15" >
+            <!-- START Form Control-->
+            <div class="form-group form-group-default">
+            
+              <div class="controls">
+                <input type="text" name="mobileNO" id="mobileNo" placeholder="Enter Mobile No" class="form-control" onKeyup="phoneCheck()" required >
+              </div>	<div id="msgbox1"></div>
+              <div id="msgbox2"></div>
+                 <div id="msgbox3"></div>             	
+ 	
+            </div>
+            <!-- END Form Control-->
+            <!-- START Form Control-->
+           <!-- <div class="form-group form-group-default">
+              
+              <div class="controls">
+                  <input type="text" class="form-control" id="enteredOTP" name="enteredOTP"  placeholder="Credentials" required>
+              </div>
+            </div> -->
+              
+                           
             <!-- START Form Control-->
            
-             <div class="form-group form-group-default">
+            <!-- END Form Control-->
+            <button class="btn btn-primary btn-cons m-t-10" name="login" id="login"  type="submit" >Next</button>
             
-              <div class="controls">
-             <input type="password" class="form-control" id="newpassword" name="newpassword" placeholder="Enter New Password" style="text-align: center" required>
-            </div>  	</div>
-           <div class="form-group form-group-default">
-            
-              <div class="controls">
-<input type="password" class="form-control" id="confirmpassword" name="confirmpassword" placeholder="Confirm Password" style="text-align: center" required>
-            </div>	 </div>
-            <div id="msgbox1"></div>
-            
-            
-              <div class="row">
-            
-                  <button class="btn btn-primary btn-cons m-t-10" type="submit" >Update</button> 
-                  
-                 <button class="btn btn-primary btn-cons m-t-10" type="submit">Cancel</button>  </div>
-           
+
           </form>
           <!--END Login Form-->
           <div class="pull-bottom sm-pull-bottom">

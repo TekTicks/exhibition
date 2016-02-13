@@ -1,4 +1,3 @@
-
 <%-- 
     Document   : Admin
     Created on : Dec 8, 2015, 4:36:02 PM
@@ -32,43 +31,66 @@
     <link href="pages/css/ie9.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="pages/js/jquery-1.4.2.min.js"></script>
- 
     <script type="text/javascript">
 	$(document).ready(function(){
 		$("#login_frm").submit(function(){
 
 			 //remove previous class and add new "myinfo" class
-	     //   $("#msgbox").removeClass().addClass('myinfo').text('Validating Your Login ').fadeIn(1000);
+	        $("#msgbox").removeClass().addClass('myinfo').text('Validating Your Login ').fadeIn(1000);
 
 			
 			this.timer = setTimeout(function () {
 				$.ajax({
-		          	url: '/Exhibition/exhibitionAdministratorForgotPassword',
-		          	data: 'un='+ $('#newpassword').val() +'&pw='+ $('#confirmpassword').val() ,
+		          	url: '/Exhibition/exhibitionAdministratorLoginCheck',
+		          	data: 'un='+ $('#login_id').val() +'&pw=' + $('#password').val(),
 		          	type: 'post',
 		   		success: function(msg){
-                                    alert(msg);
-                                if(msg != 'wrong') // Message Sent, check and redirect
+                                
+                                if(msg != 'ERROR') // Message Sent, check and redirect
 				{
-                                   
-                                             	$("#msgbox1").fadeTo(100,1,function() //start fading the messagebox
+                                    if(msg == 'emailinvalid')
+                                    {  
+                                             	$("#msgbox1").fadeTo(300,1,function() //start fading the messagebox
                                         {
 			                  //add message and change the class of the box and start fading
-			                 $(this).html('password updated successfully...').removeClass().addClass('myinfo').fadeTo(300,1);
-                                        // document.location='/Exhibition/html/exhibitionAdminLog.jsp?user='+msg;
+			                 $(this).html('invalid email....').removeClass().addClass('myerror').fadeTo(300,1);
+                                      //  document.location='/Exhibition/html/exhibitionAdministratorLogin.jsp?user';
                                       });
-                                     }
-                                          else
+ 
+
+                                    }
+                                    else if(msg =='passwordinvalid')
                                     {
-                                          $("#msgbox1").html('invalid password.').addClass('myerror').fadeTo(300,1,function()
+                                               
+                                               	$("#msgbox2").fadeTo(300,1,function() //start fading the messagebox
+		                {
+			                  //add message and change the class of the box and start fading
+			                 $(this).html('Sorry, Wrong Password.').removeClass().addClass('myerror').fadeTo(300,1);
+                                       // document.location='/Exhibition/html/exhibitionAdministratorLogin.jsp?user';
+                                 });
+ 
+                                    }
+                                    else
+                                    {
+                                          $("#msgbox3").html('Login Verified, Logging in.....').addClass('myinfo').fadeTo(300,1,function()
 			             {
 			                 //redirect to secure page
-			               //document.location='/Exhibition/html/exhibitionAdministratorFogotPassword.jsp';
+			              document.location='/Exhibition/html/exhibitionAdministratorProfilePage.jsp';
 			             });
                                         
                                     }
                                 
                                 }
+				else
+				{
+					$("#msgbox3").fadeTo(300,1,function() //start fading the messagebox
+		                {
+			                  //add message and change the class of the box and start fading
+			                 $(this).html('Sorry, Wrong Combination Of Username And Password.').removeClass().addClass('myerror').fadeTo(300,1);
+                                       //  document.location='/Exhibition/html/exhibitionAdministratorLogin.jsp?user';
+                                 });
+                                }
+				}
 				
 				});
 			}, 200);
@@ -76,8 +98,7 @@
  		});		
 
 	});
-   </script>  
-   
+   </script>   
 <style>
 #exists{display:none}
 #cross{display:none}
@@ -111,6 +132,34 @@
 	text-align: center;
 }
 </style>
+
+<script type="text/javascript">
+    function clearForm(oForm) {
+    
+  var elements = oForm.elements; 
+    
+  oForm.reset();
+
+  for(i=0; i<elements.length; i++) {
+      
+  field_type = elements[i].type.toLowerCase();
+  
+  switch(field_type) {
+  
+    case "text": 
+    case "password": 
+    case "msg" :
+     
+   
+      elements[i].value = ""; 
+      break;
+    default: 
+      break;
+  }
+    }
+}
+    
+    </script>
 <script type="text/javascript">
     window.onload = function()
     {
@@ -142,31 +191,47 @@
       <div class="login-container bg-white">
         <div class="p-l-50 m-l-20 p-r-50 m-r-20 p-t-50 m-t-30 sm-p-l-15 sm-p-r-15 sm-p-t-40">
          <!-- <img src="assets/img/logo.png" alt="logo" data-src="assets/img/logo.png" data-src-retina="assets/img/logo_2x.png" width="78" height="22"> -->
-         <p class="p-t-35"><h2><b> Forgot Password</b></h2>
+         <p class="p-t-35"><h2><b>Administrator Login</b></h2>
           <!-- START Login Form -->
-             <!-- START Login Form -->
-          <form id="login_frm" name="login_frm" class="p-t-15" role="form" action="" >
+         <form name="login_frm" id="login_frm" action="" method="post" class="p-t-15" >
             <!-- START Form Control-->
-           
-             <div class="form-group form-group-default">
-            
+            <div class="form-group form-group-default">
+              <label>Email</label>
               <div class="controls">
-             <input type="password" class="form-control" id="newpassword" name="newpassword" placeholder="Enter New Password" style="text-align: center" required>
-            </div>  	</div>
-           <div class="form-group form-group-default">
-            
+                <input type="text" name="login_id" id="login_id" placeholder="" class="form-control" required>
+              </div>
+                             	<div id="msgbox1"></div>
+
+            </div>
+            <!-- END Form Control-->
+            <!-- START Form Control-->
+            <div class="form-group form-group-default">
+              <label>Password</label>
               <div class="controls">
-<input type="password" class="form-control" id="confirmpassword" name="confirmpassword" placeholder="Confirm Password" style="text-align: center" required>
-            </div>	 </div>
-            <div id="msgbox1"></div>
-            
-            
-              <div class="row">
-            
-                  <button class="btn btn-primary btn-cons m-t-10" type="submit" >Update</button> 
-                  
-                 <button class="btn btn-primary btn-cons m-t-10" type="submit">Cancel</button>  </div>
-           
+                  <input type="password" class="form-control" id="password" name="password"  placeholder="Credentials" required>
+              </div>
+            </div>
+              
+                               	<div id="msgbox2"></div>
+                                <div id="msgbox3"></div>
+
+            <!-- START Form Control-->
+            <div class="row">
+              <div class="col-md-6 no-padding">
+                <div class="checkbox ">
+              <!--    <input type="checkbox" value="1" id="checkbox1">
+                  <label for="checkbox1">Keep Me Signed in</label>-->
+                                  <a href="/Exhibition/html/exhibitionAdministratorMobileNo.jsp" class="text-info small">Forgot Password..?</a>
+
+                </div>
+              </div>
+              <div class="col-md-6 text-right">
+              </div>
+            </div>
+            <!-- END Form Control-->
+            <button class="btn btn-primary btn-cons m-t-10" name="login" id="login"  type="submit">Sign in</button>
+            <button class="btn btn-primary btn-cons m-t-10" name="clear" id="clear"  type="button" value="Clear Form" onclick="clearForm(this.form);">Clear</button>
+
           </form>
           <!--END Login Form-->
           <div class="pull-bottom sm-pull-bottom">
@@ -179,7 +244,7 @@
 		        		Create a pages account. If you have a facebook account, log into it for this process. Sign in with <a href="#" class="text-info">Facebook</a> or <a href="#" class="text-info">Google</a></small>
                 </p>-->
               </div>
-                        <!--<div id="error_box"></div> -->
+                        <div id="error_box"></div>
 
             </div>
           </div>
@@ -214,7 +279,7 @@
     <script>
     $(function()
     {
-      $('#form-login').validate()
+      $('#form-login').validate();
     })
     </script>
   </body>
