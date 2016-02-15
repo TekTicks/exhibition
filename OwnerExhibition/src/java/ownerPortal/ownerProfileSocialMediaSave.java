@@ -10,6 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 
 public class ownerProfileSocialMediaSave extends HttpServlet {
@@ -22,16 +23,18 @@ public class ownerProfileSocialMediaSave extends HttpServlet {
                            {
                             String socialMedia=request.getParameter("socialmedia");
                             String socialMediaLink=request.getParameter("socialmedialink");
+                            HttpSession ss=request.getSession();
+                            String id=(String)ss.getAttribute("ownerId");
                            
                             Class.forName("com.mysql.jdbc.Driver");
                             Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/Exhibition","root","12345");
-                            PreparedStatement ps=con.prepareStatement("insert into socialMedia(socialMedia,createdBy,modifiedBy)values(?,?,?)");
-                                 ps.setString(1,socialMedia);
-                                 ps.setInt(2,1);
-                                 ps.setInt(3,1);
-                                 ps.executeUpdate();
+                          //  PreparedStatement ps=con.prepareStatement("insert into socialMedia(socialMedia,createdBy,modifiedBy)values(?,?,?)");
+                            //     ps.setString(1,socialMedia);
+                              //   ps.setInt(2,1);
+                                // ps.setInt(3,1);
+                                // ps.executeUpdate();
                             
-                                 PreparedStatement ps1=con.prepareStatement("insert into ownerSocialMedia(socialMediaId,link,createdBy,modifiedBy,iconMediaId)values((select id from socialMedia where socialMedia=?),?,(select id from owner where id=1),(select id from owner where id=1),(select id from media where id=1))");
+                                 PreparedStatement ps1=con.prepareStatement("insert into ownerSocialMedia(socialMediaId,link,createdBy,modifiedBy,iconMediaId)values((select id from socialMedia where socialMedia=?),?,(select id from owner where id='"+id+"'),(select id from owner where id='"+id+"'),(select id from media where id=1))");
                                  ps1.setString(1,socialMedia);
                                   ps1.setString(2,socialMediaLink);
                                  ps1.executeUpdate();

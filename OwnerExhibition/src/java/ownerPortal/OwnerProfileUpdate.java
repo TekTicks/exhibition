@@ -14,6 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class OwnerProfileUpdate extends HttpServlet {
 
@@ -21,11 +22,16 @@ public class OwnerProfileUpdate extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
           PrintWriter out = response.getWriter();
-        try  {              
+        try  {           
+             HttpSession ss=request.getSession();
+                            String idd=(String)ss.getAttribute("ownerId");
+                            out.print(idd);
                             String cname =request.getParameter("cname");
                             String p_email =request.getParameter("p_email");
                             String s_email =request.getParameter("s_email");
                             String p_contact =request.getParameter("p_contact");
+                            String ccode =request.getParameter("ccode");
+                            String phone=ccode+p_contact;
                             String s_contact =request.getParameter("s_contact");
                             String about =request.getParameter("about");
                             String website =request.getParameter("website");
@@ -33,22 +39,21 @@ public class OwnerProfileUpdate extends HttpServlet {
                             Class.forName("com.mysql.jdbc.Driver");
                             Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/Exhibition","root","12345");
                                  
-                                PreparedStatement ps=con.prepareStatement("update ownerProfile,industry set name=?,primEmail=?,secEmail=?,primContact=?,secContact=?,about=?, website=?,industryName=? where name=? ");
+                                PreparedStatement ps=con.prepareStatement("update ownerProfile a,industry b set a.name=?,a.primEmail=?,a.secEmail=?,a.primContact=?,a.secContact=?,a.about=?, a.website=?,b.industryName=? where a.createdBy='"+idd+"' ");
                                  ps.setString(1, cname);
                                  ps.setString(2, p_email);
                                  ps.setString(3, s_email);
-                                 ps.setString(4, p_contact);
+                                 ps.setString(4, phone);
                                  ps.setString(5, s_contact);
                                  ps.setString(6, about);
                                  ps.setString(7, website);
                                  ps.setString(8, industry);
-                                 ps.setString(9,cname );
                                  ps.executeUpdate();
                                  
                                  
                                     
                        out.print("data updated");
-//response.sendRedirect("/Exhibition/html/ownerProfile.jsp"); 
+                    response.sendRedirect("/Exhibition/html/ownerProfile.jsp"); 
         }
                            catch(Exception ee)
                            {

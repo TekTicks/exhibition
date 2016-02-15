@@ -435,26 +435,28 @@
                     </div>
                     <div class="col-md-7">
                       <div class="padding-30">
-                        <form action="/Exhibition/ownerProfileDemo" method="post" role="form">
+                        <form action="/Exhibition/OwnerProfileUpdate" method="post" role="form">
                             <% 
                                   HttpSession ss=request.getSession();
-                                  String username1=(String)ss.getAttribute("username");
-                                 
+                                  String userName=(String)ss.getAttribute("username");
+                                  String idd=(String)ss.getAttribute("ownerId");
                                   String password1=(String)ss.getAttribute("password");
                                   String cname=(String)ss.getAttribute("cname");
-                                   String primEmail=(String)ss.getAttribute("primEmail1");
-                                    String secEmail=(String)ss.getAttribute("secEmail1");
-                                     String primContact=(String)ss.getAttribute("primContact1");
-                                      String secContact=(String)ss.getAttribute("secContact1");
-                                   String about=(String)ss.getAttribute("about1");
-                                   out.print(about);
-                                   String website=(String)ss.getAttribute("website1");
-                                    String industry=(String)ss.getAttribute("industry1");
-                                %>
+                                  String primEmail=(String)ss.getAttribute("primEmail1");
+                                  
+                                  String secEmail=(String)ss.getAttribute("secEmail1");
+                                  String primContact=(String)ss.getAttribute("primContact1");
+                                  
+                                  String secContact=(String)ss.getAttribute("secContact1");
+                                  String about=(String)ss.getAttribute("about1");
+                                  String website=(String)ss.getAttribute("website1");
+                                  String industry=(String)ss.getAttribute("industry1");
+                                  int ccode=Integer.parseInt(primContact.substring(0,2));
+                            %>
                                 
                             <div class="form-group form-group-default disabled">
                                <label>User Name</label>
-                               <input type="email" name="uname" value="<%out.print(username1);%>" class="form-control" value="You can put anything here" disabled>
+                               <input type="email" name="uname" value="<%out.print(userName);%>" class="form-control" value="You can put anything here" disabled>
                             </div>                  
                             <div class="form-group form-group-default required">
                               <label>Company Name</label>
@@ -473,9 +475,9 @@
                            
                             <div class="form-group form-group-default input-group required">
                               <span class="input-group-addon">
-                                            <select class="cs-select cs-skin-slide cs-transparent" data-init-plugin="cs-select">
+                                            <select class="cs-select cs-skin-slide cs-transparent" name="ccode" data-init-plugin="cs-select">
                                             <option data-countryCode="GB" value="44" Selected>UK (+44)</option>
-                                            <option data-countryCode="US" value="1">USA (+1)</option>
+                                            <option data-countryCode="US" value="1" selected>USA (+1)</option>
                                             <option data-countryCode="AR" value="54">Argentina (+54)</option>
                                             <option data-countryCode="AU" value="61">Australia (+61)</option>
                                             <option data-countryCode="AT" value="43">Austria (+43)</option>
@@ -489,7 +491,7 @@
                                         </select>
                                         </span>
                               <label>Primary Contact</label>
-                              <input type="text" name="p_contact" id="p_contact" value="<%out.print(primContact);%>" maxlength="10" minlength="10" class="form-control" placeholder="" required>
+                              <input type="text" name="p_contact" id="p_contact" value="<%out.print(primContact.substring(2,11));%>" maxlength="10" minlength="10" class="form-control" placeholder="" required>
                             </div>
                            
                             <div class="form-group form-group-default input-group ">
@@ -516,12 +518,12 @@
                            
                             <div class="form-group form-group-default disabled">
                                <label>Mobile Number</label>
-                               <input type="email" class="form-control" name="mobileno" id="mobileno" value="You can put anything here" disabled>
+                               <input type="email" class="form-control" value="<%out.print(primContact);%>" name="mobileno" id="mobileno" value="You can put anything here" disabled>
                             </div> 
                             
                              <div class="form-group form-group-default required">
                               <label>About</label>
-                          <textarea class="form-control" name="about"  id="about" value="<%out.print(about);%>" placeholder="Briefly Describe your Abilities" required></textarea>
+                          <textarea class="form-control" name="about"  id="about"  placeholder="Briefly Describe your Abilities" required><%out.print(about);%></textarea>
                             </div> 
                               
                             <div class="form-group form-group-default required">
@@ -533,9 +535,10 @@
                             <div class="form-group form-group-default required">
                                  <label>Industry</label>
                             <select class="full-width" value="<%out.print(industry);%>" name="industry" data-init-plugin="select2">
-                                <option value="AK">------- </option>  
-                                <option value="AK">Alaska</option>
-                                  <option value="HI">Hawaii</option>
+                                <option  value="<%out.print(industry);%>"><%out.print(industry);%></option>  
+                                <option  value="harware">Hardware</option>
+                                <option  value="software">Software</option>
+                               
                             </select>
                      
                             </div>
@@ -554,8 +557,8 @@
                                  <!--<button class="btn btn-success" type="submit">Submit</button>
                                  <button class="btn btn-default"><i class="pg-close"></i> Clear</button> -->
                                    <button class="btn btn-primary btn-cons m-t-10" type="submit">Submit</button>
-                                   <button class="btn btn-primary btn-cons m-t-10" onclick="document.location.href='/Exhibition/html/ownerProfileUpdate.jsp';" >Update</button> 
-                                   <button class="btn btn-primary btn-cons m-t-10" >Cancel</button> 
+                                   <!--<button class="btn btn-primary btn-cons m-t-10" onclick="document.location.href='/Exhibition/html/ownerProfileUpdate.jsp';" >Update</button> 
+                                   --><button class="btn btn-primary btn-cons m-t-10" >Cancel</button> 
                        
   
                          
@@ -619,7 +622,7 @@
                      <%@page import="java.sql.DriverManager;" %>
                      <thead>
                         <tr>
-                            <th>ID</th>
+                          <!--  <th>ID</th> -->
                         <th>Date</th>
                         <th>Social Media</th>        
                         <th>Link</th>
@@ -638,14 +641,14 @@
                          {
                             count1++;
                             out.println("<tr>");
-                            out.println("<td class='v-align-middle semi-bold'><p>"+rs1.getString(7)+"</p></td>");
+                            //out.println("<td class='v-align-middle semi-bold'><p>"+rs1.getString(7)+"</p></td>");
                             out.println("<td class='v-align-middle semi-bold'><p>"+rs1.getString(3)+"</p></td>");
                             out.println("<td class='v-align-middle semi-bold'><p>"+rs1.getString(2)+"</p></td>");
                             out.println("<td class='v-align-middle semi-bold'><p>"+rs1.getString(9)+"</p></td>");
                             String kv=rs1.getString(7);
                             String kv1=rs1.getString(2);
                             String kv2=rs1.getString(3);
-                            String kv3=rs1.getString(9);out.print(kv3);
+                            String kv3=rs1.getString(9);
                             
                              HttpSession ss1=request.getSession();
                                   ss1.setAttribute("id",kv);
@@ -753,11 +756,26 @@
                             out.println("<td><p> "+rs.getString(2)+"</p></td>");
                             out.println("<td><p> "+rs.getString(3)+"</p></td>");
                             out.println("<td><p> "+rs.getString(7)+"</p></td>");
+                            String id=rs.getString(1);
+                            String address1=rs.getString(2);
+                            String address2=rs.getString(3);
+                            String landmark=rs.getString(4);
+                            String pincode=rs.getString(5);
+                            String maplink=rs.getString(7);
+                            
+                                  HttpSession ss1=request.getSession();
+                                 // ss1.setAttribute("id1",id);
+                                  ss1.setAttribute("address11",address1);
+                                  ss1.setAttribute("address22",address2);
+                                  ss1.setAttribute("landmark1",landmark);
+                                  ss1.setAttribute("pincode1",pincode);
+                                  ss1.setAttribute("maplink1",maplink);
+                          
                            %>
                              <td>
                                  <div class="btn-group">
-                                 <button type="button" class="btn btn-success" onclick="document.location.href='/Exhibition/html/ownerProfileAddressUpdate.jsp';"><i class="fa fa-pencil"></i></button>
-                                 <button type="button" class="btn btn-success" onclick="document.location.href='/Exhibition/OwnerProfileAddressDelete';"><i class="fa fa-trash-o"></i>
+                                 <button type="button" class="btn btn-success" onclick="document.location.href='/Exhibition/html/ownerProfileAddressUpdate.jsp?addId=<%= id %>';"><i class="fa fa-pencil"></i></button>
+                                 <button type="button" class="btn btn-success" onclick="document.location.href='/Exhibition/OwnerProfileAddressDelete?addId=<%= id %>';"><i class="fa fa-trash-o"></i>
                                  </button>
                                  </div>
                             </td><%

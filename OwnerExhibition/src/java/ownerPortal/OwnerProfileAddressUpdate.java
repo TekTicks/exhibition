@@ -15,6 +15,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -36,6 +37,8 @@ public class OwnerProfileAddressUpdate extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
           PrintWriter out = response.getWriter();
         try  {
+            HttpSession ss=request.getSession();
+                                  String id=(String)ss.getAttribute("ownerAddId");
                             String address1 =request.getParameter("address1");;
                             String address2 =request.getParameter("address2");
                             String zipcode =request.getParameter("zipcode");
@@ -44,14 +47,14 @@ public class OwnerProfileAddressUpdate extends HttpServlet {
                            Class.forName("com.mysql.jdbc.Driver");
                             Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/Exhibition","root","12345");
                                  
-                                PreparedStatement ps=con.prepareStatement("update ownerAddress set address1=?,address2=?,landmark=?,pincode=?,mapLink=? where id=?");
-                                 ps.setString(1, address1);
-                                 ps.setString(2,address1);
-                                 ps.setString(3, address2);
-                                 ps.setString(4, landmark);
-                                 ps.setString(5, zipcode);
-                                 ps.setString(6, maplink);
-                                 ps.setString(7, address1);
+                                PreparedStatement ps=con.prepareStatement("update ownerAddress set address1=?,address2=?,landmark=?,pincode=?,mapLink=? where id='"+id+"'");
+                                 
+                                 ps.setString(1,address1);
+                                 ps.setString(2, address2);
+                                 ps.setString(3, landmark);
+                                 ps.setString(4, zipcode);
+                                 ps.setString(5, maplink);
+                                
                                  ps.executeUpdate();
                                  response.sendRedirect("/Exhibition/html/ownerProfile.jsp"); 
         }

@@ -26,6 +26,9 @@ public class ckvInsert extends HttpServlet {
         PrintWriter out = response.getWriter();
         try
         {
+            HttpSession ss=request.getSession();
+            //String id=(String)ss.getAttribute("username");
+            //String idd=(String)ss.getAttribute("ownerId");
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Exhibition","root","12345"); 
             PreparedStatement ps=con.prepareStatement("insert into owner(userName,password,createdBy,modifiedBy) values(?,?,?,?)");
@@ -36,7 +39,7 @@ public class ckvInsert extends HttpServlet {
             ps.setInt(4, 1);
             ps.executeUpdate();
              
-            PreparedStatement ps1=con.prepareStatement("insert into ownerProfile(name,logoMediaId,about,primEmail,secEmail,primContact,secContact,website,createdBy) values(?,(select id from media where id=1),?,?,?,?,?,?,(select id from owner where id=1))");
+            PreparedStatement ps1=con.prepareStatement("insert into ownerProfile(name,logoMediaId,about,primEmail,secEmail,primContact,secContact,website,createdBy) values(?,(select id from media where id=1),?,?,?,?,?,?,(select id from owner where userName=?))");
             ps1.setString(1, ownerPortal.Global.cname1);
             ps1.setString(2,"");
             ps1.setString(3, ownerPortal.Global.email1);
@@ -44,6 +47,7 @@ public class ckvInsert extends HttpServlet {
             ps1.setString(5, ownerPortal.Global.contact1);
             ps1.setString(6,"");
             ps1.setString(7,"");
+            ps1.setString(8, ownerPortal.Global.email1);
             ps1.executeUpdate();
             
             response.sendRedirect("/Exhibition/html/ownerRegThankyou.jsp");

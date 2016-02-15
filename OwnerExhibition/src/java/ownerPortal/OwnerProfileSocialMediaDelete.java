@@ -10,6 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 
 public class OwnerProfileSocialMediaDelete extends HttpServlet {
@@ -22,11 +23,14 @@ public class OwnerProfileSocialMediaDelete extends HttpServlet {
                            {
                             
                           String id=request.getParameter("myid");
+                          
+                          HttpSession ss=request.getSession();
+                        //  String id=(String)ss.getAttribute("id1");
                            
                            Class.forName("com.mysql.jdbc.Driver");
                             Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/Exhibition","root","12345");
                               
-                                PreparedStatement ps=con.prepareStatement("delete from ownerSocialMedia,socialMedia where id='"+id+"'");
+                                PreparedStatement ps=con.prepareStatement("delete from ownerSocialMedia where id='"+id+"'");
                                  
                                 
                                  

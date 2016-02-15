@@ -10,6 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 
 public class ownerProfileAddressSave extends HttpServlet {
@@ -21,6 +22,10 @@ public class ownerProfileAddressSave extends HttpServlet {
         PrintWriter out = response.getWriter();
          try
                            {
+                               
+                                HttpSession ss=request.getSession();
+                            String id=(String)ss.getAttribute("ownerId");
+                            
                             String address1=request.getParameter("address1");
                             String address2=request.getParameter("address2");
                             String zipcode =request.getParameter("zipcode");
@@ -29,7 +34,7 @@ public class ownerProfileAddressSave extends HttpServlet {
                            
                             Class.forName("com.mysql.jdbc.Driver");
                             Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/Exhibition","root","12345");
-                            PreparedStatement ps=con.prepareStatement("insert into ownerAddress(address1,address2,landmark,pincode,cityId,maplink,createdBy,modifiedBy)values(?,?,?,?,(select id from city where id=1),?,(select id from owner where id=1),(select id from owner where id=1))");
+                            PreparedStatement ps=con.prepareStatement("insert into ownerAddress(address1,address2,landmark,pincode,cityId,maplink,createdBy,modifiedBy)values(?,?,?,?,(select id from city where id=1),?,(select id from owner where id='"+id+"'),(select id from owner where id='"+id+"'))");
                                  ps.setString(1,address1);
                                  ps.setString(2,address2);
                                  ps.setString(3, landmark);

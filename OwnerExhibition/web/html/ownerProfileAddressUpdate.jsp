@@ -4,6 +4,10 @@
     Author     : Admin
 --%>
 
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.Connection"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -408,37 +412,62 @@
                   <div class="panel-body">
                       <br>
                       <br>
+                     
+                      
+                     
+                             
                       
              <div class="col-md-70">
                       <div class="padding-30">
                         <form action="/Exhibition/OwnerProfileAddressUpdate" method="post" role="form">
-                          
+                           <%
+                      String id=request.getParameter("addId");
+                      
+                           Class.forName("com.mysql.jdbc.Driver"); 
+                         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Exhibition","root","12345"); 
+                         Statement stat=con.createStatement();
+                         ResultSet rs=stat.executeQuery("select * from ownerAddress where id='"+id+"'");
+                         while(rs.next())
+                         {
+                             String id1=rs.getString(1);
+                             String address1=rs.getString(2);
+                               String address2=rs.getString(3);
+                                 String landmark=rs.getString(4);
+                                   String maplink=rs.getString(7);
+                                     String pincode=rs.getString(5);
+                           
+                             HttpSession ss=request.getSession();
+                                 // ss1.setAttribute("id1",id);
+                                  ss.setAttribute("ownerAddId",id1);
+                           
+                           %>
                          
                           <div class="form-group-attached">
                                 <div class="form-group form-group-default required">
                                     <label>Address 1</label>
-                                    <input type="text" name="address1" id="tin" class="form-control" required>
+                                    <input type="text" name="address1"  value="<%out.print(address1);%>" id="tin" class="form-control" required>
                                      </div>
                                
                              <div class="form-group form-group-default">
                                     <label>Address 2</label>
-                                      <input type="text" name="address2"id="tin" class="form-control">
+                                      <input type="text" name="address2"  value="<%out.print(address2);%>" id="tin" class="form-control">
                                      </div>
                             
                                <div class="form-group form-group-default required">
                                     <label>Zip Code</label>
-                                      <input type="text" name="zipcode"id="tin" class="form-control" required>
+                                      <input type="text" name="zipcode"id="tin"  value="<%out.print(pincode);%>"  class="form-control" required>
                                      </div>
                             
                              <div class="form-group form-group-default required">
                                     <label>Landmark</label>
-                                      <input type="text" name="landmark"id="tin" class="form-control" required>
+                                      <input type="text" name="landmark"id="tin"  value="<%out.print(landmark);%>" class="form-control" required>
                                      </div>
                               <br>
                               <div class="form-group form-group-default required">
                                     <label>Map Link</label>
-                                      <input type="text" name="maplink"id="tin" class="form-control" required>
+                                      <input type="text" name="maplink"id="tin"  value="<%out.print(maplink);%>" class="form-control" required>
                                      </div>
+                                     <% }%>
                               <br>
                               <br>
                               <div class="form-group">
@@ -450,8 +479,10 @@
                       </div>
                     </div>
                                
-                          </div>    
+                          </div>  
+                                        
                         </form>
+                    
                       </div>
                     </div>
                   </div>

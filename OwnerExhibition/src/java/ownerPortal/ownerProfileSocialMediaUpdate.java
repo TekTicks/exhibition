@@ -14,6 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -26,15 +27,18 @@ public class ownerProfileSocialMediaUpdate extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
          PrintWriter out = response.getWriter();
         try  {
-                           
+                            
                             String socialmedialink =request.getParameter("socialmedialink");
+                             HttpSession ss=request.getSession();
+                                  String id=(String)ss.getAttribute("id1");
+                                 
                            Class.forName("com.mysql.jdbc.Driver");
                             Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/Exhibition","root","12345");
                                  
-                                PreparedStatement ps=con.prepareStatement("update ownerSocialMedia set link=? where id=? ");
+                                PreparedStatement ps=con.prepareStatement("update ownerSocialMedia set link=? where id='"+id+"' ");
                                  
                                  ps.setString(1,socialmedialink);
-                                 ps.setString(2,ownerPortal.Global.socialmediaid);
+                             //    ps.setString(2,ownerPortal.Global.socialmediaid);
                                  ps.executeUpdate();
                                  
                                  

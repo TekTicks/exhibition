@@ -36,18 +36,16 @@ public class OwnerProfileAddressDelete extends HttpServlet {
         PrintWriter out = response.getWriter();
         try
                            {
-                            String ID =request.getParameter("abc");
-                            out.print(ID);
-                           
+                            String id=request.getParameter("addId");
                            Class.forName("com.mysql.jdbc.Driver");
                             Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/Exhibition","root","12345");
                               
-                                PreparedStatement ps=con.prepareStatement("delete from ownerAddress where id=?");
+                                PreparedStatement ps=con.prepareStatement("delete from ownerAddress where id='"+id+"'");
                                  
-                                 ps.setString(1,ID);
-                                 
+                             
                                  ps.executeUpdate();
                                  out.println("<center>Data deleted Success:</center>");
+                                 response.sendRedirect("/Exhibition/html/ownerProfile.jsp"); 
                            }
                            catch(Exception ee)
                            {

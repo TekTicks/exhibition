@@ -424,7 +424,8 @@
                               
                               String s_type="",s_link="";
                              String id=request.getParameter("myid");
-                             out.print(id);
+                              HttpSession ss=request.getSession();
+                              ss.setAttribute("id1",id);
                           Class.forName("com.mysql.jdbc.Driver"); 
                          Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Exhibition","root","12345"); 
                          Statement stat=con.createStatement();
@@ -438,12 +439,11 @@
                          else
                          {
                        %>
-                         <% String abc=(rs.getString(2));%>
+                        
                            <div class="form-group form-group-default required">
                                  <label>Select Social Media</label>
                                  <select class="full-width"  name="socialmedia" data-init-plugin="select2">
-                                     <option value="<%= abc %>"<%= abc %> ></option>
-                                  <option value="tw"></option>
+                                  <option value="<%out.print(rs.getString(2));%>"> <%out.print(rs.getString(2));%></option>
                                  
                             </select>
                      
@@ -451,7 +451,7 @@
                             <br>
                               <div class="form-group form-group-default required">
                                     <label>Social Media Link</label>
-                                      <input type="text" value="<%out.print(rs.getString(9));%>"name="socialmedialink"id="tin" class="form-control" required>
+                                      <input type="text" value="<%out.print(rs.getString(9));%>" name="socialmedialink" id="tin" class="form-control" required>
                                      </div>
                                       <%
                                           }      

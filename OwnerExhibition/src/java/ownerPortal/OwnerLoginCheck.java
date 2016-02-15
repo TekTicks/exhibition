@@ -29,28 +29,29 @@ public class OwnerLoginCheck extends HttpServlet
                            while(rs.next())
                            {
                                String un1=rs.getString("userName");
-                               //ownerPortal.Global.un=un1;
                                String pw1=rs.getString("password");
+                               String id=rs.getString(1);
                                String cname=rs.getString("name");
                                String primEmail=rs.getString("primEmail");
                                String secEmail=rs.getString("secEmail");  
                                String primContact=rs.getString("primContact");
                                String secContact=rs.getString("secContact");
-                                String about=rs.getString("about");
-                                 String website=rs.getString("website");
-                                 String industry=rs.getString("industryName");
-                              // ownerPortal.Global.pw=pw1;
+                               String about=rs.getString("about");
+                               String website=rs.getString("website");
+                               String industry=rs.getString("industryName");
+                               
                                 HttpSession ss=request.getSession();
-                                  ss.setAttribute("username",un1);
-                                  ss.setAttribute("password",pw1);
-                                  ss.setAttribute("cname",cname);
-                                  ss.setAttribute("primEmail1",primEmail);
-                                  ss.setAttribute("secEmail1",secEmail);
-                                  ss.setAttribute("primContact1",primContact);
-                                  ss.setAttribute("secContact1",secContact);
-                                  ss.setAttribute("about1",about);
-                                   ss.setAttribute("website1",website);
-                                    ss.setAttribute("industry1",industry);
+                                ss.setAttribute("username",un1);
+                                ss.setAttribute("password",pw1);
+                                ss.setAttribute("ownerId",id);
+                                ss.setAttribute("cname",cname);
+                                ss.setAttribute("primEmail1",primEmail);
+                                ss.setAttribute("secEmail1",secEmail);
+                                ss.setAttribute("primContact1",primContact);
+                                ss.setAttribute("secContact1",secContact);
+                                ss.setAttribute("about1",about);
+                                ss.setAttribute("website1",website);
+                                ss.setAttribute("industry1",industry);
                              /* ownerPortal.Global.ownerId=rs.getString("id");
                               ownerPortal.Global.companyname=rs.getString("name"); 
                               ownerPortal.Global.primaryemail=rs.getString("primEmail");
@@ -65,10 +66,10 @@ public class OwnerLoginCheck extends HttpServlet
                            if(count>0)
                            {
                                 HttpSession ss=request.getSession();
-                                  String username1=(String)ss.getAttribute("username");
+                                  String userName=(String)ss.getAttribute("username");
                                  
                                   String password1=(String)ss.getAttribute("password");
-                               if( !uname.equals(username1))
+                               if( !uname.equals(userName))
                                {
                                     out.print("emailinvalid");        
 
