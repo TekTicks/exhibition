@@ -1,178 +1,124 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <title></title>
-    <!-- Path to Framework7 Library CSS-->
-    <link rel="stylesheet" href="css/framework7.material.min.css">
-    <link rel="stylesheet" href="css/framework7.material.colors.min.css">
-	<!--<link rel="stylesheet" href="css/slider.css">-->
-    <!-- Path to your custom app styles-->
-    <link rel="stylesheet" href="css/my-app.css">
-	
-	
-	
+
+<div data-page="lazy-load" class="page">
+  <div class="navbar">
+    <div class="navbar-inner">
+      <div class="left"><a href="logo.html" class="back link icon-only"><i class="icon icon-back"></i></a></div>
+      <div class="center">Each Exhibition</div>
+      <div class="right"><a href="#" class="open-panel link icon-only"><i class="icon icon-bars"></i></a></div>
+    </div>
+  </div>
+  <div class="page-content infinite-scroll">
 	<style>
-	.demo-card-header-pic .card-header {
-    height: 30vw;
-    background-size: cover;
-    background-position: center;
-	}
+		.demo-card-header-pic .card-header {
+		height: 30vw;
+		background-size: cover;
+		background-position: center;
+		}
 	</style>
-  </head>
-  <body>
-    <!-- Status bar overlay for fullscreen mode-->
-    <div class="statusbar-overlay"></div>
-    <!-- Panels overlay-->
-    <div class="panel-overlay"></div>
-    <!-- Left panel with reveal effect-->
-    <div class="panel panel-left panel-reveal">
-      <div class="content-block">
-        <p>Left panel content goes here</p>
-      </div>
-    </div>
-    <!-- Right panel with cover effect-->
-    <div class="panel panel-right panel-cover">
-      <div class="content-block">
-        <p>Right panel content goes here</p>
-      </div>
-    </div>
-    <!-- Views-->
-    <div class="views">
-      <!-- Your main view, should have "view-main" class-->
-      <div class="view view-main">
-        <!-- Top Navbar-->
-		
-        <div class="navbar">
-          <div class="navbar-inner">
-            <!-- We have home navbar without left link-->
-            <div class="center sliding"></div>
-			<!--Back Icon Coding-->
-			<div class="left"><a href="logo.html" class="back link icon-only"><i class="icon icon-back"></i></a></div>
-            <div class="right">
-              <!-- Right link contains only icon - additional "icon-only" class--><a href="#" class="link icon-only open-panel"> <i class="icon icon-only"></i></a>
-            </div>
-          </div>
-        </div>
-        <!-- Pages, because we need fixed-through navbar and toolbar, it has additional appropriate classes-->
-        <div class="pages navbar-through toolbar-through">
-          <!-- Page, data-page contains page name-->
-          <div data-page="index" class="page">
-            <!-- Scrollable page content--><br>
-            <div class="page-content">
-              <div class="content-block">
-			  <div class="card demo-card-header-pic" id="intro">
-					<div class="swiper-container swiper-init" data-speed="400" data-space-between="40" data-pagination=".swiper-pagination">
-					<div class="swiper-pagination"></div>
-						<div class="swiper-wrapper">
-							<div class="swiper-slide"><span><div style="background-image:url(http://lorempixel.com/1000/600/)"  valign="bottom" class="card-header color-white no-border" ></div></span></div>
+	<div class="card demo-card-header-pic" style="margin:0px 0px">
+		<div class="swiper-container swiper-init" data-speed="400" data-space-between="40" data-pagination=".swiper-pagination">
+			<div class="swiper-pagination"></div>
+				<div class="swiper-wrapper">
+					<div class="swiper-slide"><span><div style="background-image:url(http://lorempixel.com/1000/600/)"  valign="bottom" class="card-header color-white no-border" ></div></span></div>
 							
-							<div class="swiper-slide"><span><div style="background-image:url(http://lorempixel.com/1000/601/)"  valign="bottom" class="card-header color-white no-border" ></div></span></div>
+					<div class="swiper-slide"><span><div style="background-image:url(http://lorempixel.com/1000/601/)"  valign="bottom" class="card-header color-white no-border" ></div></span></div>
 							
-							<div class="swiper-slide"><span><div style="background-image:url(http://lorempixel.com/1000/602/)"  valign="bottom" class="card-header color-white no-border" ></div></span></div>
+					<div class="swiper-slide"><span><div style="background-image:url(http://lorempixel.com/1000/602/)"  valign="bottom" class="card-header color-white no-border" ></div></span></div>
 							
-							<div class="swiper-slide"><span><div style="background-image:url(http://lorempixel.com/1000/603/)"  valign="bottom" class="card-header color-white no-border" ></div></span></div>
-						</div>
-						<br>
-						<div class="swiper-pagination"></div>
-					</div>
-					</div>
-			  </div>
-			  
-			  <div class="list-block">
-			  <ul>
-			  
-			  <li>
-			  <div class="row">
-			  <div class="col-100">
-			  <center><p class="color-gray"><b><h2>Exhibition 1</h2></b></p></center>
-			  </div>
-			  </div>
-			  <div class="row">
-			  <div class="col-50">
-			  <center><p class="color-gray"><h4>29th Jan 2016</h4></p></center>
-			  </div>
-			  <div class="col-50">
-			  <center><p class="color-gray"><h4>Mumbai</h4></p></center>
-			  </div>
-			  </div>
-			  </li>
-			  
-			  <li>
-			  <div class="row">
-			  <div class="col-100">
-			  <center><p class="color-gray"><b><h5>About</h2></b></p></center>
-			  </div>
-			  </div>
-			  <div class="row">
-			  <div class="col-100">
-			  <center>sfgzdfhgxfchfngjfchjsdfgszfgdhdfghsfgsfngujsfbhkhsfjksdhgsf,jgsdfhgjjkzdfhgfd,jgdf,gbfjkgdfhfksjgugkaighuehgwwwkaulghawlkurghwaulksahkulawrhgwarulkghawrug</center>
-			  </div>
-			  </div>
-			  </li>
-			  
-			  <li>
-			  <div class="content-block">
-			 <div class="content-block-title">Partners</div>
-			 <div class="row">
-			  
-				<div class="col-33">
-                  <center><a href="#"><img src="img/calendar53.png" width="64px" height="64px" alt="News"><br>Pinnacle</img></a></center>
+					<div class="swiper-slide"><span><div style="background-image:url(http://lorempixel.com/1000/603/)"  valign="bottom" class="card-header color-white no-border" ></div></span></div>
 				</div>
-				  
-				<div class="col-33">
-                  <center><a href="#"  ><img src="img/business133.png" width="64px" height="64px"><br>EXCALIBER</img></a></center>
-				</div>
-				  
-				<div class="col-33">
-                  <center><a href="#"><img src="img/newspaper11.png" width="64px" height="64px"><br>&nbsp;&nbsp;&nbsp;Epidemy</img></a></center>
-				</div>
-				</div>
-			  </div>
-			  </li>
-			  
-			  <li>
-			  <div class="content-block">
-			 <div class="content-block-title">Exhibitors</div>
-			 <div class="row">
-			  
-				<div class="col-33">
-                  <center><a href="#"><img src="img/calendar53.png" width="64px" height="64px" alt="News"><br>Buzz.com</img></a></center>
-				</div>
-				  
-				<div class="col-33">
-                  <center><a href="#"  ><img src="img/business133.png" width="64px" height="64px"><br>Ubisoft</img></a></center>
-				</div>
-				  
-				<div class="col-33">
-                  <center><a href="#"><img src="img/newspaper11.png" width="64px" height="64px"><br>&nbsp;&nbsp;&nbsp;Chitale Bandhu PVT LTD</img></a></center>
-				</div>
-				</div>
-			  </div>
-			  </li>
-			  
-			  </ul>
-			  </div>
-			   
-              <!--<div class="card demo-card-header-pic">
-					<div style="background-image:url(http://lorempixel.com/1000/600/nature/3/)"  valign="bottom" class="card-header color-white no-border" >Exhibition</div>
-				</div>-->
-              
-            </div>
-          </div>
-        
-        <!-- Bottom Toolbar-->
-        
+				
+			<div class="swiper-pagination"></div>
 		</div>
-      </div>
-	  </div>
-    
-    <!-- Path to Framework7 Library JS-->
-    <script type="text/javascript" src="js/framework7.min.js"></script>
-    <!-- Path to your app js-->
-    <script type="text/javascript" src="js/my-app.js"></script>
-  </body>
-</html>
+	</div>
+	
+	
+	<div class="card" style="padding:10px">
+		<div class="card-content">
+			<div class="row">
+				<div class="col-100">
+					<center><div class="item-title"><h1>Exhibition 1</h1></div></center>
+				</div>					
+			</div>
+			<div class="row">
+				<div class="col-100">
+					<center><div class="item-subtitle">29th Jan 2016</div></center>	
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-100">
+					<center><p class="color-text"><h4>Mumbai</h4></p></center>
+				</div>
+			</div>
+			</div>
+	</div>
+	
+	<div class="card" style="padding:10px">
+		<div class="card-content">
+			<div class="row">
+				<div class="col-100">
+					<center><div class="item-title"><h2>About</h2></div></center>
+				</div>					
+			</div>
+			<div class="row">
+				<div class="col-100">
+					<p>&nbsp;&nbsp;An exhibition, in the most general sense, is an organized presentation and display of a selection of items. In practice, exhibitions usually occur within museums, galleries and exhibition halls, and World's Fairs. Exhibitions can include many things such as art in both major museums and smaller galleries, interpretive exhibitions, natural history museums and history museums, and also varieties such as more commercially focused exhibitions and trade fairs.
+
+					The word "exhibition" is usually, but not always, the word used for a collection of items. Sometimes "exhibit" is synonymous with "exhibition", but "exhibit" generally refers to a single item being exhibited within an exhibition.
+
+					Exhibitions may be permanent displays or temporary, but in common usage, "exhibitions" are considered temporary and usually scheduled to open and close on specific dates. While many exhibitions are shown in just one venue, some exhibitions are shown in multiple locations and are called travelling exhibitions, and some are online exhibitions.
+
+					Though exhibitions are common events, the concept of an exhibition is quite wide and encompasses many variables. Exhibitions range from an extraordinarily large event such as a World's Fair exposition to small one-artist solo shows or a display of just one item. Curators are sometimes involved as the people who select the items in an exhibition. Writers and editors are sometimes needed to write text, labels and accompanying printed material such as catalogs and books. Architects, exhibition designers, graphic designers and other designers may be needed to shape the exhibition space and give form to the editorial content. Organizing and holding exhibitions also requires effective event planning, management, and logistics.
+					</p>	
+				</div>
+			</div>	
+		</div>
+	</div>
+	
+	<div class="card" style="padding:10px">
+		<div class="card-content">
+			<div class="row">
+				<div class="col-100">
+					<center><div class="item-title"><h2>Partners</h2></div></center>
+				</div>					
+			</div>
+			<div class="row">
+				<div class="col-33">
+					<center><a href="#"><img src="img/Dell.jpg" width="64px" height="64px" alt="News"><br>Dell</img></a></center>
+				</div>
+				<div class="col-33">
+					<center><a href="#"  ><img src="img/microsoft.jpg" width="64px" height="64px"><br>Microsoft</img></a></center>
+				</div>
+				<div class="col-33">
+					<center><a href="#"><img src="img/infosys.png" width="64px" height="64px"><br>Infosys Technologies</img></a></center>
+				</div>
+			</div>	
+		</div>
+	</div>
+
+	<div class="card" style="padding:10px">
+		<div class="card-content">
+			<div class="row">
+				<div class="col-100">
+					<center><div class="item-title"><h2>Exhibitiors</h2></div></center>
+				</div>					
+			</div>
+			<div class="row">
+				<div class="col-33">
+					<center><a href="#"><img src="img/cognizant.jpeg" width="64px" height="64px"><br>Cognizant</img></a></center>
+				</div>	
+				<div class="col-33">
+					<center><a href="#"  ><img src="img/rockstar.png" width="64px" height="64px"><br>Rockstar Games</img></a></center>
+				</div>
+				<div class="col-33">
+					<center><a href="#"><img src="img/ea.png" width="64px" height="64px"><br>Electronic Arts Ltd.</img></a></center>
+				</div>
+			</div>	
+		</div>
+	</div>
+	
+</div>	
+</div>
+	
+
+  
