@@ -1,80 +1,58 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <title></title>
-    <!-- Path to Framework7 Library CSS-->
-    <link rel="stylesheet" href="css/framework7.material.min.css">
-    <link rel="stylesheet" href="css/framework7.material.colors.min.css">
-    <!-- Path to your custom app styles-->
-    <link rel="stylesheet" href="css/my-app.css">
-  </head>
-  <body>
-    <!-- Status bar overlay for fullscreen mode-->
-    <div class="statusbar-overlay"></div>
-    <!-- Panels overlay-->
-    <div class="panel-overlay"></div>
-    <!-- Left panel with reveal effect-->
-    <div class="panel panel-left panel-reveal">
-      <div class="content-block">
-        <p>Left panel content goes here</p>
-      </div>
+<div data-page="login-screen-embedded" class="page">
+<div class="navbar">
+    <div class="navbar-inner">
+      <div class="left"><a href="login.html" class="back link icon-only"><i class="icon icon-back"></i></a></div>
+      <div class="center">Forgot Password</div>
+      <div class="right"><a href="#" class="open-panel link icon-only"><i class="icon icon-bars"></i></a></div>
     </div>
-    <!-- Right panel with cover effect-->
-    <div class="panel panel-right panel-cover">
-      <div class="content-block">
-        <p>Right panel content goes here</p>
-      </div>
-    </div>
-    <!-- Views-->
-    <div class="views">
-      <!-- Your main view, should have "view-main" class-->
-      <div class="view view-main">
-        <!-- Top Navbar-->
-        <div class="navbar">
-          <div class="navbar-inner">
-            <!-- We have home navbar without left link-->
-            <div class="center sliding"></div>
-			<!--Back Icon Coding-->
-			<div class="left"><a href="logo.html" class="back link icon-only"><i class="icon icon-back"></i></a></div>
-            <div class="right">
-              <!-- Right link contains only icon - additional "icon-only" class--><a href="#" class="link icon-only open-panel"> <i class="icon icon-bars"></i></a>
-            </div>
-          </div>
-        </div>
-        <!-- Pages, because we need fixed-through navbar and toolbar, it has additional appropriate classes-->
-        <div class="pages navbar-through toolbar-through">
-          <!-- Page, data-page contains page name-->
-          <div data-page="index" class="page">
-            <!-- Scrollable page content--><br>
-            <div class="page-content">
-              <div class="list-block">
-					<ul>
+  </div>
+  
+    <div class="page-content login-screen-content" style="padding-top:50px">
+
+
+<form method="POST" name="forgot" >	
+   
+      <div class="list-block inputs-list">
+        <ul>
+			
 					<li>
 						<div class="item-content">
-						<div class="item-media"><i class="icon icon-form-name"></i></div>
+						<div class="item-media"><i class="icon icon-form-tel"></i></div>
 						<div class="item-inner">
-						
+						<div class="label" id="mobileError" name = "mobileError" style="color:#ff0000"></div>
+						<div class="item-title floating-label">Your Mobile Number*</div>
 						<div class="item-input">
-						<input type="number" placeholder="Enter A 10 Digit Mobile Number">
+						<input type="text" name="mobileNo" id="mobileNo" placeholder="" maxlength="10" onkeypress="return isNumber(event)" />
 						</div>
 						</div>
 						</div>
 					</li>
+					
 					<li>
-					<center><a href="otp.html" class="button button-fill color-blue" >CLICK TO RECEIVE OTP</a></center>
+					<center><a href="otp.html" class="button button-fill color-green" >CLICK TO RECEIVE OTP</a></center>
 					</li>
 					
 					<li>
 					<div class="item-content">
-						<div class="item-media"><i class="icon icon-form-name"></i></div>
+						<div class="item-media"><i class="icon icon-form-comment"></i></div>
 						<div class="item-inner">
-						
+						<div class="label" id="otpError" name = "otpError" style="color:#ff0000"></div>
+						<div class="item-title floating-label">Your OTP*</div>
 						<div class="item-input">
-						<input type="number" placeholder="Enter One Time Password(OTP)">
+						<input type="text" name="otp" id="otp" placeholder="" maxlength="04"/>
+						</div>
+						</div>
+					</div>
+					</li>
+					
+					<li>
+						<div class="item-content">
+						<div class="item-media"><i class="icon icon-form-password"></i></div>
+						<div class="item-inner">
+						<div class="label" id="newPasswordError" name = "newPasswordError" style="color:#ff0000"></div>
+						<div class="item-title floating-label">New Password*</div>
+						<div class="item-input">
+							<input type="password"  name="newPassword"  id="newPassword"  placeholder="" />
 						</div>
 						</div>
 						</div>
@@ -82,46 +60,34 @@
 					
 					<li>
 						<div class="item-content">
-						<div class="item-media"><i class="icon icon-form-name"></i></div>
+						<div class="item-media"><i class="icon icon-form-password"></i></div>
 						<div class="item-inner">
-						
+						<div class="label" id="confirmPasswordError" name = "confirmPasswordError" style="color:#ff0000"></div>
+						<div class="item-title floating-label">Confirm Password*</div>
 						<div class="item-input">
-						<input type="password" placeholder="Enter password">
-						</div>
-						</div>
-						</div>
-					</li>
-					
-					<li>
-						<div class="item-content">
-						<div class="item-media"><i class="icon icon-form-name"></i></div>
-						<div class="item-inner">
-						
-						<div class="item-input">
-						<input type="password" placeholder="Confirm password">
+							<input type="password"  name="confirmPassword"  id="confirmPassword"  placeholder=""/>
 						</div>
 						</div>
 						</div>
 					</li>
 					<li>
-					 <a href="#" class="button button-fill color-red" >SUBMIT</a>
+					 <a href="#" class="button button-fill color-red" onclick="forgotpass()" >SUBMIT</a>
 					</li>
-					</ul>
-			  </div>
-			   
-              <!--<div class="content-block">
-                <div class="row">
-                  <a href="#" class="button button-fill color-red" >SUBMIT</a>
-                </div>
-              </div>-->
-            </div>
-          </div>
-        </div>
-        <!-- Bottom Toolbar-->
-        
-    <!-- Path to Framework7 Library JS-->
-    <script type="text/javascript" src="js/framework7.min.js"></script>
-    <!-- Path to your app js-->
-    <script type="text/javascript" src="js/my-app.js"></script>
-  </body>
-</html>
+			
+        </ul>
+      </div>
+
+	  
+	  
+	
+	  <a href="#" id="next"></a>
+	  <!-- <div class="content-block"> onclick="signup()"
+        <div class="list-block-label">Some text about login information.<br>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+      </div>-->
+	  
+	  
+    </form>
+
+  </div>
+</div>
+</div>

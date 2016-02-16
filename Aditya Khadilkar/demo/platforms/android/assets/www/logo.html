@@ -3,37 +3,44 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <title></title>
-    <!-- Path to Framework7 Library CSS-->
-    <link rel="stylesheet" href="css/framework7.material.min.css">
-    <link rel="stylesheet" href="css/framework7.material.colors.min.css">
-	<!-- Path to your custom app styles-->
-    <link rel="stylesheet" href="css/my-app.css">
+    <meta name="theme-color" content="#2196f3">
+    <title>Exhibition</title>
+    <link rel="stylesheet" href="css/framework7.material.css">
+    <link rel="stylesheet" href="css/framework7.material.colors.css">
+    <link href="http://fonts.googleapis.com/css?family=Roboto:400,300,500,700" rel="stylesheet" type="text/css">
+	<!-- <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=raleway" /> -->
+	
+	<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Raleway" />
+    <!--<link rel="stylesheet" href="css/kitchen-sink.css">
+    <link rel="icon" href="img/icon.png">-->
+	<link rel="text/css" href="css/swiper.min.css">
 	
 	
-	<style>
-	.demo-card-header-pic .card-header {
-    height: 20vw;
-    background-size: cover;
-    background-position: center;
-	}
-	</style>
 	
-	
-  </head>
-  <body>
-    <!-- Status bar overlay for fullscreen mode-->
+</head>
+  <body onload="navi()">
     <div class="statusbar-overlay"></div>
-    <!-- Panels overlay-->
     <div class="panel-overlay"></div>
-    <!-- Left panel with reveal effect-->
-    <div class="panel panel-left panel-reveal">
-       <div class="content-block">
+	<div class="panel panel-left panel-cover">
+	
+      <div class="view navbar-fixed">
+        <div class="pages">
+          <div data-page="panel-left" class="page">
+            <!-- <div class="navbar">
+              <div class="navbar-inner">
+                <div class="center">Social Worker</div>
+                <div class="center">Social Worker</div>
+              </div>
+            </div> -->
+            <div class="page-content" style="padding-top:0px">
+			<a href="sw_profile.html" class="item-link close-panel" id="profile" name="profile">
+               <div class="content-block">
 	   <a href="sw_profile.html" class="item-link close-panel">
                <div class="content-block" style="text-align:center;padding:0px 0px">
-				<img src="img/museum39.png"  width="50%" height="50%" />
+				<img src="img/Profilelogo.png"  width="50%" height="50%" />
 				<div class="content-block-title" style="margin:0px">Name</div>
                 <!-- <p>This is a side panel/drawer. You can close it by clicking outsite or on this link: <a href="#" class="close-panel">close me</a>. You can put here anything, even another isolated view like in <a href="#" data-panel="right" class="open-panel">Right Panel</a></p> -->
 			  </div></a>
@@ -54,27 +61,58 @@
 				</a>
 				</li>
 				
-				<li><a href="intro.html" class="item-link close-panel">
+				<li><a href="badges.html" class="item-link close-panel" id="intro">
                       <div class="item-content">
                         <!-- <div class="item-media"><i class="icon icon-f7"></i></div> -->
                         <div class="item-inner">
-                          <div class="item-title">Introduction</div>
+                          <div class="item-title">My Badges</div>
                         </div>
                       </div>
 				</a>
 				</li>
-					  
-                <li><a href="signup.html" class="item-link close-panel">
+				
+				<li><a href="visited.html" class="item-link close-panel" id="intro">
                       <div class="item-content">
                         <!-- <div class="item-media"><i class="icon icon-f7"></i></div> -->
                         <div class="item-inner">
-                          <div class="item-title">Sign Up</div>
+                          <div class="item-title">My Visited</div>
                         </div>
                       </div>
 				</a>
 				</li>
-					  
-                <li><a href="login.html" class="item-link close-panel">
+				
+				<li><a href="favourites.html" class="item-link close-panel" id="intro">
+                      <div class="item-content">
+                        <!-- <div class="item-media"><i class="icon icon-f7"></i></div> -->
+                        <div class="item-inner">
+                          <div class="item-title">My Favourites</div>
+                        </div>
+                      </div>
+				</a>
+				</li>
+				
+				<li><a href="events.html" class="item-link close-panel" id="intro">
+                      <div class="item-content">
+                        <!-- <div class="item-media"><i class="icon icon-f7"></i></div> -->
+                        <div class="item-inner">
+                          <div class="item-title">My Events</div>
+                        </div>
+                      </div>
+				</a>
+				</li>
+				
+				<li><a href="signUp.html" class="item-link close-panel" id="intro">
+                      <div class="item-content">
+                        <!-- <div class="item-media"><i class="icon icon-f7"></i></div> -->
+                        <div class="item-inner">
+                          <div class="item-title">Register</div>
+                        </div>
+                      </div>
+				</a>
+				</li>
+				
+				
+				<li><a href="login.html" class="item-link close-panel">
                       <div class="item-content">
                         <!-- <div class="item-media"><i class="icon icon-f7"></i></div> -->
                         <div class="item-inner">
@@ -83,6 +121,31 @@
                       </div>
 				</a>
 				</li>
+				
+				
+				<li><a href="notifications.html" class="item-link close-panel" >
+                      <div class="item-content">
+                        <!-- <div class="item-media"><i class="icon icon-f7"></i></div> -->
+                        <div class="item-inner">
+                          <div class="item-title">Notifications</div>
+                        </div>
+                      </div>
+				</a>
+				</li>
+				
+				<!--<li><a href="intro.html" class="item-link close-panel" id="intro">
+                      <div class="item-content">
+                        
+                        <div class="item-inner">
+                          <div class="item-title">Introduction</div>
+                        </div>
+                      </div>
+				</a>
+				</li>-->
+					  
+               
+					  
+                
 					  
 					  
                 <li><a href="title.html" class="item-link close-panel">
@@ -96,7 +159,7 @@
 				</li>
 				
 				<li>
-				<a href="index.html" class="item-link close-panel">
+				<a href="selectSpeakers.html" class="item-link close-panel">
                       <div class="item-content">
                         <!-- <div class="item-media"><i class="icon icon-f7"></i></div> -->
                         <div class="item-inner">
@@ -117,19 +180,24 @@
 				</a>
 				</li>-->
 				
+				
+				
+				
 				<li>
-				<a href="browser.html" class="item-link close-panel">
+				<a href="book.html" class="item-link close-panel">
                       <div class="item-content">
                         <!-- <div class="item-media"><i class="icon icon-f7"></i></div> -->
                         <div class="item-inner">
-                          <div class="item-title">Browser</div>
+                          <div class="item-title">Book Tickets</div>
                         </div>
                       </div>
 				</a>
 				</li>
 				
+				
+				
 				<li>
-				<a href="eachphoto.html" class="item-link close-panel">
+				<a href="eachPhoto.html" class="item-link close-panel">
                       <div class="item-content">
                         <!-- <div class="item-media"><i class="icon icon-f7"></i></div> -->
                         <div class="item-inner">
@@ -150,16 +218,6 @@
 				</a>
 				</li>
 				
-				<li>
-				<a href="otp.html" class="item-link close-panel">
-                      <div class="item-content">
-                        <!-- <div class="item-media"><i class="icon icon-f7"></i></div> -->
-                        <div class="item-inner">
-                          <div class="item-title">OTP</div>
-                        </div>
-                      </div>
-				</a>
-				</li>
 				
 				<li>
 				<a href="album.html" class="item-link close-panel">
@@ -171,87 +229,181 @@
                       </div>
 				</a>
 				</li>
-               
+				
+				
+				<li><a href="eachEvent.html" class="item-link close-panel" >
+                      <div class="item-content">
+                        <!-- <div class="item-media"><i class="icon icon-f7"></i></div> -->
+                        <div class="item-inner">
+                          <div class="item-title">Each Event</div>
+                        </div>
+                      </div>
+				</a>
+				</li>
+				
+				<li><a href="exhibitorProfile1.html" class="item-link close-panel" >
+                      <div class="item-content">
+                        <!-- <div class="item-media"><i class="icon icon-f7"></i></div> -->
+                        <div class="item-inner">
+                          <div class="item-title">Exhibitor Profile 1</div>
+                        </div>
+                      </div>
+				</a>
+				</li>
+				
+				<li><a href="exhibitorProfile2.html" class="item-link close-panel" >
+                      <div class="item-content">
+                        <!-- <div class="item-media"><i class="icon icon-f7"></i></div> -->
+                        <div class="item-inner">
+                          <div class="item-title">Exhibitor Profile 2</div>
+                        </div>
+                      </div>
+				</a>
+				</li>
+				
+				<li><a href="exhibitorSector.html" class="item-link close-panel" >
+                      <div class="item-content">
+                        <!-- <div class="item-media"><i class="icon icon-f7"></i></div> -->
+                        <div class="item-inner">
+                          <div class="item-title">Exhibitor Sector</div>
+                        </div>
+                      </div>
+				</a>
+				</li>
+				
+				<li><a href="flashBack.html" class="item-link close-panel" >
+                      <div class="item-content">
+                        <!-- <div class="item-media"><i class="icon icon-f7"></i></div> -->
+                        <div class="item-inner">
+                          <div class="item-title">Flash Back</div>
+                        </div>
+                      </div>
+				</a>
+				</li>
+				
+				<li><a href="myNotes.html" class="item-link close-panel" >
+                      <div class="item-content">
+                        <!-- <div class="item-media"><i class="icon icon-f7"></i></div> -->
+                        <div class="item-inner">
+                          <div class="item-title">My Notes</div>
+                        </div>
+                      </div>
+				</a>
+				</li>
+				
+				<li><a href="news.html" class="item-link close-panel" >
+                      <div class="item-content">
+                        <!-- <div class="item-media"><i class="icon icon-f7"></i></div> -->
+                        <div class="item-inner">
+                          <div class="item-title">News</div>
+                        </div>
+                      </div>
+				</a>
+				</li>
+				
+				<li><a href="profile.html" class="item-link close-panel" >
+                      <div class="item-content">
+                        <!-- <div class="item-media"><i class="icon icon-f7"></i></div> -->
+                        <div class="item-inner">
+                          <div class="item-title">Profile</div>
+                        </div>
+                      </div>
+				</a>
+				</li>
+				
+				<li><a href="settings.html" class="item-link close-panel">
+                      <div class="item-content">
+                        <!-- <div class="item-media"><i class="icon icon-f7"></i></div> -->
+                        <div class="item-inner">
+                          <div class="item-title">Settings</div>
+                        </div>
+                      </div>
+				</a>
+				</li>
+			   
+			   
 			   
                 </ul>
               </div>
 
-			  
-			  
-			  
-			  
-			  
-			  
-			  
-			  
-		<!--	  
-	   <center><h3><a href="logo.html" class="link">Home</a></h3></center>
-        <center><h3><a href="intro.html" class="link">Introduction</a></h3></center>
-		
-		<center><h3><a href="signup.html" class="link">Sign Up</a></h3></center>
-		
-		<center><h3><a href="login.html" class="link">Sign In</a></h3></center>
-		
-		<center><h3><a href="title.html" class="link">Title</a></h3></center>
-		
-		<center><h3><a href="index.html" class="link">Select Speakers</a></h3></center>
-		<center><h3><a href="each.html" class="link">Each Speaker</a></h3></center>
-		<center><h3><a href="browser.html" class="link">Browser</a></h3></center>
-		<center><h3><a href="eachphoto.html" class="link">Each Photo In The Album</a></h3></center>
-		<center><h3><a href="gallery.html" class="link">Gallery</a></h3></center>
-		<center><h3><a href="otp.html" class="link">OTP</a></h3></center>
-		<center><h3><a href="album.html" class="link">Album</a></h3></center>-->
       </div>
-    </div>
-    <!-- Right panel with cover effect-->
-    <div class="panel panel-right panel-cover">
-      <div class="content-block">
-       
-      </div>
-    </div>
-    <!-- Views-->
-    <div class="views">
-      <!-- Your main view, should have "view-main" class-->
-      <div class="view view-main">
-        <!-- Top Navbar-->
-		
-        <div class="navbar">
-          <div class="navbar-inner">
-            <!-- We have home navbar without left link-->
-            <div class="center sliding"></div>
-            <div class="right">
-              <!-- Right link contains only icon - additional "icon-only" class--><a href="#" class="link icon-only open-panel"> <i class="icon icon-bars"></i></a>
             </div>
           </div>
         </div>
-        <!-- Pages, because we need fixed-through navbar and toolbar, it has additional appropriate classes-->
-        <div class="pages navbar-through toolbar-through">
-          <!-- Page, data-page contains page name-->
-          <div data-page="index" class="page">
-            <!-- Scrollable page content--><br><br>
-            <div class="page-content">
-              <div class="content-block">
-					<center><img src="img/museum39.png" width="128px" height="128px"><br><h1>The Exhibition</h1></img></center>
-					
-					<br><center><h3>POWERED BY</h3></center>
-					<br>
-					<center><img src="img/open203.png" width="64px" height="64px"><br>&nbsp;<h4>Glassdoor.com</h4></img></center>
-			  </div>
-			   
-              
-              
-            </div>
-          </div>
-        </div>
-        <!-- Bottom Toolbar-->
-       
-		</div>
       </div>
-	  
+    </div>
     
-    <!-- Path to Framework7 Library JS-->
-    <script type="text/javascript" src="js/framework7.min.js"></script>
-    <!-- Path to your app js-->
-    <script type="text/javascript" src="js/my-app.js"></script>
+   
+    <div class="views">
+      <div class="view view-main">
+        <div class="pages navbar-fixed">
+          <div data-page="index" class="page">
+		  <div class="navbar">
+              <div class="navbar-inner">
+				<div class="left"><a href="#" class="open-panel link icon-only"><i class="icon icon-bars"></i></a></div>
+                <div class="center">Exhibition</div>
+                <!-- <div class="right"><a href="#" class="open-panel link icon-only"><i class="icon icon-bars"></i></a></div> -->
+              </div>
+		</div>
+		
+             <div  class="page-content infinite-scroll">
+<div class="content-block">
+					<center><img src="img/exhibition.png" width="50%" height="50%"><h1>The Exhibition</h1></img></center>
+					
+					<center><h4>POWERED BY</h4></center>
+					
+					<center><img src="img/glassdoor.jpg" width="25%" height="25%"><h5>Glassdoor.com</h5></img></center>
+					
+					<center><a href="intro.html"><img src="img/arrowforward.png" width="10%" height="10%"></a></center>
+			  </div>
+	
+		
+   
+	
+  </div>
+ 
+       
+      </div>
+	
+  </div>
+  </div>
+  </div>
+  
+ 
+  
+  
+         
+  <script type="text/javascript" src="js/swiper.min.js"></script>
+		<!--javascript code for swiper in introduction-->
+		<script>
+			var swiper = new Swiper('.swiper-container', {
+			pagination: '.swiper-pagination',
+			paginationClickable: true,
+			nextButton: '.swiper-button-next',
+			prevButton: '.swiper-button-prev',
+			spaceBetween: 30,
+			effect: 'fade'
+			});
+    </script>
+    <script type="text/javascript" src="js/framework7.js"></script>
+    <script type="text/javascript" src="js/kitchen-sink.js"></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> 
+	<script type="text/javascript" src="js/main.js"></script>
+	<script type="text/javascript" src="js/forgotmain.js"></script>
+	<script type="text/javascript" src="js/cors.js"></script>
+	<script type="text/javascript" src="js/signup.js"></script>
+	<script type="text/javascript" src="js/signin.js"></script> 
+	<script type="text/javascript" src="js/signOut.js"></script> 
+	<script type="text/javascript" src="js/navi.js"></script> 
+	<script type="text/javascript" src="js/forgotpass.js"></script> 
+	<script type="text/javascript" src="js/about.js"></script>
+		<script type="text/javascript" src="js/getnews.js"></script>
+		<script type="text/javascript" src="js/getevents.js"></script>
+		<script type="text/javascript" src="js/getphotos.js"></script>
+		<script type="text/javascript" src="js/eachnews.js"></script>
+		<script type="text/javascript" src="js/eachevents.js"></script>
+		<script type="text/javascript" src="js/eachphotos.js"></script>
+	 <!-- <script type="text/javascript" src="js/my-app.js"></script>	 -->
+		
   </body>
-</html>
+</html>	
