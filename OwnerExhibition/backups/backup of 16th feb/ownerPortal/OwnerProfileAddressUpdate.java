@@ -44,8 +44,8 @@ public class OwnerProfileAddressUpdate extends HttpServlet {
                             String zipcode =request.getParameter("zipcode");
                             String landmark =request.getParameter("landmark");
                             String maplink =request.getParameter("maplink");
-                           Connection con;
-                           con=dbConnection.getConnection();
+                           Class.forName("com.mysql.jdbc.Driver");
+                            Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/Exhibition","root","12345");
                                  
                                 PreparedStatement ps=con.prepareStatement("update ownerAddress set address1=?,address2=?,landmark=?,pincode=?,mapLink=? where id='"+id+"'");
                                  

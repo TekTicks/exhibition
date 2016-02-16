@@ -25,7 +25,6 @@ public class OwnerProfileUpdate extends HttpServlet {
         try  {           
              HttpSession ss=request.getSession();
                             String idd=(String)ss.getAttribute("ownerId");
-                            out.print(idd);
                             String cname =request.getParameter("cname");
                             String p_email =request.getParameter("p_email");
                             String s_email =request.getParameter("s_email");
@@ -36,8 +35,8 @@ public class OwnerProfileUpdate extends HttpServlet {
                             String about =request.getParameter("about");
                             String website =request.getParameter("website");
                             String industry =request.getParameter("industry");
-                            Class.forName("com.mysql.jdbc.Driver");
-                            Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/Exhibition","root","12345");
+                           Connection con;
+                           con=dbConnection.getConnection();
                                  
                                 PreparedStatement ps=con.prepareStatement("update ownerProfile a,industry b set a.name=?,a.primEmail=?,a.secEmail=?,a.primContact=?,a.secContact=?,a.about=?, a.website=?,b.industryName=? where a.createdBy='"+idd+"' ");
                                  ps.setString(1, cname);

@@ -26,16 +26,15 @@ public class OwnerProfileSocialMediaDelete extends HttpServlet {
                           
                           HttpSession ss=request.getSession();
                         //  String id=(String)ss.getAttribute("id1");
-                           
-                           Class.forName("com.mysql.jdbc.Driver");
-                            Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/Exhibition","root","12345");
-                              
+                           Connection con;
+                           con=dbConnection.getConnection();
                                 PreparedStatement ps=con.prepareStatement("delete from ownerSocialMedia where id='"+id+"'");
                                  
                                 
                                  
                                  ps.executeUpdate();
-                                 response.sendRedirect("/Exhibition/html/ownerProfile.jsp");
+                                
+                                response.sendRedirect("/Exhibition/html/ownerProfile.jsp");
                            }
                            catch(Exception ee)
                            {

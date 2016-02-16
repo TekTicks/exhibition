@@ -4,6 +4,10 @@
     Author     : Admin
 --%>
 
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.Connection"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -401,23 +405,46 @@
               </div>
                 
                 
-              
               <div class="col-lg-7 col-md-6 ">
                 <!-- START PANEL -->
                 <div class="panel panel-transparent">
                   <div class="panel-body">
-                      <br>
-                      <br>
+                      
                       
              <div class="col-md-70">
                       <div class="padding-30">
-                         <form action="/Exhibition/ownerProfileContactperson" method="post" id="form-project" role="form" autocomplete="off">
+                         <form action="/Exhibition/OwnerProfileContactPersonUpdate" method="post" id="form-project" role="form" autocomplete="off">
+                             
+                             
+                              <%  
+                            
+                             try{    
+                              
+                              
+                             String id=request.getParameter("contactPersonId");
+                              HttpSession ss=request.getSession();
+                              ss.setAttribute("contactPersonId",id);
+                          Class.forName("com.mysql.jdbc.Driver"); 
+                         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Exhibition","root","12345"); 
+                         Statement stat=con.createStatement();
+                         ResultSet rs=stat.executeQuery("select * from ownerContactPerson where id='"+id+"'");
+                         %>
+                         <%
+                             if(!rs.next())
+                         {
+                             out.print("Sory");
+                         }
+                         else
+                         {
+                       %>
+              
                         <p>Basic Information</p>
                             <div class="form-group form-group-default required">
                                  <label>Title</label>
                                  <select class="full-width" name="title" data-init-plugin="select2">
-                                  <option value="AK">Mr.</option>
-                                  <option value="HI">Mrs.</option>
+                                     <option  value="<%out.print(rs.getString(2));%>"><%out.print(rs.getString(2));%></option>
+                                  <option value="Mr.">Mr.</option>
+                                  <option value="Mrs.">Mrs.</option>
                             </select>
                      
                             </div>
@@ -426,20 +453,20 @@
                                 <div class="col-sm-6">
                                 <div class="form-group form-group-default required">
                                      <label>First name</label>
-                                     <input type="text" name="fname" class="form-control" name="firstName" required>
+                                     <input type="text"  value="<%out.print(rs.getString(3));%>" name="fname" class="form-control" name="firstName" required>
                                 </div>
                                 </div>
                                 <div class="col-sm-6">
                                  <div class="form-group form-group-default">
                                      <label>Last name</label>
-                                     <input type="text" name="lname" class="form-control" name="lastName">
+                                     <input type="text"  value="<%out.print(rs.getString(4));%>" name="lname" class="form-control" name="lastName">
                                 </div>
                                 </div>
                                 <div class="row">
                         <div class="col-sm-12">
                           <div class="form-group form-group-default">
                             <label>Email</label>
-                            <input type="email" class="form-control" name="email" placeholder="" required>
+                            <input type="email" class="form-control"  value="<%out.print(rs.getString(11));%>" name="email" placeholder="" required>
                           </div>
                         </div>
                       </div>
@@ -465,7 +492,7 @@
                           <div class="col-sm-12">
                             <div class="form-group form-group-default required">
                                 <label> Date of Birth</label>
-                              <input id="start-date" type="date" class="form-control date" name="dob"  prequired>
+                              <input id="start-date"  value="<%out.print(rs.getString(7));%>"  type="date" class="form-control date" name="dob"  prequired>
                             </div>
                           </div>
                         </div>
@@ -473,7 +500,7 @@
                              <div class="col-sm-12">
                                 <div class="form-group form-group-default required">
                                      <label>Designation</label>
-                                     <input type="text"  class="form-control" name="designation" required>
+                                     <input type="text"  value="<%out.print(rs.getString(8));%>" class="form-control" name="designation" required>
                                 </div>
                                 </div>
                       </div>
@@ -495,7 +522,7 @@
                                         </select>
                                         </span>
                               <label>Telephone Number</label>
-                              <input type="text" name="phoneno" class="form-control" placeholder="" required>
+                              <input type="text"  value="<%out.print(rs.getString(9));%>"name="phoneno" class="form-control" placeholder="" required>
                             </div>
                                         
                      <div class="form-group form-group-default input-group required">
@@ -516,14 +543,22 @@
                                         </select>
                                         </span>
                               <label>Mobile Number</label>
-                              <input type="text" name="mobileno" class="form-control" placeholder="" required>
+                              <input type="text" name="mobileno"  value="<%out.print(rs.getString(10));%>" class="form-control" placeholder="" required>
                             </div>
                      
                 </div>
                       <br>
                        <button class="btn btn-primary btn-cons m-t-10" type="submit">Submit</button>
-                         <button class="btn btn-primary btn-cons m-t-10" onclick="document.location.href='/Exhibition/html/ownerProfileContactPersonUpdate.jsp';">Update</button> 
-                                   <button class="btn btn-primary btn-cons m-t-10" >Cancel</button> 
+                       <button class="btn btn-primary btn-cons m-t-10" onclick="document.location.href='/Exhibition/html/ownerProfile.jsp';">Cancel</button> 
+                                    <%
+                                          }      
+                         }
+                        catch(Exception ee)
+                           {
+                               out.println("error"+ee);
+                         
+                           }
+                           %>
                     </form>
                       </div>
                     </div>

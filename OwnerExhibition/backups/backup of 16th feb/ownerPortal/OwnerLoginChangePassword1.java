@@ -15,13 +15,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Admin
  */
-public class OwnerProfileAddressUpdate extends HttpServlet {
+public class OwnerLoginChangePassword1 extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,34 +34,33 @@ public class OwnerProfileAddressUpdate extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-          PrintWriter out = response.getWriter();
-        try  {
-            HttpSession ss=request.getSession();
-                                  String id=(String)ss.getAttribute("ownerAddId");
-                            String address1 =request.getParameter("address1");;
-                            String address2 =request.getParameter("address2");
-                            String zipcode =request.getParameter("zipcode");
-                            String landmark =request.getParameter("landmark");
-                            String maplink =request.getParameter("maplink");
-                           Connection con;
-                           con=dbConnection.getConnection();
-                                 
-                                PreparedStatement ps=con.prepareStatement("update ownerAddress set address1=?,address2=?,landmark=?,pincode=?,mapLink=? where id='"+id+"'");
-                                 
-                                 ps.setString(1,address1);
-                                 ps.setString(2, address2);
-                                 ps.setString(3, landmark);
-                                 ps.setString(4, zipcode);
-                                 ps.setString(5, maplink);
-                                
-                                 ps.executeUpdate();
-                                 response.sendRedirect("/Exhibition/html/ownerProfile.jsp"); 
+        response.setContentType("text/html;charset=UTF-8");
+        try
+        {
+             String  password=request.getParameter("newpassword");
+             String mob=ownerPortal.Global.un;
+                           Class.forName("com.mysql.jdbc.Driver"); 
+                          Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Exhibition","root","12345"); 
+                        
+                       String query = "update owner set password ='"+password+"' where userName='"+mob+"'";
+                      PreparedStatement ps = con.prepareStatement(query);
+                       
+                      // ps.setString(1,password);
+                           
+                     int i =  ps.executeUpdate();
+                     if(i>0)
+                     {
+                       response.sendRedirect("/Exhibition/html/ownerLoginThankyou.jsp");
+                     } 
+                     else
+                     {
+                         out.println("error");
+                     } 
         }
-                           catch(Exception ee)
-                           {
-                               out.println("error"+ee);
-                         
-                           }
+        catch(Exception ee)
+        {
+           out.println("error"+ee.toString());
+        }
         
     }
 

@@ -373,7 +373,7 @@
                 <li><a href="#"><i class="pg-signals"></i> Help</a>
                 </li>
                 <li class="bg-master-lighter">
-                  <a href="ownerLogin.jsp" class="clearfix">
+                  <a href="#" class="clearfix">
                     <span class="pull-left">Logout</span>
                     <span class="pull-right"><i class="pg-power"></i></span>
                   </a>
@@ -491,9 +491,10 @@
                                         </select>
                                         </span>
                               <label>Primary Contact</label>
-                              <input type="text" name="p_contact" value="<%out.print(primContact);%>" id="p_contact" maxlength="10" minlength="10" class="form-control" placeholder="" required>
+                              <input type="text" name="p_contact" id="p_contact" value="<%out.print(primContact.substring(2,11));%>" maxlength="10" minlength="10" class="form-control" placeholder="" required>
                             </div>
-                             <div class="form-group form-group-default input-group ">
+                           
+                            <div class="form-group form-group-default input-group ">
                               <span class="input-group-addon">
                                             <select class="cs-select cs-skin-slide cs-transparent" data-init-plugin="cs-select">
                                             <option data-countryCode="GB" value="44" Selected>UK (+44)</option>
@@ -543,8 +544,24 @@
                             </div>
                               
                               <br>
+                            <!--  <div class="m-t-15">
+                                  <center>
+                                      <button class="btn btn-info btn-cons m-b-10" type="button"><i class="fa fa-paste"></i> <span class="bold">Edit</span>
+                                        </button>
+                                      <button class="btn btn-primary btn-cons m-b-10" type="button"><i class="pg-form"></i> <span class="bold">Submit</span>
+                                        </button>
+                                  </center>
+                      
+                               </div>-->
+                          
+                                 <!--<button class="btn btn-success" type="submit">Submit</button>
+                                 <button class="btn btn-default"><i class="pg-close"></i> Clear</button> -->
                                    <button class="btn btn-primary btn-cons m-t-10" type="submit">Submit</button>
-                                   <button class="btn btn-primary btn-cons m-t-10" >Cancel</button> 
+                                   <!--<button class="btn btn-primary btn-cons m-t-10" onclick="document.location.href='/Exhibition/html/ownerProfileUpdate.jsp';" >Update</button> 
+                                   --><button class="btn btn-primary btn-cons m-t-10" >Cancel</button> 
+                       
+  
+                         
                         </form>
                       </div>
                     </div>
@@ -801,99 +818,160 @@
    <!----------------------------------------------------------------------------------------------------------------------------------------------------->
         <div class="tab-pane slide-left padding-20" id="tab4">
                     
-                  
-    
-    <!-- START CONTAINER FLUID -->
-          <div class="container-fluid container-fixed-lg">
-            <!-- START PANEL -->
-            <div class="panel panel-transparent">
-              <div class="panel-heading">
-                <div class="panel-title">
-                </div>
-                <div class="pull-right">
-                  <div class="col-xs-12">
-                    <button id="show-modal" class="btn btn-primary btn-cons" onclick="document.location.href='/Exhibition/html/ownerProfileAddContactInfo.jsp';"><i class="fa fa-plus"></i> Add Address
-                    </button>
+                
+                  <div class="container-fluid container-fixed-lg bg-white">
+            <div class="row">
+              <div class="col-sm-5">
+                <!-- START PANEL -->
+                <div class="panel panel-transparent">
+                  <div class="panel-heading">
+                    <div class="panel-title">Contact Person
+                    </div>
+                  </div>
+                  <div class="panel-body">
+                    <h3>Keep in Touch
+							&amp; Create Contemporary feels</h3>
+                    <p>Despite the UI, We thought of the User experience, With attached From Layouts you can simply categories Important fields and prioritize them.</p>
+                    <br>
+                    <div>
+                      <div class="profile-img-wrapper m-t-5 inline">
+                        <img width="35" height="35" src="assets/img/profiles/avatar_small.jpg" alt="" data-src="assets/img/profiles/avatar_small.jpg" data-src-retina="assets/img/profiles/avatar_small2x.jpg">
+                        <div class="chat-status available">
+                        </div>
+                      </div>
+                      <div class="inline m-l-10">
+                        <p class="small hint-text">VIA senior product manage
+                          <br> for UI/UX at REVOX</p>
+                      </div>
+                    </div>
                   </div>
                 </div>
-                <div class="clearfix"></div>
+                <!-- END PANEL -->
               </div>
-              <div class="panel-body">
-               
-                  <table class="table table-hover demo-table-search" id="tableWithSearch">
-                     <%@page import="java.io.*;" %>
-                     <%@page import="java.sql.*;" %>
-                     <%@page import="java.sql.DriverManager;" %>
-                     <thead>
-                        <tr>
-                        <th>Name</th>
-                        <th>Designation</th>
-                        <th>Mobile No</th>        
-                        <th>Email Id</th>
-                        <th>Update/Delete.</th>
-                        </tr>
-                  </thead>
-                  <tbody>
-                    <%   
-                         Class.forName("com.mysql.jdbc.Driver"); 
-                           Connection con2 = DriverManager.getConnection("jdbc:mysql://localhost:3306/Exhibition","root","12345"); 
-                         Statement stat2=con2.createStatement();
-                         ResultSet rs2=stat.executeQuery("select * from ownerContactPerson");
-                         int count2=0;
-                         while(rs2.next())
-                         {
-                            count2++;
-                            out.println("<tr>");
-                            out.println("<td class='v-align-middle semi-bold'><p>"+rs2.getString(3)+"</p></td>");
-                            out.println("<td><p> "+rs2.getString(8)+"</p></td>");
-                            out.println("<td><p> "+rs2.getString(10)+"</p></td>");
-                            out.println("<td><p> "+rs2.getString(11)+"</p></td>");
-                           
-                           String id=rs2.getString(1);
-                            String title=rs2.getString(2);
-                            String fname=rs2.getString(3);
-                            String lname=rs2.getString(4);
-                            String gender=rs2.getString(5);
-                            String dob=rs2.getString(7);
-                            String designation=rs2.getString(8);
-                            String phoneno=rs2.getString(9);
-                            String mobileno=rs2.getString(10);
-                            String Emailid=rs2.getString(11);
-                            
+              <div class="col-sm-7">
+                <!-- START PANEL -->
+                <div class="panel panel-transparent">
+                  <div class="panel-body">
+                    <form action="/Exhibition/ownerProfileContactperson" method="post" id="form-project" role="form" autocomplete="off">
+                        <p>Basic Information</p>
+                            <div class="form-group form-group-default required">
+                                 <label>Title</label>
+                                 <select class="full-width" name="title" data-init-plugin="select2">
+                                  <option value="AK">Mr.</option>
+                                  <option value="HI">Mrs.</option>
+                            </select>
+                     
+                            </div>
+                            <div class="form-group-attached">
+                            <div class="row clearfix">
+                                <div class="col-sm-6">
+                                <div class="form-group form-group-default required">
+                                     <label>First name</label>
+                                     <input type="text" name="fname" class="form-control" name="firstName" required>
+                                </div>
+                                </div>
+                                <div class="col-sm-6">
+                                 <div class="form-group form-group-default">
+                                     <label>Last name</label>
+                                     <input type="text" name="lname" class="form-control" name="lastName">
+                                </div>
+                                </div>
+                                <div class="row">
+                        <div class="col-sm-12">
+                          <div class="form-group form-group-default">
+                            <label>Email</label>
+                            <input type="email" class="form-control" name="email" placeholder="" required>
+                          </div>
+                        </div>
+                      </div>
+                            </div>
+                            </div>
+                            <p>Other Information</p>
+                                   <div class="row">
+                        <div class="col-sm-12">
+                          <div class="form-group form-group-default">
+                           <label>Gender</label></div>
+                                <div class="radio radio-success">
+                                    &nbsp;&nbsp;&nbsp;<input type="radio" value="0" name="gender" id="male">
+                                <label for="male">Male</label>
+                                <input type="radio" checked="checked" value="1" name="gender" id="female">
+                                <label for="female">Female</label>
                                 
-                              HttpSession ss1=request.getSession();
-                                 // ss1.setAttribute("id1",id);
-                                  ss1.setAttribute("id",id);
-                                   ss1.setAttribute("title",title);
-                                    ss1.setAttribute("fname",fname);
-                                     ss1.setAttribute("lname",lname);
-                                      ss1.setAttribute("gender",gender);
-                                       ss1.setAttribute("dob",dob);
-                                        ss1.setAttribute("designation",designation);
-                                         ss1.setAttribute("phoneno",phoneno);
-                                          ss1.setAttribute("mobileno",mobileno);
-                                           ss1.setAttribute("Emailid",Emailid);
-
-                            
-                           %>
-                             <td>
-                                 <div class="btn-group">
-                                 <button type="button" class="btn btn-success" onclick="document.location.href='/Exhibition/html/ownerProfileContactPersonUpdate.jsp?contactPersonId=<%= id  %>';"><i class="fa fa-pencil"></i></button>
-                                 <button type="button" class="btn btn-success" onclick="document.location.href='/Exhibition/ownerProfileContactPersonDelete?contactPersonId=<%= id %>';"><i class="fa fa-trash-o"></i>
-                                 </button>
-                                 </div>
-                            </td><%
-                            out.println(" </tr>");
-                        }
-                   %>   
-                   </tbody>
-                </table>
-                   
+                          </div>
+                        </div>
+                      </div> 
+                                 
+                 
+                           <div class="row clearfix">
+                          <div class="col-sm-12">
+                            <div class="form-group form-group-default required">
+                                <label> Date of Birth</label>
+                              <input id="start-date" type="date" class="form-control date" name="dob"  prequired>
+                            </div>
+                          </div>
+                        </div>
+                             <div class="row clearfix">    
+                             <div class="col-sm-12">
+                                <div class="form-group form-group-default required">
+                                     <label>Designation</label>
+                                     <input type="text"  class="form-control" name="designation" required>
+                                </div>
+                                </div>
+                      </div>
+                        <div class="form-group form-group-default input-group required">
+                              <span class="input-group-addon">
+                                            <select class="cs-select cs-skin-slide cs-transparent" data-init-plugin="cs-select">
+                                            <option data-countryCode="GB" value="44" Selected>UK (+44)</option>
+                                            <option data-countryCode="US" value="1">USA (+1)</option>
+                                            <option data-countryCode="AR" value="54">Argentina (+54)</option>
+                                            <option data-countryCode="AU" value="61">Australia (+61)</option>
+                                            <option data-countryCode="AT" value="43">Austria (+43)</option>
+                                            <option data-countryCode="BE" value="32">Belgium (+32)</option>
+                                            <option data-countryCode="BZ" value="501">Belize (+501)</option>
+                                            <option data-countryCode="CN" value="86">China (+86)</option>
+                                            <option data-countryCode="IS" value="354">Iceland (+354)</option>
+                                            <option data-countryCode="IN" value="91">India (+91)</option>
+                                            <option data-countryCode="MY" value="60">Malaysia (+60)</option>
+                                            <option data-countryCode="ZW" value="263">Zimbabwe (+263)</option>
+                                        </select>
+                                        </span>
+                              <label>Telephone Number</label>
+                              <input type="text" name="phoneno" class="form-control" placeholder="" required>
+                            </div>
+                                        
+                     <div class="form-group form-group-default input-group required">
+                              <span class="input-group-addon">
+                                            <select class="cs-select cs-skin-slide cs-transparent" data-init-plugin="cs-select">
+                                            <option data-countryCode="GB" value="44" Selected>UK (+44)</option>
+                                            <option data-countryCode="US" value="1">USA (+1)</option>
+                                            <option data-countryCode="AR" value="54">Argentina (+54)</option>
+                                            <option data-countryCode="AU" value="61">Australia (+61)</option>
+                                            <option data-countryCode="AT" value="43">Austria (+43)</option>
+                                            <option data-countryCode="BE" value="32">Belgium (+32)</option>
+                                            <option data-countryCode="BZ" value="501">Belize (+501)</option>
+                                            <option data-countryCode="CN" value="86">China (+86)</option>
+                                            <option data-countryCode="IS" value="354">Iceland (+354)</option>
+                                            <option data-countryCode="IN" value="91">India (+91)</option>
+                                            <option data-countryCode="MY" value="60">Malaysia (+60)</option>
+                                            <option data-countryCode="ZW" value="263">Zimbabwe (+263)</option>
+                                        </select>
+                                        </span>
+                              <label>Mobile Number</label>
+                              <input type="text" name="mobileno" class="form-control" placeholder="" required>
+                            </div>
+                     
+                </div>
+                      <br>
+                       <button class="btn btn-primary btn-cons m-t-10" type="submit">Submit</button>
+                         <button class="btn btn-primary btn-cons m-t-10" onclick="document.location.href='/Exhibition/html/ownerProfileContactPersonUpdate.jsp';">Update</button> 
+                                   <button class="btn btn-primary btn-cons m-t-10" >Cancel</button> 
+                    </form>
+                  </div>
+                </div>
+                <!-- END PANEL -->
               </div>
             </div>
-            <!-- END PANEL -->
-          </div>
-                   <div class="padding-20 bg-white">
+<div class="padding-20 bg-white">
                   <ul class="pager wizard">
                     <li class="next">
                       <button class="btn btn-primary btn-cons btn-animated from-left fa fa-truck pull-right" type="button">
@@ -918,8 +996,6 @@
                   </ul>
                 </div>
                 </div>
-                  
- 
 <!----------------------------------------------------------------------------------------------------------------------------------------------------->                  
                 <div class="tab-pane slide-left padding-20" id="tab5">
                     

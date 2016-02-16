@@ -10,7 +10,7 @@
   <head>
     <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
     <meta charset="utf-8" />
-    <title>Owner Profile</title>
+    <title>Pages - Admin Dashboard UI Kit - Form Wizard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no" />
     <link rel="apple-touch-icon" href="pages/ico/60.png">
     <link rel="apple-touch-icon" sizes="76x76" href="pages/ico/76.png">
@@ -45,13 +45,13 @@
     <link class="main-stylesheet" href="pages/css/pages.css" rel="stylesheet" type="text/css" />
     
   </head>
-
   <body class="fixed-header ">
-    <nav class="page-sidebar" data-pages="sidebar">
-      <!-- BEGIN SIDEBAR MENU TOP TRAY CONTENT-->
-      <div class="sidebar-overlay-slide from-top" id="appMenu">
-        <div class="row">
-          <div class="col-xs-6 no-padding">
+    <!-- BEGIN SIDEBPANEL-->
+        <nav class="page-sidebar" data-pages="sidebar">
+          <!-- BEGIN SIDEBAR MENU TOP TRAY CONTENT-->
+          <div class="sidebar-overlay-slide from-top" id="appMenu">
+           <div class="row">
+            <div class="col-xs-6 no-padding">
             <a href="#" class="p-l-40"><img src="assets/img/demo/social_app.svg" alt="socail">
             </a>
           </div>
@@ -86,98 +86,88 @@
       <!-- START SIDEBAR MENU -->
       <div class="sidebar-menu">
         <!-- BEGIN SIDEBAR MENU ITEMS-->
-        <ul class="menu-items"> 
+        <ul class="menu-items">  
             <li class="">
             <a href="ckvindex.jsp" class="detailed">
-              <span class="title">Dashboard</span>
-              <span class="details">No items</span>
+                 <span class="title">Dashboard</span>
+                 <span class="details">No items</span>
             </a>
             <span class="bg-success icon-thumbnail"><i class="pg-home"></i></span>
-          </li>
-          <li class="">
-            <a href="ownerProfile.jsp" class="detailed">
+            </li>
+            <li class="">
+            <a href="ckvProfile.jsp" class="detailed">
               <span class="title">Profile</span>
               <span class="details">No items</span>
             </a>
             <span class="icon-thumbnail">P</span>
-          </li>
-          <li>
+            </li>
+            <li>
             <a href="javascript:;"><span class="title">Exhibitions</span>
             <span class=" arrow"></span></a>
             <span class="bg-success icon-thumbnail"><i class="pg-home"></i></span>
             <ul class="sub-menu">
-              <li class="">
-                <a href="ckvProfile.jsp">Add Exhibitions</a>
+                <li class="">
+                <a href="ckvAddexhibition.jsp">Add Exhibitions</a>
                 <span class="icon-thumbnail">P</span>
-              </li>
-           
-              <li class="">
-                <a href="ckvProfile.jsp">Modify Exhibitions</a>
+                </li>
+                <li class="">
+                <a href="ckvModifyexhibition.jsp">Modify Exhibitions</a>
                 <span class="icon-thumbnail">Me</span>
-              </li>
-              <li class="">
-                <a href="ckvAddadmin.jsp">Add Administrator</a>
+                </li>
+                <li class="">
+                <a href="ckvAddadministrator.jsp">Add Administrator</a>
                 <span class="icon-thumbnail">Mv</span>
-              </li>
-           </ul>
-          </li>
-          
-          
-           <li>
-            <a href="javascript:;"><span class="title">Exhibitors</span>
-            <span class=" arrow"></span></a>
-            <span class="bg-success icon-thumbnail"><i class="pg-home"></i></span>
-            <ul class="sub-menu">
-              <li class="">
-                <a href="ckvProfile.jsp">Add Exhibitors</a>
-                <span class="icon-thumbnail">P</span>
-              </li>
-           
-              
-           </ul>
-          </li>
-          
-          
+                </li>
+            </ul>
+            </li> 
             <li>
-            <a href="javascript:;"><span class="title">Visitors</span>
-            <span class=" arrow"></span></a>
-            <span class="bg-success icon-thumbnail"><i class="pg-home"></i></span>
-            <ul class="sub-menu">
-              <li class="">
-                <a href="ckvProfile.jsp">Add Exhibitors</a>
+                <a href="javascript:;"><span class="title">Exhibitors</span>
+                <span class=" arrow"></span></a>
+                <span class="bg-success icon-thumbnail"><i class="pg-home"></i></span>
+                <ul class="sub-menu">
+                <li class="">
+                <a href="ckvProfile.jsp">View Exhibitors</a>
                 <span class="icon-thumbnail">P</span>
-              </li>
-           
-              
-           </ul>
-          </li>
-          
-             <li class="">
-            <a href="ckvNotification.jsp" class="detailed">
-              <span class="title">Notification</span>
-              <span class="details">12 New Notification</span>
-            </a>
-            <span class="icon-thumbnail">N</span>
-          </li>
-        
-           <li class="">
-            <a href="ckvNotification.jsp" class="detailed">
-              <span class="title">Reports</span>
-            </a>
-            <span class="icon-thumbnail">R</span>
-          </li>
-          
-           <li class="">
-            <a href="ckvNotification.jsp" class="detailed">
-              <span class="title">Privacy</span>
-            </a>
-            <span class="icon-thumbnail">P</span>
-          </li>
+                </li>  
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;"><span class="title">Visitors</span>
+                <span class=" arrow"></span></a>
+                <span class="bg-success icon-thumbnail"><i class="pg-home"></i></span>
+                <ul class="sub-menu">
+                <li class="">
+                <a href="ckvProfile.jsp">View Visitors</a>
+                <span class="icon-thumbnail">P</span>
+                </li>
+                </ul>
+            </li>
+            <li class="">
+                <a href="ckvNotification.jsp" class="detailed">
+                <span class="title">Notification</span>
+                <span class="details">12 New Notification</span>
+                </a>
+                <span class="icon-thumbnail">N</span>
+            </li>
+            <li class="">
+                <a href="ckvNotification.jsp" class="detailed">
+                <span class="title">Reports</span>
+                </a>
+                <span class="icon-thumbnail">R</span>
+            </li>
+            <li class="">
+                <a href="ckvNotification.jsp" class="detailed">
+                <span class="title">Privacy</span>
+                </a>
+           `    <span class="icon-thumbnail">P</span>
+            </li>
         </ul>
+        
         <div class="clearfix"></div>
       </div>
       <!-- END SIDEBAR MENU -->
     </nav>
+    
     <!-- END SIDEBAR -->
     <!-- END SIDEBPANEL-->
     <!-- START PAGE-CONTAINER -->
@@ -373,7 +363,7 @@
                 <li><a href="#"><i class="pg-signals"></i> Help</a>
                 </li>
                 <li class="bg-master-lighter">
-                  <a href="ownerLogin.jsp" class="clearfix">
+                  <a href="#" class="clearfix">
                     <span class="pull-left">Logout</span>
                     <span class="pull-right"><i class="pg-power"></i></span>
                   </a>
@@ -385,99 +375,68 @@
         </div>
       </div>
       <!-- END HEADER -->
+      
+      
       <!-- START PAGE CONTENT WRAPPER -->
       <div class="page-content-wrapper ">
         <!-- START PAGE CONTENT -->
         <div class="content ">
           <!-- START CONTAINER FLUID -->
-          <div class="container-fluid container-fixed-lg">
-            <div id="rootwizard" class="m-t-50">
-              <!-- Nav tabs -->
-              <ul class="nav nav-tabs nav-tabs-linetriangle nav-tabs-separator nav-stack-sm">
-               
-                <li class="">
-                  <a data-toggle="tab" href="#tab1"><i class="fa fa-truck tab-icon"></i> <span>Owner Profile</span></a>
-                </li>
-                
-                <li class="">
-                  <a data-toggle="tab" href="#tab2"><i class="fa fa-truck tab-icon"></i> <span>Social Media</span></a>
-                </li>
-                
-                  <li class="">
-                  <a data-toggle="tab" href="#tab3"><i class="fa fa-truck tab-icon"></i> <span>Address Information</span></a>
-                </li>
-                
-                <li class="">
-                  <a data-toggle="tab" href="#tab4"><i class="fa fa-truck tab-icon"></i> <span>Contact Person</span></a>
-                </li>
-               
-                <li class="">
-                  <a data-toggle="tab" href="#tab5"><i class="fa fa-check tab-icon"></i> <span>About</span></a>
-                </li>
-              </ul>
-              <!-- Tab panes -->
-              <div class="tab-content">
-<!----------------------------------------------------------------------------------------------------------------------------------------------------->
-                <div class="tab-pane slide-left padding-20" id="tab1">
-                  <div class="row row-same-height">
-                    <div class="col-md-5 b-r b-dashed b-grey ">
-                      <div class="padding-30 m-t-50">
-                        <div class="col-lg-7 col-md-6 col-md-height col-middle bg-white">
-                      <!-- START PANEL -->
-                      <div class="full-height">
-                        <div class="panel-body text-center">
-                          <img class="image-responsive-height demo-mw-500" src="assets/img/demo/typography_hero.gif" alt="">
-                        </div>
-                      </div>
-                      <!-- END PANEL -->
+          <div class="container-fluid container-fixed-lg bg-white">
+            <div class="row">
+              <div class="col-sm-5">
+                <!-- START PANEL -->
+                <div class="panel panel-transparent">
+                  <div class="panel-heading">
+                  </div>
+                    <br>
+                    <br>
+                  <div class="panel-body">
+                    <div class="panel-body text-center">
+                        <img class="image-responsive-height demo-mw-500" src="assets/img/demo/typography_hero.gif" alt="">
                     </div>
-                      </div>
-                    </div>
-                    <div class="col-md-7">
+                  </div>
+                </div>
+                <!-- END PANEL -->
+              </div>
+                
+                
+              
+              <div class="col-lg-7 col-md-6 ">
+                <!-- START PANEL -->
+                <div class="panel panel-transparent">
+                  <div class="panel-body">
+                      <br>
+                      <br>
+                      
+             <div class="col-md-70">
                       <div class="padding-30">
                         <form action="/Exhibition/OwnerProfileUpdate" method="post" role="form">
-                            <% 
-                                  HttpSession ss=request.getSession();
-                                  String userName=(String)ss.getAttribute("username");
-                                  String idd=(String)ss.getAttribute("ownerId");
-                                  String password1=(String)ss.getAttribute("password");
-                                  String cname=(String)ss.getAttribute("cname");
-                                  String primEmail=(String)ss.getAttribute("primEmail1");
-                                  
-                                  String secEmail=(String)ss.getAttribute("secEmail1");
-                                  String primContact=(String)ss.getAttribute("primContact1");
-                                  
-                                  String secContact=(String)ss.getAttribute("secContact1");
-                                  String about=(String)ss.getAttribute("about1");
-                                  String website=(String)ss.getAttribute("website1");
-                                  String industry=(String)ss.getAttribute("industry1");
-                                  int ccode=Integer.parseInt(primContact.substring(0,2));
-                            %>
                                 
                             <div class="form-group form-group-default disabled">
                                <label>User Name</label>
-                               <input type="email" name="uname" value="<%out.print(userName);%>" class="form-control" value="You can put anything here" disabled>
+                               <input type="email" name="uname" value="<%out.print(ownerPortal.Global.un);%>" class="form-control" value="You can put anything here" disabled>
                             </div>                  
                             <div class="form-group form-group-default required">
                               <label>Company Name</label>
-                              <input type="text" value="<%out.print(cname);%>" name="cname" id="cname" class="form-control" required>
+                              <input type="text" name="cname" value="<%out.print(ownerPortal.Global.companyname);%>" id="cname" class="form-control" required>
                             </div>
                          
                           <div class="form-group form-group-default required">
                               <label>Primary Email</label>
-                              <input type="email" name="p_email"  value="<%out.print(primEmail);%>" id="p_email" class="form-control" required>
+                              <input type="email" name="p_email" value="<%out.print(ownerPortal.Global.primaryemail);%>" id="p_email" class="form-control" required>
                             </div>
                           
                           <div class="form-group form-group-default required">
                               <label>Secondary Email</label>
-                              <input type="email" name="s_email" value="<%out.print(secEmail);%>" id="s_email" class="form-control" required>
+                              <input type="email" name="s_email" value="<%out.print(ownerPortal.Global.secondaryemail);%>" id="s_email" class="form-control" required>
                             </div>
                            
                             <div class="form-group form-group-default input-group required">
                               <span class="input-group-addon">
-                                            <select class="cs-select cs-skin-slide cs-transparent" name="ccode" data-init-plugin="cs-select">
+                                            <select class="cs-select cs-skin-slide cs-transparent" data-init-plugin="cs-select">
                                             <option data-countryCode="GB" value="44" Selected>UK (+44)</option>
-                                            <option data-countryCode="US" value="1" selected>USA (+1)</option>
+                                            <option data-countryCode="US" value="1">USA (+1)</option>
                                             <option data-countryCode="AR" value="54">Argentina (+54)</option>
                                             <option data-countryCode="AU" value="61">Australia (+61)</option>
                                             <option data-countryCode="AT" value="43">Austria (+43)</option>
@@ -491,9 +450,10 @@
                                         </select>
                                         </span>
                               <label>Primary Contact</label>
-                              <input type="text" name="p_contact" value="<%out.print(primContact);%>" id="p_contact" maxlength="10" minlength="10" class="form-control" placeholder="" required>
+                              <input type="text" name="p_contact" value="<%out.print(ownerPortal.Global.primarycontact);%>" id="p_contact" maxlength="10" minlength="10" class="form-control" placeholder="" required>
                             </div>
-                             <div class="form-group form-group-default input-group ">
+                           
+                            <div class="form-group form-group-default input-group ">
                               <span class="input-group-addon">
                                             <select class="cs-select cs-skin-slide cs-transparent" data-init-plugin="cs-select">
                                             <option data-countryCode="GB" value="44" Selected>UK (+44)</option>
@@ -511,485 +471,70 @@
                                         </select>
                                         </span>
                               <label>Secondary Contact</label>
-                              <input type="text" name="s_contact" value="<%out.print(secContact);%>"  id="s_contact" class="form-control" placeholder="">
+                              <input type="text" name="s_contact" value="<%out.print(ownerPortal.Global.secondarycontact);%>" id="s_contact" class="form-control" placeholder="">
                             </div>
                                
                            
                             <div class="form-group form-group-default disabled">
                                <label>Mobile Number</label>
-                               <input type="email" class="form-control" value="<%out.print(primContact);%>" name="mobileno" id="mobileno" value="You can put anything here" disabled>
+                               <input type="email" class="form-control"  value="<%out.print(ownerPortal.Global.phoneno);%>" name="mobileno" id="mobileno" value="You can put anything here" disabled>
                             </div> 
                             
                              <div class="form-group form-group-default required">
                               <label>About</label>
-                          <textarea class="form-control" name="about"  id="about"  placeholder="Briefly Describe your Abilities" required><%out.print(about);%></textarea>
+                          <textarea class="form-control" name="about" value="<%out.print(ownerPortal.Global.about);%>" id="about" placeholder="Briefly Describe your Abilities"required></textarea>
                             </div> 
                               
                             <div class="form-group form-group-default required">
                               <label>Website</label>
-                              <input type="text" value="<%out.print(website);%>" name="website" id="website"  class="form-control" required>
+                              <input type="text" name="website" value="<%out.print(ownerPortal.Global.website);%>" id="website" class="form-control" required>
                             </div>
                             
                             
                             <div class="form-group form-group-default required">
                                  <label>Industry</label>
-                            <select class="full-width" value="<%out.print(industry);%>" name="industry" data-init-plugin="select2">
-                                <option  value="<%out.print(industry);%>"><%out.print(industry);%></option>  
-                                <option  value="harware">Hardware</option>
-                                <option  value="software">Software</option>
-                               
+                            <select class="full-width" name="industry" value="<%out.print(ownerPortal.Global.industry);%>"data-init-plugin="select2">
+                                  <option value="AK">Alaska</option>
+                                  <option value="HI">Hawaii</option>
                             </select>
                      
                             </div>
                               
                               <br>
-                                   <button class="btn btn-primary btn-cons m-t-10" type="submit">Submit</button>
+                            
+                                 <button class="btn btn-primary btn-cons m-t-10" TYPE="submit" >Update</button> 
                                    <button class="btn btn-primary btn-cons m-t-10" >Cancel</button> 
+                       
+  
+                         
+                        </form>
+                      </div>
+                    </div>
+                               
+                          </div>    
                         </form>
                       </div>
                     </div>
                   </div>
-                    
-                    <div class="padding-20 bg-white">
-                  <ul class="pager wizard">
-                    <li class="next">
-                      <button class="btn btn-primary btn-cons btn-animated from-left fa fa-truck pull-right" type="button">
-                        <span>Next</span>
-                      </button>
-                    </li>
-                    <li class="next finish hidden">
-                      <button class="btn btn-primary btn-cons btn-animated from-left fa fa-cog pull-right" type="button">
-                        <span>Finish</span>
-                      </button>
-                    </li>
-                    <li class="previous first hidden">
-                      <button class="btn btn-default btn-cons btn-animated from-left fa fa-cog pull-right" type="button">
-                        <span>First</span>
-                      </button>
-                    </li>
-                    <li class="previous">
-                      <button class="btn btn-default btn-cons pull-right" type="button">
-                        <span>Previous</span>
-                      </button>
-                    </li>
-                  </ul>
                 </div>
-                    
-                </div>
-    <!----------------------------------------------------------------------------------------------------------------------------------------------------->
-        <div class="tab-pane slide-left padding-20" id="tab2">
-                    
-                 
-               <div class="container-fluid container-fixed-lg">
-            <!-- START PANEL -->
-            <div class="panel panel-transparent">
-              <div class="panel-heading">
-                <div class="panel-title">
-                </div>
-                <div class="pull-right">
-                  <div class="col-xs-12">
-                      <button id="show-modal" class="btn btn-primary btn-cons" onclick="document.location.href='/Exhibition/html/ownerProfileSocialMedia.jsp';"><i class="fa fa-plus"></i> Add 
-                    </button>
-                  </div>
-                </div>
-                <div class="clearfix"></div>
+                <!-- END PANEL -->
               </div>
-              <div class="panel-body">
-                  
-              
-              
-              
-               <table class="table table-hover demo-table-search" id="tableWithSearch">
-                     <%@page import="java.io.*;" %>
-                     <%@page import="java.sql.*;" %>
-                     <%@page import="java.sql.DriverManager;" %>
-                     <thead>
-                        <tr>
-                          <!--  <th>ID</th> -->
-                        <th>Date</th>
-                        <th>Social Media</th>        
-                        <th>Link</th>
-                        <th>Update/Delete.</th>
-                        </tr>
-                  </thead>
-                  <tbody>
-                    <%   
-                         Class.forName("com.mysql.jdbc.Driver"); 
-                         Connection con1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/Exhibition","root","12345"); 
-                         Statement stat1=con1.createStatement();
-                         ResultSet rs1=stat1.executeQuery("select a.*,b.* from socialMedia a,ownerSocialMedia b where a.id=b.socialMediaId;");
-                         int count1=0;
-                        
-                         while(rs1.next())
-                         {
-                            count1++;
-                            out.println("<tr>");
-                            //out.println("<td class='v-align-middle semi-bold'><p>"+rs1.getString(7)+"</p></td>");
-                            out.println("<td class='v-align-middle semi-bold'><p>"+rs1.getString(3)+"</p></td>");
-                            out.println("<td class='v-align-middle semi-bold'><p>"+rs1.getString(2)+"</p></td>");
-                            out.println("<td class='v-align-middle semi-bold'><p>"+rs1.getString(9)+"</p></td>");
-                            String kv=rs1.getString(7);
-                            String kv1=rs1.getString(2);
-                            String kv2=rs1.getString(3);
-                            String kv3=rs1.getString(9);
-                            
-                             HttpSession ss1=request.getSession();
-                                  ss1.setAttribute("id",kv);
-                                  ss1.setAttribute("date",kv2);
-                                  ss1.setAttribute("socialmedia1",kv1);
-                                  ss1.setAttribute("link1",kv3);
-                                  
-                            
-                           %>
-                          
-                             <td>
-                                 <div class="btn-group">
-                                 <button  type="button" class="btn btn-success" onclick="document.location.href='/Exhibition/html/ownerProfileSocialMediaEdit.jsp?myid=<%= kv %>';"><i class="fa fa-pencil"></i></button>
-                                 <button type="button" class="btn btn-success"  onclick="document.location.href='/Exhibition/OwnerProfileSocialMediaDelete?myid=<%= kv %>';"><i class="fa fa-trash-o"></i>
-                                 </button>
-                                 </div>
-                            </td><%
-                            out.println(" </tr>");
-                        }
-                       
-                   %>   
-                   </tbody>
-                </table>
-              </div>
+          
             </div>
-            <!-- END PANEL -->
-          </div>
-            
-            
-              <div class="padding-20 bg-white">
-                  <ul class="pager wizard">
-                    <li class="next">
-                      <button class="btn btn-primary btn-cons btn-animated from-left fa fa-truck pull-right" type="button">
-                        <span>Next</span>
-                      </button>
-                    </li>
-                    <li class="next finish hidden">
-                      <button class="btn btn-primary btn-cons btn-animated from-left fa fa-cog pull-right" type="button">
-                        <span>Finish</span>
-                      </button>
-                    </li>
-                    <li class="previous first hidden">
-                      <button class="btn btn-default btn-cons btn-animated from-left fa fa-cog pull-right" type="button">
-                        <span>First</span>
-                      </button>
-                    </li>
-                    <li class="previous">
-                      <button class="btn btn-default btn-cons pull-right" type="button">
-                        <span>Previous</span>
-                      </button>
-                    </li>
-                  </ul>
-                </div>
-                    
-                </div>
-                            
- <!----------------------------------------------------------------------------------------------------------------------------------------------------->
-    
-    
-    <div class="tab-pane slide-left padding-20" id="tab3">
-   
-    
-    <!-- START CONTAINER FLUID -->
-          <div class="container-fluid container-fixed-lg">
-            <!-- START PANEL -->
-            <div class="panel panel-transparent">
-              <div class="panel-heading">
-                <div class="panel-title">
-                </div>
-                <div class="pull-right">
-                  <div class="col-xs-12">
-                    <button id="show-modal" class="btn btn-primary btn-cons" onclick="document.location.href='/Exhibition/html/ownerProfileAddAddress.jsp';"><i class="fa fa-plus"></i> Add Address
-                    </button>
-                  </div>
-                </div>
-                <div class="clearfix"></div>
-              </div>
-              <div class="panel-body">
-               
-                  <table class="table table-hover demo-table-search" id="tableWithSearch">
-                     <%@page import="java.io.*;" %>
-                     <%@page import="java.sql.*;" %>
-                     <%@page import="java.sql.DriverManager;" %>
-                     <thead>
-                        <tr>
-                        <th>Date</th>
-                        <th>Title</th>
-                        <th>Address</th>        
-                        <th>MapLink</th>
-                        <th>Update/Delete.</th>
-                        </tr>
-                  </thead>
-                  <tbody>
-                    <%   
-                         Class.forName("com.mysql.jdbc.Driver"); 
-                           Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Exhibition","root","12345"); 
-                         Statement stat=con.createStatement();
-                         ResultSet rs=stat.executeQuery("select * from ownerAddress");
-                         int count=0;
-                         while(rs.next())
-                         {
-                            count++;
-                            out.println("<tr>");
-                            out.println("<td class='v-align-middle semi-bold'><p>"+rs.getString(8)+"</p></td>");
-                            out.println("<td><p> "+rs.getString(2)+"</p></td>");
-                            out.println("<td><p> "+rs.getString(3)+"</p></td>");
-                            out.println("<td><p> "+rs.getString(7)+"</p></td>");
-                            String id=rs.getString(1);
-                            String address1=rs.getString(2);
-                            String address2=rs.getString(3);
-                            String landmark=rs.getString(4);
-                            String pincode=rs.getString(5);
-                            String maplink=rs.getString(7);
-                            
-                                  HttpSession ss1=request.getSession();
-                                 // ss1.setAttribute("id1",id);
-                                  ss1.setAttribute("address11",address1);
-                                  ss1.setAttribute("address22",address2);
-                                  ss1.setAttribute("landmark1",landmark);
-                                  ss1.setAttribute("pincode1",pincode);
-                                  ss1.setAttribute("maplink1",maplink);
-                          
-                           %>
-                             <td>
-                                 <div class="btn-group">
-                                 <button type="button" class="btn btn-success" onclick="document.location.href='/Exhibition/html/ownerProfileAddressUpdate.jsp?addId=<%= id %>';"><i class="fa fa-pencil"></i></button>
-                                 <button type="button" class="btn btn-success" onclick="document.location.href='/Exhibition/OwnerProfileAddressDelete?addId=<%= id %>';"><i class="fa fa-trash-o"></i>
-                                 </button>
-                                 </div>
-                            </td><%
-                            out.println(" </tr>");
-                        }
-                   %>   
-                   </tbody>
-                </table>
-                   
-              </div>
-            </div>
-            <!-- END PANEL -->
-          </div><div class="padding-20 bg-white">
-                  <ul class="pager wizard">
-                    <li class="next">
-                      <button class="btn btn-primary btn-cons btn-animated from-left fa fa-truck pull-right" type="button">
-                        <span>Next</span>
-                      </button>
-                    </li>
-                    <li class="next finish hidden">
-                      <button class="btn btn-primary btn-cons btn-animated from-left fa fa-cog pull-right" type="button">
-                        <span>Finish</span>
-                      </button>
-                    </li>
-                    <li class="previous first hidden">
-                      <button class="btn btn-default btn-cons btn-animated from-left fa fa-cog pull-right" type="button">
-                        <span>First</span>
-                      </button>
-                    </li>
-                    <li class="previous">
-                      <button class="btn btn-default btn-cons pull-right" type="button">
-                        <span>Previous</span>
-                      </button>
-                    </li>
-                  </ul>
-                </div>
-                </div>
-                  
- 
-   <!----------------------------------------------------------------------------------------------------------------------------------------------------->
-        <div class="tab-pane slide-left padding-20" id="tab4">
-                    
-                  
-    
-    <!-- START CONTAINER FLUID -->
-          <div class="container-fluid container-fixed-lg">
-            <!-- START PANEL -->
-            <div class="panel panel-transparent">
-              <div class="panel-heading">
-                <div class="panel-title">
-                </div>
-                <div class="pull-right">
-                  <div class="col-xs-12">
-                    <button id="show-modal" class="btn btn-primary btn-cons" onclick="document.location.href='/Exhibition/html/ownerProfileAddContactInfo.jsp';"><i class="fa fa-plus"></i> Add Address
-                    </button>
-                  </div>
-                </div>
-                <div class="clearfix"></div>
-              </div>
-              <div class="panel-body">
-               
-                  <table class="table table-hover demo-table-search" id="tableWithSearch">
-                     <%@page import="java.io.*;" %>
-                     <%@page import="java.sql.*;" %>
-                     <%@page import="java.sql.DriverManager;" %>
-                     <thead>
-                        <tr>
-                        <th>Name</th>
-                        <th>Designation</th>
-                        <th>Mobile No</th>        
-                        <th>Email Id</th>
-                        <th>Update/Delete.</th>
-                        </tr>
-                  </thead>
-                  <tbody>
-                    <%   
-                         Class.forName("com.mysql.jdbc.Driver"); 
-                           Connection con2 = DriverManager.getConnection("jdbc:mysql://localhost:3306/Exhibition","root","12345"); 
-                         Statement stat2=con2.createStatement();
-                         ResultSet rs2=stat.executeQuery("select * from ownerContactPerson");
-                         int count2=0;
-                         while(rs2.next())
-                         {
-                            count2++;
-                            out.println("<tr>");
-                            out.println("<td class='v-align-middle semi-bold'><p>"+rs2.getString(3)+"</p></td>");
-                            out.println("<td><p> "+rs2.getString(8)+"</p></td>");
-                            out.println("<td><p> "+rs2.getString(10)+"</p></td>");
-                            out.println("<td><p> "+rs2.getString(11)+"</p></td>");
-                           
-                           String id=rs2.getString(1);
-                            String title=rs2.getString(2);
-                            String fname=rs2.getString(3);
-                            String lname=rs2.getString(4);
-                            String gender=rs2.getString(5);
-                            String dob=rs2.getString(7);
-                            String designation=rs2.getString(8);
-                            String phoneno=rs2.getString(9);
-                            String mobileno=rs2.getString(10);
-                            String Emailid=rs2.getString(11);
-                            
-                                
-                              HttpSession ss1=request.getSession();
-                                 // ss1.setAttribute("id1",id);
-                                  ss1.setAttribute("id",id);
-                                   ss1.setAttribute("title",title);
-                                    ss1.setAttribute("fname",fname);
-                                     ss1.setAttribute("lname",lname);
-                                      ss1.setAttribute("gender",gender);
-                                       ss1.setAttribute("dob",dob);
-                                        ss1.setAttribute("designation",designation);
-                                         ss1.setAttribute("phoneno",phoneno);
-                                          ss1.setAttribute("mobileno",mobileno);
-                                           ss1.setAttribute("Emailid",Emailid);
-
-                            
-                           %>
-                             <td>
-                                 <div class="btn-group">
-                                 <button type="button" class="btn btn-success" onclick="document.location.href='/Exhibition/html/ownerProfileContactPersonUpdate.jsp?contactPersonId=<%= id  %>';"><i class="fa fa-pencil"></i></button>
-                                 <button type="button" class="btn btn-success" onclick="document.location.href='/Exhibition/ownerProfileContactPersonDelete?contactPersonId=<%= id %>';"><i class="fa fa-trash-o"></i>
-                                 </button>
-                                 </div>
-                            </td><%
-                            out.println(" </tr>");
-                        }
-                   %>   
-                   </tbody>
-                </table>
-                   
-              </div>
-            </div>
-            <!-- END PANEL -->
-          </div>
-                   <div class="padding-20 bg-white">
-                  <ul class="pager wizard">
-                    <li class="next">
-                      <button class="btn btn-primary btn-cons btn-animated from-left fa fa-truck pull-right" type="button">
-                        <span>Next</span>
-                      </button>
-                    </li>
-                    <li class="next finish hidden">
-                      <button class="btn btn-primary btn-cons btn-animated from-left fa fa-cog pull-right" type="button">
-                        <span>Finish</span>
-                      </button>
-                    </li>
-                    <li class="previous first hidden">
-                      <button class="btn btn-default btn-cons btn-animated from-left fa fa-cog pull-right" type="button">
-                        <span>First</span>
-                      </button>
-                    </li>
-                    <li class="previous">
-                      <button class="btn btn-default btn-cons pull-right" type="button">
-                        <span>Previous</span>
-                      </button>
-                    </li>
-                  </ul>
-                </div>
-                </div>
-                  
- 
-<!----------------------------------------------------------------------------------------------------------------------------------------------------->                  
-                <div class="tab-pane slide-left padding-20" id="tab5">
-                    
-                    <div class="row-xs-height">
-                                <div class="social-user-profile col-xs-height text-center col-top">
-                                  <div class="thumbnail-wrapper d48 circular bordered b-white">
-                                    <img alt="Avatar" width="55" height="55" data-src-retina="assets/img/profiles/avatar_small2x.jpg" data-src="assets/img/profiles/avatar.jpg" src="assets/img/profiles/avatar.jpg">
-                                  </div>
-                                  <br>
-                                  <i class="fa fa-check-circle text-success fs-16 m-t-10"></i>
-                                </div>
-                                <div class="col-xs-height p-l-20">
-                                  <h3 class="no-margin">David Nester</h3>
-                                  <p class="no-margin fs-16">is excited about the new pages design framework
-                                  </p>
-                                  <p class="hint-text m-t-5 small">San Fransisco Bay | CEO at Pages.inc
-                                  </p>
-                                </div>
-                              </div>
-                    <div class="padding-20 bg-white">
-                  <ul class="pager wizard">
-                    <li class="next">
-                      <button class="btn btn-primary btn-cons btn-animated from-left fa fa-truck pull-right" type="button">
-                        <span>Next</span>
-                      </button>
-                    </li>
-                    <li class="next finish hidden">
-                      <button class="btn btn-primary btn-cons btn-animated from-left fa fa-cog pull-right" type="button">
-                        <span>Finish</span>
-                      </button>
-                    </li>
-                    <li class="previous first hidden">
-                      <button class="btn btn-default btn-cons btn-animated from-left fa fa-cog pull-right" type="button">
-                        <span>First</span>
-                      </button>
-                    </li>
-                    <li class="previous">
-                      <button class="btn btn-default btn-cons pull-right" type="button">
-                        <span>Previous</span>
-                      </button>
-                    </li>
-                  </ul>
-                </div>
-                    
-                </div>
-                
-                
-              </div>
             </div>
           </div>
-          <!-- END CONTAINER FLUID -->
+          <!-- END CONTAINER FLUID -->  
+          </div>
         </div>
         <!-- END PAGE CONTENT -->
+        
+        
+        
+        
         <!-- START COPYRIGHT -->
         <!-- START CONTAINER FLUID -->
         <!-- START CONTAINER FLUID -->
-        <div class="container-fluid container-fixed-lg footer">
-          <div class="copyright sm-text-center">
-            <p class="small no-margin pull-left sm-pull-reset">
-              <span class="hint-text">Copyright &copy; 2014 </span>
-              <span class="font-montserrat">REVOX</span>.
-              <span class="hint-text">All rights reserved. </span>
-              <span class="sm-block"><a href="#" class="m-l-10 m-r-10">Terms of use</a> | <a href="#" class="m-l-10">Privacy Policy</a></span>
-            </p>
-            <p class="small no-margin pull-right sm-pull-reset">
-              <a href="#">Hand-crafted</a> <span class="hint-text">&amp; Made with Love ®</span>
-            </p>
-            <div class="clearfix"></div>
-          </div>
-        </div>
+       
         <!-- END COPYRIGHT -->
       </div>
       <!-- END PAGE CONTENT WRAPPER -->

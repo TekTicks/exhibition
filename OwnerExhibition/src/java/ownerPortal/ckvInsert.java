@@ -29,8 +29,8 @@ public class ckvInsert extends HttpServlet {
             HttpSession ss=request.getSession();
             //String id=(String)ss.getAttribute("username");
             //String idd=(String)ss.getAttribute("ownerId");
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Exhibition","root","12345"); 
+            Connection con;
+            con=dbConnection.getConnection();
             PreparedStatement ps=con.prepareStatement("insert into owner(userName,password,createdBy,modifiedBy) values(?,?,?,?)");
          
             ps.setString(1,  ownerPortal.Global.email1);

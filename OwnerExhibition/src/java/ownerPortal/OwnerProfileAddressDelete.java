@@ -37,8 +37,8 @@ public class OwnerProfileAddressDelete extends HttpServlet {
         try
                            {
                             String id=request.getParameter("addId");
-                           Class.forName("com.mysql.jdbc.Driver");
-                            Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/Exhibition","root","12345");
+                           Connection con;
+                           con=dbConnection.getConnection();
                               
                                 PreparedStatement ps=con.prepareStatement("delete from ownerAddress where id='"+id+"'");
                                  

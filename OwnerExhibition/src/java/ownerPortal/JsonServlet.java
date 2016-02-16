@@ -7,20 +7,20 @@ package ownerPortal;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import static java.lang.System.out;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+//import com.google.json.Gson;
 
 /**
  *
  * @author Admin
  */
-public class OwnerLoginChangePassword1 extends HttpServlet {
+public class JsonServlet extends HttpServlet {
+private static final long serialVersionUID = 1L;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,34 +34,18 @@ public class OwnerLoginChangePassword1 extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        response.setContentType("text/html;charset=UTF-8");
-        try
-        {
-             String  password=request.getParameter("newpassword");
-             String mob=ownerPortal.Global.un;
-                           Connection con;
-                           con=dbConnection.getConnection();
-                        
-                       String query = "update owner set password ='"+password+"' where userName='"+mob+"'";
-                      PreparedStatement ps = con.prepareStatement(query);
-                       
-                      // ps.setString(1,password);
-                           
-                     int i =  ps.executeUpdate();
-                     if(i>0)
-                     {
-                       response.sendRedirect("/Exhibition/html/ownerLoginThankyou.jsp");
-                     } 
-                     else
-                     {
-                         out.println("error");
-                     } 
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet JsonServlet</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet JsonServlet at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
-        catch(Exception ee)
-        {
-           out.println("error"+ee.toString());
-        }
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -79,18 +63,34 @@ public class OwnerLoginChangePassword1 extends HttpServlet {
         processRequest(request, response);
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        
+        
+        String sportsName = request.getParameter("sportsName");
+                List<String> list = new ArrayList<String>();
+                String json = null;
+
+                if (sportsName.equals("Football")) {
+                        list.add("Lionel Messi");
+                        list.add("Cristiano Ronaldo");
+                        list.add("David Beckham");
+                        list.add("Diego Maradona");
+                } else if (sportsName.equals("Cricket")) {
+                        list.add("Sourav Ganguly");
+                        list.add("Sachin Tendulkar");
+                        list.add("Lance Klusener");
+                        list.add("Michael Bevan");
+                } else if (sportsName.equals("Select Sports")) {
+                        list.add("Select Player");
+                }
+
+                json = new Gson().toJson(list);
+                response.setContentType("application/json");
+                response.getWriter().write(json);
     }
 
     /**
@@ -102,5 +102,15 @@ public class OwnerLoginChangePassword1 extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private static class Gson {
+
+        public Gson() {
+        }
+
+        private String toJson(List<String> list) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+    }
 
 }

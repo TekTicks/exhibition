@@ -7,11 +7,8 @@ package ownerPortal;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import static java.lang.System.out;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,49 +18,28 @@ import javax.servlet.http.HttpSession;
  *
  * @author Admin
  */
-public class OwnerProfileAddressUpdate extends HttpServlet {
+@WebServlet(name = "NewServlet", urlPatterns = {"/NewServlet"})
+public class NewServlet extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-          PrintWriter out = response.getWriter();
-        try  {
+                PrintWriter out = response.getWriter();
+        try
+        {
+            String cname=request.getParameter("cname");
+            String p_email=request.getParameter("p_email");
+            String s_email=request.getParameter("s_email");
             HttpSession ss=request.getSession();
-                                  String id=(String)ss.getAttribute("ownerAddId");
-                            String address1 =request.getParameter("address1");;
-                            String address2 =request.getParameter("address2");
-                            String zipcode =request.getParameter("zipcode");
-                            String landmark =request.getParameter("landmark");
-                            String maplink =request.getParameter("maplink");
-                           Connection con;
-                           con=dbConnection.getConnection();
-                                 
-                                PreparedStatement ps=con.prepareStatement("update ownerAddress set address1=?,address2=?,landmark=?,pincode=?,mapLink=? where id='"+id+"'");
-                                 
-                                 ps.setString(1,address1);
-                                 ps.setString(2, address2);
-                                 ps.setString(3, landmark);
-                                 ps.setString(4, zipcode);
-                                 ps.setString(5, maplink);
-                                
-                                 ps.executeUpdate();
-                                 response.sendRedirect("/Exhibition/html/ownerProfile.jsp"); 
+            ss.setAttribute("eid", cname);
+            ss.setAttribute("ename", p_email);
+            ss.setAttribute("eage", s_email);
+            response.sendRedirect("/WebApplication3/Aaa");
+         }
+        catch(Exception ee)
+        {
+            out.println("error"+ee);
         }
-                           catch(Exception ee)
-                           {
-                               out.println("error"+ee);
-                         
-                           }
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

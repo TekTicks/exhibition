@@ -34,8 +34,8 @@ public class ownerProfileDemo extends HttpServlet {
                             String website =request.getParameter("website");
                             String industry =request.getParameter("industry");
                             ownerPortal.Global.industry=industry;
-                            Class.forName("com.mysql.jdbc.Driver");
-                            Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/Exhibition","root","12345");
+                            Connection con;
+                           con=dbConnection.getConnection();
                             PreparedStatement ps=con.prepareStatement("insert into ownerProfile(name,logoMediaId,about,primEmail,secEmail,primContact,secContact,website,createdBy)values(?,(select id from media where id=1),?,?,?,?,?,?,(select id from owner where id=?))");
                                  ps.setString(1,companyname);
                                  ps.setString(2,about);

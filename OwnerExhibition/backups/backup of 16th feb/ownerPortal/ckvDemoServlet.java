@@ -32,8 +32,8 @@ public class ckvDemoServlet extends HttpServlet {
            // Global.global.contact1=COUNTRYCODE;
             
            
-           Connection con;
-                           con=dbConnection.getConnection();
+            Class.forName("com.mysql.jdbc.Driver"); 
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Exhibition","root","12345"); 
             Statement stat=con.createStatement();
             ResultSet rs=stat.executeQuery("select * from ownerProfile where primEmail='"+EMAIL+"' or primContact='"+PHONE+"'");
             int count=0;

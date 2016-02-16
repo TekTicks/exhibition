@@ -32,8 +32,8 @@ public class ownerProfileAddressSave extends HttpServlet {
                             String landmark =request.getParameter("landmark");
                             String maplink =request.getParameter("maplink");
                            
-                            Class.forName("com.mysql.jdbc.Driver");
-                            Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/Exhibition","root","12345");
+                          Connection con;
+                           con=dbConnection.getConnection();
                             PreparedStatement ps=con.prepareStatement("insert into ownerAddress(address1,address2,landmark,pincode,cityId,maplink,createdBy,modifiedBy)values(?,?,?,?,(select id from city where id=1),?,(select id from owner where id='"+id+"'),(select id from owner where id='"+id+"'))");
                                  ps.setString(1,address1);
                                  ps.setString(2,address2);

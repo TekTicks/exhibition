@@ -15,55 +15,50 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-/**
- *
- * @author Admin
- */
-public class OwnerProfileAddressUpdate extends HttpServlet {
+public class ownerProfileDemo extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+   
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-          PrintWriter out = response.getWriter();
-        try  {
-            HttpSession ss=request.getSession();
-                                  String id=(String)ss.getAttribute("ownerAddId");
-                            String address1 =request.getParameter("address1");;
-                            String address2 =request.getParameter("address2");
-                            String zipcode =request.getParameter("zipcode");
-                            String landmark =request.getParameter("landmark");
-                            String maplink =request.getParameter("maplink");
-                           Connection con;
-                           con=dbConnection.getConnection();
-                                 
-                                PreparedStatement ps=con.prepareStatement("update ownerAddress set address1=?,address2=?,landmark=?,pincode=?,mapLink=? where id='"+id+"'");
-                                 
-                                 ps.setString(1,address1);
-                                 ps.setString(2, address2);
-                                 ps.setString(3, landmark);
-                                 ps.setString(4, zipcode);
-                                 ps.setString(5, maplink);
-                                
+         PrintWriter out = response.getWriter();
+         try
+                           {
+                            String companyname =request.getParameter("cname");
+                            String primaryemail=request.getParameter("p_email");
+                            String secemail =request.getParameter("s_email");
+                            String primarycontact =request.getParameter("p_contact");
+                            String seccontact =request.getParameter("s_contact");
+                            String about =request.getParameter("about");
+                            String website =request.getParameter("website");
+                            String industry =request.getParameter("industry");
+                            ownerPortal.Global.industry=industry;
+                            Class.forName("com.mysql.jdbc.Driver");
+                            Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/Exhibition","root","12345");
+                            PreparedStatement ps=con.prepareStatement("insert into ownerProfile(name,logoMediaId,about,primEmail,secEmail,primContact,secContact,website,createdBy)values(?,(select id from media where id=1),?,?,?,?,?,?,(select id from owner where id=?))");
+                                 ps.setString(1,companyname);
+                                 ps.setString(2,about);
+                                 ps.setString(3, primaryemail);
+                                 ps.setString(4, secemail); 
+                                 ps.setString(5, primarycontact);
+                                 ps.setString(6, seccontact);
+                                 ps.setString(7, website); 
+                                 ps.setString(8,ownerPortal.Global.ownerId);
                                  ps.executeUpdate();
+                            PreparedStatement ps1=con.prepareStatement("insert into industry(industryName,createdBy,modifiedBy) values(?,?,?)");
+                                 ps1.setString(1, industry);
+                                 ps1.setInt(2,1);
+                                 ps1.setInt(3,1);
+                                 
+                                 ps1.executeUpdate();
                                  response.sendRedirect("/Exhibition/html/ownerProfile.jsp"); 
-        }
+                           }
                            catch(Exception ee)
                            {
                                out.println("error"+ee);
                          
                            }
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

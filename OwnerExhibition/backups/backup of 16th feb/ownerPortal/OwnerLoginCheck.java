@@ -1,7 +1,6 @@
 package ownerPortal;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -21,8 +20,8 @@ public class OwnerLoginCheck extends HttpServlet
                            String uname=request.getParameter("un");
                            String pass=request.getParameter("pw");
                           
-                           Connection con;
-                           con=dbConnection.getConnection();
+                           Class.forName("com.mysql.jdbc.Driver"); 
+                           java.sql.Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Exhibition","root","12345"); 
                            Statement stat=con.createStatement();
                            //ResultSet rs=stat.executeQuery("select a.* from owner a where a.userName='"+uname+"' and a.password='"+pass+"'");
                            ResultSet rs=stat.executeQuery("select a.*,b.*,c.* from owner a,ownerProfile b,industry c where a.userName='"+uname+"' and a.password='"+pass+"'");

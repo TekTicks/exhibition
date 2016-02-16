@@ -29,8 +29,8 @@ public class ownerProfileContactperson extends HttpServlet {
                             String designation =request.getParameter("designation");
                             String phoneno =request.getParameter("phoneno");
                             String mobileno =request.getParameter("mobileno");
-                            Class.forName("com.mysql.jdbc.Driver");
-                            Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/Exhibition","root","12345");
+                           Connection con;
+                           con=dbConnection.getConnection();
                             PreparedStatement ps=con.prepareStatement("insert into ownerContactPerson(title,firstName,lastName,photoMediaId,gender,dateOfBirth,degination,phoneNo,mobileNo,email,createdBy,modifiedBy)values(?,?,?,(select id from media where id=1),?,?,?,?,?,?,(select id from owner where id=1),(select id from owner where id=1))");
                                  ps.setString(1,title);
                                  ps.setString(2,firstname);

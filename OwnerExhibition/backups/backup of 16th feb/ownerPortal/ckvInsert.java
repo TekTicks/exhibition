@@ -7,7 +7,6 @@ package ownerPortal;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import static java.lang.System.out;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -17,53 +16,48 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- *
- * @author Admin
- */
-public class OwnerProfileAddressUpdate extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+public class ckvInsert extends HttpServlet {
+
+   
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-          PrintWriter out = response.getWriter();
-        try  {
+        PrintWriter out = response.getWriter();
+        try
+        {
             HttpSession ss=request.getSession();
-                                  String id=(String)ss.getAttribute("ownerAddId");
-                            String address1 =request.getParameter("address1");;
-                            String address2 =request.getParameter("address2");
-                            String zipcode =request.getParameter("zipcode");
-                            String landmark =request.getParameter("landmark");
-                            String maplink =request.getParameter("maplink");
-                           Connection con;
-                           con=dbConnection.getConnection();
-                                 
-                                PreparedStatement ps=con.prepareStatement("update ownerAddress set address1=?,address2=?,landmark=?,pincode=?,mapLink=? where id='"+id+"'");
-                                 
-                                 ps.setString(1,address1);
-                                 ps.setString(2, address2);
-                                 ps.setString(3, landmark);
-                                 ps.setString(4, zipcode);
-                                 ps.setString(5, maplink);
-                                
-                                 ps.executeUpdate();
-                                 response.sendRedirect("/Exhibition/html/ownerProfile.jsp"); 
+            //String id=(String)ss.getAttribute("username");
+            //String idd=(String)ss.getAttribute("ownerId");
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Exhibition","root","12345"); 
+            PreparedStatement ps=con.prepareStatement("insert into owner(userName,password,createdBy,modifiedBy) values(?,?,?,?)");
+         
+            ps.setString(1,  ownerPortal.Global.email1);
+            ps.setString(2, ownerPortal.Global.password1);
+            ps.setInt(3, 1);
+            ps.setInt(4, 1);
+            ps.executeUpdate();
+             
+            PreparedStatement ps1=con.prepareStatement("insert into ownerProfile(name,logoMediaId,about,primEmail,secEmail,primContact,secContact,website,createdBy) values(?,(select id from media where id=1),?,?,?,?,?,?,(select id from owner where userName=?))");
+            ps1.setString(1, ownerPortal.Global.cname1);
+            ps1.setString(2,"");
+            ps1.setString(3, ownerPortal.Global.email1);
+            ps1.setString(4,"");
+            ps1.setString(5, ownerPortal.Global.contact1);
+            ps1.setString(6,"");
+            ps1.setString(7,"");
+            ps1.setString(8, ownerPortal.Global.email1);
+            ps1.executeUpdate();
+            
+            response.sendRedirect("/Exhibition/html/ownerRegThankyou.jsp");
+          
+         }
+        catch(Exception ee)
+        {
+            out.println("error"+ee);
+            
         }
-                           catch(Exception ee)
-                           {
-                               out.println("error"+ee);
-                         
-                           }
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

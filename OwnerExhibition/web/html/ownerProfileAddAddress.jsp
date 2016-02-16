@@ -44,6 +44,27 @@
     <link href="pages/css/pages-icons.css" rel="stylesheet" type="text/css">
     <link class="main-stylesheet" href="pages/css/pages.css" rel="stylesheet" type="text/css" />
     
+    <script src="pages/js/jquery-1.4.2.min.js" type="text/javascript"></script>
+
+<script>
+$(document).ready(function() {
+
+$('#sports').change(function(event) {
+        var sports = $("select#sports").val();
+        $.get('JsonServlet', {
+                sportsName : sports
+        }, function(response) {
+
+        var select = $('#player');
+        select.find('option').remove();
+          $.each(response, function(index, value) {
+          $('<option>').val(value).text(value).appendTo(select);
+      });
+        });
+        });
+});
+</script>
+    
   </head>
   <body class="fixed-header ">
     <!-- BEGIN SIDEBPANEL-->
@@ -170,6 +191,9 @@
     
     <!-- END SIDEBAR -->
     <!-- END SIDEBPANEL-->
+    
+    
+    
     <!-- START PAGE-CONTAINER -->
     <div class="page-container ">
       <!-- START HEADER -->
@@ -376,100 +400,69 @@
       </div>
       <!-- END HEADER -->
       
-      
-      <!-- START PAGE CONTENT WRAPPER -->
-      <div class="page-content-wrapper ">
-        <!-- START PAGE CONTENT -->
-        <div class="content ">
-          <!-- START CONTAINER FLUID -->
-          <div class="container-fluid container-fixed-lg bg-white">
-            <div class="row">
-              <div class="col-sm-5">
-                <!-- START PANEL -->
-                <div class="panel panel-transparent">
-                  <div class="panel-heading">
-                  </div>
-                    <br>
-                    <br>
-                  <div class="panel-body">
-                    <div class="panel-body text-center">
-                        <img class="image-responsive-height demo-mw-500" src="assets/img/demo/typography_hero.gif" alt="">
-                    </div>
-                  </div>
-                </div>
-                <!-- END PANEL -->
-              </div>
-                
-                
-              
-              <div class="col-lg-7 col-md-6 ">
-                <!-- START PANEL -->
-                <div class="panel panel-transparent">
-                  <div class="panel-body">
-                      <br>
-                      <br>
-                      
+ <!--------------------------------------------------------------------------------------------------------------------------------------------->     
+      <div class="register-container full-height sm-p-t-30">
+      <div class="container-sm-height full-height">
+        <div class="row row-sm-height">
+          <div class="col-sm-12 col-sm-height col-middle">
+
              <div class="col-md-70">
-                      <div class="padding-30">
-                        <form action="/Exhibition/ownerProfileAddressSave" method="post" role="form">
-                          
-                         
-                          <div class="form-group-attached">
-                                <div class="form-group form-group-default required">
-                                    <label>Address 1</label>
-                                    <input type="text" name="address1" id="tin" class="form-control" required>
-                                     </div>
-                               
-                             <div class="form-group form-group-default">
-                                    <label>Address 2</label>
-                                      <input type="text" name="address2"id="tin" class="form-control">
-                                     </div>
-                            
-                               <div class="form-group form-group-default required">
-                                    <label>Zip Code</label>
-                                      <input type="text" name="zipcode"id="tin" class="form-control" required>
-                                     </div>
-                            
-                             <div class="form-group form-group-default required">
-                                    <label>Landmark</label>
-                                      <input type="text" name="landmark"id="tin" class="form-control" required>
-                                     </div>
+                <div class="padding-30">
+                    <form action="/Exhibition/ownerProfileAddressSave" method="post" role="form">
+                        <div class="form-group-attached">
+                            <div class="form-group form-group-default required">
+                               <label>Address 1</label>
+                                 <input type="text" name="address1" id="tin" class="form-control" required>
+                            </div>
+                            <div class="form-group form-group-default">
+                                <label>Address 2</label>
+                                  <input type="text" name="address2"id="tin" class="form-control">
+                            </div>
+                            <div class="form-group form-group-default required">
+                                 <label>Zip Code</label>
+                                 <input type="text" name="zipcode"id="tin" class="form-control" required>
+                            </div>
+                            <div class="form-group form-group-default required">
+                                <label>Landmark</label>
+                                <input type="text" name="landmark"id="tin" class="form-control" required>
+                            </div>
                               <br>
-                              <div class="form-group form-group-default required">
-                                    <label>Map Link</label>
-                                      <input type="text" name="maplink"id="tin" class="form-control" required>
-                                     </div>
+                            <div class="form-group form-group-default required">
+                                <label>Map Link</label>
+                               <input type="text" name="maplink"id="tin" class="form-control" required>
+                            </div>
+                             
+                                     <!-- Select Favorite Sports:
+                                             <select id="sports">
+                                             <option>Select Sports</option>
+                                              <option value="Football">Football</option>
+                                               <option value="Cricket">Cricket</option>
+                                              </select>
+                                               <br /> <br /> 
+                                               Select Favorite Player:
+                                              <select id="player">
+                                                <option>Select Player</option>
+                                    </select>-->
+
                               <br>
                               <br>
                               <div class="form-group">
                               <button class="btn btn-primary btn-cons m-t-10" type="submit">Submit</button>
-                          <button class="btn btn-primary btn-cons m-t-10" onclick="document.location.href='/Exhibition/html/ownerProfile.jsp';"> Cancel</button> 
-                          </div>
-                          </div>    
+                              <button class="btn btn-primary btn-cons m-t-10" onclick="document.location.href='/Exhibition/html/ownerProfile.jsp';"> Cancel</button> 
+                              </div>
+                        </div>    
                         </form>
                       </div>
                     </div>
                                
-                          </div>    
-                        </form>
-                      </div>
-                    </div>
-                  </div>
+                </div>    
                 </div>
-                <!-- END PANEL -->
-              </div>
+                </div>
+                </div>
           
-            </div>
-            </div>
-          </div>
-          <!-- END CONTAINER FLUID -->  
-          </div>
+<!------------------------------------------------------------------------------------------------------------------------------------------>       
         </div>
         <!-- END PAGE CONTENT -->
-        
-        
-        
-        
         <!-- START COPYRIGHT -->
         <!-- START CONTAINER FLUID -->
         <!-- START CONTAINER FLUID -->
