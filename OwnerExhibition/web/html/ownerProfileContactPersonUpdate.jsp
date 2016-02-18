@@ -436,6 +436,8 @@
                          }
                          else
                          {
+                             int gender=Integer.parseInt(rs.getString(6));
+                            
                        %>
               
                         <p>Basic Information</p>
@@ -478,11 +480,20 @@
                           <div class="form-group form-group-default">
                            <label>Gender</label></div>
                                 <div class="radio radio-success">
+                                    <% if(gender==0) { %> 
+                                    &nbsp;&nbsp;&nbsp;<input type="radio" checked="checked" value="0" name="gender" id="male">
+                                <label for="male">Male</label>
+                                <input type="radio"  value="1" name="gender" id="female">
+                                <label for="female">Female</label>
+                                <% }
+                                    else
+                                    { %>
                                     &nbsp;&nbsp;&nbsp;<input type="radio" value="0" name="gender" id="male">
                                 <label for="male">Male</label>
                                 <input type="radio" checked="checked" value="1" name="gender" id="female">
                                 <label for="female">Female</label>
-                                
+                                   <%}%>
+     
                           </div>
                         </div>
                       </div> 

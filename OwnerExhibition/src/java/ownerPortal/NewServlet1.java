@@ -7,38 +7,27 @@ package ownerPortal;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import static java.lang.System.out;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Admin
  */
-@WebServlet(name = "NewServlet", urlPatterns = {"/NewServlet"})
-public class NewServlet extends HttpServlet {
+public class NewServlet1 extends HttpServlet {
 
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-                PrintWriter out = response.getWriter();
-        try
+         try
         {
-            ArrayList<String> arr1 =new ArrayList<String>();
-            ArrayList<String> arr2 =new ArrayList<String>();
             ArrayList<String> arr3 =new ArrayList<String>();
             ArrayList<String> arr4 =new ArrayList<String>();
-            arr1.add("");
-            arr1.add("New Delhi");
-            arr1.add("Maharashtra");
-            arr1.add("Goa");
-            arr2.add("Kabul");
-            arr2.add("Karachi");
-            arr2.add("Punjab");
             arr3.add("pune");
             arr3.add("thane");
             arr3.add("karjat");
@@ -46,14 +35,14 @@ public class NewServlet extends HttpServlet {
             arr4.add("Minto Road");
             arr4.add("Janakpuri");
             String valajax=request.getParameter("valajax");
-            if(valajax.equals("v1"))
+            if(valajax.equals(""))
             {
                 response.getWriter().write("<label><b>&nbsp &nbsp  Select state<b></label><br>");
                 response.getWriter().write("&nbsp &nbsp<select  class=\"full-width\" data-init-plugin=\"select2\"> ");
                 //response.getWriter().write("DropDown 1:<select> ");
-                for(int i=0;i<arr1.size();i++)
+                for(int i=0;i<arr3.size();i++)
                 {
-                     response.getWriter().write("<option>"+arr1.get(i)+"</option>");
+                     response.getWriter().write("<option>"+arr4.get(i)+"</option>");
                 }
                 
                 response.getWriter().write("</select> ");
@@ -62,34 +51,12 @@ public class NewServlet extends HttpServlet {
             {
                  response.getWriter().write("<label><b>&nbsp &nbsp Select state<b></label><br>");
                 response.getWriter().write("&nbsp &nbsp<select  class=\"full-width\" data-init-plugin=\"select2\"> ");
-                for(int i=0;i<arr2.size();i++)
-                {
-                     response.getWriter().write("<option>"+arr2.get(i)+"</option>");
-                }
-                
-                response.getWriter().write("</select> ");
-            }
-             
-            
-             
-              if(valajax.equals("New Delhi"))
-            {
-                
                 for(int i=0;i<arr4.size();i++)
                 {
                      response.getWriter().write("<option>"+arr4.get(i)+"</option>");
                 }
                 
-            }
-               if(valajax.equals("Maharashtra"))
-            {
-      
-                for(int i=0;i<arr3.size();i++)
-                {
-                     response.getWriter().write("<option>"+arr3.get(i)+"</option>");
-                }
-                
-            
+                response.getWriter().write("</select> ");
             }
          }
         catch(Exception ee)

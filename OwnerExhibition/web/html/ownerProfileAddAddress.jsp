@@ -43,27 +43,18 @@
     <link href="assets/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" media="screen">
     <link href="pages/css/pages-icons.css" rel="stylesheet" type="text/css">
     <link class="main-stylesheet" href="pages/css/pages.css" rel="stylesheet" type="text/css" />
-    
     <script src="pages/js/jquery-1.4.2.min.js" type="text/javascript"></script>
+    <script src="pages/js/jquery-1.11.1.js" type="text/javascript"></script>
+    <script>
+    window.onload = function()
+    {
+      // fix for windows 8
+      if (navigator.appVersion.indexOf("Windows NT 6.2") != -1)
+        document.head.innerHTML += '<link rel="stylesheet" type="text/css" href="pages/css/windows.chrome.fix.css" />'
+    } 
+    </script>
 
-<script>
-$(document).ready(function() {
 
-$('#sports').change(function(event) {
-        var sports = $("select#sports").val();
-        $.get('JsonServlet', {
-                sportsName : sports
-        }, function(response) {
-
-        var select = $('#player');
-        select.find('option').remove();
-          $.each(response, function(index, value) {
-          $('<option>').val(value).text(value).appendTo(select);
-      });
-        });
-        });
-});
-</script>
     
   </head>
   <body class="fixed-header ">
@@ -401,7 +392,42 @@ $('#sports').change(function(event) {
       <!-- END HEADER -->
       
  <!--------------------------------------------------------------------------------------------------------------------------------------------->     
-      <div class="register-container full-height sm-p-t-30">
+      
+ <script>
+    function change()
+    {
+        var val=document.getElementById('one').value;
+        var xhttp=new XMLHttpRequest();
+        xhttp.onreadystatechange=function()
+        {
+            if(xhttp.readyState==4 && xhttp.status==200)
+            {
+                document.getElementById('two').innerHTML=xhttp.responseText;
+            }
+        };
+        xhttp.open("POST","/Exhibition/NewServlet?valajax="+val,true);
+        xhttp.send();
+    }
+</script>
+
+<script>
+    function change1()
+    {
+        var val=document.getElementById('two').value;
+
+        var xhttp=new XMLHttpRequest();
+        xhttp.onreadystatechange=function()
+        {
+            if(xhttp.readyState==4 && xhttp.status==200)
+            {
+                document.getElementById('three').innerHTML=xhttp.responseText;
+            }
+        };
+        xhttp.open("POST","/Exhibition/NewServlet?valajax="+val,true);
+        xhttp.send();
+    }
+</script>
+ <div class="register-container full-height sm-p-t-30">
       <div class="container-sm-height full-height">
         <div class="row row-sm-height">
           <div class="col-sm-12 col-sm-height col-middle">
@@ -420,7 +446,7 @@ $('#sports').change(function(event) {
                             </div>
                             <div class="form-group form-group-default required">
                                  <label>Zip Code</label>
-                                 <input type="text" name="zipcode"id="tin" class="form-control" required>
+                                 <input type="text" maxlength="6" minlength="6" name="zipcode"id="tin" class="form-control" required>
                             </div>
                             <div class="form-group form-group-default required">
                                 <label>Landmark</label>
@@ -432,18 +458,42 @@ $('#sports').change(function(event) {
                                <input type="text" name="maplink"id="tin" class="form-control" required>
                             </div>
                              
-                                     <!-- Select Favorite Sports:
-                                             <select id="sports">
-                                             <option>Select Sports</option>
-                                              <option value="Football">Football</option>
-                                               <option value="Cricket">Cricket</option>
-                                              </select>
-                                               <br /> <br /> 
-                                               Select Favorite Player:
-                                              <select id="player">
-                                                <option>Select Player</option>
-                                    </select>-->
-
+                                   <!-- Drop down 1 :<select id="one" onchange="change()">
+                                        <option>select</option>
+                                        <option value="v1">value1</option>
+                                        <option value="v2">value2</option>
+                                    </select>
+                                    -->
+                                     <div class="form-group form-group-default required">
+                                 <label>Select country</label>
+                                 <select class="full-width" id="one" name="one" onchange="change()" data-init-plugin="select2" required>
+                                     <option selected>---Select country---</option>
+                                  <option value="v1">India</option>
+                                  <option value="v2">Pakistan</option>
+                                  <option value="v2">Australia</option>
+                                  <option value="v2">China</option>
+                                  <option value="v2">Austria</option>
+                                  <option value="v2">France</option>
+                                  <option value="v2">Islamabad</option>
+                                  <option value="v2">Pakistan</option>
+                                 </select>
+                            </div> 
+                                    
+                                    
+                                    <div class="form-group form-group-default required">
+                                         <label>Select state</label>
+                                    <select  class="full-width" id="two" name="two" onchange="change1()" data-init-plugin="select2" >
+                                        
+                                    </select>
+                                    </div>
+                                    
+                                      <div class="form-group form-group-default required">
+                                          <label>Select city</label>
+                                         <select  class="full-width" id="three" name="three" data-init-plugin="select2">
+                                         </select>
+                                       </div>
+                                    
+                                     
                               <br>
                               <br>
                               <div class="form-group">

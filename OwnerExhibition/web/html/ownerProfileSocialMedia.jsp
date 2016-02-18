@@ -4,7 +4,15 @@
     Author     : Admin
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="org.apache.commons.fileupload.servlet.ServletFileUpload" %>
+<%@ page import="org.apache.commons.fileupload.disk.DiskFileItemFactory"%>
+<%@ page import="org.apache.commons.fileupload.*"%>
+<%@ page import="java.util.*, java.io.*" %>
+<%@ page import="java.util.Iterator"%>
+<%@ page import="java.util.List"%>
+<%@ page import="java.io.File"%>
+<%@ page contentType="text/html;charset=UTF-8" %>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -44,6 +52,8 @@
     <link href="pages/css/pages-icons.css" rel="stylesheet" type="text/css">
     <link class="main-stylesheet" href="pages/css/pages.css" rel="stylesheet" type="text/css" />
     
+    
+   
   </head>
   <body class="fixed-header ">
     <!-- BEGIN SIDEBPANEL-->
@@ -386,17 +396,36 @@
             <div class="row">
               <div class="col-sm-5">
                 <!-- START PANEL -->
-                <div class="panel panel-transparent">
-                  <div class="panel-heading">
-                  </div>
+               
+                  
                     <br>
                     <br>
-                  <div class="panel-body">
-                    <div class="panel-body text-center">
-                        <img class="image-responsive-height demo-mw-500" src="assets/img/demo/typography_hero.gif" alt="">
-                    </div>
-                  </div>
+                    
+                <!-- START PANEL -->
+         <form action="/Exhibition/ownerProfileSocialMediaSave" method="post" role="form">
+             <div class="panel-heading">
+              <div class="panel-title">
+                    Social Media Icon 
                 </div>
+                 </div>
+       <img src='profile' id="profile" alt="Profile not uploaded" style="width:100px;height:100px"> 
+                      
+    <script type="text/javascript">
+	function readProfile(input) {
+	if (input.files && input.files[0]) {
+	var reader3 = new FileReader();
+	reader3.onload = function (e) {
+	$('#profile')
+	.attr('src', e.target.result)
+	};
+	reader3.readAsDataURL(input.files[0]);
+	}
+	}
+   </script>
+                    
+    <input name="file" id="file" style="width:100px" type="file" onchange="readProfile(this);"/>
+                  
+  
                 <!-- END PANEL -->
               </div>
                 
@@ -411,7 +440,7 @@
                       
              <div class="col-md-70">
                       <div class="padding-30">
-                        <form action="/Exhibition/ownerProfileSocialMediaSave" method="post" role="form">
+                       
                              <div class="form-group form-group-default required">
                                  <label>Select Social Media</label>
                                  <select class="full-width" name="socialmedia" data-init-plugin="select2">

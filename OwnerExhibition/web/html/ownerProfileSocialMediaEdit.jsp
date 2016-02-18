@@ -420,30 +420,32 @@
                             
                           <%  
                               try{
-                                 
-                              
-                              String s_type="",s_link="";
-                             String id=request.getParameter("myid");
-                              HttpSession ss=request.getSession();
-                              ss.setAttribute("id1",id);
-                          Class.forName("com.mysql.jdbc.Driver"); 
-                         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Exhibition","root","12345"); 
-                         Statement stat=con.createStatement();
-                         ResultSet rs=stat.executeQuery("select a.*,b.* from socialMedia a,ownerSocialMedia b where a.id=b.socialMediaId and b.id='"+id+"'");
-                         %>
-                         <%
+                               String s_type="",s_link="";
+                               String id=request.getParameter("myid");
+                               HttpSession ss=request.getSession();
+                               ss.setAttribute("id1",id);
+                               Class.forName("com.mysql.jdbc.Driver"); 
+                               Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Exhibition","root","12345"); 
+                               Statement stat=con.createStatement();
+                               ResultSet rs=stat.executeQuery("select a.*,b.* from socialMedia a,ownerSocialMedia b where a.id=b.socialMediaId and b.id='"+id+"'");
+                           %>
+                           <%
                              if(!rs.next())
-                         {
+                            {
                              out.print("Sory");
-                         }
-                         else
-                         {
-                       %>
+                            }
+                             else
+                            {
+                          %>
                         
                            <div class="form-group form-group-default required">
                                  <label>Select Social Media</label>
                                  <select class="full-width"  name="socialmedia" data-init-plugin="select2">
                                   <option value="<%out.print(rs.getString(2));%>"> <%out.print(rs.getString(2));%></option>
+                                  <option value="facebook">Facebook</option>
+                                  <option value="twitter">Twitter.</option>
+                                  <option value="Google+">Google+.</option>
+                                  <option value="Linkdin">Linkdin.</option>
                                  
                             </select>
                      

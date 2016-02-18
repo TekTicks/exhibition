@@ -424,11 +424,29 @@
                       <div class="padding-30 m-t-50">
                         <div class="col-lg-7 col-md-6 col-md-height col-middle bg-white">
                       <!-- START PANEL -->
-                      <div class="full-height">
-                        <div class="panel-body text-center">
-                          <img class="image-responsive-height demo-mw-500" src="assets/img/demo/typography_hero.gif" alt="">
-                        </div>
+                       
+               
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <div class="panel-title">
+                      Drag n' drop uploader
+                    </div>
+                    <div class="tools">
+                      <a class="collapse" href="javascript:;"></a>
+                      <a class="config" data-toggle="modal" href="#grid-config"></a>
+                      <a class="reload" href="javascript:;"></a>
+                      <a class="remove" href="javascript:;"></a>
+                    </div>
+                  </div>
+                  <div class="panel-body no-scroll no-padding">
+                    <form action="/file-upload" class="dropzone no-margin">
+                      <div class="fallback">
+                        <input name="file" type="file" multiple/>
                       </div>
+                    </form>
+                  </div>
+                </div>
+              
                       <!-- END PANEL -->
                     </div>
                       </div>
@@ -491,7 +509,7 @@
                                         </select>
                                         </span>
                               <label>Primary Contact</label>
-                              <input type="text" name="p_contact" value="<%out.print(primContact);%>" id="p_contact" maxlength="10" minlength="10" class="form-control" placeholder="" required>
+                              <input type="text" name="p_contact"  value="<%out.print(primContact);%>" id="p_contact" maxlength="10" minlength="10" class="form-control" placeholder="" required>
                             </div>
                              <div class="form-group form-group-default input-group ">
                               <span class="input-group-addon">
@@ -511,7 +529,7 @@
                                         </select>
                                         </span>
                               <label>Secondary Contact</label>
-                              <input type="text" name="s_contact" value="<%out.print(secContact);%>"  id="s_contact" class="form-control" placeholder="">
+                              <input type="text" name="s_contact" maxlength="10" minlength="10" value="<%out.print(secContact);%>"  id="s_contact" class="form-control" placeholder="">
                             </div>
                                
                            

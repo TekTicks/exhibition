@@ -13,7 +13,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-//import com.google.json.Gson;
+
+
+
+
 
 /**
  *
@@ -22,15 +25,7 @@ import javax.servlet.http.HttpServletResponse;
 public class JsonServlet extends HttpServlet {
 private static final long serialVersionUID = 1L;
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -61,14 +56,6 @@ private static final long serialVersionUID = 1L;
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-    }
-
-    
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-        
         
         String sportsName = request.getParameter("sportsName");
                 List<String> list = new ArrayList<String>();
@@ -91,6 +78,15 @@ private static final long serialVersionUID = 1L;
                 json = new Gson().toJson(list);
                 response.setContentType("application/json");
                 response.getWriter().write(json);
+    }
+
+    
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+        
+        
     }
 
     /**

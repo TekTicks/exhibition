@@ -25,24 +25,45 @@ public class ownerProfileAddressSave extends HttpServlet {
                                
                                 HttpSession ss=request.getSession();
                             String id=(String)ss.getAttribute("ownerId");
-                            
                             String address1=request.getParameter("address1");
                             String address2=request.getParameter("address2");
                             String zipcode =request.getParameter("zipcode");
                             String landmark =request.getParameter("landmark");
                             String maplink =request.getParameter("maplink");
+                            String country =request.getParameter("one");
+                             String state =request.getParameter("two");
+                              String city =request.getParameter("three");
+                            
                            
                           Connection con;
                            con=dbConnection.getConnection();
                             PreparedStatement ps=con.prepareStatement("insert into ownerAddress(address1,address2,landmark,pincode,cityId,maplink,createdBy,modifiedBy)values(?,?,?,?,(select id from city where id=1),?,(select id from owner where id='"+id+"'),(select id from owner where id='"+id+"'))");
-                                 ps.setString(1,address1);
-                                 ps.setString(2,address2);
-                                 ps.setString(3, landmark);
-                                 ps.setString(4, zipcode); 
-                                 ps.setString(5, maplink);
-                                 ps.executeUpdate();
-                            
-                                  response.sendRedirect("/Exhibition/html/ownerProfile.jsp");
+                                ps.setString(1,address1);
+                                ps.setString(2,address2);
+                                ps.setString(3, landmark);
+                                ps.setString(4, zipcode); 
+                                ps.setString(5, maplink);
+                                ps.executeUpdate();
+                              PreparedStatement ps1=con.prepareStatement("insert into country(countryName,continentId,createdBy,modifiedBy)values(?,(select id from continents where id=1),?,?)");
+                                ps1.setString(1,country);    
+                                ps1.setInt(2,1);  
+                                ps1.setInt(3,1);  
+                                ps1.executeUpdate();
+                                   
+                                PreparedStatement ps2=con.prepareStatement("insert into state(stateName,countrytId,createdBy,modifiedBy)values(?,(select id from country where id=1),?,?)");
+                                ps2.setString(1,state);    
+                                ps2.setInt(2,1);  
+                                ps2.setInt(3,1);  
+                                ps2.executeUpdate();
+                                
+                                PreparedStatement ps3=con.prepareStatement("insert into city(cityName,citytId,createdBy,modifiedBy)values(?,(select id from state where id=1),?,?)");
+                                ps3.setString(1,city);    
+                                ps3.setInt(2,1);  
+                                ps3.setInt(3,1);  
+                                ps3.executeUpdate();
+                                
+                                 // response.sendRedirect("/Exhibition/html/ownerProfile.jsp");
+                           out.print("dfasfsd");
                            }
                            catch(Exception ee)
                            {

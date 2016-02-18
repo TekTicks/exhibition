@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 
+
 public class ownerProfileSocialMediaSave extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -21,8 +22,10 @@ public class ownerProfileSocialMediaSave extends HttpServlet {
                 PrintWriter out = response.getWriter();
          try
                            {
+                               
                             String socialMedia=request.getParameter("socialmedia");
                             String socialMediaLink=request.getParameter("socialmedialink");
+                            String photo=request.getParameter("file");
                             HttpSession ss=request.getSession();
                             String id=(String)ss.getAttribute("ownerId");
                            
@@ -38,6 +41,11 @@ public class ownerProfileSocialMediaSave extends HttpServlet {
                                  ps1.setString(1,socialMedia);
                                   ps1.setString(2,socialMediaLink);
                                  ps1.executeUpdate();
+                                 
+                                   PreparedStatement ps2=con.prepareStatement("insert into media(link,type) values(?,?)");
+                                 ps2.setString(1,photo);
+                                 ps2.setString(2,"");
+                                 ps2.executeUpdate();
                                 response.sendRedirect("/Exhibition/html/ownerProfile.jsp"); 
                            }
                            catch(Exception ee)
