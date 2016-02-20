@@ -1,3 +1,5 @@
+<%@page import="org.apache.commons.io.FilenameUtils"%>
+<%@page import="org.apache.commons.fileupload.FileItem"%>
 <%@ page import="java.io.*,java.sql.*,java.util.zip.*" %>
 <%
 String saveFile="";
@@ -26,22 +28,48 @@ pos = file.indexOf("\n", pos) + 1;
 int boundaryLocation = file.indexOf(boundary, pos) - 4;
 int startPos = ((file.substring(0, pos)).getBytes()).length;
 int endPos = ((file.substring(0, boundaryLocation)).getBytes()).length;
-File ff = new File("C:/ckv/"+saveFile);
-FileOutputStream fileOut = new FileOutputStream(ff);
+File fff = new File("C:/ckv/"+saveFile);
+FileOutputStream fileOut = new FileOutputStream(fff);
 fileOut.write(dataBytes, startPos, (endPos - startPos));
 fileOut.flush();
 fileOut.close();
-%><br><table border="2"><tr><td><b>You have successfully upload the file:</b>
-<%out.println(saveFile);%></td></tr></table>
+response.sendRedirect("/Exhibition/html/ownerProfileSocialMedia.jsp"); 
+%>
 <%
 Connection connection = null;
 String connectionURL = "jdbc:mysql://localhost:3306/Exhibition";
 PreparedStatement psmnt = null;
+
+
+for (FileItem item : formItems) {
+    if (item.isFormField()) {
+        // Process regular form field (input type="text|radio|checkbox|etc", select, etc).
+        String fieldname = item.getFieldName();
+        String fieldvalue = item.getString();
+        // ... (do your job here)
+    } else {
+        // Process form file field (input type="file").
+        String fieldname = item.getFieldName();
+        String filename = FilenameUtils.getName(item.getName());
+        InputStream filecontent = item.getInputStream();
+        // ... (do your job here)
+    }
+}
+
+
+ String socialMedia=request.getParameter("socialmedia");
+ String socialMediaLink=request.getParameter("socialmedialink");
+ String photo=request.getParameter("file");
+ HttpSession ss=request.getSession();
+ String id=(String)ss.getAttribute("ownerId");
+                            
+                            
 try{
 Class.forName("com.mysql.jdbc.Driver").newInstance();
-connection = DriverManager.getConnection(connectionURL, "root", "145");
-psmnt = connection.prepareStatement("insert into media(link) values(?)");
-psmnt.setString(1, ff.getPath());
+connection = DriverManager.getConnection(connectionURL, "root", "12345");
+psmnt = connection.prepareStatement("insert into media(link,type) values(?,?)");
+psmnt.setString(1, fff.getPath());
+psmnt.setString(2, "");
 int s = psmnt.executeUpdate();
 if(s>0){
 System.out.println("Uploaded successfully !");
@@ -51,7 +79,8 @@ System.out.println("Error!");
 }
 }
 catch(Exception e){
-    e.printStackTrace();
-}
+    
+         out.println("error"+e.toString());
+        }
 }
 %>

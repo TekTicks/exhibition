@@ -419,8 +419,8 @@
                             <div class="form-group form-group-default required">
                                  <label>Title</label>
                                  <select class="full-width" name="title" data-init-plugin="select2">
-                                  <option value="AK">Mr.</option>
-                                  <option value="HI">Mrs.</option>
+                                  <option value="Mr.">Mr.</option>
+                                  <option value="Mrs.">Mrs.</option>
                             </select>
                      
                             </div>

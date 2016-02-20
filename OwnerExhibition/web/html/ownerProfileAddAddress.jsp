@@ -458,13 +458,7 @@
                                <input type="text" name="maplink"id="tin" class="form-control" required>
                             </div>
                              
-                                   <!-- Drop down 1 :<select id="one" onchange="change()">
-                                        <option>select</option>
-                                        <option value="v1">value1</option>
-                                        <option value="v2">value2</option>
-                                    </select>
-                                    -->
-                                     <div class="form-group form-group-default required">
+                            <div class="form-group form-group-default required">
                                  <label>Select country</label>
                                  <select class="full-width" id="one" name="one" onchange="change()" data-init-plugin="select2" required>
                                      <option selected>---Select country---</option>
@@ -491,7 +485,7 @@
                                           <label>Select city</label>
                                          <select  class="full-width" id="three" name="three" data-init-plugin="select2">
                                          </select>
-                                       </div>
+                                      </div>
                                     
                                      
                               <br>

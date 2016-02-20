@@ -10,7 +10,7 @@
   <head>
     <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
     <meta charset="utf-8" />
-    <title>Pages - Admin Dashboard UI Kit - Form Wizard</title>
+    <title>Owner Profile</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no" />
     <link rel="apple-touch-icon" href="pages/ico/60.png">
     <link rel="apple-touch-icon" sizes="76x76" href="pages/ico/76.png">
@@ -45,6 +45,7 @@
     <link class="main-stylesheet" href="pages/css/pages.css" rel="stylesheet" type="text/css" />
     
   </head>
+
   <body class="fixed-header ">
     <nav class="page-sidebar" data-pages="sidebar">
       <!-- BEGIN SIDEBAR MENU TOP TRAY CONTENT-->
@@ -372,7 +373,7 @@
                 <li><a href="#"><i class="pg-signals"></i> Help</a>
                 </li>
                 <li class="bg-master-lighter">
-                  <a href="#" class="clearfix">
+                  <a href="ownerLogin.jsp" class="clearfix">
                     <span class="pull-left">Logout</span>
                     <span class="pull-right"><i class="pg-power"></i></span>
                   </a>
@@ -423,43 +424,78 @@
                       <div class="padding-30 m-t-50">
                         <div class="col-lg-7 col-md-6 col-md-height col-middle bg-white">
                       <!-- START PANEL -->
-                      <div class="full-height">
-                        <div class="panel-body text-center">
-                          <img class="image-responsive-height demo-mw-500" src="assets/img/demo/typography_hero.gif" alt="">
-                        </div>
+                       
+               
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <div class="panel-title">
+                      Drag n' drop uploader
+                    </div>
+                    <div class="tools">
+                      <a class="collapse" href="javascript:;"></a>
+                      <a class="config" data-toggle="modal" href="#grid-config"></a>
+                      <a class="reload" href="javascript:;"></a>
+                      <a class="remove" href="javascript:;"></a>
+                    </div>
+                  </div>
+                  <div class="panel-body no-scroll no-padding">
+                    <form action="/file-upload" class="dropzone no-margin">
+                      <div class="fallback">
+                        <input name="file" type="file" multiple/>
                       </div>
+                    </form>
+                  </div>
+                </div>
+              
                       <!-- END PANEL -->
                     </div>
                       </div>
                     </div>
                     <div class="col-md-7">
                       <div class="padding-30">
-                        <form action="/Exhibition/ownerProfileDemo" method="post" role="form">
+                        <form action="/Exhibition/OwnerProfileUpdate" method="post" role="form">
+                            <% 
+                                  HttpSession ss=request.getSession();
+                                  String userName=(String)ss.getAttribute("username");
+                                  String idd=(String)ss.getAttribute("ownerId");
+                                  String password1=(String)ss.getAttribute("password");
+                                  String cname=(String)ss.getAttribute("cname");
+                                  String primEmail=(String)ss.getAttribute("primEmail1");
+                                  
+                                  String secEmail=(String)ss.getAttribute("secEmail1");
+                                  String primContact=(String)ss.getAttribute("primContact1");
+                                  
+                                  String secContact=(String)ss.getAttribute("secContact1");
+                                  String about=(String)ss.getAttribute("about1");
+                                  String website=(String)ss.getAttribute("website1");
+                                  String industry=(String)ss.getAttribute("industry1");
+                                  int ccode=Integer.parseInt(primContact.substring(0,2));
+                            %>
                                 
                             <div class="form-group form-group-default disabled">
                                <label>User Name</label>
-                               <input type="email" name="uname" class="form-control" value="You can put anything here" disabled>
+                               <input type="email" name="uname" value="<%out.print(userName);%>" class="form-control" value="You can put anything here" disabled>
                             </div>                  
                             <div class="form-group form-group-default required">
                               <label>Company Name</label>
-                              <input type="text" name="cname" id="cname" class="form-control" required>
+                              <input type="text" value="<%out.print(cname);%>" name="cname" id="cname" class="form-control" required>
                             </div>
                          
                           <div class="form-group form-group-default required">
                               <label>Primary Email</label>
-                              <input type="email" name="p_email" id="p_email" class="form-control" required>
+                              <input type="email" name="p_email"  value="<%out.print(primEmail);%>" id="p_email" class="form-control" required>
                             </div>
                           
                           <div class="form-group form-group-default required">
                               <label>Secondary Email</label>
-                              <input type="email" name="s_email" id="s_email" class="form-control" required>
+                              <input type="email" name="s_email" value="<%out.print(secEmail);%>" id="s_email" class="form-control" required>
                             </div>
                            
                             <div class="form-group form-group-default input-group required">
                               <span class="input-group-addon">
-                                            <select class="cs-select cs-skin-slide cs-transparent" data-init-plugin="cs-select">
+                                            <select class="cs-select cs-skin-slide cs-transparent" name="ccode" data-init-plugin="cs-select">
                                             <option data-countryCode="GB" value="44" Selected>UK (+44)</option>
-                                            <option data-countryCode="US" value="1">USA (+1)</option>
+                                            <option data-countryCode="US" value="1" selected>USA (+1)</option>
                                             <option data-countryCode="AR" value="54">Argentina (+54)</option>
                                             <option data-countryCode="AU" value="61">Australia (+61)</option>
                                             <option data-countryCode="AT" value="43">Austria (+43)</option>
@@ -473,10 +509,9 @@
                                         </select>
                                         </span>
                               <label>Primary Contact</label>
-                              <input type="text" name="p_contact" id="p_contact" maxlength="10" minlength="10" class="form-control" placeholder="" required>
+                              <input type="text" name="p_contact"  value="<%out.print(primContact);%>" id="p_contact" maxlength="10" minlength="10" class="form-control" placeholder="" required>
                             </div>
-                           
-                            <div class="form-group form-group-default input-group ">
+                             <div class="form-group form-group-default input-group ">
                               <span class="input-group-addon">
                                             <select class="cs-select cs-skin-slide cs-transparent" data-init-plugin="cs-select">
                                             <option data-countryCode="GB" value="44" Selected>UK (+44)</option>
@@ -494,53 +529,40 @@
                                         </select>
                                         </span>
                               <label>Secondary Contact</label>
-                              <input type="text" name="s_contact" id="s_contact" class="form-control" placeholder="">
+                              <input type="text" name="s_contact" maxlength="10" minlength="10" value="<%out.print(secContact);%>"  id="s_contact" class="form-control" placeholder="">
                             </div>
                                
                            
                             <div class="form-group form-group-default disabled">
                                <label>Mobile Number</label>
-                               <input type="email" class="form-control" name="mobileno" id="mobileno" value="You can put anything here" disabled>
+                               <input type="email" class="form-control" value="<%out.print(primContact);%>" name="mobileno" id="mobileno" value="You can put anything here" disabled>
                             </div> 
                             
                              <div class="form-group form-group-default required">
                               <label>About</label>
-                          <textarea class="form-control" name="about" id="about" placeholder="Briefly Describe your Abilities"required></textarea>
+                          <textarea class="form-control" name="about"  id="about"  placeholder="Briefly Describe your Abilities" required><%out.print(about);%></textarea>
                             </div> 
                               
                             <div class="form-group form-group-default required">
                               <label>Website</label>
-                              <input type="text" name="website" id="website" class="form-control" required>
+                              <input type="text" value="<%out.print(website);%>" name="website" id="website"  class="form-control" required>
                             </div>
                             
                             
                             <div class="form-group form-group-default required">
                                  <label>Industry</label>
-                            <select class="full-width" name="industry" data-init-plugin="select2">
-                                  <option value="AK">Alaska</option>
-                                  <option value="HI">Hawaii</option>
+                            <select class="full-width" value="<%out.print(industry);%>" name="industry" data-init-plugin="select2">
+                                <option  value="<%out.print(industry);%>"><%out.print(industry);%></option>  
+                                <option  value="harware">Hardware</option>
+                                <option  value="software">Software</option>
+                               
                             </select>
                      
                             </div>
                               
                               <br>
-                            <!--  <div class="m-t-15">
-                                  <center>
-                                      <button class="btn btn-info btn-cons m-b-10" type="button"><i class="fa fa-paste"></i> <span class="bold">Edit</span>
-                                        </button>
-                                      <button class="btn btn-primary btn-cons m-b-10" type="button"><i class="pg-form"></i> <span class="bold">Submit</span>
-                                        </button>
-                                  </center>
-                      
-                               </div>-->
-                             <center> 
-                                 <!--<button class="btn btn-success" type="submit">Submit</button>
-                                 <button class="btn btn-default"><i class="pg-close"></i> Clear</button> -->
                                    <button class="btn btn-primary btn-cons m-t-10" type="submit">Submit</button>
                                    <button class="btn btn-primary btn-cons m-t-10" >Cancel</button> 
-                             </center>
-  
-                         
                         </form>
                       </div>
                     </div>
@@ -591,59 +613,65 @@
                 <div class="clearfix"></div>
               </div>
               <div class="panel-body">
-                <table class="table table-hover demo-table-dynamic" id="tableWithDynamicRows">
-                  <thead>
-                    <tr>
-                      <th>Date</th>
-                      <th>Social Media</th>
-                      <th>Link</th>
-                      <th>Update/Delete.  </th>
-                    </tr>
+                  
+              
+              
+              
+               <table class="table table-hover demo-table-search" id="tableWithSearch">
+                     <%@page import="java.io.*;" %>
+                     <%@page import="java.sql.*;" %>
+                     <%@page import="java.sql.DriverManager;" %>
+                     <thead>
+                        <tr>
+                          <!--  <th>ID</th> -->
+                        <th>Date</th>
+                        <th>Social Media</th>        
+                        <th>Link</th>
+                        <th>Update/Delete.</th>
+                        </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td class="v-align-middle">
-                        <p>Hyperlapse</p>
-                      </td>
-                      <td class="v-align-middle">
-                        <p>Description goes here</p>
-                      </td>
-                      <td class="v-align-middle">
-                        <p>FREE</p>
-                      </td>
-                       <td class="v-align-middle">
-                        <div class="btn-group">
-                         
-                          <button type="button" class="btn btn-success"><i class="fa fa-pencil"></i>
-                          </button>
-                          <button type="button" class="btn btn-success"><i class="fa fa-trash-o"></i>
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                   
-                    
-                    <tr>
-                      <td class="v-align-middle">
-                        <p>Angry Birds</p>
-                      </td>
-                      <td class="v-align-middle">
-                        <p>Description goes here</p>
-                      </td>
-                      <td class="v-align-middle">
-                        <p>FREE</p>
-                      </td>
-                           <td class="v-align-middle">
-                             <div class="btn-group">
-                         
-                          <button type="button" class="btn btn-success"><i class="fa fa-pencil"></i>
-                          </button>
-                          <button type="button" class="btn btn-success"><i class="fa fa-trash-o"></i>
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  </tbody>
+                    <%   
+                         Class.forName("com.mysql.jdbc.Driver"); 
+                         Connection con1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/Exhibition","root","12345"); 
+                         Statement stat1=con1.createStatement();
+                         ResultSet rs1=stat1.executeQuery("select a.*,b.* from socialMedia a,ownerSocialMedia b where a.id=b.socialMediaId;");
+                         int count1=0;
+                        
+                         while(rs1.next())
+                         {
+                            count1++;
+                            out.println("<tr>");
+                            //out.println("<td class='v-align-middle semi-bold'><p>"+rs1.getString(7)+"</p></td>");
+                            out.println("<td class='v-align-middle semi-bold'><p>"+rs1.getString(3)+"</p></td>");
+                            out.println("<td class='v-align-middle semi-bold'><p>"+rs1.getString(2)+"</p></td>");
+                            out.println("<td class='v-align-middle semi-bold'><p>"+rs1.getString(9)+"</p></td>");
+                            String kv=rs1.getString(7);
+                            String kv1=rs1.getString(2);
+                            String kv2=rs1.getString(3);
+                            String kv3=rs1.getString(9);
+                            
+                             HttpSession ss1=request.getSession();
+                                  ss1.setAttribute("id",kv);
+                                  ss1.setAttribute("date",kv2);
+                                  ss1.setAttribute("socialmedia1",kv1);
+                                  ss1.setAttribute("link1",kv3);
+                                  
+                            
+                           %>
+                          
+                             <td>
+                                 <div class="btn-group">
+                                 <button  type="button" class="btn btn-success" onclick="document.location.href='/Exhibition/html/ownerProfileSocialMediaEdit.jsp?myid=<%= kv %>';"><i class="fa fa-pencil"></i></button>
+                                 <button type="button" class="btn btn-success"  onclick="document.location.href='/Exhibition/OwnerProfileSocialMediaDelete?myid=<%= kv %>';"><i class="fa fa-trash-o"></i>
+                                 </button>
+                                 </div>
+                            </td><%
+                            out.println(" </tr>");
+                        }
+                       
+                   %>   
+                   </tbody>
                 </table>
               </div>
             </div>
@@ -682,47 +710,7 @@
     
     
     <div class="tab-pane slide-left padding-20" id="tab3">
-    <!--               <div class="col-md-7">
-                      <div class="padding-30">
-                        <form action="ckvAddressSave.jsp" method="post" role="form">
-                          
-                         
-                          <div class="form-group-attached">
-                                <div class="form-group">
-                                    <label>Address 1</label>
-                                      <input type="text" name="address1" id="tin" class="form-control">
-                                     </div>
-                               
-                             <div class="form-group">
-                                    <label>Address 2</label>
-                                      <input type="text" name="address2"id="tin" class="form-control">
-                                     </div>
-                            <div class="row clearfix">
-                            
-                               <div class="form-group">
-                                    <label>Zip Code</label>
-                                      <input type="text" name="zipcode"id="tin" class="form-control">
-                                     </div>
-                            </div>
-                             <div class="form-group">
-                                    <label>Landmark</label>
-                                      <input type="text" name="landmark"id="tin" class="form-control">
-                                     </div>
-                              <br>
-                              <div class="form-group">
-                                    <label>Map Link</label>
-                                      <input type="text" name="maplink"id="tin" class="form-control">
-                                     </div>
-                              <br>
-                              <br>
-                              <div class="form-group">
-                               <center> <button class="btn btn-success" type="submit">Submit</button>
-                          <button class="btn btn-default"><i class="pg-close"></i> Clear</button> </center>
-                          </div>
-                          </div>    
-                        </form>
-                      </div>
-                    </div>-->
+   
     
     <!-- START CONTAINER FLUID -->
           <div class="container-fluid container-fixed-lg">
@@ -740,67 +728,64 @@
                 <div class="clearfix"></div>
               </div>
               <div class="panel-body">
-                <table class="table table-hover demo-table-dynamic" id="tableWithDynamicRows">
-                  <thead>
-                    <tr>
-                      <th>Date</th>
-                      <th>Title</th>
-                      <th>Address</th>
-                      <th>MapLink</th>
-                      <th>Update/Delete.  </th>
-                    </tr>
+               
+                  <table class="table table-hover demo-table-search" id="tableWithSearch">
+                     <%@page import="java.io.*;" %>
+                     <%@page import="java.sql.*;" %>
+                     <%@page import="java.sql.DriverManager;" %>
+                     <thead>
+                        <tr>
+                        <th>Date</th>
+                        <th>Title</th>
+                        <th>Address</th>        
+                        <th>MapLink</th>
+                        <th>Update/Delete.</th>
+                        </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td class="v-align-middle">
-                        <p>Hyperlapse</p>
-                      </td>
-                      <td class="v-align-middle">
-                        <p>Description goes here</p>
-                      </td>
-                      <td class="v-align-middle">
-                        <p>FREE</p>
-                      </td>
-                      <td class="v-align-middle">
-                        <p>Notes go here</p>
-                      </td>
-                       <td class="v-align-middle">
-                        <div class="btn-group">
-                         
-                          <button type="button" class="btn btn-success"><i class="fa fa-pencil"></i>
-                          </button>
-                          <button type="button" class="btn btn-success"><i class="fa fa-trash-o"></i>
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                   
-                    
-                    <tr>
-                      <td class="v-align-middle">
-                        <p>Angry Birds</p>
-                      </td>
-                      <td class="v-align-middle">
-                        <p>Description goes here</p>
-                      </td>
-                      <td class="v-align-middle">
-                        <p>FREE</p>
-                      </td>
-                      <td class="v-align-middle">
-                        <p>Notes go here</p>
-                      </td>
-                       <td class="v-align-middle">
-                             <div class="btn-group">
-                         
-                          <button type="button" class="btn btn-success"><i class="fa fa-pencil"></i>
-                          </button>
-                          <button type="button" class="btn btn-success"><i class="fa fa-trash-o"></i>
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  </tbody>
+                    <%   
+                         Class.forName("com.mysql.jdbc.Driver"); 
+                           Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Exhibition","root","12345"); 
+                         Statement stat=con.createStatement();
+                         ResultSet rs=stat.executeQuery("select * from ownerAddress");
+                         int count=0;
+                         while(rs.next())
+                         {
+                            count++;
+                            out.println("<tr>");
+                            out.println("<td class='v-align-middle semi-bold'><p>"+rs.getString(8)+"</p></td>");
+                            out.println("<td><p> "+rs.getString(2)+"</p></td>");
+                            out.println("<td><p> "+rs.getString(3)+"</p></td>");
+                            out.println("<td><p> "+rs.getString(7)+"</p></td>");
+                            String id=rs.getString(1);
+                            String address1=rs.getString(2);
+                            String address2=rs.getString(3);
+                            String landmark=rs.getString(4);
+                            String pincode=rs.getString(5);
+                            String maplink=rs.getString(7);
+                            
+                                  HttpSession ss1=request.getSession();
+                                 // ss1.setAttribute("id1",id);
+                                  ss1.setAttribute("address11",address1);
+                                  ss1.setAttribute("address22",address2);
+                                  ss1.setAttribute("landmark1",landmark);
+                                  ss1.setAttribute("pincode1",pincode);
+                                  ss1.setAttribute("maplink1",maplink);
+                          
+                           %>
+                             <td>
+                                 <div class="btn-group">
+                                 <button type="button" class="btn btn-success" onclick="document.location.href='/Exhibition/html/ownerProfileAddressUpdate.jsp?addId=<%= id %>';"><i class="fa fa-pencil"></i></button>
+                                 <button type="button" class="btn btn-success" onclick="document.location.href='/Exhibition/OwnerProfileAddressDelete?addId=<%= id %>';"><i class="fa fa-trash-o"></i>
+                                 </button>
+                                 </div>
+                            </td><%
+                            out.println(" </tr>");
+                        }
+                   %>   
+                   </tbody>
                 </table>
+                   
               </div>
             </div>
             <!-- END PANEL -->
@@ -834,159 +819,99 @@
    <!----------------------------------------------------------------------------------------------------------------------------------------------------->
         <div class="tab-pane slide-left padding-20" id="tab4">
                     
-                
-                  <div class="container-fluid container-fixed-lg bg-white">
-            <div class="row">
-              <div class="col-sm-5">
-                <!-- START PANEL -->
-                <div class="panel panel-transparent">
-                  <div class="panel-heading">
-                    <div class="panel-title">Contact Person
-                    </div>
-                  </div>
-                  <div class="panel-body">
-                    <h3>Keep in Touch
-							&amp; Create Contemporary feels</h3>
-                    <p>Despite the UI, We thought of the User experience, With attached From Layouts you can simply categories Important fields and prioritize them.</p>
-                    <br>
-                    <div>
-                      <div class="profile-img-wrapper m-t-5 inline">
-                        <img width="35" height="35" src="assets/img/profiles/avatar_small.jpg" alt="" data-src="assets/img/profiles/avatar_small.jpg" data-src-retina="assets/img/profiles/avatar_small2x.jpg">
-                        <div class="chat-status available">
-                        </div>
-                      </div>
-                      <div class="inline m-l-10">
-                        <p class="small hint-text">VIA senior product manage
-                          <br> for UI/UX at REVOX</p>
-                      </div>
-                    </div>
+                  
+    
+    <!-- START CONTAINER FLUID -->
+          <div class="container-fluid container-fixed-lg">
+            <!-- START PANEL -->
+            <div class="panel panel-transparent">
+              <div class="panel-heading">
+                <div class="panel-title">
+                </div>
+                <div class="pull-right">
+                  <div class="col-xs-12">
+                    <button id="show-modal" class="btn btn-primary btn-cons" onclick="document.location.href='/Exhibition/html/ownerProfileAddContactInfo.jsp';"><i class="fa fa-plus"></i> Add Address
+                    </button>
                   </div>
                 </div>
-                <!-- END PANEL -->
+                <div class="clearfix"></div>
               </div>
-              <div class="col-sm-7">
-                <!-- START PANEL -->
-                <div class="panel panel-transparent">
-                  <div class="panel-body">
-                    <form action="/Exhibition/ownerProfileContactperson" method="post" id="form-project" role="form" autocomplete="off">
-                        <p>Basic Information</p>
-                            <div class="form-group form-group-default required">
-                                 <label>Title</label>
-                                 <select class="full-width" name="title" data-init-plugin="select2">
-                                  <option value="AK">Mr.</option>
-                                  <option value="HI">Mrs.</option>
-                            </select>
-                     
-                            </div>
-                            <div class="form-group-attached">
-                            <div class="row clearfix">
-                                <div class="col-sm-6">
-                                <div class="form-group form-group-default required">
-                                     <label>First name</label>
-                                     <input type="text" name="fname" class="form-control" name="firstName" required>
-                                </div>
-                                </div>
-                                <div class="col-sm-6">
-                                 <div class="form-group form-group-default">
-                                     <label>Last name</label>
-                                     <input type="text" name="lname" class="form-control" name="lastName">
-                                </div>
-                                </div>
-                                <div class="row">
-                        <div class="col-sm-12">
-                          <div class="form-group form-group-default">
-                            <label>Email</label>
-                            <input type="email" class="form-control" name="email" placeholder="" required>
-                          </div>
-                        </div>
-                      </div>
-                            </div>
-                            </div>
-                            <p>Other Information</p>
-                                   <div class="row">
-                        <div class="col-sm-12">
-                          <div class="form-group form-group-default">
-                           <label>Gender</label></div>
-                                <div class="radio radio-success">
-                                    &nbsp;&nbsp;&nbsp;<input type="radio" value="0" name="gender" id="male">
-                                <label for="male">Male</label>
-                                <input type="radio" checked="checked" value="1" name="gender" id="female">
-                                <label for="female">Female</label>
+              <div class="panel-body">
+               
+                  <table class="table table-hover demo-table-search" id="tableWithSearch">
+                     <%@page import="java.io.*;" %>
+                     <%@page import="java.sql.*;" %>
+                     <%@page import="java.sql.DriverManager;" %>
+                     <thead>
+                        <tr>
+                        <th>Name</th>
+                        <th>Designation</th>
+                        <th>Mobile No</th>        
+                        <th>Email Id</th>
+                        <th>Update/Delete.</th>
+                        </tr>
+                  </thead>
+                  <tbody>
+                    <%   
+                         Class.forName("com.mysql.jdbc.Driver"); 
+                           Connection con2 = DriverManager.getConnection("jdbc:mysql://localhost:3306/Exhibition","root","12345"); 
+                         Statement stat2=con2.createStatement();
+                         ResultSet rs2=stat.executeQuery("select * from ownerContactPerson");
+                         int count2=0;
+                         while(rs2.next())
+                         {
+                            count2++;
+                            out.println("<tr>");
+                            out.println("<td class='v-align-middle semi-bold'><p>"+rs2.getString(3)+"</p></td>");
+                            out.println("<td><p> "+rs2.getString(8)+"</p></td>");
+                            out.println("<td><p> "+rs2.getString(10)+"</p></td>");
+                            out.println("<td><p> "+rs2.getString(11)+"</p></td>");
+                           
+                           String id=rs2.getString(1);
+                            String title=rs2.getString(2);
+                            String fname=rs2.getString(3);
+                            String lname=rs2.getString(4);
+                            String gender=rs2.getString(5);
+                            String dob=rs2.getString(7);
+                            String designation=rs2.getString(8);
+                            String phoneno=rs2.getString(9);
+                            String mobileno=rs2.getString(10);
+                            String Emailid=rs2.getString(11);
+                            
                                 
-                          </div>
-                        </div>
-                      </div> 
-                                 
-                 
-                           <div class="row clearfix">
-                          <div class="col-sm-12">
-                            <div class="form-group form-group-default required">
-                                <label> Date of Birth</label>
-                              <input id="start-date" type="date" class="form-control date" name="dob"  prequired>
-                            </div>
-                          </div>
-                        </div>
-                             <div class="row clearfix">    
-                             <div class="col-sm-12">
-                                <div class="form-group form-group-default required">
-                                     <label>Designation</label>
-                                     <input type="text"  class="form-control" name="designation" required>
-                                </div>
-                                </div>
-                      </div>
-                        <div class="form-group form-group-default input-group required">
-                              <span class="input-group-addon">
-                                            <select class="cs-select cs-skin-slide cs-transparent" data-init-plugin="cs-select">
-                                            <option data-countryCode="GB" value="44" Selected>UK (+44)</option>
-                                            <option data-countryCode="US" value="1">USA (+1)</option>
-                                            <option data-countryCode="AR" value="54">Argentina (+54)</option>
-                                            <option data-countryCode="AU" value="61">Australia (+61)</option>
-                                            <option data-countryCode="AT" value="43">Austria (+43)</option>
-                                            <option data-countryCode="BE" value="32">Belgium (+32)</option>
-                                            <option data-countryCode="BZ" value="501">Belize (+501)</option>
-                                            <option data-countryCode="CN" value="86">China (+86)</option>
-                                            <option data-countryCode="IS" value="354">Iceland (+354)</option>
-                                            <option data-countryCode="IN" value="91">India (+91)</option>
-                                            <option data-countryCode="MY" value="60">Malaysia (+60)</option>
-                                            <option data-countryCode="ZW" value="263">Zimbabwe (+263)</option>
-                                        </select>
-                                        </span>
-                              <label>Telephone Number</label>
-                              <input type="text" name="phoneno" class="form-control" placeholder="" required>
-                            </div>
-                                        
-                     <div class="form-group form-group-default input-group required">
-                              <span class="input-group-addon">
-                                            <select class="cs-select cs-skin-slide cs-transparent" data-init-plugin="cs-select">
-                                            <option data-countryCode="GB" value="44" Selected>UK (+44)</option>
-                                            <option data-countryCode="US" value="1">USA (+1)</option>
-                                            <option data-countryCode="AR" value="54">Argentina (+54)</option>
-                                            <option data-countryCode="AU" value="61">Australia (+61)</option>
-                                            <option data-countryCode="AT" value="43">Austria (+43)</option>
-                                            <option data-countryCode="BE" value="32">Belgium (+32)</option>
-                                            <option data-countryCode="BZ" value="501">Belize (+501)</option>
-                                            <option data-countryCode="CN" value="86">China (+86)</option>
-                                            <option data-countryCode="IS" value="354">Iceland (+354)</option>
-                                            <option data-countryCode="IN" value="91">India (+91)</option>
-                                            <option data-countryCode="MY" value="60">Malaysia (+60)</option>
-                                            <option data-countryCode="ZW" value="263">Zimbabwe (+263)</option>
-                                        </select>
-                                        </span>
-                              <label>Mobile Number</label>
-                              <input type="text" name="mobileno" class="form-control" placeholder="" required>
-                            </div>
-                     
-                </div>
-                      <br>
-                       <button class="btn btn-primary btn-cons m-t-10" type="submit">Submit</button>
-                                   <button class="btn btn-primary btn-cons m-t-10" >Cancel</button> 
-                    </form>
-                  </div>
-                </div>
-                <!-- END PANEL -->
+                              HttpSession ss1=request.getSession();
+                                 // ss1.setAttribute("id1",id);
+                                  ss1.setAttribute("id",id);
+                                   ss1.setAttribute("title",title);
+                                    ss1.setAttribute("fname",fname);
+                                     ss1.setAttribute("lname",lname);
+                                      ss1.setAttribute("gender",gender);
+                                       ss1.setAttribute("dob",dob);
+                                        ss1.setAttribute("designation",designation);
+                                         ss1.setAttribute("phoneno",phoneno);
+                                          ss1.setAttribute("mobileno",mobileno);
+                                           ss1.setAttribute("Emailid",Emailid);
+
+                            
+                           %>
+                             <td>
+                                 <div class="btn-group">
+                                 <button type="button" class="btn btn-success" onclick="document.location.href='/Exhibition/html/ownerProfileContactPersonUpdate.jsp?contactPersonId=<%= id  %>';"><i class="fa fa-pencil"></i></button>
+                                 <button type="button" class="btn btn-success" onclick="document.location.href='/Exhibition/ownerProfileContactPersonDelete?contactPersonId=<%= id %>';"><i class="fa fa-trash-o"></i>
+                                 </button>
+                                 </div>
+                            </td><%
+                            out.println(" </tr>");
+                        }
+                   %>   
+                   </tbody>
+                </table>
+                   
               </div>
             </div>
-<div class="padding-20 bg-white">
+            <!-- END PANEL -->
+          </div>
+                   <div class="padding-20 bg-white">
                   <ul class="pager wizard">
                     <li class="next">
                       <button class="btn btn-primary btn-cons btn-animated from-left fa fa-truck pull-right" type="button">
@@ -1011,6 +936,8 @@
                   </ul>
                 </div>
                 </div>
+                  
+ 
 <!----------------------------------------------------------------------------------------------------------------------------------------------------->                  
                 <div class="tab-pane slide-left padding-20" id="tab5">
                     

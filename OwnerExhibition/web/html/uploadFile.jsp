@@ -35,7 +35,7 @@ fileOut.close();
 <%out.println(saveFile);%></td></tr></table>
 <%
 Connection connection = null;
-String connectionURL = "jdbc:mysql://localhost:3306/Exhibition";
+String connectionURL = "jdbc:mysql://localhost:3306/Exhibiccccccccccccction";
 PreparedStatement psmnt = null;
 try{
 Class.forName("com.mysql.jdbc.Driver").newInstance();

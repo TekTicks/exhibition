@@ -1,6 +1,4 @@
-
 package ownerPortal;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -22,21 +20,22 @@ public class ownerProfileAddressSave extends HttpServlet {
         PrintWriter out = response.getWriter();
          try
                            {
-                               
-                                HttpSession ss=request.getSession();
+                            //Retrieve ownerId from Session from ownerLoginCheck   
+                            HttpSession ss=request.getSession();
                             String id=(String)ss.getAttribute("ownerId");
+                            
                             String address1=request.getParameter("address1");
                             String address2=request.getParameter("address2");
                             String zipcode =request.getParameter("zipcode");
                             String landmark =request.getParameter("landmark");
                             String maplink =request.getParameter("maplink");
                             String country =request.getParameter("one");
-                             String state =request.getParameter("two");
-                              String city =request.getParameter("three");
+                            String state =request.getParameter("two");
+                            String city =request.getParameter("three");
                             
-                           
-                          Connection con;
-                           con=dbConnection.getConnection();
+                            //One time database connection  
+                            Connection con;
+                            con=dbConnection.getConnection();
                             PreparedStatement ps=con.prepareStatement("insert into ownerAddress(address1,address2,landmark,pincode,cityId,maplink,createdBy,modifiedBy)values(?,?,?,?,(select id from city where id=1),?,(select id from owner where id='"+id+"'),(select id from owner where id='"+id+"'))");
                                 ps.setString(1,address1);
                                 ps.setString(2,address2);
@@ -62,13 +61,12 @@ public class ownerProfileAddressSave extends HttpServlet {
                                 ps3.setInt(3,1);  
                                 ps3.executeUpdate();
                                 
-                                 // response.sendRedirect("/Exhibition/html/ownerProfile.jsp");
-                           out.print("dfasfsd");
+                                response.sendRedirect("/Exhibition/html/ownerProfile.jsp");
+                         
                            }
                            catch(Exception ee)
                            {
                                out.println("error"+ee);
-                         
                            }
       
     }

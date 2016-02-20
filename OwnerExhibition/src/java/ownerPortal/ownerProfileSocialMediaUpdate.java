@@ -1,10 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ownerPortal;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -16,10 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- *
- * @author Admin
- */
 public class ownerProfileSocialMediaUpdate extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -28,27 +18,24 @@ public class ownerProfileSocialMediaUpdate extends HttpServlet {
          PrintWriter out = response.getWriter();
         try  {
                             
-                            String socialmedialink =request.getParameter("socialmedialink");
-                             HttpSession ss=request.getSession();
-                                  String id=(String)ss.getAttribute("id1");
-                                 
-                           Connection con;
-                           con=dbConnection.getConnection();
-                                 
-                                PreparedStatement ps=con.prepareStatement("update ownerSocialMedia set link=? where id='"+id+"' ");
-                                 
-                                 ps.setString(1,socialmedialink);
-                             //    ps.setString(2,ownerPortal.Global.socialmediaid);
-                                 ps.executeUpdate();
-                                 
-                                 
-                                 response.sendRedirect("/Exhibition/html/ownerProfile.jsp"); 
-        }
-                           catch(Exception ee)
-                           {
-                               out.println("error"+ee);
-                         
-                           }
+                String socialmedialink =request.getParameter("socialmedialink");
+                //Retrieve session
+                HttpSession ss=request.getSession();
+                String id=(String)ss.getAttribute("id1");
+                
+                //One time database connection  
+                Connection con;
+                con=dbConnection.getConnection();
+                PreparedStatement ps=con.prepareStatement("update ownerSocialMedia set link=? where id='"+id+"' ");
+                ps.setString(1,socialmedialink);
+                //ps.setString(2,ownerPortal.Global.socialmediaid);
+                ps.executeUpdate();
+                response.sendRedirect("/Exhibition/html/ownerProfile.jsp"); 
+             }
+        catch(Exception ee)
+             {
+                out.println("error"+ee);
+             }
         
     }
 

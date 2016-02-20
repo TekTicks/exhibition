@@ -1,8 +1,4 @@
-<%-- 
-    Document   : ckvindex
-    Created on : Jan 22, 2016, 4:48:07 PM
-    Author     : Admin
---%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -43,6 +39,10 @@
     <link href="assets/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" media="screen">
     <link href="pages/css/pages-icons.css" rel="stylesheet" type="text/css">
     <link class="main-stylesheet" href="pages/css/pages.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="pages/js/jquery-1.4.2.min.js"></script>
+    <script src="pages/js/ownerloginValidation.js"></script>
+    <link href="pages/css/ownerLoginAjax.css" rel="stylesheet" type="text/css" />  
     
   </head>
 
@@ -429,7 +429,7 @@
                 <div class="panel panel-default">
                   <div class="panel-heading">
                     <div class="panel-title">
-                      Drag n' drop uploader
+                      Profile Photo
                     </div>
                     <div class="tools">
                       <a class="collapse" href="javascript:;"></a>
@@ -439,61 +439,107 @@
                     </div>
                   </div>
                   <div class="panel-body no-scroll no-padding">
-                    <form action="/file-upload" class="dropzone no-margin">
+                    <form action="/" class="dropzone no-margin">
                       <div class="fallback">
                         <input name="file" type="file" multiple/>
                       </div>
                     </form>
                   </div>
                 </div>
-              
+              </div>
+             </div>
+            </div>
+                      
                       <!-- END PANEL -->
-                    </div>
-                      </div>
-                    </div>
+                    
+                      
+                                          <script type="text/javascript">
+	$(document).ready(function(){
+		$("#profile").submit(function(){
+
+			 //remove previous class and add new "myinfo" class
+	       // $("#msgbox").removeClass().addClass('myinfo').text('Validating Your Login ').fadeIn(1000);
+
+			
+			this.timer = setTimeout(function () {
+				$.ajax({
+		          	url: '/Exhibition/OwnerProfileUpdate',
+		          	data: 'cname='+ $('#cname').val() +'&p_email=' + $('#p_email').val()+'&s_email=' + $('#s_email').val() +'&p_contact=' + $('#p_contact').val()+'&s_contact=' + $('#s_contact').val()+'&about=' + $('#about').val() +'&website=' + $('#website').val()+'&industry=' + $('#industry').val()+'&ccodePrimary=' + $('#ccodePrimary').val()+'&ccodeSecondary=' + $('#ccodeSecondary').val(),
+		          	type: 'post',
+		   		success: function(msg){
+                                 
+                                if(msg != 'error') // Message Sent, check and redirect
+				{
+                                       
+                                          $("#msgbox1").html('Data updated successfully').addClass('myinfo').fadeTo(200,1,function()
+			             {
+			                 //redirect to secure page
+			              document.location='/Exhibition/html/ownerProfile.jsp';
+			             });
+                                        
+                                    }
+                               else
+                            {
+                                $("#msgbox1").fadeTo(100,1,function() //start fading the messagebox
+		                {
+			                  //add message and change the class of the box and start fading
+			                 $(this).html('sorry').removeClass().addClass('myerror').fadeTo(300,1);
+                                        // document.location='/Exhibition/html/exhibitionAdminLog.jsp?user';
+                                 });
+                            }
+                                }
+				});
+			}, 200);
+			return false;
+ 		});		
+
+	});
+   </script> 
                     <div class="col-md-7">
                       <div class="padding-30">
-                        <form action="/Exhibition/OwnerProfileUpdate" method="post" role="form">
+                        <form action="" id="profile" method="post" role="form">
                             <% 
-                                  HttpSession ss=request.getSession();
-                                  String userName=(String)ss.getAttribute("username");
-                                  String idd=(String)ss.getAttribute("ownerId");
-                                  String password1=(String)ss.getAttribute("password");
-                                  String cname=(String)ss.getAttribute("cname");
-                                  String primEmail=(String)ss.getAttribute("primEmail1");
-                                  
-                                  String secEmail=(String)ss.getAttribute("secEmail1");
-                                  String primContact=(String)ss.getAttribute("primContact1");
-                                  
-                                  String secContact=(String)ss.getAttribute("secContact1");
-                                  String about=(String)ss.getAttribute("about1");
-                                  String website=(String)ss.getAttribute("website1");
-                                  String industry=(String)ss.getAttribute("industry1");
-                                  int ccode=Integer.parseInt(primContact.substring(0,2));
+                               try {
+                               HttpSession ss=request.getSession();
+                               String userName=(String)ss.getAttribute("username");
+                               String idd=(String)ss.getAttribute("ownerId");
+                               String primContact=(String)ss.getAttribute("primContact1");
+                               Class.forName("com.mysql.jdbc.Driver"); 
+                               Connection con5 = DriverManager.getConnection("jdbc:mysql://localhost:3306/Exhibition","root","12345"); 
+                               Statement stat5=con5.createStatement();
+                               ResultSet rs5=stat5.executeQuery("select a.*,b.* from ownerProfile a , industry b where a.createdBy='"+idd+"'");
                             %>
-                                
+                            <%
+                             if(!rs5.next())
+                            {
+                             out.print("Sory");
+                            }
+                             else
+                            {
+                            %>
+ 
                             <div class="form-group form-group-default disabled">
                                <label>User Name</label>
                                <input type="email" name="uname" value="<%out.print(userName);%>" class="form-control" value="You can put anything here" disabled>
                             </div>                  
                             <div class="form-group form-group-default required">
                               <label>Company Name</label>
-                              <input type="text" value="<%out.print(cname);%>" name="cname" id="cname" class="form-control" required>
+                              <input type="text" value="<%out.print(rs5.getString(2));%>" name="cname" id="cname" class="form-control" required>
                             </div>
                          
                           <div class="form-group form-group-default required">
                               <label>Primary Email</label>
-                              <input type="email" name="p_email"  value="<%out.print(primEmail);%>" id="p_email" class="form-control" required>
+                              <input type="email" name="p_email"  value="<%out.print(rs5.getString(5));%>" id="p_email" class="form-control" required>
                             </div>
                           
                           <div class="form-group form-group-default required">
                               <label>Secondary Email</label>
-                              <input type="email" name="s_email" value="<%out.print(secEmail);%>" id="s_email" class="form-control" required>
+                              <input type="email" name="s_email" value="<%out.print(rs5.getString(6));%>" id="s_email" class="form-control" required>
                             </div>
                            
                             <div class="form-group form-group-default input-group required">
                               <span class="input-group-addon">
-                                            <select class="cs-select cs-skin-slide cs-transparent" name="ccode" data-init-plugin="cs-select">
+                                            <select class="cs-select cs-skin-slide cs-transparent" id="ccodePrimary" data-init-plugin="cs-select">
                                             <option data-countryCode="GB" value="44" Selected>UK (+44)</option>
                                             <option data-countryCode="US" value="1" selected>USA (+1)</option>
                                             <option data-countryCode="AR" value="54">Argentina (+54)</option>
@@ -508,12 +554,13 @@
                                             <option data-countryCode="ZW" value="263">Zimbabwe (+263)</option>
                                         </select>
                                         </span>
+                               
                               <label>Primary Contact</label>
-                              <input type="text" name="p_contact"  value="<%out.print(primContact);%>" id="p_contact" maxlength="10" minlength="10" class="form-control" placeholder="" required>
+                              <input type="text" name="p_contact"  value="<%out.print(rs5.getString(7));%>" id="p_contact" maxlength="10" minlength="10" class="form-control" placeholder="" required>
                             </div>
                              <div class="form-group form-group-default input-group ">
                               <span class="input-group-addon">
-                                            <select class="cs-select cs-skin-slide cs-transparent" data-init-plugin="cs-select">
+                                            <select class="cs-select cs-skin-slide cs-transparent" id="ccodeSecondary"  data-init-plugin="cs-select">
                                             <option data-countryCode="GB" value="44" Selected>UK (+44)</option>
                                             <option data-countryCode="US" value="1">USA (+1)</option>
                                             <option data-countryCode="AR" value="54">Argentina (+54)</option>
@@ -529,7 +576,7 @@
                                         </select>
                                         </span>
                               <label>Secondary Contact</label>
-                              <input type="text" name="s_contact" maxlength="10" minlength="10" value="<%out.print(secContact);%>"  id="s_contact" class="form-control" placeholder="">
+                              <input type="text" name="s_contact" maxlength="10" minlength="10" value="<%out.print(rs5.getString(8));%>"  id="s_contact" class="form-control" placeholder="">
                             </div>
                                
                            
@@ -540,29 +587,40 @@
                             
                              <div class="form-group form-group-default required">
                               <label>About</label>
-                          <textarea class="form-control" name="about"  id="about"  placeholder="Briefly Describe your Abilities" required><%out.print(about);%></textarea>
+                          <textarea class="form-control" name="about"  id="about"  placeholder="Briefly Describe your Abilities" required><%out.print(rs5.getString(4));%></textarea>
                             </div> 
                               
                             <div class="form-group form-group-default required">
                               <label>Website</label>
-                              <input type="text" value="<%out.print(website);%>" name="website" id="website"  class="form-control" required>
+                              <input type="text" value="<%out.print(rs5.getString(9));%>" name="website" id="website"  class="form-control" required>
                             </div>
                             
                             
                             <div class="form-group form-group-default required">
                                  <label>Industry</label>
-                            <select class="full-width" value="<%out.print(industry);%>" name="industry" data-init-plugin="select2">
-                                <option  value="<%out.print(industry);%>"><%out.print(industry);%></option>  
+                            <select class="full-width" value="<%out.print(rs5.getString(14));%>" id="industry" data-init-plugin="select2">
+                                <option  value="<%out.print(rs5.getString(14));%>"><%out.print(rs5.getString(14));%></option>  
                                 <option  value="harware">Hardware</option>
                                 <option  value="software">Software</option>
                                
                             </select>
                      
                             </div>
-                              
+                               <div id="msgbox1"></div>
                               <br>
                                    <button class="btn btn-primary btn-cons m-t-10" type="submit">Submit</button>
                                    <button class="btn btn-primary btn-cons m-t-10" >Cancel</button> 
+                                   
+                                   
+                                   <%
+                                          }      
+                         }
+                        catch(Exception ee)
+                           {
+                               out.println("error"+ee);
+                         
+                           }
+                           %>
                         </form>
                       </div>
                     </div>
@@ -632,10 +690,12 @@
                   </thead>
                   <tbody>
                     <%   
+                         HttpSession ss=request.getSession();
+                         String idd=(String)ss.getAttribute("ownerId");
                          Class.forName("com.mysql.jdbc.Driver"); 
                          Connection con1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/Exhibition","root","12345"); 
                          Statement stat1=con1.createStatement();
-                         ResultSet rs1=stat1.executeQuery("select a.*,b.* from socialMedia a,ownerSocialMedia b where a.id=b.socialMediaId;");
+                         ResultSet rs1=stat1.executeQuery("select a.*,b.* from socialMedia a,ownerSocialMedia b where a.id=b.socialMediaId and b.createdBy='"+idd+"'");
                          int count1=0;
                         
                          while(rs1.next())
@@ -744,10 +804,12 @@
                   </thead>
                   <tbody>
                     <%   
+                            HttpSession ss2=request.getSession();
+                          String idAddress=(String)ss2.getAttribute("ownerId");
                          Class.forName("com.mysql.jdbc.Driver"); 
                            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Exhibition","root","12345"); 
                          Statement stat=con.createStatement();
-                         ResultSet rs=stat.executeQuery("select * from ownerAddress");
+                         ResultSet rs=stat.executeQuery("select * from ownerAddress where createdBy='"+idAddress+"'");
                          int count=0;
                          while(rs.next())
                          {
@@ -853,10 +915,12 @@
                   </thead>
                   <tbody>
                     <%   
+                         HttpSession ss3=request.getSession();
+                         String idContactPerson=(String)ss3.getAttribute("ownerId");
                          Class.forName("com.mysql.jdbc.Driver"); 
-                           Connection con2 = DriverManager.getConnection("jdbc:mysql://localhost:3306/Exhibition","root","12345"); 
+                         Connection con2 = DriverManager.getConnection("jdbc:mysql://localhost:3306/Exhibition","root","12345"); 
                          Statement stat2=con2.createStatement();
-                         ResultSet rs2=stat.executeQuery("select * from ownerContactPerson");
+                         ResultSet rs2=stat.executeQuery("select * from ownerContactPerson where createdBy='"+idContactPerson+"'");
                          int count2=0;
                          while(rs2.next())
                          {
@@ -878,19 +942,18 @@
                             String mobileno=rs2.getString(10);
                             String Emailid=rs2.getString(11);
                             
-                                
-                              HttpSession ss1=request.getSession();
-                                 // ss1.setAttribute("id1",id);
-                                  ss1.setAttribute("id",id);
-                                   ss1.setAttribute("title",title);
-                                    ss1.setAttribute("fname",fname);
-                                     ss1.setAttribute("lname",lname);
-                                      ss1.setAttribute("gender",gender);
-                                       ss1.setAttribute("dob",dob);
-                                        ss1.setAttribute("designation",designation);
-                                         ss1.setAttribute("phoneno",phoneno);
-                                          ss1.setAttribute("mobileno",mobileno);
-                                           ss1.setAttribute("Emailid",Emailid);
+                            //creating session    
+                            HttpSession ss1=request.getSession();
+                            ss1.setAttribute("id",id);
+                            ss1.setAttribute("title",title);
+                            ss1.setAttribute("fname",fname);
+                            ss1.setAttribute("lname",lname);
+                            ss1.setAttribute("gender",gender);
+                            ss1.setAttribute("dob",dob);
+                            ss1.setAttribute("designation",designation);
+                            ss1.setAttribute("phoneno",phoneno);
+                            ss1.setAttribute("mobileno",mobileno);
+                            ss1.setAttribute("Emailid",Emailid);
 
                             
                            %>

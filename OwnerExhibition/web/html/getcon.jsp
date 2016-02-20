@@ -1,6 +1,6 @@
 <%@ page language="java" %>
 <HTML>
-<FORM ENCTYPE="multipart/form-data" ACTION="uploadFile.jsp" METHOD=POST>
+<FORM ENCTYPE="multipart/form-data" ACTION="insertimage.jsp" METHOD=POST>
 <center>
 <table border="0" bgcolor=#ccFDDEE>
 <tr>

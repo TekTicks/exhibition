@@ -10,6 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 
 public class ownerProfileContactperson extends HttpServlet {
@@ -17,40 +18,45 @@ public class ownerProfileContactperson extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-       PrintWriter out = response.getWriter();
+        PrintWriter out = response.getWriter();
+       
          try
-                           {
-                            String title=request.getParameter("title");
-                            String firstname=request.getParameter("fname");
-                            String lastname =request.getParameter("lname");
-                            String email =request.getParameter("email");
-                            String gender =request.getParameter("gender");
-                            String dateofbirth =request.getParameter("dob");
-                            String designation =request.getParameter("designation");
-                            String phoneno =request.getParameter("phoneno");
-                            String mobileno =request.getParameter("mobileno");
-                           Connection con;
-                           con=dbConnection.getConnection();
-                            PreparedStatement ps=con.prepareStatement("insert into ownerContactPerson(title,firstName,lastName,photoMediaId,gender,dateOfBirth,degination,phoneNo,mobileNo,email,createdBy,modifiedBy)values(?,?,?,(select id from media where id=1),?,?,?,?,?,?,(select id from owner where id=1),(select id from owner where id=1))");
-                                 ps.setString(1,title);
-                                 ps.setString(2,firstname);
-                                 ps.setString(3, lastname);
-                                 ps.setString(4, gender); 
-                                 ps.setString(5, dateofbirth);
-                                 ps.setString(6, designation);
-                                 ps.setString(7, phoneno); 
-                                 ps.setString(8, mobileno); 
-                                 ps.setString(9, email); 
-                                 ps.executeUpdate();
+            {
+              //Retrieve Session from ownerLoginCheck  
+              HttpSession ss=request.getSession();
+              String id=(String)ss.getAttribute("ownerId");
+              
+              String title=request.getParameter("title");
+              String firstname=request.getParameter("fname");
+              String lastname =request.getParameter("lname");
+              String email =request.getParameter("email");
+              String gender =request.getParameter("gender");
+              String dateofbirth =request.getParameter("dob");
+              String designation =request.getParameter("designation");
+              String phoneno =request.getParameter("phoneno");
+              String mobileno =request.getParameter("mobileno");
+              //one time database connection 
+              Connection con;
+              con=dbConnection.getConnection();
+              //Inserting data into ownerContactPerson table
+              PreparedStatement ps=con.prepareStatement("insert into ownerContactPerson(title,firstName,lastName,photoMediaId,gender,dateOfBirth,degination,phoneNo,mobileNo,email,createdBy,modifiedBy)values(?,?,?,(select id from media where id=1),?,?,?,?,?,?,(select id from owner where id='"+id+"'),(select id from owner where id='"+id+"'))");
+              ps.setString(1,title);
+              ps.setString(2,firstname);
+              ps.setString(3, lastname);
+              ps.setString(4, gender); 
+              ps.setString(5, dateofbirth);
+              ps.setString(6, designation);
+              ps.setString(7, phoneno); 
+              ps.setString(8, mobileno); 
+              ps.setString(9, email); 
+              ps.executeUpdate();
                             
-                            
-                                response.sendRedirect("/Exhibition/html/ownerProfile.jsp"); 
-                           }
-                           catch(Exception ee)
-                           {
-                               out.println("error"+ee);
-                         
-                           }
+              response.sendRedirect("/Exhibition/html/ownerProfile.jsp"); 
+            }
+         catch(Exception ee)
+            {
+                out.println("error"+ee);
+            }
         
     }
 

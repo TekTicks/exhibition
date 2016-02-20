@@ -47,7 +47,6 @@
 		            data: 'un='+ $('#login_id').val() +'&pw=' + $('#password').val(),
 		            type: 'post',
 		   	    success: function(msg){
-                                alert(msg);
                                 if(msg != 'ERROR') // Message Sent, check and redirect
 				{
                                        if(msg == 'emailinvalid')
@@ -118,7 +117,7 @@
             <div class="form-group form-group-default">
                 <label>Email</label>
                 <div class="controls">
-                <input type="text" name="login_id" id="login_id" placeholder="Enter Email Id" class="form-control" required>
+                <input type="email" name="login_id" id="login_id" placeholder="Enter Email Id" class="form-control" required>
              </div>
             </div>
               <div id="msgbox1"></div>

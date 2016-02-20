@@ -47,6 +47,7 @@
 		            data: 'un='+ $('#login_id').val() +'&pw=' + $('#password').val(),
 		            type: 'post',
 		   	    success: function(msg){
+                                alert(msg);
                                 if(msg != 'ERROR') // Message Sent, check and redirect
 				{
                                        if(msg == 'emailinvalid')
@@ -69,7 +70,7 @@
                                         {
                                           $("#msgbox3").html('Login Verified, Logging in.....').addClass('myinfo').fadeTo(900,1,function()
 			                  {
-                                            document.location='/Exhibition/html/index.html';
+                                            document.location='/Exhibition/html/ownerProfile.jsp';
 			                    //redirect to secure page
 			                   });
                                         }
@@ -117,7 +118,7 @@
             <div class="form-group form-group-default">
                 <label>Email</label>
                 <div class="controls">
-                <input type="email" name="login_id" id="login_id" placeholder="Enter Email Id" class="form-control" required>
+                <input type="text" name="login_id" id="login_id" placeholder="Enter Email Id" class="form-control" required>
              </div>
             </div>
               <div id="msgbox1"></div>

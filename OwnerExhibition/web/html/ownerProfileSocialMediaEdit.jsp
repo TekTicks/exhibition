@@ -4,6 +4,7 @@
     Author     : Admin
 --%>
 
+<%@page import="ownerPortal.dbConnection"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.DriverManager"%>
@@ -397,9 +398,22 @@
                     <br>
                     <br>
                   <div class="panel-body">
-                    <div class="panel-body text-center">
-                        <img class="image-responsive-height demo-mw-500" src="assets/img/demo/typography_hero.gif" alt="">
-                    </div>
+                    <img src='profile' id="profile" alt="Profile not uploaded" style="width:100px;height:100px"> 
+                      
+    <script type="text/javascript">
+	function readProfile(input) {
+	if (input.files && input.files[0]) {
+	var reader3 = new FileReader();
+	reader3.onload = function (e) {
+	$('#profile')
+	.attr('src', e.target.result)
+	};
+	reader3.readAsDataURL(input.files[0]);
+	}
+	}
+   </script>
+                    
+    <input name="file" id="file" style="width:100px" type="file" onchange="readProfile(this);"/>
                   </div>
                 </div>
                 <!-- END PANEL -->
@@ -420,16 +434,16 @@
                             
                           <%  
                               try{
-                               String s_type="",s_link="";
                                String id=request.getParameter("myid");
                                HttpSession ss=request.getSession();
                                ss.setAttribute("id1",id);
-                               Class.forName("com.mysql.jdbc.Driver"); 
-                               Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Exhibition","root","12345"); 
+                               //Database one time Connectivity
+                               Connection con;
+                               con=dbConnection.getConnection();
                                Statement stat=con.createStatement();
                                ResultSet rs=stat.executeQuery("select a.*,b.* from socialMedia a,ownerSocialMedia b where a.id=b.socialMediaId and b.id='"+id+"'");
-                           %>
-                           <%
+                          %>
+                          <%
                              if(!rs.next())
                             {
                              out.print("Sory");
@@ -438,38 +452,32 @@
                             {
                           %>
                         
-                           <div class="form-group form-group-default required">
+                            <div class="form-group form-group-default required">
                                  <label>Select Social Media</label>
-                                 <select class="full-width"  name="socialmedia" data-init-plugin="select2">
+                                 <select class="full-width"  name="socialmedia" data-init-plugin="select2" disabled>
                                   <option value="<%out.print(rs.getString(2));%>"> <%out.print(rs.getString(2));%></option>
-                                  <option value="facebook">Facebook</option>
-                                  <option value="twitter">Twitter.</option>
-                                  <option value="Google+">Google+.</option>
-                                  <option value="Linkdin">Linkdin.</option>
-                                 
-                            </select>
-                     
+                                 </select>
                             </div>  
                             <br>
-                              <div class="form-group form-group-default required">
-                                    <label>Social Media Link</label>
-                                      <input type="text" value="<%out.print(rs.getString(9));%>" name="socialmedialink" id="tin" class="form-control" required>
-                                     </div>
-                                      <%
-                                          }      
+                            <div class="form-group form-group-default required">
+                                <label>Social Media Link</label>
+                                <input type="text" value="<%out.print(rs.getString(9));%>" name="socialmedialink" id="tin" class="form-control" required>
+                            </div>
+                          <%
+                            }      
                          }
-                        catch(Exception ee)
+                           catch(Exception ee)
                            {
                                out.println("error"+ee);
-                         
                            }
-                           %>
-                                     <br>
+                          %>
                               <br>
+                              <br>
+                              
                               <div class="form-group">
-                             <button class="btn btn-primary btn-cons m-t-10" type="submit">Update</button>
-                          <button class="btn btn-primary btn-cons m-t-10" onclick="document.location.href='/Exhibition/html/ownerProfile.jsp';"> Cancel</button> 
-                          </div>
+                              <button class="btn btn-primary btn-cons m-t-10" type="submit">Update</button>
+                              <button class="btn btn-primary btn-cons m-t-10" onclick="document.location.href='/Exhibition/html/ownerProfile.jsp';"> Cancel</button> 
+                              </div>
                           </div>    
                         </form>
                       </div>

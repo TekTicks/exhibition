@@ -1,10 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ownerPortal;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -15,44 +9,28 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author Admin
- */
+
 public class OwnerProfileAddressDelete extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try
-                           {
-                            String id=request.getParameter("addId");
-                           Connection con;
-                           con=dbConnection.getConnection();
-                              
-                                PreparedStatement ps=con.prepareStatement("delete from ownerAddress where id='"+id+"'");
-                                 
-                             
-                                 ps.executeUpdate();
-                                 out.println("<center>Data deleted Success:</center>");
-                                 response.sendRedirect("/Exhibition/html/ownerProfile.jsp"); 
-                           }
-                           catch(Exception ee)
-                           {
-                               out.println("error"+ee);
-                         
-                           }
-        
+            {
+                // Getting id of ownerAddress from url of delete button from ownerProfile
+                String id=request.getParameter("addId");
+                //one time database connection
+                Connection con;
+                con=dbConnection.getConnection();
+                PreparedStatement ps=con.prepareStatement("delete from ownerAddress where id='"+id+"'");
+                ps.executeUpdate();
+                response.sendRedirect("/Exhibition/html/ownerProfile.jsp"); 
+            }
+        catch(Exception ee)
+        {
+            out.println("error"+ee);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

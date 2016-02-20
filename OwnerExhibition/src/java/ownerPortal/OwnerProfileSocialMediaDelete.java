@@ -20,27 +20,25 @@ public class OwnerProfileSocialMediaDelete extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try
-                           {
-                            
-                          String id=request.getParameter("myid");
-                          
-                          HttpSession ss=request.getSession();
-                        //  String id=(String)ss.getAttribute("id1");
-                           Connection con;
-                           con=dbConnection.getConnection();
-                                PreparedStatement ps=con.prepareStatement("delete from ownerSocialMedia where id='"+id+"'");
-                                 
-                                
-                                 
-                                 ps.executeUpdate();
-                                
-                                response.sendRedirect("/Exhibition/html/ownerProfile.jsp");
-                           }
-                           catch(Exception ee)
-                           {
-                               out.println("error"+ee);
-                         
-                           }
+                {
+                   
+                    // Getting id of ownerSocialMedia from url of delete button from ownerProfile            
+                    String id=request.getParameter("myid");
+                     //One time database connection  
+                    Connection con;
+                    con=dbConnection.getConnection();
+                    PreparedStatement ps=con.prepareStatement("delete from ownerSocialMedia where id='"+id+"'");
+                    int n=ps.executeUpdate();
+                    if(n>0)
+                    {
+                        out.print("ok");   
+                    }
+                    response.sendRedirect("/Exhibition/html/ownerProfile.jsp");
+                }
+        catch(Exception ee)
+        {
+            out.println("error"+ee);
+        }
         
     }
 

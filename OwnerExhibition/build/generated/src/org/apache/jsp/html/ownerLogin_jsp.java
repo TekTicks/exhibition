@@ -86,6 +86,7 @@ public final class ownerLogin_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\t\t            data: 'un='+ $('#login_id').val() +'&pw=' + $('#password').val(),\n");
       out.write("\t\t            type: 'post',\n");
       out.write("\t\t   \t    success: function(msg){\n");
+      out.write("                                alert(msg);\n");
       out.write("                                if(msg != 'ERROR') // Message Sent, check and redirect\n");
       out.write("\t\t\t\t{\n");
       out.write("                                       if(msg == 'emailinvalid')\n");
@@ -108,7 +109,7 @@ public final class ownerLogin_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                                        {\n");
       out.write("                                          $(\"#msgbox3\").html('Login Verified, Logging in.....').addClass('myinfo').fadeTo(900,1,function()\n");
       out.write("\t\t\t                  {\n");
-      out.write("                                            document.location='/Exhibition/html/index.html';\n");
+      out.write("                                            document.location='/Exhibition/html/ownerProfile.jsp';\n");
       out.write("\t\t\t                    //redirect to secure page\n");
       out.write("\t\t\t                   });\n");
       out.write("                                        }\n");
@@ -148,13 +149,15 @@ public final class ownerLogin_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("         <div class=\"login-container bg-white\">\n");
       out.write("         <div class=\"p-l-50 m-l-20 p-r-50 m-r-20 p-t-50 m-t-30 sm-p-l-15 sm-p-r-15 sm-p-t-40\">\n");
       out.write("         <p class=\"p-t-35\"><h2><b>Owner Login</b></h2>\n");
+      out.write("         \n");
+      out.write("         \n");
       out.write("         <!-- START Login Form -->\n");
       out.write("         <form name=\"login_frm\" id=\"login_frm\" class=\"p-t-15\" >\n");
       out.write("             <!-- START Form Control-->\n");
-      out.write("             <div class=\"form-group form-group-default\">\n");
-      out.write("             <label>Email</label>\n");
-      out.write("             <div class=\"controls\">\n");
-      out.write("             <input type=\"email\" name=\"login_id\" id=\"login_id\" placeholder=\"Enter Email Id\" class=\"form-control\" required>\n");
+      out.write("            <div class=\"form-group form-group-default\">\n");
+      out.write("                <label>Email</label>\n");
+      out.write("                <div class=\"controls\">\n");
+      out.write("                <input type=\"text\" name=\"login_id\" id=\"login_id\" placeholder=\"Enter Email Id\" class=\"form-control\" required>\n");
       out.write("             </div>\n");
       out.write("            </div>\n");
       out.write("              <div id=\"msgbox1\"></div>\n");

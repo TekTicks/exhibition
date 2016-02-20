@@ -402,13 +402,13 @@
                     <br>
                     
                 <!-- START PANEL -->
-         <form action="/Exhibition/ownerProfileSocialMediaSave" method="post" role="form">
+         <form ENCTYPE="multipart/form-data" action="/Exhibition/html/insertimage.jsp" method="post" role="form">
              <div class="panel-heading">
               <div class="panel-title">
                     Social Media Icon 
                 </div>
                  </div>
-       <img src='profile' id="profile" alt="Profile not uploaded" style="width:100px;height:100px"> 
+       <img src='' id="profile" alt="Profile not uploaded" style="width:200px;height:200px"> 
                       
     <script type="text/javascript">
 	function readProfile(input) {
@@ -423,9 +423,9 @@
 	}
    </script>
                     
-    <input name="file" id="file" style="width:100px" type="file" onchange="readProfile(this);"/>
-                  
-  
+    <input name="file" id="file" style="width:200px" type="file" onchange="readProfile(this);">
+    <input type="submit" value="upload">       
+         </form>
                 <!-- END PANEL -->
               </div>
                 
@@ -440,21 +440,48 @@
                       
              <div class="col-md-70">
                       <div class="padding-30">
-                       
+                        <form action="/Exhibition/ownerProfileSocialMediaSave" method="post" role="form">
                              <div class="form-group form-group-default required">
-                                 <label>Select Social Media</label>
-                                 <select class="full-width" name="socialmedia" data-init-plugin="select2">
+                     <%@page import="java.io.*;" %>
+                     <%@page import="java.sql.*;" %>
+                     <%@page import="java.sql.DriverManager;" %>
+                     <%@page import="java.util.Scanner.*;" %>
+                     <%   
+                         Class.forName("com.mysql.jdbc.Driver"); 
+                         java.sql.Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Exhibition","root","12345"); 
+                         Statement stat=con.createStatement();
+                         ResultSet rs=stat.executeQuery("select * from socialMedia");
+                         
+                     %>   
+                    <!--   <tr><td width=""><label class=''>Select Company</label>
+                          <select class='full-width' data-placeholder='Company' data-init-plugin='' name='cname'>-->
+                              
+                        <label>Select Social Media</label>
+                        <select class="full-width" name="socialmedia" id="socialmedia"  data-init-plugin="select2">
+                      <%
+                         while(rs.next())
+                         {
+                              String sm=rs.getString(2);
+                              out.print(sm);
+                      %>
+                             <optgroup label=''><option  value="<%=sm %>"><%=sm %></option></optgroup>
+                      
+                      <%
+                         }
+                      %>
+                              <!--   <label>Select Social Media</label>
+                                 <select class="full-width" name="socialmedia" id="socialmedia"  data-init-plugin="select2">
                                   <option value="facebook">Facebook</option>
                                   <option value="twitter">Twitter.</option>
                                   <option value="Google+">Google+.</option>
-                                  <option value="Linkdin">Linkdin.</option>
+                                  <option value="Linkdin">Linkdin.</option>-->
                             </select>
                      
                             </div>  
                             <br>
                               <div class="form-group form-group-default required">
                                     <label>Social Media Link</label>
-                                      <input type="text" name="socialmedialink"id="tin" class="form-control" required>
+                                      <input type="text" name="socialmedialink" id="socialmedialink" class="form-control" required>
                                      </div>
                               <br>
                               <br>

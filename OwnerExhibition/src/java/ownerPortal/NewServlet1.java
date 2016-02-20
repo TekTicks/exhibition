@@ -5,65 +5,102 @@
  */
 package ownerPortal;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import static java.lang.System.out;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 /**
  *
  * @author Admin
  */
-public class NewServlet1 extends HttpServlet {
+@MultipartConfig(fileSizeThreshold=1024*1024*2, 
+maxFileSize=1024*1024*10, 
+maxRequestSize=1024*1024*50)
 
+public class NewServlet1 extends HttpServlet {
+private String getFileName(final Part part) {
+    final String partHeader = part.getHeader("content-disposition");
     
+    for (String content : part.getHeader("content-disposition").split(";")) {
+        if (content.trim().startsWith("filename")) {
+            return content.substring(
+                    content.indexOf('=') + 1).trim().replace("\"", "");
+        }
+    }
+    return null;
+}
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-         try
-        {
-            ArrayList<String> arr3 =new ArrayList<String>();
-            ArrayList<String> arr4 =new ArrayList<String>();
-            arr3.add("pune");
-            arr3.add("thane");
-            arr3.add("karjat");
-            arr4.add("Delhi");
-            arr4.add("Minto Road");
-            arr4.add("Janakpuri");
-            String valajax=request.getParameter("valajax");
-            if(valajax.equals(""))
-            {
-                response.getWriter().write("<label><b>&nbsp &nbsp  Select state<b></label><br>");
-                response.getWriter().write("&nbsp &nbsp<select  class=\"full-width\" data-init-plugin=\"select2\"> ");
-                //response.getWriter().write("DropDown 1:<select> ");
-                for(int i=0;i<arr3.size();i++)
-                {
-                     response.getWriter().write("<option>"+arr4.get(i)+"</option>");
-                }
-                
-                response.getWriter().write("</select> ");
-            }
-             if(valajax.equals("v2"))
-            {
-                 response.getWriter().write("<label><b>&nbsp &nbsp Select state<b></label><br>");
-                response.getWriter().write("&nbsp &nbsp<select  class=\"full-width\" data-init-plugin=\"select2\"> ");
-                for(int i=0;i<arr4.size();i++)
-                {
-                     response.getWriter().write("<option>"+arr4.get(i)+"</option>");
-                }
-                
-                response.getWriter().write("</select> ");
-            }
-         }
-        catch(Exception ee)
-        {
-            out.println("error"+ee);
+         try (PrintWriter out1 = response.getWriter()) {
+            HttpSession session=request.getSession();
+            String name=request.getParameter("unname");
+            out.print(name);
+            Part filePart = request.getPart("filecover");
+            
+          
+          
+          String path="path here";
+          
+          File file=new File(path);
+          file.mkdir();
+          String fileName = getFileName(filePart);
+          
+          OutputStream out = null;
+          
+            InputStream filecontent = null;
+            
+            PrintWriter writer = response.getWriter();
+         
+        out = new FileOutputStream(new File(path + File.separator
+                + fileName));
+        
+        filecontent = filePart.getInputStream();
+     
+
+        int read = 0;
+        final byte[] bytes = new byte[1024];
+
+        while ((read = filecontent.read(bytes)) != -1) {
+            out.write(bytes, 0, read);
+           
+            String photo="path/"+fileName;
+            
+            
         }
-    }
+        
+       
+        Class.forName("com.mysql.jdbc.Driver");
+        Connection con=DriverManager.getConnection("URL, USERNAME, PASSWORD");
+        Statement stmt=con.createStatement();
+            String photo1 = null;
+       
+        stmt.executeUpdate("insert into tablename(Name,photourl) values('"+name+"','"+photo1+"')");
+        
+        
+                
+         }
+        catch(Exception e)
+        {
+            
+        }
+     }
+
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

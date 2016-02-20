@@ -1,10 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ownerPortal;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -16,19 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-
 public class ckvInsert extends HttpServlet {
 
-   
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+           throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try
         {
-            HttpSession ss=request.getSession();
-            //String id=(String)ss.getAttribute("username");
-            //String idd=(String)ss.getAttribute("ownerId");
+            /*HttpSession ss=request.getSession();
+            String id=(String)ss.getAttribute("username");
+            String idd=(String)ss.getAttribute("ownerId");
+            */
+            //One time database connection  
             Connection con;
             con=dbConnection.getConnection();
             PreparedStatement ps=con.prepareStatement("insert into owner(userName,password,createdBy,modifiedBy) values(?,?,?,?)");

@@ -43,6 +43,18 @@
     <link href="assets/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" media="screen">
     <link href="pages/css/pages-icons.css" rel="stylesheet" type="text/css">
     <link class="main-stylesheet" href="pages/css/pages.css" rel="stylesheet" type="text/css" />
+    <script src="pages/js/jquery-1.4.2.min.js" type="text/javascript"></script>
+    <script src="pages/js/jquery-1.11.1.js" type="text/javascript"></script>
+    <script>
+    window.onload = function()
+    {
+      // fix for windows 8
+      if (navigator.appVersion.indexOf("Windows NT 6.2") != -1)
+        document.head.innerHTML += '<link rel="stylesheet" type="text/css" href="pages/css/windows.chrome.fix.css" />'
+    } 
+    </script>
+
+
     
   </head>
   <body class="fixed-header ">
@@ -170,6 +182,9 @@
     
     <!-- END SIDEBAR -->
     <!-- END SIDEBPANEL-->
+    
+    
+    
     <!-- START PAGE-CONTAINER -->
     <div class="page-container ">
       <!-- START HEADER -->
@@ -376,100 +391,128 @@
       </div>
       <!-- END HEADER -->
       
+ <!--------------------------------------------------------------------------------------------------------------------------------------------->     
       
-      <!-- START PAGE CONTENT WRAPPER -->
-      <div class="page-content-wrapper ">
-        <!-- START PAGE CONTENT -->
-        <div class="content ">
-          <!-- START CONTAINER FLUID -->
-          <div class="container-fluid container-fixed-lg bg-white">
-            <div class="row">
-              <div class="col-sm-5">
-                <!-- START PANEL -->
-                <div class="panel panel-transparent">
-                  <div class="panel-heading">
-                  </div>
-                    <br>
-                    <br>
-                  <div class="panel-body">
-                    <div class="panel-body text-center">
-                        <img class="image-responsive-height demo-mw-500" src="assets/img/demo/typography_hero.gif" alt="">
-                    </div>
-                  </div>
-                </div>
-                <!-- END PANEL -->
-              </div>
-                
-                
-              
-              <div class="col-lg-7 col-md-6 ">
-                <!-- START PANEL -->
-                <div class="panel panel-transparent">
-                  <div class="panel-body">
-                      <br>
-                      <br>
-                      
+ <script>
+    function change()
+    {
+        var val=document.getElementById('one').value;
+        var xhttp=new XMLHttpRequest();
+        xhttp.onreadystatechange=function()
+        {
+            if(xhttp.readyState==4 && xhttp.status==200)
+            {
+                document.getElementById('two').innerHTML=xhttp.responseText;
+            }
+        };
+        xhttp.open("POST","/Exhibition/NewServlet?valajax="+val,true);
+        xhttp.send();
+    }
+</script>
+
+<script>
+    function change1()
+    {
+        var val=document.getElementById('two').value;
+
+        var xhttp=new XMLHttpRequest();
+        xhttp.onreadystatechange=function()
+        {
+            if(xhttp.readyState==4 && xhttp.status==200)
+            {
+                document.getElementById('three').innerHTML=xhttp.responseText;
+            }
+        };
+        xhttp.open("POST","/Exhibition/NewServlet?valajax="+val,true);
+        xhttp.send();
+    }
+</script>
+ <div class="register-container full-height sm-p-t-30">
+      <div class="container-sm-height full-height">
+        <div class="row row-sm-height">
+          <div class="col-sm-12 col-sm-height col-middle">
+
              <div class="col-md-70">
-                      <div class="padding-30">
-                        <form action="/Exhibition/ownerProfileAddressSave" method="post" role="form">
-                          
-                         
-                          <div class="form-group-attached">
-                                <div class="form-group form-group-default required">
-                                    <label>Address 1</label>
-                                    <input type="text" name="address1" id="tin" class="form-control" required>
-                                     </div>
-                               
-                             <div class="form-group form-group-default">
-                                    <label>Address 2</label>
-                                      <input type="text" name="address2"id="tin" class="form-control">
-                                     </div>
-                            
-                               <div class="form-group form-group-default required">
-                                    <label>Zip Code</label>
-                                      <input type="text" name="zipcode"id="tin" class="form-control" required>
-                                     </div>
-                            
-                             <div class="form-group form-group-default required">
-                                    <label>Landmark</label>
-                                      <input type="text" name="landmark"id="tin" class="form-control" required>
-                                     </div>
+                <div class="padding-30">
+                    <form action="/Exhibition/ownerProfileAddressSave" method="post" role="form">
+                        <div class="form-group-attached">
+                            <div class="form-group form-group-default required">
+                               <label>Address 1</label>
+                                 <input type="text" name="address1" id="tin" class="form-control" required>
+                            </div>
+                            <div class="form-group form-group-default">
+                                <label>Address 2</label>
+                                  <input type="text" name="address2"id="tin" class="form-control">
+                            </div>
+                            <div class="form-group form-group-default required">
+                                 <label>Zip Code</label>
+                                 <input type="text" maxlength="6" minlength="6" name="zipcode"id="tin" class="form-control" required>
+                            </div>
+                            <div class="form-group form-group-default required">
+                                <label>Landmark</label>
+                                <input type="text" name="landmark"id="tin" class="form-control" required>
+                            </div>
                               <br>
-                              <div class="form-group form-group-default required">
-                                    <label>Map Link</label>
-                                      <input type="text" name="maplink"id="tin" class="form-control" required>
-                                     </div>
+                            <div class="form-group form-group-default required">
+                                <label>Map Link</label>
+                               <input type="text" name="maplink"id="tin" class="form-control" required>
+                            </div>
+                             
+                                   <!-- Drop down 1 :<select id="one" onchange="change()">
+                                        <option>select</option>
+                                        <option value="v1">value1</option>
+                                        <option value="v2">value2</option>
+                                    </select>
+                                    -->
+                                     <div class="form-group form-group-default required">
+                                 <label>Select country</label>
+                                 <select class="full-width" id="one" name="one" onchange="change()" data-init-plugin="select2" required>
+                                     <option selected>---Select country---</option>
+                                  <option value="v1">India</option>
+                                  <option value="v2">Pakistan</option>
+                                  <option value="v2">Australia</option>
+                                  <option value="v2">China</option>
+                                  <option value="v2">Austria</option>
+                                  <option value="v2">France</option>
+                                  <option value="v2">Islamabad</option>
+                                  <option value="v2">Pakistan</option>
+                                 </select>
+                            </div> 
+                                    
+                                    
+                                    <div class="form-group form-group-default required">
+                                         <label>Select state</label>
+                                    <select  class="full-width" id="two" name="two" onchange="change1()" data-init-plugin="select2" >
+                                        
+                                    </select>
+                                    </div>
+                                    
+                                      <div class="form-group form-group-default required">
+                                          <label>Select city</label>
+                                         <select  class="full-width" id="three" name="three" data-init-plugin="select2">
+                                         </select>
+                                       </div>
+                                    
+                                     
                               <br>
                               <br>
                               <div class="form-group">
-                               <center> <button class="btn btn-success" type="submit">Submit</button>
-                          <button class="btn btn-default"><i class="pg-close"></i> Clear</button> </center>
-                          </div>
-                          </div>    
+                              <button class="btn btn-primary btn-cons m-t-10" type="submit">Submit</button>
+                              <button class="btn btn-primary btn-cons m-t-10" onclick="document.location.href='/Exhibition/html/ownerProfile.jsp';"> Cancel</button> 
+                              </div>
+                        </div>    
                         </form>
                       </div>
                     </div>
                                
-                          </div>    
-                        </form>
-                      </div>
-                    </div>
-                  </div>
+                </div>    
                 </div>
-                <!-- END PANEL -->
-              </div>
+                </div>
+                </div>
           
-            </div>
-            </div>
-          </div>
-          <!-- END CONTAINER FLUID -->  
-          </div>
+<!------------------------------------------------------------------------------------------------------------------------------------------>       
         </div>
         <!-- END PAGE CONTENT -->
-        
-        
-        
-        
         <!-- START COPYRIGHT -->
         <!-- START CONTAINER FLUID -->
         <!-- START CONTAINER FLUID -->

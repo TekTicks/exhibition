@@ -47,6 +47,10 @@
     <link href="assets/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" media="screen">
     <link href="pages/css/pages-icons.css" rel="stylesheet" type="text/css">
     <link class="main-stylesheet" href="pages/css/pages.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="pages/js/jquery-1.4.2.min.js"></script>
+    <script src="pages/js/ownerloginValidation.js"></script>
+    <link href="pages/css/ownerLoginAjax.css" rel="stylesheet" type="text/css" />  
     
   </head>
   <body class="fixed-header ">
@@ -411,39 +415,77 @@
                   <div class="panel-body">
                       
                       
+                       <script type="text/javascript">
+	$(document).ready(function(){
+		$("#contactPersonUpdate").submit(function(){
+
+			 //remove previous class and add new "myinfo" class
+	       // $("#msgbox").removeClass().addClass('myinfo').text('Validating Your Login ').fadeIn(1000);
+
+			
+			this.timer = setTimeout(function () {
+				$.ajax({
+		          	url: '/Exhibition/OwnerProfileContactPersonUpdate',
+		          	data: 'title='+ $('#title').val() +'&fname=' + $('#fname').val()+'&lname=' + $('#lname').val() +'&email=' + $('#email').val()+'&gender=' + $('#gender').val()+'&dob=' + $('#dob').val() +'&designation=' + $('#designation').val()+'&phoneno=' + $('#phoneno').val()+'&mobileno=' + $('#mobileno').val(),
+		          	type: 'post',
+		   		success: function(msg){
+                                 
+                                if(msg != 'error') // Message Sent, check and redirect
+				{
+                                       
+                                          $("#msgbox1").html('Data updated successfully').addClass('myinfo').fadeTo(1000,1,function()
+			             {
+			                 //redirect to secure page
+			              document.location='/Exhibition/html/ownerProfile.jsp';
+			             });
+                                        
+                                    }
+                               else
+                            {
+                                $("#msgbox1").fadeTo(100,1,function() //start fading the messagebox
+		                {
+			                  //add message and change the class of the box and start fading
+			                 $(this).html('sorry').removeClass().addClass('myerror').fadeTo(300,1);
+                                        // document.location='/Exhibition/html/exhibitionAdminLog.jsp?user';
+                                 });
+                            }
+                                }
+				});
+			}, 200);
+			return false;
+ 		});		
+
+	});
+   </script> 
+                      
+                      
              <div class="col-md-70">
                       <div class="padding-30">
-                         <form action="/Exhibition/OwnerProfileContactPersonUpdate" method="post" id="form-project" role="form" autocomplete="off">
-                             
-                             
+                         <form action="" method="post" id="contactPersonUpdate" role="form" autocomplete="off">
                               <%  
-                            
                              try{    
-                              
-                              
-                             String id=request.getParameter("contactPersonId");
-                              HttpSession ss=request.getSession();
-                              ss.setAttribute("contactPersonId",id);
-                          Class.forName("com.mysql.jdbc.Driver"); 
-                         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Exhibition","root","12345"); 
-                         Statement stat=con.createStatement();
-                         ResultSet rs=stat.executeQuery("select * from ownerContactPerson where id='"+id+"'");
-                         %>
-                         <%
-                             if(!rs.next())
-                         {
-                             out.print("Sory");
-                         }
-                         else
-                         {
-                             int gender=Integer.parseInt(rs.getString(6));
-                            
-                       %>
+                               String id=request.getParameter("contactPersonId");
+                               HttpSession ss=request.getSession();
+                               ss.setAttribute("contactPersonId",id);
+                               Class.forName("com.mysql.jdbc.Driver"); 
+                               Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Exhibition","root","12345"); 
+                               Statement stat=con.createStatement();
+                               ResultSet rs=stat.executeQuery("select * from ownerContactPerson where id='"+id+"'");
+                              %>
+                              <%
+                               if(!rs.next())
+                              {
+                              out.print("Sory");
+                              }
+                              else
+                              {
+                              int gender=Integer.parseInt(rs.getString(6));
+                              %>
               
                         <p>Basic Information</p>
                             <div class="form-group form-group-default required">
                                  <label>Title</label>
-                                 <select class="full-width" name="title" data-init-plugin="select2">
+                                 <select class="full-width" name="title" id="title" data-init-plugin="select2">
                                      <option  value="<%out.print(rs.getString(2));%>"><%out.print(rs.getString(2));%></option>
                                   <option value="Mr.">Mr.</option>
                                   <option value="Mrs.">Mrs.</option>
@@ -455,20 +497,20 @@
                                 <div class="col-sm-6">
                                 <div class="form-group form-group-default required">
                                      <label>First name</label>
-                                     <input type="text"  value="<%out.print(rs.getString(3));%>" name="fname" class="form-control" name="firstName" required>
+                                     <input type="text"  value="<%out.print(rs.getString(3));%>" name="fname" id="fname" class="form-control"  required>
                                 </div>
                                 </div>
                                 <div class="col-sm-6">
                                  <div class="form-group form-group-default">
                                      <label>Last name</label>
-                                     <input type="text"  value="<%out.print(rs.getString(4));%>" name="lname" class="form-control" name="lastName">
+                                     <input type="text"  value="<%out.print(rs.getString(4));%>" name="lname" id="lname" class="form-control" >
                                 </div>
                                 </div>
                                 <div class="row">
                         <div class="col-sm-12">
                           <div class="form-group form-group-default">
                             <label>Email</label>
-                            <input type="email" class="form-control"  value="<%out.print(rs.getString(11));%>" name="email" placeholder="" required>
+                            <input type="email" class="form-control"  value="<%out.print(rs.getString(11));%>" name="email"  id="email" placeholder="" required>
                           </div>
                         </div>
                       </div>
@@ -481,16 +523,16 @@
                            <label>Gender</label></div>
                                 <div class="radio radio-success">
                                     <% if(gender==0) { %> 
-                                    &nbsp;&nbsp;&nbsp;<input type="radio" checked="checked" value="0" name="gender" id="male">
+                                    &nbsp;&nbsp;&nbsp;<input type="radio" checked="checked" value="0" name="gender" id="gender">
                                 <label for="male">Male</label>
-                                <input type="radio"  value="1" name="gender" id="female">
+                                <input type="radio"  value="1" name="gender" id="gender">
                                 <label for="female">Female</label>
                                 <% }
                                     else
                                     { %>
-                                    &nbsp;&nbsp;&nbsp;<input type="radio" value="0" name="gender" id="male">
+                                    &nbsp;&nbsp;&nbsp;<input type="radio" value="0" name="gender" id="gender">
                                 <label for="male">Male</label>
-                                <input type="radio" checked="checked" value="1" name="gender" id="female">
+                                <input type="radio" checked="checked" value="1" name="gender" id="gender">
                                 <label for="female">Female</label>
                                    <%}%>
      
@@ -503,7 +545,7 @@
                           <div class="col-sm-12">
                             <div class="form-group form-group-default required">
                                 <label> Date of Birth</label>
-                              <input id="start-date"  value="<%out.print(rs.getString(7));%>"  type="date" class="form-control date" name="dob"  prequired>
+                              <input id="dob"  value="<%out.print(rs.getString(7));%>"  type="date" class="form-control date" name="dob"  prequired>
                             </div>
                           </div>
                         </div>
@@ -511,7 +553,7 @@
                              <div class="col-sm-12">
                                 <div class="form-group form-group-default required">
                                      <label>Designation</label>
-                                     <input type="text"  value="<%out.print(rs.getString(8));%>" class="form-control" name="designation" required>
+                                     <input type="text"  value="<%out.print(rs.getString(8));%>" class="form-control" name="designation" id="designation"  required>
                                 </div>
                                 </div>
                       </div>
@@ -533,7 +575,7 @@
                                         </select>
                                         </span>
                               <label>Telephone Number</label>
-                              <input type="text"  value="<%out.print(rs.getString(9));%>"name="phoneno" class="form-control" placeholder="" required>
+                              <input type="text"  value="<%out.print(rs.getString(9));%>" name="phoneno" id="phoneno" class="form-control" placeholder="" required>
                             </div>
                                         
                      <div class="form-group form-group-default input-group required">
@@ -554,22 +596,22 @@
                                         </select>
                                         </span>
                               <label>Mobile Number</label>
-                              <input type="text" name="mobileno"  value="<%out.print(rs.getString(10));%>" class="form-control" placeholder="" required>
+                              <input type="text" name="mobileno" id="mobileno" value="<%out.print(rs.getString(10));%>" class="form-control" placeholder="" required>
                             </div>
-                     
-                </div>
-                      <br>
-                       <button class="btn btn-primary btn-cons m-t-10" type="submit">Submit</button>
+                            </div> 
+                            <div id="msgbox1" ></div>     
+                            <br>
+                       <button class="btn btn-primary btn-cons m-t-10" type="submit">Update</button>
                        <button class="btn btn-primary btn-cons m-t-10" onclick="document.location.href='/Exhibition/html/ownerProfile.jsp';">Cancel</button> 
-                                    <%
-                                          }      
-                         }
-                        catch(Exception ee)
-                           {
-                               out.println("error"+ee);
-                         
-                           }
-                           %>
+                      
+                                <%
+                                      }      
+                                    }
+                                    catch(Exception ee)
+                                   {
+                                    out.println("error"+ee);
+                                   }
+                                %>
                     </form>
                       </div>
                     </div>

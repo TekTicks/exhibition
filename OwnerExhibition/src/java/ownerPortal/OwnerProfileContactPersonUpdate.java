@@ -22,42 +22,47 @@ public class OwnerProfileContactPersonUpdate extends HttpServlet {
           PrintWriter out = response.getWriter();
         try  {
                             
-                           HttpSession ss=request.getSession();
-                            String id=(String)ss.getAttribute("contactPersonId");
-                            String title =request.getParameter("title");;
-                            String fname =request.getParameter("fname");
-                            String lname =request.getParameter("lname");
-                            String email =request.getParameter("email");
-                            String gender =request.getParameter("gender");
-                            String dob =request.getParameter("dob");
-                            String designation =request.getParameter("designation");
-                            String phoneno =request.getParameter("phoneno");
-                            String mobileno =request.getParameter("mobileno");
-                            
-                          Connection con;
-                           con=dbConnection.getConnection();
+            HttpSession ss=request.getSession();
+            String id=(String)ss.getAttribute("contactPersonId");
+            String title =request.getParameter("title");;
+            String fname =request.getParameter("fname");
+            String lname =request.getParameter("lname");
+            String email =request.getParameter("email");
+            String gender =request.getParameter("gender");
+            String dob =request.getParameter("dob");
+            String designation =request.getParameter("designation");
+            String phoneno =request.getParameter("phoneno");
+            String mobileno =request.getParameter("mobileno");
+            //One time database connection                 
+            Connection con;
+            con=dbConnection.getConnection();
+            PreparedStatement ps=con.prepareStatement("update ownerContactPerson set title=?,firstName=?,lastName=?,gender=?,dateOfBirth=?,degination=?,phoneNo=?,mobileNo=?,email=? where id='"+id+"'");
                                  
-                                PreparedStatement ps=con.prepareStatement("update ownerContactPerson set title=?,firstName=?,lastName=?,gender=?,dateOfBirth=?,degination=?,phoneNo=?,mobileNo=?,email=? where id='"+id+"'");
-                                 
-                                 ps.setString(1,title);
-                                 ps.setString(2, fname);
-                                 ps.setString(3, lname);
-                                 ps.setString(4, gender);
-                                 ps.setString(5, dob);
-                                ps.setString(6, designation);
-                                ps.setString(7, phoneno);
-                                ps.setString(8, mobileno);
-                                ps.setString(9, email);
+            ps.setString(1,title);
+            ps.setString(2, fname);
+            ps.setString(3, lname);
+            ps.setString(4, gender);
+            ps.setString(5, dob);
+            ps.setString(6, designation);
+            ps.setString(7, phoneno);
+            ps.setString(8, mobileno);
+            ps.setString(9, email);
                                
-                                 ps.executeUpdate();
-                              
-                                 response.sendRedirect("/Exhibition/html/ownerProfile.jsp"); 
+            int n= ps.executeUpdate();
+            if(n>0)
+            {
+                out.print("ok");
+            }
+            else
+            {
+                out.print("error");
+            }
+            //response.sendRedirect("/Exhibition/html/ownerProfile.jsp"); 
         }
-                           catch(Exception ee)
-                           {
-                               out.println("error"+ee);
-                         
-                           }
+        catch(Exception ee)
+        {
+            out.println("error"+ee);                          
+        }
         
         }
     

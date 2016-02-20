@@ -20,7 +20,7 @@ public class OwnerLoginCheck extends HttpServlet
         { 
                            String uname=request.getParameter("un");
                            String pass=request.getParameter("pw");
-                          
+                           // one time Database connection
                            Connection con;
                            con=dbConnection.getConnection();
                            Statement stat=con.createStatement();
@@ -41,18 +41,19 @@ public class OwnerLoginCheck extends HttpServlet
                                String website=rs.getString("website");
                                String industry=rs.getString("industryName");
                                
-                                HttpSession ss=request.getSession();
-                                ss.setAttribute("username",un1);
-                                ss.setAttribute("password",pw1);
-                                ss.setAttribute("ownerId",id);
-                                ss.setAttribute("cname",cname);
-                                ss.setAttribute("primEmail1",primEmail);
-                                ss.setAttribute("secEmail1",secEmail);
-                                ss.setAttribute("primContact1",primContact);
-                                ss.setAttribute("secContact1",secContact);
-                                ss.setAttribute("about1",about);
-                                ss.setAttribute("website1",website);
-                                ss.setAttribute("industry1",industry);
+                               // Creating session
+                               HttpSession ss=request.getSession();
+                               ss.setAttribute("username",un1);
+                               ss.setAttribute("password",pw1);
+                               ss.setAttribute("ownerId",id);
+                               ss.setAttribute("cname",cname);
+                               ss.setAttribute("primEmail1",primEmail);
+                               ss.setAttribute("secEmail1",secEmail);
+                               ss.setAttribute("primContact1",primContact);
+                               ss.setAttribute("secContact1",secContact);
+                               ss.setAttribute("about1",about);
+                               ss.setAttribute("website1",website);
+                               ss.setAttribute("industry1",industry);
                              /* ownerPortal.Global.ownerId=rs.getString("id");
                               ownerPortal.Global.companyname=rs.getString("name"); 
                               ownerPortal.Global.primaryemail=rs.getString("primEmail");
@@ -66,11 +67,11 @@ public class OwnerLoginCheck extends HttpServlet
                            }
                            if(count>0)
                            {
-                                HttpSession ss=request.getSession();
-                                  String userName=(String)ss.getAttribute("username");
-                                 
-                                  String password1=(String)ss.getAttribute("password");
-                               if( !uname.equals(userName))
+                              HttpSession ss=request.getSession();
+                              String userName=(String)ss.getAttribute("username");
+                              String password1=(String)ss.getAttribute("password");
+                              
+                              if( !uname.equals(userName))
                                {
                                     out.print("emailinvalid");        
 

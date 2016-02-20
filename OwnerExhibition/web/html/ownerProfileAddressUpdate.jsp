@@ -4,6 +4,7 @@
     Author     : Admin
 --%>
 
+<%@page import="ownerPortal.dbConnection"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.DriverManager"%>
@@ -421,59 +422,58 @@
                       <div class="padding-30">
                         <form action="/Exhibition/OwnerProfileAddressUpdate" method="post" role="form">
                            <%
-                      String id=request.getParameter("addId");
-                      
-                           Class.forName("com.mysql.jdbc.Driver"); 
-                         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Exhibition","root","12345"); 
-                         Statement stat=con.createStatement();
-                         ResultSet rs=stat.executeQuery("select * from ownerAddress where id='"+id+"'");
-                         while(rs.next())
-                         {
-                             String id1=rs.getString(1);
-                             String address1=rs.getString(2);
-                               String address2=rs.getString(3);
-                                 String landmark=rs.getString(4);
-                                   String maplink=rs.getString(7);
-                                     String pincode=rs.getString(5);
+                            String id=request.getParameter("addId");
+                            Connection con;
+                            con=dbConnection.getConnection();
+                            Statement stat=con.createStatement();
+                            ResultSet rs=stat.executeQuery("select * from ownerAddress where id='"+id+"'");
+                            while(rs.next())
+                            {
+                              String id1=rs.getString(1);
+                              String address1=rs.getString(2);
+                              String address2=rs.getString(3);
+                              String landmark=rs.getString(4);
+                              String maplink=rs.getString(7);
+                              String pincode=rs.getString(5);
                            
-                             HttpSession ss=request.getSession();
-                                 // ss1.setAttribute("id1",id);
-                                  ss.setAttribute("ownerAddId",id1);
+                              HttpSession ss=request.getSession();
+                              ss.setAttribute("ownerAddId",id1);
                            
-                           %>
+                            %>
                          
-                          <div class="form-group-attached">
+                           <div class="form-group-attached">
                                 <div class="form-group form-group-default required">
                                     <label>Address 1</label>
                                     <input type="text" name="address1"  value="<%out.print(address1);%>" id="tin" class="form-control" required>
-                                     </div>
+                                </div>
                                
-                             <div class="form-group form-group-default">
+                                <div class="form-group form-group-default">
                                     <label>Address 2</label>
                                       <input type="text" name="address2"  value="<%out.print(address2);%>" id="tin" class="form-control">
-                                     </div>
+                                </div>
                             
-                               <div class="form-group form-group-default required">
+                                <div class="form-group form-group-default required">
                                     <label>Zip Code</label>
                                       <input type="text" name="zipcode"id="tin"  value="<%out.print(pincode);%>"  class="form-control" required>
-                                     </div>
+                                </div>
                             
-                             <div class="form-group form-group-default required">
+                                <div class="form-group form-group-default required">
                                     <label>Landmark</label>
                                       <input type="text" name="landmark"id="tin"  value="<%out.print(landmark);%>" class="form-control" required>
-                                     </div>
-                              <br>
-                              <div class="form-group form-group-default required">
+                                </div>
+                                <br>
+                                <div class="form-group form-group-default required">
                                     <label>Map Link</label>
                                       <input type="text" name="maplink"id="tin"  value="<%out.print(maplink);%>" class="form-control" required>
-                                     </div>
-                                     <% }%>
+                                </div>
+                                
+                                 <% }%>
                               <br>
                               <br>
                               <div class="form-group">
                               <button class="btn btn-primary btn-cons m-t-10" type="submit">Update</button>
-                          <button class="btn btn-primary btn-cons m-t-10" onclick="document.location.href='/Exhibition/html/ownerProfile.jsp';"> Cancel</button> 
-                          </div>
+                              <button class="btn btn-primary btn-cons m-t-10" onclick="document.location.href='/Exhibition/html/ownerProfile.jsp';"> Cancel</button> 
+                              </div>
                           </div>    
                         </form>
                       </div>

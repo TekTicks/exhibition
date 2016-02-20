@@ -1,6 +1,4 @@
-
 package ownerPortal;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -20,30 +18,21 @@ public class ownerProfileContactPersonDelete extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
          PrintWriter out = response.getWriter();
         try
-                           {
-                            
-                          String id=request.getParameter("contactPersonId");
-                          out.print(id);
-                          
-                          HttpSession ss=request.getSession();
-                        //  String id=(String)ss.getAttribute("id1");
-                           
-                          Connection con;
-                           con=dbConnection.getConnection();
+            {
+                // Getting id of ownerContactPerson from url of delete button from ownerProfile            
+                String id=request.getParameter("contactPersonId");
+                //One time database connection  
+                Connection con;
+                con=dbConnection.getConnection();
                               
-                                PreparedStatement ps=con.prepareStatement("delete from ownerContactPerson where id='"+id+"'");
-                                 
-                                
-                                 
-                                 ps.executeUpdate();
-                                 
-                                 response.sendRedirect("/Exhibition/html/ownerProfile.jsp");
-                           }
-                           catch(Exception ee)
-                           {
-                               out.println("error"+ee);
-                         
-                           }
+                PreparedStatement ps=con.prepareStatement("delete from ownerContactPerson where id='"+id+"'");
+                ps.executeUpdate();
+                response.sendRedirect("/Exhibition/html/ownerProfile.jsp");
+            }
+        catch(Exception ee)
+            {
+                out.println("error"+ee);
+            }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
