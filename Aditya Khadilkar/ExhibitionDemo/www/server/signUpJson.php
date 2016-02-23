@@ -16,9 +16,10 @@ $email=$data['signUp'][0]['emailId'];
 $createdOn=date('Y-m-d h:i:s', time());
 
 
-if($mobileNo=='' or $email=='' or $password=='')
+
+if($name=='' or $mobileNo=='' or $email=='' or $password=='')
 {
-	deliver_response(201,"Missing Information","visitor",$jsonresponse);
+	deliver_response(203,"Missing Information","visitor",$jsonresponse);
 }
 else
 {
@@ -28,7 +29,7 @@ else
 	$selectVisitorRows1 = mysql_num_rows($selectVisitor1);
 	if($selectVisitorRows1 > 0)
 	{
-		deliver_response(202,"Mobile Number Already Exists","visitor",$jsonresponse);
+		deliver_response(203,"Account With This Mobile Number Already Exists","visitor",$jsonresponse);
 	}
 	else
 	{
@@ -38,7 +39,7 @@ else
 		$selectVisitorRows2=mysql_num_rows($selectVisitor2);
 		if($selectVisitorRows2 > 0)
 		{
-			deliver_response(203,"Email Id Already Exists","visitor",$jsonresponse);
+			deliver_response(203,"Account With This Email Id Already Exists","visitor",$jsonresponse);
 		}
 		else
 		{
@@ -47,12 +48,18 @@ else
 			$insertVisitor=mysql_query($insertVisitorQuery,$conn) or die(mysql_error());
 			
 			
-			$jsonresponse=$name;
-			json_encode($jsonresponse);
-			deliver_response(200,"array created","Name",$jsonresponse);
+			//$jsonresponse=array("name"=>$name, "password"=>$password, "mobileNo"=>$mobileNo, "emailId"=>$email);
 			
-			//select id from comment table
-			/*$selectVisitorQuery1 = "select id from visitor where mobileNo='$mobileno'";
+			$jsonresponse=$name;
+			
+			//$jsonresponse=($name, $password, $mobileNo, $email);
+			
+			json_encode($jsonresponse);
+			deliver_response(200,"array created","signUp",$jsonresponse);
+			
+			
+			//select id from visitor table
+			/*$selectVisitorQuery1 = "select id from visitor where mobileNo='$mobileNo'";
 			$selectVisitor1 = mysql_query($selectVisitorQuery1 ,$conn) or die(mysql_error());
 			$selectVisitorResult=mysql_fetch_assoc($selectVisitor1);
 			
@@ -62,10 +69,13 @@ else
 				//id1 has the current id from auto incremented column
 				$id1=mysql_insert_id();
 			}*/
-			/*insertVisitorProfileQuery="insert into visitorprofile (name,createdOn,modifiedOn,createdBy,modifiedBy)  values('$name','$createdOn','$createdOn','$id1','$id1')";
-			$insertVisitorProfile=mysql_query($insertVisitorProfileQuery,$conn) or die(mysql_error());
+			
+			//inserting data into visitorProfile
+			/*insertVisitorProfileQuery="insert into visitorProfile (name,createdOn,modifiedOn,createdBy,modifiedBy)  values('$name','$createdOn','$createdOn','$id1','$id1')";
+			$insertVisitorProfile=mysql_query($insertVisitorProfileQuery,$conn) or die(mysql_error());*/
+			
 			//Create OTP
-			$digits_needed=4;
+			/*$digits_needed=4;
 			$random_number=''; // set up a blank string
 			$count=0;
 			while ($count < $digits_needed ) 
@@ -73,18 +83,23 @@ else
 				$random_digit = mt_rand(0, 3);
 				$random_number .= $random_digit;
 				$count++;
-			}
+			}*/
+			
+			
+			
 			//select visitorId from Visitor table
-			$selectVisitorQuery3="select id from visitor where mobileNumber='$mobileNo' and email='$email'";
+			/*$selectVisitorQuery3="select id from visitor where mobileNumber='$mobileNo' and email='$email'";
 			$selectVisitor3=mysql_query($selectVisitorQuery3,$conn)or die(mysql_error());
 			$selectVisitorResult=mysql_fetch_assoc($selectVisitor3);
 			$jsonresponse=array("visitorId"=>$selectVisitorResult['id'],"OTP"=>$random_number);
 			json_encode($jsonresponse);
 			deliver_response(200,"Visitor Created","visitor",$jsonresponse);
-			$id=$selectVisitorResult['id'];
+			$id=$selectVisitorResult['id'];*/
+		
+			
 			/* $insertVisitorStatsQuery="insert into visitorStats(visitorId) values ('$id')";
 			$insertVisitorStats=mysql_query($insertVisitorStatsQuery,$conn)or die(mysql_error()); */
-	}
+		}
 	}
 }
 

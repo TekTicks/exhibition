@@ -1,8 +1,9 @@
 function signup()
 {
+	
 	//document.getElementById('preload').click();
 	localStorage.clear(); 
-	var request = createCORSRequest( "post", "http://socialworker.tekticks.co.in" );
+	var request = createCORSRequest( "post", "http://exhibition.tekticks.co.in" );
 	if(request)
 	{
 		var name = document.getElementById('name').value;
@@ -45,14 +46,16 @@ function signup()
 		{
 			$("#passwordError").fadeIn();
 		}
+		
 		if(mobileNoValidate && emailIdValidate && passwordValidate)
 		{
+			//sending otp
 			var data = {"otp":[{"mobileNo":mobileNo,"emailId":emailId}]};
 			var sendData = function(data)
 			{   
 				$.ajax
 				({
-				url: 'http://socialworker.tekticks.co.in/json/otpCreation.php',
+				url: 'http://exhibition.tekticks.co.in/application/Exhibition/json/otpCreation.php',
 				type: 'POST',
 				contentType: 'application/json',
 				data: JSON.stringify(data),
@@ -61,28 +64,32 @@ function signup()
 					{
 						if(JSON.stringify(response.status)==200)
 						{
-							$("#mobileError").hide();
-							$("#emailError").hide();
+							$("#mobileError").fadeOut();
+							$("#emailError").fadeOut();
+							$("#nameError").fadeOut();
+							$("#passwordError").fadeOut();
+							//accessing response object
 							var otp = JSON.stringify(response.otp).replace(/"/g,"");
 							localStorage.setItem("mobileNo", mobileNo);
 							localStorage.setItem("emailId", emailId);
 							localStorage.setItem("password", password);
 							localStorage.setItem("name", name);
 							localStorage.setItem("otp", otp);
-							var a = document.getElementById('next');
-							a.setAttribute("href","sw_verifyotp.html");
-							document.getElementById('next').click();
+							
+							var a = document.getElementById('signupNext');
+							a.setAttribute("href","otp.html");
+							document.getElementById('signupNext').click();
 							
 						}
 						else if(JSON.stringify(response.status)==202)
 						{
-							$("#mobileError").text(JSON.stringify(response.statusMessage).replace(/"/g,""));
-							$("#mobileError").fadeIn();
+							$("#displayInfo").text(JSON.stringify(response.statusMessage).replace(/"/g,""));
+							$("#displayInfo").fadeIn();
 						}
 						else if(JSON.stringify(response.status)==203)
 						{
-							$("#emailError").text(JSON.stringify(response.statusMessage).replace(/"/g,""));
-							$("#emailError").fadeIn();
+							$("#displayInfo").text(JSON.stringify(response.statusMessage).replace(/"/g,""));
+							$("#displayInfo").fadeIn();
 						}
 					},
 					error: function(xhr, textStatus, error)
@@ -102,7 +109,8 @@ function verifyotp()
 	var otp = document.getElementById('otp').value;
 	if(localStorage.getItem("otp")==otp)
 	{
-		var request = createCORSRequest( "post", "http://socialworker.tekticks.co.in" );
+		$("#otpConfirm").text("OTP Verified");
+		var request = createCORSRequest( "post", "http://exhibition.tekticks.co.in" );
 		if(request)
 		{
 			var mobileNo = localStorage.getItem("mobileNo");
@@ -114,7 +122,7 @@ function verifyotp()
 				{   
 					$.ajax
 					({
-					url: '',
+					url: 'http://exhibition.tekticks.co.in/application/Exhibition/json/signUpJson.php',
 					type: 'POST',
 					contentType: 'application/json',
 					data: JSON.stringify(data),
@@ -124,14 +132,24 @@ function verifyotp()
 							if(JSON.stringify(response.status)==200)
 							{
 								localStorage.clear();
-								var visitorId = JSON.stringify(response.visitorId).replace(/"/g,"");
-								localStorage.setItem("visitorId",visitorId);
-								$("#signupnow").fadeOut();
-								$("#signinnow").fadeOut();
-								$("#profile").fadeIn();	
-								var a = document.getElementById('next');
-								a.setAttribute("href","sw_index.html");
-								document.getElementById('next').click();
+								//var visitorId = JSON.stringify(response.visitorId).replace(/"/g,"");
+								//localStorage.setItem("visitorId",visitorId);
+								var Name = JSON.stringify(response.Name).replace(/"/g,"");
+								
+								$("#signup").fadeOut();
+								$("#signin").fadeOut();
+								$("#profile").fadeIn();
+								
+								$("#displayName").text("Welcome "+Name);
+								
+								//document.getElementById("#proName").innerHTML = Name;
+								
+								//window.location="logo.html";
+								
+								var b = document.getElementById('otpNext');
+								b.setAttribute("href","logo.html");
+								document.getElementById('otpNext').click();
+								
 								
 							}
 							else
@@ -156,3 +174,4 @@ function verifyotp()
 		$("#otpError").fadeIn();
 	}
 }
+

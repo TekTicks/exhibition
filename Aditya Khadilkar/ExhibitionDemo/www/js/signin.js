@@ -24,14 +24,14 @@ function signin()
 		{
 			$("#passwordError").fadeIn();
 		}
-		if(mobileNoValidate && passwordValidate)
+		if(emailIdValidate && passwordValidate)
 		{
-		var data = {"signIn":[{"mobileNo":mobileNo,"password":password}]};
+		var data = {"signIn":[{"emailId":emailId,"password":password}]};
 			var sendData = function(data)
 			{   
 				$.ajax
 				({
-				url: 'http://socialworker.tekticks.co.in/json/signInJson.php',
+				url: 'http://exhibition.tekticks.co.in/application/json/signInJson.php',
 				type: 'POST',
 				contentType: 'application/json',
 				data: JSON.stringify(data),
@@ -40,27 +40,27 @@ function signin()
 					{
 						if(JSON.stringify(response.status)==200)
 						{
-							$("#mobileError").hide();
+							$("#emailError").hide();
 							$("#passwordError").hide();
 							var visitorId = JSON.stringify(response.visitorId).replace(/"/g,"");
 							localStorage.setItem("visitorId",visitorId);
-							$("#signupnow").fadeOut();
-							$("#signinnow").fadeOut();
+							$("#signup").fadeOut();
+							$("#signin").fadeOut();
 							$("#profile").fadeIn();	
-							var a = document.getElementById('next');
-							a.setAttribute("href","sw_index.html");
-							document.getElementById('next').click();
+							var a = document.getElementById('signInNext');
+							a.setAttribute("href","logo.html");
+							document.getElementById('signInNext').click();
 							
 						}
 						else if(JSON.stringify(response.status)==203)
 						{
-							$("#mobileError").text(JSON.stringify(response.statusMessage).replace(/"/g,""));
-							$("#mobileError").fadeIn();
+							$("#loginInfo").text(JSON.stringify(response.statusMessage).replace(/"/g,""));
+							$("#loginInfo").fadeIn();
 						}
 						else if(JSON.stringify(response.status)==202)
 						{
-							$("#passwordError").text(JSON.stringify(response.statusMessage).replace(/"/g,""));
-							$("#passwordError").fadeIn();
+							$("#loginInfo").text(JSON.stringify(response.statusMessage).replace(/"/g,""));
+							$("#loginInfo").fadeIn();
 						}
 			
 					},

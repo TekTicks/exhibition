@@ -49,6 +49,7 @@ function signup()
 		
 		if(mobileNoValidate && emailIdValidate && passwordValidate)
 		{
+			//sending otp
 			var data = {"otp":[{"mobileNo":mobileNo,"emailId":emailId}]};
 			var sendData = function(data)
 			{   
@@ -67,8 +68,7 @@ function signup()
 							$("#emailError").fadeOut();
 							$("#nameError").fadeOut();
 							$("#passwordError").fadeOut();
-							
-								
+							//accessing response object
 							var otp = JSON.stringify(response.otp).replace(/"/g,"");
 							localStorage.setItem("mobileNo", mobileNo);
 							localStorage.setItem("emailId", emailId);
@@ -83,13 +83,13 @@ function signup()
 						}
 						else if(JSON.stringify(response.status)==202)
 						{
-							$("#mobileError").text(JSON.stringify(response.statusMessage).replace(/"/g,""));
-							$("#mobileError").fadeIn();
+							$("#displayInfo").text(JSON.stringify(response.statusMessage).replace(/"/g,""));
+							$("#displayInfo").fadeIn();
 						}
 						else if(JSON.stringify(response.status)==203)
 						{
-							$("#emailError").text(JSON.stringify(response.statusMessage).replace(/"/g,""));
-							$("#emailError").fadeIn();
+							$("#displayInfo").text(JSON.stringify(response.statusMessage).replace(/"/g,""));
+							$("#displayInfo").fadeIn();
 						}
 					},
 					error: function(xhr, textStatus, error)
@@ -109,6 +109,7 @@ function verifyotp()
 	var otp = document.getElementById('otp').value;
 	if(localStorage.getItem("otp")==otp)
 	{
+		$("#otpConfirm").text("OTP Verified");
 		var request = createCORSRequest( "post", "http://exhibition.tekticks.co.in" );
 		if(request)
 		{
@@ -134,15 +135,21 @@ function verifyotp()
 								//var visitorId = JSON.stringify(response.visitorId).replace(/"/g,"");
 								//localStorage.setItem("visitorId",visitorId);
 								var Name = JSON.stringify(response.Name).replace(/"/g,"");
-								window.alert(Name);	
+								
 								$("#signup").fadeOut();
 								$("#signin").fadeOut();
 								$("#profile").fadeIn();
+								
+								$("#displayName").text("Welcome "+Name);
+								
+								//document.getElementById("#proName").innerHTML = Name;
+								
 								//window.location="logo.html";
 								
 								var b = document.getElementById('otpNext');
 								b.setAttribute("href","logo.html");
 								document.getElementById('otpNext').click();
+								
 								
 							}
 							else
