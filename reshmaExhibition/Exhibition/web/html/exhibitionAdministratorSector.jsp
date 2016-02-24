@@ -1,4 +1,4 @@
-<%-- 
+ <%-- 
     Document   : exhibitionSector
     Created on : Jan 27, 2016, 5:15:09 PM
     Author     : Admin
@@ -29,11 +29,16 @@
     <link href="assets/plugins/bootstrap-select2/select2.css" rel="stylesheet" type="text/css" media="screen" />
     <link href="assets/plugins/switchery/css/switchery.min.css" rel="stylesheet" type="text/css" media="screen" />
     <link href="assets/plugins/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet" type="text/css" media="screen">
+      <link href="assets/plugins/jquery-datatable/media/css/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/jquery-datatable/extensions/FixedColumns/css/dataTables.fixedColumns.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/datatables-responsive/css/datatables.responsive.css" rel="stylesheet" type="text/css" media="screen" />
     <link href="pages/css/pages-icons.css" rel="stylesheet" type="text/css">
     <link class="main-stylesheet" href="pages/css/pages.css" rel="stylesheet" type="text/css" />
+   
     <!--[if lte IE 9]>
 	<link href="assets/plugins/codrops-dialogFx/dialog.ie.css" rel="stylesheet" type="text/css" media="screen" />
 	<![endif]-->
+  
      <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="pages/js/jquery-1.4.2.min.js"></script>
    
@@ -51,7 +56,6 @@
 		          	data: 'SN='+ $('#sectorName').val() +'&ds=' + $('#description').val(),
 		          	type: 'post',
 		   		success: function(msg){
-                                  alert(msg);
                                 if(msg != 'error') // Message Sent, check and redirect
 				{
                                        
@@ -140,7 +144,7 @@
   </head>
   <body class="fixed-header ">
     <!-- BEGIN SIDEBPANEL-->
-    <nav class="page-sidebar" data-pages="sidebar">
+  <nav class="page-sidebar" data-pages="sidebar">
       <!-- BEGIN SIDEBAR MENU TOP TRAY CONTENT-->
       <div class="sidebar-overlay-slide from-top" id="appMenu">
         <div class="row">
@@ -663,6 +667,8 @@
                   </thead>
                   <tbody>
                     <%   
+                        
+                        
                          Class.forName("com.mysql.jdbc.Driver"); 
                          Connection con1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/Exhibition","root","123"); 
                          Statement stat1=con1.createStatement();
@@ -676,12 +682,15 @@
                             out.println("<td class='v-align-middle semi-bold'><p>"+rs1.getString(2)+"</p></td>");
                             out.println("<td class='v-align-middle semi-bold'><p>"+rs1.getString(4)+"</p></td>");
                          
-                            
+                            String exid=rs1.getString(1);
+                            //HttpSession ss=request.getSession(true);
+                            //ss.setAttribute("myid", exid);
+                            //out.print(exid);
                            %>
                              <td>
                                  <div class="btn-group">
-                                <!-- <button type="button" class="btn btn-success" onclick=""><i class="fa fa-pencil"></i></button>  -->
-                                 <button type="button" class="btn btn-success" onclick=""><i class="fa fa-trash-o"></i>
+                             <button type="button" class="btn btn-success" onclick="document.location.href='/Exhibition/html/exhibitionAdministratorSectorEdit.jsp?myid=<%=exid%>';"><i class="fa fa-pencil"></i></button> 
+                                 <button type="button" class="btn btn-success"  onclick="document.location.href='/Exhibition/exhibitionAdministratorSectorDelete?myid=<%=exid%>';"><i class="fa fa-trash-o"></i>
                                  </button>
                                  </div>
                             </td><%
@@ -707,7 +716,259 @@
             </div>
               
               
-              
+          <!-- END JUMBOTRON -->
+          <!-- START CONTAINER FLUID -->
+         <div class="page-content-wrapper ">
+        <!-- START PAGE CONTENT -->
+        <div class="content ">
+          <!-- START JUMBOTRON -->
+  
+          <!-- END JUMBOTRON -->
+          <!-- START CONTAINER FLUID -->
+          <div class="container-fluid container-fixed-lg bg-white">
+            <!-- START PANEL -->
+            <div class="panel panel-transparent">
+              <div class="panel-heading">
+                <div class="panel-title">My Style
+                </div>
+                <div class="pull-right">
+                  <div class="col-xs-12">
+                    <input type="text" id="search-table" class="form-control pull-right" placeholder="Search">
+                  </div>
+                </div>
+                <div class="clearfix"></div>
+              </div>
+              <div class="panel-body">
+                <table class="table table-hover demo-table-search" id="tableWithSearch">
+                  <thead>
+                    <tr>
+                      <th>Title</th>
+                      <th>Places</th>
+                      <th>Activities</th>
+                      <th>Status</th>
+                      <th>Last Update</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="v-align-middle semi-bold">
+                        <p>First Tour</p>
+                      </td>
+                      <td class="v-align-middle"><a href="#" class="btn btn-tag">United States</a><a href="#" class="btn btn-tag">India</a>
+                        <a href="#" class="btn btn-tag">China</a><a href="#" class="btn btn-tag">Africa</a>
+                      </td>
+                      <td class="v-align-middle">
+                        <p>it is more then ONE nation/nationality as its fall name is The United Kingdom of Great Britain and North Ireland..</p>
+                      </td>
+                      <td class="v-align-middle">
+                        <p>Public</p>
+                      </td>
+                      <td class="v-align-middle">
+                        <p>April 13,2014 10:13</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="v-align-middle semi-bold">
+                        <p>Among the children</p>
+                      </td>
+                      <td class="v-align-middle"><a href="#" class="btn btn-tag">United States</a><a href="#" class="btn btn-tag">India</a>
+                        <a href="#" class="btn btn-tag">China</a><a href="#" class="btn btn-tag">Africa</a>
+                      </td>
+                      <td class="v-align-middle">
+                        <p>you want English, Scottish, Welsh, Irish, British, European or UK even a British (name other original country you came form or have roots to E.G. A British Japanese or a 5th generation
+                        </p>
+                      </td>
+                      <td class="v-align-middle">
+                        <p>Public</p>
+                      </td>
+                      <td class="v-align-middle">
+                        <p>April 13,2014 10:13</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="v-align-middle semi-bold">
+                        <p>A day to remember</p>
+                      </td>
+                      <td class="v-align-middle"><a href="#" class="btn btn-tag">United States</a><a href="#" class="btn btn-tag">India</a>
+                        <a href="#" class="btn btn-tag">China</a><a href="#" class="btn btn-tag">Africa</a>
+                      </td>
+                      <td class="v-align-middle">
+                        <p>UK was on top of the art world 18-19 century had the best food, best cloths and best entertainment back then) it was a hyper nation</p>
+                      </td>
+                      <td class="v-align-middle">
+                        <p>Public</p>
+                      </td>
+                      <td class="v-align-middle">
+                        <p>April 13,2014 10:13</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="v-align-middle semi-bold">
+                        <p>Life?s sadness shared</p>
+                      </td>
+                      <td class="v-align-middle"><a href="#" class="btn btn-tag">United States</a><a href="#" class="btn btn-tag">India</a>
+                        <a href="#" class="btn btn-tag">China</a><a href="#" class="btn btn-tag">Africa</a>
+                      </td>
+                      <td class="v-align-middle">
+                        <p>he world speaks English. Common law, Magna Carta and the Bill of Rights are its wonderful legacy
+                        </p>
+                      </td>
+                      <td class="v-align-middle">
+                        <p>Public</p>
+                      </td>
+                      <td class="v-align-middle">
+                        <p>April 13,2014 10:13</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="v-align-middle semi-bold">
+                        <p>First Tour</p>
+                      </td>
+                      <td class="v-align-middle"><a href="#" class="btn btn-tag">United States</a><a href="#" class="btn btn-tag">India</a>
+                        <a href="#" class="btn btn-tag">China</a><a href="#" class="btn btn-tag">Africa</a>
+                      </td>
+                      <td class="v-align-middle">
+                        <p>it is more then ONE nation/nationality as its fall name is The United Kingdom of Great Britain and North Ireland..</p>
+                      </td>
+                      <td class="v-align-middle">
+                        <p>Public</p>
+                      </td>
+                      <td class="v-align-middle">
+                        <p>April 13,2014 10:13</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="v-align-middle semi-bold">
+                        <p>First Tour</p>
+                      </td>
+                      <td class="v-align-middle"><a href="#" class="btn btn-tag">United States</a><a href="#" class="btn btn-tag">India</a>
+                        <a href="#" class="btn btn-tag">China</a><a href="#" class="btn btn-tag">Africa</a>
+                      </td>
+                      <td class="v-align-middle">
+                        <p>it is more then ONE nation/nationality as its fall name is The United Kingdom of Great Britain and North Ireland..</p>
+                      </td>
+                      <td class="v-align-middle">
+                        <p>Public</p>
+                      </td>
+                      <td class="v-align-middle">
+                        <p>April 13,2014 10:13</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="v-align-middle semi-bold">
+                        <p>First Tour</p>
+                      </td>
+                      <td class="v-align-middle"><a href="#" class="btn btn-tag">United States</a><a href="#" class="btn btn-tag">India</a>
+                        <a href="#" class="btn btn-tag">China</a><a href="#" class="btn btn-tag">Africa</a>
+                      </td>
+                      <td class="v-align-middle">
+                        <p>it is more then ONE nation/nationality as its fall name is The United Kingdom of Great Britain and North Ireland..</p>
+                      </td>
+                      <td class="v-align-middle">
+                        <p>Public</p>
+                      </td>
+                      <td class="v-align-middle">
+                        <p>April 13,2014 10:13</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="v-align-middle semi-bold">
+                        <p>First Tour</p>
+                      </td>
+                      <td class="v-align-middle"><a href="#" class="btn btn-tag">United States</a><a href="#" class="btn btn-tag">India</a>
+                        <a href="#" class="btn btn-tag">China</a><a href="#" class="btn btn-tag">Africa</a>
+                      </td>
+                      <td class="v-align-middle">
+                        <p>it is more then ONE nation/nationality as its fall name is The United Kingdom of Great Britain and North Ireland..</p>
+                      </td>
+                      <td class="v-align-middle">
+                        <p>Public</p>
+                      </td>
+                      <td class="v-align-middle">
+                        <p>April 13,2014 10:13</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="v-align-middle semi-bold">
+                        <p>First Tour</p>
+                      </td>
+                      <td class="v-align-middle"><a href="#" class="btn btn-tag">United States</a><a href="#" class="btn btn-tag">India</a>
+                        <a href="#" class="btn btn-tag">China</a><a href="#" class="btn btn-tag">Africa</a>
+                      </td>
+                      <td class="v-align-middle">
+                        <p>it is more then ONE nation/nationality as its fall name is The United Kingdom of Great Britain and North Ireland..</p>
+                      </td>
+                      <td class="v-align-middle">
+                        <p>Public</p>
+                      </td>
+                      <td class="v-align-middle">
+                        <p>April 13,2014 10:13</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="v-align-middle semi-bold">
+                        <p>First Tour</p>
+                      </td>
+                      <td class="v-align-middle"><a href="#" class="btn btn-tag">United States</a><a href="#" class="btn btn-tag">India</a>
+                        <a href="#" class="btn btn-tag">China</a><a href="#" class="btn btn-tag">Africa</a>
+                      </td>
+                      <td class="v-align-middle">
+                        <p>it is more then ONE nation/nationality as its fall name is The United Kingdom of Great Britain and North Ireland..</p>
+                      </td>
+                      <td class="v-align-middle">
+                        <p>Public</p>
+                      </td>
+                      <td class="v-align-middle">
+                        <p>April 13,2014 10:13</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="v-align-middle semi-bold">
+                        <p>First Tour</p>
+                      </td>
+                      <td class="v-align-middle"><a href="#" class="btn btn-tag">United States</a><a href="#" class="btn btn-tag">India</a>
+                        <a href="#" class="btn btn-tag">China</a><a href="#" class="btn btn-tag">Africa</a>
+                      </td>
+                      <td class="v-align-middle">
+                        <p>it is more then ONE nation/nationality as its fall name is The United Kingdom of Great Britain and North Ireland..</p>
+                      </td>
+                      <td class="v-align-middle">
+                        <p>Public</p>
+                      </td>
+                      <td class="v-align-middle">
+                        <p>April 13,2014 10:13</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="v-align-middle semi-bold">
+                        <p>First Tour</p>
+                      </td>
+                      <td class="v-align-middle"><a href="#" class="btn btn-tag">United States</a><a href="#" class="btn btn-tag">India</a>
+                        <a href="#" class="btn btn-tag">China</a><a href="#" class="btn btn-tag">Africa</a>
+                      </td>
+                      <td class="v-align-middle">
+                        <p>it is more then ONE nation/nationality as its fall name is The United Kingdom of Great Britain and North Ireland..</p>
+                      </td>
+                      <td class="v-align-middle">
+                        <p>Public</p>
+                      </td>
+                      <td class="v-align-middle">
+                        <p>April 13,2014 10:13</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <!-- END PANEL -->
+          </div>
+          <!-- END CONTAINER FLUID -->
+          <!-- START CONTAINER FLUID -->
+         
+            <!-- END PANEL -->
+          </div>
+                  
+       
           <!-- END CONTAINER FLUID -->
         </div>
         <!-- END PAGE CONTENT -->
@@ -2007,13 +2268,75 @@
     <script src="assets/plugins/switchery/js/switchery.min.js" type="text/javascript"></script>
     <script src="assets/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
     <script src="assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
+     <script src="assets/plugins/jquery-datatable/media/js/jquery.dataTables.min.js" type="text/javascript"></script>
+      <script src="assets/plugins/jquery-datatable/media/js/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script src="assets/plugins/jquery-datatable/extensions/TableTools/js/dataTables.tableTools.min.js" type="text/javascript"></script>
+    <script src="assets/plugins/jquery-datatable/media/js/dataTables.bootstrap.js" type="text/javascript"></script>
+    <script src="assets/plugins/jquery-datatable/extensions/Bootstrap/jquery-datatable-bootstrap.js" type="text/javascript"></script>
+    <script type="text/javascript" src="assets/plugins/datatables-responsive/js/datatables.responsive.js"></script>
+    <script type="text/javascript" src="assets/plugins/datatables-responsive/js/lodash.min.js"></script>
     <!-- END VENDOR JS -->
     <!-- BEGIN CORE TEMPLATE JS -->
     <script src="pages/js/pages.min.js"></script>
     <!-- END CORE TEMPLATE JS -->
     <!-- BEGIN PAGE LEVEL JS -->
     <script src="assets/js/form_layouts.js" type="text/javascript"></script>
+       <script src="assets/js/datatables.js" type="text/javascript"></script>
     <script src="assets/js/scripts.js" type="text/javascript"></script>
     <!-- END PAGE LEVEL JS -->
+    
+    
+    <!----------------------------------------------------------------------------------------------------------------------------------- -->
+     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no" />
+    <link rel="apple-touch-icon" href="pages/ico/60.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="pages/ico/76.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="pages/ico/120.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="pages/ico/152.png">
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+    <link href="assets/plugins/pace/pace-theme-flash.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/boostrapv3/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/jquery-scrollbar/jquery.scrollbar.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="assets/plugins/bootstrap-select2/select2.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="assets/plugins/switchery/css/switchery.min.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="assets/plugins/jquery-datatable/media/css/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/jquery-datatable/extensions/FixedColumns/css/dataTables.fixedColumns.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/datatables-responsive/css/datatables.responsive.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="pages/css/pages-icons.css" rel="stylesheet" type="text/css">
+    <link class="main-stylesheet" href="pages/css/pages.css" rel="stylesheet" type="text/css" />
+    
+    <script src="assets/plugins/pace/pace.min.js" type="text/javascript"></script>
+    <script src="assets/plugins/jquery/jquery-1.11.1.min.js" type="text/javascript"></script>
+    <script src="assets/plugins/modernizr.custom.js" type="text/javascript"></script>
+    <script src="assets/plugins/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
+    <script src="assets/plugins/boostrapv3/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="assets/plugins/jquery/jquery-easy.js" type="text/javascript"></script>
+    <script src="assets/plugins/jquery-unveil/jquery.unveil.min.js" type="text/javascript"></script>
+    <script src="assets/plugins/jquery-bez/jquery.bez.min.js"></script>
+    <script src="assets/plugins/jquery-ios-list/jquery.ioslist.min.js" type="text/javascript"></script>
+    <script src="assets/plugins/jquery-actual/jquery.actual.min.js"></script>
+    <script src="assets/plugins/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+    <script type="text/javascript" src="assets/plugins/bootstrap-select2/select2.min.js"></script>
+    <script type="text/javascript" src="assets/plugins/classie/classie.js"></script>
+    <script src="assets/plugins/switchery/js/switchery.min.js" type="text/javascript"></script>
+    <script src="assets/plugins/jquery-datatable/media/js/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script src="assets/plugins/jquery-datatable/extensions/TableTools/js/dataTables.tableTools.min.js" type="text/javascript"></script>
+    <script src="assets/plugins/jquery-datatable/media/js/dataTables.bootstrap.js" type="text/javascript"></script>
+    <script src="assets/plugins/jquery-datatable/extensions/Bootstrap/jquery-datatable-bootstrap.js" type="text/javascript"></script>
+    <script type="text/javascript" src="assets/plugins/datatables-responsive/js/datatables.responsive.js"></script>
+    <script type="text/javascript" src="assets/plugins/datatables-responsive/js/lodash.min.js"></script>
+    <!-- END VENDOR JS -->
+    <!-- BEGIN CORE TEMPLATE JS -->
+    <script src="pages/js/pages.min.js"></script>
+    <!-- END CORE TEMPLATE JS -->
+    <!-- BEGIN PAGE LEVEL JS -->
+    <script src="assets/js/datatables.js" type="text/javascript"></script>
+    <script src="assets/js/scripts.js" type="text/javascript"></script>
+  
   </body>
 </html>

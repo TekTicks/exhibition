@@ -51,7 +51,6 @@
 		          	data: 'EI='+ $('#exhibitionId').val() +'&link=' + $('#link').val(),
 		          	type: 'post',
 		   		success: function(msg){
-                                  alert(msg);
                                 if(msg != 'error') // Message Sent, check and redirect
 				{
                                        
@@ -680,11 +679,13 @@
                          
                            // exhibitionAdministrator.personalInformation.id1=id1;
                             String exid=rs1.getString(1);
+                           // HttpSession ss1=request.getSession(true);
+                           // ss1.setAttribute("myid", exid);
                            %>
                  
                              <td>
                                  <div class="btn-group">
-                                 
+                                 <button type="button" class="btn btn-success" onclick="document.location.href='/Exhibition/html/exhibitionAdministratorSocialMediaEdit.jsp?myid=<%=exid%>';"><i class="fa fa-pencil"></i></button> 
                                  <button type="button" class="btn btn-success" onclick="document.location.href='/Exhibition/exhibitionAdministratorSocialMediaDelete?myid=<%=exid%>';"><i class="fa fa-trash-o"></i>
                                  </button>
                                  </div>

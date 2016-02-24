@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <meta http-equiv ="content-type" content="text/html;charset=UTF-8" />
     <meta charset="utf-8" />
     <title>Pages - Admin Dashboard UI Kit - Form Layouts</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no" />
@@ -52,7 +52,7 @@
 		          	data: 'tagline='+ $('#tagline').val() +'&title=' + $('#title').val()+'&firstName=' + $('#firstName').val() +'&lastName=' + $('#lastName').val()+'&gender=' + $('#gender').val()+'&dateOfBirth=' + $('#dateOfBirth').val() +'&degination=' + $('#degination').val()+'&phoneNo=' + $('#phoneNo').val()+'&mobileNo=' + $('#mobileNo').val()+'&email=' + $('#email').val() +'&modifiedBy=' + $('#modifiedBy').val(),
 		          	type: 'post',
 		   		success: function(msg){
-                                  alert(msg);
+                                  
                                 if(msg != 'error') // Message Sent, check and redirect
 				{
                                        
@@ -528,85 +528,41 @@
           <!-- END User Info-->
         </div>
       </div>
-      <!-- END HEADER -->
-      <!-- START PAGE CONTENT WRAPPER -->
- <!-- <div class="page-content-wrapper ">
-        <!-- START PAGE CONTENT -->
-  <!-- <div class="content ">
-       <div class="panel-header"> <h2> Create Exhibition Team </h2> </div>
-       <div class="panel-body">
-  <form role="form" id="login" name="login" action="" method="">
-              <div class="form-group">
-                   <label for="fname" class="col-sm-1 control-label">Tagline</label>
-                        <div class="col-sm-5">
-                        <input type="text" id="tagline" name="tagline" class="form-control" required>
-                        </div> </div>
-              <div class="form-group">
-                        <label>Title</label>
-                        <span class="help"></span>
-                        <input type="text" id="title" name="title" class="form-control" required>
-                      </div>
-             
-                      <div class="form-group">
-                        <label>First name</label>
-                        <span class="help"></span>
-                        <input type="text" id="firstName" name="firstName" class="form-control" required>
-                      </div>
-                       <div class="form-group">
-                        <label>Last name</label>
-                        <span class="help"></span>
-                        <input type="text" id="lastName" name="lastName" class="form-control" required>
-                      </div>
-                      <div class="form-group">
-                        <label>Gender</label>
-                        <span class="help"></span>
-                        <input type="text" id="gender" name="gender" class="form-control" required>
-                      </div>
-                      
-                      <div class="form-group">
-                        <label>Date of Birth</label>
-                        <span class="help"></span>
-                        <input type="text" id="dateOfBirth" name="dateOfBirth" class="form-control" required>
-                      </div>
-             <div class="form-group">
-                        <label>Designation</label>
-                        <span class="help"></span>
-                        <input type="text" id="degination" name="degination" class="form-control" required>
-                      </div>
-             <div class="form-group">
-                        <label>Phone No</label>
-                        <span class="help"></span>
-                        <input type="text" id="phoneNo" name="phoneNo" class="form-control" required>
-                      </div>
-             
-                      <div class="form-group">
-                        <label> Mobile No </label>
-                        <span class="help"></span>
-                        <input type="text" id="mobileNo" name="mobileNo" class="form-control"  required>
-                      </div>
-               <div class="form-group">
-                        <label>email</label>
-                        <span class="help"></span>
-                        <input type="email" id="email" name="email" class="form-control"  required>
-                      </div>
-                       <div class="form-group">
-                        <label>Modified on</label>
-                        <span class="help"></span>
-                        <input type="text" id="modifiedBy" name="modifiedBy" class="form-control"  required>
-                      </div>
-             <br><div id="msgbox1"></div>
-               <button class="btn btn-success" type="submit">Add</button>
-                          <button class="btn btn-default"><i class="pg-close"></i> Clear</button>
-                      
-                    </form> 
-           
-           
-             
-                  </div> 
+    
+   <div class="page-content-wrapper ">
+   <div class="panel panel-transparent">
+              <div class="panel-heading">
+                <div class="panel-title">Exhibition Team Members
+                </div>
+              </div>
+              <div class="panel-body">
+      <!--     <div class="alert alert-info visible-xs visible-sm" role="alert">
+                  <button class="close" data-dismiss="alert"></button>
+                  <strong>Info: </strong> For mobile optimization the tab will become a Dropdown
                 </div> -->
-                <!-- END PANEL -->
-                <div class="page-content-wrapper ">
-        <!-- START PAGE CONTENT -->
+                <div class="row">
+            
+                    <h5>Exhibition Team Members</h5> 
+                    <br>
+                    <br>
+                    <div class="panel panel-transparent ">
+                      <!-- Nav tabs -->
+                      <ul class="nav nav-tabs nav-tabs-fillup" data-init-reponsive-tabs="dropdownfx">
+                        <li class="active">
+                          <a data-toggle="tab" href="#tab-fillup1"><span>Add Team Members</span></a>
+                        </li>
+                      <!--  <li>
+                          <a data-toggle="tab" href="#tab-fillup2"><span> Update Team Members</span></a>
+                        </li> -->
+                        <li>
+                          <a data-toggle="tab" href="#tab-fillup3"><span>View/Delete Team Members</span></a>
+                        </li>
+                      </ul>
+                      <!-- Tab panes -->
+                      <div class="tab-content">
+                        <div class="tab-pane active" id="tab-fillup1">
+                          
+                                     <!-- START PAGE CONTENT -->
 <div class="content ">
     <div class="panel-body">
                 <div class="register-container full-height sm-p-t-30">
@@ -620,6 +576,238 @@
         Create a pages account. If you have a facebook account, log into it for this process. Sign in with <a href="#" class="text-info">Facebook</a> or <a href="#" class="text-info">Google</a>
     </small>
   </p> --><p><h1><b>Add Exhibition Team Members..!</b></h1></p>
+          <br>           
+               <form role="form"   class="p-t-15" id="login" name="login" action="" method="">
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="form-group form-group-default">
+                    <label>First NAme</label>
+                    <input type="text" id="firstName" name="firstName" class="form-control" required>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group form-group-default">
+                    <label>Last Name</label>
+                  <input type="text" id="lastName" name="lastName" class="form-control" required>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group form-group-default">
+                    <label>Tagline</label>
+                    <input type="text" id="tagline" name="tagline" class="form-control" required>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group form-group-default">
+                    <label>Title</label>
+                   <input type="text" id="title" name="title" class="form-control" required>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group form-group-default">
+                    <label>Gender</label>
+                    <input type="text" id="gender" name="gender" class="form-control" required>
+                  </div>
+                </div>
+              </div>
+                 <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group form-group-default">
+                    <label>Date Of Bith</label>
+                 <input type="text" id="dateOfBirth" name="dateOfBirth" class="form-control" required>
+                  </div>
+                </div>
+              </div>
+                 <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group form-group-default">
+                    <label>Designation</label>
+                  <input type="text" id="degination" name="degination" class="form-control" required>
+                  </div>
+                </div>
+              </div>
+                 <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group form-group-default">
+                    <label>Phone No</label>
+                   <input type="text" id="phoneNo" name="phoneNo" class="form-control" required>
+                  </div>
+                </div>
+              </div>
+                 <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group form-group-default">
+                    <label>Mobile No</label>
+                  <input type="text" id="mobileNo" name="mobileNo" class="form-control"  required>
+                  </div>
+                </div>
+              </div>
+                 <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group form-group-default">
+                    <label>Email</label>
+                     <input type="email" id="email" name="email" class="form-control"  required>
+                  </div>
+                </div>
+              </div>
+             <!--    <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group form-group-default">
+                    <label>Modified By</label>
+                    <input type="text" id="modifiedBy" name="modifiedBy" class="form-control"  required>
+                  </div>
+                </div>
+              </div>  -->
+          <!--  <div class="row m-t-10">
+                <div class="col-md-6">
+                  <p>I agree to the <a href="#" class="text-info small">Exhibition Terms</a> and <a href="#" class="text-info small">Privacy</a>.</p>
+                </div>
+                <div class="col-md-6 text-right">
+                  <a href="#" class="text-info small">Help? Contact Support</a>
+                </div>
+              </div>  -->
+       <div id="msgbox1"></div>       <button class="btn btn-primary btn-cons m-t-10" type="submit">Create a new account</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+</div>        
+     
+                                
+                           
+                        </div>
+                   <!--     <div class="tab-pane" id="tab-fillup2">
+                          <div class="row">
+                            <div class="col-md-12">
+                              <h3>“ Nothing is
+                                                <span class="semi-bold">impossible</span>, the word itself says 'I'm
+                                                <span class="semi-bold">possible</span>'! ”</h3>
+                              <p>A style represents visual customizations on top of a layout. By editing a style, you can use Squarespace's visual interface to customize your...</p>
+                              <br>
+                              <p class="pull-right">
+                                <button type="button" class="btn btn-default btn-cons">White</button>
+                                <button type="button" class="btn btn-success btn-cons">Success</button>
+                              </p>
+                            </div>
+                          </div>
+                        </div>  -->
+                        <div class="tab-pane" id="tab-fillup3">
+                          <div class="row">
+                                <div class="pull-right">
+                  <div class="col-xs-12">
+                    <input type="text" id="search-table" class="form-control pull-right" placeholder="Search">
+                  </div>
+                </div>
+                              
+                            <div class="col-md-12">
+                           <form id="teamMember" name="teamMember" action="" method="post">
+              
+               <table class="table table-hover demo-table-search" id="tableWithSearch">
+                     <%@page import="java.io.*;" %>
+                     <%@page import="java.sql.*;" %>
+                     <%@page import="java.sql.DriverManager;" %>
+                      <table class="table table-hover demo-table-search" id="tableWithSearch">
+                     <thead>
+                        <tr>
+                        <th>Tagline</th>
+                        <th>Title</th>        
+                           <th>First Name</th>
+                            <th>Last Name</th>
+                        <th>Gender</th>        
+                           <th>Date of Birth</th>
+                            <th>Designation </th>
+                            <th>Phone No</th>
+                        <th>Mobile No</th>        
+                           <th>Email</th>
+                             
+                        </tr>
+                  </thead>
+                  <tbody>
+                        <%@ page import="javax.servlet.http.HttpSession.*;" %>
+                    <%   
+                         Class.forName("com.mysql.jdbc.Driver"); 
+                         Connection con1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/Exhibition","root","123"); 
+                         Statement stat1=con1.createStatement();
+                         ResultSet rs1=stat1.executeQuery("select * from exhibitionTeam");
+                         int count1=0;
+                        
+                         while(rs1.next())
+                         {
+                            count1++;
+                            out.println("<tr>");
+                           out.println("<td class='v-align-middle semi-bold'><p>"+rs1.getString(2)+"</p></td>");
+                         out.println("<td class='v-align-middle semi-bold'><p>"+rs1.getString(3)+"</p></td>");
+                         out.println("<td class='v-align-middle semi-bold'><p>"+rs1.getString(4)+"</p></td>");
+                         out.println("<td class='v-align-middle semi-bold'><p>"+rs1.getString(5)+"</p></td>");
+                         out.println("<td class='v-align-middle semi-bold'><p>"+rs1.getString(6)+"</p></td>");
+                         out.println("<td class='v-align-middle semi-bold'><p>"+rs1.getString(7)+"</p></td>");
+                         out.println("<td class='v-align-middle semi-bold'><p>"+rs1.getString(8)+"</p></td>");
+                         out.println("<td class='v-align-middle semi-bold'><p>"+rs1.getString(9)+"</p></td>");
+                         out.println("<td class='v-align-middle semi-bold'><p>"+rs1.getString(10)+"</p></td>");
+                         out.println("<td class='v-align-middle semi-bold'><p>"+rs1.getString(11)+"</p></td>");
+                         // out.println("<td class='v-align-middle semi-bold'><p>"+rs1.getString(15)+"</p></td>");
+                           // exhibitionAdministrator.personalInformation.id1=id1;
+                            String exid=rs1.getString(1);
+                            
+                            HttpSession ss=request.getSession(true);
+                            ss.setAttribute("myid", exid);
+                           %>
+                 
+                             <td>
+                                 <div class="btn-group">
+                                 <button type="button" class="btn btn-success" onclick="document.location.href='/Exhibition/html/exhibitionTeamMemberEdit.jsp';"><i class="fa fa-pencil"></i></button>
+                                 <button type="button" class="btn btn-success" onclick="document.location.href='/Exhibition/exhibitionAdministratorTeamMemberDelete?myid=<%=exid%>';"><i class="fa fa-trash-o"></i>
+                                 </button>
+                                 </div>
+                            </td> <%
+                            out.println(" </tr>");
+                        }
+                       
+                   %>   
+                   </tbody>
+                </table>
+                  </form>
+                            </div>
+                        <!--  </div>  -->
+                      </div>  
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+  
+  
+  
+  
+  
+  
+  
+                <!-- END PANEL -->
+   <!-- <div class="page-content-wrapper ">
+        <!-- START PAGE CONTENT --> <!--
+<div class="content ">
+    <div class="panel-body">
+                <div class="register-container full-height sm-p-t-30">
+      <div class="container-sm-height full-height">
+        <div class="row row-sm-height">
+          <div class="col-sm-12 col-sm-height col-middle">
+  <!--          <img src="assets/img/logo.png" alt="logo" data-src="assets/img/logo.png" data-src-retina="assets/img/logo_2x.png" width="78" height="22">
+            <h3>Pages makes it easy to enjoy what matters the most in your life</h3>
+            <p>
+              <small>
+        Create a pages account. If you have a facebook account, log into it for this process. Sign in with <a href="#" class="text-info">Facebook</a> or <a href="#" class="text-info">Google</a>
+    </small>
+ <!-- </p> --> <!--<p><h1><b>Add Exhibition Team Members..!</b></h1></p>
           <br>           
                <form role="form"   class="p-t-15" id="login" name="login" action="" method="">
               <div class="row">
@@ -716,13 +904,15 @@
                   <a href="#" class="text-info small">Help? Contact Support</a>
                 </div>
               </div>  -->
-       <div id="msgbox1"></div>       <button class="btn btn-primary btn-cons m-t-10" type="submit">Create a new account</button>
+  <!--     <div id="msgbox1"></div>       <button class="btn btn-primary btn-cons m-t-10" type="submit">Create a new account</button>
             </form>
           </div>
         </div>
       </div>
     </div>
-    </div></div>        
+    </div>
+
+</div>       -->  
      
           <!-- END CONTAINER FLUID -->
   

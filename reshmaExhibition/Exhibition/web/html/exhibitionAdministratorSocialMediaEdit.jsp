@@ -1,17 +1,20 @@
 <%-- 
-    Document   : profilePage
-    Created on : Jan 22, 2016, 6:55:17 PM
+    Document   : exhibitionSector
+    Created on : Jan 27, 2016, 5:15:09 PM
     Author     : Admin
 --%>
 
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+ <%@page import="java.io.*;" %>
+  <%@page import="java.sql.*;" %>
+  <%@page import="java.sql.DriverManager;" %>
 <!DOCTYPE html>
 <html>
   <head>
     <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
     <meta charset="utf-8" />
-    <title>Pages - Admin Dashboard UI Kit - Form Wizard</title>
+    <title>Pages - Admin Dashboard UI Kit - Form Layouts</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no" />
     <link rel="apple-touch-icon" href="pages/ico/60.png">
     <link rel="apple-touch-icon" sizes="76x76" href="pages/ico/76.png">
@@ -29,15 +32,15 @@
     <link href="assets/plugins/jquery-scrollbar/jquery.scrollbar.css" rel="stylesheet" type="text/css" media="screen" />
     <link href="assets/plugins/bootstrap-select2/select2.css" rel="stylesheet" type="text/css" media="screen" />
     <link href="assets/plugins/switchery/css/switchery.min.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="assets/plugins/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet" type="text/css" media="screen">
     <link href="pages/css/pages-icons.css" rel="stylesheet" type="text/css">
     <link class="main-stylesheet" href="pages/css/pages.css" rel="stylesheet" type="text/css" />
     <!--[if lte IE 9]>
 	<link href="assets/plugins/codrops-dialogFx/dialog.ie.css" rel="stylesheet" type="text/css" media="screen" />
 	<![endif]-->
-      <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="pages/js/jquery-1.4.2.min.js"></script>
-   
-  <script type="text/javascript">
+   <script type="text/javascript">
 	$(document).ready(function(){
 		$("#login").submit(function(){
 
@@ -47,14 +50,14 @@
 			
 			this.timer = setTimeout(function () {
 				$.ajax({
-		          	url: '/Exhibition/ExhibitionAdministratorPersonalInformation',
-		          	data: 'mn='+ $('#mobileNo').val() +'&us=' + $('#userName').val()+'&pw=' + $('#password').val() +'&le=' + $('#level').val(),
+		          	url: '/Exhibition/exhibitionAdministratorSocialMediaEdit',
+		          	data: 'EI='+ $('#exhibitionId').val() +'&link=' + $('#link').val(),
 		          	type: 'post',
 		   		success: function(msg){
-                                  alert(msg);
-                                if(msg != 'mobileNoInvalid') // Message Sent, check and redirect
+                                    alert(msg);
+                                if(msg != 'error') // Message Sent, check and redirect
 				{
-                                        if(msg=='ok')
+                                        if(msg != 'wrong')
                                         {
                                           $("#msgbox1").html('data updated').addClass('myinfo').fadeTo(200,1,function()
 			             {
@@ -92,52 +95,8 @@
 
 	});
    </script> 
-  <script type="text/javascript">
-	$(document).ready(function(){
-		$("#login_frm").submit(function(){
-
-			 //remove previous class and add new "myinfo" class
-	        //$("#msgbox").removeClass().addClass('myinfo').text('Validating Your Login ').fadeIn(1000);
-
-			
-			this.timer = setTimeout(function () {
-				$.ajax({
-		          	url: '/Exhibition/exhibitionAdministratorContactInformation',
-		          	data: 'tt='+ $('#title').val() +'&fn=' + $('#firstName').val()+'&ln='+ $('#ln').val() +'&dob='+ $('#DOB').val()+'&le=' + $('#le').val() +'&dn=' + $('#degination').val()+'&pn=' + $('#ph').val(),
-		          	type: 'post',
-		   		success: function(msg){
-                                alert(msg);
-                                if(msg != 'wrong') // Message Sent, check and redirect
-				{
-                                   
-                                          $("#msgbox3").html('data inserted').addClass('myinfo').fadeTo(900,1,function()
-			             {
-			                 //redirect to secure page
-			             // document.location='/Exhibition/html/profilePage.jsp';
-			             });
-                                        
-                                    }
-                                
-				else
-				{
-					$("#msgbox3").fadeTo(200,0.1,function() //start fading the messagebox
-		                {
-			                  //add message and change the class of the box and start fading
-			                 $(this).html('Sorry...').removeClass().addClass('myerror').fadeTo(900,1);
-                                         //document.location='/Exhibition/html/exhibitionAdminLog.jsp?user';
-                                 });
-                                }
-				}
-				
-				});
-			}, 200);
-			return false;
- 		});		
-
-	});
-   </script>   
-
-    <style>
+  
+     <style>
 #exists{display:none}
 #cross{display:none}
 .myinfo
@@ -169,43 +128,8 @@
 	-webkit-border-radius:4px;
 	text-align: center;
 }
-</style>
-<link class="jsbin" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
-<script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-<script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
-<script>
-function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
+</style> 
 
-            reader.onload = function (e) {
-                $('#blah')
-                    .attr('src', e.target.result)
-                    .width(150)
-                    .height(200);
-            };
-
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-	</script>
-<meta charset=utf-8 />
-<title>JS Bin</title>
-<!--[if IE]>
-  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-<![endif]-->
-<style>
-  article, aside, figure, footer, header, hgroup, 
-  menu, nav, section { display: block; }
-</style>
-<script type="text/javascript">
-    window.onload = function()
-    {
-      // fix for windows 8
-      if (navigator.appVersion.indexOf("Windows NT 6.2") != -1)
-        document.head.innerHTML += '<link rel="stylesheet" type="text/css" href="pages/css/windows.chrome.fix.css" />'
-    }
-</script>
   </head>
   <body class="fixed-header ">
     <!-- BEGIN SIDEBPANEL-->
@@ -246,7 +170,7 @@ function readURL(input) {
       </div>
       <!-- END SIDEBAR MENU HEADER-->
       <!-- START SIDEBAR MENU -->
-       <div class="sidebar-menu">
+      <div class="sidebar-menu">
         <!-- BEGIN SIDEBAR MENU ITEMS-->
         <ul class="menu-items">
           <li class="m-t-30 ">
@@ -623,234 +547,92 @@ function readURL(input) {
       </div>
       <!-- END HEADER -->
       <!-- START PAGE CONTENT WRAPPER -->
-      <div class="page-content-wrapper ">
+  <div class="page-content-wrapper ">
         <!-- START PAGE CONTENT -->
-        <div class="content ">
-          <!-- START CONTAINER FLUID -->
-          <div class="container-fluid container-fixed-lg">
-            <div id="rootwizard" class="m-t-50">
-              <!-- Nav tabs -->
-              <ul class="nav nav-tabs nav-tabs-linetriangle nav-tabs-separator nav-stack-sm">
-                <li class="active">
-                  <a data-toggle="tab" href="#tab1"><!--<i class="fa fa-shopping-cart tab-icon"></i> --><span>Profile Info</span></a>
-                </li>
-                <li class="">
-                  <a data-toggle="tab" href="#tab2"> <!-- <i class="fa fa-truck tab-icon"></i> --> <span>Contact Info</span></a>
-                </li>
-            <!--    <li class="">
-                  <a data-toggle="tab" href="#tab3"><i class="fa fa-credit-card tab-icon"></i> <span>Payment details</span></a>
-                </li>
-                <li class="">
-                  <a data-toggle="tab" href="#tab4"><i class="fa fa-check tab-icon"></i> <span>Summary</span></a>
-                </li>  -->
-              </ul>
-              <!-- Tab panes -->
-              <div class="tab-content">
-                <div class="tab-pane padding-20 active slide-left" id="tab1">
-                  <div class="row row-same-height">
-                    <div class="col-md-5 b-r b-dashed b-grey sm-b-b">
-                      <div class="padding-30 m-t-50">
-                      
-                        <h2> Welcome David Nest </h2>
-                        <p>Your Personal Information wil be displayed here soon...</p>
-                        <p class="small hint-text">Thank you..</p>
-                      </div>
-                    </div>
-                     <div class="container-fluid container-fixed-lg">
-            <div class="row">
-<div class="col-md-6">
-                <!-- START PANEL -->
-                <div class="panel panel-default">
-                  <div class="panel-heading">
-                    <div class="panel-title">
-                   Personal
-                    </div>
-                  </div>
-                  <div class="panel-body">
-                    
-                   <div class="row">
-                  <div class="col-sm-10">
-                  <!--  <h3>Create Moderator</h3> -->
-                    
-                    <form id="login" name="login" class="form-horizontal" role="form" autocomplete="off" action="" method="">
-                  
-                    <%@ page import="javax.servlet.http.HttpSession.*;" %>
-                      <%@ page session="false" %>
-                      <% HttpSession ss=request.getSession(false);%>
-                        <div class="form-group">
-                        <label for="fname" class="col-sm-3 control-label">Mobile No</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="mobileNo" name="mobileNo" placeholder="mobile No " value="  <%out.print((String)ss.getAttribute("MN")); %>" required>
-                       </div>
-                       <div id="msgbox2"> </div>
-                      </div>
-                        <div class="form-group">
-                        <label for="fname" class="col-sm-3 control-label">Email</label>
-                        <div class="col-sm-9">
-                            <input type="email" class="form-control" id="email" placeholder="Email" name="email" value="<%out.print((String)ss.getAttribute("emailValid"));%>" required>
-                        </div>
-                        
-                       
-                      </div>
-                        <div class="form-group">
-                        <label for="fname" class="col-sm-3 control-label">User Name</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="userName" placeholder="username" name="userName" value="<%out.print((String)ss.getAttribute("userNameValid"));%>" required>
-                        </div>
-                      </div>
-                           <div class="form-group">
-                        <label for="fname" class="col-sm-3 control-label">Password</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="password" placeholder="password" name="password"  value="<%out.print((String)ss.getAttribute("passwordValid"));%>" required >
-                        </div></div>
-                    
-                        <div class="form-group">
-                        <label for="fname" class="col-sm-3 control-label">Level</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="level" placeholder="level" name="level" value="<%out.print((String)ss.getAttribute("levelValid"));%>" onkeyup="validate()" required>
-                        </div>
-                      </div>   
-                        
-                        <br><div id="msgbox1"> </div>
-                      <div class="row">
-                        <div class="col-sm-3">
-                      <!--    <p>I hereby certify that the information above is true and accurate. </p> -->
-                        </div>
-                        <div class="col-sm-9">
-                            <button class="btn btn-success" name="login" id="name" type="submit">Save</button>
-                          <button class="btn btn-default">Cancel</button>
-                        </div>
-                      </div>
-                    
-                    </form>
-                  </div>
-                </div>
-                  </div>
-                </div>
-                 </div>
-            </div>
-          </div>
-                       
-                       
-                         
-                        </div>
-                        <br>
-                        
-                      </div>
-                  
-                  <div class="tab-pane slide-left padding-20" id="tab2">
-                  <div class="row row-same-height">
-                    <div class="col-md-5 b-r b-dashed b-grey ">
-                      <div class="padding-30 m-t-50">
-                          <div class="row">
-                              <div class="col-sm-10">
-                        <h2>Your Contact Details ..</h2>
-                        <p> Social Media..</p>
-                              </div></div>
-                           <div class="col-sm-10">
-                              
-                               <input type='file' onchange="readURL(this);" />
-                         <img id="blah" src="#" alt="your image" />
-                           </div>
-                      </div>
-                    </div>
-                       <div class="container-fluid container-fixed-lg">
-            <div class="row">
-<div class="col-md-6">
-                <!-- START PANEL -->
-                <div class="panel panel-default">
-                  <div class="panel-heading">
-                    <div class="panel-title">
-                Contact 
-                    </div>
-                  </div>
-                  <div class="panel-body">
-                    
-                   <div class="row">
-                  <div class="col-sm-10">
-                  <!--  <h3>Create Moderator</h3> -->
-                    
-                    <form id="login_frm" name="login_frm" class="form-horizontal" role="form" autocomplete="off" action="" method="">
-                    
-                        <div class="form-group">
-                        <label for="fname" class="col-sm-3 control-label">Title</label>
-                        <div class="col-sm-9">
-  <input type="text" class="form-control" id="title" name="title" placeholder="Title" value="" required>
-                       </div>
-                       
-                      </div>
-                        <div class="form-group">
-                        <label for="fname" class="col-sm-3 control-label">First Name</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="firstName" placeholder="First Name" name="firstName" value="" required>
-                        </div>
-                        
-                       
-                      </div>
-                        <div class="form-group">
-                        <label for="fname" class="col-sm-3 control-label">Last Name</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="ln" placeholder="lastName" name="ln" value="" required>
-                        </div>
-                      </div>
-                          
-                    
-                        <div class="form-group">
-                        <label for="fname" class="col-sm-3 control-label">Date of Birth</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="DOB" placeholder="DOB" name="DOB" value="" required>
-                        </div>
-                      </div>   
-                         <div class="form-group">
-                        <label for="fname" class="col-sm-3 control-label">Level</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="le" placeholder="level" name="le" value="" required>
-                        </div>
-                      </div>   
-                          <div class="form-group">
-                        <label for="fname" class="col-sm-3 control-label">Designation</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="degination" placeholder="Designation" name="degination" value=""  required>
-                        </div>
-                      </div>   
-                          <div class="form-group">
-                        <label for="fname" class="col-sm-3 control-label">Phone No</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="ph" placeholder="Phone No" name="ph" value="" required>
-                        </div>
-                      </div>   
-                        
-                        <br>    <div id="msgbox3"> </div> 
-                      <div class="row">
-                        <div class="col-sm-3">
-                      <!--    <p>I hereby certify that the information above is true and accurate. </p> -->
-                        </div>
-                        <div class="col-sm-6">
-                            <button class="btn btn-success" name="login" id="name" type="submit">Save</button>
-                          <button class="btn btn-default">Cancel</button>
-                        </div>
-                      </div>
-                    
-                    </form>
-                  </div>
-                </div>
-                  </div>
-                </div>
-                 </div>
-            </div>
-          </div>
-                      
-                    </div>
-                  </div>
-                </div>
-               
+   <div class="content ">
+    <div class="panel-body">
+   <div class="register-container full-height sm-p-t-30">
+      <div class="container-sm-height full-height">
+        <div class="row row-sm-height">
+          <div class="col-sm-12 col-sm-height col-middle">
+  <!--          <img src="assets/img/logo.png" alt="logo" data-src="assets/img/logo.png" data-src-retina="assets/img/logo_2x.png" width="78" height="22">
+            <h3>Pages makes it easy to enjoy what matters the most in your life</h3>
+            <p>
+              <small>
+        Create a pages account. If you have a facebook account, log into it for this process. Sign in with <a href="#" class="text-info">Facebook</a> or <a href="#" class="text-info">Google</a>
+    </small>
+  </p> --><p><h1><b>Update Exhibition Social Media..!</b></h1></p>
+          <br>
+         
+               <form role="form"   class="p-t-15" id="login" name="login" action="" method="">
           
+                  
+                     
+                   
+                   <% 
+                      try { 
+                            HttpSession ss1=request.getSession(true);
+                       String myex_id=request.getParameter("myid");
+                       
+                       ss1.setAttribute("myex_id", myex_id);
+                          Class.forName("com.mysql.jdbc.Driver"); 
+                         Connection con1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/exhibition","root","123"); 
+                         Statement stat1=con1.createStatement();
+                       
+                         String query="select * from exhibitionSocialMedia where id= '"+myex_id+" '";
+                         ResultSet rs=stat1.executeQuery(query);  
+                         
+                         int count=0;
+                        
+                         while(rs.next())
+                         {
+                             String exhibitionId=rs.getString("exhibitionId");
+                             ss1.setAttribute("ei", exhibitionId);
+                                      String link=rs.getString("link");
+                                       ss1.setAttribute("link", link);
+                                     
+                             count++;
+                         }              
+                      }    
+                    catch (Exception e)
+                    {
+                        out.print("error");
+                    }
+                   %>  
+                       <%@ page import="javax.servlet.http.HttpSession.*;" %>
+                      <%@ page session="false" %>
+                      <% HttpSession ss1=request.getSession(false);%> 
+                   
            
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group form-group-default">
+                    <label>Exhibition ID</label>
+                    <input type="text" id="exhibitionId" name="exhibitionId" class="form-control" value="<%out.print((String)ss1.getAttribute("ei"));%>" required>
+                  </div>
+                </div>
               </div>
-            </div>
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group form-group-default">
+                    <label>Link</label>
+                    <input type="text" id="link" name="link" class="form-control" value="<%out.print((String)ss1.getAttribute("link"));%>" required>
+                  </div>
+                </div>
+              </div>
+       
+             
+       <div id="msgbox1"></div>      <div id="msgbox2"></div>       
+       <button class="btn btn-primary btn-cons m-t-10" type="submit"> Update </button>
+            </form>
           </div>
+        </div>
+      </div>
+    </div>
+    </div>
           <!-- END CONTAINER FLUID -->
         </div>
+                   
         <!-- END PAGE CONTENT -->
         <!-- START COPYRIGHT -->
         <!-- START CONTAINER FLUID -->
@@ -2146,28 +1928,15 @@ function readURL(input) {
     <script type="text/javascript" src="assets/plugins/bootstrap-select2/select2.min.js"></script>
     <script type="text/javascript" src="assets/plugins/classie/classie.js"></script>
     <script src="assets/plugins/switchery/js/switchery.min.js" type="text/javascript"></script>
-    <script src="assets/plugins/bootstrap3-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
-    <script type="text/javascript" src="assets/plugins/jquery-autonumeric/autoNumeric.js"></script>
-    <script type="text/javascript" src="assets/plugins/dropzone/dropzone.min.js"></script>
-    <script type="text/javascript" src="assets/plugins/bootstrap-tag/bootstrap-tagsinput.min.js"></script>
-    <script type="text/javascript" src="assets/plugins/jquery-inputmask/jquery.inputmask.min.js"></script>
-    <script src="assets/plugins/boostrap-form-wizard/js/jquery.bootstrap.wizard.min.js" type="text/javascript"></script>
     <script src="assets/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
     <script src="assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
-    <script src="assets/plugins/summernote/js/summernote.min.js" type="text/javascript"></script>
-    <script src="assets/plugins/moment/moment.min.js"></script>
-    <script src="assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
-    <script src="assets/plugins/bootstrap-timepicker/bootstrap-timepicker.min.js"></script>
     <!-- END VENDOR JS -->
     <!-- BEGIN CORE TEMPLATE JS -->
     <script src="pages/js/pages.min.js"></script>
     <!-- END CORE TEMPLATE JS -->
     <!-- BEGIN PAGE LEVEL JS -->
-    <script src="assets/js/form_wizard.js" type="text/javascript"></script>
+    <script src="assets/js/form_layouts.js" type="text/javascript"></script>
     <script src="assets/js/scripts.js" type="text/javascript"></script>
     <!-- END PAGE LEVEL JS -->
-    
-    
-        
   </body>
 </html>
