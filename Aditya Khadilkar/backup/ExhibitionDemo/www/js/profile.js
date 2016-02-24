@@ -1,7 +1,7 @@
 function getprofile()
 {
 	//alert("getprofile");
-	var request = createCORSRequest( "post", "http://exhibition.tekticks.co.in" );
+	var request = createCORSRequest( "post", "http://socialworker.tekticks.co.in" );
 	if(request)
 	{
 		var visitorId = localStorage.getItem("visitorId");
@@ -11,27 +11,24 @@ function getprofile()
 		{
 		//	alert(JSON.stringify(data));
 		$.ajax({
-		url:"http://exhibition.tekticks.co.in/application/json/retrivalProfile_json.php",
+		url:"http://socialworker.tekticks.co.in/json/retrivalProfile_json.php",
 		type: 'POST',
 		contentType: 'application/json',
 		data: JSON.stringify(data),
 		dataType:"json",
 		success:function(response)
 		{
-					//$(".floating-label").hide();
-					$("#pName").text(JSON.stringify(response.visitor[0].name).replace(/"/g,""));
-					$("#pEmailId").text(JSON.stringify(response.visitor[0].emailId).replace(/"/g,""));
-					$("#pMobileNo").text(JSON.stringify(response.visitor[0].mobileNo).replace(/"/g,""));
-					//$("#pbirthdate").val(convertDate(JSON.stringify(response.visitor[0].dob).replace(/"/g,"")));
-					
-					//$("#pcity").val(JSON.stringify(response.visitor[0].city).replace(/"/g,""));
-					
-					//$("#pgender").val(JSON.stringify(response.visitor[0].gender).replace(/"/g,""));
+					$(".floating-label").hide();
+					$("#pname").val(JSON.stringify(response.visitor[0].name).replace(/"/g,""));
+					$("#pemail").val(JSON.stringify(response.visitor[0].email).replace(/"/g,""));
+					$("#pphone").val(JSON.stringify(response.visitor[0].mobileNumber).replace(/"/g,""));
+					$("#pbirthdate").val(convertDate(JSON.stringify(response.visitor[0].dob).replace(/"/g,"")));
+					$("#pcity").val(JSON.stringify(response.visitor[0].city).replace(/"/g,""));
+					$("#pgender").val(JSON.stringify(response.visitor[0].gender).replace(/"/g,""));
 					//alert(JSON.stringify(response.visitor[0].photoLink));
-					//$("#profilePic").attr("src",JSON.stringify(response.visitor[0].photoLink).replace(/"/g,""));
-					
-					//var show = document.getElementById('profileShow');
-					//show.style.visibility = 'visible';
+					$("#profilePic").attr("src",JSON.stringify(response.visitor[0].photoLink).replace(/"/g,""));
+					var show = document.getElementById('profileShow');
+					show.style.visibility = 'visible';
 					
 		}
 		});
@@ -41,12 +38,12 @@ function getprofile()
 	
 }
 
- //function convertDate(dateString){
-//var p = dateString.split(/\D/g)
-//return [p[2],p[1],p[0] ].join("-")
-//}
+ function convertDate(dateString){
+var p = dateString.split(/\D/g)
+return [p[2],p[1],p[0] ].join("-")
+}
 
- /*function profile()
+ function profile()
 { var show = document.getElementById('profileShow');
     show.style.visibility = 'visible';
 	var pname = document.getElementById('pname').value;
@@ -91,14 +88,14 @@ function getprofile()
 							$("#emailError").fadeIn();
 						}
  */
-		//}
+		}
 	  
-//});
-		//} 
-	//sendData(data);
-	//console.log(data);
+});
+		} 
+	sendData(data);
+	console.log(data);
 
 	
-	//}
-	//}
+	}
+	}
 	

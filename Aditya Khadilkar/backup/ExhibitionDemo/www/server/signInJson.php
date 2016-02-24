@@ -37,17 +37,17 @@ else
 			{	
 				$jsonresponse=$selectVisitorResult['id'];
 				json_encode($jsonresponse);
-				deliver_response(200,"Valid Credentials","visitorId",$jsonresponse);
+				deliver_response(200,"Record found","visitorId",$jsonresponse);
 			}
 	
 			else
 			{
-				deliver_response(202,"Invalid Credentials","visitorId",$jsonresponse);
+				deliver_response(202,"Invalid Password","visitorId",$jsonresponse);
 			}
 		}
 		else
 		{ 	
-				deliver_response(203,"Invalid Credentials","visitorId",$jsonresponse);
+				deliver_response(203,"Invalid Email Id","visitorId",$jsonresponse);
 		}
 	
 }

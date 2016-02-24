@@ -40,13 +40,20 @@ function signin()
 					{
 						if(JSON.stringify(response.status)==200)
 						{
+							
 							$("#emailError").hide();
 							$("#passwordError").hide();
 							var visitorId = JSON.stringify(response.visitorId).replace(/"/g,"");
 							localStorage.setItem("visitorId",visitorId);
+							
+							//printing msg before redirecting
+							$("#loginInfo").text(JSON.stringify(response.statusMessage).replace(/"/g,""));
+							$("#loginInfo").fadeIn();
+							
 							$("#signup").fadeOut();
 							$("#signin").fadeOut();
 							$("#profile").fadeIn();	
+							
 							var a = document.getElementById('signInNext');
 							a.setAttribute("href","logo.html");
 							document.getElementById('signInNext').click();

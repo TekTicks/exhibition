@@ -55,7 +55,7 @@ function signup()
 			{   
 				$.ajax
 				({
-				url: 'http://exhibition.tekticks.co.in/application/Exhibition/json/otpCreation.php',
+				url: 'http://exhibition.tekticks.co.in/application/json/otpCreation.php',
 				type: 'POST',
 				contentType: 'application/json',
 				data: JSON.stringify(data),
@@ -75,7 +75,7 @@ function signup()
 							localStorage.setItem("password", password);
 							localStorage.setItem("name", name);
 							localStorage.setItem("otp", otp);
-							
+							//redirecting to otp.html
 							var a = document.getElementById('signupNext');
 							a.setAttribute("href","otp.html");
 							document.getElementById('signupNext').click();
@@ -122,7 +122,7 @@ function verifyotp()
 				{   
 					$.ajax
 					({
-					url: 'http://exhibition.tekticks.co.in/application/Exhibition/json/signUpJson.php',
+					url: 'http://exhibition.tekticks.co.in/application/json/signUpJson.php',
 					type: 'POST',
 					contentType: 'application/json',
 					data: JSON.stringify(data),
@@ -134,13 +134,23 @@ function verifyotp()
 								localStorage.clear();
 								//var visitorId = JSON.stringify(response.visitorId).replace(/"/g,"");
 								//localStorage.setItem("visitorId",visitorId);
-								var Name = JSON.stringify(response.Name).replace(/"/g,"");
+								
+								var Name = JSON.stringify(response.signUp).replace(/"/g,"");
+								
 								
 								$("#signup").fadeOut();
 								$("#signin").fadeOut();
 								$("#profile").fadeIn();
 								
+								//var obj=JSON.parse(object);
+								//document.getElementById("displayName").innerHTML = signUp[0];
+								
 								$("#displayName").text("Welcome "+Name);
+								
+								
+								//$("#displayName").text("Welcome "+obj.signUp[]['name']);
+								
+								//$("#displayName").text("Welcome "+localStorage.getItem("name"));
 								
 								//document.getElementById("#proName").innerHTML = Name;
 								

@@ -132,10 +132,12 @@ function verifyotp()
 							if(JSON.stringify(response.status)==200)
 							{
 								localStorage.clear();
-								//var visitorId = JSON.stringify(response.visitorId).replace(/"/g,"");
-								//localStorage.setItem("visitorId",visitorId);
 								
-								var Name = JSON.stringify(response.signUp).replace(/"/g,"");
+								var visitorId = JSON.stringify(response.visitor[0].id).replace(/"/g,"");
+								
+								localStorage.setItem("visitorId",visitorId);
+								$("#displayName").text(JSON.stringify("Welcome "+response.visitor[0].name).replace(/"/g,""));
+								//var Name = JSON.stringify(response.signUp).replace(/"/g,"");
 								
 								
 								$("#signup").fadeOut();
@@ -145,7 +147,7 @@ function verifyotp()
 								//var obj=JSON.parse(object);
 								//document.getElementById("displayName").innerHTML = signUp[0];
 								
-								$("#displayName").text("Welcome "+Name);
+								//$("#displayName").text("Welcome "+Name);
 								
 								
 								//$("#displayName").text("Welcome "+obj.signUp[]['name']);

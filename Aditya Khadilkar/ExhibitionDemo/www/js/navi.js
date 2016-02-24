@@ -1,56 +1,74 @@
 function navi()
-	{
+{
+	
 	profileReload();
+	//document.getElementById("list1").style.paddingTop = "0px";
 	var request = createCORSRequest( "post", "http://socialworker.tekticks.co.in" );
 	if(request)
 	{
-	$.ajax({
-		url:"http://socialworker.tekticks.co.in/json/sw_newsSlider_json.php",
-		dataType:"json",
-		contentType: 'application/json',
-		success:function(data)
-		{
-			var n=Object.keys(data.newsInformation).length;
-		var newsid = []; // create array here
-		$.each(data.newsInformation, function (index, newsInformation) {
-        newsid.push(newsInformation.id); //push values here
-		});
-				var newsTitle = []; // create array here
-		$.each(data.newsInformation, function (index, newsInformation) {
-        newsTitle.push(newsInformation.newsTitle); //push values here
-		});
 		
-		var imageLink = []; // create array here
-		$.each(data.newsInformation, function (index, newsInformation) {
-        imageLink.push(newsInformation.imageLink); //push values here
-		});
-		 
-		 for (var i = 0; i < n; i++)
-				{	
-				localStorage.setItem("newsId"+i,JSON.stringify(newsid[i]).replace(/"/g,"")); 
-				localStorage.setItem("imageLink"+i,JSON.stringify(imageLink[i]).replace(/"/g,"")); 
-				localStorage.setItem("newsTitle"+i,JSON.stringify(newsTitle[i]).replace(/"/g,"")); 
-					
-				}
-		 var divId = "divNews";
-				jQuery(divId).ready(function() {
-					localNews();  
-					});
-					
-	}});
-	}
-//		alert("navi");
 		if(localStorage.getItem("visitorId") === null)
 		{
 			$("#signup").fadeIn();
 			$("#signin").fadeIn();
-			$("#Profile").fadeOut();				
+			$("#profile").fadeOut();
+						
 		}
 		else
 		{
 			$("#signup").fadeOut();
 			$("#signin").fadeOut();
-			$("#Profile").fadeIn();	
-			
+			$("#profile").fadeIn();	
+		
 		}
 	}
+}
+
+
+/*function profileReload()
+{	
+var request = createCORSRequest( "post", "http://socialworker.tekticks.co.in" );
+	if(request)
+	{
+var visitorId=localStorage.getItem("visitorId");
+var data = {"profile":[{"visitorId":visitorId}]};
+	var sendData = function(data)
+	{
+	$.ajax({
+		url:"http://socialworker.tekticks.co.in/json/sw_visitor.php",
+		dataType:"json",
+		type: 'POST',
+		data: JSON.stringify(data),
+		contentType: 'application/json',
+		success:function(response)
+		{	
+		if(JSON.stringify(response.status)==200)
+			{ 
+			
+				var profileName= JSON.stringify(response.visitor.name).replace(/"/g,"");
+			   var photoLink= JSON.stringify(response.visitor.photoLink).replace(/"/g,""); 
+			   					
+			 	if(photoLink=="null")
+				{
+					document.getElementById("profile1").style.backgroundImage='linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.8)),url(img/Profilelogo.png)';
+					
+				}
+				else
+				{
+				document.getElementById("profile1").style.backgroundImage='linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.8)),url('+photoLink+')';
+				}
+		 
+			$("#profileName").text(profileName);
+			//$("#photoLink").attr("src",photoLink);
+			localStorage.setItem("profileName", profileName);
+			localStorage.setItem("profileImage", photoLink);
+			
+			}
+		}
+	});
+	}
+sendData(data);	
+console.log(data);
+	}
+}
+*/

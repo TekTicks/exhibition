@@ -50,12 +50,40 @@ else
 			
 			//$jsonresponse=array("name"=>$name, "password"=>$password, "mobileNo"=>$mobileNo, "emailId"=>$email);
 			
-			$jsonresponse=$name;
+			//$jsonresponse=$name;
 			
 			//$jsonresponse=($name, $password, $mobileNo, $email);
 			
-			json_encode($jsonresponse);
-			deliver_response(200,"array created","signUp",$jsonresponse);
+			//json_encode($jsonresponse);
+			//deliver_response(200,"array created","signUp",$jsonresponse);
+			
+			
+				//$selectVisitorQuery1="select id from visitor where mobileNo='$mobileNo'";
+				
+				
+				
+				/*$selectVisitorQuery1="select id,name from visitor where mobileNo='$mobileNo'";
+				$selectVisitor1=mysql_query($selectVisitorQuery1,$conn)or die(mysql_error());
+				$selectVisitorResult=mysql_fetch_assoc($selectVisitor1);
+				$visitorId=$selectVisitorResult['id'];
+			
+				$jsonresponse=$visitorId;
+				json_encode($jsonresponse);
+				deliver_response(200,"Visitor Created","visitor",$jsonresponse);*/
+			
+			
+			$selectVisitorQuery1="select id,name from visitor where mobileNo='$mobileNo'";
+			$selectVisitor1=mysql_query($selectVisitorQuery1,$conn)or die(mysql_error());
+			$visitorResultRows=mysql_num_rows($selectVisitor1);
+				while($selectVisitorResult=mysql_fetch_assoc($selectVisitor1))
+				{
+					$jsonresponse[] = $selectVisitorResult;
+				}
+				json_encode($jsonresponse);
+				deliver_response(200,"visitor created","visitor",$jsonresponse);
+			
+			
+			
 			
 			
 			//select id from visitor table

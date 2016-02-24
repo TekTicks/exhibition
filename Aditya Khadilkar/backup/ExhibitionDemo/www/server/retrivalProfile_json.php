@@ -15,12 +15,7 @@ $visitorid1=$data['profile'][0]['visitorId'];
 
 			
 		//Cheking visitor entry in Visitor table
-	
-	
-	$selectVisitorQuery="select name,mobileNo,emailId from visitor where id='$visitorid1'";
-	
-	//$selectVisitorQuery="select vp.name,vp.gender,vp.dob,vp.city,vp.photoLink,v.mobileNumber,v.email from visitorprofile vp,visitor v where vp.createdBy='$visitorid1' and vp.createdBy=v.id";
-	
+	$selectVisitorQuery="select vp.name,vp.gender,vp.dob,vp.city,vp.photoLink,v.mobileNumber,v.email from visitorprofile vp,visitor v where vp.createdBy='$visitorid1' and vp.createdBy=v.id";
 	$selectVisitor=mysql_query($selectVisitorQuery,$conn)or die(mysql_error());
 	
 	$visitorResultRows=mysql_num_rows($selectVisitor);
