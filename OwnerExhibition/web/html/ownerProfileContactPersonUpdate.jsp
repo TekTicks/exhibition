@@ -4,6 +4,7 @@
     Author     : Admin
 --%>
 
+<%@page import="ownerPortal.dbConnection"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.DriverManager"%>
@@ -419,10 +420,6 @@
 	$(document).ready(function(){
 		$("#contactPersonUpdate").submit(function(){
 
-			 //remove previous class and add new "myinfo" class
-	       // $("#msgbox").removeClass().addClass('myinfo').text('Validating Your Login ').fadeIn(1000);
-
-			
 			this.timer = setTimeout(function () {
 				$.ajax({
 		          	url: '/Exhibition/OwnerProfileContactPersonUpdate',
@@ -465,17 +462,19 @@
                               <%  
                              try{    
                                String id=request.getParameter("contactPersonId");
+                               //create session
                                HttpSession ss=request.getSession();
                                ss.setAttribute("contactPersonId",id);
-                               Class.forName("com.mysql.jdbc.Driver"); 
-                               Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Exhibition","root","12345"); 
+                               //One time connection 
+                               Connection con;
+                               con=dbConnection.getConnection();
                                Statement stat=con.createStatement();
                                ResultSet rs=stat.executeQuery("select * from ownerContactPerson where id='"+id+"'");
                               %>
                               <%
                                if(!rs.next())
                               {
-                              out.print("Sory");
+                              out.print("error");
                               }
                               else
                               {
@@ -601,8 +600,8 @@
                             </div> 
                             <div id="msgbox1" ></div>     
                             <br>
-                       <button class="btn btn-primary btn-cons m-t-10" type="submit">Update</button>
-                       <button class="btn btn-primary btn-cons m-t-10" onclick="document.location.href='/Exhibition/html/ownerProfile.jsp';">Cancel</button> 
+                            <button class="btn btn-primary btn-cons m-t-10" type="submit">Update</button>
+                            <button class="btn btn-primary btn-cons m-t-10" onclick="document.location.href='/Exhibition/html/ownerProfile.jsp';">Cancel</button> 
                       
                                 <%
                                       }      

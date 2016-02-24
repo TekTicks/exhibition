@@ -4,6 +4,7 @@
     Author     : Admin
 --%>
 
+<%@page import="ownerPortal.dbConnection"%>
 <%@ page import="org.apache.commons.fileupload.servlet.ServletFileUpload" %>
 <%@ page import="org.apache.commons.fileupload.disk.DiskFileItemFactory"%>
 <%@ page import="org.apache.commons.fileupload.*"%>
@@ -385,8 +386,7 @@
         </div>
       </div>
       <!-- END HEADER -->
-      
-      
+   
       <!-- START PAGE CONTENT WRAPPER -->
       <div class="page-content-wrapper ">
         <!-- START PAGE CONTENT -->
@@ -396,11 +396,7 @@
             <div class="row">
               <div class="col-sm-5">
                 <!-- START PANEL -->
-               
-                  
-                    <br>
-                    <br>
-                    
+  
                 <!-- START PANEL -->
          <form ENCTYPE="multipart/form-data" action="/Exhibition/html/insertimage.jsp" method="post" role="form">
              <div class="panel-heading">
@@ -408,8 +404,39 @@
                     Social Media Icon 
                 </div>
                  </div>
-       <img src='' id="profile" alt="Profile not uploaded" style="width:200px;height:200px"> 
-                      
+             
+          <%
+            try {
+           String img_name="";
+             Class.forName("com.mysql.jdbc.Driver"); 
+             java.sql.Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/exhibition","root","12345");
+             Statement stat=con.createStatement();
+             
+             HttpSession ss=request.getSession();
+             String fileName=(String)ss.getAttribute("fileName");
+                         
+            // ResultSet rs=stat.executeQuery("select * from media order By id desc limit 1");
+            ResultSet rs=stat.executeQuery("select * from media where link='"+fileName+"'");
+             
+             if(!rs.next())
+             {
+                 out.println("Error");
+             }
+             else
+             {
+               img_name=rs.getString(2);
+               ss.setAttribute("mediaId1",rs.getString(1));
+               out.print(rs.getString(1));
+             }
+            %>    
+
+    <img src='<%= img_name %>' id="profile" alt="Profile not uploaded" style="width:200px;height:200px"> 
+            <%}
+              catch(Exception e)
+                {
+                   out.print("fsdaf" +e);
+                }
+            %>  
     <script type="text/javascript">
 	function readProfile(input) {
 	if (input.files && input.files[0]) {
@@ -422,12 +449,12 @@
 	}
 	}
    </script>
-                    
-    <input name="file" id="file" style="width:200px" type="file" onchange="readProfile(this);">
-    <input type="submit" value="upload">       
+   <input name="file" id="file" style="width:200px" type="file" onchange="readProfile(this);">
+   <input type="submit" value="upload">       
+  
          </form>
                 <!-- END PANEL -->
-              </div>
+   </div>
                 
                 
               
@@ -447,10 +474,10 @@
                      <%@page import="java.sql.DriverManager;" %>
                      <%@page import="java.util.Scanner.*;" %>
                      <%   
-                         Class.forName("com.mysql.jdbc.Driver"); 
-                         java.sql.Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Exhibition","root","12345"); 
-                         Statement stat=con.createStatement();
-                         ResultSet rs=stat.executeQuery("select * from socialMedia");
+                       Connection con;
+                       con=dbConnection.getConnection();
+                       Statement stat=con.createStatement();
+                       ResultSet rs=stat.executeQuery("select * from socialMedia");
                          
                      %>   
                     <!--   <tr><td width=""><label class=''>Select Company</label>
@@ -458,17 +485,16 @@
                               
                         <label>Select Social Media</label>
                         <select class="full-width" name="socialmedia" id="socialmedia"  data-init-plugin="select2">
-                      <%
+                        <%
                          while(rs.next())
                          {
-                              String sm=rs.getString(2);
-                              out.print(sm);
-                      %>
+                           String sm=rs.getString(2);
+                        %>
                              <optgroup label=''><option  value="<%=sm %>"><%=sm %></option></optgroup>
-                      
-                      <%
+                       
+                        <%
                          }
-                      %>
+                        %>
                               <!--   <label>Select Social Media</label>
                                  <select class="full-width" name="socialmedia" id="socialmedia"  data-init-plugin="select2">
                                   <option value="facebook">Facebook</option>

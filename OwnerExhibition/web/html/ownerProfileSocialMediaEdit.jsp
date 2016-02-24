@@ -3,7 +3,9 @@
     Created on : Jan 22, 2016, 4:48:07 PM
     Author     : Admin
 --%>
-
+<%
+                      response.setIntHeader("Refresh",5);
+                       %>
 <%@page import="ownerPortal.dbConnection"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
@@ -49,7 +51,19 @@
     <link href="assets/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" media="screen">
     <link href="pages/css/pages-icons.css" rel="stylesheet" type="text/css">
     <link class="main-stylesheet" href="pages/css/pages.css" rel="stylesheet" type="text/css" />
-    
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="pages/js/jquery-1.4.2.min.js"></script>
+    <script src="pages/js/ownerloginValidation.js"></script>
+    <link href="pages/css/ownerLoginAjax.css" rel="stylesheet" type="text/css" />  
+    <script>
+        
+	$(document).ready(function(){
+            window.location.reload();
+               // window.location.href ="ownerProfileSocialMediaEdit.jsp";
+
+        });
+        }
+        </script>
   </head>
   <body class="fixed-header ">
     <!-- BEGIN SIDEBPANEL-->
@@ -397,23 +411,26 @@
                   </div>
                     <br>
                     <br>
-                  <div class="panel-body">
-                    <img src='profile' id="profile" alt="Profile not uploaded" style="width:100px;height:100px"> 
-                      
-    <script type="text/javascript">
-	function readProfile(input) {
-	if (input.files && input.files[0]) {
-	var reader3 = new FileReader();
-	reader3.onload = function (e) {
-	$('#profile')
-	.attr('src', e.target.result)
-	};
-	reader3.readAsDataURL(input.files[0]);
-	}
-	}
-   </script>
-                    
-    <input name="file" id="file" style="width:100px" type="file" onchange="readProfile(this);"/>
+                    <%
+                       // response.setIntHeader("Refresh",5);
+                         HttpSession ss1=request.getSession();
+                         String mediaId1=(String)ss1.getAttribute("mediaId");
+                         
+                         out.print(mediaId1);
+                         Connection con1;
+                         con1=dbConnection.getConnection();
+                         Statement stat1=con1.createStatement();
+                         ResultSet rs1=stat1.executeQuery("select * from media where id='"+mediaId1+"'");
+                         while(rs1.next())
+                         {
+                            String abc= rs1.getString("link");
+                            out.print(abc);
+                         
+                         %>
+                       <div class="panel-body">
+                       <img src="<%=rs1.getString(2) %>" id="profile" alt="Profile not uploaded" style="width:200px;height:200px">
+            
+                       <% } %>
                   </div>
                 </div>
                 <!-- END PANEL -->
@@ -431,7 +448,7 @@
              <div class="col-md-70">
                       <div class="padding-30">
                         <form action="/Exhibition/ownerProfileSocialMediaUpdate" method="post" role="form">
-                            
+                           
                           <%  
                               try{
                                String id=request.getParameter("myid");
@@ -450,6 +467,8 @@
                             }
                              else
                             {
+                                ss.setAttribute("mediaId",rs.getString("iconMediaId"));
+                               // out.print(rs.getString("iconMediaId"));
                           %>
                         
                             <div class="form-group form-group-default required">
@@ -473,7 +492,6 @@
                           %>
                               <br>
                               <br>
-                              
                               <div class="form-group">
                               <button class="btn btn-primary btn-cons m-t-10" type="submit">Update</button>
                               <button class="btn btn-primary btn-cons m-t-10" onclick="document.location.href='/Exhibition/html/ownerProfile.jsp';"> Cancel</button> 

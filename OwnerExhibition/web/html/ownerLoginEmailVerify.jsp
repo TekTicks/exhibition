@@ -41,14 +41,14 @@
                                 $("#msgbox3").removeClass().addClass('myinfo').text('Checking Your Verfication........ ').fadeIn(1000);
 			this.timer = setTimeout(function () {
 				$.ajax({
-		          	url: '/Exhibition/OwnerLoginCheck',
+		          	url: '/Exhibition/ownerLoginEmailCheck',
 		          	data: 'un='+ $('#emailid').val(),
 		          	type: 'post',
 		   		success: function(msg){
-                                   
+                             
                                 if(msg != 'ERROR') // Message Sent, check and redirect
 				{
-                                    if(msg == 'emailinvalid')
+                                    if(msg != 'valid')
                                     {
                                         $("#msgbox3").fadeTo(200,0.1,function() //start fading the messagebox
                                         {

@@ -1,51 +1,38 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package ownerPortal;
+
 import java.io.IOException;
 import java.io.PrintWriter;
-import static java.lang.System.out;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 
-public class OwnerLoginChangePassword1 extends HttpServlet {
+public class ownerLoginOtpCheck extends HttpServlet {
 
    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try
-        {
-             HttpSession ss=request.getSession();
-             String userName=(String)ss.getAttribute("username");
-             String  password=request.getParameter("newpassword");
-
-             // One time Database Connection
-             Connection con;
-             con=dbConnection.getConnection();
-             //updating Owner Table           
-             String query = "update owner set password ='"+password+"' where userName='"+userName+"'";
-             PreparedStatement ps = con.prepareStatement(query);
-             // ps.setString(1,password);
-             int i =  ps.executeUpdate();
-             if(i>0)
-             {
-                 response.sendRedirect("/Exhibition/html/ownerLoginThankyou.jsp");
-             } 
-             else
-             {
-                 out.println("error");
-             } 
+        try (PrintWriter out = response.getWriter()) {
+           int otp = 1234;
+           
+           int enteredOtp=Integer.parseInt(request.getParameter("enteredOtp"));
+       
+           if(enteredOtp==otp)
+           {
+               out.print("ok");
+           }
+           else
+           {
+               out.print("error");
+           }
         }
-        catch(Exception ee)
-        {
-           out.println("error"+ee.toString());
-        }
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

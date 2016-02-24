@@ -35,31 +35,47 @@
     <script src="pages/js/jquery-1.4.2.min.js"></script>
     <link href="pages/css/ownerLoginAjax.css" rel="stylesheet" type="text/css" />   
     
-    
-    <script type="text/javascript">
-    
-                   function check()
-                   {
-                     var generatedOTP = 1234;
-                     var enteredOTP=document.getElementById('enteredOTP').value;
-                if(generatedOTP==enteredOTP)
-                {
-                    //alert(" OTP match");
-                    $("#otpMsgBox").html('OTP match').addClass('myinfo').fadeTo(900,1,function()
-			             {document.location='/Exhibition/html/ownerLoginChangePassword.jsp';
-			             });
-                             
-                }
-                else
-                {
-                     $("#otpMsgBox").html('Please Enter valid OTP').addClass('myerror').fadeTo(900,1,function()
+    <!-- Otp checking for Login Page  -->
+     <script type="text/javascript">
+	$(document).ready(function(){
+		$("#otpPage").submit(function(){
+
+		
+			 $("#msgbox1").removeClass().addClass('myinfo').text('').fadeOut(0);
+			this.timer = setTimeout(function () {
+				$.ajax({
+		          	url: '/Exhibition/ownerLoginOtpCheck',
+		          	data: 'enteredOtp='+ $('#enteredOTP').val(),
+		          	type: 'post',
+		   		success: function(msg){
+                                
+                                if(msg != 'error') // Message Sent, check and redirect
+				{
+                                       
+                                          $("#msgbox1").html('Otp matches').addClass('myinfo').fadeTo(200,1,function()
 			             {
+			                 //redirect to secure page
+			              document.location='/Exhibition/html/ownerLoginChangePassword.jsp';
 			             });
-                                     //document.location='ckvOtp.jsp';
-                }
-                   }	
-   
-    </script>
+                                        
+                                    }
+                               else
+                            {
+                                $("#msgbox1").fadeTo(100,1,function() //start fading the messagebox
+		                {
+			                  //add message and change the class of the box and start fading
+			                 $(this).html('Please Enter Correct Otp..!!').removeClass().addClass('myerror').fadeTo(300,1);
+                                        // document.location='/Exhibition/html/exhibitionAdminLog.jsp?user';
+                                 });
+                            }
+                                }
+				});
+			}, 200);
+			return false;
+ 		});		
+
+	});
+   </script> 
     
     
     <script type="text/javascript">
@@ -93,16 +109,17 @@
       <div class="p-l-50 m-l-20 p-r-50 m-r-20 p-t-50 m-t-30 sm-p-l-15 sm-p-r-15 sm-p-t-40">
         <h2><b> OTP Generation<b/></h2>
           <!-- START Login Form -->
-          <form id="form-register" class="p-t-15" role="form">
+          <form id="otpPage" class="p-t-15" role="form">
             <div class="form-group form-group-default">
                 <label>Enter OTP</label>
-                <input type="text" id="enteredOTP" name="enteredOTP" maxlength="4" class="form-control"  onblur="check()" required>
+                <input type="text" id="enteredOTP" name="enteredOTP" maxlength="4" class="form-control" required>
             </div>
-            <div id="otpMsgBox"></div>
+            <div id="msgbox1"></div>
+              <div id="msgbox2"></div>
              <br>
              <br>
             <center>
-                <button class="btn btn-primary btn-cons m-t-10" type="submit" onblur="check();" >Send</button>
+                <button class="btn btn-primary btn-cons m-t-10" type="submit" >Send</button>
                 <button class="btn btn-primary btn-cons m-t-10" onclick="location.href='ownerLogin.jsp'" >cancel</button>
             </center>
           </form>

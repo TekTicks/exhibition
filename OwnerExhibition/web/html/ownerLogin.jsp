@@ -47,6 +47,7 @@
 		            data: 'un='+ $('#login_id').val() +'&pw=' + $('#password').val(),
 		            type: 'post',
 		   	    success: function(msg){
+                                alert(msg);
                                 if(msg != 'ERROR') // Message Sent, check and redirect
 				{
                                        if(msg == 'emailinvalid')
@@ -57,7 +58,7 @@
                                                $(this).html('EmailId doesnt exists...').removeClass().addClass('myerror').fadeTo(900,10);
                                              });
                                         }
-                                        else if(msg =='passwordinvalid')
+                                        else if(msg == 'passwordinvalid')
                                         {
                                             $("#msgbox3").fadeTo(200,0.1,function() //start fading the messagebox
                                               {
@@ -135,20 +136,18 @@
             <!-- START Form Control-->
             <div class="row">
             <div class="col-md-6 no-padding">
-            <div class="checkbox ">
-                 <input type="checkbox" value="1" id="checkbox1">
-                  <label for="checkbox1">Keep Me Signed in</label> </div> </div>
+           </div>
             </div>
             <!-- END Form Control-->  
-            <div align="right">
+           
                 <a href="/Exhibition/html/ownerLoginEmailVerify.jsp" class="text-info small"><font size="2.5"><b>Forgot Password..?</font></a>
-            </div>
+            
             <br>
             <br>
-            <center>
+         
             <button class="btn btn-primary btn-cons m-t-10" name="login" id="login"  type="submit" onclick="return val1();">Sign in</button>
             <button class="btn btn-primary btn-cons m-t-10" name="clear" id="clear"  type="reset">Clear</button>
-            </center>
+           
           </form>
           <!--END Login Form-->
         </div>

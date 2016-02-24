@@ -5,10 +5,6 @@
 --%>
 
 <%@page import="ownerPortal.dbConnection"%>
-<%@page import="java.sql.ResultSet"%>
-<%@page import="java.sql.Statement"%>
-<%@page import="java.sql.DriverManager"%>
-<%@page import="java.sql.Connection"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -48,6 +44,11 @@
     <link href="assets/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" media="screen">
     <link href="pages/css/pages-icons.css" rel="stylesheet" type="text/css">
     <link class="main-stylesheet" href="pages/css/pages.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="pages/js/jquery-1.4.2.min.js"></script>
+    <script src="pages/js/ownerloginValidation.js"></script>
+    <link href="pages/css/ownerLoginAjax.css" rel="stylesheet" type="text/css" />  
+    
     
   </head>
   <body class="fixed-header ">
@@ -93,14 +94,14 @@
         <!-- BEGIN SIDEBAR MENU ITEMS-->
         <ul class="menu-items">  
             <li class="">
-            <a href="ckvindex.jsp" class="detailed">
+            <a href="index.jsp" class="detailed">
                  <span class="title">Dashboard</span>
                  <span class="details">No items</span>
             </a>
             <span class="bg-success icon-thumbnail"><i class="pg-home"></i></span>
             </li>
             <li class="">
-            <a href="ckvProfile.jsp" class="detailed">
+            <a href="ownerProfile.jsp" class="detailed">
               <span class="title">Profile</span>
               <span class="details">No items</span>
             </a>
@@ -112,7 +113,7 @@
             <span class="bg-success icon-thumbnail"><i class="pg-home"></i></span>
             <ul class="sub-menu">
                 <li class="">
-                <a href="ckvAddexhibition.jsp">Add Exhibitions</a>
+                <a href="ownerExhibition.jsp">Add Exhibitions</a>
                 <span class="icon-thumbnail">P</span>
                 </li>
                 <li class="">
@@ -389,104 +390,73 @@
           <!-- START CONTAINER FLUID -->
           <div class="container-fluid container-fixed-lg bg-white">
             <div class="row">
-              <div class="col-sm-5">
-                <!-- START PANEL -->
-                <div class="panel panel-transparent">
-                  <div class="panel-heading">
+             
+                                  
+                                          <script type="text/javascript">
+	$(document).ready(function(){
+		$("#profile").submit(function(){
+
+			 //remove previous class and add new "myinfo" class
+	       // $("#msgbox").removeClass().addClass('myinfo').text('Validating Your Login ').fadeIn(1000);
+
+			
+			this.timer = setTimeout(function () {
+				$.ajax({
+		          	url: '/Exhibition/ownerAddExhibition',
+		          	data: 'exhibitionName='+ $('#exhibitionName').val(),
+		          	type: 'post',
+		   		success: function(msg){
+                                 
+                                if(msg != 'error') // Message Sent, check and redirect
+				{
+                                       
+                                          $("#msgbox1").html('Exhibition Added successfully....!!').addClass('myinfo').fadeTo(200,1,function()
+			             {
+			                 //redirect to secure page
+			              document.location='/Exhibition/html/ownerExhibition.jsp';
+			             });
+                                        
+                                    }
+                               else
+                            {
+                                $("#msgbox1").fadeTo(100,1,function() //start fading the messagebox
+		                {
+			                  //add message and change the class of the box and start fading
+			                 $(this).html('sorry').removeClass().addClass('myerror').fadeTo(300,1);
+                                        // document.location='/Exhibition/html/exhibitionAdminLog.jsp?user';
+                                 });
+                            }
+                                }
+				});
+			}, 200);
+			return false;
+ 		});		
+
+	});
+   </script>     
+                
+                
+             <div class="tab-pane slide-right padding-20" >
+                 <form action="" id="profile" method="post" role="form">
+                 <h1> Enter Exhibition name </h1><br>
+                  <div class="col-sm-4">
+                  <div class="input-group"> 
+                      <span class="input-group-addon primary">
+                                <i class="fa fa-building"></i>
+                      </span>
+                      <input type="text" id="exhibitionName" placeholder="Exhibition name" class="form-control">
                   </div>
-                    <br>
-                    <br>
-                  <div class="panel-body">
-                    <div class="panel-body text-center">
-                        <img class="image-responsive-height demo-mw-500" src="assets/img/demo/typography_hero.gif" alt="">
-                    </div>
+                      <br><br>
+                  <button class="btn btn-primary btn-cons m-t-10" type="submit">Submit</button>
+                  <button class="btn btn-primary btn-cons m-t-10" >Cancel</button> 
+                   <div id="msgbox1"></div>
                   </div>
-                </div>
-                <!-- END PANEL -->
-              </div>
+                 </form>
+             </div>
+                            
                 
                 
               
-              <div class="col-lg-7 col-md-6 ">
-                <!-- START PANEL -->
-                <div class="panel panel-transparent">
-                  <div class="panel-body">
-                      <br>
-                      <br>
-                     
-                      
-                     
-                             
-                      
-             <div class="col-md-70">
-                      <div class="padding-30">
-                        <form action="/Exhibition/OwnerProfileAddressUpdate" method="post" role="form">
-                           <%
-                               //getting id of ownerAddress in url from ownerProfile
-                            String id=request.getParameter("addId");
-                            //one time connection
-                            Connection con;
-                            con=dbConnection.getConnection();
-                            Statement stat=con.createStatement();
-                            ResultSet rs=stat.executeQuery("select * from ownerAddress where id='"+id+"'");
-                            while(rs.next())
-                            {
-                              String id1=rs.getString(1);
-                              String address1=rs.getString(2);
-                              String address2=rs.getString(3);
-                              String landmark=rs.getString(4);
-                              String maplink=rs.getString(7);
-                              String pincode=rs.getString(5);
-                              //creating session of id of ownerAddress
-                              HttpSession ss=request.getSession();
-                              ss.setAttribute("ownerAddId",id1);
-                           
-                            %>
-                         
-                           <div class="form-group-attached">
-                                <div class="form-group form-group-default required">
-                                    <label>Address 1</label>
-                                    <input type="text" name="address1"  value="<%out.print(address1);%>" id="tin" class="form-control" required>
-                                </div>
-                               
-                                <div class="form-group form-group-default">
-                                    <label>Address 2</label>
-                                      <input type="text" name="address2"  value="<%out.print(address2);%>" id="tin" class="form-control">
-                                </div>
-                            
-                                <div class="form-group form-group-default required">
-                                    <label>Zip Code</label>
-                                      <input type="text" name="zipcode"id="tin"  value="<%out.print(pincode);%>"  class="form-control" required>
-                                </div>
-                            
-                                <div class="form-group form-group-default required">
-                                    <label>Landmark</label>
-                                      <input type="text" name="landmark"id="tin"  value="<%out.print(landmark);%>" class="form-control" required>
-                                </div>
-                                <br>
-                                <div class="form-group form-group-default required">
-                                    <label>Map Link</label>
-                                      <input type="text" name="maplink"id="tin"  value="<%out.print(maplink);%>" class="form-control" required>
-                                </div>
-                                
-                                 <% }%>
-                              <br>
-                              <br>
-                              <div class="form-group">
-                              <button class="btn btn-primary btn-cons m-t-10" type="submit">Update</button>
-                              <button class="btn btn-primary btn-cons m-t-10" onclick="document.location.href='/Exhibition/html/ownerProfile.jsp';"> Cancel</button> 
-                              </div>
-                          </div>    
-                        </form>
-                      </div>
-                    </div>
-                               
-                          </div>  
-                                        
-                        </form>
-                    
-                      </div>
-                    </div>
                   </div>
                 </div>
                 <!-- END PANEL -->
@@ -506,20 +476,7 @@
         <!-- START COPYRIGHT -->
         <!-- START CONTAINER FLUID -->
         <!-- START CONTAINER FLUID -->
-        <div class="container-fluid container-fixed-lg footer">
-          <div class="copyright sm-text-center">
-            <p class="small no-margin pull-left sm-pull-reset">
-              <span class="hint-text">Copyright &copy; 2014 </span>
-              <span class="font-montserrat">REVOX</span>.
-              <span class="hint-text">All rights reserved. </span>
-              <span class="sm-block"><a href="#" class="m-l-10 m-r-10">Terms of use</a> | <a href="#" class="m-l-10">Privacy Policy</a></span>
-            </p>
-            <p class="small no-margin pull-right sm-pull-reset">
-              <a href="#">Hand-crafted</a> <span class="hint-text">&amp; Made with Love ®</span>
-            </p>
-            <div class="clearfix"></div>
-          </div>
-        </div>
+       
         <!-- END COPYRIGHT -->
       </div>
       <!-- END PAGE CONTENT WRAPPER -->

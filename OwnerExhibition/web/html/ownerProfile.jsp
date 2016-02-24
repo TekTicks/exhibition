@@ -1,5 +1,6 @@
 
 
+<%@page import="ownerPortal.dbConnection"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -88,7 +89,7 @@
         <!-- BEGIN SIDEBAR MENU ITEMS-->
         <ul class="menu-items"> 
             <li class="">
-            <a href="ckvindex.jsp" class="detailed">
+            <a href="index.html" class="detailed">
               <span class="title">Dashboard</span>
               <span class="details">No items</span>
             </a>
@@ -107,17 +108,13 @@
             <span class="bg-success icon-thumbnail"><i class="pg-home"></i></span>
             <ul class="sub-menu">
               <li class="">
-                <a href="ckvProfile.jsp">Add Exhibitions</a>
-                <span class="icon-thumbnail">P</span>
+                <a href="ownerExhibition.jsp">Add Exhibitions</a>
+                <span class="icon-thumbnail">E</span>
               </li>
            
               <li class="">
-                <a href="ckvProfile.jsp">Modify Exhibitions</a>
-                <span class="icon-thumbnail">Me</span>
-              </li>
-              <li class="">
-                <a href="ckvAddadmin.jsp">Add Administrator</a>
-                <span class="icon-thumbnail">Mv</span>
+                <a href="ownerAddAdministrator.jsp">Add Administrator</a>
+                <span class="icon-thumbnail">A</span>
               </li>
            </ul>
           </li>
@@ -504,15 +501,15 @@
                                String userName=(String)ss.getAttribute("username");
                                String idd=(String)ss.getAttribute("ownerId");
                                String primContact=(String)ss.getAttribute("primContact1");
-                               Class.forName("com.mysql.jdbc.Driver"); 
-                               Connection con5 = DriverManager.getConnection("jdbc:mysql://localhost:3306/Exhibition","root","12345"); 
+                               Connection con5;
+                               con5=dbConnection.getConnection();
                                Statement stat5=con5.createStatement();
                                ResultSet rs5=stat5.executeQuery("select a.*,b.* from ownerProfile a , industry b where a.createdBy='"+idd+"'");
                             %>
                             <%
                              if(!rs5.next())
                             {
-                             out.print("Sory");
+                             
                             }
                              else
                             {
@@ -692,8 +689,8 @@
                     <%   
                          HttpSession ss=request.getSession();
                          String idd=(String)ss.getAttribute("ownerId");
-                         Class.forName("com.mysql.jdbc.Driver"); 
-                         Connection con1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/Exhibition","root","12345"); 
+                         Connection con1;
+                         con1=dbConnection.getConnection();
                          Statement stat1=con1.createStatement();
                          ResultSet rs1=stat1.executeQuery("select a.*,b.* from socialMedia a,ownerSocialMedia b where a.id=b.socialMediaId and b.createdBy='"+idd+"'");
                          int count1=0;
@@ -706,16 +703,19 @@
                             out.println("<td class='v-align-middle semi-bold'><p>"+rs1.getString(3)+"</p></td>");
                             out.println("<td class='v-align-middle semi-bold'><p>"+rs1.getString(2)+"</p></td>");
                             out.println("<td class='v-align-middle semi-bold'><p>"+rs1.getString(9)+"</p></td>");
+                            out.println("<td class='v-align-middle semi-bold'><p>"+rs1.getString(14)+"</p></td>");
                             String kv=rs1.getString(7);
                             String kv1=rs1.getString(2);
                             String kv2=rs1.getString(3);
                             String kv3=rs1.getString(9);
+                            String kv4=rs1.getString(14);
                             
                              HttpSession ss1=request.getSession();
                                   ss1.setAttribute("id",kv);
                                   ss1.setAttribute("date",kv2);
                                   ss1.setAttribute("socialmedia1",kv1);
                                   ss1.setAttribute("link1",kv3);
+                                  ss1.setAttribute("iconMediaId",kv4);
                                   
                             
                            %>
@@ -804,10 +804,10 @@
                   </thead>
                   <tbody>
                     <%   
-                            HttpSession ss2=request.getSession();
-                          String idAddress=(String)ss2.getAttribute("ownerId");
-                         Class.forName("com.mysql.jdbc.Driver"); 
-                           Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/Exhibition","root","12345"); 
+                         HttpSession ss2=request.getSession();
+                         String idAddress=(String)ss2.getAttribute("ownerId");
+                         Connection con;
+                         con=dbConnection.getConnection();
                          Statement stat=con.createStatement();
                          ResultSet rs=stat.executeQuery("select * from ownerAddress where createdBy='"+idAddress+"'");
                          int count=0;
@@ -917,8 +917,8 @@
                     <%   
                          HttpSession ss3=request.getSession();
                          String idContactPerson=(String)ss3.getAttribute("ownerId");
-                         Class.forName("com.mysql.jdbc.Driver"); 
-                         Connection con2 = DriverManager.getConnection("jdbc:mysql://localhost:3306/Exhibition","root","12345"); 
+                         Connection con2;
+                         con2=dbConnection.getConnection();
                          Statement stat2=con2.createStatement();
                          ResultSet rs2=stat.executeQuery("select * from ownerContactPerson where createdBy='"+idContactPerson+"'");
                          int count2=0;

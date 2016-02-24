@@ -5,10 +5,6 @@
 --%>
 
 <%@page import="ownerPortal.dbConnection"%>
-<%@page import="java.sql.ResultSet"%>
-<%@page import="java.sql.Statement"%>
-<%@page import="java.sql.DriverManager"%>
-<%@page import="java.sql.Connection"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -93,14 +89,14 @@
         <!-- BEGIN SIDEBAR MENU ITEMS-->
         <ul class="menu-items">  
             <li class="">
-            <a href="ckvindex.jsp" class="detailed">
+            <a href="index.jsp" class="detailed">
                  <span class="title">Dashboard</span>
                  <span class="details">No items</span>
             </a>
             <span class="bg-success icon-thumbnail"><i class="pg-home"></i></span>
             </li>
             <li class="">
-            <a href="ckvProfile.jsp" class="detailed">
+            <a href="ownerProfile.jsp" class="detailed">
               <span class="title">Profile</span>
               <span class="details">No items</span>
             </a>
@@ -112,7 +108,7 @@
             <span class="bg-success icon-thumbnail"><i class="pg-home"></i></span>
             <ul class="sub-menu">
                 <li class="">
-                <a href="ckvAddexhibition.jsp">Add Exhibitions</a>
+                <a href="ownerExhibition.jsp">Add Exhibitions</a>
                 <span class="icon-thumbnail">P</span>
                 </li>
                 <li class="">
@@ -389,104 +385,116 @@
           <!-- START CONTAINER FLUID -->
           <div class="container-fluid container-fixed-lg bg-white">
             <div class="row">
-              <div class="col-sm-5">
-                <!-- START PANEL -->
-                <div class="panel panel-transparent">
-                  <div class="panel-heading">
-                  </div>
-                    <br>
-                    <br>
-                  <div class="panel-body">
-                    <div class="panel-body text-center">
-                        <img class="image-responsive-height demo-mw-500" src="assets/img/demo/typography_hero.gif" alt="">
-                    </div>
+             <div class="tab-pane slide-left padding-20" id="tab2">
+                    
+                 
+               <div class="container-fluid container-fixed-lg">
+            <!-- START PANEL -->
+            <div class="panel panel-transparent">
+              <div class="panel-heading">
+                <div class="panel-title">
+                </div>
+                <div class="pull-right">
+                  <div class="col-xs-12">
+                      <button id="show-modal" class="btn btn-primary btn-cons" onclick="document.location.href='/Exhibition/html/ownerAddExhibition.jsp';"><i class="fa fa-plus"></i> Add Exhibitions
+                    </button>
                   </div>
                 </div>
-                <!-- END PANEL -->
+                <div class="clearfix"></div>
               </div>
+              <div class="panel-body">
+                  
+              
+              
+              
+               <table class="table table-hover demo-table-search" id="tableWithSearch">
+                     <%@page import="java.io.*;" %>
+                     <%@page import="java.sql.*;" %>
+                     <%@page import="java.sql.DriverManager;" %>
+                     <thead>
+                        <tr>
+                          <!--  <th>ID</th> -->
+                        <th>Date</th>
+                        <th>Exhibition Name</th>        
+                        <th>Update/Delete.</th>
+                        </tr>
+                  </thead>
+                  <tbody>
+                    <%   
+                         HttpSession ss=request.getSession();
+                         String idd=(String)ss.getAttribute("ownerId");
+                         Connection con1;
+                         con1=dbConnection.getConnection();
+                         Statement stat1=con1.createStatement();
+                         ResultSet rs1=stat1.executeQuery("select * from exhibition ");
+                         int count1=0;
+                        
+                         while(rs1.next())
+                         {
+                            count1++;
+                            
+                            out.println("<tr >");
+                            out.println("<td class='v-align-middle semi-bold'><p>"+rs1.getString(16)+"</p></td>");
+                            out.println("<td class='v-align-middle semi-bold'><p>"+rs1.getString(2)+"</p></td>");
+                            String kv=rs1.getString(1);
+                            
+                             HttpSession ss1=request.getSession();
+                                  ss1.setAttribute("id",kv);
+                                 
+                                  
+                            
+                           %>
+                          
+                             <td>
+                                 <div class="btn-group">
+                                
+                                 <button  type="button" class="btn btn-success" onclick="document.location.href='/Exhibition/html/ownerEditExhibition.jsp?myid=<%= kv %>';"><i class="fa fa-pencil"></i></button>
+                                 <button type="button" class="btn btn-success"  onclick="document.location.href='/Exhibition/ownerDeleteExhibition?myid=<%= kv %>';"><i class="fa fa-trash-o"></i>
+                                 </button>
+                                 </div>
+                            </td><%
+                            out.println(" </tr>");
+                        }
+                       
+                   %>   
+                   </tbody>
+                </table>
+              </div>
+            </div>
+            <!-- END PANEL -->
+          </div>
+            
+            
+              <div class="padding-20 bg-white">
+                  <ul class="pager wizard">
+                    <li class="next">
+                      <button class="btn btn-primary btn-cons btn-animated from-left fa fa-truck pull-right" type="button">
+                        <span>Next</span>
+                      </button>
+                    </li>
+                    <li class="next finish hidden">
+                      <button class="btn btn-primary btn-cons btn-animated from-left fa fa-cog pull-right" type="button">
+                        <span>Finish</span>
+                      </button>
+                    </li>
+                    <li class="previous first hidden">
+                      <button class="btn btn-default btn-cons btn-animated from-left fa fa-cog pull-right" type="button">
+                        <span>First</span>
+                      </button>
+                    </li>
+                    <li class="previous">
+                      <button class="btn btn-default btn-cons pull-right" type="button">
+                        <span>Previous</span>
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+                    
+                </div>
+                            
                 
                 
               
-              <div class="col-lg-7 col-md-6 ">
-                <!-- START PANEL -->
-                <div class="panel panel-transparent">
-                  <div class="panel-body">
-                      <br>
-                      <br>
-                     
-                      
-                     
-                             
-                      
-             <div class="col-md-70">
-                      <div class="padding-30">
-                        <form action="/Exhibition/OwnerProfileAddressUpdate" method="post" role="form">
-                           <%
-                               //getting id of ownerAddress in url from ownerProfile
-                            String id=request.getParameter("addId");
-                            //one time connection
-                            Connection con;
-                            con=dbConnection.getConnection();
-                            Statement stat=con.createStatement();
-                            ResultSet rs=stat.executeQuery("select * from ownerAddress where id='"+id+"'");
-                            while(rs.next())
-                            {
-                              String id1=rs.getString(1);
-                              String address1=rs.getString(2);
-                              String address2=rs.getString(3);
-                              String landmark=rs.getString(4);
-                              String maplink=rs.getString(7);
-                              String pincode=rs.getString(5);
-                              //creating session of id of ownerAddress
-                              HttpSession ss=request.getSession();
-                              ss.setAttribute("ownerAddId",id1);
-                           
-                            %>
-                         
-                           <div class="form-group-attached">
-                                <div class="form-group form-group-default required">
-                                    <label>Address 1</label>
-                                    <input type="text" name="address1"  value="<%out.print(address1);%>" id="tin" class="form-control" required>
-                                </div>
-                               
-                                <div class="form-group form-group-default">
-                                    <label>Address 2</label>
-                                      <input type="text" name="address2"  value="<%out.print(address2);%>" id="tin" class="form-control">
-                                </div>
-                            
-                                <div class="form-group form-group-default required">
-                                    <label>Zip Code</label>
-                                      <input type="text" name="zipcode"id="tin"  value="<%out.print(pincode);%>"  class="form-control" required>
-                                </div>
-                            
-                                <div class="form-group form-group-default required">
-                                    <label>Landmark</label>
-                                      <input type="text" name="landmark"id="tin"  value="<%out.print(landmark);%>" class="form-control" required>
-                                </div>
-                                <br>
-                                <div class="form-group form-group-default required">
-                                    <label>Map Link</label>
-                                      <input type="text" name="maplink"id="tin"  value="<%out.print(maplink);%>" class="form-control" required>
-                                </div>
-                                
-                                 <% }%>
-                              <br>
-                              <br>
-                              <div class="form-group">
-                              <button class="btn btn-primary btn-cons m-t-10" type="submit">Update</button>
-                              <button class="btn btn-primary btn-cons m-t-10" onclick="document.location.href='/Exhibition/html/ownerProfile.jsp';"> Cancel</button> 
-                              </div>
-                          </div>    
-                        </form>
-                      </div>
-                    </div>
-                               
-                          </div>  
-                                        
-                        </form>
-                    
-                      </div>
-                    </div>
                   </div>
                 </div>
                 <!-- END PANEL -->
@@ -506,20 +514,7 @@
         <!-- START COPYRIGHT -->
         <!-- START CONTAINER FLUID -->
         <!-- START CONTAINER FLUID -->
-        <div class="container-fluid container-fixed-lg footer">
-          <div class="copyright sm-text-center">
-            <p class="small no-margin pull-left sm-pull-reset">
-              <span class="hint-text">Copyright &copy; 2014 </span>
-              <span class="font-montserrat">REVOX</span>.
-              <span class="hint-text">All rights reserved. </span>
-              <span class="sm-block"><a href="#" class="m-l-10 m-r-10">Terms of use</a> | <a href="#" class="m-l-10">Privacy Policy</a></span>
-            </p>
-            <p class="small no-margin pull-right sm-pull-reset">
-              <a href="#">Hand-crafted</a> <span class="hint-text">&amp; Made with Love ®</span>
-            </p>
-            <div class="clearfix"></div>
-          </div>
-        </div>
+       
         <!-- END COPYRIGHT -->
       </div>
       <!-- END PAGE CONTENT WRAPPER -->

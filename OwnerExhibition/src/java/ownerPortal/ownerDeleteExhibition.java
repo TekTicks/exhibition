@@ -1,51 +1,42 @@
+
 package ownerPortal;
+
 import java.io.IOException;
 import java.io.PrintWriter;
-import static java.lang.System.out;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
+public class ownerDeleteExhibition extends HttpServlet {
 
-public class OwnerLoginChangePassword1 extends HttpServlet {
-
-   
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
         try
-        {
-             HttpSession ss=request.getSession();
-             String userName=(String)ss.getAttribute("username");
-             String  password=request.getParameter("newpassword");
-
-             // One time Database Connection
-             Connection con;
-             con=dbConnection.getConnection();
-             //updating Owner Table           
-             String query = "update owner set password ='"+password+"' where userName='"+userName+"'";
-             PreparedStatement ps = con.prepareStatement(query);
-             // ps.setString(1,password);
-             int i =  ps.executeUpdate();
-             if(i>0)
-             {
-                 response.sendRedirect("/Exhibition/html/ownerLoginThankyou.jsp");
-             } 
-             else
-             {
-                 out.println("error");
-             } 
-        }
+                {
+                   
+                    // Getting id of ownerSocialMedia from url of delete button from ownerProfile            
+                    String id=request.getParameter("myid");
+                     //One time database connection  
+                    Connection con;
+                    con=dbConnection.getConnection();
+                    PreparedStatement ps=con.prepareStatement("delete from exhibition where id='"+id+"'");
+                    int n=ps.executeUpdate();
+                    if(n>0)
+                    {
+                        out.print("ok");   
+                    }
+                    response.sendRedirect("/Exhibition/html/ownerExhibition.jsp");
+                }
         catch(Exception ee)
         {
-           out.println("error"+ee.toString());
+            out.println("error"+ee);
         }
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
