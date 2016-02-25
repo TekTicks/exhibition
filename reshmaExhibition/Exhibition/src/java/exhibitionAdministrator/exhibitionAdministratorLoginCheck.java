@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.ServletContext;
 
 
 public class exhibitionAdministratorLoginCheck extends HttpServlet {
@@ -26,12 +27,16 @@ public class exhibitionAdministratorLoginCheck extends HttpServlet {
                          Statement stat=con.createStatement();
                            ResultSet rs=stat.executeQuery("select * from exhibitionAdmin where email='"+uname+"' or password='"+pass+"'");
                            int count=0; 
+                       
                            while(rs.next())
                            {
                                  String un=rs.getString("email");
                                  ss.setAttribute("emailValid", un);
                                  String pw=rs.getString("password");
                                 ss.setAttribute("passwordValid", pw);
+                                
+                                  String idValid=rs.getString("id");
+                                  ss.setAttribute("idValid" , idValid);
                            
                                            String mn=rs.getString("mobileNo");
                                           ss.setAttribute("MN",mn);
@@ -45,8 +50,8 @@ public class exhibitionAdministratorLoginCheck extends HttpServlet {
                            }
                            if(count>0)
                            {
-                               // HttpSession ss=request.getSession(false);
-                             ;
+                               //HttpSession ss=request.getSession(false);
+                             
                                if( !uname.equals(ss.getAttribute("emailValid")) )
                                {
                                     out.print("emailinvalid");        
@@ -59,16 +64,18 @@ public class exhibitionAdministratorLoginCheck extends HttpServlet {
                                }
                                else
                                {            
-                                   out.print("valid");     
+                                   out.print("valid");   
+                              
                                }
                            }
+                             
                            else
                            {        
                                  out.print("ERROR");
                               
                            }   
                           
-                           
+                            
                            
         }
         catch(Exception ee)

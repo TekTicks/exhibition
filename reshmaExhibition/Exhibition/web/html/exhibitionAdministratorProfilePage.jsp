@@ -4,8 +4,21 @@
     Author     : Admin
 --%>
 
+<%@ page import="exhibitionAdministrator.*;" %>
+<%@ page import="org.apache.commons.fileupload.servlet.ServletFileUpload" %>
+<%@ page import="org.apache.commons.fileupload.disk.DiskFileItemFactory"%>
+<%@ page import="org.apache.commons.fileupload.*"%>
+<%@ page import="java.util.*, java.io.*" %>
+<%@ page import="java.util.Iterator"%>
+<%@ page import="java.util.List"%>
+<%@ page import="java.io.File"%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%@page import = "java.sql.ResultSet;"%>
+<%@page import ="java.sql.Statement;"%>
+<%@page import = "exhibitionAdministrator.exhibitionAdministratorOneTimeConnection;"%>
+<%@page import = "java.sql.Connection;"%>
+<%@page contentType = "text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
   <head>
@@ -47,7 +60,7 @@
 			
 			this.timer = setTimeout(function () {
 				$.ajax({
-		          	url: '/Exhibition/ExhibitionAdministratorPersonalInformation',
+		          	url: '/Exhibition/exhibitionAdministratorPersonalInformation',
 		          	data: 'mn='+ $('#mobileNo').val() +'&us=' + $('#userName').val()+'&pw=' + $('#password').val() +'&le=' + $('#level').val(),
 		          	type: 'post',
 		   		success: function(msg){
@@ -103,31 +116,47 @@
 			this.timer = setTimeout(function () {
 				$.ajax({
 		          	url: '/Exhibition/exhibitionAdministratorContactInformation',
-		          	data: 'tt='+ $('#title').val() +'&fn=' + $('#firstName').val()+'&ln='+ $('#ln').val() +'&dob='+ $('#DOB').val()+'&le=' + $('#le').val() +'&dn=' + $('#degination').val()+'&pn=' + $('#ph').val(),
+		          	data: 't1='+ $('#t1').val() +'&fn=' + $('#fn').val()+'&ln='+ $('#ln').val() +'&dob='+ $('#dob').val()+'&le=' + $('#le').val() +'&dn=' + $('#degination').val()+'&pn=' + $('#pn').val(),
 		          	type: 'post',
 		   		success: function(msg){
                                 alert(msg);
-                                if(msg != 'wrong') // Message Sent, check and redirect
+                                 if(msg != 'error') // Message Sent, check and redirect
 				{
-                                   
-                                          $("#msgbox3").html('data inserted').addClass('myinfo').fadeTo(900,1,function()
+                                     if(msg != 'dataupdateinvalid') {
+                                         
+                                          $("#msgbox3").html('data updated').addClass('myinfo').fadeTo(900,1,function()
 			             {
 			                 //redirect to secure page
 			             // document.location='/Exhibition/html/profilePage.jsp';
 			             });
-                                        
-                                    }
+                                  
+                             }
                                 
-				else
+                            else
 				{
-					$("#msgbox3").fadeTo(200,0.1,function() //start fading the messagebox
+				
+                                         $("#msgbox4").fadeTo(200,0.1,function() //start fading the messagebox
 		                {
 			                  //add message and change the class of the box and start fading
-			                 $(this).html('Sorry...').removeClass().addClass('myerror').fadeTo(900,1);
+			                 $(this).html('Sorry...data not updated').removeClass().addClass('myerror').fadeTo(900,1);
                                          //document.location='/Exhibition/html/exhibitionAdminLog.jsp?user';
                                  });
+                                        
+                                    }	
+                                
+				} 
+                                else
+                                {
+                                     $("#msgbox4").fadeTo(200,0.1,function() //start fading the messagebox
+		                {
+			                  //add message and change the class of the box and start fading
+			                 $(this).html('Error').removeClass().addClass('myerror').fadeTo(900,1);
+                                         //document.location='/Exhibition/html/exhibitionAdminLog.jsp?user';
+                                 });
+                                    
                                 }
-				}
+                                
+    }
 				
 				});
 			}, 200);
@@ -749,8 +778,63 @@ function readURL(input) {
                               </div></div>
                            <div class="col-sm-10">
                               
-                               <input type='file' onchange="readURL(this);" />
-                         <img id="blah" src="#" alt="your image" />
+                                 <form ENCTYPE="multipart/form-data" action="/Exhibition/html/insertimage.jsp" method="post" role="form">
+             <div class="panel-heading">
+              <div class="panel-title">
+                    Social Media Icon 
+                </div>
+                 </div>
+             
+          <%
+            try {
+           String img_name="";
+             Class.forName("com.mysql.jdbc.Driver"); 
+                Connection con;
+  con=exhibitionAdministratorOneTimeConnection.getConnection();
+             
+             Statement stat=con.createStatement();
+             
+             HttpSession ssC=request.getSession();
+             String fileName=(String)ssC.getAttribute("fileName");
+                         
+            // ResultSet rs=stat.executeQuery("select * from media order By id desc limit 1");
+            ResultSet rs=stat.executeQuery("select * from media where link='"+fileName+"'");
+             
+             if(!rs.next())
+             {
+                 out.println("Error");
+             }
+             else
+             {
+               img_name=rs.getString(2);
+               ss.setAttribute("mediaId1",rs.getString(1));
+               //out.print(rs.getString(1));
+             }
+            %>    
+
+    <img src='<%= img_name %>' id="profile" alt="Profile not uploaded" style="width:200px;height:200px"> 
+            <%}
+              catch(Exception e)
+                {
+                   out.print("fsdaf" +e);
+                }
+            %>  
+    <script type="text/javascript">
+	function readProfile(input) {
+	if (input.files && input.files[0]) {
+	var reader3 = new FileReader();
+	reader3.onload = function (e) {
+	$('#profile')
+	.attr('src', e.target.result)
+	};
+	reader3.readAsDataURL(input.files[0]);
+	}
+	}
+   </script>
+   <input name="file" id="file" style="width:200px" type="file" onchange="readProfile(this);">
+   <input type="submit" value="upload">       
+  
+         </form>
                            </div>
                       </div>
                     </div>
@@ -769,20 +853,40 @@ function readURL(input) {
                    <div class="row">
                   <div class="col-sm-10">
                   <!--  <h3>Create Moderator</h3> -->
+                   <%@ page import="javax.servlet.http.HttpSession.*;" %>
+                      <%@ page session="false" %>
+                      
+                      <%
+                          Connection con;
+  con=exhibitionAdministratorOneTimeConnection.getConnection();
+  
+                           // HttpSession ss=request.getSession(false);
+                    String rs1 = (String) ss.getAttribute("idValid");
+                    //out.print(dob);
+                     //  HttpSession objcontact=request.getSession(true);
+                          Statement st=con.createStatement();
+                        ResultSet rs=st.executeQuery("select * from exhibitionAdminContact where id='"+rs1+"'");
+                          
+                        int co=0;
+                        
+                        while(rs.next())
+                        {
+                  
+                        %>
                     
                     <form id="login_frm" name="login_frm" class="form-horizontal" role="form" autocomplete="off" action="" method="">
                     
                         <div class="form-group">
                         <label for="fname" class="col-sm-3 control-label">Title</label>
                         <div class="col-sm-9">
-  <input type="text" class="form-control" id="title" name="title" placeholder="Title" value="" required>
+                            <input type="text" class="form-control" id="t1" name="t1" placeholder="Title" value="<%out.print(rs.getString("title"));%>" required>
                        </div>
                        
                       </div>
                         <div class="form-group">
                         <label for="fname" class="col-sm-3 control-label">First Name</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="firstName" placeholder="First Name" name="firstName" value="" required>
+                            <input type="text" class="form-control" id="fn" placeholder="First Name" name="fn" value="<%out.print(rs.getString("firstName"));%>" required>
                         </div>
                         
                        
@@ -790,7 +894,7 @@ function readURL(input) {
                         <div class="form-group">
                         <label for="fname" class="col-sm-3 control-label">Last Name</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="ln" placeholder="lastName" name="ln" value="" required>
+                            <input type="text" class="form-control" id="ln" placeholder="lastName" name="ln" value="<%out.print(rs.getString("lastName"));%>" required>
                         </div>
                       </div>
                           
@@ -798,29 +902,29 @@ function readURL(input) {
                         <div class="form-group">
                         <label for="fname" class="col-sm-3 control-label">Date of Birth</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="DOB" placeholder="DOB" name="DOB" value="" required>
+                            <input type="text" class="form-control" id="dob" placeholder="DOB" name="dob" value="<%out.print(rs.getString("dateOfBirth"));%>" required>
                         </div>
                       </div>   
                          <div class="form-group">
                         <label for="fname" class="col-sm-3 control-label">Level</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="le" placeholder="level" name="le" value="" required>
+                            <input type="text" class="form-control" id="le" placeholder="level" name="le" value="<%out.print(rs.getString("level"));%>" required>
                         </div>
                       </div>   
                           <div class="form-group">
                         <label for="fname" class="col-sm-3 control-label">Designation</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="degination" placeholder="Designation" name="degination" value=""  required>
+                            <input type="text" class="form-control" id="degination" placeholder="Designation" name="degination" value="<%out.print(rs.getString("degination"));%>"  required>
                         </div>
                       </div>   
                           <div class="form-group">
                         <label for="fname" class="col-sm-3 control-label">Phone No</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="ph" placeholder="Phone No" name="ph" value="" required>
+                            <input type="text" class="form-control" id="pn" placeholder="Phone No" name="pn" value="<%out.print(rs.getString("phoneNo"));%>" required>
                         </div>
                       </div>   
                         
-                        <br>    <div id="msgbox3"> </div> 
+                        <br>     <div id="msgbox3"> </div>  <div id="msgbox4"> </div> 
                       <div class="row">
                         <div class="col-sm-3">
                       <!--    <p>I hereby certify that the information above is true and accurate. </p> -->
@@ -831,6 +935,15 @@ function readURL(input) {
                         </div>
                       </div>
                     
+                     
+                      
+                         <%
+                          co++;  
+                          
+                        }
+                        
+                             
+                      %>
                     </form>
                   </div>
                 </div>

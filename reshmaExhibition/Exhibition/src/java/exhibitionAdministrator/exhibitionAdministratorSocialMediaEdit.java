@@ -1,7 +1,13 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package exhibitionAdministrator;
+
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.*;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -9,49 +15,43 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class exhibitionAdministratorContactInformation extends HttpServlet {
+public class exhibitionAdministratorSocialMediaEdit extends HttpServlet {
 
-  
+ 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-          response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
-        try {
-              String tt=request.getParameter("t1");
-              String fn=request.getParameter("fn");
-              String ln =request.getParameter("ln");
-            
-              String dob=request.getParameter("dob");
-                String le=request.getParameter("le");
-              String dn=request.getParameter("dn");
-                String pn=request.getParameter("pn");
-                         
-               Connection con;
-  con=exhibitionAdministratorOneTimeConnection.getConnection();
-            HttpSession ss=request.getSession(false);
-                    String rs1 = (String) ss.getAttribute("idValid");
-        PreparedStatement ps=con.prepareStatement("update exhibitionAdminContact set title='"+tt+"',firstName='"+fn+"',lastName='"+ln+"',dateOfBirth='"+dob+"' ,level='"+le+"',degination='"+dn+"',phoneNo='"+pn+"' where id='"+rs1+"' ");
-   int rst = ps.executeUpdate();
- if(rst !=0)
-      {
-          out.print("dataupdated");
-      }
-      else
-      {
-          out.print("dataupdateinvalid");
-      } 
-                     }
-       
-            
-        
-        catch(Exception ee)
-        {
-           out.println("error" +ee.toString());
-        }
-     
-    }
+        response.setContentType("text/html;charset=UTF-8");
+          PrintWriter out = response.getWriter();
+       try
+            {
+                 HttpSession ss1=request.getSession(false);
+              String myex_id=(String)ss1.getAttribute("myex_id");
+               out.print(myex_id);
+                String exhibitionId=request.getParameter("EI");
+                out.print(exhibitionId);
+                String link=request.getParameter("link");
+                out.print(link);
+                 
+            Connection con;
+             con=exhibitionAdministratorOneTimeConnection.getConnection();
+             String query = "update exhibitionSocialMedia set exhibitionId ='"+exhibitionId+"' , link ='"+link+"' where id='"+myex_id+"' ";
+           PreparedStatement ps=con.prepareStatement(query);
+      int rs= ps.executeUpdate();
+       if(rs !=0)
+       {
 
+              out.print("ok");   
+       }
+       else
+       {
+           out.print("wrong");
+       }       
+    }
+       catch(Exception e)
+       {
+           out.print("error");
+       }
+    }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -90,9 +90,5 @@ public class exhibitionAdministratorContactInformation extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
-/*    private boolean isNaN(char[] value) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    } */
 
 }

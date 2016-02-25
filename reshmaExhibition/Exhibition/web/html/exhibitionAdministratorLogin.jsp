@@ -45,7 +45,6 @@
 		          	data: 'un='+ $('#login_id').val() +'&pw=' + $('#password').val(),
 		          	type: 'post',
 		   		success: function(msg){
-                                
                                 if(msg != 'ERROR') // Message Sent, check and redirect
 				{
                                     if(msg == 'emailinvalid')

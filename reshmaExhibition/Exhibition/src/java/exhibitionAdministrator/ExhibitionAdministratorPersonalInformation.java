@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class ExhibitionAdministratorPersonalInformation extends HttpServlet {
+public class exhibitionAdministratorPersonalInformation extends HttpServlet {
 
   
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -30,7 +30,7 @@ public class ExhibitionAdministratorPersonalInformation extends HttpServlet {
           String rs1 = (String) ss.getAttribute("emailValid");
         
      // String query="update exhibitionAdmin set mobileNo='"+mn+"'  where email='"+Global.un+"'" ;
-      if (!(mn.length()== 10) )
+      if (!(mn.length() == 10) )
      
               {
                    out.print("mobileNoInvalid");
