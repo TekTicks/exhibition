@@ -59,8 +59,7 @@ else
 			
 			
 				//$selectVisitorQuery1="select id from visitor where mobileNo='$mobileNo'";
-				
-				
+	
 				
 				/*$selectVisitorQuery1="select id,name from visitor where mobileNo='$mobileNo'";
 				$selectVisitor1=mysql_query($selectVisitorQuery1,$conn)or die(mysql_error());
@@ -70,6 +69,27 @@ else
 				$jsonresponse=$visitorId;
 				json_encode($jsonresponse);
 				deliver_response(200,"Visitor Created","visitor",$jsonresponse);*/
+			
+			
+			
+			//select id from visitor table
+			$selectVisitorQuery2 = "select id from visitor where mobileNo='$mobileNo'";
+			$selectVisitor2 = mysql_query($selectVisitorQuery2 ,$conn) or die(mysql_error());
+			$selectVisitorResult1=mysql_fetch_assoc($selectVisitor2);
+			
+			$selectVisitorRows1 = mysql_num_rows($selectVisitor2);
+			if($selectVisitorRows1 > 0)
+			{
+				//id1 has the current id from auto incremented column
+				$id1=mysql_insert_id();
+			}
+			
+			//inserting data into visitorProfile
+			$insertVisitorProfileQuery="insert into visitorProfile (name,createdOn,modifiedOn,createdBy,modifiedBy)  values('$name','$createdOn','$createdOn','$id1','$id1')";
+			$insertVisitorProfile=mysql_query($insertVisitorProfileQuery,$conn) or die(mysql_error());
+			
+			
+			
 			
 			
 			$selectVisitorQuery1="select id,name from visitor where mobileNo='$mobileNo'";
@@ -82,25 +102,6 @@ else
 				json_encode($jsonresponse);
 				deliver_response(200,"visitor created","visitor",$jsonresponse);
 			
-			
-			
-			
-			
-			//select id from visitor table
-			/*$selectVisitorQuery1 = "select id from visitor where mobileNo='$mobileNo'";
-			$selectVisitor1 = mysql_query($selectVisitorQuery1 ,$conn) or die(mysql_error());
-			$selectVisitorResult=mysql_fetch_assoc($selectVisitor1);
-			
-			$selectVisitorRows1 = mysql_num_rows($selectVisitor1);
-			if($selectVisitorRows1 > 0)
-			{
-				//id1 has the current id from auto incremented column
-				$id1=mysql_insert_id();
-			}*/
-			
-			//inserting data into visitorProfile
-			/*insertVisitorProfileQuery="insert into visitorProfile (name,createdOn,modifiedOn,createdBy,modifiedBy)  values('$name','$createdOn','$createdOn','$id1','$id1')";
-			$insertVisitorProfile=mysql_query($insertVisitorProfileQuery,$conn) or die(mysql_error());*/
 			
 			//Create OTP
 			/*$digits_needed=4;
