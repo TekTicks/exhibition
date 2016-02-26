@@ -20,7 +20,7 @@ $email=$data['otp'][0]['emailId'];
 //Check for blank information
 if($mobileNo=='' or $email=='')
 {
-	deliver_response(201,"Missing Information","otp",$jsonresponse);
+	deliver_response(203,"Missing Information..Please Enter All The Information!!","otp",$jsonresponse);
 }
 else
 {
@@ -30,7 +30,7 @@ else
 	$selectVisitorRows1 = mysql_num_rows($selectVisitor1);
 	if($selectVisitorRows1 > 0)
 	{
-		deliver_response(202,"Mobile Number Already Exists","otp",$jsonresponse);
+		deliver_response(203,"An Account With This Mobile Number Already Exists","otp",$jsonresponse);
 	}
 	else
 	{
@@ -40,7 +40,7 @@ else
 		$selectVisitorRows2=mysql_num_rows($selectVisitor2);
 		if($selectVisitorRows2 > 0)
 		{
-			deliver_response(203,"Email Id Already Exists","otp",$jsonresponse);
+			deliver_response(203,"An Account With This Email Id Already Exists","otp",$jsonresponse);
 		}
 		else
 		{

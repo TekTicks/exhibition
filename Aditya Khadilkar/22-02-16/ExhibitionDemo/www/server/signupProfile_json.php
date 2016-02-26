@@ -15,29 +15,26 @@ $pname=$data['profile'][0]['pname'];
 $visitorId=$data['profile'][0]['visitorId'];
 $pemail=$data['profile'][0]['pemail'];
 $pphone=$data['profile'][0]['pphone'];
-$pGender=$data['profile'][0]['pGender'];
-$pprofession=$data['profile'][0]['pProfession'];
-$pEducation=$data['profile'][0]['pEducation'];
-$pBirthDate=$data['profile'][0]['pBirthDate'];
-
+$pgender=$data['profile'][0]['pgender'];
+$pbirthdate=$data['profile'][0]['pbirthdate'];
+$pcity=$data['profile'][0]['pcity'];
 //echo $pbirthdate;
 			
 		//insert into comment table
 		//$dob=strtotime('27-10-1987');
-		$dob = date('Y-m-d',strtotime($pBirthDate));
+		$dob = date('Y-m-d',strtotime($pbirthdate));
 
 //@$createdon = date('Y-m-d h:i:s', time());			
-$updateVisitorProfileQuery="update visitorProfile
+$updateVisitorProfileQuery="update visitorprofile
 set name='$pname',
-gender='$pGender',
-dateOfBirth='$dob',	
-profession='$pprofession',
-education='$pEducation'
+gender='$pgender',
+dob='$dob',	
+city='$pcity'
 where createdBy='$visitorId'";	
 mysql_query($updateVisitorProfileQuery,$conn); 
 	
 			
-//deliver_response(200,"visitor profile updated","visitor",$jsonresponse);
+deliver_response(200,"visitor profile updated","visitor",$jsonresponse);
 
 
  
