@@ -7,83 +7,66 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.servlet.ServletContext;
-
 
 public class exhibitionAdministratorLoginCheck extends HttpServlet {
-
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException { 
            response.setContentType("text/html");
         PrintWriter out = response.getWriter();
         try
         {
-                           String uname=request.getParameter("un");
-                           request.setAttribute("email",uname);                    
-                           String pass=request.getParameter("pw");
+                        String uname=request.getParameter("un");
+                        request.setAttribute("email",uname);                    
+                        String pass=request.getParameter("pw");
                         HttpSession ss=request.getSession(true);
                         Connection con;
                         con=exhibitionAdministratorOneTimeConnection.getConnection();
-                         Statement stat=con.createStatement();
-                           ResultSet rs=stat.executeQuery("select * from exhibitionAdmin where email='"+uname+"' or password='"+pass+"'");
-                           int count=0; 
-                       
-                           while(rs.next())
+                        Statement stat=con.createStatement();
+                        ResultSet rs=stat.executeQuery("select * from exhibitionAdmin where email='"+uname+"' or password='"+pass+"'");
+                        int count=0; 
+                          while(rs.next())
                            {
                                  String un=rs.getString("email");
                                  ss.setAttribute("emailValid", un);
                                  String pw=rs.getString("password");
-                                ss.setAttribute("passwordValid", pw);
-                                
-                                  String idValid=rs.getString("id");
-                                  ss.setAttribute("idValid" , idValid);
-                           
-                                           String mn=rs.getString("mobileNo");
-                                          ss.setAttribute("MN",mn);
-                                          
-                                           String usn=rs.getString("userName");
-                                          ss.setAttribute("userNameValid", usn);
-                                        
-                                           String le=rs.getString("level");
-                                           ss.setAttribute("levelValid", le);
+                                 ss.setAttribute("passwordValid", pw);
+                                 String idValid=rs.getString("id");
+                                 ss.setAttribute("idValid" , idValid);
+                                 String mn=rs.getString("mobileNo");
+                                 ss.setAttribute("MN",mn);
+                                 String usn=rs.getString("userName");
+                                 ss.setAttribute("userNameValid", usn);
+                                 String le=rs.getString("level");
+                                 ss.setAttribute("levelValid", le);
                                  count++;
                            }
                            if(count>0)
                            {
                                //HttpSession ss=request.getSession(false);
-                             
                                if( !uname.equals(ss.getAttribute("emailValid")) )
                                {
                                     out.print("emailinvalid");        
-
                                }
                                else if(! pass.equals(ss.getAttribute("passwordValid")))
                                {
                                    out.print("passwordinvalid");        
-
                                }
                                else
                                {            
                                    out.print("valid");   
-                              
                                }
-                           }
-                             
+                           }  
                            else
                            {        
                                  out.print("ERROR");
-                              
                            }   
-                          
-                            
-                           
+                 
         }
         catch(Exception ee)
         {
            out.println("error"+ee.toString());
         }
     }
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -122,5 +105,4 @@ public class exhibitionAdministratorLoginCheck extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }

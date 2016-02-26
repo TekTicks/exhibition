@@ -1,6 +1,4 @@
-
 package exhibitionAdministrator;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -11,82 +9,56 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- *
- * @author Admin
- */
 public class exhibitionAdministratorTeamMember extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+          throws ServletException, IOException {
+          response.setContentType("text/html;charset=UTF-8");
           PrintWriter out = response.getWriter();
         try
-            {
-                 HttpSession ss=request.getSession(false);
-                 String idValid = (String) ss.getAttribute("idValid");
-                
-                                
+          {
+             HttpSession ss=request.getSession(false);
+             String idValid = (String) ss.getAttribute("idValid");                   
              String tagline=request.getParameter("tagline");
-           String title=request.getParameter("title");
-            String firstName=request.getParameter("firstName");
-           String lastName=request.getParameter("lastName");
-            String gender=request.getParameter("gender");
-            String dateOfBirth=request.getParameter("dateOfBirth");
-           String degination=request.getParameter("degination");
-           String phoneNo=request.getParameter("phoneNo");
-           String mobileNo=request.getParameter("mobileNo");
-           String email=request.getParameter("email");
-           String modifiedBy=request.getParameter("modifiedBy");
-                     
-              Connection con;
-                con=exhibitionAdministratorOneTimeConnection.getConnection();
-              
-        String val = "insert into exhibitionTeam(tagline,title,firstName,lastName,gender,dateOfBirth,degination,phoneNo,mobileNo,email,createdBy,modifiedBy,modifiedByFlag)  values (?,?,?,?,?,?,?,?,?,?,(select id from owner where id=1), '"+idValid+"' ,(select id from roles where id=1))" ;
-                PreparedStatement ps = con.prepareStatement(val);
-                 
-                   
-                 ps.setString(1, tagline);
-                   ps.setString(2, title);
-                     ps.setString(3, firstName);
-                   ps.setString(4, lastName);
-                     ps.setString(5,gender);
-                   ps.setString(6, dateOfBirth);
-                     ps.setString(7, degination);
-                   ps.setString(8, phoneNo);
-                    ps.setString(9, mobileNo);
-                     ps.setString(10, email);
-                     
-                  
-                  int n=  ps.executeUpdate(); 
-        
+             String title=request.getParameter("title");
+             String firstName=request.getParameter("firstName");
+             String lastName=request.getParameter("lastName");
+             String gender=request.getParameter("gender");
+             String dateOfBirth=request.getParameter("dateOfBirth");
+             String degination=request.getParameter("degination");
+             String phoneNo=request.getParameter("phoneNo");
+             String mobileNo=request.getParameter("mobileNo");
+             String email=request.getParameter("email");
+            // String modifiedBy=request.getParameter("modifiedBy");       
+             Connection con;
+             con=exhibitionAdministratorOneTimeConnection.getConnection();  
+             String val = "insert into exhibitionTeam(tagline,title,firstName,lastName,gender,dateOfBirth,degination,phoneNo,mobileNo,email,createdBy,modifiedBy,modifiedByFlag)  values (?,?,?,?,?,?,?,?,?,?,(select id from owner where id=1), '"+idValid+"' ,(select id from roles where id=1))" ;
+             PreparedStatement ps = con.prepareStatement(val); 
+              ps.setString(1, tagline);
+              ps.setString(2, title);
+              ps.setString(3, firstName);
+              ps.setString(4, lastName);
+              ps.setString(5,gender);
+              ps.setString(6, dateOfBirth);
+              ps.setString(7, degination);
+              ps.setString(8, phoneNo);
+              ps.setString(9, mobileNo);
+              ps.setString(10, email);      
+              int n=  ps.executeUpdate(); 
                   if(n>0)
                   {
-                        out.println("ok");
+                   out.println("ok");
                   }
                   else
                   {
-                        out.println("error");
+                   out.println("error");
                   }
-      
            con.close();
-            
-            }
+          }
            catch(Exception e)
            {
-               out.println("error" +e);
+             out.println("error" +e);
            }
     }
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -125,5 +97,4 @@ public class exhibitionAdministratorTeamMember extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }

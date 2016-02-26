@@ -10,58 +10,44 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class exhibitionAdministratorPersonalInformation extends HttpServlet {
-
-  
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
           response.setContentType("text/html");
         PrintWriter out = response.getWriter();
         try {
              String mn=request.getParameter("mn");
-           
-         String us=request.getParameter("us");
+             String us=request.getParameter("us");
              String pw=request.getParameter("pw");
              String le=request.getParameter("le");
-         
              Connection con;
-  con=exhibitionAdministratorOneTimeConnection.getConnection();
-          HttpSession ss=request.getSession(false);
-          String rs1 = (String) ss.getAttribute("emailValid");
-        
-     // String query="update exhibitionAdmin set mobileNo='"+mn+"'  where email='"+Global.un+"'" ;
-      if (!(mn.length() == 10) )
-     
+             con=exhibitionAdministratorOneTimeConnection.getConnection();
+             HttpSession ss=request.getSession(false);
+             String rs1 = (String) ss.getAttribute("emailValid");
+             // String query="update exhibitionAdmin set mobileNo='"+mn+"'  where email='"+Global.un+"'" ;
+             if (!(mn.length() == 10) )
               {
                    out.print("mobileNoInvalid");
+              }  
+              else
+              {
+                String query = "update exhibitionAdmin set mobileNo ='"+mn+"',userName ='"+us+"',password ='"+pw+"',level ='"+le+"' where email='"+rs1+"' ";
+               PreparedStatement ps=con.prepareStatement(query);
+               int rs= ps.executeUpdate();
+               if(rs !=0)
+              {
+               out.print("ok");   
               }
- 
-                
-        else
-      {
-    String query = "update exhibitionAdmin set mobileNo ='"+mn+"',userName ='"+us+"',password ='"+pw+"',level ='"+le+"' where email='"+rs1+"' ";
-           PreparedStatement ps=con.prepareStatement(query);
-      int rs= ps.executeUpdate();
-       if(rs !=0)
-       {
-
-              out.print("ok");   
-       }
-       else
-       {
-           out.print("wrong");
-       }
-                
-      
-        }
-        }
+               else
+              {
+                out.print("wrong");
+              }
+              }
+             }
         catch(Exception ee)
         {
            out.println("error" +ee.toString());
         }
-     
-    }
-
+    } 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -100,9 +86,7 @@ public class exhibitionAdministratorPersonalInformation extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
-    private boolean isNaN(char[] value) {
+ /*   private boolean isNaN(char[] value) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+    } */
 }

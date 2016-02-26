@@ -179,7 +179,7 @@
 		        		Create a pages account. If you have a facebook account, log into it for this process. Sign in with <a href="#" class="text-info">Facebook</a> or <a href="#" class="text-info">Google</a></small>
                 </p>-->
               </div>
-                        <!--<div id="error_box"></div> -->
+                   <!--<div id="error_box"></div> -->
 
             </div>
           </div>

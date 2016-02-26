@@ -1,16 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package exhibitionAdministrator;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -18,32 +9,27 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class exhibitionAdministratorSocialMediaDelete extends HttpServlet {
-
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+          throws ServletException, IOException {
+          response.setContentType("text/html;charset=UTF-8");
           PrintWriter out = response.getWriter();
        try
-            {
-            String myex_id=request.getParameter("myid");
-                out.print(myex_id);
-            Connection con;
-             con=exhibitionAdministratorOneTimeConnection.getConnection();
+          {
+               String myex_id=request.getParameter("myid");
+               out.print(myex_id);
+               Connection con;
+               con=exhibitionAdministratorOneTimeConnection.getConnection();
                Statement st=con.createStatement();
-            st.executeUpdate("delete from exhibitionSocialMedia where id='"+myex_id+"'"); 
-        
-               response.sendRedirect("/Exhibition/html/exhibitionAdministratorSocialMedia.jsp");
-                    
-           con.close();
-            
+               st.executeUpdate("delete from exhibitionSocialMedia where id='"+myex_id+"'"); 
+               response.sendRedirect("/Exhibition/html/exhibitionAdministratorSocialMedia.jsp");   
+               con.close();
             }
-           catch(Exception e)
-           {
-               out.print("error" +e);
-           }
+       catch(Exception e)
+          {
+            out.print("error" +e);
+          }
 
     }
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -82,5 +68,4 @@ public class exhibitionAdministratorSocialMediaDelete extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }

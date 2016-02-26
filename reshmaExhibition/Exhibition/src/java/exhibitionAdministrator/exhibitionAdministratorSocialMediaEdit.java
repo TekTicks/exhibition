@@ -1,10 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package exhibitionAdministrator;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -16,40 +10,33 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class exhibitionAdministratorSocialMediaEdit extends HttpServlet {
-
- 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+          throws ServletException, IOException {
+          response.setContentType("text/html;charset=UTF-8");
           PrintWriter out = response.getWriter();
        try
-            {
-                 HttpSession ss1=request.getSession(false);
-              String myex_id=(String)ss1.getAttribute("myex_id");
-               out.print(myex_id);
+          {
+                HttpSession ss1=request.getSession(false);
+                String myex_id=(String)ss1.getAttribute("myex_id");
                 String exhibitionId=request.getParameter("EI");
-                out.print(exhibitionId);
-                String link=request.getParameter("link");
-                out.print(link);
-                 
-            Connection con;
-             con=exhibitionAdministratorOneTimeConnection.getConnection();
-             String query = "update exhibitionSocialMedia set exhibitionId ='"+exhibitionId+"' , link ='"+link+"' where id='"+myex_id+"' ";
-           PreparedStatement ps=con.prepareStatement(query);
-      int rs= ps.executeUpdate();
-       if(rs !=0)
-       {
-
-              out.print("ok");   
-       }
-       else
-       {
-           out.print("wrong");
-       }       
-    }
+                String link=request.getParameter("link");      
+                Connection con;
+                con=exhibitionAdministratorOneTimeConnection.getConnection();
+                String query = "update exhibitionSocialMedia set exhibitionId ='"+exhibitionId+"' , link ='"+link+"' where id='"+myex_id+"' ";
+                PreparedStatement ps=con.prepareStatement(query);
+                int rs= ps.executeUpdate();
+                 if(rs !=0)
+                  {
+                    out.print("ok");   
+                  }
+                 else
+                  {
+                     out.print("wrong");
+                  }       
+           }
        catch(Exception e)
        {
-           out.print("error");
+         out.print("error");
        }
     }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -90,5 +77,4 @@ public class exhibitionAdministratorSocialMediaEdit extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }

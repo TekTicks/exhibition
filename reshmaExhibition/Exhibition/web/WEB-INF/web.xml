@@ -21,10 +21,6 @@
         <servlet-class>global.ReceiveOTPSession</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>AdminLogCheck</servlet-name>
-        <servlet-class>global.AdminLogCheck</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>MobileNoVerify</servlet-name>
         <servlet-class>global.MobileNoVerify</servlet-class>
     </servlet>
@@ -35,6 +31,74 @@
     <servlet>
         <servlet-name>ExhibitionTeamInsert</servlet-name>
         <servlet-class>global.ExhibitionTeamInsert</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>exhibitionAdministratorPersonalInformation</servlet-name>
+        <servlet-class>exhibitionAdministrator.exhibitionAdministratorPersonalInformation</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>exhibitionAdministratorLoginCheck</servlet-name>
+        <servlet-class>exhibitionAdministrator.exhibitionAdministratorLoginCheck</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>exhibitionAdministratorContactInformation</servlet-name>
+        <servlet-class>exhibitionAdministrator.exhibitionAdministratorContactInformation</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>exhibitionAdministratorForgotPassword</servlet-name>
+        <servlet-class>exhibitionAdministrator.exhibitionAdministratorForgotPassword</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>exhibitionAdministratorMobileNo</servlet-name>
+        <servlet-class>exhibitionAdministrator.exhibitionAdministratorMobileNo</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>exhibitionAdministratorReceiveOtp</servlet-name>
+        <servlet-class>exhibitionAdministrator.exhibitionAdministratorReceiveOtp</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>exhibitionAdministratorSector</servlet-name>
+        <servlet-class>exhibitionAdministrator.exhibitionAdministratorSector</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>exhibitionAdministratorSocialMedia</servlet-name>
+        <servlet-class>exhibitionAdministrator.exhibitionAdministratorSocialMedia</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>exhibitionAdministratorSocialMediaDelete</servlet-name>
+        <servlet-class>exhibitionAdministrator.exhibitionAdministratorSocialMediaDelete</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>exhibitionAdministratorTeamMember</servlet-name>
+        <servlet-class>exhibitionAdministrator.exhibitionAdministratorTeamMember</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>exhibitionAdministratorSectorDelete</servlet-name>
+        <servlet-class>exhibitionAdministrator.exhibitionAdministratorSectorDelete</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>exhibitionAdministratorTeamMemberDelete</servlet-name>
+        <servlet-class>exhibitionAdministrator.exhibitionAdministratorTeamMemberDelete</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>exhibitionAdministratorTeamMemberEdit</servlet-name>
+        <servlet-class>exhibitionAdministrator.exhibitionAdministratorTeamMemberEdit</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>exhibitionAdministratorSocialMediaEdit</servlet-name>
+        <servlet-class>exhibitionAdministrator.exhibitionAdministratorSocialMediaEdit</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>exhibitionAdministratorSectorEdit</servlet-name>
+        <servlet-class>exhibitionAdministrator.exhibitionAdministratorSectorEdit</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>exhibitionAdministratorFAQ</servlet-name>
+        <servlet-class>exhibitionAdministrator.exhibitionAdministratorFAQ</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>demo</servlet-name>
+        <servlet-class>exhibitionAdministrator.demo</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>exhibitionAdminLog</servlet-name>
@@ -57,10 +121,6 @@
         <url-pattern>/ReceiveOTPSession</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>AdminLogCheck</servlet-name>
-        <url-pattern>/AdminLogCheck</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>MobileNoVerify</servlet-name>
         <url-pattern>/MobileNoVerify</url-pattern>
     </servlet-mapping>
@@ -71,6 +131,74 @@
     <servlet-mapping>
         <servlet-name>ExhibitionTeamInsert</servlet-name>
         <url-pattern>/ExhibitionTeamInsert</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>exhibitionAdministratorPersonalInformation</servlet-name>
+        <url-pattern>/exhibitionAdministratorPersonalInformation</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>exhibitionAdministratorLoginCheck</servlet-name>
+        <url-pattern>/exhibitionAdministratorLoginCheck</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>exhibitionAdministratorContactInformation</servlet-name>
+        <url-pattern>/exhibitionAdministratorContactInformation</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>exhibitionAdministratorForgotPassword</servlet-name>
+        <url-pattern>/exhibitionAdministratorForgotPassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>exhibitionAdministratorMobileNo</servlet-name>
+        <url-pattern>/exhibitionAdministratorMobileNo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>exhibitionAdministratorReceiveOtp</servlet-name>
+        <url-pattern>/exhibitionAdministratorReceiveOtp</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>exhibitionAdministratorSector</servlet-name>
+        <url-pattern>/exhibitionAdministratorSector</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>exhibitionAdministratorSocialMedia</servlet-name>
+        <url-pattern>/exhibitionAdministratorSocialMedia</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>exhibitionAdministratorSocialMediaDelete</servlet-name>
+        <url-pattern>/exhibitionAdministratorSocialMediaDelete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>exhibitionAdministratorTeamMember</servlet-name>
+        <url-pattern>/exhibitionAdministratorTeamMember</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>exhibitionAdministratorSectorDelete</servlet-name>
+        <url-pattern>/exhibitionAdministratorSectorDelete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>exhibitionAdministratorTeamMemberDelete</servlet-name>
+        <url-pattern>/exhibitionAdministratorTeamMemberDelete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>exhibitionAdministratorTeamMemberEdit</servlet-name>
+        <url-pattern>/exhibitionAdministratorTeamMemberEdit</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>exhibitionAdministratorSocialMediaEdit</servlet-name>
+        <url-pattern>/exhibitionAdministratorSocialMediaEdit</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>exhibitionAdministratorSectorEdit</servlet-name>
+        <url-pattern>/exhibitionAdministratorSectorEdit</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>exhibitionAdministratorFAQ</servlet-name>
+        <url-pattern>/exhibitionAdministratorFAQ</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>demo</servlet-name>
+        <url-pattern>/demo</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

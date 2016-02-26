@@ -10,8 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class exhibitionAdministratorContactInformation extends HttpServlet {
-
-  
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
@@ -26,12 +24,13 @@ public class exhibitionAdministratorContactInformation extends HttpServlet {
                 String le=request.getParameter("le");
               String dn=request.getParameter("dn");
                 String pn=request.getParameter("pn");
-                         
+                
                Connection con;
   con=exhibitionAdministratorOneTimeConnection.getConnection();
             HttpSession ss=request.getSession(false);
                     String rs1 = (String) ss.getAttribute("idValid");
-        PreparedStatement ps=con.prepareStatement("update exhibitionAdminContact set title='"+tt+"',firstName='"+fn+"',lastName='"+ln+"',dateOfBirth='"+dob+"' ,level='"+le+"',degination='"+dn+"',phoneNo='"+pn+"' where id='"+rs1+"' ");
+                    String mediaid=(String) ss.getAttribute("mediaId1");
+        PreparedStatement ps=con.prepareStatement("update exhibitionAdminContact set title='"+tt+"',firstName='"+fn+"',lastName='"+ln+"',dateOfBirth='"+dob+"' ,level='"+le+"',degination='"+dn+"',phoneNo='"+pn+"' photomediaId='"+mediaid+"' where id='"+rs1+"' ");
    int rst = ps.executeUpdate();
  if(rst !=0)
       {
@@ -40,18 +39,13 @@ public class exhibitionAdministratorContactInformation extends HttpServlet {
       else
       {
           out.print("dataupdateinvalid");
-      } 
-                     }
-       
-            
-        
+      }             
+        }
         catch(Exception ee)
         {
            out.println("error" +ee.toString());
         }
-     
     }
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

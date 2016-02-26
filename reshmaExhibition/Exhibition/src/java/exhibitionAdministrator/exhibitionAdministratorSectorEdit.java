@@ -1,10 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package exhibitionAdministrator;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -16,40 +10,34 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class exhibitionAdministratorSectorEdit extends HttpServlet {
-
- 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+          throws ServletException, IOException {
+          response.setContentType("text/html;charset=UTF-8");
           PrintWriter out = response.getWriter();
        try
             {
-              HttpSession ss1=request.getSession(false);
-              String myex_id=(String)ss1.getAttribute("myex_id");
+                HttpSession ss1=request.getSession(false);
+                String myex_id=(String)ss1.getAttribute("myex_id");
                 String sectorName=request.getParameter("sectorName");
-                out.print(sectorName);
-                String description=request.getParameter("description");
-                out.print(description);
-                 
-            Connection con;
-             con=exhibitionAdministratorOneTimeConnection.getConnection();
-             String query = "update exhibitionSector set sectorName ='"+sectorName+"' , description ='"+description+"' where id='"+myex_id+"' ";
-           PreparedStatement ps=con.prepareStatement(query);
-      int rs= ps.executeUpdate();
-       if(rs > 0 )
-       {
-
-              out.print("ok");   
-       }
-       else
-       {
-           out.print("wrong");
-       }       
-    }
-       catch(Exception e)
-       {
+                String description=request.getParameter("description");  
+                Connection con;
+                con=exhibitionAdministratorOneTimeConnection.getConnection();
+                String query = "update exhibitionSector set sectorName ='"+sectorName+"' , description ='"+description+"' where id='"+myex_id+"' ";
+                PreparedStatement ps=con.prepareStatement(query);
+                int rs= ps.executeUpdate();
+                if(rs > 0 )
+                {
+                  out.print("ok");   
+                }
+               else
+               {
+                out.print("wrong");
+               }       
+            }
+      catch(Exception e)
+        {
            out.print("error");
-       }
+         }
     }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -89,5 +77,4 @@ public class exhibitionAdministratorSectorEdit extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }
