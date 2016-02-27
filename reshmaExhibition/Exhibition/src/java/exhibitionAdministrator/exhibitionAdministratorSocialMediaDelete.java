@@ -15,13 +15,14 @@ public class exhibitionAdministratorSocialMediaDelete extends HttpServlet {
           PrintWriter out = response.getWriter();
        try
           {
+               // value fetch from exhibitionAdministratorSocialMedia table
                String myex_id=request.getParameter("myid");
-               out.print(myex_id);
                Connection con;
                con=exhibitionAdministratorOneTimeConnection.getConnection();
                Statement st=con.createStatement();
                st.executeUpdate("delete from exhibitionSocialMedia where id='"+myex_id+"'"); 
-               response.sendRedirect("/Exhibition/html/exhibitionAdministratorSocialMedia.jsp");   
+               //data deleted from exhibitionSocialMedia table
+               response.sendRedirect("/Exhibition/html/exhibitionAdministratorSocialMedia.jsp");   // page is redirect to exhibitionAdministratorSocialMedia.jsp 
                con.close();
             }
        catch(Exception e)

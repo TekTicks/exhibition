@@ -227,7 +227,7 @@
                 <span class="icon-thumbnail">M</span>
               </li>
                <li class="">
-                <a href="facilities.jsp"> Facilities</a>
+                <a href="/Exhibition/html/exhibitionAdministratorFacilities.jsp"> Facilities</a>
                 <span class="icon-thumbnail">M</span>
               </li>
                <li class="">
@@ -729,13 +729,13 @@
                            // exhibitionAdministrator.personalInformation.id1=id1;
                             String exid=rs1.getString(1);
                             
-                            HttpSession ss=request.getSession(true);
-                            ss.setAttribute("myid", exid);
+                           // HttpSession ss=request.getSession(true);
+                            //ss.setAttribute("myid", exid);
                            %>
                            
                              <td>
                                  <div class="btn-group">
-                                 <button type="button" class="btn btn-success" onclick="document.location.href='/Exhibition/html/exhibitionTeamMemberEdit.jsp';"><i class="fa fa-pencil"></i></button>
+                                 <button type="button" class="btn btn-success" onclick="document.location.href='/Exhibition/html/exhibitionTeamMemberEdit.jsp?myid=<%=exid%>';"><i class="fa fa-pencil"></i></button>
                                  <button type="button" class="btn btn-success" onclick="document.location.href='/Exhibition/exhibitionAdministratorTeamMemberDelete?myid=<%=exid%>';"><i class="fa fa-trash-o"></i>
                                  </button>
                                  </div>

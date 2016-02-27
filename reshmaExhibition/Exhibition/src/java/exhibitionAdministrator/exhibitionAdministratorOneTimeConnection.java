@@ -2,7 +2,7 @@ package exhibitionAdministrator;
 import java.sql.Connection; 
 import java.sql.DriverManager; 
 import java.sql.SQLException; 
-public class exhibitionAdministratorOneTimeConnection {
+public class exhibitionAdministratorOneTimeConnection {        //java file for connection with database
     static {
            try { 
                Class.forName("com.mysql.jdbc.Driver");
@@ -12,7 +12,7 @@ public class exhibitionAdministratorOneTimeConnection {
                 System.out.print("Error" +e);
             }
             }  
-        public static Connection getConnection() throws SQLException 
+        public static Connection getConnection() throws SQLException    
         {
           return DriverManager.getConnection("jdbc:mysql://localhost:3306/exhibition","root","123");
         } 

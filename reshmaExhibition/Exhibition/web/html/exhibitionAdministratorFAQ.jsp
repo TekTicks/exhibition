@@ -3,17 +3,18 @@
     Created on : Jan 27, 2016, 5:15:09 PM
     Author     : Admin
 --%>
+
 <%@page import="exhibitionAdministrator.exhibitionAdministratorOneTimeConnection"%>
 <%@page import="java.sql.ResultSet"%>
-<%@page import="java.sql.Statement"%>
 <%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.Statement"%>
 <%@page import="java.sql.Connection"%>
 <!DOCTYPE html>
 <html>
   <head>
     <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
     <meta charset="utf-8" />
-    <title>Pages - Admin Dashboard UI Kit - Form Layouts</title>
+    <title>Pages - Admin Dashboard UI Kit - Blank Page</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no" />
     <link rel="apple-touch-icon" href="pages/ico/60.png">
     <link rel="apple-touch-icon" sizes="76x76" href="pages/ico/76.png">
@@ -31,29 +32,28 @@
     <link href="assets/plugins/jquery-scrollbar/jquery.scrollbar.css" rel="stylesheet" type="text/css" media="screen" />
     <link href="assets/plugins/bootstrap-select2/select2.css" rel="stylesheet" type="text/css" media="screen" />
     <link href="assets/plugins/switchery/css/switchery.min.css" rel="stylesheet" type="text/css" media="screen" />
-    <link href="assets/plugins/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet" type="text/css" media="screen">
+    <link href="assets/plugins/jquery-datatable/media/css/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/jquery-datatable/extensions/FixedColumns/css/dataTables.fixedColumns.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/datatables-responsive/css/datatables.responsive.css" rel="stylesheet" type="text/css" media="screen" />
     <link href="pages/css/pages-icons.css" rel="stylesheet" type="text/css">
     <link class="main-stylesheet" href="pages/css/pages.css" rel="stylesheet" type="text/css" />
     <!--[if lte IE 9]>
 	<link href="assets/plugins/codrops-dialogFx/dialog.ie.css" rel="stylesheet" type="text/css" media="screen" />
 	<![endif]-->
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="pages/js/jquery-1.4.2.min.js"></script>
-   <script type="text/javascript">
+   
+    <script type="text/javascript">
 	$(document).ready(function(){
 		$("#login").submit(function(){
-
-			 //remove previous class and add new "myinfo" class
+	       //remove previous class and add new "myinfo" class
 	       // $("#msgbox").removeClass().addClass('myinfo').text('Validating Your Login ').fadeIn(1000);
-
-			
 			this.timer = setTimeout(function () {
 				$.ajax({
 		          	url: '/Exhibition/exhibitionAdministratorFAQ',
-		          	data: 'exId='+ $('#exId').val()+'&title=' + $('#title').val() +'&que=' + $('#que').val()+'&ans=' + $('#ans').val(),
+		          	data: 'exId=' + $('#exId').val() +'&title=' + $('#title').val() +'&que=' + $('#que').val()+'&ans=' + $('#ans').val(),
 		          	type: 'post',
-		   		success: function(msg){
-                                  alert(msg);
+		   		success: function(msg){ 
                                 if(msg != 'error') // Message Sent, check and redirect
 				{
                                         if(msg !='wrn')
@@ -62,11 +62,8 @@
 			             {
 			                 //redirect to secure page
 			              //document.location='/Exhibition/html/exhibitionAdminPersonal.jsp';
-			             });
-                                        
+			             });      
                                     }
-                                
-				
                                 else
                                 {
                                     $("#msgbox2").fadeTo(100,1,function() //start fading the messagebox
@@ -94,7 +91,6 @@
 
 	});
    </script> 
-  
      <style>
 #exists{display:none}
 #cross{display:none}
@@ -127,22 +123,21 @@
 	-webkit-border-radius:4px;
 	text-align: center;
 }
-</style> 
-
+</style>
   </head>
   <body class="fixed-header ">
     <!-- BEGIN SIDEBPANEL-->
     <nav class="page-sidebar" data-pages="sidebar">
       <!-- BEGIN SIDEBAR MENU TOP TRAY CONTENT-->
-      <div class="sidebar-overlay-slide from-top" id="appMenu">
-        <div class="row">
-          <div class="col-xs-6 no-padding">
-            <a href="#" class="p-l-40"><img src="assets/img/demo/social_app.svg" alt="socail">
-            </a>
-          </div>
-          <div class="col-xs-6 no-padding">
-            <a href="#" class="p-l-10"><img src="assets/img/demo/email_app.svg" alt="socail">
-            </a>
+    <div class="sidebar-overlay-slide from-top" id="appMenu">
+      <div class="row">
+        <div class="col-xs-6 no-padding">
+          <a href="#" class="p-l-40"><img src="assets/img/demo/social_app.svg" alt="socail">
+          </a>
+        </div>
+        <div class="col-xs-6 no-padding">
+          <a href="#" class="p-l-10"><img src="assets/img/demo/email_app.svg" alt="socail">
+          </a>
           </div>
         </div>
         <div class="row">
@@ -241,11 +236,11 @@
                 <span class="icon-thumbnail">M</span>
               </li>
                <li class="">
-                <a href="exhibitionFAQ.jsp"> FAQ's </a>
+                <a href="/Exhibition/html/exhibitionAdministratorFAQ.jsp"> FAQ's </a>
                 <span class="icon-thumbnail">M</span>
               </li>
                <li class="">
-                <a href="facilities.jsp"> Facilities</a>
+                <a href="/Exhibition/html/exhibitionAdministratorFacilities.jsp"> Facilities</a>
                 <span class="icon-thumbnail">M</span>
               </li>
                <li class="">
@@ -273,9 +268,7 @@
                 <span class="icon-thumbnail">M</span>
               </li>
             </ul>
-              
           </li>
-           
            <li>
             <a href="javascript:;"><span class="title">Manage Exhibitor</span>
             <span class=" arrow"></span></a>
@@ -297,10 +290,8 @@
                 <a href="deleteExhibitor.jsp">Delete Exhibitor </a>
                 <span class="icon-thumbnail">M</span>
               </li>
-              
             </ul>
           </li>
-      
           <li>
             <a href="javascript:;"><span class="title">Manage Visitors</span>
             <span class=" arrow"></span></a>
@@ -318,7 +309,6 @@
                 <a href="deleteVisitor.jsp">Delete Visitors </a>
                 <span class="icon-thumbnail">M</span>
               </li>
-             
             </ul>
           </li>
            <li class="">
@@ -331,7 +321,6 @@
             <a href="report.jsp"><span class="title">Reports</span>
             </a>
             <span class="icon-thumbnail"><i class="pg-layouts2"></i></span> 
-        
           </li>
           </ul>
         <div class="clearfix"></div>
@@ -546,82 +535,167 @@
       </div>
       <!-- END HEADER -->
       <!-- START PAGE CONTENT WRAPPER -->
-  <div class="page-content-wrapper ">
-        <!-- START PAGE CONTENT -->
-   <div class="content ">
-    <div class="panel-body">
+      <div class="page-content-wrapper ">
+       <div class="content ">
+       
+       <h5>Frequently Asked Questions</h5>
+                    
+                                     <div class="panel panel-transparent ">
+                      <!-- Nav tabs -->
+                      <ul class="nav nav-tabs nav-tabs-fillup">
+                        <li class="active">
+                          <a data-toggle="tab" href="#tab-fillup1"><span>FAQ</span></a>
+                        </li>
+                        <li>
+                          <a data-toggle="tab" href="#tab-fillup2"><span>View FAQ</span></a>
+                        </li>
+                      <!--  <li>
+                          <a data-toggle="tab" href="#tab-fillup3"><span>Messages</span></a>
+                        </li> -->
+                      </ul>
+                      <!-- Tab panes -->
+                      <div class="tab-content">
+                        <div class="tab-pane active" id="tab-fillup1">
+                            <div class="panel-body">
    <div class="register-container full-height sm-p-t-30">
       <div class="container-sm-height full-height">
         <div class="row row-sm-height">
           <div class="col-sm-12 col-sm-height col-middle">
-  <!--          <img src="assets/img/logo.png" alt="logo" data-src="assets/img/logo.png" data-src-retina="assets/img/logo_2x.png" width="78" height="22">
-            <h3>Pages makes it easy to enjoy what matters the most in your life</h3>
-            <p>
-              <small>
-        Create a pages account. If you have a facebook account, log into it for this process. Sign in with <a href="#" class="text-info">Facebook</a> or <a href="#" class="text-info">Google</a>
-    </small>
-  </p> --><p><h1><b> Frequently Asked Questions...!</b></h1></p>
+<p><h1><b> Frequently Asked Questions...!</b></h1></p>
           <br>
              <form role="form"   class="p-t-15" id="login" name="login" action="" method="">      
-                    
-                
                       <div class="form-group ">
                            <label>Exhibition</label>
-                             <%    
-                      try{ 
-                         Class.forName("com.mysql.jdbc.Driver"); 
-                       Connection con;
-              con=exhibitionAdministratorOneTimeConnection.getConnection(); 
-                         Statement stat1=con.createStatement();
-                         ResultSet rs1=stat1.executeQuery("select * from exhibitionAdmin");
-                         int count1=0;
-                           %>
-                 
+                      <%    
+                    try { 
+                           Class.forName("com.mysql.jdbc.Driver"); 
+                           Connection con;
+                           con= exhibitionAdministratorOneTimeConnection.getConnection(); 
+                           Statement stat1=con.createStatement();
+                           ResultSet rs1=stat1.executeQuery("select * from exhibitionAdmin");
+                           int count1=0;
+                     %>
+                     
                         <select class="full-width" data-init-plugin="select2" name="exId" id="exId">
-                            <% while(rs1.next())
-                         {
-                          %>
-                            <option><%out.print(rs1.getString(1));%></option>
                             
-                            <% 
-                            
+                         <% while(rs1.next())
+                         {   
+                         %>
+                        <option><%out.print(rs1.getString(1));%></option>
+                         <%   
                          }
-                  } 
-                  catch(Exception e) 
-                  { 
+                        } 
+                   catch(Exception e) 
+                      { 
                       out.print("error" +e); 
-                  }
-                            %>
+                      }
+                        %>  
                          
                         </select>
-                      </div>
+                      </div>  
                     <div class="form-group">
                         <label>Title</label>
                       <input type="text" class="form-control" id="title" name="title" required>
                       </div>         
-                  
                             <div class="form-group">
                         <label>Questions</label>
                       <textarea class="form-control" id="que" name="que"></textarea>
                       </div>          
-                 
                          <div class="form-group">
                         <label>Answers</label>
                          <textarea class="form-control" id="ans" name="ans"></textarea>
                       </div>
              
-       <div id="msgbox1"></div>      <div id="msgbox2"></div>       
-       <button class="btn btn-primary btn-cons m-t-10" type="submit"> Save </button>
-        <button class="btn btn-primary btn-cons m-t-10" type="submit"> Cancel </button>
-            </form>
+                    <div id="msgbox1"></div> 
+                    <div id="msgbox2"></div>       
+                  <button class="btn btn-primary btn-cons m-t-10" type="submit"> Save </button>
+                 <button class="btn btn-primary btn-cons m-t-10" type="submit"> Cancel </button>
+                </form>
+                  </div>
+                 </div>
+                 </div>
+                 </div>
+                  </div>
+                        </div>
+                        <div class="tab-pane" id="tab-fillup2">
+                                        <div class="container-fluid container-fixed-lg">
+            <!-- START PANEL -->
+            <div class="panel panel-transparent">
+              <div class="panel-heading">
+                <div class="panel-title">
+                </div>
+                 
+              </div>
+              <div class="panel-body">                 
+               <div class="container-fluid container-fixed-lg bg-white">
+            <!-- START PANEL -->
+            <div class="panel panel-transparent">
+              <div class="panel-heading">
+                <div class="panel-title">View FAQ
+                </div>
+                <div class="pull-right">
+                  <div class="col-xs-12">
+                    <input type="text" id="search-table" class="form-control pull-right" placeholder="Search">
+                  </div>
+                </div>
+                <div class="clearfix"></div>
+              </div>
+              <div class="panel-body">
+                <table class="table table-hover demo-table-search" id="tableWithSearch">
+                  <thead>
+                    <tr>
+                      <th>Exhibition ID</th>
+                      <th>Questions</th>
+                       <th>Answers</th>
+                      <th>Edit/Delete</th>
+                     <!-- <th>Status</th>
+                      <th>Last Update</th> -->
+                    </tr>
+                  </thead>
+                  <tbody>                          
+                        <%   
+                          Class.forName("com.mysql.jdbc.Driver"); 
+                          Connection con;
+                          con= exhibitionAdministratorOneTimeConnection.getConnection(); 
+                          Statement stat1=con.createStatement();
+                          ResultSet rs1=stat1.executeQuery("select * from exhibitionFAQ");
+                          int count1=0;
+                          while(rs1.next())
+                          {
+                            count1++;
+                            out.println("<tr>");
+                            out.println("<td class='v-align-middle semi-bold'><p>"+rs1.getString(2)+"</p></td>");
+                            out.println("<td class='v-align-middle semi-bold'><p>"+rs1.getString(4)+"</p></td>");
+                            out.println("<td class='v-align-middle semi-bold'><p>"+rs1.getString(5)+"</p></td>");
+                            String idr=rs1.getString(1);
+                           %>
+                             <td>
+                             <div class="btn-group">
+                             <button type="button" class="btn btn-success" onclick="document.location.href='/Exhibition/html/exhibitionAdministratorFAQEdit.jsp?idr=<%=idr%>';"><i class="fa fa-pencil"></i></button> 
+                             <button type="button" class="btn btn-success"  onclick="document.location.href='/Exhibition/exhibitionAdministratorFAQDelete?idr=<%=idr%>';"><i class="fa fa-trash-o"></i>
+                             </button>
+                             </div>
+                            </td><%
+                            out.println(" </tr>");
+                            }
+                           %>
+         </tbody>
+         </table>
+         </div>
+         </div>
+            <!-- END PANEL -->
           </div>
-        </div>
-      </div>
-    </div>
-    </div>
+          <!-- END CONTAINER FLUID -->
+          <!-- START CONTAINER FLUID -->
+            <!-- END PANEL -->
+            </div> 
+            </div>    
+             </div>
+             </div> 
+             </div>
+             </div>          
           <!-- END CONTAINER FLUID -->
         </div>
-                   
         <!-- END PAGE CONTENT -->
         <!-- START COPYRIGHT -->
         <!-- START CONTAINER FLUID -->
@@ -1917,14 +1991,18 @@
     <script type="text/javascript" src="assets/plugins/bootstrap-select2/select2.min.js"></script>
     <script type="text/javascript" src="assets/plugins/classie/classie.js"></script>
     <script src="assets/plugins/switchery/js/switchery.min.js" type="text/javascript"></script>
-    <script src="assets/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
-    <script src="assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
+    <script src="assets/plugins/jquery-datatable/media/js/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script src="assets/plugins/jquery-datatable/extensions/TableTools/js/dataTables.tableTools.min.js" type="text/javascript"></script>
+    <script src="assets/plugins/jquery-datatable/media/js/dataTables.bootstrap.js" type="text/javascript"></script>
+    <script src="assets/plugins/jquery-datatable/extensions/Bootstrap/jquery-datatable-bootstrap.js" type="text/javascript"></script>
+    <script type="text/javascript" src="assets/plugins/datatables-responsive/js/datatables.responsive.js"></script>
+    <script type="text/javascript" src="assets/plugins/datatables-responsive/js/lodash.min.js"></script>
     <!-- END VENDOR JS -->
     <!-- BEGIN CORE TEMPLATE JS -->
     <script src="pages/js/pages.min.js"></script>
     <!-- END CORE TEMPLATE JS -->
     <!-- BEGIN PAGE LEVEL JS -->
-    <script src="assets/js/form_layouts.js" type="text/javascript"></script>
+    <script src="assets/js/datatables.js" type="text/javascript"></script>
     <script src="assets/js/scripts.js" type="text/javascript"></script>
     <!-- END PAGE LEVEL JS -->
   </body>

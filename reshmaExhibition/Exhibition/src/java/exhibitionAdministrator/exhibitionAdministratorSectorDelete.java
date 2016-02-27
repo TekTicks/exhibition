@@ -15,11 +15,12 @@ public class exhibitionAdministratorSectorDelete extends HttpServlet {
         PrintWriter out = response.getWriter();
        try
             {
-               String myex_id=request.getParameter("myid");
+               String myex_id=request.getParameter("myid");      //value fetch from exhibitionAdministratorSector.jsp file
                Connection con;
                con=exhibitionAdministratorOneTimeConnection.getConnection();
                Statement st=con.createStatement();
-               st.executeUpdate("delete from exhibitionSector where id='"+myex_id+"'"); 
+               st.executeUpdate("delete from exhibitionSector where id='"+myex_id+"'");  
+               // data deleted from exhibitionSector table
                response.sendRedirect("/Exhibition/html/exhibitionAdministratorSector.jsp");     
                con.close();
             }

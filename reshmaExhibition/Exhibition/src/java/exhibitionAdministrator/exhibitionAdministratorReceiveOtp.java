@@ -15,9 +15,10 @@ public class exhibitionAdministratorReceiveOtp extends HttpServlet {
              {
                  //HttpSession session = request.getSession(true);
                  //session.setAttribute("demoid", mobileNo);         
-                   String generatedOTP ="1234";
+                   String generatedOTP ="1234";          
+                   // value fetch from textbox of exhibitionAdministratorReceiveOtp.jsp file
                    String enteredOTP=request.getParameter("un");     
-                   if(generatedOTP.equals(enteredOTP))
+                   if(generatedOTP.equals(enteredOTP))         // entered otp verified with hardcoded otp
                     {
                       out.print("OTPvalid");
                     }

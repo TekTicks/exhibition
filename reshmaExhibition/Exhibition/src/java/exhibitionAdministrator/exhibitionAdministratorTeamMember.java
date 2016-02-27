@@ -16,8 +16,10 @@ public class exhibitionAdministratorTeamMember extends HttpServlet {
           PrintWriter out = response.getWriter();
         try
           {
+              // value fetch from exhibitionAdministratorTeam.jsp 
              HttpSession ss=request.getSession(false);
-             String idValid = (String) ss.getAttribute("idValid");                   
+             String idValid = (String) ss.getAttribute("idValid");      
+              // value fetch from textbox of exhibitionAdministratorTeam.jsp             
              String tagline=request.getParameter("tagline");
              String title=request.getParameter("title");
              String firstName=request.getParameter("firstName");
@@ -28,10 +30,11 @@ public class exhibitionAdministratorTeamMember extends HttpServlet {
              String phoneNo=request.getParameter("phoneNo");
              String mobileNo=request.getParameter("mobileNo");
              String email=request.getParameter("email");
-            // String modifiedBy=request.getParameter("modifiedBy");       
+           
              Connection con;
              con=exhibitionAdministratorOneTimeConnection.getConnection();  
              String val = "insert into exhibitionTeam(tagline,title,firstName,lastName,gender,dateOfBirth,degination,phoneNo,mobileNo,email,createdBy,modifiedBy,modifiedByFlag)  values (?,?,?,?,?,?,?,?,?,?,(select id from owner where id=1), '"+idValid+"' ,(select id from roles where id=1))" ;
+            // data inserted in exhibitionTeam table
              PreparedStatement ps = con.prepareStatement(val); 
               ps.setString(1, tagline);
               ps.setString(2, title);

@@ -1,4 +1,4 @@
-package exhibitionAdministrator;
+ package exhibitionAdministrator;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.*;
@@ -10,11 +10,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class exhibitionAdministratorPersonalInformation extends HttpServlet {
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+          protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+          throws ServletException, IOException {
           response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
+          PrintWriter out = response.getWriter();
         try {
+             //value fetch from textbox of exhibitionAdministratorProfilePage.jsp file
              String mn=request.getParameter("mn");
              String us=request.getParameter("us");
              String pw=request.getParameter("pw");
@@ -22,15 +23,15 @@ public class exhibitionAdministratorPersonalInformation extends HttpServlet {
              Connection con;
              con=exhibitionAdministratorOneTimeConnection.getConnection();
              HttpSession ss=request.getSession(false);
-             String rs1 = (String) ss.getAttribute("emailValid");
-             // String query="update exhibitionAdmin set mobileNo='"+mn+"'  where email='"+Global.un+"'" ;
-             if (!(mn.length() == 10) )
+             String rs1 = (String) ss.getAttribute("emailValid");       // emailValid value fetch from exhibitionAdministratorLoginCheck.java file
+             if (!(mn.length() == 10) )       // mobile no validation
               {
                    out.print("mobileNoInvalid");
               }  
               else
               {
-                String query = "update exhibitionAdmin set mobileNo ='"+mn+"',userName ='"+us+"',password ='"+pw+"',level ='"+le+"' where email='"+rs1+"' ";
+               String query = "update exhibitionAdmin set mobileNo ='"+mn+"',userName ='"+us+"',password ='"+pw+"',level ='"+le+"' where email='"+rs1+"' ";
+               // data updated in exhibitionAdmin table
                PreparedStatement ps=con.prepareStatement(query);
                int rs= ps.executeUpdate();
                if(rs !=0)

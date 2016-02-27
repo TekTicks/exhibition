@@ -1,8 +1,5 @@
-<%-- 
-    Document   : Admin
-    Created on : Dec 8, 2015, 4:36:02 PM
-    Author     : DJ
---%>
+<% Cookie cookie = new Cookie("sessionID", request.getParameter("login_id"));
+response.addCookie(cookie); %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -45,6 +42,7 @@
 		          	data: 'un='+ $('#login_id').val() +'&pw=' + $('#password').val(),
 		          	type: 'post',
 		   		success: function(msg){
+                                    alert(msg);
                                 if(msg != 'ERROR') // Message Sent, check and redirect
 				{
                                     if(msg == 'emailinvalid')
@@ -71,15 +69,31 @@
                                     }
                                     else
                                     {
-                                          $("#msgbox3").html('Login Verified, Logging in.....').addClass('myinfo').fadeTo(300,1,function()
-			             {
-			                 //redirect to secure page
-			              document.location='/Exhibition/html/exhibitionAdministratorProfilePage.jsp';
-			             });
+                                        if(msg != 'welcome' )
+                                        {
+                                            	$("#msgbox2").fadeTo(300,1,function() //start fading the messagebox
+		                {
+			                  //add message and change the class of the box and start fading
+			                 $(this).html('visit profile page').removeClass().addClass('myerror').fadeTo(300,1);
+                                          document.location='/Exhibition/html/exhibitionAdministratorProfilePage.jsp';
+                                      
+                                 });
+  
+                                        } 
+                                        else
+                                        {
+                                           
+                                            	$("#msgbox2").fadeTo(300,1,function() //start fading the messagebox
+		                {
+			                  //add message and change the class of the box and start fading
+			                 $(this).html('').removeClass().addClass('myerror').fadeTo(300,1);
+                                      document.location='/Exhibition/html/welcomeUser.jsp';
+                                 });
+                                        }
                                         
                                     }
                                 
-                                }
+                                } 
 				else
 				{
 					$("#msgbox3").fadeTo(300,1,function() //start fading the messagebox
@@ -98,6 +112,7 @@
 
 	});
    </script>   
+   
 <style>
 #exists{display:none}
 #cross{display:none}

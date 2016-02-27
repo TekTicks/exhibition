@@ -51,14 +51,14 @@
 			
 			this.timer = setTimeout(function () {
 				$.ajax({
-		          	url: '/Exhibition/exhibitionAdministratorTeamMemberEdit',
-		          	data: 'firstName='+ $('#firstName').val() +'&lastName=' + $('#lastName').val()+'&tagline=' + $('#tagline').val() +'&title=' + $('#title').val()+'&gender=' + $('#gender').val() +'&degination=' + $('#degination').val()+'&dateOfBirth=' + $('#dateOfBirth').val()+'&phoneNo=' + $('#phoneNo').val()+'&mobileNo=' + $('#mobileNo').val()+'&email=' + $('#email').val(),
+		          	url: '/Exhibition/exhibitionAdministratorFacilitiesEdit',
+		          	data: 'exId='+ $('#exId').val() +'&title=' + $('#title').val()+'&description='+ $('#description').val(),
 		          	type: 'post',
 		   		success: function(msg){
                                   alert(msg);
                                 if(msg != 'error') // Message Sent, check and redirect
 				{
-                                        if(msg=='ok')
+                                        if(msg !='wrong')
                                         {
                                           $("#msgbox1").html('data updated').addClass('myinfo').fadeTo(200,1,function()
 			             {
@@ -551,7 +551,7 @@
   <div class="page-content-wrapper ">
         <!-- START PAGE CONTENT -->
    <div class="content ">
-    <div class="panel-body">
+                            <div class="panel-body">
    <div class="register-container full-height sm-p-t-30">
       <div class="container-sm-height full-height">
         <div class="row row-sm-height">
@@ -562,52 +562,42 @@
               <small>
         Create a pages account. If you have a facebook account, log into it for this process. Sign in with <a href="#" class="text-info">Facebook</a> or <a href="#" class="text-info">Google</a>
     </small>
-  </p> --><p><h1><b>Update Exhibition Team Members..!</b></h1></p>
+  </p> --><p><h1><b> Update Exhibition Facilities...!</b></h1></p>
           <br>
-           
-               <form role="form"   class="p-t-15" id="login" name="login" action="" method="">
-             
-                  
-                     
-                   
+             <form role="form"   class="p-t-15" id="login" name="login" action="" method="">      
+                 
                    <% 
                       try { 
-                           HttpSession ss1=request.getSession(true);
-                       String myex_id=request.getParameter("myid");
-                       
+                          
+                            HttpSession obj=request.getSession(true);
+                            
+                        String idr=request.getParameter("idr");
                         
+                         obj.setAttribute("myid", idr);
+                         
                           Class.forName("com.mysql.jdbc.Driver"); 
-                          Connection con;
-                con=exhibitionAdministratorOneTimeConnection.getConnection(); 
+                         Connection con;
+                      con=exhibitionAdministratorOneTimeConnection.getConnection(); 
                          Statement stat1=con.createStatement();
                        
-                         String query="select * from exhibitionTeam where id= '"+myex_id+" '";
+                         String query="select * from exhibitionFacilities where id= '"+idr+"'";
                          ResultSet rs=stat1.executeQuery(query);  
                          
                          int count=0;
                         
                          while(rs.next())
                          {
-                             String fn=rs.getString("firstName");
-                             ss1.setAttribute("fn1", fn);
-                                      String lastName=rs.getString("lastName");
-                                       ss1.setAttribute("ln1", lastName);
-                                      String tagline=rs.getString("tagline");
-                                       ss1.setAttribute("tn1", tagline);
-                                      String title=rs.getString("title");
-                                       ss1.setAttribute("tt1", title);
-                                      String gender=rs.getString("gender");
-                                       ss1.setAttribute("gn1", gender);
-                                      String dateOfBirth=rs.getString("dateOfBirth");
-                                       ss1.setAttribute("dob1", dateOfBirth);
-                                      String degination=rs.getString("degination");
-                                       ss1.setAttribute("dn1", degination);
-                                      String phoneNo=rs.getString("phoneNo");
-                                       ss1.setAttribute("pn1", phoneNo);
-                                      String mobileNo=rs.getString("mobileNo");
-                                       ss1.setAttribute("mn1", mobileNo);
-                                       String email=rs.getString("email");
-                                        ss1.setAttribute("em1", email);
+                             String exId=rs.getString("exhibitionId");
+                             obj.setAttribute("exId", exId);
+                             //out.print(exId);
+                             String title=rs.getString("title");
+                            
+                             obj.setAttribute("title", title);
+                             
+                             String des=rs.getString("description");
+                             obj.setAttribute("des", des);
+                            
+                                     
                              count++;
                          }              
                       }    
@@ -616,91 +606,61 @@
                         out.print("error");
                     }
                    %>  
-                       <%@ page import="javax.servlet.http.HttpSession.*;" %>
-                      <%@ page session="false" %>
-                      <% HttpSession ss1=request.getSession(false);%> 
-                   
-              <div class="row">
-                <div class="col-sm-6">
-                  <div class="form-group form-group-default">
-                    <label>First Name</label>
-                    <input type="text" id="firstName" name="firstName" class="form-control" value="<%out.print((String)ss1.getAttribute("fn1"));%>" required>
-                  </div>
-                </div>
-                <div class="col-sm-6">
-                  <div class="form-group form-group-default">
-                    <label>Last Name</label>
-                    <input type="text" id="lastName" name="lastName" class="form-control"  value="<%out.print((String)ss1.getAttribute("ln1"));%>"  required>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-sm-12">
-                  <div class="form-group form-group-default">
-                    <label>Tag line</label>
-                    <input type="text" id="tagline" name="tagline" class="form-control" value="<%out.print((String)ss1.getAttribute("tn1"));%>" required>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-sm-12">
-                  <div class="form-group form-group-default">
-                    <label>Title</label>
-                   <input type="text" id="title" name="title" class="form-control" value="<%out.print((String)ss1.getAttribute("tt1"));%>" required>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-sm-12">
-                  <div class="form-group form-group-default">
-                    <label>Gender</label>
-                    <input type="text" id="gender" name="gender" class="form-control" value="<%out.print((String)ss1.getAttribute("gn1"));%>" required>
-                  </div>
-                </div>
-              </div>
-                 <div class="row">
-                <div class="col-sm-12">
-                  <div class="form-group form-group-default">
-                    <label>Date Of Bith</label>
-                 <input type="text" id="dateOfBirth" name="dateOfBirth" class="form-control" value="<%out.print((String)ss1.getAttribute("dob1"));%>" required>
-                  </div>
-                </div>
-              </div>
-                 <div class="row">
-                <div class="col-sm-12">
-                  <div class="form-group form-group-default">
-                    <label>Designation</label>
-                  <input type="text" id="degination" name="degination" class="form-control" value="<%out.print((String)ss1.getAttribute("dn1"));%>" required>
-                  </div>
-                </div>
-              </div>
-                 <div class="row">
-                <div class="col-sm-12">
-                  <div class="form-group form-group-default">
-                    <label>Phone No</label>
-                   <input type="text" id="phoneNo" name="phoneNo" class="form-control" value="<%out.print((String)ss1.getAttribute("pn1"));%>" required>
-                  </div>
-                </div>
-              </div>
-                 <div class="row">
-                <div class="col-sm-12">
-                  <div class="form-group form-group-default">
-                    <label>Mobile No</label>
-                  <input type="text" id="mobileNo" name="mobileNo" class="form-control"  value="<%out.print((String)ss1.getAttribute("mn1"));%>" required>
-                  </div>
-                </div>
-              </div>
-                 <div class="row">
-                <div class="col-sm-12">
-                  <div class="form-group form-group-default">
-                    <label>Email</label>
-                     <input type="email" id="email" name="email" class="form-control"  value="<%out.print((String)ss1.getAttribute("em1"));%>" required>
-                  </div>
-                </div>
-              </div>
+                 <%@ page import="javax.servlet.http.HttpSession.*;" %>
+                      <%@ page session="false" %> 
+                      <% HttpSession obj=request.getSession(false);%> 
+                 
+                    
+           
+                    <div class="form-group ">
+                           <label>Exhibition</label>
+                           <%    
+                      try{ 
+                         Class.forName("com.mysql.jdbc.Driver"); 
+                       Connection con;
+               con= exhibitionAdministratorOneTimeConnection.getConnection(); 
+                         Statement stat1=con.createStatement();
+                         ResultSet rs1=stat1.executeQuery("select * from exhibitionAdmin");
+                         int count1=0;
+                           %>
+                           
+                        <select class="full-width" data-init-plugin="select2" name="exId" id="exId">
+                             <option> <%out.print((String)obj.getAttribute("exId"));%></option> 
+                            <optgroup label="Select id">
+                             <% while(rs1.next())
+                         {
+                          %>
+                          
+                         
+                           <option><%out.print(rs1.getString(1));%></option>
+                           <% 
+                            
+                         }
+                  } 
+                  catch(Exception e) 
+                  { 
+                      out.print("error" +e); 
+                  }
+                            %>  
+                            
+                           
+                          </optgroup>
+                          
+                        </select>
+                      </div>   
+                    <div class="form-group">
+                        <label>Title</label>
+                        <input type="text" class="form-control" id="title" name="title" value="<% out.print((String)obj.getAttribute("title"));%>" required>
+                      </div>         
+                  
+                            <div class="form-group">
+                        <label>Description</label>
+                        <textarea class="form-control" id="description" name="description"> <%out.print((String)obj.getAttribute("des"));%> </textarea>
+                      </div>          
              
        <div id="msgbox1"></div>      <div id="msgbox2"></div>       
-       <button class="btn btn-primary btn-cons m-t-10" type="submit">Update </button>
+       <button class="btn btn-primary btn-cons m-t-10" type="submit"> Update </button>
+        <button class="btn btn-primary btn-cons m-t-10" type="submit"> Cancel </button>
             </form>
           </div>
         </div>

@@ -1,22 +1,10 @@
-<%-- 
-    Document   : exhibitionSector
-    Created on : Jan 27, 2016, 5:15:09 PM
-    Author     : Admin
---%>
-
-
-<%@page import="exhibitionAdministrator.exhibitionAdministratorOneTimeConnection"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
- <%@page import="java.io.*;" %>
-  <%@page import="java.sql.*;" %>
-  <%@page import="java.sql.DriverManager;" %>
 <!DOCTYPE html>
 <html>
   <head>
     <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
     <meta charset="utf-8" />
-    <title>Pages - Admin Dashboard UI Kit - Form Layouts</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no" />
+    <title>Pages - Admin Dashboard UI Kit</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <link rel="apple-touch-icon" href="pages/ico/60.png">
     <link rel="apple-touch-icon" sizes="76x76" href="pages/ico/76.png">
     <link rel="apple-touch-icon" sizes="120x120" href="pages/ico/120.png">
@@ -33,106 +21,21 @@
     <link href="assets/plugins/jquery-scrollbar/jquery.scrollbar.css" rel="stylesheet" type="text/css" media="screen" />
     <link href="assets/plugins/bootstrap-select2/select2.css" rel="stylesheet" type="text/css" media="screen" />
     <link href="assets/plugins/switchery/css/switchery.min.css" rel="stylesheet" type="text/css" media="screen" />
-    <link href="assets/plugins/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet" type="text/css" media="screen">
     <link href="pages/css/pages-icons.css" rel="stylesheet" type="text/css">
     <link class="main-stylesheet" href="pages/css/pages.css" rel="stylesheet" type="text/css" />
     <!--[if lte IE 9]>
-	<link href="assets/plugins/codrops-dialogFx/dialog.ie.css" rel="stylesheet" type="text/css" media="screen" />
-	<![endif]-->
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script src="pages/js/jquery-1.4.2.min.js"></script>
-   <script type="text/javascript">
-	$(document).ready(function(){
-		$("#login").submit(function(){
-
-			 //remove previous class and add new "myinfo" class
-	       // $("#msgbox").removeClass().addClass('myinfo').text('Validating Your Login ').fadeIn(1000);
-
-			
-			this.timer = setTimeout(function () {
-				$.ajax({
-		          	url: '/Exhibition/exhibitionAdministratorTeamMemberEdit',
-		          	data: 'firstName='+ $('#firstName').val() +'&lastName=' + $('#lastName').val()+'&tagline=' + $('#tagline').val() +'&title=' + $('#title').val()+'&gender=' + $('#gender').val() +'&degination=' + $('#degination').val()+'&dateOfBirth=' + $('#dateOfBirth').val()+'&phoneNo=' + $('#phoneNo').val()+'&mobileNo=' + $('#mobileNo').val()+'&email=' + $('#email').val(),
-		          	type: 'post',
-		   		success: function(msg){
-                                  alert(msg);
-                                if(msg != 'error') // Message Sent, check and redirect
-				{
-                                        if(msg=='ok')
-                                        {
-                                          $("#msgbox1").html('data updated').addClass('myinfo').fadeTo(200,1,function()
-			             {
-			                 //redirect to secure page
-			              //document.location='/Exhibition/html/exhibitionAdminPersonal.jsp';
-			             });
-                                        
-                                    }
-                                
-				
-                                else
-                                {
-                                    $("#msgbox2").fadeTo(100,1,function() //start fading the messagebox
-		                {
-			                  //add message and change the class of the box and start fading
-			                 $(this).html('records are not updated..').removeClass().addClass('myerror').fadeTo(300,1);
-                                        // document.location='/Exhibition/html/exhibitionAdminLog.jsp?user';
-                                 });
-                                }
-                            }
-                            else
-                            {
-                                $("#msgbox2").fadeTo(100,1,function() //start fading the messagebox
-		                {
-			                  //add message and change the class of the box and start fading
-			                 $(this).html('MobileNo should be 10 digits only').removeClass().addClass('myerror').fadeTo(300,1);
-                                        // document.location='/Exhibition/html/exhibitionAdminLog.jsp?user';
-                                 });
-                            }
-                                }
-				});
-			}, 200);
-			return false;
- 		});		
-
-	});
-   </script> 
-  
-     <style>
-#exists{display:none}
-#cross{display:none}
-.myinfo
-{
-	margin: 5px auto;
-	background:#d6e3f5;
-	border: 1px #0010ac solid;
-	padding:5px;
-	color:#0010ac;
-	font-size:12px;
-	width:350px;
-	min-height:0px;
-	-moz-border-radius:4px;
-	-webkit-border-radius:4px;
-	text-align: center;
-}
-
-.myerror
-{
-	margin: 5px auto;
-	background:#FFDFDF;
-	border: 1px #FF0000 solid;
-	padding:5px;
-	color:#FF0000;
-	font-size:12px;
-	width:350px;
-	min-height:0px;
-	-moz-border-radius:4px;
-	-webkit-border-radius:4px;
-	text-align: center;
-}
-</style> 
-
+        <link href="pages/css/ie9.css" rel="stylesheet" type="text/css" />
+    <![endif]-->
+    <script type="text/javascript">
+    window.onload = function()
+    {
+      // fix for windows 8
+      if (navigator.appVersion.indexOf("Windows NT 6.2") != -1)
+        document.head.innerHTML += '<link rel="stylesheet" type="text/css" href="pages/css/windows.chrome.fix.css" />'
+    }
+    </script>
   </head>
-  <body class="fixed-header ">
+  <body class="fixed-header   ">
     <!-- BEGIN SIDEBPANEL-->
     <nav class="page-sidebar" data-pages="sidebar">
       <!-- BEGIN SIDEBAR MENU TOP TRAY CONTENT-->
@@ -179,205 +82,456 @@
               <span class="title">Dashboard</span>
               <span class="details">12 New Updates</span>
             </a>
-            <span class="bg-success icon-thumbnail"><i class="pg-home"></i></span>
+            <span class="icon-thumbnail bg-success"><i class="pg-home"></i></span>
           </li>
           <li class="">
-            <a href="/Exhibition/html/exhibitionAdministratorProfilePage.jsp" class="detailed">
-              <span class="title">Profile</span>
-          <!--  <span class="details">19 items</span>  -->
+            <a href="email.html" class="detailed">
+              <span class="title">Email</span>
+              <span class="details">234 New Emails</span>
             </a>
-            <span class="icon-thumbnail">p</i></span>
+            <span class="icon-thumbnail "><i class="pg-mail"></i></span>
           </li>
-         
-             <li>
-            <a href="javascript:;"><span class="title">Manage Moderators</span>
-            <span class=" arrow"></span></a>
+          <li class="">
+            <a href="social.html"><span class="title">Social</span></a>
+            <span class="icon-thumbnail "><i class="pg-social"></i></span>
+          </li>
+          <li class="">
+            <a href="calendar.html"><span class="title">Calendar</span></a>
             <span class="icon-thumbnail"><i class="pg-calender"></i></span>
-            <ul class="sub-menu">
-                 <li class="">
-                <a href="createModerator.jsp">Create Moderators</a>
-                <span class="icon-thumbnail">c</span>
-              </li>
-              <li class="">
-                <a href="assignRolesModerator.jsp">Assign Roles</a>
-                <span class="icon-thumbnail">c</span>
-              </li>
-              <li class="">
-                <a href="viewModerator.jsp">View Moderator</a>
-                <span class="icon-thumbnail">c</span>
-              </li>
-              <li class="">
-                <a href="editModerator.jsp">Edit Moderator</a>
-                <span class="icon-thumbnail">L</span>
-              </li>
-              <li class="">
-                <a href="deleteModerator.jsp">Delete Moderator </a>
-                <span class="icon-thumbnail">M</span>
-              </li>
-             
-            </ul>
           </li>
-         <li>
-            <a href="javascript:;"><span class="title">Manage Exhibition</span>
-            <span class=" arrow"></span></a>
-            <span class="icon-thumbnail"><i class="pg-calender"></i></span>
-              <ul class="sub-menu">
-                 <li class="">
-                <a href="/Exhibition/html/exhibitionAdministratorSector.jsp"> Add Sectors </a>
-                <span class="icon-thumbnail">c</span>
-              </li>
-              <li class="">
-                <a href="/Exhibition/html/exhibitionAdministratorTeam.jsp"> Add Exhibition Team</a>
-                <span class="icon-thumbnail">c</span>
-              </li>
-              <li class="">
-                <a href="/Exhibition/html/exhibitionAdministratorSocialMedia.jsp">Add Exhibition Social Media</a>
-                <span class="icon-thumbnail">L</span>
-              </li>
-              <li class="">
-                <a href="exhibitionAddress.jsp">Add Exhibition Address </a>
-                <span class="icon-thumbnail">M</span>
-              </li>
-               <li class="">
-                <a href="exhibitionOpportunity.jsp">Opportunities/Response </a>
-                <span class="icon-thumbnail">M</span>
-              </li>
-               <li class="">
-                <a href="/Exhibition/html/exhibitionAdministratorFAQ.jsp"> FAQ's </a>
-                <span class="icon-thumbnail">M</span>
-              </li>
-               <li class="">
-                <a href="/Exhibition/html/exhibitionAdministratorFacilities.jsp"> Facilities</a>
-                <span class="icon-thumbnail">M</span>
-              </li>
-               <li class="">
-                <a href="exhibitionBooth.jsp">Add Booths </a>
-                <span class="icon-thumbnail">M</span>
-              </li>
-               <li class="">
-                <a href="exhibitionEvent.jsp">Exhibition Event</a>
-                <span class="icon-thumbnail">M</span>
-              </li>
-               <li class="">
-                <a href="exhibitionSpeaker.jsp"> Exhibition Speakers  </a>
-                <span class="icon-thumbnail">M</span>
-              </li>
-               <li class="">
-                <a href="photoVideo.jsp">Photos/Videos/Blogs</a>
-                <span class="icon-thumbnail">M</span>
-              </li>
-                <li class="">
-                <a href="news.jsp">News</a>
-                <span class="icon-thumbnail">M</span>
-              </li>
-              <li class="">
-                <a href="exhibitionRegistrationPage.jsp">Create Exhibition Registration Page</a>
-                <span class="icon-thumbnail">M</span>
-              </li>
-            </ul>
-              
-          </li>
-           
-           <li>
-            <a href="javascript:;"><span class="title">Manage Exhibitor</span>
-            <span class=" arrow"></span></a>
-            <span class="icon-thumbnail"><i class="pg-calender"></i></span>
-            <ul class="sub-menu">
-                 <li class="">
-                <a href="createExhibitor.jsp"> Create Exhibitor </a>
-                <span class="icon-thumbnail">c</span>
-              </li>
-              <li class="">
-                <a href="viewExhibitor.jsp">View Exhibitor</a>
-                <span class="icon-thumbnail">c</span>
-              </li>
-              <li class="">
-                <a href="editExhibitor.jsp">Edit Exhibitor</a>
-                <span class="icon-thumbnail">L</span>
-              </li>
-              <li class="">
-                <a href="deleteExhibitor.jsp">Delete Exhibitor </a>
-                <span class="icon-thumbnail">M</span>
-              </li>
-              
-            </ul>
-          </li>
-      
-          <li>
-            <a href="javascript:;"><span class="title">Manage Visitors</span>
-            <span class=" arrow"></span></a>
-            <span class="icon-thumbnail"><i class="pg-calender"></i></span>
-            <ul class="sub-menu">
-              <li class="">
-                <a href="viewVisitor.jsp">View Visitors</a>
-                <span class="icon-thumbnail">c</span>
-              </li>
-              <li class="">
-                <a href="editVisitor.jsp">Edit visitors</a>
-                <span class="icon-thumbnail">L</span>
-              </li>
-              <li class="">
-                <a href="deleteVisitor.jsp">Delete Visitors </a>
-                <span class="icon-thumbnail">M</span>
-              </li>
-             
-            </ul>
-          </li>
-           <li class="">
-            <a href="notification.jsp">
-              <span class="title">Manage Notification</span>
+          <li class="">
+            <a href="builder.html">
+              <span class="title">Builder</span>
             </a>
             <span class="icon-thumbnail"><i class="pg-layouts"></i></span>
           </li>
-          <li class="">
-            <a href="report.jsp"><span class="title">Reports</span>
-            </a>
-            <span class="icon-thumbnail"><i class="pg-layouts2"></i></span> 
-        
+          <li class="active open">
+            <a href="javascript:;"><span class="title">UI Elements</span>
+            <span class="active open arrow"></span></a>
+            <span class="icon-thumbnail">Ui</span>
+            <ul class="sub-menu">
+              <li class="">
+                <a href="color.html">Color</a>
+                <span class="icon-thumbnail">c</span>
+              </li>
+              <li class="">
+                <a href="typography.html">Typography</a>
+                <span class="icon-thumbnail">t</span>
+              </li>
+              <li class="">
+                <a href="icons.html">Icons</a>
+                <span class="icon-thumbnail">i</span>
+              </li>
+              <li class="">
+                <a href="buttons.html">Buttons</a>
+                <span class="icon-thumbnail">b</span>
+              </li>
+              <li class="">
+                <a href="notifications.html">Notifications</a>
+                <span class="icon-thumbnail">n</span>
+              </li>
+              <li class="active">
+                <a href="modals.html">Modals</a>
+                <span class="icon-thumbnail">m</span>
+              </li>
+              <li class="">
+                <a href="progress.html">Progress &amp; Activity</a>
+                <span class="icon-thumbnail">pa</span>
+              </li>
+              <li class="">
+                <a href="tabs_accordian.html">Tabs &amp; Accordions</a>
+                <span class="icon-thumbnail">ta</span>
+              </li>
+              <li class="">
+                <a href="sliders.html">Sliders</a>
+                <span class="icon-thumbnail">s</span>
+              </li>
+              <li class="">
+                <a href="tree_view.html">Tree View</a>
+                <span class="icon-thumbnail">tv</span>
+              </li>
+              <li class="">
+                <a href="nestables.html">Nestable</a>
+                <span class="icon-thumbnail">ns</span>
+              </li>
+            </ul>
           </li>
-          </ul>
+          <li class="">
+            <a href="javascript:;">
+              <span class="title">Forms</span>
+              <span class="arrow
+             "></span>
+            </a>
+            <span class="icon-thumbnail"><i class="pg-form"></i></span>
+            <ul class="sub-menu">
+              <li class="">
+                <a href="form_elements.html">Form Elements</a>
+                <span class="icon-thumbnail">fe</span>
+              </li>
+              <li class="">
+                <a href="form_layouts.html">Form Layouts</a>
+                <span class="icon-thumbnail">fl</span>
+              </li>
+              <li class="">
+                <a href="form_wizard.html">Form Wizard</a>
+                <span class="icon-thumbnail">fw</span>
+              </li>
+            </ul>
+          </li>
+          <li class="">
+            <a href="portlets.html">
+              <span class="title">Portlets</span>
+            </a>
+            <span class="icon-thumbnail"><i class="pg-grid"></i></span>
+          </li>
+          <li class="">
+            <a href="javascript:;"><span class="title">Tables</span>
+            <span class=" arrow"></span></a>
+            <span class="icon-thumbnail"><i class="pg-tables"></i></span>
+            <ul class="sub-menu">
+              <li class="">
+                <a href="tables.html">Basic Tables</a>
+                <span class="icon-thumbnail">bt</span>
+              </li>
+              <li class="">
+                <a href="datatables.html">Data Tables</a>
+                <span class="icon-thumbnail">dt</span>
+              </li>
+            </ul>
+          </li>
+          <li class="">
+            <a href="javascript:;"><span class="title">Maps</span> 
+            <span class=" arrow"></span></a>
+            <span class="icon-thumbnail "><i class="pg-map"></i></span>
+            <ul class="sub-menu">
+              <li class="">
+                <a href="google_map.html">Google Maps</a>
+                <span class="icon-thumbnail">gm</span>
+              </li>
+              <li class="">
+                <a href="vector_map.html">Vector Maps</a>
+                <span class="icon-thumbnail">vm</span>
+              </li>
+            </ul>
+          </li>
+          <li class="">
+            <a href="charts.html"><span class="title">Charts</span></a>
+            <span class="icon-thumbnail"><i class="pg-charts"></i></span>
+          </li>
+          <li class="">
+            <a href="javascript:;"><span class="title">Extra</span>
+            <span class=" arrow"></span></a>
+            <span class="icon-thumbnail"><i class="pg-bag"></i></span>
+            <ul class="sub-menu">
+              <li class="">
+                <a href="invoice.html">Invoice</a>
+                <span class="icon-thumbnail">in</span>
+              </li>
+              <li class="">
+                <a href="404.html">404 Page</a>
+                <span class="icon-thumbnail">pg</span>
+              </li>
+              <li class="">
+                <a href="500.html">500 Page</a>
+                <span class="icon-thumbnail">pg</span>
+              </li>
+              <li class="">
+                <a href="blank_template.html">Blank Page</a>
+                <span class="icon-thumbnail">bp</span>
+              </li>
+              <li class="">
+                <a href="login.html">Login</a>
+                <span class="icon-thumbnail">l</span>
+              </li>
+              <li class="">
+                <a href="register.html">Register</a>
+                <span class="icon-thumbnail">re</span>
+              </li>
+              <li class="">
+                <a href="lock_screen.html">Lockscreen</a>
+                <span class="icon-thumbnail">ls</span>
+              </li>
+              <li class="">
+                <a href="gallery.html">Gallery</a>
+                <span class="icon-thumbnail">gl</span>
+              </li>
+              <li class="">
+                <a href="timeline.html">Timeline</a>
+                <span class="icon-thumbnail">t</span>
+              </li>
+            </ul>
+          </li>
+          <li class="">
+            <a href="javascript:;"><span class="title">Menu Levels</span>
+            <span class="arrow"></span></a>
+            <span class="icon-thumbnail"><i class="pg-menu_lv"></i></span>
+            <ul class="sub-menu">
+              <li>
+                <a href="javascript:;">Level 1</a>
+                <span class="icon-thumbnail">L1</span>
+              </li>
+              <li>
+                <a href="javascript:;"><span class="title">Level 2</span>
+                <span class="arrow"></span></a>
+                <span class="icon-thumbnail">L2</span>
+                <ul class="sub-menu">
+                  <li>
+                    <a href="javascript:;">Sub Menu</a>
+                    <span class="icon-thumbnail">Sm</span>
+                  </li>
+                  <li>
+                    <a href="ujavascript:;">Sub Menu</a>
+                    <span class="icon-thumbnail">Sm</span>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
         <div class="clearfix"></div>
       </div>
       <!-- END SIDEBAR MENU -->
     </nav>
     <!-- END SIDEBAR -->
     <!-- END SIDEBPANEL-->
-    <!-- START PAGE-CONTAINER -->
-    <div class="page-container ">
-      <!-- START HEADER -->
-      <div class="header ">
-        <!-- START MOBILE CONTROLS -->
-        <div class="container-fluid relative">
-          <!-- LEFT SIDE -->
-          <div class="pull-left full-height visible-sm visible-xs">
-            <!-- START ACTION BAR -->
-            <div class="header-inner">
-              <a href="#" class="btn-link toggle-sidebar visible-sm-inline-block visible-xs-inline-block padding-5" data-toggle="sidebar">
-                <span class="icon-set menu-hambuger"></span>
-              </a>
-            </div>
-            <!-- END ACTION BAR -->
+    <!-- Modal -->
+    <div class="modal fade fill-in" id="modalFillIn" tabindex="-1" role="dialog" aria-hidden="true">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+        <i class="pg-close"></i>
+      </button>
+      <div class="modal-dialog ">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="text-left p-b-5"><span class="semi-bold">News letter</span> signup</h5>
           </div>
-          <div class="pull-center hidden-md hidden-lg">
-            <div class="header-inner">
-              <div class="brand inline">
-                <img src="assets/img/logo.png" alt="logo" data-src="assets/img/logo.png" data-src-retina="assets/img/logo_2x.png" width="78" height="22">
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-md-9 ">
+                <input type="text" placeholder="Your email address here" class="form-control input-lg" id="icon-filter" name="icon-filter">
+              </div>
+              <div class="col-md-3 no-padding sm-m-t-10 sm-text-center">
+                <button type="button" class="btn btn-primary btn-lg btn-large fs-15">Sign up</button>
+              </div>
+            </div>
+            <p class="text-right sm-text-center hinted-text p-t-10 p-r-10">What is it? Terms and conditions</p>
+          </div>
+          <div class="modal-footer">
+          </div>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
+    <!-- Modal -->
+    <div class="modal fade slide-up disable-scroll" id="modalSlideUp" tabindex="-1" role="dialog" aria-hidden="false">
+      <div class="modal-dialog ">
+        <div class="modal-content-wrapper">
+          <div class="modal-content">
+            <div class="modal-header clearfix text-left">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="pg-close fs-14"></i>
+              </button>
+              <h5>Payment <span class="semi-bold">Information</span></h5>
+              <p class="p-b-10">We need payment information inorder to process your order</p>
+            </div>
+            <div class="modal-body">
+              <form role="form">
+                <div class="form-group-attached">
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <div class="form-group form-group-default">
+                        <label>Company Name</label>
+                        <input type="email" class="form-control">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-8">
+                      <div class="form-group form-group-default">
+                        <label>Card Number</label>
+                        <input type="text" class="form-control">
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="form-group form-group-default">
+                        <label>Card Holder</label>
+                        <input type="text" class="form-control">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+              <div class="row">
+                <div class="col-sm-8">
+                  <div class="p-t-20 clearfix p-l-10 p-r-10">
+                    <div class="pull-left">
+                      <p class="bold font-montserrat text-uppercase">TOTAL</p>
+                    </div>
+                    <div class="pull-right">
+                      <p class="bold font-montserrat text-uppercase">$20.00</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-4 m-t-10 sm-m-t-10">
+                  <button type="button" class="btn btn-primary btn-block m-t-5">Pay Now</button>
+                </div>
               </div>
             </div>
           </div>
-          <!-- RIGHT SIDE -->
-          <div class="pull-right full-height visible-sm visible-xs">
-            <!-- START ACTION BAR -->
-            <div class="header-inner">
-              <a href="#" class="btn-link visible-sm-inline-block visible-xs-inline-block" data-toggle="quickview" data-toggle-element="#quickview">
-                <span class="icon-set menu-hambuger-plus"></span>
-              </a>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+    </div>
+    <!-- /.modal-dialog -->
+    <!-- MODAL SLIDE UP SMALL  -->
+    <!-- Modal -->
+    <div class="modal fade slide-up disable-scroll" id="modalSlideUpSmall" tabindex="-1" role="dialog" aria-hidden="false">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content-wrapper">
+          <div class="modal-content">
+            <div class="modal-body text-center m-t-20">
+              <h4 class="no-margin p-b-10">You have subscribed</h4>
+              <button type="button" class="btn btn-primary btn-cons" data-dismiss="modal">Continue</button>
             </div>
-            <!-- END ACTION BAR -->
           </div>
         </div>
+        <!-- /.modal-content -->
+      </div>
+    </div>
+    <!-- /.modal-dialog -->
+    <!-- MODAL STICK UP  -->
+    <div class="modal fade stick-up" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header clearfix text-left">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="pg-close fs-14"></i>
+            </button>
+            <h5>Payment <span class="semi-bold">Information</span></h5>
+            <p>We need payment information inorder to process your order</p>
+          </div>
+          <div class="modal-body">
+            <form role="form">
+              <div class="form-group-attached">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div class="form-group form-group-default">
+                      <label>Company Name</label>
+                      <input type="email" class="form-control">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-8">
+                    <div class="form-group form-group-default">
+                      <label>Card Number</label>
+                      <input type="text" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="form-group form-group-default">
+                      <label>Card Holder</label>
+                      <input type="text" class="form-control">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+            <div class="row">
+              <div class="col-sm-8">
+                <div class="p-t-20 clearfix p-l-10 p-r-10">
+                  <div class="pull-left">
+                    <p class="bold font-montserrat text-uppercase">TOTAL</p>
+                  </div>
+                  <div class="pull-right">
+                    <p class="bold font-montserrat text-uppercase">$20.00</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4 m-t-10 sm-m-t-10">
+                <button type="button" class="btn btn-primary btn-block m-t-5">Pay Now</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
+    <!-- END MODAL STICK UP  -->
+    <!-- MODAL STICK UP SMALL ALERT -->
+    <div class="modal fade stick-up" id="modalStickUpSmall" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content-wrapper">
+          <div class="modal-content">
+            <div class="modal-header clearfix text-left">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="pg-close fs-14"></i>
+              </button>
+              <h5>Reset all settings</h5>
+            </div>
+            <div class="modal-body">
+              <p class="no-margin">This will restore all system settings to factory defults. Are you sure that you want to proceed?</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary btn-cons  pull-left inline" data-dismiss="modal">Continue</button>
+              <button type="button" class="btn btn-default btn-cons no-margin pull-left inline" data-dismiss="modal">Cancel</button>
+            </div>
+          </div>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
+    <!-- END MODAL STICK UP SMALL ALERT -->
+    <!-- MODAL STICK UP SMALL ALERT -->
+    <div class="modal fade slide-right" id="modalSlideLeft" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content-wrapper">
+          <div class="modal-content">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="pg-close fs-14"></i>
+            </button>
+            <div class="container-xs-height full-height">
+              <div class="row-xs-height">
+                <div class="modal-body col-xs-height col-middle text-center   ">
+                  <h5 class="text-primary ">Before you <span class="semi-bold">proceed</span>, you have to login to make the necessary changes</h5>
+                  <br>
+                  <button type="button" class="btn btn-primary btn-block" data-dismiss="modal">Continue</button>
+                  <button type="button" class="btn btn-default btn-block" data-dismiss="modal">Cancel</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
+    <!-- END MODAL STICK UP SMALL ALERT -->
+    <!-- START PAGE-CONTAINER -->
+    <div class="page-container">
+      <!-- START HEADER -->
+      <div class="header ">
+        <!-- START MOBILE CONTROLS -->
+        <!-- LEFT SIDE -->
+        <div class="pull-left full-height visible-sm visible-xs">
+          <!-- START ACTION BAR -->
+          <div class="sm-action-bar">
+            <a href="#" class="btn-link toggle-sidebar" data-toggle="sidebar">
+              <span class="icon-set menu-hambuger"></span>
+            </a>
+          </div>
+          <!-- END ACTION BAR -->
+        </div>
+        <!-- RIGHT SIDE -->
+        <div class="pull-right full-height visible-sm visible-xs">
+          <!-- START ACTION BAR -->
+          <div class="sm-action-bar">
+            <a href="#" class="btn-link" data-toggle="quickview" data-toggle-element="#quickview">
+              <span class="icon-set menu-hambuger-plus"></span>
+            </a>
+          </div>
+          <!-- END ACTION BAR -->
+        </div>
         <!-- END MOBILE CONTROLS -->
-        <div class=" pull-left sm-table hidden-xs hidden-sm">
+        <div class=" pull-left sm-table">
           <div class="header-inner">
             <div class="brand inline">
               <img src="assets/img/logo.png" alt="logo" data-src="assets/img/logo.png" data-src-retina="assets/img/logo_2x.png" width="78" height="22">
@@ -399,7 +553,7 @@
                         <div class="notification-item unread clearfix">
                           <!-- START Notification Item-->
                           <div class="heading open">
-                            <a href="#" class="text-complete pull-left">
+                            <a href="#" class="text-complete">
                               <i class="pg-map fs-16 m-r-10"></i>
                               <span class="bold">Carrot Design</span>
                               <span class="fs-12 m-l-10">David Nester</span>
@@ -413,9 +567,9 @@
                             </div>
                             <div class="more-details">
                               <div class="more-details-inner">
-                                <h5 class="semi-bold fs-16">“Apple’s Motivation - Innovation <br> 
+                                <h5 class="semi-bold fs-16">?Apple?s Motivation - Innovation <br> 
                                                             distinguishes between <br>
-                                                            A leader and a follower.”</h5>
+                                                            A leader and a follower.?</h5>
                                 <p class="small hint-text">
                                   Commented on john Smiths wall.
                                   <br> via pages framework.
@@ -434,7 +588,7 @@
                         <!-- START Notification Item-->
                         <div class="notification-item  clearfix">
                           <div class="heading">
-                            <a href="#" class="text-danger pull-left">
+                            <a href="#" class="text-danger">
                               <i class="fa fa-exclamation-triangle m-r-10"></i>
                               <span class="bold">98% Server Load</span>
                               <span class="fs-12 m-l-10">Take Action</span>
@@ -451,7 +605,7 @@
                         <!-- START Notification Item-->
                         <div class="notification-item  clearfix">
                           <div class="heading">
-                            <a href="#" class="text-warning-dark pull-left">
+                            <a href="#" class="text-warning-dark">
                               <i class="fa fa-exclamation-triangle m-r-10"></i>
                               <span class="bold">Warning Notification</span>
                               <span class="fs-12 m-l-10">Buy Now</span>
@@ -471,7 +625,7 @@
                             <div class="thumbnail-wrapper d24 circular b-white m-r-5 b-a b-white m-t-10 m-r-10">
                               <img width="30" height="30" data-src-retina="assets/img/profiles/1x.jpg" data-src="assets/img/profiles/1.jpg" alt="" src="assets/img/profiles/1.jpg">
                             </div>
-                            <a href="#" class="text-complete pull-left">
+                            <a href="#" class="text-complete">
                               <span class="bold">Revox Design Labs</span>
                               <span class="fs-12 m-l-10">Owners</span>
                             </a>
@@ -548,182 +702,283 @@
       </div>
       <!-- END HEADER -->
       <!-- START PAGE CONTENT WRAPPER -->
-  <div class="page-content-wrapper ">
+      <div class="page-content-wrapper">
         <!-- START PAGE CONTENT -->
-   <div class="content ">
-    <div class="panel-body">
-   <div class="register-container full-height sm-p-t-30">
-      <div class="container-sm-height full-height">
-        <div class="row row-sm-height">
-          <div class="col-sm-12 col-sm-height col-middle">
-  <!--          <img src="assets/img/logo.png" alt="logo" data-src="assets/img/logo.png" data-src-retina="assets/img/logo_2x.png" width="78" height="22">
-            <h3>Pages makes it easy to enjoy what matters the most in your life</h3>
-            <p>
-              <small>
-        Create a pages account. If you have a facebook account, log into it for this process. Sign in with <a href="#" class="text-info">Facebook</a> or <a href="#" class="text-info">Google</a>
-    </small>
-  </p> --><p><h1><b>Update Exhibition Team Members..!</b></h1></p>
-          <br>
-           
-               <form role="form"   class="p-t-15" id="login" name="login" action="" method="">
-             
-                  
-                     
-                   
-                   <% 
-                      try { 
-                           HttpSession ss1=request.getSession(true);
-                       String myex_id=request.getParameter("myid");
-                       
-                        
-                          Class.forName("com.mysql.jdbc.Driver"); 
-                          Connection con;
-                con=exhibitionAdministratorOneTimeConnection.getConnection(); 
-                         Statement stat1=con.createStatement();
-                       
-                         String query="select * from exhibitionTeam where id= '"+myex_id+" '";
-                         ResultSet rs=stat1.executeQuery(query);  
-                         
-                         int count=0;
-                        
-                         while(rs.next())
-                         {
-                             String fn=rs.getString("firstName");
-                             ss1.setAttribute("fn1", fn);
-                                      String lastName=rs.getString("lastName");
-                                       ss1.setAttribute("ln1", lastName);
-                                      String tagline=rs.getString("tagline");
-                                       ss1.setAttribute("tn1", tagline);
-                                      String title=rs.getString("title");
-                                       ss1.setAttribute("tt1", title);
-                                      String gender=rs.getString("gender");
-                                       ss1.setAttribute("gn1", gender);
-                                      String dateOfBirth=rs.getString("dateOfBirth");
-                                       ss1.setAttribute("dob1", dateOfBirth);
-                                      String degination=rs.getString("degination");
-                                       ss1.setAttribute("dn1", degination);
-                                      String phoneNo=rs.getString("phoneNo");
-                                       ss1.setAttribute("pn1", phoneNo);
-                                      String mobileNo=rs.getString("mobileNo");
-                                       ss1.setAttribute("mn1", mobileNo);
-                                       String email=rs.getString("email");
-                                        ss1.setAttribute("em1", email);
-                             count++;
-                         }              
-                      }    
-                    catch (Exception e)
-                    {
-                        out.print("error");
-                    }
-                   %>  
-                       <%@ page import="javax.servlet.http.HttpSession.*;" %>
-                      <%@ page session="false" %>
-                      <% HttpSession ss1=request.getSession(false);%> 
-                   
-              <div class="row">
-                <div class="col-sm-6">
-                  <div class="form-group form-group-default">
-                    <label>First Name</label>
-                    <input type="text" id="firstName" name="firstName" class="form-control" value="<%out.print((String)ss1.getAttribute("fn1"));%>" required>
-                  </div>
-                </div>
-                <div class="col-sm-6">
-                  <div class="form-group form-group-default">
-                    <label>Last Name</label>
-                    <input type="text" id="lastName" name="lastName" class="form-control"  value="<%out.print((String)ss1.getAttribute("ln1"));%>"  required>
+        <div class="content">
+          <!-- START JUMBOTRON -->
+          <div class="jumbotron" data-pages="parallax">
+            <div class="container-fluid container-fixed-lg">
+              <div class="inner">
+                <!-- START BREADCRUMB -->
+                <ul class="breadcrumb">
+                  <li>
+                    <a href="#">UI Elements</a>
+                  </li>
+                  <li><a href="#" class="active">Modals</a>
+                  </li>
+                </ul>
+                <!-- END BREADCRUMB -->
+                <div class="container-md-height m-b-20">
+                  <div class="row row-md-height">
+                    <div class="col-lg-7 col-md-6 col-md-height col-middle bg-white">
+                      <!-- START PANEL -->
+                      <div class="full-height">
+                        <div class="panel-body text-center">
+                          <img class="image-responsive-height demo-mw-400" src="assets/img/demo/modal_hero.gif" alt="">
+                        </div>
+                      </div>
+                      <!-- END PANEL -->
+                    </div>
+                    <div class="col-lg-5 col-md-height col-md-6 col-top">
+                      <!-- START PANEL -->
+                      <div class="panel panel-transparent">
+                        <div class="panel-heading">
+                          <div class="panel-title">Getting started
+                          </div>
+                        </div>
+                        <div class="panel-body">
+                          <h3>A modal helps to displays content that temporarily blocks interactions with a web site</h3>
+                          <p>These are native boostrap modals and work as the same way as it does but more awesome with the added styles and animation giving the user more options to go to</p>
+                          <br>
+                          <div>
+                            <div class="profile-img-wrapper m-t-5 inline">
+                              <img width="35" height="35" src="assets/img/profiles/avatar_small.jpg" alt="" data-src="assets/img/profiles/avatar_small.jpg" data-src-retina="assets/img/profiles/avatar_small2x.jpg">
+                              <div class="chat-status available">
+                              </div>
+                            </div>
+                            <div class="inline m-l-10">
+                              <p class="small hint-text m-t-5">VIA senior product manage
+                                <br> for UI/UX at REVOX</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- END PANEL -->
+                    </div>
                   </div>
                 </div>
               </div>
-              <div class="row">
-                <div class="col-sm-12">
-                  <div class="form-group form-group-default">
-                    <label>Tag line</label>
-                    <input type="text" id="tagline" name="tagline" class="form-control" value="<%out.print((String)ss1.getAttribute("tn1"));%>" required>
+            </div>
+          </div>
+          <!-- END JUMBOTRON -->
+          <!-- START CONTAINER FLUID -->
+          <div class="container-fluid container-fixed-lg">
+            <div class="row">
+              <div class="col-sm-4">
+                <!-- START PANEL -->
+                <div class="panel panel-transparent">
+                  <div class="panel-heading">
+                    <div class="panel-title">Boostrap Native Modals
+                    </div>
+                  </div>
+                  <div class="panel-body">
+                    Boostrap modals are something very functional and we began to think how to make something better even better. The modals were styled to suite pages color scheme and animation, we did not stop here we added more, Read more.
+                  </div>
+                </div>
+                <!-- END PANEL -->
+              </div>
+              <div class="col-sm-4">
+                <!-- START PANEL -->
+                <div class="panel panel-transparent">
+                  <div class="panel-heading">
+                    <div class="panel-title">Style and Animation
+                    </div>
+                  </div>
+                  <div class="panel-body">
+                    These modals are customized with new animations and style, now pages modals support up to 3 different versions and each version have small, medium and large modals. This helps you to make your app look even better
+                  </div>
+                </div>
+                <!-- END PANEL -->
+              </div>
+              <div class="col-sm-4">
+                <!-- START PANEL -->
+                <div class="panel panel-transparent">
+                  <div class="panel-heading">
+                    <div class="panel-title">Functional
+                    </div>
+                  </div>
+                  <div class="panel-body">
+                    We did not just go for the looks and compromise functionality, since they are boostrap modals they are responsive and fast and works on all screens.
+                  </div>
+                </div>
+                <!-- END PANEL -->
+              </div>
+            </div>
+          </div>
+          <!-- END CONTAINER FLUID -->
+          <!-- START CONTAINER FLUID -->
+          <div class="container-fluid container-fixed-lg bg-white">
+            <div class="panel panel-transparent">
+              <div class="panel-heading">
+                <div class="panel-title">Boostrap Native Modals
+                </div>
+              </div>
+              <div class="panel-body">
+                <div class="row">
+                  <div class="col-lg-4 col-sm-6">
+                    <div class="panel panel-transparent">
+                      <div class="panel-heading no-padding">
+                        <div class="panel-title">
+                          Slide Up
+                        </div>
+                      </div>
+                      <div class="panel-body no-padding">
+                        <div class="m-b-15">
+                          <img alt="" src="assets/img/demo/1.svg" class="full-width">
+                        </div>
+                        <p>
+                          This modal slides in from the bottom and rests on the middle of the screen, to add this simply add the class
+                          <code>slide-up</code> to the <code>modal</code> div
+                        </p>
+                        <div class="radio radio-success inline">
+                          <input id="slideup_full" name="slideup_toggler" type="radio" value="full">
+                          <label for="slideup_full">Large</label>
+                          <br>
+                          <input id="slideup_default" name="slideup_toggler" type="radio" value="default" checked>
+                          <label for="slideup_default">Default</label>
+                          <br>
+                          <input id="slideup_small" name="slideup_toggler" type="radio" value="mini">
+                          <label for="slideup_small">Small</label>
+                        </div>
+                        <button class="btn btn-green btn-lg pull-right bottom-right" id="btnToggleSlideUpSize">Generate</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-4 col-sm-6">
+                    <div class="column-body">
+                      <div class="panel panel-transparent">
+                        <div class="panel-heading no-padding">
+                          <div class="panel-title">
+                            Stick Up
+                          </div>
+                        </div>
+                        <div class="panel-body no-padding">
+                          <div class="m-b-15">
+                            <img alt="" src="assets/img/demo/2.svg" class="full-width">
+                          </div>
+                          <p>
+                            This modal slides in from the top and rests on the top of the screen, to add this simply add the class
+                            <code>stick-up</code> to the <code>modal</code> div
+                          </p>
+                          <div class="radio radio-success inline">
+                            <input id="stickup_full" name="stickup_toggler" type="radio" value="full">
+                            <label for="stickup_full">Large</label>
+                            <br>
+                            <input id="stickup_default" name="stickup_toggler" type="radio" value="default" checked>
+                            <label for="stickup_default">Default</label>
+                            <br>
+                            <input id="stickup_small" name="stickup_toggler" type="radio" value="mini">
+                            <label for="stickup_small">Small</label>
+                          </div>
+                          <button class="btn btn-green btn-lg bottom-right" id="btnStickUpSizeToggler">Generate</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-4 visible-lg">
+                    <div class="panel panel-transparent">
+                      <div class="panel-heading no-padding">
+                        <div class="panel-title">
+                          Slide Right
+                        </div>
+                      </div>
+                      <div class="panel-body no-padding">
+                        <div class="m-b-15">
+                          <img alt="" src="assets/img/demo/4.svg" class="full-width">
+                        </div>
+                        <p>
+                          This modal slides from the right side <code>slide-right</code> to the <code>modal</code> div
+                        </p>
+                        <button class="btn btn-green btn-lg pull-right" data-target="#modalSlideLeft" data-toggle="modal">Generate</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-6 hidden-lg">
+                    <div class="panel panel-transparent">
+                      <div class="panel-heading no-padding">
+                        <div class="panel-title">
+                          Fill in Modal
+                        </div>
+                      </div>
+                      <div class="panel-body no-padding">
+                        <div class="m-b-15">
+                          <img alt="" src="assets/img/demo/3.svg" class="full-width">
+                        </div>
+                        <p>
+                          This modal zooms from the middle and fills in <code>fill-in</code> to the <code>modal</code> div
+                        </p>
+                        <button class="btn btn-green btn-lg pull-right" data-target="#modalFillIn" data-toggle="modal" id="btnFillSizeToggler">Generate</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-6 hidden-lg">
+                    <div class="panel panel-transparent">
+                      <div class="panel-heading no-padding">
+                        <div class="panel-title">
+                          Slide Right
+                        </div>
+                      </div>
+                      <div class="panel-body no-padding">
+                        <div class="m-b-15">
+                          <img alt="" src="assets/img/demo/4.svg" class="full-width">
+                        </div>
+                        <p>
+                          This modal slides from the right side <code>slide-right</code> to the <code>modal</code> div
+                        </p>
+                        <button class="btn btn-green btn-lg pull-right" data-target="#modalSlideLeft" data-toggle="modal">Generate</button>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-              <div class="row">
-                <div class="col-sm-12">
-                  <div class="form-group form-group-default">
-                    <label>Title</label>
-                   <input type="text" id="title" name="title" class="form-control" value="<%out.print((String)ss1.getAttribute("tt1"));%>" required>
+              <!-- START PANEL -->
+              <div class="panel panel-transparent visible-lg">
+                <div class="panel-heading">
+                  <div class="panel-title">
+                  </div>
+                </div>
+                <div class="panel-body">
+                  <div class="row">
+                    <div class="col-lg-4 ">
+                      <div class="panel panel-transparent">
+                        <div class="panel-heading no-padding">
+                          <div class="panel-title">
+                            Fill in Modal
+                          </div>
+                        </div>
+                        <div class="panel-body no-padding">
+                          <div class="m-b-15">
+                            <img alt="" src="assets/img/demo/3.svg" class="full-width">
+                          </div>
+                          <p>
+                            This modal zooms from the middle and fills in <code>fill-in</code> to the <code>modal</code> div
+                          </p>
+                          <button class="btn btn-green btn-lg pull-right" data-target="#modalFillIn" data-toggle="modal" id="btnFillSizeToggler2">Generate</button>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-              <div class="row">
-                <div class="col-sm-12">
-                  <div class="form-group form-group-default">
-                    <label>Gender</label>
-                    <input type="text" id="gender" name="gender" class="form-control" value="<%out.print((String)ss1.getAttribute("gn1"));%>" required>
-                  </div>
-                </div>
-              </div>
-                 <div class="row">
-                <div class="col-sm-12">
-                  <div class="form-group form-group-default">
-                    <label>Date Of Bith</label>
-                 <input type="text" id="dateOfBirth" name="dateOfBirth" class="form-control" value="<%out.print((String)ss1.getAttribute("dob1"));%>" required>
-                  </div>
-                </div>
-              </div>
-                 <div class="row">
-                <div class="col-sm-12">
-                  <div class="form-group form-group-default">
-                    <label>Designation</label>
-                  <input type="text" id="degination" name="degination" class="form-control" value="<%out.print((String)ss1.getAttribute("dn1"));%>" required>
-                  </div>
-                </div>
-              </div>
-                 <div class="row">
-                <div class="col-sm-12">
-                  <div class="form-group form-group-default">
-                    <label>Phone No</label>
-                   <input type="text" id="phoneNo" name="phoneNo" class="form-control" value="<%out.print((String)ss1.getAttribute("pn1"));%>" required>
-                  </div>
-                </div>
-              </div>
-                 <div class="row">
-                <div class="col-sm-12">
-                  <div class="form-group form-group-default">
-                    <label>Mobile No</label>
-                  <input type="text" id="mobileNo" name="mobileNo" class="form-control"  value="<%out.print((String)ss1.getAttribute("mn1"));%>" required>
-                  </div>
-                </div>
-              </div>
-                 <div class="row">
-                <div class="col-sm-12">
-                  <div class="form-group form-group-default">
-                    <label>Email</label>
-                     <input type="email" id="email" name="email" class="form-control"  value="<%out.print((String)ss1.getAttribute("em1"));%>" required>
-                  </div>
-                </div>
-              </div>
-             
-       <div id="msgbox1"></div>      <div id="msgbox2"></div>       
-       <button class="btn btn-primary btn-cons m-t-10" type="submit">Update </button>
-            </form>
+              <!-- END PANEL -->
+            </div>
           </div>
         </div>
-      </div>
-    </div>
-    </div>
-          <!-- END CONTAINER FLUID -->
-        </div>
-                   
         <!-- END PAGE CONTENT -->
         <!-- START COPYRIGHT -->
-        <!-- START CONTAINER FLUID -->
         <!-- START CONTAINER FLUID -->
         <div class="container-fluid container-fixed-lg footer">
           <div class="copyright sm-text-center">
             <p class="small no-margin pull-left sm-pull-reset">
-              <span class="hint-text">Copyright &copy; 2014 </span>
+              <span class="hint-text">Copyright � 2014 </span>
               <span class="font-montserrat">REVOX</span>.
               <span class="hint-text">All rights reserved. </span>
               <span class="sm-block"><a href="#" class="m-l-10 m-r-10">Terms of use</a> | <a href="#" class="m-l-10">Privacy Policy</a></span>
             </p>
             <p class="small no-margin pull-right sm-pull-reset">
-              <a href="#">Hand-crafted</a> <span class="hint-text">&amp; Made with Love ®</span>
+              <a href="#">Hand-crafted</a> <span class="hint-text">&amp; Made with Love �</span>
             </p>
             <div class="clearfix"></div>
           </div>
@@ -1001,7 +1256,7 @@
                         </p>
                         <p class="p-l-10 col-xs-height col-middle col-xs-12 overflow-ellipsis fs-12">
                           <span class="text-master link">Jame Smith commented on your status<br></span>
-                          <span class="text-master">“Perfection Simplified - Company Revox"</span>
+                          <span class="text-master">?Perfection Simplified - Company Revox"</span>
                         </p>
                       </a>
                       <!-- END Alert Item!-->
@@ -1016,7 +1271,7 @@
                         </p>
                         <p class="p-l-10 col-xs-height col-middle col-xs-12 overflow-ellipsis fs-12">
                           <span class="text-master link">Jame Smith commented on your status<br></span>
-                          <span class="text-master">“Perfection Simplified - Company Revox"</span>
+                          <span class="text-master">?Perfection Simplified - Company Revox"</span>
                         </p>
                       </a>
                       <!-- END Alert Item!-->
@@ -2005,14 +2260,12 @@
     <script type="text/javascript" src="assets/plugins/bootstrap-select2/select2.min.js"></script>
     <script type="text/javascript" src="assets/plugins/classie/classie.js"></script>
     <script src="assets/plugins/switchery/js/switchery.min.js" type="text/javascript"></script>
-    <script src="assets/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
-    <script src="assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
     <!-- END VENDOR JS -->
     <!-- BEGIN CORE TEMPLATE JS -->
     <script src="pages/js/pages.min.js"></script>
     <!-- END CORE TEMPLATE JS -->
     <!-- BEGIN PAGE LEVEL JS -->
-    <script src="assets/js/form_layouts.js" type="text/javascript"></script>
+    <script src="assets/js/demo.js" type="text/javascript"></script>
     <script src="assets/js/scripts.js" type="text/javascript"></script>
     <!-- END PAGE LEVEL JS -->
   </body>

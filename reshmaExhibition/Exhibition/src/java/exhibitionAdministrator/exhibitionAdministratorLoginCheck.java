@@ -9,59 +9,62 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class exhibitionAdministratorLoginCheck extends HttpServlet {
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException { 
+           protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+           throws ServletException, IOException { 
            response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
-        try
-        {
-                        String uname=request.getParameter("un");
+           PrintWriter out = response.getWriter();
+              try
+                  {
+                        // value fetch from exhibitionAdministratorLogin.jsp file
+                        String uname=request.getParameter("un");  
                         request.setAttribute("email",uname);                    
                         String pass=request.getParameter("pw");
                         HttpSession ss=request.getSession(true);
                         Connection con;
                         con=exhibitionAdministratorOneTimeConnection.getConnection();
                         Statement stat=con.createStatement();
+                        // email id and password is verified from exhibitionAdmin table
                         ResultSet rs=stat.executeQuery("select * from exhibitionAdmin where email='"+uname+"' or password='"+pass+"'");
+                       
                         int count=0; 
                           while(rs.next())
                            {
                                  String un=rs.getString("email");
-                                 ss.setAttribute("emailValid", un);
+                                 ss.setAttribute("emailValid", un);           // emailValid variable is set using session object
                                  String pw=rs.getString("password");
-                                 ss.setAttribute("passwordValid", pw);
-                                 String idValid=rs.getString("id");
-                                 ss.setAttribute("idValid" , idValid);
+                                 ss.setAttribute("passwordValid", pw);        // passwordValid variable is set using session object
+                                 String idValid=rs.getString("id");         
+                                 ss.setAttribute("idValid" , idValid);        // idValid variable is set using session object
                                  String mn=rs.getString("mobileNo");
-                                 ss.setAttribute("MN",mn);
+                                 ss.setAttribute("MN",mn);                    // mn variable is set using session object
                                  String usn=rs.getString("userName");
-                                 ss.setAttribute("userNameValid", usn);
+                                 ss.setAttribute("userNameValid", usn);       // userName variable is set using session object
                                  String le=rs.getString("level");
-                                 ss.setAttribute("levelValid", le);
+                                 ss.setAttribute("levelValid", le);           // levelValid variable is set using session object
                                  count++;
                            }
                            if(count>0)
                            {
                                //HttpSession ss=request.getSession(false);
-                               if( !uname.equals(ss.getAttribute("emailValid")) )
+                               if( !uname.equals(ss.getAttribute("emailValid")) )         // textbox and table value of email compared 
                                {
                                     out.print("emailinvalid");        
                                }
-                               else if(! pass.equals(ss.getAttribute("passwordValid")))
+                               else if(! pass.equals(ss.getAttribute("passwordValid")))   //textbox and table value of password are checked
                                {
                                    out.print("passwordinvalid");        
-                               }
+                               } 
                                else
                                {            
-                                   out.print("valid");   
-                               }
-                           }  
+                               out.print("valid");      
+                               } 
+                           }
                            else
                            {        
                                  out.print("ERROR");
                            }   
                  
-        }
+                   }
         catch(Exception ee)
         {
            out.println("error"+ee.toString());

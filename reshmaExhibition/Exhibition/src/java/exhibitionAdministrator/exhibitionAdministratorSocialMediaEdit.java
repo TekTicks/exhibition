@@ -16,13 +16,16 @@ public class exhibitionAdministratorSocialMediaEdit extends HttpServlet {
           PrintWriter out = response.getWriter();
        try
           {
+                // value fetch from exhibitionAdministratorSocialMedia.jsp 
                 HttpSession ss1=request.getSession(false);
                 String myex_id=(String)ss1.getAttribute("myex_id");
+                // value fetch from exhibitionAdministratorSocialMedia.jsp
                 String exhibitionId=request.getParameter("EI");
                 String link=request.getParameter("link");      
                 Connection con;
                 con=exhibitionAdministratorOneTimeConnection.getConnection();
                 String query = "update exhibitionSocialMedia set exhibitionId ='"+exhibitionId+"' , link ='"+link+"' where id='"+myex_id+"' ";
+                // data updated in exhibitionSocialMedia table
                 PreparedStatement ps=con.prepareStatement(query);
                 int rs= ps.executeUpdate();
                  if(rs !=0)

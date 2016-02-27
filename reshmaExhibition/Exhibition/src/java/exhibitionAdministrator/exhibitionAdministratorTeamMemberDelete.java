@@ -15,14 +15,15 @@ public class exhibitionAdministratorTeamMemberDelete extends HttpServlet {
           PrintWriter out = response.getWriter();
        try
          {
+              // value fetch from exhibitionAdministratorTeam.jsp
               String myex_id=request.getParameter("myid");
               Connection con;
               con=exhibitionAdministratorOneTimeConnection.getConnection();
               Statement st=con.createStatement();
-              st.executeUpdate("delete from exhibitionTeam where id='"+myex_id+"'");         
-              response.sendRedirect("/Exhibition/html/exhibitionAdministratorTeam.jsp");       
+              st.executeUpdate("delete from exhibitionTeam where id='"+myex_id+"'");        // data deleted from exhibitionTeam table 
+              response.sendRedirect("/Exhibition/html/exhibitionAdministratorTeam.jsp");    // page redirect to exhibitionAdministratorTeam.jsp   
               con.close();
-            }
+         }
            catch(Exception e)
            {
                out.print("error" +e);

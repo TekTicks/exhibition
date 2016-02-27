@@ -16,8 +16,10 @@ public class exhibitionAdministratorTeamMemberEdit extends HttpServlet {
           PrintWriter out = response.getWriter();
        try
          {
-              HttpSession ss=request.getSession(false);
-              String myex_id=(String)ss.getAttribute("myid");
+              // data fetch from exhibitionAdministratorTeam.jsp
+              HttpSession ss1=request.getSession(false);
+              String myex_id=(String)ss1.getAttribute("myid");
+              // values fetch from textbox of exhibitionAdministratorTeam.jsp
               String firstName=request.getParameter("firstName");
               String lastName=request.getParameter("lastName"); 
               String tagline=request.getParameter("tagline");
@@ -31,6 +33,7 @@ public class exhibitionAdministratorTeamMemberEdit extends HttpServlet {
               Connection con;
               con=exhibitionAdministratorOneTimeConnection.getConnection();
               String query = "update exhibitionTeam set tagline ='"+tagline+"',title ='"+title+"',firstName ='"+firstName+"',lastName ='"+lastName+"',gender ='"+gender+"',dateOfBirth ='"+dateOfBirth+"',degination ='"+degination+"',phoneNo ='"+phoneNo+"',mobileNo ='"+mobileNo+"',email ='"+email+"' where id='"+myex_id+"' ";
+              // data updated in exhibitionTeam table
               PreparedStatement ps=con.prepareStatement(query);
               int rs= ps.executeUpdate();
               if(rs !=0)

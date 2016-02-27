@@ -10,36 +10,38 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class exhibitionAdministratorForgotPassword extends HttpServlet {
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-         response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
-             try
+           protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+           throws ServletException, IOException {
+           response.setContentType("text/html");
+           PrintWriter out = response.getWriter();
+          try
              { 
-                 String password=request.getParameter("un"); 
-                   String cpassword=request.getParameter("pw");
-                    HttpSession ss=request.getSession(false);
-                 String mob = (String)ss.getAttribute("MN");
-                  if( (!(password.equals(cpassword))) || !(password.length()<6) || !(cpassword.length()<6) )
-               {
+                // value fetch from textbox of exhibitionAdministratorForgotPassword.jsp file
+                String password=request.getParameter("un"); 
+                String cpassword=request.getParameter("pw");
+                HttpSession ss=request.getSession(false);
+                String mob = (String)ss.getAttribute("MN");      // value fetch from exhibitionAdministratorMobileNo.jsp file
+                if( (!(password.equals(cpassword))) || !(password.length()<6) || !(cpassword.length()<6) )     //steps for mobile no validations
+                 {
                     out.print("wrong");
-               }
-               else
+                 }
+                else
                 {
-                        Connection con;
-                        con=exhibitionAdministratorOneTimeConnection.getConnection();
-                       String query = "update exhibitionAdmin set password ='"+password+"' where mobileNo='"+mob+"'";
-                      PreparedStatement ps = con.prepareStatement(query);
-                      // ps.setString(1,password);    
+                    Connection con;
+                    con=exhibitionAdministratorOneTimeConnection.getConnection();
+                    String query = "update exhibitionAdmin set password ='"+password+"' where mobileNo='"+mob+"'";
+                    // password is updated in exhibitionAdmin table
+                    PreparedStatement ps = con.prepareStatement(query);
+                    // ps.setString(1,password);    
                      int i =  ps.executeUpdate(); 
-                  out.print("ok");
+                    out.print("ok");
                 }
              }
      catch(Exception e)
-     {
-           out.print("errorsss" +e);
+      {
+         out.print("errorsss" +e);
     
-     }
+      }
     }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
