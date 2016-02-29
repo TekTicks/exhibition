@@ -495,12 +495,7 @@
                         <%
                          }
                         %>
-                              <!--   <label>Select Social Media</label>
-                                 <select class="full-width" name="socialmedia" id="socialmedia"  data-init-plugin="select2">
-                                  <option value="facebook">Facebook</option>
-                                  <option value="twitter">Twitter.</option>
-                                  <option value="Google+">Google+.</option>
-                                  <option value="Linkdin">Linkdin.</option>-->
+                              
                             </select>
                      
                             </div>  

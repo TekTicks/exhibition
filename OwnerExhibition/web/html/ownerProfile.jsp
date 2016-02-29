@@ -113,7 +113,7 @@
               </li>
            
               <li class="">
-                <a href="ownerAddAdministrator.jsp">Add Administrator</a>
+                <a href="ownerAdministrator.jsp">Add Administrator</a>
                 <span class="icon-thumbnail">A</span>
               </li>
            </ul>

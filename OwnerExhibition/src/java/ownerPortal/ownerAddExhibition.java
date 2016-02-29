@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package ownerPortal;
 
 import java.io.IOException;
@@ -14,32 +10,23 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-/**
- *
- * @author Admin
- */
 @WebServlet(name = "ownerAddExhibition", urlPatterns = {"/ownerAddExhibition"})
 public class ownerAddExhibition extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
        PrintWriter out = response.getWriter();
         try  {
+            //Retrive ownerId from session 
+            HttpSession ss=request.getSession();
+            String ownerId=(String)ss.getAttribute("ownerId");
             String exhibitionName =request.getParameter("exhibitionName");
             Connection con;
             con=dbConnection.getConnection();
-            PreparedStatement ps=con.prepareStatement("insert into exhibition(name,tagline,location,logoMediaId,shortDescription,longDescription,startDate,endDate,address1,address2,pincode,cityId,maplink,website,createdBy,modifiedBy,modifiedByFlag) values(?,'','',1,'','','07-04-02','05-04-02','','','',1,'','',1,1,1);");
+            PreparedStatement ps=con.prepareStatement("insert into exhibition(name,tagline,location,logoMediaId,shortDescription,longDescription,startDate,endDate,address1,address2,pincode,cityId,maplink,website,createdBy,modifiedBy,modifiedByFlag) values(?,'','',1,'','','07-04-02','05-04-02','','','',1,'','',(select id from owner where id='"+ownerId+"'),(select id from owner where id='"+ownerId+"'),1);");
             ps.setString(1,exhibitionName);
             int n=ps.executeUpdate();
            if(n>0)

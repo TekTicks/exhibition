@@ -21,7 +21,7 @@ public class ownerEditExhibition extends HttpServlet {
         try  {
                             
                 String exhibitionName =request.getParameter("exhibitionName");
-                //Retrieve session
+                //Retrieve session from ownerEditExhibition.jsp
                 HttpSession ss=request.getSession();
                 String id=(String)ss.getAttribute("id1");
                 
@@ -30,7 +30,6 @@ public class ownerEditExhibition extends HttpServlet {
                 con=dbConnection.getConnection();
                 PreparedStatement ps=con.prepareStatement("update exhibition set name=? where id='"+id+"' ");
                 ps.setString(1,exhibitionName);
-                //ps.setString(2,ownerPortal.Global.socialmediaid);
                 int n=ps.executeUpdate();
                 if(n>0)
                 {

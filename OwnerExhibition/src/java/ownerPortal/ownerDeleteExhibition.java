@@ -20,8 +20,8 @@ public class ownerDeleteExhibition extends HttpServlet {
         try
                 {
                    
-                    // Getting id of ownerSocialMedia from url of delete button from ownerProfile            
-                    String id=request.getParameter("myid");
+                    // Getting id of exhibitionId from url of delete button from ownerExhibition            
+                    String id=request.getParameter("exhibitionId");
                      //One time database connection  
                     Connection con;
                     con=dbConnection.getConnection();

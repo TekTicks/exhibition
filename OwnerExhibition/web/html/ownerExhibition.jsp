@@ -112,11 +112,7 @@
                 <span class="icon-thumbnail">P</span>
                 </li>
                 <li class="">
-                <a href="ckvModifyexhibition.jsp">Modify Exhibitions</a>
-                <span class="icon-thumbnail">Me</span>
-                </li>
-                <li class="">
-                <a href="ckvAddadministrator.jsp">Add Administrator</a>
+                <a href="ownerAdministrator.jsp">Add Administrator</a>
                 <span class="icon-thumbnail">Mv</span>
                 </li>
             </ul>
@@ -414,19 +410,20 @@
                      <thead>
                         <tr>
                           <!--  <th>ID</th> -->
-                        <th>Date</th>
-                        <th>Exhibition Name</th>        
+                        <th>Date/Time</th>
+                        <th>Name of the Exhibition </th>           
                         <th>Update/Delete.</th>
                         </tr>
                   </thead>
                   <tbody>
-                    <%   
+                    <%   //Retrieve onwerId from session 
                          HttpSession ss=request.getSession();
                          String idd=(String)ss.getAttribute("ownerId");
+                         //one time database connectivity
                          Connection con1;
                          con1=dbConnection.getConnection();
                          Statement stat1=con1.createStatement();
-                         ResultSet rs1=stat1.executeQuery("select * from exhibition ");
+                         ResultSet rs1=stat1.executeQuery("select * from exhibition where createdBy='"+idd+"' ");
                          int count1=0;
                         
                          while(rs1.next())
@@ -443,13 +440,12 @@
                                  
                                   
                             
-                           %>
+                    %>
                           
                              <td>
                                  <div class="btn-group">
-                                
-                                 <button  type="button" class="btn btn-success" onclick="document.location.href='/Exhibition/html/ownerEditExhibition.jsp?myid=<%= kv %>';"><i class="fa fa-pencil"></i></button>
-                                 <button type="button" class="btn btn-success"  onclick="document.location.href='/Exhibition/ownerDeleteExhibition?myid=<%= kv %>';"><i class="fa fa-trash-o"></i>
+                                 <button  type="button" class="btn btn-success" onclick="document.location.href='/Exhibition/html/ownerEditExhibition.jsp?exhibitionId=<%= kv %>';"><i class="fa fa-pencil"></i></button>
+                                 <button type="button" type="button" class="btn btn-success"  onclick="document.location.href='/Exhibition/ownerDeleteExhibition?exhibitionId=<%= kv %>';"><i class="fa fa-trash-o"></i>
                                  </button>
                                  </div>
                             </td><%
@@ -464,32 +460,6 @@
             <!-- END PANEL -->
           </div>
             
-            
-              <div class="padding-20 bg-white">
-                  <ul class="pager wizard">
-                    <li class="next">
-                      <button class="btn btn-primary btn-cons btn-animated from-left fa fa-truck pull-right" type="button">
-                        <span>Next</span>
-                      </button>
-                    </li>
-                    <li class="next finish hidden">
-                      <button class="btn btn-primary btn-cons btn-animated from-left fa fa-cog pull-right" type="button">
-                        <span>Finish</span>
-                      </button>
-                    </li>
-                    <li class="previous first hidden">
-                      <button class="btn btn-default btn-cons btn-animated from-left fa fa-cog pull-right" type="button">
-                        <span>First</span>
-                      </button>
-                    </li>
-                    <li class="previous">
-                      <button class="btn btn-default btn-cons pull-right" type="button">
-                        <span>Previous</span>
-                      </button>
-                    </li>
-                  </ul>
-                </div>
-                    
                 </div>
                             
                 

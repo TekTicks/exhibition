@@ -410,7 +410,7 @@
                                 if(msg != 'error') // Message Sent, check and redirect
 				{
                                        
-                                          $("#msgbox1").html('Exhibition Added successfully....!!').addClass('myinfo').fadeTo(200,1,function()
+                                          $("#msgbox1").html('Exhibition Added successfully....!!').addClass('myinfo').fadeTo(1500,1,function()
 			             {
 			                 //redirect to secure page
 			              document.location='/Exhibition/html/ownerExhibition.jsp';
@@ -448,7 +448,7 @@
                   </div>
                       <br><br>
                   <button class="btn btn-primary btn-cons m-t-10" type="submit">Submit</button>
-                  <button class="btn btn-primary btn-cons m-t-10" >Cancel</button> 
+                  <button type="button" class="btn btn-primary btn-cons m-t-10"  onclick="document.location.href='/Exhibition/html/ownerExhibition.jsp'"  >Cancel</button> 
                    <div id="msgbox1"></div>
                   </div>
                  </form>
