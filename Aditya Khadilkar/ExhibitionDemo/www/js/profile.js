@@ -61,6 +61,8 @@ function sendProfile()
 		dataType:"json",
 		success:function(response)
 		{
+			
+			
 					$(".floating-label").hide();
 					
 					document.getElementById("pname").value = JSON.stringify(response.visitor[0].name).replace(/"/g,"");
@@ -69,6 +71,14 @@ function sendProfile()
 					
 					document.getElementById("pEmail").value = JSON.stringify(response.visitor[0].emailId).replace(/"/g,"");
 					
+					document.getElementById("pBirthDate").value = JSON.stringify(response.visitor[0].dateOfBirth).replace(/"/g,"");
+					
+					document.getElementById("pGender").value = JSON.stringify(response.visitor[0].gender).replace(/"/g,"");
+					
+					document.getElementById("pEducation").value = JSON.stringify(response.visitor[0].education).replace(/"/g,"");
+					
+					document.getElementById("pProfession").value = JSON.stringify(response.visitor[0].profession).replace(/"/g,"");
+				
 					//$("#pname").val(JSON.stringify(response.visitor[0].name).replace(/"/g,""));
 					//$("#pMobile").text(JSON.stringify(response.visitor[0].mobileNo).replace(/"/g,""));
 					//$("#pEmail").text(JSON.stringify(response.visitor[0].emailId).replace(/"/g,""));
@@ -96,7 +106,7 @@ function sendProfile()
 }
 
 
-
+     
 
  //function convertDate(dateString){
 //var p = dateString.split(/\D/g)
@@ -113,7 +123,7 @@ function sendProfile()
 	var pEducation = document.getElementById('pEducation').value;
 	var pProfession = document.getElementById('pProfession').value;	
 	var visitorId = localStorage.getItem("visitorId");
-	var request = createCORSRequest( "post", "http://socialworker.tekticks.co.in" );
+	var request = createCORSRequest( "post", "http://exhibition.tekticks.co.in" );
 	//var fileName = upload();
 	//alert(fileName);
 	if(request)
@@ -133,8 +143,8 @@ function sendProfile()
 		{
 					if(JSON.stringify(response.status)==200)
 						{
-							$("#updateInfo").text("Profile Updated");
-							
+							$("#updateInfo").text("Profile Updated").delay(3000);
+							myApp.alert('Data Updated','Update');
 						}
 							
 		
@@ -147,5 +157,8 @@ function sendProfile()
 
 	
 	}
-	}
+}
+
+
+	
 	

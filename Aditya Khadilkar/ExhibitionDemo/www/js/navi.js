@@ -1,9 +1,8 @@
 function navi()
 {
+	localStorage.clear();
 	
-	profileReload();
-	//document.getElementById("list1").style.paddingTop = "0px";
-	var request = createCORSRequest( "post", "http://socialworker.tekticks.co.in" );
+	var request = createCORSRequest( "post", "http://exhibition.tekticks.co.in" );
 	if(request)
 	{
 		
@@ -12,7 +11,7 @@ function navi()
 			$("#signup").fadeIn();
 			$("#signin").fadeIn();
 			$("#profile").fadeOut();
-						
+			document.getElementById("list1").style.marginTop = "0px";			
 		}
 		else
 		{
@@ -22,12 +21,13 @@ function navi()
 		
 		}
 	}
+	//profileReload();
 }
 
 
-/*function profileReload()
+function profileReload()
 {	
-var request = createCORSRequest( "post", "http://socialworker.tekticks.co.in" );
+var request = createCORSRequest( "post", "http://exhibition.tekticks.co.in" );
 	if(request)
 	{
 var visitorId=localStorage.getItem("visitorId");
@@ -35,7 +35,7 @@ var data = {"profile":[{"visitorId":visitorId}]};
 	var sendData = function(data)
 	{
 	$.ajax({
-		url:"http://socialworker.tekticks.co.in/json/sw_visitor.php",
+		url:"http://exhibition.tekticks.co.in/application/json/sw_visitor.php",
 		dataType:"json",
 		type: 'POST',
 		data: JSON.stringify(data),
@@ -46,29 +46,28 @@ var data = {"profile":[{"visitorId":visitorId}]};
 			{ 
 			
 				var profileName= JSON.stringify(response.visitor.name).replace(/"/g,"");
-			   var photoLink= JSON.stringify(response.visitor.photoLink).replace(/"/g,""); 
+			   var profilePic= JSON.stringify(response.visitor.profilePic).replace(/"/g,""); 
 			   					
-			 	if(photoLink=="null")
+			 	if(profilePic=="null")
 				{
-					document.getElementById("profile1").style.backgroundImage='linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.8)),url(img/Profilelogo.png)';
+					document.getElementById("profilePic").style.backgroundImage='linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.8)),url(img/Profilelogo.png)';
 					
 				}
 				else
 				{
-				document.getElementById("profile1").style.backgroundImage='linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.8)),url('+photoLink+')';
+				document.getElementById("profilePic").style.backgroundImage='linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.8)),url('+profilePic+')';
 				}
 		 
 			$("#profileName").text(profileName);
-			//$("#photoLink").attr("src",photoLink);
+			//$("#profilePic").attr("src",profilePic);
 			localStorage.setItem("profileName", profileName);
-			localStorage.setItem("profileImage", photoLink);
+			localStorage.setItem("profileImage", profilePic);
 			
 			}
 		}
 	});
 	}
 sendData(data);	
-console.log(data);
+//console.log(data);
 	}
 }
-*/

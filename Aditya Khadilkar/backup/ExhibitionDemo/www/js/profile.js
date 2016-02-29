@@ -42,7 +42,7 @@ function getprofile()
 }
 
 
-function sendprofile()
+function sendProfile()
 {
 	var request = createCORSRequest( "post", "http://exhibition.tekticks.co.in" );
 	if(request)
@@ -62,9 +62,16 @@ function sendprofile()
 		success:function(response)
 		{
 					$(".floating-label").hide();
-					$("#pName").val(JSON.stringify(response.visitor[0].name).replace(/"/g,""));
-					$("#pMobileNo").val(JSON.stringify(response.visitor[0].mobileNo).replace(/"/g,""));
-					$("#pEmailId").val(JSON.stringify(response.visitor[0].emailId).replace(/"/g,""));
+					
+					document.getElementById("pname").value = JSON.stringify(response.visitor[0].name).replace(/"/g,"");
+					
+					document.getElementById("pMobile").value = JSON.stringify(response.visitor[0].mobileNo).replace(/"/g,"");
+					
+					document.getElementById("pEmail").value = JSON.stringify(response.visitor[0].emailId).replace(/"/g,"");
+					
+					//$("#pname").val(JSON.stringify(response.visitor[0].name).replace(/"/g,""));
+					//$("#pMobile").text(JSON.stringify(response.visitor[0].mobileNo).replace(/"/g,""));
+					//$("#pEmail").text(JSON.stringify(response.visitor[0].emailId).replace(/"/g,""));
 					
 					//$("#pbirthdate").val(convertDate(JSON.stringify(response.visitor[0].dob).replace(/"/g,"")));
 					
@@ -77,9 +84,8 @@ function sendprofile()
 					//var show = document.getElementById('profileShow');
 					//show.style.visibility = 'visible';
 					
-					var a = document.getElementById('profileNext');
-							a.setAttribute("href","profileEdit.html");
-							document.getElementById('profileNext').click();
+					//var show = document.getElementById('profileShow');
+					//show.style.visibility = 'visible';
 					
 		}
 		});
@@ -97,59 +103,49 @@ function sendprofile()
 //return [p[2],p[1],p[0] ].join("-")
 //}
 
- /*function profile()
-{ var show = document.getElementById('profileShow');
-    show.style.visibility = 'visible';
+ function profile()
+{ 
 	var pname = document.getElementById('pname').value;
-	var pemail = document.getElementById('pemail').value;
-	var pphone = document.getElementById('pphone').value;
-	var pgender = document.getElementById('pgender').value;
-	var pbirthdate = document.getElementById('pbirthdate').value;
-	var pcity = document.getElementById('pcity').value;
+	var pphone = document.getElementById('pMobile').value;
+	var pemail = document.getElementById('pEmail').value;
+	var pBirthDate = document.getElementById('pBirthDate').value;
+	var pGender = document.getElementById("pGender").value;
+	var pEducation = document.getElementById('pEducation').value;
+	var pProfession = document.getElementById('pProfession').value;	
 	var visitorId = localStorage.getItem("visitorId");
 	var request = createCORSRequest( "post", "http://socialworker.tekticks.co.in" );
-	var fileName = upload();
-	alert(fileName);
+	//var fileName = upload();
+	//alert(fileName);
 	if(request)
 	{
 	
 	
-		var data = {"profile":[{"visitorId":visitorId,"pname":pname,"pemail":pemail,"pphone":pphone,"pgender":pgender,"pbirthdate":pbirthdate,"pcity":pcity}]};
+		var data = {"profile":[{"visitorId":visitorId,"pname":pname,"pemail":pemail,"pphone":pphone,"pGender":pGender,"pBirthDate":pBirthDate,"pEducation":pEducation,"pProfession":pProfession}]};
 		var sendData = function(data)
 		{
 	$.ajax({
-		url:"http://socialworker.tekticks.co.in/json/signupProfile_json.php",
+		url:"http://exhibition.tekticks.co.in/application/json/signupProfile_json.php",
 		type: 'POST',
 		contentType: 'application/json',
 		data: JSON.stringify(data),
 		dataType:"json",
 		success:function(response)
 		{
-			/* if(JSON.stringify(response.status)==200) */
-						/* {
-	                        $("#mobileError").hide();
-							$("#emailError").hide();
-	
-	                    } */
-		/* else if(JSON.stringify(response.status)==202)
+					if(JSON.stringify(response.status)==200)
 						{
-							$("#mobileError").text(JSON.stringify(response.statusMessage).replace(/"/g,""));
-							$("#mobileError").fadeIn();
+							$("#updateInfo").text("Profile Updated");
+							
 						}
-						else if(JSON.stringify(response.status)==203)
-						{
-							$("#emailError").text(JSON.stringify(response.statusMessage).replace(/"/g,""));
-							$("#emailError").fadeIn();
-						}
- */
-		//}
+							
+		
+		}
 	  
-//});
-		//} 
-	//sendData(data);
+		});
+		} 
+	sendData(data);
 	//console.log(data);
 
 	
-	//}
-	//}
+	}
+	}
 	

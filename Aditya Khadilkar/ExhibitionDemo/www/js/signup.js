@@ -158,6 +158,8 @@ function verifyotp()
 								
 								//window.location="logo.html";
 								
+								profileReload();
+								
 								var b = document.getElementById('otpNext');
 								b.setAttribute("href","logo.html");
 								document.getElementById('otpNext').click();

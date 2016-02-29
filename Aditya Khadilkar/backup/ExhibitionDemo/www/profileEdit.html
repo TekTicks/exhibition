@@ -7,7 +7,7 @@
     </div>
   </div>
   
-    <div class="page-content login-screen-content" style="padding-top:50px">
+    <div class="page-content login-screen-content" style="padding-top:50px" id="profileShow">
 
 
 <form method="POST" name="register" >	
@@ -18,9 +18,9 @@
           <div class="item-content">
             <div class="item-media"><i class="icon icon-form-name"></i></div>
             <div class="item-inner"> 
-              <div class="item-title floating-label">Your Name</div>
+              <div class="item-title color-gray"><small>Your Name</small></div>
               <div class="item-input">
-                <input type="text"  id="pName" name="pName" placeholder=""/>
+                <input type="text"  id="pname" name="pname" placeholder=""/>
               </div>
             </div>
           </div>
@@ -30,9 +30,9 @@
 			<div class="item-media"><i class="icon icon-form-tel"></i></div>
             <div class="item-inner"> 
 			<div class="label" id="mobileError" name = "mobileError" style="color:#ff0000"></div>
-              <div class="item-title floating-label">Your Mobile Number*</div>
+              <div class="item-title color-gray"><small>Your Mobile Number</small></div>
               <div class="item-input">
-                <input type="text" name="pMobileNo" id="pMobileNo" placeholder="" maxlength="10" onkeypress="return isNumber(event)" />
+                <input type="text" name="pMobile" id="pMobile" placeholder="" maxlength="10" onkeypress="return isNumber(event)" />
               </div>
             </div>
           </li>
@@ -42,23 +42,56 @@
             <div class="item-media"><i class="icon icon-form-email"></i></div>
             <div class="item-inner">
             <div class="label" id="emailError" name = "emailError" style="color:#ff0000"></div>			
-              <div class="item-title floating-label">Your E-mail</div>
+              <div class="item-title color-gray"><small>Your E-mail</small></div>
               <div class="item-input">
-                <input type="email" id="pEmailId" placeholder=""/>
+                <input type="email" id="pEmail" placeholder=""/>
               </div>
             </div>
           </div>
         </li>
          
+		 
+          <!--<div class="item-content">
+            <div class="item-media"><i class="icon icon-form-calendar"></i></div>
+            <div class="item-inner"> 
+              <div class="item-title floating-label">Your birth date (DD/MM/YYYY)</div>
+              <div class="item-input">
+                <input type="date"  id="pBirthDate" placeholder=""/>
+              </div>
+            </div>
+          </div>-->
+		  
+		  <!--<div class="item-content">
+			<div class="item-inner">
+				<div class="item-title label">Pick A Date</div>
+				<div class="item-input">
+					<input type="date" placeholder="Pick A Date" value="2014-04-30">
+				</div>
+			</div>
+		</div>-->
+		  
+        <li>
+      <div class="item-content">
+        <div class="item-media"><i class="icon icon-form-calendar"></i></div>
+        <div class="item-inner">
+          <div class="item-title">Date Of Birth</div>
+          <div class="item-input">
+            <input type="date" placeholder="YYYY-MM-DD" id="pBirthDate">
+          </div>
+        </div>
+      </div>
+    </li>
+		
+		
 		
 		<li>
           <div class="item-content">
             <div class="item-media"><i class="icon icon-form-gender"></i></div>
             <div class="item-inner"> 
-              <div class="item-title floating-label">Your Gender</div>
+              <div class="item-title color-gray"><small>Your Gender</small></div>
               <div class="item-input">
-                <select id="pgender">
-                 <option value=""></option>
+                <select id="pGender">
+				<option value="">Gender</option>
                   <option value="M">Male</option>
                   <option value="F">Female</option>
 				   <!-- <option>Other</option> -->
@@ -72,16 +105,16 @@
           <div class="item-content">
             <div class="item-media"><i class="icon icon-form-comment"></i></div>
             <div class="item-inner"> 
-              <div class="item-title floating-label">Your Education</div>
+              <div class="item-title color-gray"><small>Your Education</small></div>
               <div class="item-input">
-                <select id="pgender">
-                 <option value=""></option>
-                  <option value="ssc">S.S.C</option>
-                  <option value="hsc">H.S.C</option>
-				  <option value="grad">Graduation</option>
-				  <option value="pgrad">Post Graduation</option>
-				  <option value="phd">P.H.D</option>
-				  <option value="phd">Other</option>
+                <select id="pEducation">
+				 <option value="">Education</option>
+                  <option value="SSC">S.S.C</option>
+                  <option value="HSC">H.S.C</option>
+				  <option value="Graduation">Graduation</option>
+				  <option value="Post Graduation">Post Graduation</option>
+				  <option value="PHD">P.H.D</option>
+				  <option value="Other">Other</option>
 				   <!-- <option>Other</option> -->
                 </select>
               </div>
@@ -92,9 +125,9 @@
 		
 		<li>
           <div class="item-content">
-            <div class="item-media"><i class="icon icon-form-comment"></i></div>
+            <div class="item-media"><i class="icon icon-form-calendar"></i></div>
             <div class="item-inner"> 
-              <div class="item-title floating-label">Your Profession</div>
+              <div class="item-title color-gray"><small>Your Profession</small></div>
               <div class="item-input">
                 <input type="text"  id="pProfession" placeholder=""/>
               </div>
@@ -117,7 +150,7 @@
 
   </div>
   
-  <center><div class="content-block"><div class="label" id="updateInfo" name = "updateInfo" style="color:#ff0000"></div></div></center>
+  <center><div class="content-block"><div class="label" id="updateInfo" name = "updateInfo" style="color:#00ff00"></div></div></center>
   
   
 </form>
