@@ -1,3 +1,4 @@
+<%@page import="exhibitionAdministrator.exhibitionAdministratorOneTimeConnection"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.Statement"%>
@@ -220,7 +221,7 @@
                 <span class="icon-thumbnail">M</span>
               </li>
                <li class="">
-                <a href="exhibitionOpportunity.jsp">Opportunities/Response </a>
+                <a href="/Exhibition/html/exhibitionAdministratorOpportunity.jsp">Opportunities/Response </a>
                 <span class="icon-thumbnail">M</span>
               </li>
                <li class="">
@@ -324,6 +325,11 @@
     <!-- END SIDEBAR -->
     <!-- END SIDEBPANEL-->
     <!-- START PAGE-CONTAINER -->
+     
+    
+    
+    
+    
     <div class="page-container ">
       <!-- START HEADER -->
       <div class="header ">
@@ -631,6 +637,7 @@
                     <tr>
                       <th>Sector Name</th>
                       <th>Description</th>
+                      
                       <th>Edit/Delete</th>
                      <!-- <th>Status</th>
                       <th>Last Update</th> -->
@@ -643,8 +650,9 @@
                         
                         
                          Class.forName("com.mysql.jdbc.Driver"); 
-                         Connection con1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/Exhibition","root","123"); 
-                         Statement stat1=con1.createStatement();
+                       Connection con;
+                       con=exhibitionAdministratorOneTimeConnection.getConnection(); 
+                         Statement stat1=con.createStatement();
                          ResultSet rs1=stat1.executeQuery("select * from exhibitionSector");
                          int count1=0;
                         
@@ -656,15 +664,47 @@
                             out.println("<td class='v-align-middle semi-bold'><p>"+rs1.getString(4)+"</p></td>");
                          
                             String exid=rs1.getString(1);
-                            //HttpSession ss=request.getSession(true);
-                            //ss.setAttribute("myid", exid);
+                           // HttpSession sO=request.getSession(true);
+                           // s.setAttribute("myid", exid);
                             //out.print(exid);
                            %>
                              <td>
                                  <div class="btn-group">
-                             <button type="button" class="btn btn-success" onclick="document.location.href='/Exhibition/html/exhibitionAdministratorSectorEdit.jsp?myid=<%=exid%>';"><i class="fa fa-pencil"></i></button> 
-                                 <button type="button" class="btn btn-success"  onclick="document.location.href='/Exhibition/exhibitionAdministratorSectorDelete?myid=<%=exid%>';"><i class="fa fa-trash-o"></i>
+        
+                                 <button type="button" class="btn btn-success" onclick="document.location.href='/Exhibition/html/exhibitionAdministratorSectorEdit.jsp?myid=<%=exid%>';"><i class="fa fa-pencil"></i></button> 
+                                 
+    <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Confirm Delete</h4>
+                </div>
+            
+                <div class="modal-body">
+                    <p>You are about to delete one track, this procedure is irreversible.</p>
+                    <p>Do you want to proceed?</p>
+                    <p class="debug-url"></p>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-dismiss="modal" onclick="document.location.href='/Exhibition/html/exhibitionAdministratorSector.jsp';">Cancel</button>
+                    <a class="btn btn-success btn-ok" onclick="document.location.href='/Exhibition/exhibitionAdministratorSectorDelete?myid=<%=exid%>';">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+                                 
+                                 <button type="button" class="btn btn-success" data-href="/Exhibition/exhibitionAdministratorSectorDelete?myid=<%=exid%>" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash-o"></i>
                                  </button>
+                          <script>
+        $('#confirm-delete').on('show.bs.modal', function(e) {
+            $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+            
+            $('.debug-url').html('Delete URL: <strong>' + $(this).find('.btn-ok').attr('href') + '</strong>');
+        });
+    </script>
                                  </div>
                             </td><%
                             out.println(" </tr>");
@@ -2024,6 +2064,28 @@
     <!-- BEGIN PAGE LEVEL JS -->
     <script src="assets/js/datatables.js" type="text/javascript"></script>
     <script src="assets/js/scripts.js" type="text/javascript"></script>
+       <script src="assets/plugins/pace/pace.min.js" type="text/javascript"></script>
+    <script src="assets/plugins/jquery/jquery-1.11.1.min.js" type="text/javascript"></script>
+    <script src="assets/plugins/modernizr.custom.js" type="text/javascript"></script>
+    <script src="assets/plugins/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
+    <script src="assets/plugins/boostrapv3/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="assets/plugins/jquery/jquery-easy.js" type="text/javascript"></script>
+    <script src="assets/plugins/jquery-unveil/jquery.unveil.min.js" type="text/javascript"></script>
+    <script src="assets/plugins/jquery-bez/jquery.bez.min.js"></script>
+    <script src="assets/plugins/jquery-ios-list/jquery.ioslist.min.js" type="text/javascript"></script>
+    <script src="assets/plugins/jquery-actual/jquery.actual.min.js"></script>
+    <script src="assets/plugins/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+    <script type="text/javascript" src="assets/plugins/bootstrap-select2/select2.min.js"></script>
+    <script type="text/javascript" src="assets/plugins/classie/classie.js"></script>
+    <script src="assets/plugins/switchery/js/switchery.min.js" type="text/javascript"></script>
+    <!-- END VENDOR JS -->
+    <!-- BEGIN CORE TEMPLATE JS -->
+    <script src="pages/js/pages.min.js"></script>
+    <!-- END CORE TEMPLATE JS -->
+    <!-- BEGIN PAGE LEVEL JS -->
+    <script src="assets/js/demo.js" type="text/javascript"></script>
+    <script src="assets/js/scripts.js" type="text/javascript"></script>
+    
     <!-- END PAGE LEVEL JS -->
   </body>
 </html>

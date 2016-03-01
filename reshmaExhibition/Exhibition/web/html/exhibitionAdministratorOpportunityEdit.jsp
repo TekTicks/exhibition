@@ -4,7 +4,7 @@
     Author     : Admin
 --%>
 
-
+<%@page import="exhibitionAdministrator.exhibitionAdministratorOneTimeConnection"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
  <%@page import="java.io.*;" %>
   <%@page import="java.sql.*;" %>
@@ -50,24 +50,21 @@
 			
 			this.timer = setTimeout(function () {
 				$.ajax({
-		          	url: '/Exhibition/exhibitionAdministratorSocialMediaEdit',
-		          	data: 'EI='+ $('#exhibitionId').val() +'&link=' + $('#link').val(),
+		          	url: '/Exhibition/exhibitionAdministratorOpportunityEdit',
+		          	data: 'exId='+ $('#exId').val() +'&title=' + $('#title').val()+'&email=' + $('#email').val() +'&mobile=' + $('#mobile').val()+'&contactNo=' + $('#contactNo').val(),
 		          	type: 'post',
 		   		success: function(msg){
-                                    alert(msg);
+                                  alert(msg);
                                 if(msg != 'error') // Message Sent, check and redirect
 				{
-                                        if(msg != 'wrong')
+                                        if(msg !='wrong')
                                         {
                                           $("#msgbox1").html('data updated').addClass('myinfo').fadeTo(200,1,function()
 			             {
 			                 //redirect to secure page
 			              //document.location='/Exhibition/html/exhibitionAdminPersonal.jsp';
-			             });
-                                        
+			             });    
                                     }
-                                
-				
                                 else
                                 {
                                     $("#msgbox2").fadeTo(100,1,function() //start fading the messagebox
@@ -129,7 +126,6 @@
 	text-align: center;
 }
 </style> 
-
   </head>
   <body class="fixed-header ">
     <!-- BEGIN SIDEBPANEL-->
@@ -550,88 +546,108 @@
   <div class="page-content-wrapper ">
         <!-- START PAGE CONTENT -->
    <div class="content ">
-    <div class="panel-body">
+                            <div class="panel-body">
    <div class="register-container full-height sm-p-t-30">
       <div class="container-sm-height full-height">
         <div class="row row-sm-height">
           <div class="col-sm-12 col-sm-height col-middle">
-  <!--          <img src="assets/img/logo.png" alt="logo" data-src="assets/img/logo.png" data-src-retina="assets/img/logo_2x.png" width="78" height="22">
-            <h3>Pages makes it easy to enjoy what matters the most in your life</h3>
-            <p>
-              <small>
-        Create a pages account. If you have a facebook account, log into it for this process. Sign in with <a href="#" class="text-info">Facebook</a> or <a href="#" class="text-info">Google</a>
-    </small>
-  </p> --><p><h1><b>Update Exhibition Social Media..!</b></h1></p>
+ <p><h1><b> Update Opportunities...!</b></h1></p>
           <br>
-         
-               <form role="form"   class="p-t-15" id="login" name="login" action="" method="">
-          
-                  
-                     
-                   
+             <form role="form"   class="p-t-15" id="login" name="login" action="" method="">      
                    <% 
                       try { 
-                            HttpSession ss1=request.getSession(true);
-                       String myex_id=request.getParameter("myid");
-                       
-                       ss1.setAttribute("myex_id", myex_id);
-                          Class.forName("com.mysql.jdbc.Driver"); 
-                         Connection con1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/exhibition","root","123"); 
-                         Statement stat1=con1.createStatement();
-                       
-                         String query="select * from exhibitionSocialMedia where id= '"+myex_id+" '";
-                         ResultSet rs=stat1.executeQuery(query);  
-                         
-                         int count=0;
-                        
-                         while(rs.next())
-                         {
-                             String exhibitionId=rs.getString("exhibitionId");
-                             ss1.setAttribute("ei", exhibitionId);
-                                      String link=rs.getString("link");
-                                       ss1.setAttribute("link", link);
-                                     
+                             HttpSession obj=request.getSession(true);
+                             String idr=request.getParameter("idr");
+                             obj.setAttribute("myid", idr);
+                             Class.forName("com.mysql.jdbc.Driver"); 
+                             Connection con;
+                             con=exhibitionAdministratorOneTimeConnection.getConnection(); 
+                             Statement stat1=con.createStatement();
+                             String query="select * from exhibitionOpportunity where id= '"+idr+"'";
+                             ResultSet rs=stat1.executeQuery(query);  
+                             int count=0;
+                             while(rs.next())
+                             {
+                             String exId=rs.getString("exhibitionId");
+                             obj.setAttribute("exId", exId);
+                             String title=rs.getString("opportunityTitle");
+                             obj.setAttribute("title", title);
+                             String email=rs.getString("email");
+                             obj.setAttribute("email", email);
+                             String mobile=rs.getString("mobile");
+                             obj.setAttribute("mobile", mobile);     
+                              String contactNo=rs.getString("contactNo");
+                             obj.setAttribute("contactNo", contactNo);     
+                              
                              count++;
-                         }              
-                      }    
+                             }              
+                          }    
                     catch (Exception e)
                     {
                         out.print("error");
                     }
                    %>  
-                       <%@ page import="javax.servlet.http.HttpSession.*;" %>
-                      <%@ page session="false" %>
-                      <% HttpSession ss1=request.getSession(false);%> 
-                   
-           
-              <div class="row">
-                <div class="col-sm-12">
-                  <div class="form-group form-group-default">
-                    <label>Exhibition ID</label>
-                    <input type="text" id="exhibitionId" name="exhibitionId" class="form-control" value="<%out.print((String)ss1.getAttribute("ei"));%>" required>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-sm-12">
-                  <div class="form-group form-group-default">
-                    <label>Link</label>
-                    <input type="text" id="link" name="link" class="form-control" value="<%out.print((String)ss1.getAttribute("link"));%>" required>
-                  </div>
-                </div>
-              </div>
-       
-             
-       <div id="msgbox1"></div>      <div id="msgbox2"></div>       
-       <button class="btn btn-primary btn-cons m-t-10" type="submit"> Update </button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-    </div>
+                      <%@ page import="javax.servlet.http.HttpSession.*;" %>
+                      <%@ page session="false" %> 
+                      <% HttpSession obj=request.getSession(false);%> 
+                     <div class="form-group ">
+                     <label>Exhibition</label>
+                     <%    
+                      try { 
+                             Class.forName("com.mysql.jdbc.Driver"); 
+                             Connection con;
+                             con= exhibitionAdministratorOneTimeConnection.getConnection(); 
+                             Statement stat1=con.createStatement();
+                             ResultSet rs1=stat1.executeQuery("select * from exhibitionAdmin");
+                             int count1=0;
+                    %>
+                           
+                       <select class="full-width" data-init-plugin="select2" name="exId" id="exId">
+                       <option> <%out.print((String)obj.getAttribute("exId"));%></option> 
+                       <optgroup label="Select id">
+                    <% while(rs1.next())
+                        {
+                    %>
+                      <option><%out.print(rs1.getString(1));%></option>
+                    <%     
+                        }
+                        } 
+                  catch(Exception e) 
+                  { 
+                      out.print("error" +e); 
+                  }
+                    %>  
+                       </optgroup>
+                        </select>
+                       </div>   
+                      <div class="form-group">
+                        <label>Title</label>
+                        <input type="text" class="form-control" id="title" name="title" value="<% out.print((String)obj.getAttribute("title"));%>" required>
+                      </div>         
+                       <div class="form-group">
+                        <label>Email</label>
+                        <textarea class="form-control" id="email" name="email"> <%out.print((String)obj.getAttribute("email"));%> </textarea>
+                      </div>          
+                      <div class="form-group">
+                        <label>Mobile No</label>
+                        <textarea class="form-control" id="mobile" name="mobile"><%out.print((String)obj.getAttribute("mobile"));%> </textarea>
+                      </div>  
+             <div class="form-group">
+                        <label>Contact No</label>
+                        <textarea class="form-control" id="contactNo" name="contactNo"><%out.print((String)obj.getAttribute("contactNo"));%> </textarea>
+                      </div> 
+                      <div id="msgbox1"></div>  
+                      <div id="msgbox2"></div>       
+                      <button class="btn btn-primary btn-cons m-t-10" type="submit"> Update </button>
+                       <button class="btn btn-primary btn-cons m-t-10" type="submit"> Cancel </button>
+                     </form>
+                     </div>
+                     </div>
+                     </div>
+                     </div>
+                     </div>
           <!-- END CONTAINER FLUID -->
-        </div>
+                     </div>
                    
         <!-- END PAGE CONTENT -->
         <!-- START COPYRIGHT -->

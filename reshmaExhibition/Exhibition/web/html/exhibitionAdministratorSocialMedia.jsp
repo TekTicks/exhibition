@@ -220,7 +220,7 @@
                 <span class="icon-thumbnail">M</span>
               </li>
                <li class="">
-                <a href="exhibitionOpportunity.jsp">Opportunities/Response </a>
+                <a href="/Exhibition/html/exhibitionAdministratorOpportunity.jsp">Opportunities/Response </a>
                 <span class="icon-thumbnail">M</span>
               </li>
                <li class="">
@@ -662,8 +662,38 @@
                              <td>
                                  <div class="btn-group">
                                  <button type="button" class="btn btn-success" onclick="document.location.href='/Exhibition/html/exhibitionAdministratorSocialMediaEdit.jsp?myid=<%=exid%>';"><i class="fa fa-pencil"></i></button> 
-                                 <button type="button" class="btn btn-success" onclick="document.location.href='/Exhibition/exhibitionAdministratorSocialMediaDelete?myid=<%=exid%>';"><i class="fa fa-trash-o"></i>
+                             <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Confirm Delete</h4>
+                </div>
+            
+                <div class="modal-body">
+                    <p>You are about to delete one track, this procedure is irreversible.</p>
+                    <p>Do you want to proceed?</p>
+                    <p class="debug-url"></p>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-dismiss="modal" onclick="document.location.href='/Exhibition/html/exhibitionAdministratorSocialMedia.jsp';">Cancel</button>
+                    <a class="btn btn-success btn-ok" onclick="document.location.href='/Exhibition/exhibitionAdministratorSocialMediaDelete?myid=<%=exid%>';">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+                                 
+                                 <button type="button" class="btn btn-success" data-href="/Exhibition/exhibitionAdministratorSocialMediaDelete?myid=<%=exid%>" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash-o"></i>
                                  </button>
+                          <script>
+        $('#confirm-delete').on('show.bs.modal', function(e) {
+            $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+            
+            $('.debug-url').html('Delete URL: <strong>' + $(this).find('.btn-ok').attr('href') + '</strong>');
+        });
+    </script>
                                  </div>
                             </td><%
                             out.println(" </tr>");

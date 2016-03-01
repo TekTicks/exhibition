@@ -4,17 +4,17 @@
     Author     : Admin
 --%>
 
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
- <%@page import="java.io.*;" %>
-  <%@page import="java.sql.*;" %>
-  <%@page import="java.sql.DriverManager;" %>
+<%@page import="exhibitionAdministrator.exhibitionAdministratorOneTimeConnection"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.Connection"%>
 <!DOCTYPE html>
 <html>
   <head>
     <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
     <meta charset="utf-8" />
-    <title>Pages - Admin Dashboard UI Kit - Form Layouts</title>
+    <title>Pages - Admin Dashboard UI Kit - Blank Page</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no" />
     <link rel="apple-touch-icon" href="pages/ico/60.png">
     <link rel="apple-touch-icon" sizes="76x76" href="pages/ico/76.png">
@@ -32,48 +32,45 @@
     <link href="assets/plugins/jquery-scrollbar/jquery.scrollbar.css" rel="stylesheet" type="text/css" media="screen" />
     <link href="assets/plugins/bootstrap-select2/select2.css" rel="stylesheet" type="text/css" media="screen" />
     <link href="assets/plugins/switchery/css/switchery.min.css" rel="stylesheet" type="text/css" media="screen" />
-    <link href="assets/plugins/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet" type="text/css" media="screen">
+    <link href="assets/plugins/jquery-datatable/media/css/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/jquery-datatable/extensions/FixedColumns/css/dataTables.fixedColumns.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/datatables-responsive/css/datatables.responsive.css" rel="stylesheet" type="text/css" media="screen" />
     <link href="pages/css/pages-icons.css" rel="stylesheet" type="text/css">
     <link class="main-stylesheet" href="pages/css/pages.css" rel="stylesheet" type="text/css" />
     <!--[if lte IE 9]>
 	<link href="assets/plugins/codrops-dialogFx/dialog.ie.css" rel="stylesheet" type="text/css" media="screen" />
 	<![endif]-->
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="pages/js/jquery-1.4.2.min.js"></script>
-   <script type="text/javascript">
+   
+    <script type="text/javascript">
 	$(document).ready(function(){
 		$("#login").submit(function(){
-
-			 //remove previous class and add new "myinfo" class
+	       //remove previous class and add new "myinfo" class
 	       // $("#msgbox").removeClass().addClass('myinfo').text('Validating Your Login ').fadeIn(1000);
-
-			
 			this.timer = setTimeout(function () {
 				$.ajax({
-		          	url: '/Exhibition/exhibitionAdministratorSocialMediaEdit',
-		          	data: 'EI='+ $('#exhibitionId').val() +'&link=' + $('#link').val(),
+		          	url: '/Exhibition/exhibitionAdministratorOpportunity',
+		          	data: 'exId=' + $('#exId').val() +'&title=' + $('#title').val() +'&email=' + $('#email').val()+'&mobile=' + $('#mobile').val()+'&contactNo=' + $('#contactNo').val(),
 		          	type: 'post',
-		   		success: function(msg){
+		   		success: function(msg){ 
                                     alert(msg);
                                 if(msg != 'error') // Message Sent, check and redirect
 				{
-                                        if(msg != 'wrong')
+                                        if(msg !='wrn')
                                         {
-                                          $("#msgbox1").html('data updated').addClass('myinfo').fadeTo(200,1,function()
+                                          $("#msgbox1").html('data inserted').addClass('myinfo').fadeTo(200,1,function()
 			             {
 			                 //redirect to secure page
 			              //document.location='/Exhibition/html/exhibitionAdminPersonal.jsp';
-			             });
-                                        
+			             });      
                                     }
-                                
-				
                                 else
                                 {
                                     $("#msgbox2").fadeTo(100,1,function() //start fading the messagebox
 		                {
 			                  //add message and change the class of the box and start fading
-			                 $(this).html('records are not updated..').removeClass().addClass('myerror').fadeTo(300,1);
+			                 $(this).html('records are not inserted..').removeClass().addClass('myerror').fadeTo(300,1);
                                         // document.location='/Exhibition/html/exhibitionAdminLog.jsp?user';
                                  });
                                 }
@@ -83,7 +80,7 @@
                                 $("#msgbox2").fadeTo(100,1,function() //start fading the messagebox
 		                {
 			                  //add message and change the class of the box and start fading
-			                 $(this).html('MobileNo should be 10 digits only').removeClass().addClass('myerror').fadeTo(300,1);
+			                 $(this).html('sorry').removeClass().addClass('myerror').fadeTo(300,1);
                                         // document.location='/Exhibition/html/exhibitionAdminLog.jsp?user';
                                  });
                             }
@@ -95,7 +92,6 @@
 
 	});
    </script> 
-  
      <style>
 #exists{display:none}
 #cross{display:none}
@@ -128,22 +124,21 @@
 	-webkit-border-radius:4px;
 	text-align: center;
 }
-</style> 
-
+</style>
   </head>
   <body class="fixed-header ">
     <!-- BEGIN SIDEBPANEL-->
     <nav class="page-sidebar" data-pages="sidebar">
       <!-- BEGIN SIDEBAR MENU TOP TRAY CONTENT-->
-      <div class="sidebar-overlay-slide from-top" id="appMenu">
-        <div class="row">
-          <div class="col-xs-6 no-padding">
-            <a href="#" class="p-l-40"><img src="assets/img/demo/social_app.svg" alt="socail">
-            </a>
-          </div>
-          <div class="col-xs-6 no-padding">
-            <a href="#" class="p-l-10"><img src="assets/img/demo/email_app.svg" alt="socail">
-            </a>
+    <div class="sidebar-overlay-slide from-top" id="appMenu">
+      <div class="row">
+        <div class="col-xs-6 no-padding">
+          <a href="#" class="p-l-40"><img src="assets/img/demo/social_app.svg" alt="socail">
+          </a>
+        </div>
+        <div class="col-xs-6 no-padding">
+          <a href="#" class="p-l-10"><img src="assets/img/demo/email_app.svg" alt="socail">
+          </a>
           </div>
         </div>
         <div class="row">
@@ -274,9 +269,7 @@
                 <span class="icon-thumbnail">M</span>
               </li>
             </ul>
-              
           </li>
-           
            <li>
             <a href="javascript:;"><span class="title">Manage Exhibitor</span>
             <span class=" arrow"></span></a>
@@ -298,10 +291,8 @@
                 <a href="deleteExhibitor.jsp">Delete Exhibitor </a>
                 <span class="icon-thumbnail">M</span>
               </li>
-              
             </ul>
           </li>
-      
           <li>
             <a href="javascript:;"><span class="title">Manage Visitors</span>
             <span class=" arrow"></span></a>
@@ -319,7 +310,6 @@
                 <a href="deleteVisitor.jsp">Delete Visitors </a>
                 <span class="icon-thumbnail">M</span>
               </li>
-             
             </ul>
           </li>
            <li class="">
@@ -332,7 +322,6 @@
             <a href="report.jsp"><span class="title">Reports</span>
             </a>
             <span class="icon-thumbnail"><i class="pg-layouts2"></i></span> 
-        
           </li>
           </ul>
         <div class="clearfix"></div>
@@ -412,9 +401,9 @@
                             </div>
                             <div class="more-details">
                               <div class="more-details-inner">
-                                <h5 class="semi-bold fs-16">“Apple’s Motivation - Innovation <br> 
+                                <h5 class="semi-bold fs-16">?Apple?s Motivation - Innovation <br> 
                                                             distinguishes between <br>
-                                                            A leader and a follower.”</h5>
+                                                            A leader and a follower.?</h5>
                                 <p class="small hint-text">
                                   Commented on john Smiths wall.
                                   <br> via pages framework.
@@ -547,92 +536,205 @@
       </div>
       <!-- END HEADER -->
       <!-- START PAGE CONTENT WRAPPER -->
-  <div class="page-content-wrapper ">
-        <!-- START PAGE CONTENT -->
-   <div class="content ">
-    <div class="panel-body">
+      <div class="page-content-wrapper ">
+       <div class="content ">
+       
+       <h5>Exhibition Opportunities</h5>
+                    
+                                     <div class="panel panel-transparent ">
+                      <!-- Nav tabs -->
+                      <ul class="nav nav-tabs nav-tabs-fillup">
+                        <li class="active">
+                          <a data-toggle="tab" href="#tab-fillup1"><span>Add Opportunity</span></a>
+                        </li>
+                        <li>
+                          <a data-toggle="tab" href="#tab-fillup2"><span>View Opportunities</span></a>
+                        </li>
+                      <!--  <li>
+                          <a data-toggle="tab" href="#tab-fillup3"><span>Messages</span></a>
+                        </li> -->
+                      </ul>
+                      <!-- Tab panes -->
+                      <div class="tab-content">
+                        <div class="tab-pane active" id="tab-fillup1">
+                            <div class="panel-body">
    <div class="register-container full-height sm-p-t-30">
       <div class="container-sm-height full-height">
         <div class="row row-sm-height">
           <div class="col-sm-12 col-sm-height col-middle">
-  <!--          <img src="assets/img/logo.png" alt="logo" data-src="assets/img/logo.png" data-src-retina="assets/img/logo_2x.png" width="78" height="22">
-            <h3>Pages makes it easy to enjoy what matters the most in your life</h3>
-            <p>
-              <small>
-        Create a pages account. If you have a facebook account, log into it for this process. Sign in with <a href="#" class="text-info">Facebook</a> or <a href="#" class="text-info">Google</a>
-    </small>
-  </p> --><p><h1><b>Update Exhibition Social Media..!</b></h1></p>
+<p><h1><b> Opportunities....!</b></h1></p>
           <br>
-         
-               <form role="form"   class="p-t-15" id="login" name="login" action="" method="">
-          
-                  
+             <form role="form"   class="p-t-15" id="login" name="login" action="" method="">      
+                      <div class="form-group ">
+                           <label>Exhibition</label>
+                      <%    
+                    try { 
+                           Class.forName("com.mysql.jdbc.Driver"); 
+                           Connection con;
+                           con= exhibitionAdministratorOneTimeConnection.getConnection(); 
+                           Statement stat1=con.createStatement();
+                           ResultSet rs1=stat1.executeQuery("select * from exhibitionAdmin");
+                           int count1=0;
+                     %>
                      
-                   
-                   <% 
-                      try { 
-                            HttpSession ss1=request.getSession(true);
-                       String myex_id=request.getParameter("myid");
-                       
-                       ss1.setAttribute("myex_id", myex_id);
-                          Class.forName("com.mysql.jdbc.Driver"); 
-                         Connection con1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/exhibition","root","123"); 
-                         Statement stat1=con1.createStatement();
-                       
-                         String query="select * from exhibitionSocialMedia where id= '"+myex_id+" '";
-                         ResultSet rs=stat1.executeQuery(query);  
+                        <select class="full-width" data-init-plugin="select2" name="exId" id="exId">
+                            
+                         <% while(rs1.next())
+                         {   
+                         %>
+                        <option><%out.print(rs1.getString(1));%></option>
+                         <%   
+                         }
+                        } 
+                   catch(Exception e) 
+                      { 
+                      out.print("error" +e); 
+                      }
+                        %>  
                          
-                         int count=0;
-                        
-                         while(rs.next())
-                         {
-                             String exhibitionId=rs.getString("exhibitionId");
-                             ss1.setAttribute("ei", exhibitionId);
-                                      String link=rs.getString("link");
-                                       ss1.setAttribute("link", link);
-                                     
-                             count++;
-                         }              
-                      }    
-                    catch (Exception e)
-                    {
-                        out.print("error");
-                    }
-                   %>  
-                       <%@ page import="javax.servlet.http.HttpSession.*;" %>
-                      <%@ page session="false" %>
-                      <% HttpSession ss1=request.getSession(false);%> 
-                   
-           
-              <div class="row">
-                <div class="col-sm-12">
-                  <div class="form-group form-group-default">
-                    <label>Exhibition ID</label>
-                    <input type="text" id="exhibitionId" name="exhibitionId" class="form-control" value="<%out.print((String)ss1.getAttribute("ei"));%>" required>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-sm-12">
-                  <div class="form-group form-group-default">
-                    <label>Link</label>
-                    <input type="text" id="link" name="link" class="form-control" value="<%out.print((String)ss1.getAttribute("link"));%>" required>
-                  </div>
-                </div>
-              </div>
-       
+                        </select>
+                      </div>  
+                    <div class="form-group">
+                        <label>Title</label>
+                      <input type="text" class="form-control" id="title" name="title" required>
+                      </div>         
+                            <div class="form-group">
+                        <label>Email</label>
+                      <input type="email" class="form-control" id="email" name="email" required>
+                      </div>          
+                         <div class="form-group">
+                        <label>Mobile No</label>
+                          <input type="text" class="form-control" id="mobile" name="mobile" required>
+                      </div>
+                        <div class="form-group">
+                        <label>Contact No</label>
+                          <input type="text" class="form-control" id="contactNo" name="contactNo" required>
+                      </div>
              
-       <div id="msgbox1"></div>      <div id="msgbox2"></div>       
-       <button class="btn btn-primary btn-cons m-t-10" type="submit"> Update </button>
-            </form>
-          </div>
+                    <div id="msgbox1"></div> 
+                    <div id="msgbox2"></div>       
+                  <button class="btn btn-primary btn-cons m-t-10" type="submit"> Save </button>
+                 <button class="btn btn-primary btn-cons m-t-10" type="submit"> Cancel </button>
+                </form>
+                  </div>
+                 </div>
+                 </div>
+                 </div>
+                  </div>
+                        </div>
+                        <div class="tab-pane" id="tab-fillup2">
+                                        <div class="container-fluid container-fixed-lg">
+            <!-- START PANEL -->
+            <div class="panel panel-transparent">
+              <div class="panel-heading">
+                <div class="panel-title">
+                </div>
+                 
+              </div>
+              <div class="panel-body">                 
+               <div class="container-fluid container-fixed-lg bg-white">
+            <!-- START PANEL -->
+            <div class="panel panel-transparent">
+              <div class="panel-heading">
+                <div class="panel-title">View Opportunities
+                </div>
+                <div class="pull-right">
+                  <div class="col-xs-12">
+                    <input type="text" id="search-table" class="form-control pull-right" placeholder="Search">
+                  </div>
+                </div>
+                <div class="clearfix"></div>
+              </div>
+              <div class="panel-body">
+                <table class="table table-hover demo-table-search" id="tableWithSearch">
+                  <thead>
+                    <tr>
+                      <th>Exhibition ID</th>
+                      <th>Email</th>
+                       <th>Mobile No</th>
+                    <th>Photo Id</th>
+                     <th>Edit/Delete</th>
+                     <!-- <th>Status</th>
+                      <th>Last Update</th> -->
+                    </tr>
+                  </thead>
+                  <tbody>                          
+                        <%   
+                          Class.forName("com.mysql.jdbc.Driver"); 
+                          Connection con;
+                          con= exhibitionAdministratorOneTimeConnection.getConnection(); 
+                          Statement stat1=con.createStatement();
+                          ResultSet rs1=stat1.executeQuery("select * from exhibitionOpportunity");
+                          int count1=0;
+                          while(rs1.next())
+                          {
+                            count1++;
+                            out.println("<tr>");
+                            out.println("<td class='v-align-middle semi-bold'><p>"+rs1.getString(2)+"</p></td>");
+                            out.println("<td class='v-align-middle semi-bold'><p>"+rs1.getString(4)+"</p></td>");
+                            out.println("<td class='v-align-middle semi-bold'><p>"+rs1.getString(5)+"</p></td>");
+                            out.println("<td class='v-align-middle semi-bold'><p>"+rs1.getString(7)+"</p></td>");
+                            String idr=rs1.getString(1);
+                           %>
+                             <td>
+                             <div class="btn-group">
+                             <button type="button" class="btn btn-success" onclick="document.location.href='/Exhibition/html/exhibitionAdministratorOpportunityEdit.jsp?idr=<%=idr%>';"><i class="fa fa-pencil"></i></button> 
+                             
+                               <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Confirm Delete</h4>
+                </div>
+            
+                <div class="modal-body">
+                    <p>You are about to delete one track, this procedure is irreversible.</p>
+                    <p>Do you want to proceed?</p>
+                    <p class="debug-url"></p>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-dismiss="modal" onclick="document.location.href='/Exhibition/html/exhibitionAdministratorOpportunity.jsp';">Cancel</button>
+                    <a class="btn btn-success btn-ok" onclick="document.location.href='/Exhibition/exhibitionAdministratorOpportunityDelete?idr=<%=idr%>';">Delete</a>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-    </div>
+                                 
+                                 <button type="button" class="btn btn-success" data-href="/Exhibition/exhibitionAdministratorOpportunityDelete?idr=<%=idr%>" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash-o"></i>
+                                 </button>
+                          <script>
+        $('#confirm-delete').on('show.bs.modal', function(e) {
+            $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+            
+            $('.debug-url').html('Delete URL: <strong>' + $(this).find('.btn-ok').attr('href') + '</strong>');
+        });
+    </script>
+                             
+                             </div>
+                            </td><%
+                            out.println(" </tr>");
+                            }
+                           %>
+         </tbody>
+         </table>
+         </div>
+         </div>
+            <!-- END PANEL -->
+          </div>
+          <!-- END CONTAINER FLUID -->
+          <!-- START CONTAINER FLUID -->
+            <!-- END PANEL -->
+            </div> 
+            </div>    
+             </div>
+             </div> 
+             </div>
+             </div>          
           <!-- END CONTAINER FLUID -->
         </div>
-                   
         <!-- END PAGE CONTENT -->
         <!-- START COPYRIGHT -->
         <!-- START CONTAINER FLUID -->
@@ -646,7 +748,7 @@
               <span class="sm-block"><a href="#" class="m-l-10 m-r-10">Terms of use</a> | <a href="#" class="m-l-10">Privacy Policy</a></span>
             </p>
             <p class="small no-margin pull-right sm-pull-reset">
-              <a href="#">Hand-crafted</a> <span class="hint-text">&amp; Made with Love ®</span>
+              <a href="#">Hand-crafted</a> <span class="hint-text">&amp; Made with Love �</span>
             </p>
             <div class="clearfix"></div>
           </div>
@@ -924,7 +1026,7 @@
                         </p>
                         <p class="p-l-10 col-xs-height col-middle col-xs-12 overflow-ellipsis fs-12">
                           <span class="text-master link">Jame Smith commented on your status<br></span>
-                          <span class="text-master">“Perfection Simplified - Company Revox"</span>
+                          <span class="text-master">?Perfection Simplified - Company Revox"</span>
                         </p>
                       </a>
                       <!-- END Alert Item!-->
@@ -939,7 +1041,7 @@
                         </p>
                         <p class="p-l-10 col-xs-height col-middle col-xs-12 overflow-ellipsis fs-12">
                           <span class="text-master link">Jame Smith commented on your status<br></span>
-                          <span class="text-master">“Perfection Simplified - Company Revox"</span>
+                          <span class="text-master">?Perfection Simplified - Company Revox"</span>
                         </p>
                       </a>
                       <!-- END Alert Item!-->
@@ -1928,14 +2030,18 @@
     <script type="text/javascript" src="assets/plugins/bootstrap-select2/select2.min.js"></script>
     <script type="text/javascript" src="assets/plugins/classie/classie.js"></script>
     <script src="assets/plugins/switchery/js/switchery.min.js" type="text/javascript"></script>
-    <script src="assets/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
-    <script src="assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
+    <script src="assets/plugins/jquery-datatable/media/js/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script src="assets/plugins/jquery-datatable/extensions/TableTools/js/dataTables.tableTools.min.js" type="text/javascript"></script>
+    <script src="assets/plugins/jquery-datatable/media/js/dataTables.bootstrap.js" type="text/javascript"></script>
+    <script src="assets/plugins/jquery-datatable/extensions/Bootstrap/jquery-datatable-bootstrap.js" type="text/javascript"></script>
+    <script type="text/javascript" src="assets/plugins/datatables-responsive/js/datatables.responsive.js"></script>
+    <script type="text/javascript" src="assets/plugins/datatables-responsive/js/lodash.min.js"></script>
     <!-- END VENDOR JS -->
     <!-- BEGIN CORE TEMPLATE JS -->
     <script src="pages/js/pages.min.js"></script>
     <!-- END CORE TEMPLATE JS -->
     <!-- BEGIN PAGE LEVEL JS -->
-    <script src="assets/js/form_layouts.js" type="text/javascript"></script>
+    <script src="assets/js/datatables.js" type="text/javascript"></script>
     <script src="assets/js/scripts.js" type="text/javascript"></script>
     <!-- END PAGE LEVEL JS -->
   </body>
