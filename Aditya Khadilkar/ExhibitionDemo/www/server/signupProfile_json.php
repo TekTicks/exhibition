@@ -44,8 +44,8 @@ mobileNo='$pphone'
 where id='$visitorId'";	
 mysql_query($updateVisitorQuery,$conn); 
 	
-			
-//deliver_response(200,"visitor profile updated","visitor",$jsonresponse);
+$jsonresponse=$visitorId;			
+deliver_response(200,"visitor profile updated","visitor",$jsonresponse);
 
 
  

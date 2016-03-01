@@ -34,7 +34,15 @@ dateOfBirth='$dob',
 profession='$pprofession',
 education='$pEducation'
 where createdBy='$visitorId'";	
-mysql_query($updateVisitorProfileQuery,$conn); 
+mysql_query($updateVisitorProfileQuery,$conn);
+
+
+$updateVisitorQuery="update visitor
+set name='$pname',
+emailId='$pemail',
+mobileNo='$pphone'	
+where id='$visitorId'";	
+mysql_query($updateVisitorQuery,$conn); 
 	
 			
 //deliver_response(200,"visitor profile updated","visitor",$jsonresponse);

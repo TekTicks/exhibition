@@ -28,7 +28,8 @@ function getprofile()
 					
 					//$("#pgender").val(JSON.stringify(response.visitor[0].gender).replace(/"/g,""));
 					//alert(JSON.stringify(response.visitor[0].photoLink));
-					//$("#profilePic").attr("src",JSON.stringify(response.visitor[0].photoLink).replace(/"/g,""));
+					
+					//$("#profilePic").attr("src",JSON.stringify(response.visitor[0].profilePic).replace(/"/g,""));
 					
 					//var show = document.getElementById('profileShow');
 					//show.style.visibility = 'visible';
@@ -143,7 +144,6 @@ function sendProfile()
 		{
 					if(JSON.stringify(response.status)==200)
 						{
-							$("#updateInfo").text("Profile Updated").delay(3000);
 							myApp.alert('Data Updated','Update');
 						}
 							

@@ -47,12 +47,16 @@ function signin()
 							localStorage.setItem("visitorId",visitorId);
 							
 							//printing msg before redirecting
-							$("#loginInfo").text(JSON.stringify(response.statusMessage).replace(/"/g,""));
-							$("#loginInfo").fadeIn();
-							
+							//$("#loginInfo").text(JSON.stringify(response.statusMessage).replace(/"/g,""));
+							//$("#loginInfo").fadeIn();
+							myApp.alert('You Have Successfully Logged On..!!','Log In');
+
 							$("#signup").fadeOut();
 							$("#signin").fadeOut();
 							$("#profile").fadeIn();	
+							
+							profileReload();
+							
 							
 							var a = document.getElementById('signInNext');
 							a.setAttribute("href","logo.html");

@@ -134,11 +134,11 @@ function verifyotp()
 								localStorage.clear();
 								
 								var visitorId = JSON.stringify(response.visitor[0].id).replace(/"/g,"");
-								
+								var Name = JSON.stringify(response.visitor[0].name).replace(/"/g,"");
 								localStorage.setItem("visitorId",visitorId);
-								$("#displayName").text(JSON.stringify("Welcome "+response.visitor[0].name).replace(/"/g,""));
+								//$("#displayName").text(JSON.stringify("Welcome "+response.visitor[0].name).replace(/"/g,""));
 								//var Name = JSON.stringify(response.signUp).replace(/"/g,"");
-								
+								myApp.alert('Welcome '+Name,'SignUp');
 								
 								$("#signup").fadeOut();
 								$("#signin").fadeOut();
