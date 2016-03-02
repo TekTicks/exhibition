@@ -609,13 +609,66 @@
                         <div class="form-group">
                         <label>Contact No</label>
                           <input type="text" class="form-control" id="contactNo" name="contactNo" required>
-                      </div>
+                        </div> </form>
+                         <form ENCTYPE="multipart/form-data" action="/Exhibition/html/exhibitionAdministratorOpportunityInsertImage.jsp" method="post" role="form">
+                          <div class="form-group">
+                              <label> Photo </label>
+                     
+      <%
+            try {
+           String img_name="";
+             Class.forName("com.mysql.jdbc.Driver"); 
+                Connection con;
+  con=exhibitionAdministratorOneTimeConnection.getConnection();
+             
+             Statement stat=con.createStatement();
+             
+             HttpSession ssC=request.getSession();
+             String fileName=(String)ssC.getAttribute("fileName");
+                         
+            // ResultSet rs=stat.executeQuery("select * from media order By id desc limit 1");
+            ResultSet rs=stat.executeQuery("select * from media where link='"+fileName+"'");
+             
+             if(!rs.next())
+             {
+                 out.println("Error");
+             }
+             else
+             {
+               img_name=rs.getString(2);
+               ssC.setAttribute("mediaId1",rs.getString(1));
+               //out.print(rs.getString(1));
+             }
+            %>    
+
+    <img src='<%= img_name %>' id="profile" alt="Profile not uploaded" style="width:200px;height:200px"> 
+            <%}
+              catch(Exception e)
+                {
+                   out.print("fsdaf" +e);
+                }
+            %>  
+    <script type="text/javascript">
+	function readProfile(input) {
+	if (input.files && input.files[0]) {
+	var reader3 = new FileReader();
+	reader3.onload = function (e) {
+	$('#profile')
+	.attr('src', e.target.result)
+	};
+	reader3.readAsDataURL(input.files[0]);
+	}
+	}
+   </script>
+   <input name="file" id="file"  style="width:200px" type="file" onchange="readProfile(this);">
+   <input type="submit" value="upload">          
+                          </div>
              
                     <div id="msgbox1"></div> 
                     <div id="msgbox2"></div>       
                   <button class="btn btn-primary btn-cons m-t-10" type="submit"> Save </button>
                  <button class="btn btn-primary btn-cons m-t-10" type="submit"> Cancel </button>
-                </form>
+               </form>
                   </div>
                  </div>
                  </div>

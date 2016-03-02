@@ -1,33 +1,21 @@
-<!-- <!DOCTYPE html>
-<html>
-<head>
-    <script data-require="jquery@*" data-semver="2.0.3" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
-    <script data-require="bootstrap@*" data-semver="3.1.1" src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-    <link data-require="bootstrap-css@3.1.1" data-semver="3.1.1" rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="style.css" />
-    <script src="script.js"></script>
-</head>
-<body>
-</body>
-</html>  -->
-
-
 <%-- 
     Document   : exhibitionSector
     Created on : Jan 27, 2016, 5:15:09 PM
     Author     : Admin
 --%>
+
+
 <%@page import="exhibitionAdministrator.exhibitionAdministratorOneTimeConnection"%>
-<%@page import="java.sql.ResultSet"%>
-<%@page import="java.sql.DriverManager"%>
-<%@page import="java.sql.Statement"%>
-<%@page import="java.sql.Connection"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+ <%@page import="java.io.*;" %>
+  <%@page import="java.sql.*;" %>
+  <%@page import="java.sql.DriverManager;" %>
 <!DOCTYPE html>
 <html>
   <head>
     <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
     <meta charset="utf-8" />
-    <title>Pages - Admin Dashboard UI Kit - Blank Page</title>
+    <title>Pages - Admin Dashboard UI Kit - Form Layouts</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no" />
     <link rel="apple-touch-icon" href="pages/ico/60.png">
     <link rel="apple-touch-icon" sizes="76x76" href="pages/ico/76.png">
@@ -45,25 +33,26 @@
     <link href="assets/plugins/jquery-scrollbar/jquery.scrollbar.css" rel="stylesheet" type="text/css" media="screen" />
     <link href="assets/plugins/bootstrap-select2/select2.css" rel="stylesheet" type="text/css" media="screen" />
     <link href="assets/plugins/switchery/css/switchery.min.css" rel="stylesheet" type="text/css" media="screen" />
-    <link href="assets/plugins/jquery-datatable/media/css/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="assets/plugins/jquery-datatable/extensions/FixedColumns/css/dataTables.fixedColumns.min.css" rel="stylesheet" type="text/css" />
-    <link href="assets/plugins/datatables-responsive/css/datatables.responsive.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="assets/plugins/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet" type="text/css" media="screen">
     <link href="pages/css/pages-icons.css" rel="stylesheet" type="text/css">
     <link class="main-stylesheet" href="pages/css/pages.css" rel="stylesheet" type="text/css" />
     <!--[if lte IE 9]>
 	<link href="assets/plugins/codrops-dialogFx/dialog.ie.css" rel="stylesheet" type="text/css" media="screen" />
 	<![endif]-->
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="pages/js/jquery-1.4.2.min.js"></script>
- <script type="text/javascript">
+   <script type="text/javascript">
 	$(document).ready(function(){
 		$("#login").submit(function(){
-                 //remove previous class and add new "myinfo" class
-	        // $("#msgbox").removeClass().addClass('myinfo').text('Validating Your Login ').fadeIn(1000);
+
+			 //remove previous class and add new "myinfo" class
+	       // $("#msgbox").removeClass().addClass('myinfo').text('Validating Your Login ').fadeIn(1000);
+
+			
 			this.timer = setTimeout(function () {
 				$.ajax({
-		          	url: '/Exhibition/exhibitionAdministratorFacilities',
-		          	data: 'exId=' + $('#exId').val() +'&title=' + $('#title').val() +'&description=' + $('#description').val(),
+		          	url: '/Exhibition/exhibitionAdministratorContactInformationFirstTimeUse',
+		          	data: 'title='+ $('#title').val() +'&firstName=' + $('#firstName').val()+'&lastName=' + $('#lastName').val()+'&dateOfBirth=' + $('#dateOfBirth').val() +'&level=' + $('#level').val()+'&degination=' + $('#degination').val()+'&phoneNo=' + $('#phoneNo').val(),
 		          	type: 'post',
 		   		success: function(msg){
                                   alert(msg);
@@ -71,18 +60,21 @@
 				{
                                         if(msg !='wrn')
                                         {
-                                          $("#msgbox1").html('data inserted').addClass('myinfo').fadeTo(200,1,function()
+                                          $("#msgbox1").html('data updated').addClass('myinfo').fadeTo(200,1,function()
 			             {
 			                 //redirect to secure page
 			              //document.location='/Exhibition/html/exhibitionAdminPersonal.jsp';
-			             });  
+			             });
+                                        
                                     }
+                                
+				
                                 else
                                 {
                                     $("#msgbox2").fadeTo(100,1,function() //start fading the messagebox
 		                {
 			                  //add message and change the class of the box and start fading
-			                 $(this).html('records are not inserted..').removeClass().addClass('myerror').fadeTo(300,1);
+			                 $(this).html('records are not updated..').removeClass().addClass('myerror').fadeTo(300,1);
                                         // document.location='/Exhibition/html/exhibitionAdminLog.jsp?user';
                                  });
                                 }
@@ -92,7 +84,7 @@
                                 $("#msgbox2").fadeTo(100,1,function() //start fading the messagebox
 		                {
 			                  //add message and change the class of the box and start fading
-			                 $(this).html('sorry').removeClass().addClass('myerror').fadeTo(300,1);
+			                 $(this).html('MobileNo should be 10 digits only').removeClass().addClass('myerror').fadeTo(300,1);
                                         // document.location='/Exhibition/html/exhibitionAdminLog.jsp?user';
                                  });
                             }
@@ -104,6 +96,7 @@
 
 	});
    </script> 
+  
      <style>
 #exists{display:none}
 #cross{display:none}
@@ -136,7 +129,8 @@
 	-webkit-border-radius:4px;
 	text-align: center;
 }
-</style>
+</style> 
+
   </head>
   <body class="fixed-header ">
     <!-- BEGIN SIDEBPANEL-->
@@ -281,7 +275,9 @@
                 <span class="icon-thumbnail">M</span>
               </li>
             </ul>
+              
           </li>
+           
            <li>
             <a href="javascript:;"><span class="title">Manage Exhibitor</span>
             <span class=" arrow"></span></a>
@@ -303,8 +299,10 @@
                 <a href="deleteExhibitor.jsp">Delete Exhibitor </a>
                 <span class="icon-thumbnail">M</span>
               </li>
+              
             </ul>
           </li>
+      
           <li>
             <a href="javascript:;"><span class="title">Manage Visitors</span>
             <span class=" arrow"></span></a>
@@ -322,6 +320,7 @@
                 <a href="deleteVisitor.jsp">Delete Visitors </a>
                 <span class="icon-thumbnail">M</span>
               </li>
+             
             </ul>
           </li>
            <li class="">
@@ -334,6 +333,7 @@
             <a href="report.jsp"><span class="title">Reports</span>
             </a>
             <span class="icon-thumbnail"><i class="pg-layouts2"></i></span> 
+        
           </li>
           </ul>
         <div class="clearfix"></div>
@@ -413,9 +413,9 @@
                             </div>
                             <div class="more-details">
                               <div class="more-details-inner">
-                                <h5 class="semi-bold fs-16">?Apple?s Motivation - Innovation <br> 
+                                <h5 class="semi-bold fs-16">“Apple’s Motivation - Innovation <br> 
                                                             distinguishes between <br>
-                                                            A leader and a follower.?</h5>
+                                                            A leader and a follower.”</h5>
                                 <p class="small hint-text">
                                   Commented on john Smiths wall.
                                   <br> via pages framework.
@@ -548,79 +548,96 @@
       </div>
       <!-- END HEADER -->
       <!-- START PAGE CONTENT WRAPPER -->
-      <div class="page-content-wrapper ">
-       <div class="content ">
+  <div class="page-content-wrapper ">
+        <!-- START PAGE CONTENT -->
+   <div class="content ">
+    <div class="panel-body">
+   <div class="register-container full-height sm-p-t-30">
+      <div class="container-sm-height full-height">
+        <div class="row row-sm-height">
+          <div class="col-sm-12 col-sm-height col-middle">
+  <!--          <img src="assets/img/logo.png" alt="logo" data-src="assets/img/logo.png" data-src-retina="assets/img/logo_2x.png" width="78" height="22">
+            <h3>Pages makes it easy to enjoy what matters the most in your life</h3>
+            <p>
+              <small>
+        Create a pages account. If you have a facebook account, log into it for this process. Sign in with <a href="#" class="text-info">Facebook</a> or <a href="#" class="text-info">Google</a>
+    </small>
+  </p> --><p><h1><b>Add Contact Information ...!</b></h1></p>
           
-       <table class="table table-hover demo-table-search" id="tableWithSearch">
-        <tr data-toggle="modal" data-id="1" data-target="#confirm-delete">
-            <th> id </th>
-            <th> User Name</th>
-            <th>marks </th>
-            <th>Delete </th>
-        </tr>
-        <tr>
-            <td> 1</td>
-            <td> Reshma </td>
-            <td>89</td>
-            <td>  <a href="#" data-target="#myModal" role="button" class="btn btn-default" data-toggle="modal">1</a>
-</td>
-        </tr>
-         <tr>
-            <td> 2</td>
-            <td> shma </td>
-            <td>99</td>
-            <td>  <a href="#" data-target="#myModal" role="button" class="btn btn-default" data-toggle="modal">2</a>
-</td>
-        </tr>
-         <tr>
-            <td> 3</td>
-            <td> Res </td>
-            <td>39</td>
-            <td> <a href="#" data-target="#myModal" role="button" class="btn btn-default" data-toggle="modal">3</a>
-</td>
-        </tr>
-         <tr>
-            <td>4</td>
-            <td> Resha </td>
-            <td>22</td>
-            <td> <a href="#" data-target="#myModal" role="button" class="btn btn-default" data-toggle="modal">4</a> </td>
-        </tr>
-    </table>
-    
-    <!-- Event Modal -->
-<div id="myModal" class="modal fade">
-    <div class="modal-dialog">
-        <div class="modal-content">
+           
+               <form role="form"   class="p-t-15" id="login" name="login" action="" method="">
 
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">Event</h4>
-                </div>
-                <div class="modal-body">
-                    <p>Loading...</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary btn-ok">Save changes</button>
-                </div>
+                    
+                       <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group form-group-default">
+                        <label>Title</label>
+                       
+                            <input type="text" class="form-control" id="title" name="title" placeholder="Title" value="" required>
+                       </div>
+                       
+                </div> </div>
+                         <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group form-group-default">
+                        <label>First Name</label>
+                            <input type="text" class="form-control" id="firstName" placeholder="First Name" name="firstName" value="" required>
+                  </div> </div></div>
+                   
+                         <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group form-group-default">
+                        <label>Last Name</label>
+                            <input type="text" class="form-control" id="lastName" placeholder="lastName" name="lastName" value="" required>
+                        </div>
+                </div> </div>
+                           <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group form-group-default">
+                        <label>Date Of Birth</label>
+                            <input type="text" class="form-control" id="dateOfBirth" placeholder="DOB" name="dateOfBirth" value="" required>
+                        </div>
+                </div>  </div>
+                 
+                          <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group form-group-default">
+                        <label>Level</label>
+                            <input type="text" class="form-control" id="level" placeholder="level" name="level" value="" required>
+                        </div>
+                </div> </div>  
+                           <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group form-group-default">
+                        <label>Designation</label>
+                            <input type="text" class="form-control" id="degination" placeholder="Designation" name="degination" value=""  required>
+                        </div>
+                </div>  </div> 
+                           <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group form-group-default">
+                        <label>Phone No</label>
+                            <input type="text" class="form-control" id="phoneNo" placeholder="Phone No" name="phoneNo" value="" required>
+                        </div>
+                </div>   </div>
+                        
+                       <div id="msgbox1"> </div>  <div id="msgbox2"> </div> 
 
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-    <script>
-        $('#myModal').on('click', function(e) {
-            $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+                             <button class="btn btn-primary btn-cons m-t-10" type="submit">Save </button>
+                               <button class="btn btn-primary btn-cons m-t-10" type="submit">Cancel </button>
+   
+                    </form>
+             
+      
             
-            $('.debug-url').html('Delete URL: <strong>' + $(this).data('href') + '</strong>');
-        });
-    </script>
-
-  
-                             
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
           <!-- END CONTAINER FLUID -->
         </div>
+                   
         <!-- END PAGE CONTENT -->
         <!-- START COPYRIGHT -->
         <!-- START CONTAINER FLUID -->
@@ -634,7 +651,7 @@
               <span class="sm-block"><a href="#" class="m-l-10 m-r-10">Terms of use</a> | <a href="#" class="m-l-10">Privacy Policy</a></span>
             </p>
             <p class="small no-margin pull-right sm-pull-reset">
-              <a href="#">Hand-crafted</a> <span class="hint-text">&amp; Made with Love �</span>
+              <a href="#">Hand-crafted</a> <span class="hint-text">&amp; Made with Love ®</span>
             </p>
             <div class="clearfix"></div>
           </div>
@@ -912,7 +929,7 @@
                         </p>
                         <p class="p-l-10 col-xs-height col-middle col-xs-12 overflow-ellipsis fs-12">
                           <span class="text-master link">Jame Smith commented on your status<br></span>
-                          <span class="text-master">?Perfection Simplified - Company Revox"</span>
+                          <span class="text-master">“Perfection Simplified - Company Revox"</span>
                         </p>
                       </a>
                       <!-- END Alert Item!-->
@@ -927,7 +944,7 @@
                         </p>
                         <p class="p-l-10 col-xs-height col-middle col-xs-12 overflow-ellipsis fs-12">
                           <span class="text-master link">Jame Smith commented on your status<br></span>
-                          <span class="text-master">?Perfection Simplified - Company Revox"</span>
+                          <span class="text-master">“Perfection Simplified - Company Revox"</span>
                         </p>
                       </a>
                       <!-- END Alert Item!-->
@@ -1916,18 +1933,14 @@
     <script type="text/javascript" src="assets/plugins/bootstrap-select2/select2.min.js"></script>
     <script type="text/javascript" src="assets/plugins/classie/classie.js"></script>
     <script src="assets/plugins/switchery/js/switchery.min.js" type="text/javascript"></script>
-    <script src="assets/plugins/jquery-datatable/media/js/jquery.dataTables.min.js" type="text/javascript"></script>
-    <script src="assets/plugins/jquery-datatable/extensions/TableTools/js/dataTables.tableTools.min.js" type="text/javascript"></script>
-    <script src="assets/plugins/jquery-datatable/media/js/dataTables.bootstrap.js" type="text/javascript"></script>
-    <script src="assets/plugins/jquery-datatable/extensions/Bootstrap/jquery-datatable-bootstrap.js" type="text/javascript"></script>
-    <script type="text/javascript" src="assets/plugins/datatables-responsive/js/datatables.responsive.js"></script>
-    <script type="text/javascript" src="assets/plugins/datatables-responsive/js/lodash.min.js"></script>
+    <script src="assets/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
+    <script src="assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
     <!-- END VENDOR JS -->
     <!-- BEGIN CORE TEMPLATE JS -->
     <script src="pages/js/pages.min.js"></script>
     <!-- END CORE TEMPLATE JS -->
     <!-- BEGIN PAGE LEVEL JS -->
-    <script src="assets/js/datatables.js" type="text/javascript"></script>
+    <script src="assets/js/form_layouts.js" type="text/javascript"></script>
     <script src="assets/js/scripts.js" type="text/javascript"></script>
     <!-- END PAGE LEVEL JS -->
   </body>

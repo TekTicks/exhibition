@@ -802,7 +802,7 @@ function readURL(input) {
              
              if(!rs.next())
              {
-                 out.println("Error");
+                 //out.println("Error");
              }
              else
              {
