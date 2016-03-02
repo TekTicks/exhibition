@@ -49,18 +49,9 @@ function forgotpass()
 			$("#confirmPasswordError").fadeIn();
 		}
 		
-		
-		if(Otp!=otp)
-		{
-			myApp.alert('OTP Does Not Match..Please Re-Enter!!','OTP Error');
-		}
-
-		else
-		{
-		
 		if(mobileNoValidate)
 		{
-		var data = {"password":[{"mobileNo":mobileNo,"newPassword":newPassword,"confirmPassword":confirmPassword}]};
+		var data = {"password":[{"pOtp":Otp,"nOtp":otp,"mobileNo":mobileNo,"newPassword":newPassword,"confirmPassword":confirmPassword}]};
 			var sendData = function(data)
 			{   
 				$.ajax
@@ -85,16 +76,19 @@ function forgotpass()
 							document.getElementById('cPasswordNext').click();
 							
 						}
-						/*else if(JSON.stringify(response.status)==203)
+						else if(JSON.stringify(response.status)==203)
 						{
-							myApp.alert('Passwords does not match','Password');
+							$("#newPasswordError").text(JSON.stringify(response.statusMessage).replace(/"/g,""));
+							$("#newPasswordError").fadeIn();
+							$("#confirmPasswordError").text(JSON.stringify(response.statusMessage).replace(/"/g,""));
+							$("#confirmPasswordError").fadeIn();
 						}
 						
 						else if(JSON.stringify(response.status)==202)
 						{
-							$("#loginInfo").text(JSON.stringify(response.statusMessage).replace(/"/g,""));
-							$("#loginInfo").fadeIn();
-						}*/
+							$("#otpError").text(JSON.stringify(response.statusMessage).replace(/"/g,""));
+							$("#otpError").fadeIn();
+						}
 			
 					},
 					error: function(xhr, textStatus, error)
@@ -107,7 +101,7 @@ function forgotpass()
 			};
 			sendData(data);
 		}
-		}
+		
 	}
 }
 
@@ -149,19 +143,9 @@ function changePassword()
 		{
 			$("#confirmPasswordError").fadeIn();
 		}
-		
-		
-		if(newPassword!=confirmPassword)
-		{
-			myApp.alert('Passwords are not the same..Please Re-Enter!!','Password Error');
-		}
-		
-		else
-		{
-		
 		if(passwordValidate)
 		{
-		var data = {"password":[{"visitorId":visitorId,"password":password,"newPassword":newPassword}]};
+		var data = {"password":[{"visitorId":visitorId,"password":password,"newPassword":newPassword,"confirmPassword":confirmPassword}]};
 			var sendData = function(data)
 			{   
 				$.ajax
@@ -172,7 +156,7 @@ function changePassword()
 				data: JSON.stringify(data),
 				dataType: 'json',
 				success: function(response)
-										{
+					{
 						if(JSON.stringify(response.status)==200)
 						{
 							
@@ -186,16 +170,18 @@ function changePassword()
 							document.getElementById('changePasswordNext').click();
 							
 						}
-						/*else if(JSON.stringify(response.status)==203)
+						else if(JSON.stringify(response.status)==203)
 						{
-							$("#loginInfo").text(JSON.stringify(response.statusMessage).replace(/"/g,""));
-							$("#loginInfo").fadeIn();
+							$("#passwordError").text(JSON.stringify(response.statusMessage).replace(/"/g,""));
+							$("#passwordError").fadeIn();
 						}
 						else if(JSON.stringify(response.status)==202)
 						{
-							$("#loginInfo").text(JSON.stringify(response.statusMessage).replace(/"/g,""));
-							$("#loginInfo").fadeIn();
-						}*/
+							$("#newPasswordError").text(JSON.stringify(response.statusMessage).replace(/"/g,""));
+							$("#newPasswordError").fadeIn();
+							$("#confirmPasswordError").text(JSON.stringify(response.statusMessage).replace(/"/g,""));
+							$("#confirmPasswordError").fadeIn();
+						}
 			
 					},
 					error: function(xhr, textStatus, error)
@@ -208,7 +194,7 @@ function changePassword()
 			};
 			sendData(data);
 		}
-		}
+		
 	}
 }
 
@@ -237,10 +223,18 @@ function generateOtp()
 				var otp = JSON.stringify(response.otp).replace(/"/g,"");
 				localStorage.setItem("otp", otp);
 				myApp.alert('Your OTP Is '+otp,'One Time Password');
-			}			
+				$("#mobileError").fadeOut();
+			}
+			else if(JSON.stringify(response.status)==202)
+			{
+				$("#mobileError").text(JSON.stringify(response.statusMessage).replace(/"/g,""));
+				$("#mobileError").fadeIn();
+			}
 			else if(JSON.stringify(response.status)==203)
 			{
-				myApp.alert('This Number Does Not Exist..Make A New Account!!','Error');
+				$("#mobileError").text(JSON.stringify(response.statusMessage).replace(/"/g,""));
+				$("#mobileError").fadeIn();
+				//myApp.alert('This Number Does Not Exist..Make A New Account!!','Error');
 			}
 		},
 		error: function(xhr, textStatus, error)

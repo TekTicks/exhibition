@@ -55,7 +55,7 @@ function signup()
 			{   
 				$.ajax
 				({
-				url: 'http://exhibition.tekticks.co.in/application/Exhibition/json/otpCreation.php',
+				url: 'http://exhibition.tekticks.co.in/application/json/otpCreation.php',
 				type: 'POST',
 				contentType: 'application/json',
 				data: JSON.stringify(data),
@@ -64,6 +64,8 @@ function signup()
 					{
 						if(JSON.stringify(response.status)==200)
 						{
+							$("#displayInfo").text("Valid Credentials");
+							$("#displayInfo").fadeIn();
 							$("#mobileError").fadeOut();
 							$("#emailError").fadeOut();
 							$("#nameError").fadeOut();
@@ -75,7 +77,7 @@ function signup()
 							localStorage.setItem("password", password);
 							localStorage.setItem("name", name);
 							localStorage.setItem("otp", otp);
-							
+							//redirecting to otp.html
 							var a = document.getElementById('signupNext');
 							a.setAttribute("href","otp.html");
 							document.getElementById('signupNext').click();
@@ -122,7 +124,7 @@ function verifyotp()
 				{   
 					$.ajax
 					({
-					url: 'http://exhibition.tekticks.co.in/application/Exhibition/json/signUpJson.php',
+					url: 'http://exhibition.tekticks.co.in/application/json/signUpJson.php',
 					type: 'POST',
 					contentType: 'application/json',
 					data: JSON.stringify(data),
@@ -132,19 +134,33 @@ function verifyotp()
 							if(JSON.stringify(response.status)==200)
 							{
 								localStorage.clear();
-								//var visitorId = JSON.stringify(response.visitorId).replace(/"/g,"");
-								//localStorage.setItem("visitorId",visitorId);
-								var Name = JSON.stringify(response.Name).replace(/"/g,"");
+								
+								var visitorId = JSON.stringify(response.visitor[0].id).replace(/"/g,"");
+								var Name = JSON.stringify(response.visitor[0].name).replace(/"/g,"");
+								localStorage.setItem("visitorId",visitorId);
+								//$("#displayName").text(JSON.stringify("Welcome "+response.visitor[0].name).replace(/"/g,""));
+								//var Name = JSON.stringify(response.signUp).replace(/"/g,"");
+								myApp.alert('Welcome '+Name,'SignUp');
 								
 								$("#signup").fadeOut();
 								$("#signin").fadeOut();
 								$("#profile").fadeIn();
 								
-								$("#displayName").text("Welcome "+Name);
+								//var obj=JSON.parse(object);
+								//document.getElementById("displayName").innerHTML = signUp[0];
+								
+								//$("#displayName").text("Welcome "+Name);
+								
+								
+								//$("#displayName").text("Welcome "+obj.signUp[]['name']);
+								
+								//$("#displayName").text("Welcome "+localStorage.getItem("name"));
 								
 								//document.getElementById("#proName").innerHTML = Name;
 								
 								//window.location="logo.html";
+								
+								profileReload();
 								
 								var b = document.getElementById('otpNext');
 								b.setAttribute("href","logo.html");

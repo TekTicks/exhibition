@@ -38,15 +38,10 @@ $mobileNo=$data['otp'][0]['mobileNo'];
 			json_encode($jsonresponse);
 			deliver_response(200,"OTP Created","otp",$jsonresponse);
 	}
-	
-	else if($mobileNo=="")
-	{
-		deliver_response(202,"Please Enter Mobile Number","otp",$jsonresponse);
-	}
 	else
 	{
 		
-		deliver_response(203,"Account With This Mobile No. Does Not Exist. Please Re-Enter!","otp",$jsonresponse);
+		deliver_response(203,"Account With This Mobile No. Does Not Exist","otp",$jsonresponse);
 		
 	}
 

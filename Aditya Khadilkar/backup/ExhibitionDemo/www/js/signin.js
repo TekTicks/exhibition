@@ -1,7 +1,7 @@
 function signin()
 {
 	localStorage.clear(); 
-	var request = createCORSRequest( "post", "http://socialworker.tekticks.co.in" );
+	var request = createCORSRequest( "post", "http://exhibition.tekticks.co.in" );
 	if(request)
 	{
 		var emailId = document.getElementById('emailId').value;
@@ -49,7 +49,7 @@ function signin()
 							//printing msg before redirecting
 							//$("#loginInfo").text(JSON.stringify(response.statusMessage).replace(/"/g,""));
 							//$("#loginInfo").fadeIn();
-							myApp.alert('You Have Successfully Logged On..!!','Log In');
+							myApp.alert('Login Successful..!!','Log In');
 
 							$("#signup").fadeOut();
 							$("#signin").fadeOut();

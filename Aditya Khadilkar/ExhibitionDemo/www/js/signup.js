@@ -64,6 +64,8 @@ function signup()
 					{
 						if(JSON.stringify(response.status)==200)
 						{
+							$("#displayInfo").text("Valid Credentials");
+							$("#displayInfo").fadeIn();
 							$("#mobileError").fadeOut();
 							$("#emailError").fadeOut();
 							$("#nameError").fadeOut();

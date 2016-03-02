@@ -55,7 +55,7 @@ var data = {"profile":[{"visitorId":visitorId}]};
 				}
 				else
 				{
-				document.getElementById("profilePic").style.backgroundImage='linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.8)),url('+profilePic+')';
+				document.getElementById("profilePic").style.backgroundImage='linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.8)),url(profilePic)';
 				}
 		 
 			$("#profileName").text(profileName);

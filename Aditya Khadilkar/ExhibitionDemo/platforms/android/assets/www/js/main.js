@@ -66,19 +66,20 @@ function validatePassword(password)
  function validateName(name)   
 {  //checking if name is empty
 	var letters = /^[A-Za-z]+$/; 
+	
 	if(name == "")
 	{
 		$("#nameError").text("Please enter a name");
         return false;
-	} 
+	}
 	else if(name.match(letters))  
 	{  
 		return true;  
-	}  
+	}  	
    else  
-     {  
+    {  
        $("#nameError").text("Please enter a valid name");
        return false;  
-     }  
+    }  
 }
  
