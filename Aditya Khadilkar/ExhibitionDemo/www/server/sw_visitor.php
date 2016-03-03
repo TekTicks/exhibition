@@ -27,7 +27,7 @@ else
 	if($visitorResultRows>0)
 	{
 		$jsonresponse['name']=$selectVisitorResult['name'];
-		$jsonresponse['profilePic']=$selectVisitorResult['ProfilePic'];
+		$jsonresponse['profilePic']=$selectVisitorResult['profilePic'];
 		json_encode($jsonresponse);
 		deliver_response(200,"Record found","visitor",$jsonresponse);
 			

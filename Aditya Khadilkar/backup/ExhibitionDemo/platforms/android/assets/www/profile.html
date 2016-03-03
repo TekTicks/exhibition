@@ -10,42 +10,32 @@
   <div class="page-content infinite-scroll">
   <style>
 	.demo-card-header-pic .card-header {
-    height: 40vw;
+    height: 70vw;
     background-size: cover;
     background-position: center;
 	}
 	</style>
   <div class="card demo-card-header-pic" id="each" style="margin:0px 0px">
-				<div style="background-image:url(http://lorempixel.com/1000/610/)" valign="bottom" class="card-header color-white no-border"><b><h2>Profile</h2></b></div>
+				<div style="background-image:url(http://lorempixel.com/1000/611/)" valign="bottom" class="card-header color-white no-border"><b><h2><div class="label" id="pName" name = "pName"></div></h2></b></div>
 				<div class="card-content">
 				<div class="card-content-inner" style="padding:20px">
-				<p class="color-gray"><b><h3>Name</h3></b></p>
-				<p class="color-gray"><b><h4>Mobile Number</h4></b></p>
-				<p class="color-black"><b><h4>E-Mail</h4></b></p>
-				<p class="color-black"><b><h4>Gender</h4></b></p>
-				<p class="color-black"><b><h4>Date Of Birth</h4></b></p>
-				</div>
-				</div>
-				<div class="card-footer" style="padding:20px">
+				<p><h3><b>Contact Number</b></h3></p>
+				<p><div class="label" id="pMobileNo" name = "pMobileNo"></div></p>
 				
+				<p><h4><b>Email Id</b></h4></p>
+				<p><div class="label" id="pEmailId" name = "pEmailId"></div></p>
+				</div>
+				</div>
 				
+				<div class="card-content">
+				<div class="content-block" style="padding:10px"><a href="profileEdit.html" class="button button-fill button-raised color-green" onclick="sendProfile()">Edit Profile</a></div>
+						
+				<div class="content-block" style="padding:10px"><a href="changePassword.html" class="button button-fill button-raised color-red">Change Password</a></div>
+						
+				<div class="content-block" style="padding:10px"><a href="#" class="button button-fill button-raised color-blue">Follow</a></div>
+						
+				</div>
 				
-				<div class="row">
-				<div class="col-33">
-					<center><a href="#"><img src="img/wapp.ico" width="50%" height="50%"><br>Whatsapp</img></a></center>
-				</div>
-				  
-				<div class="col-33">
-					<center><a href="forgot.html"><img src="img/lock.png" width="50%" height="50%"><br>Change Password</img></a></center>
-				</div>
-				  
-				<div class="col-33">
-					<center><a href="#"  ><img src="img/facebook.png" width="50%" height="50%"><br>Facebook</img></a></center>
-				</div>
-			</div>
-	
-				
-				</div>
 				</div>
 	
 	</div></div>

@@ -46,6 +46,7 @@ function onPhotoURISuccess(imageURI) {
     // The inline CSS rules are used to resize the image
     //
     galleryImage.src = imageURI;
+	//alert(imageURI);
 }
 // A button will call this function
 //
@@ -102,11 +103,13 @@ function upload() {
     var params = new Object();
     options.params = params;
     options.chunkedMode = true;
+	
     var ft = new FileTransfer();
 	//ft.upload(fileEntry.toURL(), encodeURI("http://socialworker.tekticks.co.in/json/uploadProfile.php"), onSuccess, onError, getFileUploadOptions(fileEntry.fullPath));	
 
-    ft.upload(imageURI, encodeURI("http://socialworker.tekticks.co.in/json/uploadProfile.php"), win, fail, options);
+    ft.upload(imageURI, encodeURI("http://exhibition.tekticks.co.in/application/json/uploadProfile.php"), win, fail, options);
 	return imageURI.substr(imageURI.lastIndexOf('/'));
+	
 } 
  
 /* 
