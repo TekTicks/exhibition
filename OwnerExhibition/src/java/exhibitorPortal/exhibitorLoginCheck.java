@@ -33,6 +33,7 @@ public class exhibitorLoginCheck extends HttpServlet
                     ss1.setAttribute("username",rs.getString("username"));
                     ss1.setAttribute("password",rs.getString("password"));
                     ss1.setAttribute("exhibitorId",rs.getString("id"));
+                    ss1.setAttribute("mobileno",rs.getString("mobileNo"));
                     count++;
                 }
                     if(count>0)

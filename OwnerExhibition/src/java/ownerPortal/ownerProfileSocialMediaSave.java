@@ -25,7 +25,6 @@ public class ownerProfileSocialMediaSave extends HttpServlet {
                 HttpSession ss=request.getSession();
                 String id=(String)ss.getAttribute("ownerId");
                 String mediaId=(String)ss.getAttribute("mediaId1");
-                out.print(mediaId);
                 //One time database connection            
                 Connection con;
                 con=dbConnection.getConnection();

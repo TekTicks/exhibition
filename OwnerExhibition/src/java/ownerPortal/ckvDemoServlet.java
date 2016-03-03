@@ -18,40 +18,43 @@ public class ckvDemoServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         try
         {
-
+            HttpSession ss=request.getSession();
             String CNAME=request.getParameter("cname");
-            ownerPortal.Global.cname1=CNAME;
+              ss.setAttribute("cname",CNAME);
             String EMAIL=request.getParameter("emailid");
-             ownerPortal.Global.email1=EMAIL; 
+             ss.setAttribute("email",EMAIL);
             String PHONE=request.getParameter("contact");
-              ownerPortal.Global.contact1=PHONE;
+              ss.setAttribute("phone",PHONE);
             String PASSWORD=request.getParameter("password");
-             ownerPortal.Global.password1=PASSWORD;
+             ss.setAttribute("password",PASSWORD);
             String COUNTRYCODE=request.getParameter("ccode");
+             ss.setAttribute("ccode",COUNTRYCODE);
             //COUNTRYCODE=COUNTRYCODE+PHONE;
            // Global.global.contact1=COUNTRYCODE;
             
            
            Connection con;
-                           con=dbConnection.getConnection();
+           con=dbConnection.getConnection();
             Statement stat=con.createStatement();
             ResultSet rs=stat.executeQuery("select * from ownerProfile where primEmail='"+EMAIL+"' or primContact='"+PHONE+"'");
             int count=0;
             while(rs.next())
                 {
                     String email_id=rs.getString(5);
-                       ownerPortal.Global.emailid=email_id; 
+                     ss.setAttribute("email1",email_id);   
                     String phone_no=rs.getString(7);
-                       ownerPortal.Global.phoneno=phone_no;  
+                     ss.setAttribute("phone1",phone_no); 
                         count++;
                 }
             if(count>0)
                 {
-                  if(EMAIL.equals( ownerPortal.Global.emailid))
+                    String emailId=(String)ss.getAttribute("email1");
+                    String phoneNo=(String)ss.getAttribute("phone1");
+                  if(EMAIL.equals(emailId ))
                     {
                       out.print("invalidemail");    
                     }
-                  else if(PHONE.equals( ownerPortal.Global.phoneno))
+                  else if(PHONE.equals( phoneNo))
                     {
                       out.print("invalidphone");    
                     }

@@ -480,8 +480,7 @@
                        ResultSet rs=stat.executeQuery("select * from socialMedia");
                          
                      %>   
-                    <!--   <tr><td width=""><label class=''>Select Company</label>
-                          <select class='full-width' data-placeholder='Company' data-init-plugin='' name='cname'>-->
+                    
                               
                         <label>Select Social Media</label>
                         <select class="full-width" name="socialmedia" id="socialmedia"  data-init-plugin="select2">

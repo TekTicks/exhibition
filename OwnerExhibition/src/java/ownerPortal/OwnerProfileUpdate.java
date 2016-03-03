@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package ownerPortal;
 
 import java.io.IOException;
@@ -32,12 +28,12 @@ public class OwnerProfileUpdate extends HttpServlet {
                             String s_email =request.getParameter("s_email");
                             
                             String p_contact =request.getParameter("p_contact");
-                            String ccode =request.getParameter("ccodePrimary");
-                            String primaryContact=ccode+p_contact;
+                           // String ccode =request.getParameter("ccodePrimary");
+                            //String primaryContact=ccode+p_contact;
                             //appending primaryContact with countryCode 
                             String s_contact =request.getParameter("s_contact");
                             String ccodeSecondary =request.getParameter("ccodeSecondary");
-                            String secContact=ccodeSecondary+s_contact;
+                            //String secContact=ccodeSecondary+s_contact;
                             String about =request.getParameter("about");
                             String website =request.getParameter("website");
                             String industry =request.getParameter("industry");
@@ -45,26 +41,19 @@ public class OwnerProfileUpdate extends HttpServlet {
                             Connection con;
                             con=dbConnection.getConnection();
                                  
-                            PreparedStatement ps=con.prepareStatement("update ownerProfile a,industry b set a.name=?,a.primEmail=?,a.secEmail=?,a.primContact=?,a.secContact=?,a.about=?, a.website=?,b.industryName=? where a.createdBy='"+idd+"' ");
+                            PreparedStatement ps=con.prepareStatement("update ownerProfile a,ownerIndustry b set a.name=?,a.primEmail=?,a.secEmail=?,a.primContact=?,a.secContact=?,a.secCountryCodeId=?,a.about=?, a.website=?,b.industryId=? where a.createdBy='"+idd+"' ");
                                  
                             ps.setString(1, cname);
                             ps.setString(2, p_email);
                             ps.setString(3, s_email);
-                            ps.setString(4, primaryContact);
-                            ps.setString(5, secContact);
-                            ps.setString(6, about);
-                            ps.setString(7, website);
-                            ps.setString(8, industry);
-                            int n=ps.executeUpdate();
-                            if(n>0)
-                                {
-                                    out.print("ok");
-                                }
-                                 
-                            else
-                                {
-                                    out.print("error");
-                                }
+                            ps.setString(4, p_contact);
+                            ps.setString(5, s_contact);
+                            ps.setString(6, ccodeSecondary);
+                            ps.setString(7, about);
+                            ps.setString(8, website);
+                            ps.setString(9, industry);
+                            ps.executeUpdate();
+                            
                       
              }
                            catch(Exception ee)

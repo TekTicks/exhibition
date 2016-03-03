@@ -1,4 +1,5 @@
 
+<%@page import="ownerPortal.dbConnection"%>
 <%-- 
     Document   : ckvRegister
     Created on : Jan 22, 2016, 6:56:24 PM
@@ -37,7 +38,6 @@
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="pages/js/jquery-1.4.2.min.js"></script>
     <script src="pages/js/ownerRegValidation.js"></script>
-    <script src="pages/js/ownerRegVerification.js"></script>
     
     <script>
         
@@ -47,34 +47,32 @@
                          var phonenumber=document.getElementById('phone').value;
                          var result=countrycode+phonenumber;
                          
-                                document.getElementById('abc').value = result;
-                                //document.getElementById('contactno').value = countrycode+phonenumber;
+                              document.getElementById('abc').value = result;
+                              //document.getElementById('contactno').value = countrycode+phonenumber;
                               $("#msgbox1").removeClass().addClass('myinfo').text('Checking Emailid........ ').fadeOut(1);
                               $("#msgbox13").removeClass().addClass('myinfo').text('Checking phoneno........ ').fadeOut(1);
 			this.timer = setTimeout(function () {
 				$.ajax({
 		          	url: '/Exhibition/ckvDemoServlet',
-		          	data: 'emailid='+ $('#email').val()+'&contact='+ $('#abc').val()+'&cname='+ $('#cname').val()+'&password='+ $('#password').val()+'&ccode='+ $('#prefix').val(),
+		          	data: 'emailid='+ $('#email').val()+'&contact='+ $('#phone').val()+'&cname='+ $('#cname').val()+'&password='+ $('#password').val()+'&ccode='+ $('#prefix').val(),
 		          	type: 'post',
                                 
 		   		success: function(msg){
-                                      // alert(msg);
+                                       alert(msg);
                                 if(msg != 'ERROR') // Message Sent, check and redirect
 				{				// and direct to the success page
 					if(msg == 'invalidemail')	
                                         {
 					$("#msgbox1").html('Email id Already exists.....').addClass('myerror').fadeTo(900,1,function()
 			             {
-			                 //redirect to secure page
-			                //document.location='ckvOtp.jsp?user='+msg;
+			                
 			             });
                                         }
                                         else if(msg == 'invalidphone')
                                         {
                                             $("#msgbox13").html('phone no exists.....').addClass('myerror').fadeTo(900,1,function()
 			             {
-			                 //redirect to secure page
-			                //document.location='ckvOtp.jsp?user='+msg;
+			                 
 			             });
                                         }
                                       
@@ -142,21 +140,35 @@
                   </div>
                 </div>
                </div>
-
+                    
+                
+                
+                 <%@page import="java.io.*;" %>
+                     <%@page import="java.sql.*;" %>
+                     <%@page import="java.sql.DriverManager;" %>
+                     <%@page import="java.util.Scanner.*;" %>
+                     <%   
+                       Connection con;
+                       con=dbConnection.getConnection();
+                       Statement stat=con.createStatement();
+                       ResultSet rs=stat.executeQuery("select * from country");
+                     %>  
+                     
                 <div class="form-group form-group-default input-group">
                     <span class="input-group-addon">
                     <select class="cs-select cs-skin-slide cs-transparent" id="prefix" data-init-plugin="cs-select">
-                    <option data-countryCode="GB" value="44" Selected>UK (+44)</option>
-                    <option data-countryCode="US" value="1">USA (+1)</option>
-                    <option data-countryCode="AR" value="54">Argentina (+54)</option>
-                    <option data-countryCode="AU" value="61">Australia (+61)</option>
-                    <option data-countryCode="AT" value="43">Austria (+43)</option>
-                    <option data-countryCode="BE" value="32">Belgium (+32)</option>
-                    <option data-countryCode="BZ" value="501">Belize (+501)</option>
-                    <option data-countryCode="CN" value="86">China (+86)</option>
-                    <option data-countryCode="IN" value="91">India (+91)</option>
-                    <option data-countryCode="MY" value="60">Malaysia (+60)</option>
-                    <option data-countryCode="ZW" value="263">Zimbabwe (+263)</option>
+                     <%
+                         while(rs.next())
+                         {
+                           String sm=rs.getString(8);
+                           String id=rs.getString(1);
+                        %>
+                          %>
+                             <optgroup label=''><option  value="<%=id %>"><%=sm %></option></optgroup>
+                       
+                        <%
+                         }
+                        %>
                     </select>
                     </span>
                     <label>Contact Number</label>
@@ -183,16 +195,7 @@
                   </div>
                  </div>
                 </div>
-
-              <!--  <div class="row m-t-10">
-                <div class="col-md-6">
-                </div>
-                <div class="col-md-6 text-right">
-                  <a href="https://www.facebook.com/" class="text-info small">Help? Contact Support</a>
-                </div>
-                </div>-->
               <br>
-                 
                 <button class="btn btn-primary btn-cons m-t-10" type="submit" onclick="return val();">Submit</button>
                 <button class="btn btn-primary btn-cons m-t-10" >Cancel</button> 
               

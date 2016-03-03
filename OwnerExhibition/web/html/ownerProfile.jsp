@@ -44,10 +44,42 @@
     <script src="pages/js/jquery-1.4.2.min.js"></script>
     <script src="pages/js/ownerloginValidation.js"></script>
     <link href="pages/css/ownerLoginAjax.css" rel="stylesheet" type="text/css" />  
+  
+    <script data-require="jquery@*" data-semver="2.0.3" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+    <script data-require="bootstrap@*" data-semver="3.1.1" src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
     
   </head>
 
   <body class="fixed-header ">
+     
+      
+      
+        <!-- delete Confirm Box  -->
+        <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Confirm Delete</h4>
+                </div>
+            
+                <div class="modal-body">
+                    <p>Do you want to delete?</p>
+                    <p class="debug-url"></p>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-danger btn-ok">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+       
+        
+        
+        
     <nav class="page-sidebar" data-pages="sidebar">
       <!-- BEGIN SIDEBAR MENU TOP TRAY CONTENT-->
       <div class="sidebar-overlay-slide from-top" id="appMenu">
@@ -113,7 +145,7 @@
               </li>
            
               <li class="">
-                <a href="ownerAdministrator.jsp">Add Administrator</a>
+                <a href="ownerAddAdministrator.jsp">Add Administrator</a>
                 <span class="icon-thumbnail">A</span>
               </li>
            </ul>
@@ -464,7 +496,7 @@
 		          	data: 'cname='+ $('#cname').val() +'&p_email=' + $('#p_email').val()+'&s_email=' + $('#s_email').val() +'&p_contact=' + $('#p_contact').val()+'&s_contact=' + $('#s_contact').val()+'&about=' + $('#about').val() +'&website=' + $('#website').val()+'&industry=' + $('#industry').val()+'&ccodePrimary=' + $('#ccodePrimary').val()+'&ccodeSecondary=' + $('#ccodeSecondary').val(),
 		          	type: 'post',
 		   		success: function(msg){
-                                 
+                                 alert(msg);
                                 if(msg != 'error') // Message Sent, check and redirect
 				{
                                        
@@ -504,7 +536,7 @@
                                Connection con5;
                                con5=dbConnection.getConnection();
                                Statement stat5=con5.createStatement();
-                               ResultSet rs5=stat5.executeQuery("select a.*,b.* from ownerProfile a , industry b where a.createdBy='"+idd+"'");
+                               ResultSet rs5=stat5.executeQuery("select a.*,b.* from ownerProfile a , ownerIndustry b where a.createdBy='"+idd+"'");
                             %>
                             <%
                              if(!rs5.next())
@@ -512,7 +544,9 @@
                              
                             }
                              else
-                            {
+                            { String sm=rs5.getString(13);
+                            String sm1=rs5.getString(14);
+                          String sm2=rs5.getString("industryId");
                             %>
  
                             <div class="form-group form-group-default disabled">
@@ -533,45 +567,86 @@
                               <label>Secondary Email</label>
                               <input type="email" name="s_email" value="<%out.print(rs5.getString(6));%>" id="s_email" class="form-control" required>
                             </div>
-                           
-                            <div class="form-group form-group-default input-group required">
+                            
+                            
+                           <div class="form-group form-group-default input-group required">
                               <span class="input-group-addon">
-                                            <select class="cs-select cs-skin-slide cs-transparent" id="ccodePrimary" data-init-plugin="cs-select">
-                                            <option data-countryCode="GB" value="44" Selected>UK (+44)</option>
-                                            <option data-countryCode="US" value="1" selected>USA (+1)</option>
-                                            <option data-countryCode="AR" value="54">Argentina (+54)</option>
-                                            <option data-countryCode="AU" value="61">Australia (+61)</option>
-                                            <option data-countryCode="AT" value="43">Austria (+43)</option>
-                                            <option data-countryCode="BE" value="32">Belgium (+32)</option>
-                                            <option data-countryCode="BZ" value="501">Belize (+501)</option>
-                                            <option data-countryCode="CN" value="86">China (+86)</option>
-                                            <option data-countryCode="IS" value="354">Iceland (+354)</option>
-                                            <option data-countryCode="IN" value="91">India (+91)</option>
-                                            <option data-countryCode="MY" value="60">Malaysia (+60)</option>
-                                            <option data-countryCode="ZW" value="263">Zimbabwe (+263)</option>
-                                        </select>
-                                        </span>
-                               
+                            <select class="cs-select cs-skin-slide cs-transparent" id="ccodePrimary" data-init-plugin="cs-select">
+                                
+                              <%     
+                                   Connection con2;
+                                   con2=dbConnection.getConnection();
+                                   Statement stat2=con2.createStatement();
+                                   ResultSet rs2=stat2.executeQuery("select * from country where id='"+sm+"'");
+                             %>  
+                             <% 
+                                 while(rs2.next())
+                                { 
+                             %>
+                            
+                                    <option value=""><%out.print(rs2.getString(8));%></option>  
+                              <% 
+                                }
+                             %>
+                               <optgroup label="<b>Select country :">
+                                <%     
+                                   Connection con4;
+                                   con4=dbConnection.getConnection();
+                                   Statement stat4=con4.createStatement();
+                                   ResultSet rs4=stat4.executeQuery("select * from country");
+                               %>  
+                                <% while(rs4.next())
+                                { 
+                               %>
+                              </optgroup>
+                              <option value=""><%out.print(rs4.getString(8));%></option>  
+                              <% 
+                                }
+                              %>
+                              </select>
+                             </span>
                               <label>Primary Contact</label>
                               <input type="text" name="p_contact"  value="<%out.print(rs5.getString(7));%>" id="p_contact" maxlength="10" minlength="10" class="form-control" placeholder="" required>
                             </div>
-                             <div class="form-group form-group-default input-group ">
-                              <span class="input-group-addon">
-                                            <select class="cs-select cs-skin-slide cs-transparent" id="ccodeSecondary"  data-init-plugin="cs-select">
-                                            <option data-countryCode="GB" value="44" Selected>UK (+44)</option>
-                                            <option data-countryCode="US" value="1">USA (+1)</option>
-                                            <option data-countryCode="AR" value="54">Argentina (+54)</option>
-                                            <option data-countryCode="AU" value="61">Australia (+61)</option>
-                                            <option data-countryCode="AT" value="43">Austria (+43)</option>
-                                            <option data-countryCode="BE" value="32">Belgium (+32)</option>
-                                            <option data-countryCode="BZ" value="501">Belize (+501)</option>
-                                            <option data-countryCode="CN" value="86">China (+86)</option>
-                                            <option data-countryCode="IS" value="354">Iceland (+354)</option>
-                                            <option data-countryCode="IN" value="91">India (+91)</option>
-                                            <option data-countryCode="MY" value="60">Malaysia (+60)</option>
-                                            <option data-countryCode="ZW" value="263">Zimbabwe (+263)</option>
-                                        </select>
-                                        </span>
+                            
+                            
+                            <div class="form-group form-group-default input-group ">
+                            <span class="input-group-addon">
+                            <select class="cs-select cs-skin-slide cs-transparent" id="ccodeSecondary"  data-init-plugin="cs-select">
+                                
+                                  <%     
+                                   Connection con6;
+                                   con6=dbConnection.getConnection();
+                                   Statement stat6=con6.createStatement();
+                                   ResultSet rs6=stat6.executeQuery("select * from country where id='"+sm1+"'");
+                             %>  
+                             <% 
+                                 while(rs6.next())
+                                { String id=rs6.getString(1);
+                             %>
+                            
+                                    <option value="<%=id %>"><%out.print(rs6.getString(8));%></option>  
+                              <% 
+                                }
+                             %>
+                                
+                                <optgroup label="<b>Select country :">
+                                <%     
+                                   Connection con3;
+                                   con3=dbConnection.getConnection();
+                                   Statement stat3=con3.createStatement();
+                                   ResultSet rs3=stat3.executeQuery("select * from country");
+                                %>  
+                                <% while(rs3.next())
+                                { String id=rs3.getString(1);
+                                %>
+                               </optgroup>
+                            <option  value="<%=id %>"><%out.print(rs3.getString(8));%></option>                                     
+                               <% 
+                                 }
+                               %>
+                            </select>
+                            </span>
                               <label>Secondary Contact</label>
                               <input type="text" name="s_contact" maxlength="10" minlength="10" value="<%out.print(rs5.getString(8));%>"  id="s_contact" class="form-control" placeholder="">
                             </div>
@@ -584,7 +659,7 @@
                             
                              <div class="form-group form-group-default required">
                               <label>About</label>
-                          <textarea class="form-control" name="about"  id="about"  placeholder="Briefly Describe your Abilities" required><%out.print(rs5.getString(4));%></textarea>
+                              <textarea class="form-control" name="about"  id="about"  placeholder="Briefly Describe your Abilities" required><%out.print(rs5.getString(4));%></textarea>
                             </div> 
                               
                             <div class="form-group form-group-default required">
@@ -595,18 +670,49 @@
                             
                             <div class="form-group form-group-default required">
                                  <label>Industry</label>
-                            <select class="full-width" value="<%out.print(rs5.getString(14));%>" id="industry" data-init-plugin="select2">
-                                <option  value="<%out.print(rs5.getString(14));%>"><%out.print(rs5.getString(14));%></option>  
-                                <option  value="harware">Hardware</option>
-                                <option  value="software">Software</option>
-                               
+                            <select class="full-width" id="industry" data-init-plugin="select2">
+                                
+                                      <%     
+                                   Connection con8;
+                                   con8=dbConnection.getConnection();
+                                   Statement stat8=con8.createStatement();
+                                   ResultSet rs8=stat8.executeQuery("select * from industry where id='"+sm2+"'");
+                             %>  
+                             <% 
+                                 while(rs8.next())
+                                { String id=rs8.getString(1);
+                             %>
+                            
+                                    <option value="<%=id %>"><%out.print(rs8.getString(2));%></option>  
+                              <% 
+                                }
+                             %>
+                             
+                                
+                                <optgroup label="Select Industry :">
+                                          <%     
+                                   Connection con7;
+                                   con7=dbConnection.getConnection();
+                                   Statement stat7=con7.createStatement();
+                                   ResultSet rs7=stat7.executeQuery("select * from industry ");
+                             %>  
+                             <% 
+                                 while(rs7.next())
+                                { String id=rs7.getString(1);
+                             %>
+                            
+                                    <option value="<%=id %>"><%out.print(rs7.getString(2));%></option>  
+                              <% 
+                                }
+                             %>
+                             
+                              </optgroup> 
                             </select>
-                     
                             </div>
                                <div id="msgbox1"></div>
-                              <br>
-                                   <button class="btn btn-primary btn-cons m-t-10" type="submit">Submit</button>
-                                   <button class="btn btn-primary btn-cons m-t-10" >Cancel</button> 
+                             <br>
+                             <button class="btn btn-primary btn-cons m-t-10" type="submit">Submit</button>
+                             <button class="btn btn-primary btn-cons m-t-10" >Cancel</button> 
                                    
                                    
                                    <%
@@ -669,6 +775,13 @@
               </div>
               <div class="panel-body">
                   
+                  
+                  
+                  
+                  
+                  
+                  
+                  
               
               
               
@@ -723,8 +836,7 @@
                              <td>
                                  <div class="btn-group">
                                  <button  type="button" class="btn btn-success" onclick="document.location.href='/Exhibition/html/ownerProfileSocialMediaEdit.jsp?myid=<%= kv %>';"><i class="fa fa-pencil"></i></button>
-                                 <button type="button" class="btn btn-success"  onclick="document.location.href='/Exhibition/OwnerProfileSocialMediaDelete?myid=<%= kv %>';"><i class="fa fa-trash-o"></i>
-                                 </button>
+   <button type="button" class="btn btn-success" data-toggle="modal" data-target="#confirm-delete" data-href="/Exhibition/OwnerProfileSocialMediaDelete?myid=<%=kv%>"><i class="fa fa-trash-o"></i>                                 </button>
                                  </div>
                             </td><%
                             out.println(" </tr>");
@@ -838,7 +950,9 @@
                              <td>
                                  <div class="btn-group">
                                  <button type="button" class="btn btn-success" onclick="document.location.href='/Exhibition/html/ownerProfileAddressUpdate.jsp?addId=<%= id %>';"><i class="fa fa-pencil"></i></button>
-                                 <button type="button" class="btn btn-success" onclick="document.location.href='/Exhibition/OwnerProfileAddressDelete?addId=<%= id %>';"><i class="fa fa-trash-o"></i>
+                                <!-- <button type="button" class="btn btn-success" onclick="document.location.href='/Exhibition/OwnerProfileAddressDelete?addId=<%= id %>';"><i class="fa fa-trash-o"></i>
+                                --><button type="button" class="btn btn-success" data-toggle="modal" data-target="#confirm-delete" data-href="/Exhibition/OwnerProfileAddressDelete?addId=<%=id%>"><i class="fa fa-trash-o"></i>                                 </button>
+
                                  </button>
                                  </div>
                             </td><%
@@ -960,8 +1074,9 @@
                              <td>
                                  <div class="btn-group">
                                  <button type="button" class="btn btn-success" onclick="document.location.href='/Exhibition/html/ownerProfileContactPersonUpdate.jsp?contactPersonId=<%= id  %>';"><i class="fa fa-pencil"></i></button>
-                                 <button type="button" class="btn btn-success" onclick="document.location.href='/Exhibition/ownerProfileContactPersonDelete?contactPersonId=<%= id %>';"><i class="fa fa-trash-o"></i>
-                                 </button>
+                               <!--  <button type="button" class="btn btn-success" onclick="document.location.href='/Exhibition/ownerProfileContactPersonDelete?contactPersonId=<%= id %>';"><i class="fa fa-trash-o"></i>
+                                --><button type="button" class="btn btn-success" data-toggle="modal" data-target="#confirm-delete" data-href="/Exhibition/ownerProfileContactPersonDelete?contactPersonId=<%=id%>"><i class="fa fa-trash-o"></i>                                 </button>
+                               </button>
                                  </div>
                             </td><%
                             out.println(" </tr>");
@@ -2332,6 +2447,15 @@
       </div>
       <!-- END Overlay Content !-->
     </div>
+    
+    
+    <script>
+        $('#confirm-delete').on('show.bs.modal', function(e) {
+            $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+            
+            $('.debug-url').html('Delete URL: <strong>' + $(this).find('.btn-ok').attr('href') + '</strong>');
+        });
+    </script> 
     <!-- END OVERLAY -->
     <!-- BEGIN VENDOR JS -->
     <script src="assets/plugins/pace/pace.min.js" type="text/javascript"></script>

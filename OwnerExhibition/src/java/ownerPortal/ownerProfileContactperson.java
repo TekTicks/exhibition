@@ -35,13 +35,15 @@ public class ownerProfileContactperson extends HttpServlet {
               String designation =request.getParameter("designation");
               String phoneno =request.getParameter("phoneno");
               String mobileno =request.getParameter("mobileno");
+              String phnNo =request.getParameter("phnNo");
+              String mobNo =request.getParameter("mobileNo");
               //one time database connection 
               Connection con;
               con=dbConnection.getConnection();
               //Inserting data into ownerContactPerson table
-              PreparedStatement ps=con.prepareStatement("insert into ownerContactPerson(title,firstName,lastName,photoMediaId,gender,dateOfBirth,degination,phoneNo,mobileNo,email,createdBy,modifiedBy)values(?,?,?,(select id from media where id=1),?,?,?,?,?,?,(select id from owner where id='"+id+"'),(select id from owner where id='"+id+"'))");
-              ps.setString(1,title);
-              ps.setString(2,firstname);
+              PreparedStatement ps=con.prepareStatement("insert into ownerContactPerson(title,firstName,lastName,photoMediaId,gender,dateOfBirth,degination,phoneNo,mobileNo,email,createdBy,modifiedBy,primCountryCodeId,secCountryCodeId)values(?,?,?,(select id from media where id=1),?,?,?,?,?,?,(select id from owner where id='"+id+"'),(select id from owner where id='"+id+"'),(select id from country where id=?),(select id from country where id=?))");
+              ps.setString(1, title);
+              ps.setString(2, firstname);
               ps.setString(3, lastname);
               ps.setString(4, gender); 
               ps.setString(5, dateofbirth);
@@ -49,6 +51,8 @@ public class ownerProfileContactperson extends HttpServlet {
               ps.setString(7, phoneno); 
               ps.setString(8, mobileno); 
               ps.setString(9, email); 
+              ps.setString(10, phnNo); 
+              ps.setString(11, mobNo); 
               ps.executeUpdate();
                             
               response.sendRedirect("/Exhibition/html/ownerProfile.jsp"); 

@@ -423,7 +423,7 @@
 			this.timer = setTimeout(function () {
 				$.ajax({
 		          	url: '/Exhibition/OwnerProfileContactPersonUpdate',
-		          	data: 'title='+ $('#title').val() +'&fname=' + $('#fname').val()+'&lname=' + $('#lname').val() +'&email=' + $('#email').val()+'&gender=' + $('#gender').val()+'&dob=' + $('#dob').val() +'&designation=' + $('#designation').val()+'&phoneno=' + $('#phoneno').val()+'&mobileno=' + $('#mobileno').val(),
+		          	data: 'title='+ $('#title').val() +'&fname=' + $('#fname').val()+'&lname=' + $('#lname').val() +'&email=' + $('#email').val()+'&gender=' + $('#gender').val()+'&dob=' + $('#dob').val() +'&designation=' + $('#designation').val()+'&phoneno=' + $('#phoneno').val()+'&mobileno=' + $('#mobileno').val()+'&phnNo=' + $('#phnNo').val()+'&mobNo=' + $('#mobNo').val(),
 		          	type: 'post',
 		   		success: function(msg){
                                  
@@ -479,6 +479,8 @@
                               else
                               {
                               int gender=Integer.parseInt(rs.getString(6));
+                              String phnoId=rs.getString(16);
+                              String mobnoId=rs.getString(17);
                               %>
               
                         <p>Basic Information</p>
@@ -558,44 +560,89 @@
                       </div>
                         <div class="form-group form-group-default input-group required">
                               <span class="input-group-addon">
-                                            <select class="cs-select cs-skin-slide cs-transparent" data-init-plugin="cs-select">
-                                            <option data-countryCode="GB" value="44" Selected>UK (+44)</option>
-                                            <option data-countryCode="US" value="1">USA (+1)</option>
-                                            <option data-countryCode="AR" value="54">Argentina (+54)</option>
-                                            <option data-countryCode="AU" value="61">Australia (+61)</option>
-                                            <option data-countryCode="AT" value="43">Austria (+43)</option>
-                                            <option data-countryCode="BE" value="32">Belgium (+32)</option>
-                                            <option data-countryCode="BZ" value="501">Belize (+501)</option>
-                                            <option data-countryCode="CN" value="86">China (+86)</option>
-                                            <option data-countryCode="IS" value="354">Iceland (+354)</option>
-                                            <option data-countryCode="IN" value="91">India (+91)</option>
-                                            <option data-countryCode="MY" value="60">Malaysia (+60)</option>
-                                            <option data-countryCode="ZW" value="263">Zimbabwe (+263)</option>
+                                            <select class="cs-select cs-skin-slide cs-transparent" id="phnNo" data-init-plugin="cs-select">
+                                             <%     
+                                   Connection con8;
+                                   con8=dbConnection.getConnection();
+                                   Statement stat8=con8.createStatement();
+                                   ResultSet rs8=stat8.executeQuery("select * from country where id='"+phnoId+"'");
+                             %>  
+                             <% 
+                                 while(rs8.next())
+                                { String id1=rs8.getString(1);
+                             %>
+                            
+                                    <option value="<%=id1 %>"><%out.print(rs8.getString(8));%></option>  
+                              <% 
+                                }
+                             %>
+                             
+                                
+                             <optgroup label="<b>Select Country :">
+                                          <%     
+                                   Connection con7;
+                                   con7=dbConnection.getConnection();
+                                   Statement stat7=con7.createStatement();
+                                   ResultSet rs7=stat7.executeQuery("select * from country ");
+                             %>  
+                             <% 
+                                 while(rs7.next())
+                                { String id2=rs7.getString(1);
+                             %>
+                             </optgroup> 
+                                    <option value="<%=id2 %>"><%out.print(rs7.getString(8));%></option>  
+                              <% 
+                                }
+                             %>
+                             
+                             
                                         </select>
                                         </span>
                               <label>Telephone Number</label>
-                              <input type="text"  value="<%out.print(rs.getString(9));%>" name="phoneno" id="phoneno" class="form-control" placeholder="" required>
+                              <input type="text" maxlength="10" minlength="10" value="<%out.print(rs.getString(9));%>" name="phoneno" id="phoneno" class="form-control" placeholder="" required>
                             </div>
                                         
                      <div class="form-group form-group-default input-group required">
                               <span class="input-group-addon">
-                                            <select class="cs-select cs-skin-slide cs-transparent" data-init-plugin="cs-select">
-                                            <option data-countryCode="GB" value="44" Selected>UK (+44)</option>
-                                            <option data-countryCode="US" value="1">USA (+1)</option>
-                                            <option data-countryCode="AR" value="54">Argentina (+54)</option>
-                                            <option data-countryCode="AU" value="61">Australia (+61)</option>
-                                            <option data-countryCode="AT" value="43">Austria (+43)</option>
-                                            <option data-countryCode="BE" value="32">Belgium (+32)</option>
-                                            <option data-countryCode="BZ" value="501">Belize (+501)</option>
-                                            <option data-countryCode="CN" value="86">China (+86)</option>
-                                            <option data-countryCode="IS" value="354">Iceland (+354)</option>
-                                            <option data-countryCode="IN" value="91">India (+91)</option>
-                                            <option data-countryCode="MY" value="60">Malaysia (+60)</option>
-                                            <option data-countryCode="ZW" value="263">Zimbabwe (+263)</option>
+                                            <select class="cs-select cs-skin-slide cs-transparent" id="mobNo" data-init-plugin="cs-select">
+                                                <%     
+                                   Connection con2;
+                                   con2=dbConnection.getConnection();
+                                   Statement stat2=con2.createStatement();
+                                   ResultSet rs2=stat2.executeQuery("select * from country where id='"+mobnoId+"'");
+                             %>  
+                             <% 
+                                 while(rs2.next())
+                                { String id1=rs2.getString(1);
+                             %>
+                            
+                                    <option value="<%=id1 %>"><%out.print(rs2.getString(8));%></option>  
+                              <% 
+                                }
+                             %>
+                             
+                                
+                             <optgroup label="<b>Select Country :">
+                                          <%     
+                                   Connection con3;
+                                   con3=dbConnection.getConnection();
+                                   Statement stat3=con3.createStatement();
+                                   ResultSet rs3=stat3.executeQuery("select * from country ");
+                             %>  
+                             <% 
+                                 while(rs3.next())
+                                { String id2=rs3.getString(1);
+                             %>
+                             </optgroup> 
+                                    <option value="<%=id2 %>"><%out.print(rs3.getString(8));%></option>  
+                              <% 
+                                }
+                             %>
+                             
                                         </select>
                                         </span>
                               <label>Mobile Number</label>
-                              <input type="text" name="mobileno" id="mobileno" value="<%out.print(rs.getString(10));%>" class="form-control" placeholder="" required>
+                              <input type="text" maxlength="10" minlength="10" name="mobileno" id="mobileno" value="<%out.print(rs.getString(10));%>" class="form-control" placeholder="" required>
                             </div>
                             </div> 
                             <div id="msgbox1" ></div>     

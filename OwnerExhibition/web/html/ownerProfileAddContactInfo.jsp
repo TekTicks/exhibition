@@ -4,6 +4,7 @@
     Author     : Admin
 --%>
 
+<%@page import="ownerPortal.dbConnection"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.DriverManager"%>
@@ -482,19 +483,23 @@
                       </div>
                         <div class="form-group form-group-default input-group required">
                               <span class="input-group-addon">
-                                            <select class="cs-select cs-skin-slide cs-transparent" data-init-plugin="cs-select">
-                                            <option data-countryCode="GB" value="44" Selected>UK (+44)</option>
-                                            <option data-countryCode="US" value="1">USA (+1)</option>
-                                            <option data-countryCode="AR" value="54">Argentina (+54)</option>
-                                            <option data-countryCode="AU" value="61">Australia (+61)</option>
-                                            <option data-countryCode="AT" value="43">Austria (+43)</option>
-                                            <option data-countryCode="BE" value="32">Belgium (+32)</option>
-                                            <option data-countryCode="BZ" value="501">Belize (+501)</option>
-                                            <option data-countryCode="CN" value="86">China (+86)</option>
-                                            <option data-countryCode="IS" value="354">Iceland (+354)</option>
-                                            <option data-countryCode="IN" value="91">India (+91)</option>
-                                            <option data-countryCode="MY" value="60">Malaysia (+60)</option>
-                                            <option data-countryCode="ZW" value="263">Zimbabwe (+263)</option>
+                                            <select class="cs-select cs-skin-slide cs-transparent" name="phnNo" data-init-plugin="cs-select">
+                               
+                               <optgroup label="<b>Select country :">
+                                <%     
+                                   Connection con4;
+                                   con4=dbConnection.getConnection();
+                                   Statement stat4=con4.createStatement();
+                                   ResultSet rs4=stat4.executeQuery("select * from country");
+                               %>  
+                                <% while(rs4.next())
+                                { String phnNo=rs4.getString(1);
+                               %>
+                              </optgroup>
+                              <option value="<%=phnNo %>"><%out.print(rs4.getString(8));%></option>  
+                              <% 
+                                }
+                              %>
                                         </select>
                                         </span>
                               <label>Telephone Number</label>
@@ -503,19 +508,22 @@
                                         
                      <div class="form-group form-group-default input-group required">
                               <span class="input-group-addon">
-                                            <select class="cs-select cs-skin-slide cs-transparent" data-init-plugin="cs-select">
-                                            <option data-countryCode="GB" value="44" Selected>UK (+44)</option>
-                                            <option data-countryCode="US" value="1">USA (+1)</option>
-                                            <option data-countryCode="AR" value="54">Argentina (+54)</option>
-                                            <option data-countryCode="AU" value="61">Australia (+61)</option>
-                                            <option data-countryCode="AT" value="43">Austria (+43)</option>
-                                            <option data-countryCode="BE" value="32">Belgium (+32)</option>
-                                            <option data-countryCode="BZ" value="501">Belize (+501)</option>
-                                            <option data-countryCode="CN" value="86">China (+86)</option>
-                                            <option data-countryCode="IS" value="354">Iceland (+354)</option>
-                                            <option data-countryCode="IN" value="91">India (+91)</option>
-                                            <option data-countryCode="MY" value="60">Malaysia (+60)</option>
-                                            <option data-countryCode="ZW" value="263">Zimbabwe (+263)</option>
+                                            <select class="cs-select cs-skin-slide cs-transparent" name="mobileNo" data-init-plugin="cs-select">
+                                           <optgroup label="<b>Select country :">
+                                <%     
+                                   Connection con2;
+                                   con2=dbConnection.getConnection();
+                                   Statement stat2=con2.createStatement();
+                                   ResultSet rs2=stat2.executeQuery("select * from country");
+                               %>  
+                                <% while(rs2.next())
+                                { String mobileNo=rs2.getString(1);
+                               %>
+                              </optgroup>
+                              <option value="<%=mobileNo %>"><%out.print(rs2.getString(8));%></option>  
+                              <% 
+                                }
+                              %>
                                         </select>
                                         </span>
                               <label>Mobile Number</label>

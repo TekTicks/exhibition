@@ -33,10 +33,12 @@ public class OwnerProfileContactPersonUpdate extends HttpServlet {
             String designation =request.getParameter("designation");
             String phoneno =request.getParameter("phoneno");
             String mobileno =request.getParameter("mobileno");
+            String phnNo =request.getParameter("phnNo");
+            String mobNo =request.getParameter("mobNo");
             //One time database connection                 
             Connection con;
             con=dbConnection.getConnection();
-            PreparedStatement ps=con.prepareStatement("update ownerContactPerson set title=?,firstName=?,lastName=?,gender=?,dateOfBirth=?,degination=?,phoneNo=?,mobileNo=?,email=? where id='"+id+"'");
+            PreparedStatement ps=con.prepareStatement("update ownerContactPerson set title=?,firstName=?,lastName=?,gender=?,dateOfBirth=?,degination=?,phoneNo=?,mobileNo=?,email=?,primCountryCodeId=?,secCountryCodeId=? where id='"+id+"'");
                                  
             ps.setString(1,title);
             ps.setString(2, fname);
@@ -47,6 +49,8 @@ public class OwnerProfileContactPersonUpdate extends HttpServlet {
             ps.setString(7, phoneno);
             ps.setString(8, mobileno);
             ps.setString(9, email);
+            ps.setString(10,phnNo);
+            ps.setString(11,mobNo);
                                
             int n= ps.executeUpdate();
             if(n>0)

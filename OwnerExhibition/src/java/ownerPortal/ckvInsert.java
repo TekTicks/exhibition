@@ -18,30 +18,35 @@ public class ckvInsert extends HttpServlet {
         PrintWriter out = response.getWriter();
         try
         {
-            /*HttpSession ss=request.getSession();
-            String id=(String)ss.getAttribute("username");
-            String idd=(String)ss.getAttribute("ownerId");
-            */
+            HttpSession ss=request.getSession();
+            String emailId=(String)ss.getAttribute("email");
+            String phoneNo=(String)ss.getAttribute("phone");
+            String password=(String)ss.getAttribute("password");
+            String cname=(String)ss.getAttribute("cname");
+            String ccode=(String)ss.getAttribute("ccode");
+            
             //One time database connection  
             Connection con;
             con=dbConnection.getConnection();
             PreparedStatement ps=con.prepareStatement("insert into owner(userName,password,createdBy,modifiedBy) values(?,?,?,?)");
          
-            ps.setString(1,  ownerPortal.Global.email1);
-            ps.setString(2, ownerPortal.Global.password1);
-            ps.setInt(3, 1);
-            ps.setInt(4, 1);
+            ps.setString(1,emailId);
+            ps.setString(2,password);
+            ps.setInt(3,1);
+            ps.setInt(4,1);
             ps.executeUpdate();
              
-            PreparedStatement ps1=con.prepareStatement("insert into ownerProfile(name,logoMediaId,about,primEmail,secEmail,primContact,secContact,website,createdBy) values(?,(select id from media where id=1),?,?,?,?,?,?,(select id from owner where userName=?))");
-            ps1.setString(1, ownerPortal.Global.cname1);
+            PreparedStatement ps1=con.prepareStatement("insert into ownerProfile(name,logoMediaId,about,primEmail,secEmail,primContact,secContact,website,createdBy,countryCodeId,secCountryCodeId) values(?,(select id from media where id=1),?,?,?,?,?,?,(select id from owner where userName=?),(select id from country where id=?),(select id from country where id=?))");
+            ps1.setString(1,cname );
             ps1.setString(2,"");
-            ps1.setString(3, ownerPortal.Global.email1);
+            ps1.setString(3, emailId);
             ps1.setString(4,"");
-            ps1.setString(5, ownerPortal.Global.contact1);
+            ps1.setString(5,phoneNo );
             ps1.setString(6,"");
             ps1.setString(7,"");
-            ps1.setString(8, ownerPortal.Global.email1);
+            ps1.setString(8, emailId);
+            ps1.setString(9, ccode);
+            ps1.setString(10,ccode);
             ps1.executeUpdate();
             
             response.sendRedirect("/Exhibition/html/ownerRegThankyou.jsp");
