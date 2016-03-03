@@ -12,13 +12,14 @@
 <%@ page import="java.util.Iterator"%>
 <%@ page import="java.util.List"%>
 <%@ page import="java.io.File"%>
-
+ 
 
 <%@page import = "java.sql.ResultSet;"%>
 <%@page import ="java.sql.Statement;"%>
 <%@page import = "exhibitionAdministrator.exhibitionAdministratorOneTimeConnection;"%>
 <%@page import = "java.sql.Connection;"%>
 <%@page contentType = "text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -199,34 +200,63 @@
 	text-align: center;
 }
 </style>
-<link class="jsbin" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
-<script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-<script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
-<script>
-function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
 
-            reader.onload = function (e) {
-                $('#blah')
-                    .attr('src', e.target.result)
-                    .width(150)
-                    .height(200);
-            };
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#login").submit(function(){
 
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-	</script>
-<meta charset=utf-8 />
-<title>JS Bin</title>
-<!--[if IE]>
-  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-<![endif]-->
-<style>
-  article, aside, figure, footer, header, hgroup, 
-  menu, nav, section { display: block; }
-</style>
+			 //remove previous class and add new "myinfo" class
+	       // $("#msgbox").removeClass().addClass('myinfo').text('Validating Your Login ').fadeIn(1000);
+
+			
+			this.timer = setTimeout(function () {
+				$.ajax({
+		          	url: '/Exhibition/exhibitionAdministratorPersonalInformation',
+		          	data: 'mn='+ $('#mobileNo').val() +'&us=' + $('#userName').val()+'&pw=' + $('#password').val() +'&le=' + $('#level').val(),
+		          	type: 'post',
+		   		success: function(msg){
+                                  alert(msg);
+                                if(msg != 'mobileNoInvalid') // Message Sent, check and redirect
+				{
+                                        if(msg=='ok')
+                                        {
+                                          $("#msgbox1").html('data updated').addClass('myinfo').fadeTo(200,1,function()
+			             {
+			                 //redirect to secure page
+			              //document.location='/Exhibition/html/exhibitionAdminPersonal.jsp';
+			             });
+                                        
+                                    }
+                                
+				
+                                else
+                                {
+                                    $("#msgbox2").fadeTo(100,1,function() //start fading the messagebox
+		                {
+			                  //add message and change the class of the box and start fading
+			                 $(this).html('records are not updated..').removeClass().addClass('myerror').fadeTo(300,1);
+                                        // document.location='/Exhibition/html/exhibitionAdminLog.jsp?user';
+                                 });
+                                }
+                            }
+                            else
+                            {
+                                $("#msgbox2").fadeTo(100,1,function() //start fading the messagebox
+		                {
+			                  //add message and change the class of the box and start fading
+			                 $(this).html('MobileNo should be 10 digits only').removeClass().addClass('myerror').fadeTo(300,1);
+                                        // document.location='/Exhibition/html/exhibitionAdminLog.jsp?user';
+                                 });
+                            }
+                                }
+				});
+			}, 200);
+			return false;
+ 		});		
+
+	});
+   </script> 
+  
 <script type="text/javascript">
     window.onload = function()
     {
@@ -778,47 +808,17 @@ function readURL(input) {
                               </div></div>
                            <div class="col-sm-10">
                               
-                                 <form ENCTYPE="multipart/form-data" action="/Exhibition/html/insertimage.jsp" method="post" role="form">
+                                 <form ENCTYPE="multipart/form-data" action="" method="post" role="form">
              <div class="panel-heading">
               <div class="panel-title">
                     Social Media Icon 
                 </div>
                  </div>
              
-          <%
-            try {
-           String img_name="";
-             Class.forName("com.mysql.jdbc.Driver"); 
-                Connection con;
-  con=exhibitionAdministratorOneTimeConnection.getConnection();
-             
-             Statement stat=con.createStatement();
-             
-             HttpSession ssC=request.getSession();
-             String fileName=(String)ssC.getAttribute("fileName");
-                         
-            // ResultSet rs=stat.executeQuery("select * from media order By id desc limit 1");
-            ResultSet rs=stat.executeQuery("select * from media where link='"+fileName+"'");
-             
-             if(!rs.next())
-             {
-                 //out.println("Error");
-             }
-             else
-             {
-               img_name=rs.getString(2);
-               ss.setAttribute("mediaId1",rs.getString(1));
-               //out.print(rs.getString(1));
-             }
-            %>    
+        
 
-    <img src='<%= img_name %>' id="profile" alt="Profile not uploaded" style="width:200px;height:200px"> 
-            <%}
-              catch(Exception e)
-                {
-                   out.print("fsdaf" +e);
-                }
-            %>  
+    <img src='' id="profile" alt="Profile not uploaded" style="width:200px;height:200px"> 
+          
     <script type="text/javascript">
 	function readProfile(input) {
 	if (input.files && input.files[0]) {
@@ -833,11 +833,12 @@ function readURL(input) {
    </script>
    <input name="file" id="file" style="width:200px" type="file" onchange="readProfile(this);">
    <input type="submit" value="upload">       
-  
-         </form>
+
+         </form><jsp:include page="insertimage.jsp" />
+                               
                            </div>
                       </div>
-                    </div>
+                    </div>   
                        <div class="container-fluid container-fixed-lg">
             <div class="row">
 <div class="col-md-6">
@@ -963,7 +964,7 @@ function readURL(input) {
             </div>
           </div>
           <!-- END CONTAINER FLUID -->
-        </div>
+        
         <!-- END PAGE CONTENT -->
         <!-- START COPYRIGHT -->
         <!-- START CONTAINER FLUID -->
@@ -2280,7 +2281,8 @@ function readURL(input) {
     <script src="assets/js/scripts.js" type="text/javascript"></script>
     <!-- END PAGE LEVEL JS -->
     
-    
-        
+     
+       
   </body>
+   
 </html>

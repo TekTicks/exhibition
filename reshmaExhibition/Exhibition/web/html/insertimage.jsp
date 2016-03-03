@@ -33,34 +33,14 @@ FileOutputStream fileOut = new FileOutputStream(fff);
 fileOut.write(dataBytes, startPos, (endPos - startPos));
 fileOut.flush();
 fileOut.close();
-response.sendRedirect("/Exhibition/html/exhibitionAdministratorProfilePage.jsp"); 
+out.print(saveFile);
+HttpSession ssC=request.getSession();
+ssC.setAttribute("fileName",saveFile); 
+ //response.sendRedirect("/Exhibition/html/exhibitionAdministratorProfilePage.jsp"); 
+
+
 %>
 <%
-Connection connection = null;
-String connectionURL = "jdbc:mysql://localhost:3306/Exhibition";
-PreparedStatement psmnt = null;
-
-
-HttpSession ssC=request.getSession();
-ssC.setAttribute("fileName",saveFile);                            
-                            
-try{
-Class.forName("com.mysql.jdbc.Driver").newInstance();
-connection = DriverManager.getConnection(connectionURL, "root", "123");
-psmnt = connection.prepareStatement("insert into media(link,type) values('"+saveFile+"',?)");
-//psmnt.setString(1, );
-psmnt.setString(1, "");
-int s = psmnt.executeUpdate();
-if(s>0){
-System.out.println("Uploaded successfully !");
-}
-else{
-System.out.println("Error!");
-}
-}
-catch(Exception e){
-    
-         out.println("error"+e.toString());
-        }
 }
 %>
+

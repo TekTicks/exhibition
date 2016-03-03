@@ -9,35 +9,31 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class exhibitionAdministratorOpportunity extends HttpServlet {
-        protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        try {
-              //values fetch from textbox of exhibitionAdministratorOpportunity.jsp file
-              String exId=request.getParameter("exId");  
-              String tt=request.getParameter("title");
-              String email=request.getParameter("email");
-              String mobile=request.getParameter("mobile");
-              String contactNo=request.getParameter("contactNo");
-              Connection con;
-              con=exhibitionAdministratorOneTimeConnection.getConnection(); 
-              HttpSession ss=request.getSession(false);
-              String idValid=(String)ss.getAttribute("idValid");  // value fetch from exhibitionAdminLoginCheck.java file
-               HttpSession ssC=request.getSession(false);
-                String fileName=(String)ssC.getAttribute("fileName");
-                out.print(fileName);
-              String val = "insert into exhibitionOpportunity(exhibitionId,opportunityTitle,email,mobile,contactNo,mediaId,message,createdBy,modifiedBy,modifiedByFlag)  values (?,?,?,?,?,3,'opportunity_message','"+idValid+"','"+idValid+"',(select id from roles where id=1))" ;
-              //data inserted in exhibitionFAQ table
-              PreparedStatement ps = con.prepareStatement(val);  
-              ps.setString(1, exId);
-               ps.setString(2, tt);
-               ps.setString(3, email);
-               ps.setString(4, mobile);
-                ps.setString(5, contactNo);
-               int n=  ps.executeUpdate(); 
-                  if(n>0)
+public class exhibitionAdministratorContactInformationFirstTimeUse extends HttpServlet {
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+          throws ServletException, IOException {
+          response.setContentType("text/html;charset=UTF-8");
+          PrintWriter out = response.getWriter();
+       try
+            {
+                // value fetch from textbox from exhibitionSector.jsp file
+                 String title=request.getParameter("title");
+                 String firstName=request.getParameter("firstName");  
+                 String lastName=request.getParameter("lastName"); 
+                 String dateOfBirth=request.getParameter("dateOfBirth");  
+                 String level=request.getParameter("level");
+                 String degination=request.getParameter("degination");  
+                 String phoneNo=request.getParameter("phoneNo");
+                Connection con;
+                con=exhibitionAdministratorOneTimeConnection.getConnection();
+                HttpSession ss=request.getSession(false);
+                String idValid=(String)ss.getAttribute("idValid");   
+                String val = "update exhibitionAdminContact set title='"+title+"',firstName='"+firstName+"',lastName='"+lastName+"',dateOfBirth='"+dateOfBirth+"',level='"+level+"',degination='"+degination+"',phoneNo='"+phoneNo+"' where id='"+idValid+"' ";
+                // data inserted in exhibitionAdminContact table
+                PreparedStatement ps = con.prepareStatement(val);  
+              
+                int n=  ps.executeUpdate(); 
+                  if(n!=0)
                   {
                         out.print("ok");
                   }
@@ -45,11 +41,11 @@ public class exhibitionAdministratorOpportunity extends HttpServlet {
                   {
                         out.print("wrn");
                   }
-           con.close();
+            con.close();
             }
            catch(Exception e)
            {
-       out.print("error" +e);
+               out.print("error" +e);
            }
     }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

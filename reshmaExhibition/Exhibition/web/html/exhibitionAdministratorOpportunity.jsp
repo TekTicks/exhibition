@@ -9,6 +9,8 @@
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.Connection"%>
+<%@include file="insertimage.jsp" %>
+        
 <!DOCTYPE html>
 <html>
   <head>
@@ -42,7 +44,7 @@
 	<![endif]-->
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="pages/js/jquery-1.4.2.min.js"></script>
-   
+<!--
     <script type="text/javascript">
 	$(document).ready(function(){
 		$("#login").submit(function(){
@@ -124,7 +126,7 @@
 	-webkit-border-radius:4px;
 	text-align: center;
 }
-</style>
+</style> -->
   </head>
   <body class="fixed-header ">
     <!-- BEGIN SIDEBPANEL-->
@@ -538,8 +540,11 @@
       <!-- START PAGE CONTENT WRAPPER -->
       <div class="page-content-wrapper ">
        <div class="content ">
-       
-       <h5>Exhibition Opportunities</h5>
+       <div class="panel panel-transparent ">
+        <div class="panel-heading">
+                <div class="panel-title"> Exhibition Opportunity
+                </div>
+              </div>
                     
                                      <div class="panel panel-transparent ">
                       <!-- Nav tabs -->
@@ -564,7 +569,7 @@
           <div class="col-sm-12 col-sm-height col-middle">
 <p><h1><b> Opportunities....!</b></h1></p>
           <br>
-             <form role="form"   class="p-t-15" id="login" name="login" action="" method="">      
+             <form role="form"   class="p-t-15" id="login" name="login" action="insertimage.jsp" method="" enctype="multipart/form-data">      
                       <div class="form-group ">
                            <label>Exhibition</label>
                       <%    
@@ -609,66 +614,33 @@
                         <div class="form-group">
                         <label>Contact No</label>
                           <input type="text" class="form-control" id="contactNo" name="contactNo" required>
-                        </div> </form>
-                         <form ENCTYPE="multipart/form-data" action="/Exhibition/html/exhibitionAdministratorOpportunityInsertImage.jsp" method="post" role="form">
-                          <div class="form-group">
-                              <label> Photo </label>
-                     
-      <%
-            try {
-           String img_name="";
-             Class.forName("com.mysql.jdbc.Driver"); 
-                Connection con;
-  con=exhibitionAdministratorOneTimeConnection.getConnection();
-             
-             Statement stat=con.createStatement();
-             
-             HttpSession ssC=request.getSession();
-             String fileName=(String)ssC.getAttribute("fileName");
-                         
-            // ResultSet rs=stat.executeQuery("select * from media order By id desc limit 1");
-            ResultSet rs=stat.executeQuery("select * from media where link='"+fileName+"'");
-             
-             if(!rs.next())
-             {
-                 out.println("Error");
-             }
-             else
-             {
-               img_name=rs.getString(2);
-               ssC.setAttribute("mediaId1",rs.getString(1));
-               //out.print(rs.getString(1));
-             }
-            %>    
-
-    <img src='<%= img_name %>' id="profile" alt="Profile not uploaded" style="width:200px;height:200px"> 
-            <%}
-              catch(Exception e)
-                {
-                   out.print("fsdaf" +e);
-                }
-            %>  
-    <script type="text/javascript">
-	function readProfile(input) {
-	if (input.files && input.files[0]) {
-	var reader3 = new FileReader();
-	reader3.onload = function (e) {
-	$('#profile')
-	.attr('src', e.target.result)
-	};
-	reader3.readAsDataURL(input.files[0]);
-	}
-	}
-   </script>
-   <input name="file" id="file"  style="width:200px" type="file" onchange="readProfile(this);">
-   <input type="submit" value="upload">          
-                          </div>
-             
-                    <div id="msgbox1"></div> 
-                    <div id="msgbox2"></div>       
-                  <button class="btn btn-primary btn-cons m-t-10" type="submit"> Save </button>
-                 <button class="btn btn-primary btn-cons m-t-10" type="submit"> Cancel </button>
+                        </div> 
+                      <div id="uploadFormLayer">
+<label><b>Upload Image File:</b></label><br/>
+<input name="userImage" type="file" class="inputFile" onchange="readURL(this);"  />
+	<script type="text/javascript">
+									function readURL(input) {
+									if (input.files && input.files[0]) {
+									var reader = new FileReader();
+									reader.onload = function (e) {
+									$('#tempImg')
+									.attr('src', e.target.result)
+									.width(125)
+									.height(125);
+									$('#flag').val("1");
+									};
+									reader.readAsDataURL(input.files[0]);
+									}
+									}
+									</script>
+									<input type="hidden" id="flag" name="flag">
+	<img id="tempImg"  src="" width="125" height="125"> 
+</div> 
+               <button class="btn btn-primary btn-cons m-t-10" type="submit"> Save </button>
+                 <button class="btn btn-primary btn-cons m-t-10" type="submit"> Cancel </button> 
+                 <br>
                </form>
+                        
                   </div>
                  </div>
                  </div>
@@ -787,7 +759,7 @@
              </div>
              </div>          
           <!-- END CONTAINER FLUID -->
-        </div>
+       </div> </div>
         <!-- END PAGE CONTENT -->
         <!-- START COPYRIGHT -->
         <!-- START CONTAINER FLUID -->

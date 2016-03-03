@@ -1,5 +1,4 @@
-<% Cookie cookie = new Cookie("sessionID", request.getParameter("login_id"));
-response.addCookie(cookie); %>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

@@ -26,10 +26,29 @@ public class exhibitionAdministratorContactInformation extends HttpServlet {
               String pn=request.getParameter("pn");
               Connection con;
               con=exhibitionAdministratorOneTimeConnection.getConnection();
+              
               HttpSession ss=request.getSession(false);
-              String rs1 = (String)ss.getAttribute("idValid");   // idValid fetch from exhibitionAdminLoginCheck.java file 
-              String mediaid=(String)ss.getAttribute("mediaId1"); //value fetch from insertimage.jsp file
-              PreparedStatement ps=con.prepareStatement("update exhibitionAdminContact set title='"+tt+"',firstName='"+fn+"',lastName='"+ln+"',dateOfBirth='"+dob+"' ,level='"+le+"',degination='"+dn+"',phoneNo='"+pn+"' photomediaId='"+mediaid+"' where id='"+rs1+"' ");
+              String rs1 = (String)ss.getAttribute("idValid"); 
+               String mediaid=(String)ss.getAttribute("mediaId1");
+               
+               HttpSession ssC=request.getSession(false);
+                String fileName = (String)ssC.getAttribute("fileName"); 
+                out.print(fileName);
+               
+     /*     PreparedStatement   psmnt = con.prepareStatement("insert into media(link,type) values('"+fileName+"',?)");
+//psmnt.setString(1, );
+psmnt.setString(1, "");
+int s = psmnt.executeUpdate();
+if(s>0){
+System.out.println("Uploaded successfully !");
+}
+else{
+System.out.println("Error!");
+}  */
+                
+              // idValid fetch from exhibitionAdminLoginCheck.java file 
+              //value fetch from insertimage.jsp file
+              PreparedStatement ps=con.prepareStatement("update exhibitionAdminContact set title='"+tt+"',firstName='"+fn+"',lastName='"+ln+"',dateOfBirth='"+dob+"' ,level='"+le+"',degination='"+dn+"',phoneNo='"+pn+"' where id='"+rs1+"' ");
               //data is updated in exhibitionAdmin table
               int rst = ps.executeUpdate();
               if(rst !=0)
