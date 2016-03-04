@@ -25,7 +25,7 @@ function getprofile()
 					//$("#pbirthdate").val(convertDate(JSON.stringify(response.visitor[0].dob).replace(/"/g,"")));
 					
 					//$("#pcity").val(JSON.stringify(response.visitor[0].city).replace(/"/g,""));
-					
+					$("#profilePic").attr("src",'data:image/(png|jpg);base64,'+JSON.stringify(response.visitor[0].image).replace(/"/g,"")+'');
 					//$("#pgender").val(JSON.stringify(response.visitor[0].gender).replace(/"/g,""));
 					//alert(JSON.stringify(response.visitor[0].photoLink));
 					

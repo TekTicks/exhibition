@@ -25,7 +25,7 @@ function getprofile()
 					//$("#pbirthdate").val(convertDate(JSON.stringify(response.visitor[0].dob).replace(/"/g,"")));
 					
 					//$("#pcity").val(JSON.stringify(response.visitor[0].city).replace(/"/g,""));
-					$("#profilePic").attr("src",'data:image/(png|jpg);base64,'+JSON.stringify(response.visitor[0].image).replace(/"/g,"")+'');
+					//$("#profilePic").attr("src",'data:image/(png|jpg);base64,'+JSON.stringify(response.visitor[0].image).replace(/"/g,"")+'');
 					//$("#pgender").val(JSON.stringify(response.visitor[0].gender).replace(/"/g,""));
 					//alert(JSON.stringify(response.visitor[0].photoLink));
 					
@@ -116,6 +116,13 @@ function sendProfile()
 
  function profile()
 { 
+	var show = document.getElementById('profileShow');
+    show.style.visibility = 'visible';
+	var profilePic = document.getElementById('profilePic').src;
+	//alert(profilePic);
+	var profilePicture = getBase64Image(document.getElementById('profilePic'));
+	//alert(profilePicture);
+
 	var pname = document.getElementById('pname').value;
 	var pphone = document.getElementById('pMobile').value;
 	var pemail = document.getElementById('pEmail').value;
@@ -125,13 +132,13 @@ function sendProfile()
 	var pProfession = document.getElementById('pProfession').value;	
 	var visitorId = localStorage.getItem("visitorId");
 	var request = createCORSRequest( "post", "http://exhibition.tekticks.co.in" );
-	//var fileName = upload();
+	var fileName = upload();
 	//alert(fileName);
 	if(request)
 	{
 	
 	
-		var data = {"profile":[{"visitorId":visitorId,"pname":pname,"pemail":pemail,"pphone":pphone,"pGender":pGender,"pBirthDate":pBirthDate,"pEducation":pEducation,"pProfession":pProfession}]};
+		var data = {"profile":[{"visitorId":visitorId,"pname":pname,"pemail":pemail,"profilePicture":profilePicture,"pphone":pphone,"pGender":pGender,"pBirthDate":pBirthDate,"pEducation":pEducation,"pProfession":pProfession}]};
 		var sendData = function(data)
 		{
 	$.ajax({
@@ -162,6 +169,14 @@ function sendProfile()
 	}
 }
 
-
+function getBase64Image(img) {
+  var canvas = document.createElement("canvas");
+  canvas.width = img.width;
+  canvas.height =img.height;
+  var ctx = canvas.getContext("2d");
+  ctx.drawImage(img, 0, 0);
+  var dataURL = canvas.toDataURL("image/png");
+  return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
+}
 	
 	
