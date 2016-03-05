@@ -28,6 +28,14 @@ public class exhibitionAdministratorContactInformationFirstTimeUse extends HttpS
                 con=exhibitionAdministratorOneTimeConnection.getConnection();
                 HttpSession ss=request.getSession(false);
                 String idValid=(String)ss.getAttribute("idValid");   
+                int n1=title.length();
+               
+                if (!(phoneNo.length() == 10) || (n1 > 10) )       // mobile no validation
+                 {
+                   out.print("mobileNoInvalid");
+                 }  
+                else
+                {
                 String val = "update exhibitionAdminContact set title='"+title+"',firstName='"+firstName+"',lastName='"+lastName+"',dateOfBirth='"+dateOfBirth+"',level='"+level+"',degination='"+degination+"',phoneNo='"+phoneNo+"' where id='"+idValid+"' ";
                 // data inserted in exhibitionAdminContact table
                 PreparedStatement ps = con.prepareStatement(val);  
@@ -42,6 +50,7 @@ public class exhibitionAdministratorContactInformationFirstTimeUse extends HttpS
                         out.print("wrn");
                   }
             con.close();
+            }
             }
            catch(Exception e)
            {

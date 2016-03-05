@@ -1,8 +1,4 @@
-<%-- 
-    Document   : Admin
-    Created on : Dec 8, 2015, 4:36:02 PM
-    Author     : DJ
---%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -44,7 +40,7 @@
 		          	url: '/Exhibition/exhibitionAdministratorLoginCheck',
 		          	data: 'un='+ $('#login_id').val() +'&pw=' + $('#password').val(),
 		          	type: 'post',
-		   		success: function(msg){
+		   		success: function(msg){  
                                 if(msg != 'ERROR') // Message Sent, check and redirect
 				{
                                     if(msg == 'emailinvalid')
@@ -58,7 +54,7 @@
  
 
                                     }
-                                    else if(msg =='passwordinvalid')
+                                    else if(msg == 'passwordinvalid')
                                     {
                                                
                                                	$("#msgbox2").fadeTo(300,1,function() //start fading the messagebox
@@ -71,18 +67,34 @@
                                     }
                                     else
                                     {
-                                          $("#msgbox3").html('Login Verified, Logging in.....').addClass('myinfo').fadeTo(300,1,function()
-			             {
-			                 //redirect to secure page
-			              document.location='/Exhibition/html/exhibitionAdministratorProfilePage.jsp';
-			             });
+                                        if(msg == 'firstVisitor' )
+                                        {
+                                            	$("#msgbox2").fadeTo(300,1,function() //start fading the messagebox
+		                {
+			                  //add message and change the class of the box and start fading
+			                 $(this).html('Login Verified').removeClass().addClass('myinfo').fadeTo(300,1);
+                                         document.location='/Exhibition/html/exhibitionAdministratorContactInformationFirstTimeUse.jsp';
+                                      
+                                 });
+  
+                                        } 
+                                        else
+                                        {
+                                           
+                                            	$("#msgbox2").fadeTo(300,1,function() //start fading the messagebox
+		                {
+			                  //add message and change the class of the box and start fading
+			                 $(this).html('Login Verified....').removeClass().addClass('myinfo').fadeTo(300,1);
+                                       document.location='/Exhibition/html/exhibitionAdministratorProfilePage.jsp';
+                                 });
+                                        }
                                         
                                     }
                                 
-                                }
+                                } 
 				else
 				{
-					$("#msgbox3").fadeTo(300,1,function() //start fading the messagebox
+					$("#msgbox2").fadeTo(300,1,function() //start fading the messagebox
 		                {
 			                  //add message and change the class of the box and start fading
 			                 $(this).html('Sorry, Wrong Combination Of Username And Password.').removeClass().addClass('myerror').fadeTo(300,1);
@@ -98,6 +110,7 @@
 
 	});
    </script>   
+   
 <style>
 #exists{display:none}
 #cross{display:none}
@@ -212,7 +225,7 @@
             </div>
               
                                	<div id="msgbox2"></div>
-                                <div id="msgbox3"></div>
+                                
 
             <!-- START Form Control-->
             <div class="row">
@@ -231,7 +244,7 @@
             <button class="btn btn-primary btn-cons m-t-10" name="login" id="login"  type="submit">Sign in</button>
             <button class="btn btn-primary btn-cons m-t-10" name="clear" id="clear"  type="button" value="Clear Form" onclick="clearForm(this.form);">Clear</button>
 
-          </form>
+          </form> 
           <!--END Login Form-->
           <div class="pull-bottom sm-pull-bottom">
             <div class="m-b-30 p-r-80 sm-m-t-20 sm-p-r-15 sm-p-b-20 clearfix">
@@ -243,7 +256,7 @@
 		        		Create a pages account. If you have a facebook account, log into it for this process. Sign in with <a href="#" class="text-info">Facebook</a> or <a href="#" class="text-info">Google</a></small>
                 </p>-->
               </div>
-                        <div id="error_box"></div>
+                       
 
             </div>
           </div>

@@ -50,22 +50,36 @@
 		          	data: 'tagline='+ $('#tagline').val() +'&title=' + $('#title').val()+'&firstName=' + $('#firstName').val() +'&lastName=' + $('#lastName').val()+'&gender=' + $('#gender').val()+'&dateOfBirth=' + $('#dateOfBirth').val() +'&degination=' + $('#degination').val()+'&phoneNo=' + $('#phoneNo').val()+'&mobileNo=' + $('#mobileNo').val()+'&email=' + $('#email').val() +'&modifiedBy=' + $('#modifiedBy').val(),
 		          	type: 'post',
 		   		success: function(msg){
-                                if(msg != 'error') // Message Sent, check and redirect
+                                    alert(msg);
+                              if(msg != 'mobileNoInvalid') // Message Sent, check and redirect
 				{
-                                       
-                                          $("#msgbox1").html('data inserted').addClass('myinfo').fadeTo(200,1,function()
+                                        if(msg =='ok')
+                                        {
+                                          
+                                      $("#msgbox1").fadeTo(100,1,function() //start fading the messagebox
+		                {
+			                  //add message and change the class of the box and start fading
+			                 $(this).html('records are not updated..').removeClass().addClass('myerror').fadeTo(300,1);
+                                        // document.location='/Exhibition/html/exhibitionAdminLog.jsp?user';
+                                 });
+                                }
+                                        
+                                  
+                                else
+                                {
+                                  $("#msgbox2").html('data updated').addClass('myinfo').fadeTo(200,1,function()
 			             {
 			                 //redirect to secure page
 			              //document.location='/Exhibition/html/exhibitionAdminPersonal.jsp';
-			             });
-                                        
-                                    }
-                               else
+			             }); 
+                            }
+                                }
+                            else
                             {
                                 $("#msgbox1").fadeTo(100,1,function() //start fading the messagebox
 		                {
 			                  //add message and change the class of the box and start fading
-			                 $(this).html('sorry').removeClass().addClass('myerror').fadeTo(300,1);
+			                 $(this).html('MobileNo should be 10 digits only').removeClass().addClass('myerror').fadeTo(300,1);
                                         // document.location='/Exhibition/html/exhibitionAdminLog.jsp?user';
                                  });
                             }
@@ -219,7 +233,7 @@
                 <span class="icon-thumbnail">M</span>
               </li>
                <li class="">
-                <a href="exhibitionOpportunity.jsp">Opportunities/Response </a>
+                <a href="/Exhibition/html/exhibitionAdministratorOpportunity.jsp">Opportunities/Response </a>
                 <span class="icon-thumbnail">M</span>
               </li>
                <li class="">
@@ -227,7 +241,7 @@
                 <span class="icon-thumbnail">M</span>
               </li>
                <li class="">
-                <a href="facilities.jsp"> Facilities</a>
+                <a href="/Exhibition/html/exhibitionAdministratorFacilities.jsp"> Facilities</a>
                 <span class="icon-thumbnail">M</span>
               </li>
                <li class="">
@@ -647,7 +661,7 @@
                 </div>
               </div>
          
-       <div id="msgbox1"></div>      
+       <div id="msgbox1"></div>       <div id="msgbox2"></div>     
        <button class="btn btn-primary btn-cons m-t-10" type="submit">Create a new account</button>
             </form>
         </div></div></div> </div> 
@@ -729,15 +743,50 @@
                            // exhibitionAdministrator.personalInformation.id1=id1;
                             String exid=rs1.getString(1);
                             
-                            HttpSession ss=request.getSession(true);
-                            ss.setAttribute("myid", exid);
+                           // HttpSession ss=request.getSession(true);
+                            //ss.setAttribute("myid", exid);
                            %>
                            
                              <td>
                                  <div class="btn-group">
-                                 <button type="button" class="btn btn-success" onclick="document.location.href='/Exhibition/html/exhibitionTeamMemberEdit.jsp';"><i class="fa fa-pencil"></i></button>
-                                 <button type="button" class="btn btn-success" onclick="document.location.href='/Exhibition/exhibitionAdministratorTeamMemberDelete?myid=<%=exid%>';"><i class="fa fa-trash-o"></i>
+                                 <button type="button" class="btn btn-success" onclick="document.location.href='/Exhibition/html/exhibitionTeamMemberEdit.jsp?myid=<%=exid%>';"><i class="fa fa-pencil"></i></button>
+                                
+                                  <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Confirm Delete</h4>
+                </div>
+            
+                <div class="modal-body">
+                    <p>You are about to delete one track, this procedure is irreversible.</p>
+                    <p>Do you want to proceed?</p>
+                    <p class="debug-url"></p>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-dismiss="modal" onclick="document.location.href='/Exhibition/html/exhibitionAdministratorSector.jsp';">Cancel</button>
+                    <a class="btn btn-success btn-ok" onclick="document.location.href='/Exhibition/exhibitionAdministratorTeamMemberDelete?myid=<%=exid%>';">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+                                 
+                                 <button type="button" class="btn btn-success" data-href="/Exhibition/exhibitionAdministratorTeamMemberDelete?myid=<%=exid%>" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash-o"></i>
                                  </button>
+                          <script>
+        $('#confirm-delete').on('show.bs.modal', function(e) {
+            $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+            
+            $('.debug-url').html('Delete URL: <strong>' + $(this).find('.btn-ok').attr('href') + '</strong>');
+        });
+    </script>
+                                 
+                                 
+                                 
+                                 
                                  </div>
                             </td> <%
                             out.println(" </tr>");

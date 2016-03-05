@@ -33,6 +33,12 @@ public class exhibitionAdministratorTeamMember extends HttpServlet {
            
              Connection con;
              con=exhibitionAdministratorOneTimeConnection.getConnection();  
+             if(!(mobileNo.length() == 10) || !(phoneNo.length() == 10 ) )
+             {
+                 out.print("mobileNoInvalid");
+             }
+             else
+             {
              String val = "insert into exhibitionTeam(tagline,title,firstName,lastName,gender,dateOfBirth,degination,phoneNo,mobileNo,email,createdBy,modifiedBy,modifiedByFlag)  values (?,?,?,?,?,?,?,?,?,?,(select id from owner where id=1), '"+idValid+"' ,(select id from roles where id=1))" ;
             // data inserted in exhibitionTeam table
              PreparedStatement ps = con.prepareStatement(val); 
@@ -56,6 +62,7 @@ public class exhibitionAdministratorTeamMember extends HttpServlet {
                    out.println("error");
                   }
            con.close();
+          }
           }
            catch(Exception e)
            {

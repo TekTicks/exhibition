@@ -1,0 +1,12 @@
+SMAP
+insertimage_jsp.java
+JSP
+*S JSP
+*F
++ 0 insertimage.jsp
+html/insertimage.jsp
+*L
+1,40:49
+40:89
+42,28:91
+*E

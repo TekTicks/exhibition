@@ -240,7 +240,7 @@
                 <span class="icon-thumbnail">M</span>
               </li>
                <li class="">
-                <a href="exhibitionOpportunity.jsp">Opportunities/Response </a>
+                <a href="/Exhibition/html/exhibitionAdministratorOpportunity.jsp">Opportunities/Response </a>
                 <span class="icon-thumbnail">M</span>
               </li>
                <li class="">
@@ -248,7 +248,7 @@
                 <span class="icon-thumbnail">M</span>
               </li>
                <li class="">
-                <a href="facilities.jsp"> Facilities</a>
+                <a href="/Exhibition/html/exhibitionAdministratorFacilities.jsp"> Facilities</a>
                 <span class="icon-thumbnail">M</span>
               </li>
                <li class="">
@@ -336,7 +336,7 @@
             <span class="icon-thumbnail"><i class="pg-layouts2"></i></span> 
         
           </li>
-          </ul>
+        </ul> </div>
         <div class="clearfix"></div>
       </div>
       <!-- END SIDEBAR MENU -->
@@ -636,6 +636,8 @@
       </div>
     </div>
     </div>
+                  
+                  
           <!-- END CONTAINER FLUID -->
         </div>
                    

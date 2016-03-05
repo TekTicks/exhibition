@@ -5,6 +5,7 @@
 --%>
 
 
+<%@page import="exhibitionAdministrator.exhibitionAdministratorOneTimeConnection"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
  <%@page import="java.io.*;" %>
   <%@page import="java.sql.*;" %>
@@ -238,7 +239,7 @@
                 <span class="icon-thumbnail">M</span>
               </li>
                <li class="">
-                <a href="exhibitionOpportunity.jsp">Opportunities/Response </a>
+                <a href="/Exhibition/html/exhibitionAdministratorOpportunity.jsp">Opportunities/Response </a>
                 <span class="icon-thumbnail">M</span>
               </li>
                <li class="">
@@ -246,7 +247,7 @@
                 <span class="icon-thumbnail">M</span>
               </li>
                <li class="">
-                <a href="facilities.jsp"> Facilities</a>
+                <a href="/Exhibition/html/exhibitionAdministratorFacilities.jsp"> Facilities</a>
                 <span class="icon-thumbnail">M</span>
               </li>
                <li class="">
@@ -565,20 +566,20 @@
           <br>
            
                <form role="form"   class="p-t-15" id="login" name="login" action="" method="">
-             <%@ page import="javax.servlet.http.HttpSession.*;" %>
-                      <%@ page session="false" %>
-                      <% HttpSession ss=request.getSession(false);%>
+             
                   
                      
                    
                    <% 
                       try { 
-                       String myex_id=(String)ss.getAttribute("myid");
+                           HttpSession ss1=request.getSession(true);
+                       String myex_id=request.getParameter("myid");
                        
-                        HttpSession ss1=request.getSession(true);
+                        
                           Class.forName("com.mysql.jdbc.Driver"); 
-                         Connection con1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/exhibition","root","123"); 
-                         Statement stat1=con1.createStatement();
+                          Connection con;
+                con=exhibitionAdministratorOneTimeConnection.getConnection(); 
+                         Statement stat1=con.createStatement();
                        
                          String query="select * from exhibitionTeam where id= '"+myex_id+" '";
                          ResultSet rs=stat1.executeQuery(query);  
@@ -588,25 +589,25 @@
                          while(rs.next())
                          {
                              String fn=rs.getString("firstName");
-                             ss.setAttribute("fn1", fn);
+                             ss1.setAttribute("fn1", fn);
                                       String lastName=rs.getString("lastName");
-                                       ss.setAttribute("ln1", lastName);
+                                       ss1.setAttribute("ln1", lastName);
                                       String tagline=rs.getString("tagline");
-                                       ss.setAttribute("tn1", tagline);
+                                       ss1.setAttribute("tn1", tagline);
                                       String title=rs.getString("title");
-                                       ss.setAttribute("tt1", title);
+                                       ss1.setAttribute("tt1", title);
                                       String gender=rs.getString("gender");
-                                       ss.setAttribute("gn1", gender);
+                                       ss1.setAttribute("gn1", gender);
                                       String dateOfBirth=rs.getString("dateOfBirth");
-                                       ss.setAttribute("dob1", dateOfBirth);
+                                       ss1.setAttribute("dob1", dateOfBirth);
                                       String degination=rs.getString("degination");
-                                       ss.setAttribute("dn1", degination);
+                                       ss1.setAttribute("dn1", degination);
                                       String phoneNo=rs.getString("phoneNo");
-                                       ss.setAttribute("pn1", phoneNo);
+                                       ss1.setAttribute("pn1", phoneNo);
                                       String mobileNo=rs.getString("mobileNo");
-                                       ss.setAttribute("mn1", mobileNo);
+                                       ss1.setAttribute("mn1", mobileNo);
                                        String email=rs.getString("email");
-                                        ss.setAttribute("em1", email);
+                                        ss1.setAttribute("em1", email);
                              count++;
                          }              
                       }    
@@ -685,7 +686,7 @@
                 <div class="col-sm-12">
                   <div class="form-group form-group-default">
                     <label>Mobile No</label>
-                  <input type="text" id="mobileNo" name="mobileNo" class="form-control"  value="<%out.print((String)ss.getAttribute("mn1"));%>" required>
+                  <input type="text" id="mobileNo" name="mobileNo" class="form-control"  value="<%out.print((String)ss1.getAttribute("mn1"));%>" required>
                   </div>
                 </div>
               </div>
@@ -693,7 +694,7 @@
                 <div class="col-sm-12">
                   <div class="form-group form-group-default">
                     <label>Email</label>
-                     <input type="email" id="email" name="email" class="form-control"  value="<%out.print((String)ss.getAttribute("em1"));%>" required>
+                     <input type="email" id="email" name="email" class="form-control"  value="<%out.print((String)ss1.getAttribute("em1"));%>" required>
                   </div>
                 </div>
               </div>

@@ -97,8 +97,48 @@
         <servlet-class>exhibitionAdministrator.exhibitionAdministratorFAQ</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>demo</servlet-name>
-        <servlet-class>exhibitionAdministrator.demo</servlet-class>
+        <servlet-name>exhibitionAdministratorFAQDelete</servlet-name>
+        <servlet-class>exhibitionAdministrator.exhibitionAdministratorFAQDelete</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>exhibitionAdministratorFAQEdit</servlet-name>
+        <servlet-class>exhibitionAdministrator.exhibitionAdministratorFAQEdit</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>exhibitionAdministratorFacilities</servlet-name>
+        <servlet-class>exhibitionAdministrator.exhibitionAdministratorFacilities</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>exhibitionAdministratorFacilitiesEdit</servlet-name>
+        <servlet-class>exhibitionAdministrator.exhibitionAdministratorFacilitiesEdit</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>exhibitionAdministratorFacilitiesDelete</servlet-name>
+        <servlet-class>exhibitionAdministrator.exhibitionAdministratorFacilitiesDelete</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>exhibitionAdministratorOpportunity</servlet-name>
+        <servlet-class>exhibitionAdministrator.exhibitionAdministratorOpportunity</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>exhibitionAdministratorOpportunityEdit</servlet-name>
+        <servlet-class>exhibitionAdministrator.exhibitionAdministratorOpportunityEdit</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>exhibitionAdministratorOpportunityDelete</servlet-name>
+        <servlet-class>exhibitionAdministrator.exhibitionAdministratorOpportunityDelete</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>exhibitionAdministratorContactInformationFirstTimeUse</servlet-name>
+        <servlet-class>exhibitionAdministrator.exhibitionAdministratorContactInformationFirstTimeUse</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ImageServlet</servlet-name>
+        <servlet-class>exhibitionAdministrator.ImageServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>displayImage</servlet-name>
+        <servlet-class>displayImage</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>exhibitionAdminLog</servlet-name>
@@ -197,8 +237,48 @@
         <url-pattern>/exhibitionAdministratorFAQ</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>demo</servlet-name>
-        <url-pattern>/demo</url-pattern>
+        <servlet-name>exhibitionAdministratorFAQDelete</servlet-name>
+        <url-pattern>/exhibitionAdministratorFAQDelete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>exhibitionAdministratorFAQEdit</servlet-name>
+        <url-pattern>/exhibitionAdministratorFAQEdit</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>exhibitionAdministratorFacilities</servlet-name>
+        <url-pattern>/exhibitionAdministratorFacilities</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>exhibitionAdministratorFacilitiesEdit</servlet-name>
+        <url-pattern>/exhibitionAdministratorFacilitiesEdit</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>exhibitionAdministratorFacilitiesDelete</servlet-name>
+        <url-pattern>/exhibitionAdministratorFacilitiesDelete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>exhibitionAdministratorOpportunity</servlet-name>
+        <url-pattern>/exhibitionAdministratorOpportunity</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>exhibitionAdministratorOpportunityEdit</servlet-name>
+        <url-pattern>/exhibitionAdministratorOpportunityEdit</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>exhibitionAdministratorOpportunityDelete</servlet-name>
+        <url-pattern>/exhibitionAdministratorOpportunityDelete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>exhibitionAdministratorContactInformationFirstTimeUse</servlet-name>
+        <url-pattern>/exhibitionAdministratorContactInformationFirstTimeUse</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ImageServlet</servlet-name>
+        <url-pattern>/ImageServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>displayImage</servlet-name>
+        <url-pattern>/displayImage</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

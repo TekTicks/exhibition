@@ -8,6 +8,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.*;
+import java.sql.*;
+import java.util.zip.*;
+
 
 public class exhibitionAdministratorOpportunity extends HttpServlet {
         protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -24,10 +28,15 @@ public class exhibitionAdministratorOpportunity extends HttpServlet {
               Connection con;
               con=exhibitionAdministratorOneTimeConnection.getConnection(); 
               HttpSession ss=request.getSession(false);
-              String idValid=(String)ss.getAttribute("idValid");  // value fetch from exhibitionAdminLoginCheck.java file
-               HttpSession ssC=request.getSession(false);
-                String fileName=(String)ssC.getAttribute("fileName");
-                out.print(fileName);
+              String idValid=(String)ss.getAttribute("idValid");  
+               out.print(idValid);
+              // value fetch from exhibitionAdminLoginCheck.java file
+             if(!(mobile.length() == 10) )
+             {
+                 out.print("mobileNoInvalid");
+             }
+             else
+             {
               String val = "insert into exhibitionOpportunity(exhibitionId,opportunityTitle,email,mobile,contactNo,mediaId,message,createdBy,modifiedBy,modifiedByFlag)  values (?,?,?,?,?,3,'opportunity_message','"+idValid+"','"+idValid+"',(select id from roles where id=1))" ;
               //data inserted in exhibitionFAQ table
               PreparedStatement ps = con.prepareStatement(val);  
@@ -47,6 +56,7 @@ public class exhibitionAdministratorOpportunity extends HttpServlet {
                   }
            con.close();
             }
+        }
            catch(Exception e)
            {
        out.print("error" +e);

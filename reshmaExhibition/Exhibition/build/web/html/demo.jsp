@@ -1,25 +1,30 @@
-<HTML>
-    <HEAD>
-        <TITLE>JSP page Counter</TITLE>
-    </HEAD>
 
-    <BODY>
-        <H1>JSP page Counter</H1>
-        <%
-    
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-        Integer applicationCount = (Integer)application.getAttribute("applicationCount");
-        if (applicationCount == null) {
-            applicationCount = new Integer(1);
-        } else {
-            applicationCount= new Integer(applicationCount.intValue() + 1);
-        }
+<html>
+<body>
+<form method="post" action="UploadFile" enctype="multipart/form-data">
+<input type="file" id="files" />
+<img id="image"  style="width:200px;height:200px"/>
+<script>
+document.getElementById("files").onchange = function () {
+    var reader = new FileReader();
 
-        application.setAttribute("applicationCount", applicationCount);
-        %>
+    reader.onload = function (e) {
+        // get loaded data and render thumbnail.
+        document.getElementById("image").src = e.target.result;
+    };
 
-        
-        <BR>
-        Visitors to this page so far <%=applicationCount%> (visitor).
-    </BODY>
-</HTML>  
+    // read the image file as a data URL.
+    reader.readAsDataURL(this.files[0]);
+  
+   
+};
+
+</script>
+
+</form> <jsp:include page="insertimage.jsp" />
+   
+</body>
+</html>
+ 

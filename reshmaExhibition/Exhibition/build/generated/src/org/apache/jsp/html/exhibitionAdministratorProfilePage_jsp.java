@@ -3,7 +3,25 @@ package org.apache.jsp.html;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
+import exhibitionAdministrator.*;;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.*;
+import java.util.*;
+import java.io.*;
+import java.util.Iterator;
+import java.util.List;
+import java.io.File;
+import java.sql.ResultSet;;
+import java.sql.Statement;;
+import exhibitionAdministrator.exhibitionAdministratorOneTimeConnection;;
+import java.sql.Connection;;
 import javax.servlet.http.HttpSession.*;;
+import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.fileupload.FileItem;
+import java.io.*;
+import java.sql.*;
+import java.util.zip.*;
 import javax.servlet.http.HttpSession.*;;
 
 public final class exhibitionAdministratorProfilePage_jsp extends org.apache.jasper.runtime.HttpJspBase
@@ -41,6 +59,22 @@ public final class exhibitionAdministratorProfilePage_jsp extends org.apache.jas
       _jspx_out = out;
       _jspx_resourceInjector = (org.glassfish.jsp.api.ResourceInjector) application.getAttribute("com.sun.appserv.jsp.resource.injector");
 
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
       out.write("\n");
       out.write("\n");
       out.write("\n");
@@ -146,26 +180,43 @@ public final class exhibitionAdministratorProfilePage_jsp extends org.apache.jas
       out.write("\t\t          \ttype: 'post',\n");
       out.write("\t\t   \t\tsuccess: function(msg){\n");
       out.write("                                alert(msg);\n");
-      out.write("                                 if(msg == 'dataupdated') // Message Sent, check and redirect\n");
+      out.write("                                 if(msg != 'error') // Message Sent, check and redirect\n");
       out.write("\t\t\t\t{\n");
-      out.write("                                   \n");
+      out.write("                                     if(msg != 'dataupdateinvalid') {\n");
+      out.write("                                         \n");
       out.write("                                          $(\"#msgbox3\").html('data updated').addClass('myinfo').fadeTo(900,1,function()\n");
       out.write("\t\t\t             {\n");
       out.write("\t\t\t                 //redirect to secure page\n");
       out.write("\t\t\t             // document.location='/Exhibition/html/profilePage.jsp';\n");
       out.write("\t\t\t             });\n");
-      out.write("                                        \n");
-      out.write("                                    }\n");
+      out.write("                                  \n");
+      out.write("                             }\n");
+      out.write("                                \n");
       out.write("                            else\n");
       out.write("\t\t\t\t{\n");
-      out.write("\t\t\t\t\t$(\"#msgbox3\").fadeTo(200,0.1,function() //start fading the messagebox\n");
+      out.write("\t\t\t\t\n");
+      out.write("                                         $(\"#msgbox4\").fadeTo(200,0.1,function() //start fading the messagebox\n");
       out.write("\t\t                {\n");
       out.write("\t\t\t                  //add message and change the class of the box and start fading\n");
       out.write("\t\t\t                 $(this).html('Sorry...data not updated').removeClass().addClass('myerror').fadeTo(900,1);\n");
       out.write("                                         //document.location='/Exhibition/html/exhibitionAdminLog.jsp?user';\n");
       out.write("                                 });\n");
+      out.write("                                        \n");
+      out.write("                                    }\t\n");
+      out.write("                                \n");
+      out.write("\t\t\t\t} \n");
+      out.write("                                else\n");
+      out.write("                                {\n");
+      out.write("                                     $(\"#msgbox4\").fadeTo(200,0.1,function() //start fading the messagebox\n");
+      out.write("\t\t                {\n");
+      out.write("\t\t\t                  //add message and change the class of the box and start fading\n");
+      out.write("\t\t\t                 $(this).html('Error').removeClass().addClass('myerror').fadeTo(900,1);\n");
+      out.write("                                         //document.location='/Exhibition/html/exhibitionAdminLog.jsp?user';\n");
+      out.write("                                 });\n");
+      out.write("                                    \n");
       out.write("                                }\n");
-      out.write("\t\t\t\t}\n");
+      out.write("                                \n");
+      out.write("    }\n");
       out.write("\t\t\t\t\n");
       out.write("\t\t\t\t});\n");
       out.write("\t\t\t}, 200);\n");
@@ -352,15 +403,15 @@ public final class exhibitionAdministratorProfilePage_jsp extends org.apache.jas
       out.write("                <span class=\"icon-thumbnail\">M</span>\n");
       out.write("              </li>\n");
       out.write("               <li class=\"\">\n");
-      out.write("                <a href=\"exhibitionOpportunity.jsp\">Opportunities/Response </a>\n");
+      out.write("                <a href=\"/Exhibition/html/exhibitionAdministratorOpportunity.jsp\">Opportunities/Response </a>\n");
       out.write("                <span class=\"icon-thumbnail\">M</span>\n");
       out.write("              </li>\n");
       out.write("               <li class=\"\">\n");
-      out.write("                <a href=\"exhibitionFAQ.jsp\"> FAQ's </a>\n");
+      out.write("                <a href=\"/Exhibition/html/exhibitionAdministratorFAQ.jsp\"> FAQ's </a>\n");
       out.write("                <span class=\"icon-thumbnail\">M</span>\n");
       out.write("              </li>\n");
       out.write("               <li class=\"\">\n");
-      out.write("                <a href=\"facilities.jsp\"> Facilities</a>\n");
+      out.write("                <a href=\"/Exhibition/html/exhibitionAdministratorFacilities.jsp\"> Facilities</a>\n");
       out.write("                <span class=\"icon-thumbnail\">M</span>\n");
       out.write("              </li>\n");
       out.write("               <li class=\"\">\n");
@@ -799,8 +850,81 @@ out.print((String)ss.getAttribute("levelValid"));
       out.write("                              </div></div>\n");
       out.write("                           <div class=\"col-sm-10\">\n");
       out.write("                              \n");
-      out.write("                               <input type='file' onchange=\"readURL(this);\" />\n");
-      out.write("                         <img id=\"blah\" src=\"#\" alt=\"your image\" />\n");
+      out.write("                                 <form ENCTYPE=\"multipart/form-data\" action=\"\" method=\"post\" role=\"form\">\n");
+      out.write("             <div class=\"panel-heading\">\n");
+      out.write("              <div class=\"panel-title\">\n");
+      out.write("                    Social Media Icon \n");
+      out.write("                </div>\n");
+      out.write("                 </div>\n");
+      out.write("             \n");
+      out.write("         \n");
+      out.write("\n");
+      out.write("    <img src='' id=\"profile\" alt=\"Profile not uploaded\" style=\"width:200px;height:200px\"> \n");
+      out.write("            \n");
+      out.write("    <script type=\"text/javascript\">\n");
+      out.write("\tfunction readProfile(input) {\n");
+      out.write("\tif (input.files && input.files[0]) {\n");
+      out.write("\tvar reader3 = new FileReader();\n");
+      out.write("\treader3.onload = function (e) {\n");
+      out.write("\t$('#profile')\n");
+      out.write("\t.attr('src', e.target.result)\n");
+      out.write("\t};\n");
+      out.write("\treader3.readAsDataURL(input.files[0]);\n");
+      out.write("\t}\n");
+      out.write("\t}\n");
+      out.write("   </script>\n");
+      out.write("   <input name=\"file\" id=\"file\" style=\"width:200px\" type=\"file\" onchange=\"readProfile(this);\">\n");
+      out.write("  \n");
+      out.write("   \n");
+      out.write("   \n");
+      out.write("\n");
+      out.write("\n");
+
+String saveFile="";
+String contentType = request.getContentType();
+if((contentType != null)&&(contentType.indexOf("multipart/form-data") >= 0)){
+DataInputStream in = new DataInputStream(request.getInputStream());
+int formDataLength = request.getContentLength();
+byte dataBytes[] = new byte[formDataLength];
+int byteRead = 0;
+int totalBytesRead = 0;
+while(totalBytesRead < formDataLength){
+byteRead = in.read(dataBytes, totalBytesRead,formDataLength);
+totalBytesRead += byteRead;
+}
+String file = new String(dataBytes);
+saveFile = file.substring(file.indexOf("filename=\"") + 10);
+saveFile = saveFile.substring(0, saveFile.indexOf("\n"));
+saveFile = saveFile.substring(saveFile.lastIndexOf("\\") + 1,saveFile.indexOf("\""));
+int lastIndex = contentType.lastIndexOf("=");
+String boundary = contentType.substring(lastIndex + 1,contentType.length());
+int pos;
+pos = file.indexOf("filename=\"");
+pos = file.indexOf("\n", pos) + 1;
+pos = file.indexOf("\n", pos) + 1;
+pos = file.indexOf("\n", pos) + 1;
+int boundaryLocation = file.indexOf(boundary, pos) - 4;
+int startPos = ((file.substring(0, pos)).getBytes()).length;
+int endPos = ((file.substring(0, boundaryLocation)).getBytes()).length;
+File fff = new File("C:/Users/Admin/Documents/NetBeansProjects/Exhibition/web/html/"+saveFile);
+FileOutputStream fileOut = new FileOutputStream(fff);
+fileOut.write(dataBytes, startPos, (endPos - startPos));
+fileOut.flush();
+fileOut.close();
+
+HttpSession ssC=request.getSession();
+ssC.setAttribute("fileName",saveFile); 
+ //response.sendRedirect("/Exhibition/html/exhibitionAdministratorProfilePage.jsp"); 
+
+
+
+      out.write('\n');
+
+}
+
+      out.write("\n");
+      out.write("    <input type=\"submit\" value=\"upload\">     \n");
+      out.write("         </form>\n");
       out.write("                           </div>\n");
       out.write("                      </div>\n");
       out.write("                    </div>\n");
@@ -821,8 +945,25 @@ out.print((String)ss.getAttribute("levelValid"));
       out.write("                  <!--  <h3>Create Moderator</h3> -->\n");
       out.write("                   \n");
       out.write("                      \n");
+      out.write("                      \n");
       out.write("                      ");
- HttpSession objcontact=request.getSession(false);
+
+                          Connection con;
+  con=exhibitionAdministratorOneTimeConnection.getConnection();
+  
+                           // HttpSession ss=request.getSession(false);
+                    String rs1 = (String) ss.getAttribute("idValid");
+                    //out.print(dob);
+                     //  HttpSession objcontact=request.getSession(true);
+                          Statement st=con.createStatement();
+                        ResultSet rs=st.executeQuery("select * from exhibitionAdminContact where id='"+rs1+"'");
+                          
+                        int co=0;
+                        
+                        while(rs.next())
+                        {
+                  
+                        
       out.write("\n");
       out.write("                    \n");
       out.write("                    <form id=\"login_frm\" name=\"login_frm\" class=\"form-horizontal\" role=\"form\" autocomplete=\"off\" action=\"\" method=\"\">\n");
@@ -831,7 +972,7 @@ out.print((String)ss.getAttribute("levelValid"));
       out.write("                        <label for=\"fname\" class=\"col-sm-3 control-label\">Title</label>\n");
       out.write("                        <div class=\"col-sm-9\">\n");
       out.write("                            <input type=\"text\" class=\"form-control\" id=\"t1\" name=\"t1\" placeholder=\"Title\" value=\"");
-out.print((String)objcontact.getAttribute("trt"));
+out.print(rs.getString("title"));
       out.write("\" required>\n");
       out.write("                       </div>\n");
       out.write("                       \n");
@@ -840,7 +981,7 @@ out.print((String)objcontact.getAttribute("trt"));
       out.write("                        <label for=\"fname\" class=\"col-sm-3 control-label\">First Name</label>\n");
       out.write("                        <div class=\"col-sm-9\">\n");
       out.write("                            <input type=\"text\" class=\"form-control\" id=\"fn\" placeholder=\"First Name\" name=\"fn\" value=\"");
-out.print((String)objcontact.getAttribute("firstName"));
+out.print(rs.getString("firstName"));
       out.write("\" required>\n");
       out.write("                        </div>\n");
       out.write("                        \n");
@@ -850,7 +991,7 @@ out.print((String)objcontact.getAttribute("firstName"));
       out.write("                        <label for=\"fname\" class=\"col-sm-3 control-label\">Last Name</label>\n");
       out.write("                        <div class=\"col-sm-9\">\n");
       out.write("                            <input type=\"text\" class=\"form-control\" id=\"ln\" placeholder=\"lastName\" name=\"ln\" value=\"");
-out.print((String)objcontact.getAttribute("lastName"));
+out.print(rs.getString("lastName"));
       out.write("\" required>\n");
       out.write("                        </div>\n");
       out.write("                      </div>\n");
@@ -860,7 +1001,7 @@ out.print((String)objcontact.getAttribute("lastName"));
       out.write("                        <label for=\"fname\" class=\"col-sm-3 control-label\">Date of Birth</label>\n");
       out.write("                        <div class=\"col-sm-9\">\n");
       out.write("                            <input type=\"text\" class=\"form-control\" id=\"dob\" placeholder=\"DOB\" name=\"dob\" value=\"");
-out.print((String)objcontact.getAttribute("dateOfBirth"));
+out.print(rs.getString("dateOfBirth"));
       out.write("\" required>\n");
       out.write("                        </div>\n");
       out.write("                      </div>   \n");
@@ -868,7 +1009,7 @@ out.print((String)objcontact.getAttribute("dateOfBirth"));
       out.write("                        <label for=\"fname\" class=\"col-sm-3 control-label\">Level</label>\n");
       out.write("                        <div class=\"col-sm-9\">\n");
       out.write("                            <input type=\"text\" class=\"form-control\" id=\"le\" placeholder=\"level\" name=\"le\" value=\"");
-out.print((String)objcontact.getAttribute("level"));
+out.print(rs.getString("level"));
       out.write("\" required>\n");
       out.write("                        </div>\n");
       out.write("                      </div>   \n");
@@ -876,7 +1017,7 @@ out.print((String)objcontact.getAttribute("level"));
       out.write("                        <label for=\"fname\" class=\"col-sm-3 control-label\">Designation</label>\n");
       out.write("                        <div class=\"col-sm-9\">\n");
       out.write("                            <input type=\"text\" class=\"form-control\" id=\"degination\" placeholder=\"Designation\" name=\"degination\" value=\"");
-out.print((String)objcontact.getAttribute("degination"));
+out.print(rs.getString("degination"));
       out.write("\"  required>\n");
       out.write("                        </div>\n");
       out.write("                      </div>   \n");
@@ -884,12 +1025,12 @@ out.print((String)objcontact.getAttribute("degination"));
       out.write("                        <label for=\"fname\" class=\"col-sm-3 control-label\">Phone No</label>\n");
       out.write("                        <div class=\"col-sm-9\">\n");
       out.write("                            <input type=\"text\" class=\"form-control\" id=\"pn\" placeholder=\"Phone No\" name=\"pn\" value=\"");
-out.print((String)objcontact.getAttribute("phoneNo"));
+out.print(rs.getString("phoneNo"));
       out.write("\" required>\n");
       out.write("                        </div>\n");
       out.write("                      </div>   \n");
       out.write("                        \n");
-      out.write("                        <br>     <div id=\"msgbox3\"> </div> \n");
+      out.write("                        <br>     <div id=\"msgbox3\"> </div>  <div id=\"msgbox4\"> </div> \n");
       out.write("                      <div class=\"row\">\n");
       out.write("                        <div class=\"col-sm-3\">\n");
       out.write("                      <!--    <p>I hereby certify that the information above is true and accurate. </p> -->\n");
@@ -900,6 +1041,17 @@ out.print((String)objcontact.getAttribute("phoneNo"));
       out.write("                        </div>\n");
       out.write("                      </div>\n");
       out.write("                    \n");
+      out.write("                     \n");
+      out.write("                      \n");
+      out.write("                         ");
+
+                          co++;  
+                          
+                        }
+                        
+                             
+                      
+      out.write("\n");
       out.write("                    </form>\n");
       out.write("                  </div>\n");
       out.write("                </div>\n");

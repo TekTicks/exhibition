@@ -1,0 +1,10 @@
+SMAP
+data_jsp.java
+JSP
+*S JSP
+*F
++ 0 data.jsp
+html/data.jsp
+*L
+5,284:57
+*E

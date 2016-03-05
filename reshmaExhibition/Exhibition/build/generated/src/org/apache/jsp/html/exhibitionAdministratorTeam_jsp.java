@@ -3,6 +3,7 @@ package org.apache.jsp.html;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
+import exhibitionAdministrator.exhibitionAdministratorOneTimeConnection;
 import java.sql.ResultSet;
 import java.sql.DriverManager;
 import java.sql.Statement;
@@ -45,6 +46,7 @@ public final class exhibitionAdministratorTeam_jsp extends org.apache.jasper.run
       _jspx_out = out;
       _jspx_resourceInjector = (org.glassfish.jsp.api.ResourceInjector) application.getAttribute("com.sun.appserv.jsp.resource.injector");
 
+      out.write("\n");
       out.write("\n");
       out.write("\n");
       out.write("\n");
@@ -265,15 +267,15 @@ public final class exhibitionAdministratorTeam_jsp extends org.apache.jasper.run
       out.write("                <span class=\"icon-thumbnail\">M</span>\n");
       out.write("              </li>\n");
       out.write("               <li class=\"\">\n");
-      out.write("                <a href=\"exhibitionOpportunity.jsp\">Opportunities/Response </a>\n");
+      out.write("                <a href=\"/Exhibition/html/exhibitionAdministratorOpportunity.jsp\">Opportunities/Response </a>\n");
       out.write("                <span class=\"icon-thumbnail\">M</span>\n");
       out.write("              </li>\n");
       out.write("               <li class=\"\">\n");
-      out.write("                <a href=\"exhibitionFAQ.jsp\"> FAQ's </a>\n");
+      out.write("                <a href=\"/Exhibition/html/exhibitionAdministratorFAQ.jsp\"> FAQ's </a>\n");
       out.write("                <span class=\"icon-thumbnail\">M</span>\n");
       out.write("              </li>\n");
       out.write("               <li class=\"\">\n");
-      out.write("                <a href=\"facilities.jsp\"> Facilities</a>\n");
+      out.write("                <a href=\"/Exhibition/html/exhibitionAdministratorFacilities.jsp\"> Facilities</a>\n");
       out.write("                <span class=\"icon-thumbnail\">M</span>\n");
       out.write("              </li>\n");
       out.write("               <li class=\"\">\n");
@@ -752,8 +754,9 @@ public final class exhibitionAdministratorTeam_jsp extends org.apache.jasper.run
                        
                          
                          Class.forName("com.mysql.jdbc.Driver"); 
-                         Connection con1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/Exhibition","root","123"); 
-                         Statement stat1=con1.createStatement();
+                       Connection con;
+               con=exhibitionAdministratorOneTimeConnection.getConnection(); 
+                         Statement stat1=con.createStatement();
                          ResultSet rs1=stat1.executeQuery("select * from exhibitionTeam");
                          int count1=0;
                         
@@ -775,18 +778,57 @@ public final class exhibitionAdministratorTeam_jsp extends org.apache.jasper.run
                            // exhibitionAdministrator.personalInformation.id1=id1;
                             String exid=rs1.getString(1);
                             
-                            HttpSession ss=request.getSession(true);
-                            ss.setAttribute("myid", exid);
+                           // HttpSession ss=request.getSession(true);
+                            //ss.setAttribute("myid", exid);
                            
       out.write("\n");
       out.write("                           \n");
       out.write("                             <td>\n");
       out.write("                                 <div class=\"btn-group\">\n");
-      out.write("                                 <button type=\"button\" class=\"btn btn-success\" onclick=\"document.location.href='/Exhibition/html/exhibitionTeamMemberEdit.jsp';\"><i class=\"fa fa-pencil\"></i></button>\n");
-      out.write("                                 <button type=\"button\" class=\"btn btn-success\" onclick=\"document.location.href='/Exhibition/exhibitionAdministratorTeamMemberDelete?myid=");
+      out.write("                                 <button type=\"button\" class=\"btn btn-success\" onclick=\"document.location.href='/Exhibition/html/exhibitionTeamMemberEdit.jsp?myid=");
       out.print(exid);
-      out.write("';\"><i class=\"fa fa-trash-o\"></i>\n");
+      out.write("';\"><i class=\"fa fa-pencil\"></i></button>\n");
+      out.write("                                \n");
+      out.write("                                  <div class=\"modal fade\" id=\"confirm-delete\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\" aria-hidden=\"true\">\n");
+      out.write("        <div class=\"modal-dialog\">\n");
+      out.write("            <div class=\"modal-content\">\n");
+      out.write("            \n");
+      out.write("                <div class=\"modal-header\">\n");
+      out.write("                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-hidden=\"true\">&times;</button>\n");
+      out.write("                    <h4 class=\"modal-title\" id=\"myModalLabel\">Confirm Delete</h4>\n");
+      out.write("                </div>\n");
+      out.write("            \n");
+      out.write("                <div class=\"modal-body\">\n");
+      out.write("                    <p>You are about to delete one track, this procedure is irreversible.</p>\n");
+      out.write("                    <p>Do you want to proceed?</p>\n");
+      out.write("                    <p class=\"debug-url\"></p>\n");
+      out.write("                </div>\n");
+      out.write("                \n");
+      out.write("                <div class=\"modal-footer\">\n");
+      out.write("                    <button type=\"button\" class=\"btn btn-success\" data-dismiss=\"modal\" onclick=\"document.location.href='/Exhibition/html/exhibitionAdministratorSector.jsp';\">Cancel</button>\n");
+      out.write("                    <a class=\"btn btn-success btn-ok\" onclick=\"document.location.href='/Exhibition/exhibitionAdministratorTeamMemberDelete?myid=");
+      out.print(exid);
+      out.write("';\">Delete</a>\n");
+      out.write("                </div>\n");
+      out.write("            </div>\n");
+      out.write("        </div>\n");
+      out.write("    </div>\n");
+      out.write("                                 \n");
+      out.write("                                 <button type=\"button\" class=\"btn btn-success\" data-href=\"/Exhibition/exhibitionAdministratorTeamMemberDelete?myid=");
+      out.print(exid);
+      out.write("\" data-toggle=\"modal\" data-target=\"#confirm-delete\"><i class=\"fa fa-trash-o\"></i>\n");
       out.write("                                 </button>\n");
+      out.write("                          <script>\n");
+      out.write("        $('#confirm-delete').on('show.bs.modal', function(e) {\n");
+      out.write("            $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));\n");
+      out.write("            \n");
+      out.write("            $('.debug-url').html('Delete URL: <strong>' + $(this).find('.btn-ok').attr('href') + '</strong>');\n");
+      out.write("        });\n");
+      out.write("    </script>\n");
+      out.write("                                 \n");
+      out.write("                                 \n");
+      out.write("                                 \n");
+      out.write("                                 \n");
       out.write("                                 </div>\n");
       out.write("                            </td> ");
 

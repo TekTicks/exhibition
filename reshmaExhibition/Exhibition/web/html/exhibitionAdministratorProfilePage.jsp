@@ -201,61 +201,7 @@
 }
 </style>
 
-<script type="text/javascript">
-	$(document).ready(function(){
-		$("#login").submit(function(){
 
-			 //remove previous class and add new "myinfo" class
-	       // $("#msgbox").removeClass().addClass('myinfo').text('Validating Your Login ').fadeIn(1000);
-
-			
-			this.timer = setTimeout(function () {
-				$.ajax({
-		          	url: '/Exhibition/exhibitionAdministratorPersonalInformation',
-		          	data: 'mn='+ $('#mobileNo').val() +'&us=' + $('#userName').val()+'&pw=' + $('#password').val() +'&le=' + $('#level').val(),
-		          	type: 'post',
-		   		success: function(msg){
-                                  alert(msg);
-                                if(msg != 'mobileNoInvalid') // Message Sent, check and redirect
-				{
-                                        if(msg=='ok')
-                                        {
-                                          $("#msgbox1").html('data updated').addClass('myinfo').fadeTo(200,1,function()
-			             {
-			                 //redirect to secure page
-			              //document.location='/Exhibition/html/exhibitionAdminPersonal.jsp';
-			             });
-                                        
-                                    }
-                                
-				
-                                else
-                                {
-                                    $("#msgbox2").fadeTo(100,1,function() //start fading the messagebox
-		                {
-			                  //add message and change the class of the box and start fading
-			                 $(this).html('records are not updated..').removeClass().addClass('myerror').fadeTo(300,1);
-                                        // document.location='/Exhibition/html/exhibitionAdminLog.jsp?user';
-                                 });
-                                }
-                            }
-                            else
-                            {
-                                $("#msgbox2").fadeTo(100,1,function() //start fading the messagebox
-		                {
-			                  //add message and change the class of the box and start fading
-			                 $(this).html('MobileNo should be 10 digits only').removeClass().addClass('myerror').fadeTo(300,1);
-                                        // document.location='/Exhibition/html/exhibitionAdminLog.jsp?user';
-                                 });
-                            }
-                                }
-				});
-			}, 200);
-			return false;
- 		});		
-
-	});
-   </script> 
   
 <script type="text/javascript">
     window.onload = function()
@@ -808,34 +754,41 @@
                               </div></div>
                            <div class="col-sm-10">
                               
-                                 <form ENCTYPE="multipart/form-data" action="" method="post" role="form">
+                                 <form action="employee_upload_profile_image.jsp" method="post" enctype="multipart/form-data" name="form1" id="form1">
              <div class="panel-heading">
               <div class="panel-title">
                     Social Media Icon 
                 </div>
                  </div>
              
+   
+ <div id="uploadFormLayer">
+<label><b>Upload Image File:</b></label><br/>
+<input name="userImage" type="file" class="inputFile" onchange="readURL(this);"  />
+	<script type="text/javascript">
+									function readURL(input) {
+									if (input.files && input.files[0]) {
+									var reader = new FileReader();
+									reader.onload = function (e) {
+									$('#tempImg')
+									.attr('src', e.target.result)
+									.width(125)
+									.height(125);
+									$('#flag').val("1");
+									};
+									reader.readAsDataURL(input.files[0]);
+									}
+									}
+									</script>
+									<input type="hidden" id="flag" name="flag">
+	<img id="tempImg"  src="" width="125" height="125"> 
+ </div>  
+            
+    
+ 
         
+ </form>
 
-    <img src='' id="profile" alt="Profile not uploaded" style="width:200px;height:200px"> 
-          
-    <script type="text/javascript">
-	function readProfile(input) {
-	if (input.files && input.files[0]) {
-	var reader3 = new FileReader();
-	reader3.onload = function (e) {
-	$('#profile')
-	.attr('src', e.target.result)
-	};
-	reader3.readAsDataURL(input.files[0]);
-	}
-	}
-   </script>
-   <input name="file" id="file" style="width:200px" type="file" onchange="readProfile(this);">
-   <input type="submit" value="upload">       
-
-         </form><jsp:include page="insertimage.jsp" />
-                               
                            </div>
                       </div>
                     </div>   
@@ -931,7 +884,7 @@
                       <!--    <p>I hereby certify that the information above is true and accurate. </p> -->
                         </div>
                         <div class="col-sm-6">
-                            <button class="btn btn-success" name="login" id="name" type="submit">Save</button>
+                            <button class="btn btn-success" name="login" id="name" type="submit" onclick="insertimage.jsp">Save</button>
                           <button class="btn btn-default">Cancel</button>
                         </div>
                       </div>

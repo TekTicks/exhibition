@@ -12,13 +12,14 @@
 <%@ page import="java.util.Iterator"%>
 <%@ page import="java.util.List"%>
 <%@ page import="java.io.File"%>
-
+ 
 
 <%@page import = "java.sql.ResultSet;"%>
 <%@page import ="java.sql.Statement;"%>
 <%@page import = "exhibitionAdministrator.exhibitionAdministratorOneTimeConnection;"%>
 <%@page import = "java.sql.Connection;"%>
 <%@page contentType = "text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -199,34 +200,9 @@
 	text-align: center;
 }
 </style>
-<link class="jsbin" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
-<script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-<script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
-<script>
-function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
 
-            reader.onload = function (e) {
-                $('#blah')
-                    .attr('src', e.target.result)
-                    .width(150)
-                    .height(200);
-            };
 
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-	</script>
-<meta charset=utf-8 />
-<title>JS Bin</title>
-<!--[if IE]>
-  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-<![endif]-->
-<style>
-  article, aside, figure, footer, header, hgroup, 
-  menu, nav, section { display: block; }
-</style>
+  
 <script type="text/javascript">
     window.onload = function()
     {
@@ -343,7 +319,7 @@ function readURL(input) {
                 <span class="icon-thumbnail">M</span>
               </li>
                <li class="">
-                <a href="exhibitionOpportunity.jsp">Opportunities/Response </a>
+                <a href="/Exhibition/html/exhibitionAdministratorOpportunity.jsp">Opportunities/Response </a>
                 <span class="icon-thumbnail">M</span>
               </li>
                <li class="">
@@ -351,7 +327,7 @@ function readURL(input) {
                 <span class="icon-thumbnail">M</span>
               </li>
                <li class="">
-                <a href="facilities.jsp"> Facilities</a>
+                <a href="/Exhibition/html/exhibitionAdministratorFacilities.jsp"> Facilities</a>
                 <span class="icon-thumbnail">M</span>
               </li>
                <li class="">
@@ -778,66 +754,44 @@ function readURL(input) {
                               </div></div>
                            <div class="col-sm-10">
                               
-                                 <form ENCTYPE="multipart/form-data" action="/Exhibition/html/insertimage.jsp" method="post" role="form">
+                                 <form action="employee_upload_profile_image.jsp" method="post" enctype="multipart/form-data" name="form1" id="form1">
              <div class="panel-heading">
               <div class="panel-title">
                     Social Media Icon 
                 </div>
                  </div>
              
-          <%
-            try {
-           String img_name="";
-             Class.forName("com.mysql.jdbc.Driver"); 
-                Connection con;
-  con=exhibitionAdministratorOneTimeConnection.getConnection();
-             
-             Statement stat=con.createStatement();
-             
-             HttpSession ssC=request.getSession();
-             String fileName=(String)ssC.getAttribute("fileName");
-                         
-            // ResultSet rs=stat.executeQuery("select * from media order By id desc limit 1");
-            ResultSet rs=stat.executeQuery("select * from media where link='"+fileName+"'");
-             
-             if(!rs.next())
-             {
-                 out.println("Error");
-             }
-             else
-             {
-               img_name=rs.getString(2);
-               ss.setAttribute("mediaId1",rs.getString(1));
-               //out.print(rs.getString(1));
-             }
-            %>    
+   
+ <div id="uploadFormLayer">
+<label><b>Upload Image File:</b></label><br/>
+<input name="userImage" type="file" class="inputFile" onchange="readURL(this);"  />
+	<script type="text/javascript">
+									function readURL(input) {
+									if (input.files && input.files[0]) {
+									var reader = new FileReader();
+									reader.onload = function (e) {
+									$('#tempImg')
+									.attr('src', e.target.result)
+									.width(125)
+									.height(125);
+									$('#flag').val("1");
+									};
+									reader.readAsDataURL(input.files[0]);
+									}
+									}
+									</script>
+									<input type="hidden" id="flag" name="flag">
+	<img id="tempImg"  src="" width="125" height="125"> 
+ </div>  
+            
+    
+ 
+        
+ </form>
 
-    <img src='<%= img_name %>' id="profile" alt="Profile not uploaded" style="width:200px;height:200px"> 
-            <%}
-              catch(Exception e)
-                {
-                   out.print("fsdaf" +e);
-                }
-            %>  
-    <script type="text/javascript">
-	function readProfile(input) {
-	if (input.files && input.files[0]) {
-	var reader3 = new FileReader();
-	reader3.onload = function (e) {
-	$('#profile')
-	.attr('src', e.target.result)
-	};
-	reader3.readAsDataURL(input.files[0]);
-	}
-	}
-   </script>
-   <input name="file" id="file" style="width:200px" type="file" onchange="readProfile(this);">
-   <input type="submit" value="upload">       
-  
-         </form>
                            </div>
                       </div>
-                    </div>
+                    </div>   
                        <div class="container-fluid container-fixed-lg">
             <div class="row">
 <div class="col-md-6">
@@ -930,7 +884,7 @@ function readURL(input) {
                       <!--    <p>I hereby certify that the information above is true and accurate. </p> -->
                         </div>
                         <div class="col-sm-6">
-                            <button class="btn btn-success" name="login" id="name" type="submit">Save</button>
+                            <button class="btn btn-success" name="login" id="name" type="submit" onclick="insertimage.jsp">Save</button>
                           <button class="btn btn-default">Cancel</button>
                         </div>
                       </div>
@@ -963,7 +917,7 @@ function readURL(input) {
             </div>
           </div>
           <!-- END CONTAINER FLUID -->
-        </div>
+        
         <!-- END PAGE CONTENT -->
         <!-- START COPYRIGHT -->
         <!-- START CONTAINER FLUID -->
@@ -2280,7 +2234,8 @@ function readURL(input) {
     <script src="assets/js/scripts.js" type="text/javascript"></script>
     <!-- END PAGE LEVEL JS -->
     
-    
-        
+     
+       
   </body>
+   
 </html>

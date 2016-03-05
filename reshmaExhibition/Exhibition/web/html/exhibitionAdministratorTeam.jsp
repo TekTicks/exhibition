@@ -50,22 +50,36 @@
 		          	data: 'tagline='+ $('#tagline').val() +'&title=' + $('#title').val()+'&firstName=' + $('#firstName').val() +'&lastName=' + $('#lastName').val()+'&gender=' + $('#gender').val()+'&dateOfBirth=' + $('#dateOfBirth').val() +'&degination=' + $('#degination').val()+'&phoneNo=' + $('#phoneNo').val()+'&mobileNo=' + $('#mobileNo').val()+'&email=' + $('#email').val() +'&modifiedBy=' + $('#modifiedBy').val(),
 		          	type: 'post',
 		   		success: function(msg){
-                                if(msg != 'error') // Message Sent, check and redirect
+                                    alert(msg);
+                              if(msg != 'mobileNoInvalid') // Message Sent, check and redirect
 				{
-                                       
-                                          $("#msgbox1").html('data inserted').addClass('myinfo').fadeTo(200,1,function()
+                                        if(msg =='ok')
+                                        {
+                                          
+                                      $("#msgbox1").fadeTo(100,1,function() //start fading the messagebox
+		                {
+			                  //add message and change the class of the box and start fading
+			                 $(this).html('records are not updated..').removeClass().addClass('myerror').fadeTo(300,1);
+                                        // document.location='/Exhibition/html/exhibitionAdminLog.jsp?user';
+                                 });
+                                }
+                                        
+                                  
+                                else
+                                {
+                                  $("#msgbox2").html('data updated').addClass('myinfo').fadeTo(200,1,function()
 			             {
 			                 //redirect to secure page
 			              //document.location='/Exhibition/html/exhibitionAdminPersonal.jsp';
-			             });
-                                        
-                                    }
-                               else
+			             }); 
+                            }
+                                }
+                            else
                             {
                                 $("#msgbox1").fadeTo(100,1,function() //start fading the messagebox
 		                {
 			                  //add message and change the class of the box and start fading
-			                 $(this).html('sorry').removeClass().addClass('myerror').fadeTo(300,1);
+			                 $(this).html('MobileNo should be 10 digits only').removeClass().addClass('myerror').fadeTo(300,1);
                                         // document.location='/Exhibition/html/exhibitionAdminLog.jsp?user';
                                  });
                             }
@@ -647,7 +661,7 @@
                 </div>
               </div>
          
-       <div id="msgbox1"></div>      
+       <div id="msgbox1"></div>       <div id="msgbox2"></div>     
        <button class="btn btn-primary btn-cons m-t-10" type="submit">Create a new account</button>
             </form>
         </div></div></div> </div> 
