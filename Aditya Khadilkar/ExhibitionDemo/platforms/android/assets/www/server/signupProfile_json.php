@@ -31,6 +31,7 @@ $image=$data['profile'][0]['profilePicture'];
 $updateVisitorProfileQuery="update visitorProfile
 set name='$pname',
 gender='$pGender',
+image='$image',
 dateOfBirth='$dob',	
 profession='$pprofession',
 education='$pEducation'

@@ -7,11 +7,26 @@
     </div>
   </div>
   
-    <div class="page-content login-screen-content" style="padding-top:50px" id="profileShow">
-
-
+    <div class="page-content login-screen-content" style="padding-top:50px" id="profileShow" style="visibility:hidden;">
+<style>
+ #profile
+{
+height:200px;
+width:100%;
+}
+#profile img
+{
+max-width:100%; 
+max-height:100%;
+margin:auto;
+display:block;
+}
+</style>
+			
 <form method="POST" name="register" >	
-   
+   <div class="content-block profile" style="text-align:center;padding:20px;">
+				<img src="img/Profilelogo.png" id="profilePic" onclick="getPhoto(pictureSource.PHOTOLIBRARY);" class="lazy">
+             </div>
       <div class="list-block inputs-list" style="padding:0px 0px">
         <ul>
 		<div class="content-block">

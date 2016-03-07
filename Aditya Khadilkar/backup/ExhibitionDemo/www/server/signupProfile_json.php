@@ -6,7 +6,7 @@ header('Access-Control-Allow-Headers: Content-Type');
 include 'jsonFormat.php';
 include 'jsonDeliver.php';
 include 'config.php';
-//var data = {"profile":[{"visitorId":visitorId,"pname":pname,"pemail":pemail,"pphone":pphone,"pgender":pgender,"pbirthdate":pbirthdate,"pcity":pcity}]};
+//var data = {"profile":[{"visitorId":visitorId,"pname":pname,"profilePicture":profilePicture,"pemail":pemail,"pphone":pphone,"pgender":pgender,"pbirthdate":pbirthdate,"pcity":pcity}]};
 //$json = {"events":[{"eventId":eventId}]}; 
 $json = file_get_contents("php://input");
 $data = json_decode($json, true);
@@ -19,6 +19,7 @@ $pGender=$data['profile'][0]['pGender'];
 $pprofession=$data['profile'][0]['pProfession'];
 $pEducation=$data['profile'][0]['pEducation'];
 $pBirthDate=$data['profile'][0]['pBirthDate'];
+$image=$data['profile'][0]['profilePicture'];
 
 //echo $pbirthdate;
 			
@@ -40,7 +41,8 @@ mysql_query($updateVisitorProfileQuery,$conn);
 $updateVisitorQuery="update visitor
 set name='$pname',
 emailId='$pemail',
-mobileNo='$pphone'	
+mobileNo='$pphone',
+image='$image'	
 where id='$visitorId'";	
 mysql_query($updateVisitorQuery,$conn); 
 	

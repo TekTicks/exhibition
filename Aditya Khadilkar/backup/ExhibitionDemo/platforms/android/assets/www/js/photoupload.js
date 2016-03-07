@@ -8,8 +8,10 @@ document.addEventListener("deviceready", onDeviceReady, false);
 //
 
 function onDeviceReady() {
+	
     pictureSource = navigator.camera.PictureSourceType;
     destinationType = navigator.camera.DestinationType;
+	alert("hiii");
 }
 // Called when a photo is successfully retrieved
 //
@@ -33,7 +35,7 @@ function onDeviceReady() {
 //
 
 function onPhotoURISuccess(imageURI) {
-	//alert("fire");
+	alert("fire");
     // Uncomment to view the image file URI
     console.log(imageURI);
     // Get image handle
@@ -65,6 +67,7 @@ function onPhotoURISuccess(imageURI) {
 //
 
 function getPhoto(source) {
+	alert("getphotocalled");
     // Retrieve image file location from specified source
 navigator.camera.getPicture(onPhotoURISuccess, onFail, {
 	    quality: 30, 
@@ -78,7 +81,7 @@ navigator.camera.getPicture(onPhotoURISuccess, onFail, {
 //
 
 function onFail(message) {
-    //alert('Failed because: ' + message);
+    alert('Failed because: ' + message);
 }
 
 function upload() {

@@ -9,7 +9,17 @@
     "installed_plugins": {
         "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "com.example.demo"
+        },
+        "cordova-plugin-camera": {
+            "PACKAGE_NAME": "com.example.demo"
+        },
+        "cordova-plugin-file-transfer": {
+            "PACKAGE_NAME": "com.example.demo"
         }
     },
-    "dependent_plugins": {}
+    "dependent_plugins": {
+        "cordova-plugin-file": {
+            "PACKAGE_NAME": "com.example.demo"
+        }
+    }
 }

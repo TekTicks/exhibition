@@ -46,16 +46,15 @@ var data = {"profile":[{"visitorId":visitorId}]};
 			{ 
 			
 				var profileName= JSON.stringify(response.visitor.name).replace(/"/g,"");
-			   var profilePic= JSON.stringify(response.visitor.profilePic).replace(/"/g,""); 
+			   var profilePic= JSON.stringify(response.visitor.image).replace(/"/g,""); 
 			   					
 			 	if(profilePic=="null")
 				{
-					document.getElementById("profilePic").style.backgroundImage='linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.8)),url(img/Profilelogo.png)';
-					
+					document.getElementById("profilePic1").style.backgroundImage='linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.8)),url(img/Profilelogo.png)';
 				}
 				else
 				{
-				document.getElementById("profilePic").style.backgroundImage='linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.8)),url("data:image/(png|jpg);base64,'+profilePic+'")';
+				document.getElementById("profilePic1").style.backgroundImage='linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.8)),url("data:image/(png|jpg);base64,'+profilePic+'")';
 				}
 		 
 			$("#profileName").text(profileName);

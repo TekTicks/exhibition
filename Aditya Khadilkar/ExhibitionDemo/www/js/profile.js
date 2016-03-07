@@ -18,12 +18,15 @@ function getprofile()
 		dataType:"json",
 		success:function(response)
 		{
+			var Pic= JSON.stringify(response.visitor[0].image).replace(/"/g,"");
 					//$(".floating-label").hide();
 					$("#pName").text(JSON.stringify(response.visitor[0].name).replace(/"/g,""));
 					$("#pEmailId").text(JSON.stringify(response.visitor[0].emailId).replace(/"/g,""));
 					$("#pMobileNo").text(JSON.stringify(response.visitor[0].mobileNo).replace(/"/g,""));
 					//$("#pbirthdate").val(convertDate(JSON.stringify(response.visitor[0].dob).replace(/"/g,"")));
 					
+					
+					document.getElementById("prof1").style.backgroundImage='linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.8)),url("data:image/(png|jpg);base64,'+Pic+'")';
 					//$("#pcity").val(JSON.stringify(response.visitor[0].city).replace(/"/g,""));
 					//$("#profilePic").attr("src",'data:image/(png|jpg);base64,'+JSON.stringify(response.visitor[0].image).replace(/"/g,"")+'');
 					//$("#pgender").val(JSON.stringify(response.visitor[0].gender).replace(/"/g,""));
@@ -151,6 +154,7 @@ function sendProfile()
 		{
 					if(JSON.stringify(response.status)==200)
 						{
+							profileReload();
 							myApp.alert('Data Updated','Update');
 							var a = document.getElementById('reloadProfile');
 							a.setAttribute("href","logo.html");
