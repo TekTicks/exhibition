@@ -1,15 +1,10 @@
 <%-- 
-    Document   : exhibitionSector
-    Created on : Jan 27, 2016, 5:15:09 PM
+    Document   : createModerator
+    Created on : Jan 23, 2016, 10:48:50 AM
     Author     : Admin
 --%>
 
-
-<%@page import="exhibitionAdministrator.exhibitionAdministratorOneTimeConnection"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
- <%@page import="java.io.*;" %>
-  <%@page import="java.sql.*;" %>
-  <%@page import="java.sql.DriverManager;" %>
 <!DOCTYPE html>
 <html>
   <head>
@@ -39,98 +34,14 @@
     <!--[if lte IE 9]>
 	<link href="assets/plugins/codrops-dialogFx/dialog.ie.css" rel="stylesheet" type="text/css" media="screen" />
 	<![endif]-->
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script src="pages/js/jquery-1.4.2.min.js"></script>
-   <script type="text/javascript">
-	$(document).ready(function(){
-		$("#login").submit(function(){
-
-			 //remove previous class and add new "myinfo" class
-	       // $("#msgbox").removeClass().addClass('myinfo').text('Validating Your Login ').fadeIn(1000);
-
-			
-			this.timer = setTimeout(function () {
-				$.ajax({
-		          	url: '/Exhibition/exhibitionAdministratorContactInformationFirstTimeUse',
-		          	data: 'title='+ $('#title').val() +'&firstName=' + $('#firstName').val()+'&lastName=' + $('#lastName').val()+'&dateOfBirth=' + $('#dateOfBirth').val() +'&level=' + $('#level').val()+'&degination=' + $('#degination').val()+'&phoneNo=' + $('#phoneNo').val(),
-		          	type: 'post',
-		   		success: function(msg){
-                                  alert(msg);
-                                if(msg != 'mobileNoInvalid') // Message Sent, check and redirect
-				{
-                                        if(msg =='ok')
-                                        {
-                                          $("#msgbox1").html('data updated').addClass('myinfo').fadeTo(200,1,function()
-			             {
-			                 //redirect to secure page
-			              //document.location='/Exhibition/html/exhibitionAdminPersonal.jsp';
-			             });
-                                        
-                                    }
-                                
-				
-                                else
-                                {
-                                    $("#msgbox2").fadeTo(100,1,function() //start fading the messagebox
-		                {
-			                  //add message and change the class of the box and start fading
-			                 $(this).html('records are not updated..').removeClass().addClass('myerror').fadeTo(300,1);
-                                        // document.location='/Exhibition/html/exhibitionAdminLog.jsp?user';
-                                 });
-                                }
-                            }
-                            else
-                            {
-                                $("#msgbox2").fadeTo(100,1,function() //start fading the messagebox
-		                {
-			                  //add message and change the class of the box and start fading
-			                 $(this).html('MobileNo should be 10 digits only').removeClass().addClass('myerror').fadeTo(300,1);
-                                        // document.location='/Exhibition/html/exhibitionAdminLog.jsp?user';
-                                 });
-                            }
-                                }
-				});
-			}, 200);
-			return false;
- 		});		
-
-	});
-   </script> 
-  
-     <style>
-#exists{display:none}
-#cross{display:none}
-.myinfo
-{
-	margin: 5px auto;
-	background:#d6e3f5;
-	border: 1px #0010ac solid;
-	padding:5px;
-	color:#0010ac;
-	font-size:12px;
-	width:350px;
-	min-height:0px;
-	-moz-border-radius:4px;
-	-webkit-border-radius:4px;
-	text-align: center;
-}
-
-.myerror
-{
-	margin: 5px auto;
-	background:#FFDFDF;
-	border: 1px #FF0000 solid;
-	padding:5px;
-	color:#FF0000;
-	font-size:12px;
-	width:350px;
-	min-height:0px;
-	-moz-border-radius:4px;
-	-webkit-border-radius:4px;
-	text-align: center;
-}
-</style> 
-
+    <link href="assets/plugins/bootstrap3-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/bootstrap-tag/bootstrap-tagsinput.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/dropzone/css/dropzone.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet" type="text/css" media="screen">
+    <link href="assets/plugins/summernote/css/summernote.css" rel="stylesheet" type="text/css" media="screen">
+    <link href="assets/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" media="screen">
+    <link href="assets/plugins/bootstrap-timepicker/bootstrap-timepicker.min.css" rel="stylesheet" type="text/css" media="screen">
+    
   </head>
   <body class="fixed-header ">
     <!-- BEGIN SIDEBPANEL-->
@@ -174,7 +85,8 @@
       <div class="sidebar-menu">
         <!-- BEGIN SIDEBAR MENU ITEMS-->
         <ul class="menu-items">
-          <li class="m-t-30 ">
+          
+              <li class="m-t-30 ">
             <a href="index.html" class="detailed">
               <span class="title">Dashboard</span>
               <span class="details">12 New Updates</span>
@@ -182,7 +94,7 @@
             <span class="bg-success icon-thumbnail"><i class="pg-home"></i></span>
           </li>
           <li class="">
-            <a href="/Exhibition/html/exhibitionAdministratorProfilePage.jsp" class="detailed">
+            <a href="profilePage.jsp" class="detailed">
               <span class="title">Profile</span>
           <!--  <span class="details">19 items</span>  -->
             </a>
@@ -194,7 +106,7 @@
             <span class=" arrow"></span></a>
             <span class="icon-thumbnail"><i class="pg-calender"></i></span>
             <ul class="sub-menu">
-                 <li class="">
+                <li class="">
                 <a href="createModerator.jsp">Create Moderators</a>
                 <span class="icon-thumbnail">c</span>
               </li>
@@ -203,35 +115,36 @@
                 <span class="icon-thumbnail">c</span>
               </li>
               <li class="">
-                <a href="viewModerator.jsp">View Moderator</a>
+                <a href="viewModerator.jsp">View Moderators</a>
                 <span class="icon-thumbnail">c</span>
               </li>
               <li class="">
-                <a href="editModerator.jsp">Edit Moderator</a>
+                <a href="editModerator.jsp">Edit Moderators</a>
                 <span class="icon-thumbnail">L</span>
               </li>
               <li class="">
-                <a href="deleteModerator.jsp">Delete Moderator </a>
+                <a href="deleteModerator.jsp">Delete Moderators </a>
                 <span class="icon-thumbnail">M</span>
               </li>
              
             </ul>
           </li>
+          
          <li>
             <a href="javascript:;"><span class="title">Manage Exhibition</span>
             <span class=" arrow"></span></a>
             <span class="icon-thumbnail"><i class="pg-calender"></i></span>
               <ul class="sub-menu">
                  <li class="">
-                <a href="/Exhibition/html/exhibitionAdministratorSector.jsp"> Add Sectors </a>
+                <a href="exhibitionSector.jsp"> Add Sectors </a>
                 <span class="icon-thumbnail">c</span>
               </li>
               <li class="">
-                <a href="/Exhibition/html/exhibitionAdministratorTeam.jsp"> Add Exhibition Team</a>
+                <a href="exhibitionTeam.jsp"> Add Exhibition Team</a>
                 <span class="icon-thumbnail">c</span>
               </li>
               <li class="">
-                <a href="/Exhibition/html/exhibitionAdministratorSocialMedia.jsp">Add Exhibition Social Media</a>
+                <a href="exhibitionSocialMedia.jsp">Add Exhibition Social Media</a>
                 <span class="icon-thumbnail">L</span>
               </li>
               <li class="">
@@ -239,15 +152,15 @@
                 <span class="icon-thumbnail">M</span>
               </li>
                <li class="">
-                <a href="/Exhibition/html/exhibitionAdministratorOpportunity.jsp">Opportunities/Response </a>
+                <a href="exhibitionOpportunity.jsp">Opportunities/Response </a>
                 <span class="icon-thumbnail">M</span>
               </li>
                <li class="">
-                <a href="/Exhibition/html/exhibitionAdministratorFAQ.jsp"> FAQ's </a>
+                <a href="exhibitionFAQ.jsp"> FAQ's </a>
                 <span class="icon-thumbnail">M</span>
               </li>
                <li class="">
-                <a href="/Exhibition/html/exhibitionAdministratorFacilities.jsp"> Facilities</a>
+                <a href="facilities.jsp"> Facilities</a>
                 <span class="icon-thumbnail">M</span>
               </li>
                <li class="">
@@ -278,7 +191,8 @@
               
           </li>
            
-           <li>
+           
+            <li>
             <a href="javascript:;"><span class="title">Manage Exhibitor</span>
             <span class=" arrow"></span></a>
             <span class="icon-thumbnail"><i class="pg-calender"></i></span>
@@ -335,7 +249,7 @@
             <span class="icon-thumbnail"><i class="pg-layouts2"></i></span> 
         
           </li>
-          </ul>
+        </ul>
         <div class="clearfix"></div>
       </div>
       <!-- END SIDEBAR MENU -->
@@ -548,121 +462,121 @@
       </div>
       <!-- END HEADER -->
       <!-- START PAGE CONTENT WRAPPER -->
-  <div class="page-content-wrapper ">
+    <div class="page-content-wrapper ">
         <!-- START PAGE CONTENT -->
-   <div class="content ">
-    <div class="panel-body">
-   <div class="register-container full-height sm-p-t-30">
-      <div class="container-sm-height full-height">
-        <div class="row row-sm-height">
-          <div class="col-sm-12 col-sm-height col-middle">
-  <!--          <img src="assets/img/logo.png" alt="logo" data-src="assets/img/logo.png" data-src-retina="assets/img/logo_2x.png" width="78" height="22">
-            <h3>Pages makes it easy to enjoy what matters the most in your life</h3>
-            <p>
-              <small>
-        Create a pages account. If you have a facebook account, log into it for this process. Sign in with <a href="#" class="text-info">Facebook</a> or <a href="#" class="text-info">Google</a>
-    </small>
-  </p> --><p><h1><b>Add Contact Information ...!</b></h1></p>
-          
-           
-               <form role="form"   class="p-t-15" id="login" name="login" action="" method="">
+     <div class="content ">
+        
+         
+          <!-- START CONTAINER FLUID -->
+          <div class="container-fluid container-fixed-lg">
+            <!-- START PANEL -->
+            <div class="panel panel-transparent">
+              <div class="panel-heading">
+                <div class="panel-title"> Moderators
+                </div>
+              </div>
+              <div class="panel-body">
+                <div class="row">
+                  <div class="col-sm-10">
+                  <!--  <h3>Create Moderator</h3> -->
+                    <p>
+                    </p>
+                    <br>
+                    <p class="small hint-text"> Create new Moderator
+                        <br></p> 
+                    <div align="center">
+                    <form id="form-work" class="form-horizontal" role="form" autocomplete="off">
+                      <div class="form-group">
+                        <label for="fname" class="col-sm-3 control-label">ID</label>
+                        <div class="col-sm-9">
+                          <input type="text" class="form-control" id="fname" placeholder="ID" name="name" disabled>
+                        </div>
+                      </div>
+                        <div class="form-group">
+                        <label for="fname" class="col-sm-3 control-label">First Name</label>
+                        <div class="col-sm-9">
+                          <input type="text" class="form-control" id="fname" placeholder="first name" name="name" required>
+                        </div>
+                      </div>
+                        <div class="form-group">
+                        <label for="fname" class="col-sm-3 control-label">Last Name</label>
+                        <div class="col-sm-9">
+                          <input type="text" class="form-control" id="fname" placeholder="last name" name="name" required>
+                        </div>
+                      </div>
+                        <div class="form-group">
+                        <label for="fname" class="col-sm-3 control-label">TagLine</label>
+                        <div class="col-sm-9">
+                          <input type="text" class="form-control" id="fname" placeholder="tagline" name="name" required>
+                        </div>
+                      </div>
+                        <div class="form-group">
+                        <label for="fname" class="col-sm-3 control-label">Date of Birth</label>
+                        <div class="col-sm-9">
+                          <input type="text" class="form-control" id="fname" placeholder="DOB" name="name" required>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-sm-3 control-label">Your gender</label>
+                        <div class="col-sm-9">
+                          <div class="radio radio-success">
+                            <input type="radio" value="male" name="optionyes" id="male">
+                            <label for="male">Male</label>
+                            <input type="radio" checked="checked" value="female" name="optionyes" id="female">
+                            <label for="female">Female</label>
+                          </div>
+                        </div>
+                      </div>
+                        <div class="form-group">
+                        <label for="designation" class="col-sm-3 control-label">Designation</label>
+                        <div class="col-sm-9">
+                          <input type="text" class="form-control" id="fname" placeholder="designation" name="name" required>
+                        </div> 
+                      </div> 
+                          <div class="form-group">
+                                <label for="designation" class="col-sm-3 control-label">Check In</label>
+                             
+                    <input type="email" class="form-control" placeholder="Pick a date" id="datepicker-component2">
+                      <span class="input-group-addon">
+                                                  <i class="fa fa-calendar"></i>
+                                                </span>
                     
-                   <div id="uploadFormLayer">
-                        <label><b>Upload Image File:</b></label><br><br>
-                       
-	<script type="text/javascript">
-									function readURL(input) {
-									if (input.files && input.files[0]) {
-									var reader = new FileReader();
-									reader.onload = function (e) {
-									$('#tempImg')
-									.attr('src', e.target.result)
-									.width(200)
-									.height(200);
-									$('#flag').val("1");
-									};
-									reader.readAsDataURL(input.files[0]);
-									}
-									}
-									</script>
-                                                                         <input name="userImage" type="file" class="inputFile" onchange="readURL(this);"  /> <br>
-									<input type="hidden" id="flag" name="flag">
-	<img id="tempImg"  src="" width="200" height="200"> 
-                   </div>   <br><br>
-                    
-                       <div class="row">
-                <div class="col-sm-12">
-                  <div class="form-group form-group-default">
-                        <label>Title</label>
-                       
-                            <input type="text" class="form-control" id="title" name="title" placeholder="Title" value="" required>
-                       </div>
-                       
-                </div> </div>
-                         <div class="row">
-                <div class="col-sm-12">
-                  <div class="form-group form-group-default">
-                        <label>First Name</label>
-                            <input type="text" class="form-control" id="firstName" placeholder="First Name" name="firstName" value="" required>
-                  </div> </div></div>
-                   
-                         <div class="row">
-                <div class="col-sm-12">
-                  <div class="form-group form-group-default">
-                        <label>Last Name</label>
-                            <input type="text" class="form-control" id="lastName" placeholder="lastName" name="lastName" value="" required>
+                    </div>
+                        <div class="form-group">
+                        <label for="fname" class="col-sm-3 control-label">Created On</label>
+                        <div class="col-sm-9">
+                          <input type="text" class="form-control" id="fname" placeholder="created on" name="name" required>
                         </div>
-                </div> </div>
-                           <div class="row">
-                <div class="col-sm-12">
-                  <div class="form-group form-group-default">
-                        <label>Date Of Birth</label>
-                            <input type="text" class="form-control" id="dateOfBirth" placeholder="DOB" name="dateOfBirth" value="" required>
+                      </div>
+                        <div class="form-group">
+                        <label for="fname" class="col-sm-3 control-label">Modified On</label>
+                        <div class="col-sm-9">
+                          <input type="text" class="form-control" id="fname" placeholder="modified on" name="name" required>
                         </div>
-                </div>  </div>
-                 
-                          <div class="row">
-                <div class="col-sm-12">
-                  <div class="form-group form-group-default">
-                        <label>Level</label>
-                            <input type="text" class="form-control" id="level" placeholder="level" name="level" value="" required>
-                        </div>
-                </div> </div>  
-                           <div class="row">
-                <div class="col-sm-12">
-                  <div class="form-group form-group-default">
-                        <label>Designation</label>
-                            <input type="text" class="form-control" id="degination" placeholder="Designation" name="degination" value=""  required>
-                        </div>
-                </div>  </div> 
-                           <div class="row">
-                <div class="col-sm-12">
-                  <div class="form-group form-group-default">
-                        <label>Phone No</label>
-                            <input type="text" class="form-control" id="phoneNo" placeholder="Phone No" name="phoneNo" value="" required>
-                        </div>
-                </div>   </div>
-                   
-                    
-                   
+                      </div>
                         
-                       <div id="msgbox1"> </div>  <div id="msgbox2"> </div> 
-
-                             <button class="btn btn-primary btn-cons m-t-10" type="submit">Save </button>
-                               <button class="btn btn-primary btn-cons m-t-10" type="submit">Cancel </button>
-   
+                
+                      <br>
+                      <div class="row">
+                        <div class="col-sm-3">
+                      <!--    <p>I hereby certify that the information above is true and accurate. </p> -->
+                        </div>
+                        <div class="col-sm-9">
+                          <button class="btn btn-success" type="submit">Create</button>
+                          <button class="btn btn-default"><i class="pg-close"></i> Clear</button>
+                        </div>
+                      </div>
+                    
                     </form>
-             
-      
-            
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- END PANEL -->
           </div>
-        </div>
-      </div>
-    </div>
-    </div>
           <!-- END CONTAINER FLUID -->
         </div>
-                   
         <!-- END PAGE CONTENT -->
         <!-- START COPYRIGHT -->
         <!-- START CONTAINER FLUID -->
@@ -1944,7 +1858,7 @@
     </div>
     <!-- END OVERLAY -->
     <!-- BEGIN VENDOR JS -->
-    <script src="assets/plugins/pace/pace.min.js" type="text/javascript"></script>
+      <script src="assets/plugins/pace/pace.min.js" type="text/javascript"></script>
     <script src="assets/plugins/jquery/jquery-1.11.1.min.js" type="text/javascript"></script>
     <script src="assets/plugins/modernizr.custom.js" type="text/javascript"></script>
     <script src="assets/plugins/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
@@ -1958,15 +1872,24 @@
     <script type="text/javascript" src="assets/plugins/bootstrap-select2/select2.min.js"></script>
     <script type="text/javascript" src="assets/plugins/classie/classie.js"></script>
     <script src="assets/plugins/switchery/js/switchery.min.js" type="text/javascript"></script>
+    <script src="assets/plugins/bootstrap3-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+    <script type="text/javascript" src="assets/plugins/jquery-autonumeric/autoNumeric.js"></script>
+    <script type="text/javascript" src="assets/plugins/dropzone/dropzone.min.js"></script>
+    <script type="text/javascript" src="assets/plugins/bootstrap-tag/bootstrap-tagsinput.min.js"></script>
+    <script type="text/javascript" src="assets/plugins/jquery-inputmask/jquery.inputmask.min.js"></script>
+    <script src="assets/plugins/boostrap-form-wizard/js/jquery.bootstrap.wizard.min.js" type="text/javascript"></script>
     <script src="assets/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
     <script src="assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
+    <script src="assets/plugins/summernote/js/summernote.min.js" type="text/javascript"></script>
+    <script src="assets/plugins/moment/moment.min.js"></script>
+    <script src="assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <script src="assets/plugins/bootstrap-timepicker/bootstrap-timepicker.min.js"></script>
     <!-- END VENDOR JS -->
     <!-- BEGIN CORE TEMPLATE JS -->
     <script src="pages/js/pages.min.js"></script>
     <!-- END CORE TEMPLATE JS -->
     <!-- BEGIN PAGE LEVEL JS -->
-    <script src="assets/js/form_layouts.js" type="text/javascript"></script>
+    <script src="assets/js/form_elements.js" type="text/javascript"></script>
     <script src="assets/js/scripts.js" type="text/javascript"></script>
-    <!-- END PAGE LEVEL JS -->
   </body>
 </html>

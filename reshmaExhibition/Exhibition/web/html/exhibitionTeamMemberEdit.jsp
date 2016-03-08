@@ -658,14 +658,20 @@
                   </div>
                 </div>
               </div>
-                 <div class="row">
+                 
+                  <div class="row">
                 <div class="col-sm-12">
-                  <div class="form-group form-group-default">
-                    <label>Date Of Bith</label>
-                 <input type="text" id="dateOfBirth" name="dateOfBirth" class="form-control" value="<%out.print((String)ss1.getAttribute("dob1"));%>" required>
-                  </div>
-                </div>
+                <div class="form-group form-group-default">
+                    
+                                <label for="designation" class="col-sm-7 control-label">  Date Of Birth   </label>
+                                <div style="text-align:right;padding-right:5%;"> <span class="input-lg"> <i class="fa fa-calendar"></i> </span>
+                                </div>                             
+                    <input type="text" class="form-control" placeholder="Pick a date" id="datepicker-component2" name="dateOfBirth" value="<%out.print((String)ss1.getAttribute("dob1"));%>" required>
+                     
+                   
+                    </div></div>
               </div>
+                  
                  <div class="row">
                 <div class="col-sm-12">
                   <div class="form-group form-group-default">
@@ -2005,15 +2011,26 @@
     <script type="text/javascript" src="assets/plugins/bootstrap-select2/select2.min.js"></script>
     <script type="text/javascript" src="assets/plugins/classie/classie.js"></script>
     <script src="assets/plugins/switchery/js/switchery.min.js" type="text/javascript"></script>
+    <script src="assets/plugins/bootstrap3-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+    <script type="text/javascript" src="assets/plugins/jquery-autonumeric/autoNumeric.js"></script>
+    <script type="text/javascript" src="assets/plugins/dropzone/dropzone.min.js"></script>
+    <script type="text/javascript" src="assets/plugins/bootstrap-tag/bootstrap-tagsinput.min.js"></script>
+    <script type="text/javascript" src="assets/plugins/jquery-inputmask/jquery.inputmask.min.js"></script>
+    <script src="assets/plugins/boostrap-form-wizard/js/jquery.bootstrap.wizard.min.js" type="text/javascript"></script>
     <script src="assets/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
     <script src="assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
+    <script src="assets/plugins/summernote/js/summernote.min.js" type="text/javascript"></script>
+    <script src="assets/plugins/moment/moment.min.js"></script>
+    <script src="assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <script src="assets/plugins/bootstrap-timepicker/bootstrap-timepicker.min.js"></script>
     <!-- END VENDOR JS -->
     <!-- BEGIN CORE TEMPLATE JS -->
     <script src="pages/js/pages.min.js"></script>
     <!-- END CORE TEMPLATE JS -->
     <!-- BEGIN PAGE LEVEL JS -->
-    <script src="assets/js/form_layouts.js" type="text/javascript"></script>
+    <script src="assets/js/form_elements.js" type="text/javascript"></script>
     <script src="assets/js/scripts.js" type="text/javascript"></script>
     <!-- END PAGE LEVEL JS -->
+    
   </body>
 </html>

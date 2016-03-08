@@ -45,7 +45,6 @@ try {
  PreparedStatement psmnt = con.prepareStatement("insert into media(link,type) values('"+ff+"',?)");
 psmnt.setString(1, "");
 int s = psmnt.executeUpdate();
-out.print(s);
 if(s>0){
 out.print("Uploaded successfully !");
 //response.sendRedirect("/Exhibition/html/imageUpload.jsp"); 
@@ -58,6 +57,6 @@ catch(Exception e)
 {
     out.print("error" +e);
 }
-response.sendRedirect("/Exhibition/html/imageUpload.jsp"); 
+response.sendRedirect("/Exhibition/exhibitionAdministratorOpportunity"); 
 }
 %>

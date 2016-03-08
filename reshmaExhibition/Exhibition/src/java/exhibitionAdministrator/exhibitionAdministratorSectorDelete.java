@@ -7,26 +7,26 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-public class exhibitionAdministratorSectorDelete extends HttpServlet {
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-       try
+public class exhibitionAdministratorSectorDelete extends HttpServlet
+{
+        protected void processRequest(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException
+        {
+             response.setContentType("text/html;charset=UTF-8");
+             PrintWriter out = response.getWriter();
+             try
+             {
+                    String myex_id=request.getParameter("myid");      //value fetch from exhibitionAdministratorSector.jsp file
+                    Connection con;
+                    con=exhibitionAdministratorOneTimeConnection.getConnection();
+                    Statement st=con.createStatement();
+                    st.executeUpdate("delete from exhibitionSector where id='"+myex_id+"'");  
+                    // data deleted from exhibitionSector table
+                    response.sendRedirect("/Exhibition/html/exhibitionAdministratorSector.jsp");     
+                    con.close();
+             }
+            catch(Exception e)
             {
-               String myex_id=request.getParameter("myid");      //value fetch from exhibitionAdministratorSector.jsp file
-               Connection con;
-               con=exhibitionAdministratorOneTimeConnection.getConnection();
-               Statement st=con.createStatement();
-               st.executeUpdate("delete from exhibitionSector where id='"+myex_id+"'");  
-               // data deleted from exhibitionSector table
-               response.sendRedirect("/Exhibition/html/exhibitionAdministratorSector.jsp");     
-               con.close();
-            }
-       catch(Exception e)
-            {
-               out.print("error" +e);
+                   out.print("error" +e);
             }
     }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

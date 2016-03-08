@@ -8,47 +8,47 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-public class exhibitionAdministratorTeamMemberEdit extends HttpServlet {
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-          throws ServletException, IOException {
-          response.setContentType("text/html;charset=UTF-8");
-          PrintWriter out = response.getWriter();
-       try
-         {
-              // data fetch from exhibitionAdministratorTeam.jsp
-              HttpSession ss1=request.getSession(false);
-              String myex_id=(String)ss1.getAttribute("myid");
-              // values fetch from textbox of exhibitionAdministratorTeam.jsp
-              String firstName=request.getParameter("firstName");
-              String lastName=request.getParameter("lastName"); 
-              String tagline=request.getParameter("tagline");
-              String title=request.getParameter("title");
-              String gender=request.getParameter("gender");
-              String dateOfBirth=request.getParameter("dateOfBirth"); 
-              String degination=request.getParameter("degination");
-              String phoneNo=request.getParameter("phoneNo"); 
-              String mobileNo=request.getParameter("mobileNo");
-              String email=request.getParameter("email");  
-              Connection con;
-              con=exhibitionAdministratorOneTimeConnection.getConnection();
-              String query = "update exhibitionTeam set tagline ='"+tagline+"',title ='"+title+"',firstName ='"+firstName+"',lastName ='"+lastName+"',gender ='"+gender+"',dateOfBirth ='"+dateOfBirth+"',degination ='"+degination+"',phoneNo ='"+phoneNo+"',mobileNo ='"+mobileNo+"',email ='"+email+"' where id='"+myex_id+"' ";
-              // data updated in exhibitionTeam table
-              PreparedStatement ps=con.prepareStatement(query);
-              int rs= ps.executeUpdate();
-              if(rs !=0)
-              {
-                out.print("ok");   
-              }
-              else
-             {
-                out.print("wrong");
-             }       
-         }
-       catch(Exception e)
-         {
-           out.print("error" +e);
-         }
+public class exhibitionAdministratorTeamMemberEdit extends HttpServlet
+{
+          protected void processRequest(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException 
+          {
+                    response.setContentType("text/html;charset=UTF-8");
+                    PrintWriter out = response.getWriter();
+                try
+                {
+                    // data fetch from exhibitionAdministratorTeam.jsp
+                    HttpSession ss1=request.getSession(false);
+                    String myex_id=(String)ss1.getAttribute("myid");
+                    // values fetch from textbox of exhibitionAdministratorTeam.jsp
+                    String firstName=request.getParameter("firstName");
+                    String lastName=request.getParameter("lastName"); 
+                    String tagline=request.getParameter("tagline");
+                    String title=request.getParameter("title");
+                    String gender=request.getParameter("gender");
+                    String dateOfBirth=request.getParameter("dateOfBirth"); 
+                    String degination=request.getParameter("degination");
+                    String phoneNo=request.getParameter("phoneNo"); 
+                    String mobileNo=request.getParameter("mobileNo");
+                    String email=request.getParameter("email");  
+                    Connection con;
+                    con=exhibitionAdministratorOneTimeConnection.getConnection();
+                    String query = "update exhibitionTeam set tagline ='"+tagline+"',title ='"+title+"',firstName ='"+firstName+"',lastName ='"+lastName+"',gender ='"+gender+"',dateOfBirth ='"+dateOfBirth+"',degination ='"+degination+"',phoneNo ='"+phoneNo+"',mobileNo ='"+mobileNo+"',email ='"+email+"' where id='"+myex_id+"' ";
+                    // data updated in exhibitionTeam table
+                    PreparedStatement ps=con.prepareStatement(query);
+                    int rs= ps.executeUpdate();
+                    if(rs !=0)
+                    {
+                          out.print("ok");   
+                    }
+                    else
+                    {
+                          out.print("wrong");
+                    }       
+               }
+               catch(Exception e)
+               {
+                    out.print("error" +e);
+               }
     }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

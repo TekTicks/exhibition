@@ -8,39 +8,39 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-public class exhibitionAdministratorSectorEdit extends HttpServlet {
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-          throws ServletException, IOException {
-          response.setContentType("text/html;charset=UTF-8");
-          PrintWriter out = response.getWriter();
-       try
-            {
-                //value fetch from exhibitionSector.jsp file
-                HttpSession ss1=request.getSession(false);
-                String myex_id=(String)ss1.getAttribute("myex_id");
-                // value fetch from textbox from exhibitionSector.jsp file
-                String sectorName=request.getParameter("sectorName");
-                String description=request.getParameter("description");  
-                Connection con;
-                con=exhibitionAdministratorOneTimeConnection.getConnection();
-                String query = "update exhibitionSector set sectorName ='"+sectorName+"' , description ='"+description+"' where id='"+myex_id+"' ";
-               // data updated in exhibitionSector table
-                PreparedStatement ps=con.prepareStatement(query);
-                int rs= ps.executeUpdate();
-                if(rs > 0 )
-                {
-                  out.print("ok");   
-                }
-               else
-               {
-                out.print("wrong");
-               }       
-            }
-      catch(Exception e)
-        {
-           out.print("error");
-         }
+public class exhibitionAdministratorSectorEdit extends HttpServlet 
+{
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException
+    {
+              response.setContentType("text/html;charset=UTF-8");
+              PrintWriter out = response.getWriter();
+              try
+              {
+                    //value fetch from exhibitionSector.jsp file
+                    HttpSession ss1=request.getSession(false);
+                    String myex_id=(String)ss1.getAttribute("myex_id");
+                    // value fetch from textbox from exhibitionSector.jsp file
+                    String sectorName=request.getParameter("sectorName");
+                    String description=request.getParameter("description");  
+                    Connection con;
+                    con=exhibitionAdministratorOneTimeConnection.getConnection();
+                    String query = "update exhibitionSector set sectorName ='"+sectorName+"' , description ='"+description+"' where id='"+myex_id+"' ";
+                   // data updated in exhibitionSector table
+                    PreparedStatement ps=con.prepareStatement(query);
+                    int rs= ps.executeUpdate();
+                    if(rs > 0 )
+                    {
+                         out.print("ok");   
+                    }
+                    else
+                    {
+                        out.print("wrong");
+                    }       
+              }
+              catch(Exception e)
+              {
+                    out.print("error");
+              }
     }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

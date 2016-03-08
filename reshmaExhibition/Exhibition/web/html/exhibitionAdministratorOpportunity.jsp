@@ -44,7 +44,7 @@
 	<![endif]-->
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="pages/js/jquery-1.4.2.min.js"></script>
-
+<!--
     <script type="text/javascript">
 	$(document).ready(function(){
 		$("#login").submit(function(){
@@ -95,7 +95,7 @@
  		});		
 
 	});
-   </script> 
+   </script>  -->
      <style>
 #exists{display:none}
 #cross{display:none}
@@ -542,6 +542,7 @@
       <!-- START PAGE CONTENT WRAPPER -->
       <div class="page-content-wrapper ">
        <div class="content ">
+           
        <div class="panel panel-transparent ">
         <div class="panel-heading">
                 <div class="panel-title"> Exhibition Opportunity
@@ -571,7 +572,7 @@
           <div class="col-sm-12 col-sm-height col-middle">
 <p><h1><b> Opportunities....!</b></h1></p>
           <br>
-             <form action="uploadFile1.jsp" method="post" enctype="multipart/form-data" role="form" class="p-t-15" id="login" name="login"  >      
+             <form action="uploadFile1.jsp" method="post" enctype="multipart/form-data" role="form" class="p-t-15" id="login" name="login"  >  
                       <div class="form-group ">
                            <label>Exhibition</label>
                       <%    
@@ -617,10 +618,32 @@
                         <label>Contact No</label>
                           <input type="text" class="form-control" id="contactNo" name="contactNo" required>
                         </div> 
+                        
+                        <div id="uploadFormLayer">
+<label><b>Upload Image File:</b></label><br/>
+<input name="userImage" type="file" class="inputFile" onchange="readURL(this);"  />
+	<script type="text/javascript">
+									function readURL(input) {
+									if (input.files && input.files[0]) {
+									var reader = new FileReader();
+									reader.onload = function (e) {
+									$('#tempImg')
+									.attr('src', e.target.result)
+									.width(125)
+									.height(125);
+									$('#flag').val("1");
+									};
+									reader.readAsDataURL(input.files[0]);
+									}
+									}
+									</script>
+									<input type="hidden" id="flag" name="flag">
+	<img id="tempImg"  src="" width="125" height="125"> 
+ </div>  
                    
  
                         <div id="msgbox1"></div>  <div id="msgbox2"></div>
-               <button class="btn btn-primary btn-cons m-t-10" type="submit"> Save </button>
+               <button class="btn btn-primary btn-cons m-t-10" type="submit" onclik="document.location.hred='/Exhibition/exhibitionAdministratorOpportunity';"> Save </button>
                  <button class="btn btn-primary btn-cons m-t-10" type="submit"> Cancel </button> 
                  <br>
                </form>

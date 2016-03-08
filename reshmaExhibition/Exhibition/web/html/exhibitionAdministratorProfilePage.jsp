@@ -68,36 +68,36 @@
                                   alert(msg);
                                 if(msg != 'mobileNoInvalid') // Message Sent, check and redirect
 				{
-                                        if(msg=='ok')
+                                        if(msg =='ok')
                                         {
-                                          $("#msgbox1").html('data updated').addClass('myinfo').fadeTo(200,1,function()
-			             {
-			                 //redirect to secure page
-			              //document.location='/Exhibition/html/exhibitionAdminPersonal.jsp';
-			             });
+                                         $("#msgbox1").fadeTo(300,1,function() //start fading the messagebox
+                                       {
+                                            //add message and change the class of the box and start fading
+                                             $(this).html('records saved..!').removeClass().addClass('myinfo').fadeTo(300,1).fadeout();
+                                          //  document.location='/Exhibition/html/exhibitionAdministratorContactInformationFirstTimeUse.jsp';
+                                     });
                                         
                                     }
                                 
 				
                                 else
-                                {
-                                    $("#msgbox2").fadeTo(100,1,function() //start fading the messagebox
-		                {
-			                  //add message and change the class of the box and start fading
-			                 $(this).html('records are not updated..').removeClass().addClass('myerror').fadeTo(300,1);
-                                        // document.location='/Exhibition/html/exhibitionAdminLog.jsp?user';
-                                 });
+                                { 
+                                 $("#msgbox2").fadeTo(300,1,function() //start fading the messagebox
+                                                {
+                                                //add message and change the class of the box and start fading
+                                                    $(this).html('Records are not updated.!').removeClass().addClass('myerror').fadeTo(300,1).fadeOut();
+                                                });
                                 }
                             }
                             else
                             {
-                                $("#msgbox2").fadeTo(100,1,function() //start fading the messagebox
-		                {
-			                  //add message and change the class of the box and start fading
-			                 $(this).html('MobileNo should be 10 digits only').removeClass().addClass('myerror').fadeTo(300,1);
-                                        // document.location='/Exhibition/html/exhibitionAdminLog.jsp?user';
-                                 });
-                            }
+                               $("#msgbox2").fadeTo(300,1,function() //start fading the messagebox
+                                                {
+                                                //add message and change the class of the box and start fading
+                                                    $(this).html('Mobile no should be 10 digits.!').removeClass().addClass('myerror').fadeTo(300,1).fadeOut();
+                                                });
+                                }
+                            
                                 }
 				});
 			}, 200);
@@ -106,6 +106,7 @@
 
 	});
    </script> 
+   <!--
   <script type="text/javascript">
 	$(document).ready(function(){
 		$("#login_frm").submit(function(){
@@ -166,30 +167,30 @@
 
 	});
    </script>   
-
+                    -->
     <style>
 #exists{display:none}
 #cross{display:none}
 .myinfo
 {
 	margin: 5px auto;
-	background:#d6e3f5;
-	border: 1px #0010ac solid;
+	background:white;
+	border: 0px;
 	padding:5px;
 	color:#0010ac;
-	font-size:12px;
+	font-size:13px;
 	width:350px;
 	min-height:0px;
 	-moz-border-radius:4px;
 	-webkit-border-radius:4px;
-	text-align: center;
+	text-align: left;
 }
 
 .myerror
 {
 	margin: 5px auto;
-	background:#FFDFDF;
-	border: 1px #FF0000 solid;
+	background:white;
+	border: 0px;
 	padding:5px;
 	color:#FF0000;
 	font-size:12px;
@@ -197,7 +198,7 @@
 	min-height:0px;
 	-moz-border-radius:4px;
 	-webkit-border-radius:4px;
-	text-align: center;
+	text-align:left;
 }
 </style>
 
@@ -676,23 +677,39 @@
                    <div class="row">
                   <div class="col-sm-10">
                   <!--  <h3>Create Moderator</h3> -->
+                    <%
+                          
+                           Connection con;
+                          con=exhibitionAdministratorOneTimeConnection.getConnection();
+                            HttpSession ss=request.getSession(false);
+                    String rs3 = (String) ss.getAttribute("idValid");
+                     //  HttpSession objcontact=request.getSession(true);
+                          Statement st=con.createStatement();
+                        ResultSet rs=st.executeQuery("select * from exhibitionAdmin where id='"+rs3+"'");
+                          
+                        int cot=0;
+                        
+                        while(rs.next())
+                        {
+                  
+                        %> 
+                    
                     
                     <form id="login" name="login" class="form-horizontal" role="form" autocomplete="off" action="" method="">
                   
-                    <%@ page import="javax.servlet.http.HttpSession.*;" %>
-                      <%@ page session="false" %>
-                      <% HttpSession ss=request.getSession(false);%>
+                    
+                     
                         <div class="form-group">
                         <label for="fname" class="col-sm-3 control-label">Mobile No</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="mobileNo" name="mobileNo" placeholder="mobile No " value="  <%out.print((String)ss.getAttribute("MN")); %>" required>
+                            <input type="text" class="form-control" id="mobileNo" name="mobileNo" placeholder="mobile No " value="<%out.print(rs.getString("mobileNo"));%>" required>
                        </div>
                        <div id="msgbox2"> </div>
                       </div>
                         <div class="form-group">
                         <label for="fname" class="col-sm-3 control-label">Email</label>
                         <div class="col-sm-9">
-                            <input type="email" class="form-control" id="email" placeholder="Email" name="email" value="<%out.print((String)ss.getAttribute("emailValid"));%>" required>
+                            <input type="email" class="form-control" id="email" placeholder="Email" name="email" value="<%out.print(rs.getString("email"));%>" required>
                         </div>
                         
                        
@@ -700,19 +717,19 @@
                         <div class="form-group">
                         <label for="fname" class="col-sm-3 control-label">User Name</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="userName" placeholder="username" name="userName" value="<%out.print((String)ss.getAttribute("userNameValid"));%>" required>
+                            <input type="text" class="form-control" id="userName" placeholder="username" name="userName" value="<%out.print(rs.getString("userName"));%>" required>
                         </div>
                       </div>
                            <div class="form-group">
                         <label for="fname" class="col-sm-3 control-label">Password</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="password" placeholder="password" name="password"  value="<%out.print((String)ss.getAttribute("passwordValid"));%>" required >
+                            <input type="text" class="form-control" id="password" placeholder="password" name="password"  value="<%out.print(rs.getString("password"));%>" required >
                         </div></div>
                     
                         <div class="form-group">
                         <label for="fname" class="col-sm-3 control-label">Level</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="level" placeholder="level" name="level" value="<%out.print((String)ss.getAttribute("levelValid"));%>" onkeyup="validate()" required>
+                            <input type="text" class="form-control" id="level" placeholder="level" name="level" value="<%out.print(rs.getString("level"));%>" onkeyup="validate()" required>
                         </div>
                       </div>   
                         
@@ -726,6 +743,13 @@
                           <button class="btn btn-default">Cancel</button>
                         </div>
                       </div>
+                    <%
+                          cot++;  
+                          
+                        }
+                        
+                              
+                      %>  
                     
                     </form>
                   </div>
@@ -745,58 +769,14 @@
                   
                   <div class="tab-pane slide-left padding-20" id="tab2">
                   <div class="row row-same-height">
-                    <div class="col-md-5 b-r b-dashed b-grey ">
-                      <div class="padding-30 m-t-50">
-                          <div class="row">
-                              <div class="col-sm-10">
-                        <h2>Your Contact Details ..</h2>
-                        <p> Social Media..</p>
-                              </div></div>
-                           <div class="col-sm-10">
-                              
-                                 <form action="employee_upload_profile_image.jsp" method="post" enctype="multipart/form-data" name="form1" id="form1">
-             <div class="panel-heading">
-              <div class="panel-title">
-                    Social Media Icon 
-                </div>
-                 </div>
-             
-   
- <div id="uploadFormLayer">
-<label><b>Upload Image File:</b></label><br/>
-<input name="userImage" type="file" class="inputFile" onchange="readURL(this);"  />
-	<script type="text/javascript">
-									function readURL(input) {
-									if (input.files && input.files[0]) {
-									var reader = new FileReader();
-									reader.onload = function (e) {
-									$('#tempImg')
-									.attr('src', e.target.result)
-									.width(125)
-									.height(125);
-									$('#flag').val("1");
-									};
-									reader.readAsDataURL(input.files[0]);
-									}
-									}
-									</script>
-									<input type="hidden" id="flag" name="flag">
-	<img id="tempImg"  src="" width="125" height="125"> 
- </div>  
-            
-    
- 
-        
- </form>
-
-                           </div>
-                      </div>
-                    </div>   
+                   
                        <div class="container-fluid container-fixed-lg">
+                             <form id="login_frm" name="login_frm" class="form-horizontal" role="form" autocomplete="off" action="" method="">
+                            <div class="panel panel-default">
             <div class="row">
 <div class="col-md-6">
                 <!-- START PANEL -->
-                <div class="panel panel-default">
+               
                   <div class="panel-heading">
                     <div class="panel-title">
                 Contact 
@@ -811,36 +791,36 @@
                       <%@ page session="false" %>
                       
                       <%
-                          Connection con;
-  con=exhibitionAdministratorOneTimeConnection.getConnection();
-  
-                           // HttpSession ss=request.getSession(false);
+                          
+                         
+                          con=exhibitionAdministratorOneTimeConnection.getConnection();
+                            
                     String rs1 = (String) ss.getAttribute("idValid");
                     //out.print(dob);
                      //  HttpSession objcontact=request.getSession(true);
-                          Statement st=con.createStatement();
-                        ResultSet rs=st.executeQuery("select * from exhibitionAdminContact where id='"+rs1+"'");
+                          Statement stm=con.createStatement();
+                        ResultSet rst=stm.executeQuery("select * from exhibitionAdminContact where id='"+rs1+"'");
                           
                         int co=0;
                         
-                        while(rs.next())
+                        while(rst.next())
                         {
                   
                         %>
                     
-                    <form id="login_frm" name="login_frm" class="form-horizontal" role="form" autocomplete="off" action="" method="">
+                  
                     
                         <div class="form-group">
                         <label for="fname" class="col-sm-3 control-label">Title</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="t1" name="t1" placeholder="Title" value="<%out.print(rs.getString("title"));%>" required>
+                            <input type="text" class="form-control" id="t1" name="t1" placeholder="Title" value="<%out.print(rst.getString("title"));%>" required>
                        </div>
                        
                       </div>
                         <div class="form-group">
                         <label for="fname" class="col-sm-3 control-label">First Name</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="fn" placeholder="First Name" name="fn" value="<%out.print(rs.getString("firstName"));%>" required>
+                            <input type="text" class="form-control" id="fn" placeholder="First Name" name="fn" value="<%out.print(rst.getString("firstName"));%>" required>
                         </div>
                         
                        
@@ -848,7 +828,7 @@
                         <div class="form-group">
                         <label for="fname" class="col-sm-3 control-label">Last Name</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="ln" placeholder="lastName" name="ln" value="<%out.print(rs.getString("lastName"));%>" required>
+                            <input type="text" class="form-control" id="ln" placeholder="lastName" name="ln" value="<%out.print(rst.getString("lastName"));%>" required>
                         </div>
                       </div>
                           
@@ -856,25 +836,26 @@
                         <div class="form-group">
                         <label for="fname" class="col-sm-3 control-label">Date of Birth</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="dob" placeholder="DOB" name="dob" value="<%out.print(rs.getString("dateOfBirth"));%>" required>
+                            <input type="text" class="form-control" id="dob" placeholder="DOB" name="dob" value="<%out.print(rst.getString("dateOfBirth"));%>" required>
                         </div>
                       </div>   
+                        
                          <div class="form-group">
                         <label for="fname" class="col-sm-3 control-label">Level</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="le" placeholder="level" name="le" value="<%out.print(rs.getString("level"));%>" required>
+                            <input type="text" class="form-control" id="le" placeholder="level" name="le" value="<%out.print(rst.getString("level"));%>" required>
                         </div>
                       </div>   
                           <div class="form-group">
                         <label for="fname" class="col-sm-3 control-label">Designation</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="degination" placeholder="Designation" name="degination" value="<%out.print(rs.getString("degination"));%>"  required>
+                            <input type="text" class="form-control" id="degination" placeholder="Designation" name="degination" value="<%out.print(rst.getString("degination"));%>"  required>
                         </div>
                       </div>   
                           <div class="form-group">
                         <label for="fname" class="col-sm-3 control-label">Phone No</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="pn" placeholder="Phone No" name="pn" value="<%out.print(rs.getString("phoneNo"));%>" required>
+                            <input type="text" class="form-control" id="pn" placeholder="Phone No" name="pn" value="<%out.print(rst.getString("phoneNo"));%>" required>
                         </div>
                       </div>   
                         
@@ -884,7 +865,7 @@
                       <!--    <p>I hereby certify that the information above is true and accurate. </p> -->
                         </div>
                         <div class="col-sm-6">
-                            <button class="btn btn-success" name="login" id="name" type="submit" onclick="insertimage.jsp">Save</button>
+                            <button class="btn btn-success" name="login" id="name" type="submit" onclick="document.location.href='/Exhibition/exhibitionAdministratorContactInformation';"> Save</button>
                           <button class="btn btn-default">Cancel</button>
                         </div>
                       </div>
@@ -898,13 +879,61 @@
                         
                              
                       %>
-                    </form>
+                  
                   </div>
                 </div>
                   </div>
+                </div>
+                
+          
+                    
+                  <div class="col-md-6">
+                      <div class="padding-30 m-t-50">
+                          <div class="row">
+                              <div class="col-sm-10">
+                        <h2>Your Contact Details ..</h2>
+                        <p> Social Media..</p>
+                              </div></div>
+                           <div class="col-sm-10">
+                              
+                                
+             <div class="panel-heading">
+              <div class="panel-title">
+                    Social Media Icon 
                 </div>
                  </div>
-            </div>
+             
+   
+ <div id="uploadFormLayer">
+     <label><b>Upload Image File:</b></label><br> <br>
+     <input name="userImage" type="file" class="inputFile" onchange="readURL(this);"  /> <br> 
+	<script type="text/javascript">
+	function readURL(input) {
+	if (input.files && input.files[0]) {
+	var reader = new FileReader();
+	reader.onload = function (e) {
+	$('#tempImg')
+	.attr('src', e.target.result)
+	.width(200)
+	.height(200);
+	$('#flag').val("1");
+	};
+	reader.readAsDataURL(input.files[0]);
+	}
+	}
+									</script>
+						<input type="hidden" id="flag" name="flag">
+	<img id="tempImg"  src="" width="200" height="200"> 
+ </div>  
+            
+    
+ 
+        
+
+                           </div> </div>
+                           </div>
+                      </div>
+                  </div> </form>
           </div>
                       
                     </div>
@@ -915,6 +944,8 @@
            
               </div>
             </div>
+                   
+                    
           </div>
           <!-- END CONTAINER FLUID -->
         

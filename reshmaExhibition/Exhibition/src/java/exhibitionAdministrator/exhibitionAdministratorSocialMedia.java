@@ -8,40 +8,40 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-public class exhibitionAdministratorSocialMedia extends HttpServlet {
-          protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-          throws ServletException, IOException {
-          response.setContentType("text/html;charset=UTF-8");
-          PrintWriter out = response.getWriter();
-       try
-            {   
-             // value fetch from textbox of exhibitionSocialMedia.jsp file
-             String exhibitionId=request.getParameter("EI");
-             String link=request.getParameter("link");    
-             Connection con;
-             con=exhibitionAdministratorOneTimeConnection.getConnection();
-             String val = "insert into exhibitionSocialMedia(exhibitionId,socialMediaId,link,createdBy,modifiedBy,modifiedByFlag)  values (?,(select id from media where id=1),?,(select id from exhibitionAdmin where id=3),(select id from exhibitionAdmin where id=3),(select id from roles where id=1))" ;
-              // data inserted in exhibitionSocialMedia table
-             PreparedStatement ps = con.prepareStatement(val);
-             ps.setString(1, exhibitionId);
-             ps.setString(2, link);    
-             int n=  ps.executeUpdate(); 
-                if(n>0)
-                {
-                  out.print("ok");            
+public class exhibitionAdministratorSocialMedia extends HttpServlet 
+{
+          protected void processRequest(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException
+          {
+                response.setContentType("text/html;charset=UTF-8");
+                PrintWriter out = response.getWriter();
+                try
+                {   
+                    // value fetch from textbox of exhibitionSocialMedia.jsp file
+                    String exhibitionId=request.getParameter("EI");
+                    String link=request.getParameter("link");    
+                    Connection con;
+                    con=exhibitionAdministratorOneTimeConnection.getConnection();
+                    String val = "insert into exhibitionSocialMedia(exhibitionId,socialMediaId,link,createdBy,modifiedBy,modifiedByFlag)  values (?,(select id from media where id=1),?,(select id from exhibitionAdmin where id=3),(select id from exhibitionAdmin where id=3),(select id from roles where id=1))" ;
+                     // data inserted in exhibitionSocialMedia table
+                    PreparedStatement ps = con.prepareStatement(val);
+                    ps.setString(1, exhibitionId);
+                    ps.setString(2, link);    
+                    int n=  ps.executeUpdate(); 
+                    if(n>0)
+                    {
+                        out.print("ok");            
+                    }
+                    else
+                    {
+                        out.print("error");
+                    }
+                    con.close();
                 }
-                else
+                catch(Exception e)
                 {
-                  out.print("error");
+                    out.print("error" +e);
                 }
-           con.close();
-            }
-           catch(Exception e)
-           {
-               out.print("error" +e);
            }
-    }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

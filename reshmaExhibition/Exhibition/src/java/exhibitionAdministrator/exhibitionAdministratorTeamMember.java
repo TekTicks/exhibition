@@ -8,63 +8,63 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-public class exhibitionAdministratorTeamMember extends HttpServlet {
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-          throws ServletException, IOException {
+public class exhibitionAdministratorTeamMember extends HttpServlet 
+{
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException 
+    {
           response.setContentType("text/html;charset=UTF-8");
           PrintWriter out = response.getWriter();
-        try
+          try
           {
-              // value fetch from exhibitionAdministratorTeam.jsp 
-             HttpSession ss=request.getSession(false);
-             String idValid = (String) ss.getAttribute("idValid");      
-              // value fetch from textbox of exhibitionAdministratorTeam.jsp             
-             String tagline=request.getParameter("tagline");
-             String title=request.getParameter("title");
-             String firstName=request.getParameter("firstName");
-             String lastName=request.getParameter("lastName");
-             String gender=request.getParameter("gender");
-             String dateOfBirth=request.getParameter("dateOfBirth");
-             String degination=request.getParameter("degination");
-             String phoneNo=request.getParameter("phoneNo");
-             String mobileNo=request.getParameter("mobileNo");
-             String email=request.getParameter("email");
-           
-             Connection con;
-             con=exhibitionAdministratorOneTimeConnection.getConnection();  
-             if(!(mobileNo.length() == 10) || !(phoneNo.length() == 10 ) )
-             {
-                 out.print("mobileNoInvalid");
-             }
-             else
-             {
-             String val = "insert into exhibitionTeam(tagline,title,firstName,lastName,gender,dateOfBirth,degination,phoneNo,mobileNo,email,createdBy,modifiedBy,modifiedByFlag)  values (?,?,?,?,?,?,?,?,?,?,(select id from owner where id=1), '"+idValid+"' ,(select id from roles where id=1))" ;
-            // data inserted in exhibitionTeam table
-             PreparedStatement ps = con.prepareStatement(val); 
-              ps.setString(1, tagline);
-              ps.setString(2, title);
-              ps.setString(3, firstName);
-              ps.setString(4, lastName);
-              ps.setString(5,gender);
-              ps.setString(6, dateOfBirth);
-              ps.setString(7, degination);
-              ps.setString(8, phoneNo);
-              ps.setString(9, mobileNo);
-              ps.setString(10, email);      
-              int n=  ps.executeUpdate(); 
-                  if(n>0)
-                  {
-                   out.println("ok");
-                  }
-                  else
-                  {
-                   out.println("error");
-                  }
-           con.close();
-          }
-          }
-           catch(Exception e)
+                    // value fetch from exhibitionAdministratorTeam.jsp 
+                    HttpSession ss=request.getSession(false);
+                    String idValid = (String) ss.getAttribute("idValid");      
+                    // value fetch from textbox of exhibitionAdministratorTeam.jsp             
+                    String tagline=request.getParameter("tagline");
+                    String title=request.getParameter("title");
+                    String firstName=request.getParameter("firstName");
+                    String lastName=request.getParameter("lastName");
+                    String gender=request.getParameter("gender");
+                    String dateOfBirth=request.getParameter("dateOfBirth");
+                    String degination=request.getParameter("degination");
+                    String phoneNo=request.getParameter("phoneNo");
+                    String mobileNo=request.getParameter("mobileNo");
+                    String email=request.getParameter("email");
+
+                    Connection con;
+                    con=exhibitionAdministratorOneTimeConnection.getConnection();  
+                    if(!(mobileNo.length() == 10) || !(phoneNo.length() == 10 ) )
+                    {
+                        out.print("mobileNoInvalid");
+                    }
+                    else
+                    {
+                        String val = "insert into exhibitionTeam(tagline,title,firstName,lastName,gender,dateOfBirth,degination,phoneNo,mobileNo,email,createdBy,modifiedBy,modifiedByFlag)  values (?,?,?,?,?,?,?,?,?,?,(select id from owner where id=1), '"+idValid+"' ,(select id from roles where id=1))" ;
+                        // data inserted in exhibitionTeam table
+                        PreparedStatement ps = con.prepareStatement(val); 
+                        ps.setString(1, tagline);
+                        ps.setString(2, title);
+                        ps.setString(3, firstName);
+                        ps.setString(4, lastName);
+                        ps.setString(5,gender);
+                        ps.setString(6, dateOfBirth);
+                        ps.setString(7, degination);
+                        ps.setString(8, phoneNo);
+                        ps.setString(9, mobileNo);
+                        ps.setString(10, email);      
+                        int n=  ps.executeUpdate(); 
+                        if(n>0)
+                        {
+                              out.println("ok");
+                        }
+                        else
+                        {
+                              out.println("error");
+                        }
+                        con.close();
+                    }
+                 }
+                  catch(Exception e)
            {
              out.println("error" +e);
            }

@@ -8,39 +8,39 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-public class exhibitionAdministratorFacilitiesEdit extends HttpServlet {
-          protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-          throws ServletException, IOException {
-          response.setContentType("text/html;charset=UTF-8");
-          PrintWriter out = response.getWriter();
-       try
-         {
-              HttpSession obj=request.getSession(false);
-              String myex_id=(String)obj.getAttribute("myid");   // value fetch from exhibitionAdministratorFacilities.jsp file 
-              //values fetch from textbox of exhibitionAdministratorFacilities.jsp file
-              String exId=request.getParameter("exId");  
-              String title=request.getParameter("title");
-              String des=request.getParameter("description"); 
-              Connection con;
-              con=exhibitionAdministratorOneTimeConnection.getConnection();
-              String query = "update exhibitionFacilities set exhibitionId='"+exId+"',title ='"+title+"',description ='"+des+"'where id='"+myex_id+"' ";
-              //data updated in exhibitionFacilities table
-              PreparedStatement ps=con.prepareStatement(query);
-              int rs= ps.executeUpdate();
-              if(rs !=0)
-              {
-                out.print("ok");   
-              }
-              else
-             {
-                out.print("wrong");
-             }       
-         }
-       catch(Exception e)
-         {
-           out.print("error" +e);
-         }
+public class exhibitionAdministratorFacilitiesEdit extends HttpServlet 
+{
+          protected void processRequest(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException
+          {
+                response.setContentType("text/html;charset=UTF-8");
+                PrintWriter out = response.getWriter();
+                try
+                {
+                        HttpSession obj=request.getSession(false);
+                        String myex_id=(String)obj.getAttribute("myid");   // value fetch from exhibitionAdministratorFacilities.jsp file 
+                        //values fetch from textbox of exhibitionAdministratorFacilities.jsp file
+                        String exId=request.getParameter("exId");  
+                        String title=request.getParameter("title");
+                        String des=request.getParameter("description"); 
+                        Connection con;
+                        con=exhibitionAdministratorOneTimeConnection.getConnection();
+                        String query = "update exhibitionFacilities set exhibitionId='"+exId+"',title ='"+title+"',description ='"+des+"'where id='"+myex_id+"' ";
+                        //data updated in exhibitionFacilities table
+                        PreparedStatement ps=con.prepareStatement(query);
+                        int rs= ps.executeUpdate();
+                        if(rs !=0)
+                        {
+                          out.print("ok");   
+                        }
+                        else
+                        {
+                          out.print("wrong");
+                        }       
+                }
+                catch(Exception e)
+                {
+                        out.print("error" +e);
+                }
     }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

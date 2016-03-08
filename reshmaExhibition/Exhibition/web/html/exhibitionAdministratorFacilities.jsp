@@ -36,6 +36,9 @@
     <link href="assets/plugins/datatables-responsive/css/datatables.responsive.css" rel="stylesheet" type="text/css" media="screen" />
     <link href="pages/css/pages-icons.css" rel="stylesheet" type="text/css">
     <link class="main-stylesheet" href="pages/css/pages.css" rel="stylesheet" type="text/css" />
+    
+     <script data-require="jquery@*" data-semver="2.0.3" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+    <script data-require="bootstrap@*" data-semver="3.1.1" src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
     <!--[if lte IE 9]>
 	<link href="assets/plugins/codrops-dialogFx/dialog.ie.css" rel="stylesheet" type="text/css" media="screen" />
 	<![endif]-->
@@ -326,6 +329,29 @@
       </div>
       <!-- END SIDEBAR MENU -->
     </nav>
+    
+     <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Confirm Delete</h4>
+                </div>
+            
+                <div class="modal-body">
+                    <p>You are about to delete one track, this procedure is irreversible.</p>
+                    <p>Do you want to proceed?</p>
+                    <p class="debug-url"></p>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-success btn-ok" onclick="document.location.href='/Exhibition/exhibitionAdministratorFacilitiesDelete?myid';">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>   
     <!-- END SIDEBAR -->
     <!-- END SIDEBPANEL-->
     <!-- START PAGE-CONTAINER -->
@@ -639,6 +665,7 @@
                </tr>
               </thead>
               <tbody>
+                 
                <%   
                     Class.forName("com.mysql.jdbc.Driver"); 
                     Connection con;
@@ -646,62 +673,40 @@
                     Statement stat1=con.createStatement();
                     ResultSet rs1=stat1.executeQuery("select * from exhibitionFacilities");
                     int count1=0;
+                    %> 
+                    <%
                      while(rs1.next())
                      {
                         count1++;
                         out.println("<tr>");
                         out.println("<td class='v-align-middle semi-bold'><p>"+rs1.getString(2)+"</p></td>");
                         out.println("<td class='v-align-middle semi-bold'><p>"+rs1.getString(4)+"</p></td>");
-                        String idr=rs1.getString(1);
-                           
-                           
-                           %>
-                             <td>
+                        String idr=rs1.getString(1);    
+                         HttpSession idDe=request.getSession(true);
+                        idDe.setAttribute("myex_id", idr);  
+                       %>
+                            
+              <td>   
                                  <div class="btn-group">
-                             <button type="button" class="btn btn-success" onclick="document.location.href='/Exhibition/html/exhibitionAdministratorFacilitiesEdit.jsp?idr=<%=idr%>';"><i class="fa fa-pencil"></i></button> 
-                                 
-                             <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
             
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel">Confirm Delete</h4>
-                </div>
-            
-                <div class="modal-body">
-                    <p>You are about to delete one track, this procedure is irreversible.</p>
-                    <p>Do you want to proceed?</p>
-                    <p class="debug-url"></p>
-                </div>
-                
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-success" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-success btn-ok">Delete</a>
-                </div>
-            </div>
-        </div>
-    </div>
+                               <button type="button" class="btn btn-success" onclick="exhibitionAdministratorFacilitiesEdit?myid=<%=idr%>"><i class="fa fa-pencil"></i></button> 
+                          <button  class="btn btn-success"  data-href="exhibitionAdministratorFacilitiesDelete?myid=<%=idr%>" data-toggle="modal" data-target="#confirm-delete" onclick=""><i class="fa fa-trash-o"></i>
+                                 </button>  </div>
                                  
-                                 <button  class="btn btn-success"  data-href="/delete.php?11" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash-o"></i>
-                                 </button>
-          <script>
+                                 </td> <%
+          out.println(" </tr>");
+                        }  
+                   %>
+                               
+                     <script>
         $('#confirm-delete').on('show.bs.modal', function(e) {
             $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
             
             $('.debug-url').html('Delete URL: <strong>' + $(this).find('.btn-ok').attr('href') + '</strong>');
         });
-    </script>
-                             
-                             
-                             
-                                 </div>
-                            </td><%
-                            out.println(" </tr>");
-                        }
-                       
-                   %>
-             
+    </script> 
+              
+  
                   </tbody>
                 </table>
               </div>
@@ -2045,5 +2050,6 @@
     <script src="assets/js/datatables.js" type="text/javascript"></script>
     <script src="assets/js/scripts.js" type="text/javascript"></script>
     <!-- END PAGE LEVEL JS -->
+    
   </body>
 </html>

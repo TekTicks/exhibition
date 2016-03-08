@@ -8,39 +8,39 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-public class exhibitionAdministratorOpportunityEdit extends HttpServlet {
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-          throws ServletException, IOException {
-          response.setContentType("text/html;charset=UTF-8");
-          PrintWriter out = response.getWriter();
-       try
-         {
-              HttpSession obj=request.getSession(false);
-              String myex_id=(String)obj.getAttribute("myid");
-              out.print(myex_id);
-              String exId=request.getParameter("exId");
-              String title=request.getParameter("title");
-              String email=request.getParameter("email"); 
-              String mobile=request.getParameter("mobile");
-              String contactNo=request.getParameter("contactNo");
-              Connection con;
-              con=exhibitionAdministratorOneTimeConnection.getConnection();
-              String query = "update exhibitionOpportunity set exhibitionId='"+exId+"',opportunityTitle ='"+title+"',email ='"+email+"',mobile ='"+mobile+"',contactNo ='"+contactNo+"' where id='"+myex_id+"' ";
-              PreparedStatement ps=con.prepareStatement(query);
-              int rs= ps.executeUpdate();
-              if(rs !=0)
+public class exhibitionAdministratorOpportunityEdit extends HttpServlet
+{
+        protected void processRequest(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException 
+        {
+              response.setContentType("text/html;charset=UTF-8");
+              PrintWriter out = response.getWriter();
+              try
               {
-                out.print("ok");   
-              }
-              else
-             {
-                out.print("wrong");
-             }       
-         }
+                    HttpSession obj=request.getSession(false);
+                    String myex_id=(String)obj.getAttribute("myid");
+                    out.print(myex_id);
+                    String exId=request.getParameter("exId");
+                    String title=request.getParameter("title");
+                    String email=request.getParameter("email"); 
+                    String mobile=request.getParameter("mobile");
+                    String contactNo=request.getParameter("contactNo");
+                    Connection con;
+                    con=exhibitionAdministratorOneTimeConnection.getConnection();
+                    String query = "update exhibitionOpportunity set exhibitionId='"+exId+"',opportunityTitle ='"+title+"',email ='"+email+"',mobile ='"+mobile+"',contactNo ='"+contactNo+"' where id='"+myex_id+"' ";
+                    PreparedStatement ps=con.prepareStatement(query);
+                    int rs= ps.executeUpdate();
+                    if(rs !=0)
+                    {
+                        out.print("ok");   
+                    }
+                    else
+                    {
+                        out.print("wrong");
+                    }       
+             }
        catch(Exception e)
          {
-           out.print("error" +e);
+                out.print("error" +e);
          }
     }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

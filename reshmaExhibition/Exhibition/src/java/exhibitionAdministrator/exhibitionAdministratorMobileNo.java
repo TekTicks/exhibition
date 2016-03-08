@@ -9,50 +9,50 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-public class exhibitionAdministratorMobileNo extends HttpServlet {
-        protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
-             try
-             { 
-                  // value fetch from textbox of exhibitionAdministratorMobileNo.jsp file
-                  String mobile=request.getParameter("un");
-                  HttpSession ss=request.getSession(false);
-                  Connection con;
-                  con=exhibitionAdministratorOneTimeConnection.getConnection();
-                  Statement stat=con.createStatement();
-                  // textbox value of mobileNo checked with exhibitionAdmin Table
-                  ResultSet rs=stat.executeQuery("select * from exhibitionAdmin where mobileNo='"+mobile+"'");         
-                  int count=0;
-                  while(rs.next())
-                  {
-                    count++;
-                  }
-                  if(count>0)
-                  {  
-                    if(!(mobile.equals(ss.getAttribute("MN")))  && !(mobile.length()==10))   // mobile No 10 digit validation 
-                     {
-                       out.print("wrong");
-                     }
-                    else
-                     {
-                       out.print("ok");
-                       // response.sendRedirect("/Exhibition/html/exhibitionAdministratorFogotPassword.jsp");
-                     }
-                   }
-                  else
-                  {
-                     out.print("ERROR");
-                  }
+public class exhibitionAdministratorMobileNo extends HttpServlet
+{
+        protected void processRequest(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException
+        {
+                response.setContentType("text/html;charset=UTF-8");
+                response.setContentType("text/html");
+                PrintWriter out = response.getWriter();
+                try
+                { 
+                        // value fetch from textbox of exhibitionAdministratorMobileNo.jsp file
+                        String mobile=request.getParameter("un");
+                        HttpSession ss=request.getSession(false);
+                        Connection con;
+                        con=exhibitionAdministratorOneTimeConnection.getConnection();
+                        Statement stat=con.createStatement();
+                        // textbox value of mobileNo checked with exhibitionAdmin Table
+                        ResultSet rs=stat.executeQuery("select * from exhibitionAdmin where mobileNo='"+mobile+"'");         
+                        int count=0;
+                        while(rs.next())
+                        {
+                             count++;
+                        }
+                        if(count>0)
+                        {  
+                            if(!(mobile.equals(ss.getAttribute("MN")))  && !(mobile.length()==10))   // mobile No 10 digit validation 
+                            {
+                                 out.print("wrong");
+                            }
+                            else
+                            {
+                                 out.print("ok");
+                                 // response.sendRedirect("/Exhibition/html/exhibitionAdministratorFogotPassword.jsp");
+                            }
+                         }
+                         else
+                         {
+                                out.print("ERROR");
+                         }
              }
-     catch(Exception e)
-     {
-           out.println("errorsss" +e);
-    
-     }
+             catch(Exception e)
+             {  
+                   out.println("errorsss" +e);
+  
+             }
     }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

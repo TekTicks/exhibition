@@ -7,26 +7,30 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-public class exhibitionAdministratorFacilitiesDelete extends HttpServlet {
-        protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-       try
-            {
-               String myex_id=request.getParameter("idr");    //value fetch from exhibitionAdministratorFacilities.jsp file
-               Connection con;
-               con=exhibitionAdministratorOneTimeConnection.getConnection();
-               Statement st=con.createStatement();
-               st.executeUpdate("delete from exhibitionFacilities where id='"+myex_id+"'");      //data deleted from exhibitionFacilities table
-               response.sendRedirect("/Exhibition/html/exhibitionAdministratorFacilities.jsp");     //page redirected to exhibitionAministratorFacilities.jsp
-               con.close();
-            }
-       catch(Exception e)
-            {
-               out.print("error" +e);
-            }
+import javax.servlet.http.HttpSession;
+public class exhibitionAdministratorFacilitiesDelete extends HttpServlet 
+{
+        protected void processRequest(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException
+        {
+                response.setContentType("text/html;charset=UTF-8");
+                PrintWriter out = response.getWriter();
+                try
+                {
+                     HttpSession idDelete=request.getSession(false);
+                   String idDel= (String)idDelete.getAttribute("myex_id");
+                   out.print(idDel);
+                     //value fetch from exhibitionAdministratorFacilities.jsp file
+                    Connection con;
+                    con=exhibitionAdministratorOneTimeConnection.getConnection();
+                    Statement st=con.createStatement();
+                    st.executeUpdate("delete from exhibitionFacilities where id='"+idDel+"'");      //data deleted from exhibitionFacilities table
+                    response.sendRedirect("/Exhibition/html/exhibitionAdministratorFacilities.jsp");     //page redirected to exhibitionAministratorFacilities.jsp
+                    con.close();
+                }
+                catch(Exception e)
+                {
+                    out.print("error" +e);
+                }
     }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

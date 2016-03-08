@@ -32,7 +32,6 @@
     <link href="pages/css/ie9.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="pages/js/jquery-1.4.2.min.js"></script>
- 
     <script type="text/javascript">
 	$(document).ready(function(){
 		$("#login_frm").submit(function(){
@@ -48,24 +47,26 @@
 		          	type: 'post',
 		   		success: function(msg){
                                     alert(msg);
-                                if(msg != 'wrong') // Message Sent, check and redirect
+                                if(msg != 'invalidPassword') // Message Sent, check and redirect
 				{
-                                   
-                                             	$("#msgbox1").fadeTo(100,1,function() //start fading the messagebox
+                                    $("#msgbox1").fadeTo(100,1,function() //start fading the messagebox
                                         {
 			                  //add message and change the class of the box and start fading
-			                 $(this).html('password updated successfully...').removeClass().addClass('myinfo').fadeTo(300,1);
+			                 $(this).html('password updated successfully...').removeClass().addClass('myinfo').fadeout();
                                         // document.location='/Exhibition/html/exhibitionAdminLog.jsp?user='+msg;
                                       });
+                                   
                                      }
                                           else
                                     {
-                                          $("#msgbox1").html('invalid password.').addClass('myerror').fadeTo(300,1,function()
+                                     
+                                       $("#msgbox1").html('invalid password.').addClass('myerror').fadeTo(300,1,function()
 			             {
 			                 //redirect to secure page
 			               //document.location='/Exhibition/html/exhibitionAdministratorFogotPassword.jsp';
 			             });
-                                        
+                                  
+                                     
                                     }
                                 
                                 }
@@ -77,38 +78,37 @@
 
 	});
    </script>  
-   
 <style>
 #exists{display:none}
 #cross{display:none}
 .myinfo
 {
 	margin: 5px auto;
-	background:#d6e3f5;
-	border: 1px #0010ac solid;
-	padding:5px;
+	background:white;
+	border: 0px;
+	padding:3px;
 	color:#0010ac;
-	font-size:12px;
+	font-size:14px;
 	width:350px;
 	min-height:0px;
 	-moz-border-radius:4px;
 	-webkit-border-radius:4px;
-	text-align: center;
+	text-align: left;
 }
 
 .myerror
 {
 	margin: 5px auto;
-	background:#FFDFDF;
-	border: 1px #FF0000 solid;
-	padding:5px;
+	background:white;
+	border: 0px;
+	padding:3px;
 	color:#FF0000;
 	font-size:12px;
 	width:350px;
 	min-height:0px;
 	-moz-border-radius:4px;
 	-webkit-border-radius:4px;
-	text-align: center;
+	text-align: left; 
 }
 </style>
 <script type="text/javascript">
@@ -151,12 +151,12 @@
              <div class="form-group form-group-default">
             
               <div class="controls">
-             <input type="password" class="form-control" id="newpassword" name="newpassword" placeholder="Enter New Password" style="text-align: center" required>
+             <input type="password" class="form-control" id="newpassword" name="newpassword" placeholder="Enter New Password" >
             </div>  	</div>
            <div class="form-group form-group-default">
             
               <div class="controls">
-<input type="password" class="form-control" id="confirmpassword" name="confirmpassword" placeholder="Confirm Password" style="text-align: center" required>
+              <input type="password" class="form-control" id="confirmpassword" name="confirmpassword" placeholder="Confirm Password" >
             </div>	 </div>
             <div id="msgbox1"></div>
             

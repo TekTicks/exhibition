@@ -53,7 +53,7 @@
                                        	$("#msgbox1").fadeTo(200,1,function() //start fading the messagebox
                                         {
 			                  //add message and change the class of the box and start fading
-			                 $(this).html('mobile no should be 10 digits only....').removeClass().addClass('myerror').fadeTo(300,1);
+			                 $(this).html('mobile no should be 10 digits only....').removeClass().addClass('myerror').fadeout();
                                       //document.location='/Exhibition/html/exhibitionAdministratorMobileNo.jsp';
                                       });     
                                     }
@@ -93,31 +93,31 @@
 .myinfo
 {
 	margin: 5px auto;
-	background:#d6e3f5;
-	border: 1px #0010ac solid;
-	padding:5px;
+	background:white;
+	border: 0px;
+	padding:3px;
 	color:#0010ac;
-	font-size:12px;
+	font-size:14px;
 	width:350px;
 	min-height:0px;
 	-moz-border-radius:4px;
 	-webkit-border-radius:4px;
-	text-align: center;
+	text-align: left;
 }
 
 .myerror
 {
 	margin: 5px auto;
-	background:#FFDFDF;
-	border: 1px #FF0000 solid;
-	padding:5px;
+	background:white;
+	border: 0px;
+	padding:3px;
 	color:#FF0000;
 	font-size:12px;
 	width:350px;
 	min-height:0px;
 	-moz-border-radius:4px;
 	-webkit-border-radius:4px;
-	text-align: center;
+	text-align: left;
 }
 </style>
 <script type="text/javascript">

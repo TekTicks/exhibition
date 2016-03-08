@@ -37,7 +37,7 @@
 		$("#login_frm").submit(function(){
 
 			 //remove previous class and add new "myinfo" class
-	     //   $("#msgbox").removeClass().addClass('myinfo').text('Validating Your Login ').fadeIn(1000);
+	     $("#msgbox").removeClass().addClass('myinfo').text('Validating Your Login ').fadeIn(1000);
 
 			
 			this.timer = setTimeout(function () {
@@ -46,25 +46,25 @@
 		          	data: 'un='+ $('#otp').val() ,
 		          	type: 'post',
 		   		success: function(msg){
-                                if(msg == 'ERROR') // Message Sent, check and redirect
+                                if(msg != 'ERROR') // Message Sent, check and redirect
 				{
-                                   
-                                             	$("#msgbox1").fadeTo(100,1,function() //start fading the messagebox
-                                        {
-			                  //add message and change the class of the box and start fading
-			                 $(this).html('invalid OTP').removeClass().addClass('myerror').fadeTo(300,1);
-                                        // document.location='/Exhibition/html/exhibitionAdminLog.jsp?user='+msg;
-                                      });
-                                     }
-                                          else
-                                    {
                                           $("#msgbox1").html('OTP Verified.....').addClass('myinfo').fadeTo(300,1,function()
 			             {
 			                 //redirect to secure page
 			               document.location='/Exhibition/html/exhibitionAdministratorFogotPassword.jsp';
 			             });
-                                        
                                     }
+                                             	
+                                          else
+                                    {
+                                      $("#msgbox1").fadeTo(200,1,function() //start fading the messagebox
+                                        {
+			                  //add message and change the class of the box and start fading
+			                 $(this).html('invalid OTP').removeClass().addClass('myerror').fadeout();
+                                      //document.location='/Exhibition/html/exhibitionAdministratorMobileNo.jsp';
+                                      });     
+                                     }
+                                   
                                 
                                 }
 				
@@ -82,31 +82,32 @@
 .myinfo
 {
 	margin: 5px auto;
-	background:#d6e3f5;
-	border: 1px #0010ac solid;
-	padding:5px;
+	background:white;
+	border: 0px;
+	padding:3px;
 	color:#0010ac;
-	font-size:12px;
+	font-size:14px;
 	width:350px;
 	min-height:0px;
 	-moz-border-radius:4px;
 	-webkit-border-radius:4px;
-	text-align: center;
+	text-align: left;
+        
 }
 
 .myerror
 {
-	margin: 5px auto;
-	background:#FFDFDF;
-	border: 1px #FF0000 solid;
-	padding:5px;
+        margin: 5px auto;
+	background:white;
+	border: 0px;
+	padding:3px;
 	color:#FF0000;
 	font-size:12px;
 	width:350px;
 	min-height:0px;
 	-moz-border-radius:4px;
 	-webkit-border-radius:4px;
-	text-align: center;
+	text-align: left;
 }
 </style>
 <script type="text/javascript">

@@ -7,31 +7,29 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-public class exhibitionAdministratorSocialMediaDelete extends HttpServlet {
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-          throws ServletException, IOException {
-          response.setContentType("text/html;charset=UTF-8");
-          PrintWriter out = response.getWriter();
-       try
-          {
-               // value fetch from exhibitionAdministratorSocialMedia table
-               String myex_id=request.getParameter("myid");
-               Connection con;
-               con=exhibitionAdministratorOneTimeConnection.getConnection();
-               Statement st=con.createStatement();
-               st.executeUpdate("delete from exhibitionSocialMedia where id='"+myex_id+"'"); 
-               //data deleted from exhibitionSocialMedia table
-               response.sendRedirect("/Exhibition/html/exhibitionAdministratorSocialMedia.jsp");   // page is redirect to exhibitionAdministratorSocialMedia.jsp 
-               con.close();
+public class exhibitionAdministratorSocialMediaDelete extends HttpServlet
+{
+        protected void processRequest(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException
+        {
+             response.setContentType("text/html;charset=UTF-8");
+             PrintWriter out = response.getWriter();
+             try
+             {
+                    // value fetch from exhibitionAdministratorSocialMedia table
+                    String myex_id=request.getParameter("myid");
+                    Connection con;
+                    con=exhibitionAdministratorOneTimeConnection.getConnection();
+                    Statement st=con.createStatement();
+                    st.executeUpdate("delete from exhibitionSocialMedia where id='"+myex_id+"'"); 
+                    //data deleted from exhibitionSocialMedia table
+                    response.sendRedirect("/Exhibition/html/exhibitionAdministratorSocialMedia.jsp");   // page is redirect to exhibitionAdministratorSocialMedia.jsp 
+                    con.close();
+             }
+            catch(Exception e)
+            {
+                out.print("error" +e);
             }
-       catch(Exception e)
-          {
-            out.print("error" +e);
-          }
-
-    }
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    }    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *

@@ -8,46 +8,47 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-public class exhibitionAdministratorPersonalInformation extends HttpServlet {
-          protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-          throws ServletException, IOException {
-          response.setContentType("text/html");
-          PrintWriter out = response.getWriter();
-        try {
-             //value fetch from textbox of exhibitionAdministratorProfilePage.jsp file
-             String mn=request.getParameter("mn");
-             String us=request.getParameter("us");
-             String pw=request.getParameter("pw");
-             String le=request.getParameter("le");
-             Connection con;
-             con=exhibitionAdministratorOneTimeConnection.getConnection();
-             HttpSession ss=request.getSession(false);
-             String rs1 = (String) ss.getAttribute("emailValid");       // emailValid value fetch from exhibitionAdministratorLoginCheck.java file
-             if (!(mn.length() == 10) )       // mobile no validation
-              {
-                   out.print("mobileNoInvalid");
-              }  
-              else
-              {
-               String query = "update exhibitionAdmin set mobileNo ='"+mn+"',userName ='"+us+"',password ='"+pw+"',level ='"+le+"' where email='"+rs1+"' ";
-               // data updated in exhibitionAdmin table
-               PreparedStatement ps=con.prepareStatement(query);
-               int rs= ps.executeUpdate();
-               if(rs !=0)
-              {
-               out.print("ok");   
-              }
-               else
-              {
-                out.print("wrong");
-              }
-              }
-             }
-        catch(Exception ee)
-        {
-           out.println("error" +ee.toString());
-        }
+public class exhibitionAdministratorPersonalInformation extends HttpServlet
+{
+          protected void processRequest(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException
+          {
+                response.setContentType("text/html");
+                PrintWriter out = response.getWriter();
+                try
+                {
+                        //value fetch from textbox of exhibitionAdministratorProfilePage.jsp file
+                        String mn=request.getParameter("mn");
+                        String us=request.getParameter("us");
+                        String pw=request.getParameter("pw");
+                        String le=request.getParameter("le");
+                        Connection con;
+                        con=exhibitionAdministratorOneTimeConnection.getConnection();
+                        HttpSession ss=request.getSession(false);
+                        String rs1 = (String) ss.getAttribute("emailValid");       // emailValid value fetch from exhibitionAdministratorLoginCheck.java file
+                        if (!(mn.length() == 10) )       // mobile no validation
+                        {
+                              out.print("mobileNoInvalid");
+                        }  
+                        else
+                        {
+                              String query = "update exhibitionAdmin set mobileNo ='"+mn+"',userName ='"+us+"',password ='"+pw+"',level ='"+le+"' where email='"+rs1+"' ";
+                              // data updated in exhibitionAdmin table
+                              PreparedStatement ps=con.prepareStatement(query);
+                              int rs= ps.executeUpdate();
+                              if(rs !=0)
+                              {
+                                    out.print("ok");   
+                              }
+                              else
+                              {
+                                    out.print("wrong");
+                              }
+                         }
+                }
+                catch(Exception ee)
+                {
+                      out.println("error" +ee.toString());
+                }
     } 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -87,7 +88,4 @@ public class exhibitionAdministratorPersonalInformation extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
- /*   private boolean isNaN(char[] value) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    } */
-}
+ }

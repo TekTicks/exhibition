@@ -11,56 +11,70 @@ import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.sql.*;
 import java.util.zip.*;
-
-
-public class exhibitionAdministratorOpportunity extends HttpServlet {
-        protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        try {
-              //values fetch from textbox of exhibitionAdministratorOpportunity.jsp file
-              String exId=request.getParameter("exId");  
-              String tt=request.getParameter("title");
-              String email=request.getParameter("email");
-              String mobile=request.getParameter("mobile");
-              String contactNo=request.getParameter("contactNo");
-              Connection con;
-              con=exhibitionAdministratorOneTimeConnection.getConnection(); 
-              HttpSession ss=request.getSession(false);
-              String idValid=(String)ss.getAttribute("idValid");  
-               out.print(idValid);
-              // value fetch from exhibitionAdminLoginCheck.java file
-             if(!(mobile.length() == 10) )
+public class exhibitionAdministratorOpportunity extends HttpServlet
+{
+        protected void processRequest(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException 
+        {
+             response.setContentType("text/html;charset=UTF-8");
+             PrintWriter out = response.getWriter();
+             try
              {
-                 out.print("mobileNoInvalid");
+                    //values fetch from textbox of exhibitionAdministratorOpportunity.jsp file
+                    String exId=request.getParameter("exId");  
+                    String tt=request.getParameter("title");
+                    String email=request.getParameter("email");
+                    String mobile=request.getParameter("mobile");
+                    String contactNo=request.getParameter("contactNo");
+                    Connection con;
+                    con=exhibitionAdministratorOneTimeConnection.getConnection(); 
+                    HttpSession ss=request.getSession(false);
+                    String idValid=(String)ss.getAttribute("idValid");  
+                     out.print(idValid);
+                     
+                    // value fetch from exhibitionAdminLoginCheck.java file
+                    
+                     HttpSession imageSession=request.getSession(false);
+                   File f1=(File)imageSession.getAttribute("imageLocation");
+                    out.print(f1);
+                    Statement s=con.createStatement();
+                    ResultSet r=s.executeQuery("select * from media where link='"+f1+"'");
+                    int len=0;
+                    while(r.next())
+                    {
+                        len++;
+                        String imageId=r.getString("id");
+                        out.print(imageId);
+                    }
+                    if(!(mobile.length() == 10) )
+                    {
+                        out.print("mobileNoInvalid");
+                    }
+                    else
+                    {
+                        String val = "insert into exhibitionOpportunity(exhibitionId,opportunityTitle,email,mobile,contactNo,mediaId,message,createdBy,modifiedBy,modifiedByFlag)  values (?,?,?,?,?,3,'opportunity_message','"+idValid+"','"+idValid+"',(select id from roles where id=1))" ;
+                        //data inserted in exhibitionFAQ table
+                        PreparedStatement ps = con.prepareStatement(val);  
+                        ps.setString(1, exId);
+                        ps.setString(2, tt);
+                        ps.setString(3, email);
+                        ps.setString(4, mobile);
+                        ps.setString(5, contactNo);
+                        int n=  ps.executeUpdate(); 
+                        if(n>0)
+                        {
+                            out.print("ok");
+                        }
+                        else
+                        {
+                             out.print("wrn");
+                        }
+                        con.close();
+                    }
              }
-             else
+             catch(Exception e)
              {
-              String val = "insert into exhibitionOpportunity(exhibitionId,opportunityTitle,email,mobile,contactNo,mediaId,message,createdBy,modifiedBy,modifiedByFlag)  values (?,?,?,?,?,3,'opportunity_message','"+idValid+"','"+idValid+"',(select id from roles where id=1))" ;
-              //data inserted in exhibitionFAQ table
-              PreparedStatement ps = con.prepareStatement(val);  
-              ps.setString(1, exId);
-               ps.setString(2, tt);
-               ps.setString(3, email);
-               ps.setString(4, mobile);
-                ps.setString(5, contactNo);
-               int n=  ps.executeUpdate(); 
-                  if(n>0)
-                  {
-                        out.print("ok");
-                  }
-                  else
-                  {
-                        out.print("wrn");
-                  }
-           con.close();
-            }
-        }
-           catch(Exception e)
-           {
-       out.print("error" +e);
-           }
+                 out.print("error" +e);
+             }
     }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

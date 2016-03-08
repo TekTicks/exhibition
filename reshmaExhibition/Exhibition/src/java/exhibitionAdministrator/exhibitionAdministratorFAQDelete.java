@@ -7,13 +7,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-public class exhibitionAdministratorFAQDelete extends HttpServlet {
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-       try
+public class exhibitionAdministratorFAQDelete extends HttpServlet
+{
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException
+    {
+            response.setContentType("text/html;charset=UTF-8");
+            PrintWriter out = response.getWriter();
+            try
             {
                String myex_id=request.getParameter("idr");
                Connection con;
@@ -23,7 +23,7 @@ public class exhibitionAdministratorFAQDelete extends HttpServlet {
                response.sendRedirect("/Exhibition/html/exhibitionAdministratorFAQ.jsp");     
                con.close();
             }
-       catch(Exception e)
+            catch(Exception e)
             {
                out.print("error" +e);
             }
