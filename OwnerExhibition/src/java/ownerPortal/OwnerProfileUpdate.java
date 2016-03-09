@@ -27,8 +27,8 @@ public class OwnerProfileUpdate extends HttpServlet {
                             String p_email =request.getParameter("p_email");
                             String s_email =request.getParameter("s_email");
                             
-                            String p_contact =request.getParameter("p_contact");
-                           // String ccode =request.getParameter("ccodePrimary");
+                            //String p_contact =request.getParameter("p_contact");
+                            // String ccode =request.getParameter("ccodePrimary");
                             //String primaryContact=ccode+p_contact;
                             //appending primaryContact with countryCode 
                             String s_contact =request.getParameter("s_contact");
@@ -41,17 +41,17 @@ public class OwnerProfileUpdate extends HttpServlet {
                             Connection con;
                             con=dbConnection.getConnection();
                                  
-                            PreparedStatement ps=con.prepareStatement("update ownerProfile a,ownerIndustry b set a.name=?,a.primEmail=?,a.secEmail=?,a.primContact=?,a.secContact=?,a.secCountryCodeId=?,a.about=?, a.website=?,b.industryId=? where a.createdBy='"+idd+"' ");
+                            PreparedStatement ps=con.prepareStatement("update ownerProfile a,ownerIndustry b set a.name=?,a.secEmail=?,a.primContact=?,a.secContact=?,a.secCountryCodeId=?,a.about=?, a.website=?,b.industryId=? where a.createdBy='"+idd+"' ");
                                  
                             ps.setString(1, cname);
                             ps.setString(2, p_email);
                             ps.setString(3, s_email);
-                            ps.setString(4, p_contact);
-                            ps.setString(5, s_contact);
-                            ps.setString(6, ccodeSecondary);
-                            ps.setString(7, about);
-                            ps.setString(8, website);
-                            ps.setString(9, industry);
+                            // ps.setString(4, p_contact);
+                            ps.setString(4, s_contact);
+                            ps.setString(5, ccodeSecondary);
+                            ps.setString(6, about);
+                            ps.setString(7, website);
+                            ps.setString(8, industry);
                             ps.executeUpdate();
                             
                       

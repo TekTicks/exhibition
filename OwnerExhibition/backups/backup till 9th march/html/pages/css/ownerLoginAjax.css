@@ -1,0 +1,33 @@
+
+#exists{display:none}
+#cross{display:none}
+.myinfo
+{
+	margin: 5px auto;
+	background:#d6e3f5;
+	border: 1px #0010ac solid;
+	padding:5px;
+	color:#0010ac;
+	font-size:12px;
+	width:350px;
+	min-height:0px;
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+	text-align: center;
+}
+
+.myerror
+{
+	margin: 5px auto;
+	background:#FFDFDF;
+	border: 1px #FF0000 solid;
+	padding:5px;
+	color:#FF0000;
+	font-size:12px;
+	width:350px;
+	min-height:0px;
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+	text-align: center;
+}
+

@@ -3,16 +3,17 @@
     Created on : Jan 22, 2016, 4:48:07 PM
     Author     : Admin
 --%>
-<%
-                      response.setIntHeader("Refresh",5);
-                       %>
+
 <%@page import="ownerPortal.dbConnection"%>
-<%@page import="java.sql.ResultSet"%>
-<%@page import="java.sql.Statement"%>
-<%@page import="java.sql.DriverManager"%>
-<%@page import="java.sql.DriverManager"%>
-<%@page import="java.sql.Connection"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="org.apache.commons.fileupload.servlet.ServletFileUpload" %>
+<%@ page import="org.apache.commons.fileupload.disk.DiskFileItemFactory"%>
+<%@ page import="org.apache.commons.fileupload.*"%>
+<%@ page import="java.util.*, java.io.*" %>
+<%@ page import="java.util.Iterator"%>
+<%@ page import="java.util.List"%>
+<%@ page import="java.io.File"%>
+<%@ page contentType="text/html;charset=UTF-8" %>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -51,19 +52,9 @@
     <link href="assets/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" media="screen">
     <link href="pages/css/pages-icons.css" rel="stylesheet" type="text/css">
     <link class="main-stylesheet" href="pages/css/pages.css" rel="stylesheet" type="text/css" />
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script src="pages/js/jquery-1.4.2.min.js"></script>
-    <script src="pages/js/ownerloginValidation.js"></script>
-    <link href="pages/css/ownerLoginAjax.css" rel="stylesheet" type="text/css" />  
-    <script>
-        
-	$(document).ready(function(){
-            window.location.reload();
-               // window.location.href ="ownerProfileSocialMediaEdit.jsp";
-
-        });
-        }
-        </script>
+    
+    
+   
   </head>
   <body class="fixed-header ">
     <!-- BEGIN SIDEBPANEL-->
@@ -395,8 +386,7 @@
         </div>
       </div>
       <!-- END HEADER -->
-      
-      
+   
       <!-- START PAGE CONTENT WRAPPER -->
       <div class="page-content-wrapper ">
         <!-- START PAGE CONTENT -->
@@ -404,73 +394,39 @@
           <!-- START CONTAINER FLUID -->
           <div class="container-fluid container-fixed-lg bg-white">
             <div class="row">
-              <div class="col-sm-5">
-                <!-- START PANEL -->
-                <div class="panel panel-transparent">
-                  <div class="panel-heading">
-                  </div>
-                    <br>
-                    <br>
-                    <%
-                       // response.setIntHeader("Refresh",5);
-                         HttpSession ss1=request.getSession();
-                         String mediaId1=(String)ss1.getAttribute("mediaId");
-                         
-                         out.print(mediaId1);
-                         Connection con1;
-                         con1=dbConnection.getConnection();
-                         Statement stat1=con1.createStatement();
-                         ResultSet rs1=stat1.executeQuery("select * from media where id='"+mediaId1+"'");
-                         while(rs1.next())
-                         {
-                            String abc= rs1.getString("link");
-                            out.print(abc);
-                         
-                         %>
-                       <div class="panel-body">
-                       <img src="<%=rs1.getString(2) %>" id="profile" alt="Profile not uploaded" style="width:200px;height:200px">
-            
-                       <% } %>
-                  </div>
-                </div>
-                <!-- END PANEL -->
-              </div>
-                
-                
               
-              <div class="col-lg-7 col-md-6 ">
+                
+         <form ENCTYPE="multipart/form-data" action="/Exhibition/html/ownerProfileSocialMediaUpdate.jsp" method="post" role="form">
+                <div class="col-lg-7 col-md-6 ">
                 <!-- START PANEL -->
                 <div class="panel panel-transparent">
                   <div class="panel-body">
-                      <br>
-                      <br>
-                      
-             <div class="col-md-70">
-                      <div class="padding-30">
-                        <form action="/Exhibition/ownerProfileSocialMediaUpdate" method="post" role="form">
-                           
-                          <%  
-                              try{
-                               String id=request.getParameter("myid");
-                               HttpSession ss=request.getSession();
-                               ss.setAttribute("id1",id);
-                               //Database one time Connectivity
-                               Connection con;
-                               con=dbConnection.getConnection();
-                               Statement stat=con.createStatement();
-                               ResultSet rs=stat.executeQuery("select a.*,b.* from socialMedia a,ownerSocialMedia b where a.id=b.socialMediaId and b.id='"+id+"'");
-                          %>
-                          <%
-                             if(!rs.next())
+                  <div class="col-md-70">
+                    <div class="padding-30">
+                     <div class="form-group form-group-default ">
+                     <%@page import="java.io.*;" %>
+                     <%@page import="java.sql.*;" %>
+                     <%@page import="java.sql.DriverManager;" %>
+                     <%@page import="java.util.Scanner.*;" %>
+                    <%  
+                        try
+                        {
+                            String id=request.getParameter("myid");
+                            HttpSession ss=request.getSession();
+                            ss.setAttribute("id1",id);
+                            //Database one time Connectivity
+                            Connection con;
+                            con=dbConnection.getConnection();
+                            Statement stat=con.createStatement();
+                            ResultSet rs=stat.executeQuery("select a.*,b.* from socialMedia a,ownerSocialMedia b where a.id=b.socialMediaId and b.id='"+id+"'");
+                            if(!rs.next())
                             {
-                             out.print("Sory");
+                                out.print("Sorry");
                             }
-                             else
+                            else
                             {
                                 ss.setAttribute("mediaId",rs.getString("iconMediaId"));
-                               // out.print(rs.getString("iconMediaId"));
-                          %>
-                        
+                    %>
                             <div class="form-group form-group-default required">
                                  <label>Select Social Media</label>
                                  <select class="full-width"  name="socialmedia" data-init-plugin="select2" disabled>
@@ -482,29 +438,88 @@
                                 <label>Social Media Link</label>
                                 <input type="text" value="<%out.print(rs.getString(9));%>" name="socialmedialink" id="tin" class="form-control" required>
                             </div>
-                          <%
-                            }      
-                         }
+                    <%
+                        }      
+                           }
                            catch(Exception ee)
                            {
                                out.println("error"+ee);
                            }
-                          %>
+                    %>
                               <br>
                               <br>
-                              <div class="form-group">
+                            <div class="form-group">
                               <button class="btn btn-primary btn-cons m-t-10" type="submit">Update</button>
-                              <button class="btn btn-primary btn-cons m-t-10" onclick="document.location.href='/Exhibition/html/ownerProfile.jsp';"> Cancel</button> 
-                              </div>
+                              <button class="btn btn-primary btn-cons m-t-10" type="button" onclick="document.location.href='/Exhibition/html/ownerProfile.jsp';"> Cancel</button> 
+                            </div>
                           </div>    
-                        </form>
+                       
                       </div>
                     </div>
-                               
-                          </div>    
-                        </form>
-                      </div>
-                    </div>
+                   </div>    
+                  </div>
+                </div>
+                        
+                        
+
+              <div class="panel-heading">
+              <div class="panel-title">
+                    Social Media Icon 
+              </div>
+              </div>
+             
+           <%
+            try {
+           String img_name="";
+             Class.forName("com.mysql.jdbc.Driver"); 
+             java.sql.Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/exhibition","root","12345");
+             Statement stat=con.createStatement();
+             
+             
+             HttpSession ss=request.getSession();
+             String socialMediaLogo=(String)ss.getAttribute("mediaId");
+                         
+            ResultSet rs=stat.executeQuery("select * from media  where id='"+socialMediaLogo+"'");
+             
+            if(!rs.next())
+            {
+                 out.println("Error");
+            }
+            else
+            {
+               img_name=rs.getString(2);
+               ss.setAttribute("mediaId1",rs.getString(1));
+               //out.print(rs.getString(1));
+            }
+            %>    
+
+            <img src='<%= img_name %>' id="profile" alt="Profile not uploaded" style="width:200px;height:200px"> 
+            <%   }
+              catch(Exception e)
+                {
+                   out.print("fsdaf" +e);
+                }
+            %>  
+            <script type="text/javascript">
+                function readProfile(input) {
+                if (input.files && input.files[0]) {
+                var reader3 = new FileReader();
+                reader3.onload = function (e) {
+                $('#profile')
+                .attr('src', e.target.result)
+                };
+                reader3.readAsDataURL(input.files[0]);
+                }
+                }
+            </script>
+            <input name="file" id="file" style="width:200px" type="file" onchange="readProfile(this);">
+     
+  
+         </form>
+                        
+             
+  
+</div>
                   </div>
                 </div>
                 <!-- END PANEL -->

@@ -4,6 +4,10 @@
     Author     : Admin
 --%>
 
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="ownerPortal.dbConnection"%>
+<%@page import="java.sql.Connection"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -397,6 +401,7 @@
     function change()
     {
         var val=document.getElementById('one').value;
+        alert(val);
         var xhttp=new XMLHttpRequest();
         xhttp.onreadystatechange=function()
         {
@@ -414,7 +419,7 @@
     function change1()
     {
         var val=document.getElementById('two').value;
-
+            alert(val)
         var xhttp=new XMLHttpRequest();
         xhttp.onreadystatechange=function()
         {
@@ -423,7 +428,7 @@
                 document.getElementById('three').innerHTML=xhttp.responseText;
             }
         };
-        xhttp.open("POST","/Exhibition/NewServlet?valajax="+val,true);
+        xhttp.open("POST","/Exhibition/Fetch_State?valajax="+val,true);
         xhttp.send();
     }
 </script>
@@ -462,14 +467,20 @@
                                  <label>Select country</label>
                                  <select class="full-width" id="one" name="one" onchange="change()" data-init-plugin="select2" required>
                                      <option selected>---Select country---</option>
-                                  <option value="v1">India</option>
-                                  <option value="v2">Pakistan</option>
-                                  <option value="v2">Australia</option>
-                                  <option value="v2">China</option>
-                                  <option value="v2">Austria</option>
-                                  <option value="v2">France</option>
-                                  <option value="v2">Islamabad</option>
-                                  <option value="v2">Pakistan</option>
+                                  <%
+                                      Connection con2;
+                                      con2=dbConnection.getConnection();
+                                       Statement stat2=con2.createStatement();
+                                   ResultSet rs2=stat2.executeQuery("select * from country");
+                                           while(rs2.next())
+                                             { String idCountry=rs2.getString(1);
+                                            %>
+                                            
+                                            <option value="<%=idCountry%>"><%out.print(rs2.getString(2));%></option>  
+                                            <%
+                                            } 
+                                     
+                                       %>    
                                  </select>
                             </div> 
                                     

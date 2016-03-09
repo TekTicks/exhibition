@@ -393,36 +393,22 @@
           <!-- START CONTAINER FLUID -->
           <div class="container-fluid container-fixed-lg bg-white">
             <div class="row">
-              <div class="col-sm-5">
-                <!-- START PANEL -->
-                <div class="panel panel-transparent">
-                  <div class="panel-heading">
-                  </div>
-                    <br>
-                    <br>
-                  <div class="panel-body">
-                    <div class="panel-body text-center">
-                        <img class="image-responsive-height demo-mw-500" src="assets/img/demo/typography_hero.gif" alt="">
-                    </div>
-                  </div>
-                </div>
-                <!-- END PANEL -->
-              </div>
-                
-                
+            
+           <form ENCTYPE="multipart/form-data" action="/Exhibition/html/ownerProfileContactPersonUpdate2.jsp" method="post" id="contactPersonUpdate" role="form" autocomplete="off">
+
               <div class="col-lg-7 col-md-6 ">
                 <!-- START PANEL -->
                 <div class="panel panel-transparent">
                   <div class="panel-body">
                       
-                      
+            <!--          
                        <script type="text/javascript">
 	$(document).ready(function(){
 		$("#contactPersonUpdate").submit(function(){
 
 			this.timer = setTimeout(function () {
 				$.ajax({
-		          	url: '/Exhibition/OwnerProfileContactPersonUpdate',
+		          	url: '/Exhibition/html/ownerProfileContactPersonUpdate2.jsp',
 		          	data: 'title='+ $('#title').val() +'&fname=' + $('#fname').val()+'&lname=' + $('#lname').val() +'&email=' + $('#email').val()+'&gender=' + $('#gender').val()+'&dob=' + $('#dob').val() +'&designation=' + $('#designation').val()+'&phoneno=' + $('#phoneno').val()+'&mobileno=' + $('#mobileno').val()+'&phnNo=' + $('#phnNo').val()+'&mobNo=' + $('#mobNo').val(),
 		          	type: 'post',
 		   		success: function(msg){
@@ -454,95 +440,101 @@
 
 	});
    </script> 
+                   -->   
                       
-                      
-             <div class="col-md-70">
-                      <div class="padding-30">
-                         <form action="" method="post" id="contactPersonUpdate" role="form" autocomplete="off">
-                              <%  
-                             try{    
-                               String id=request.getParameter("contactPersonId");
-                               //create session
-                               HttpSession ss=request.getSession();
-                               ss.setAttribute("contactPersonId",id);
-                               //One time connection 
-                               Connection con;
-                               con=dbConnection.getConnection();
-                               Statement stat=con.createStatement();
-                               ResultSet rs=stat.executeQuery("select * from ownerContactPerson where id='"+id+"'");
-                              %>
-                              <%
-                               if(!rs.next())
-                              {
-                              out.print("error");
-                              }
-                              else
-                              {
-                              int gender=Integer.parseInt(rs.getString(6));
-                              String phnoId=rs.getString(16);
-                              String mobnoId=rs.getString(17);
-                              %>
-              
+     <div class="col-md-70">
+              <div class="padding-30">
+                     <%  
+                     try
+                     {  
+                           //id retrieved from url from ownerProfile
+                           String id=request.getParameter("contactPersonId");
+                           //create session of id of ownerContactPerson 
+                           HttpSession ss=request.getSession();
+                           ss.setAttribute("contactPersonId",id);
+                           //One time connection 
+                           Connection con;
+                           con=dbConnection.getConnection();
+                           Statement stat=con.createStatement();
+                           ResultSet rs=stat.executeQuery("select * from ownerContactPerson where id='"+id+"'");
+                     %>
+                     <%
+                       if(!rs.next())
+                      {
+                          out.print("error");
+                      }
+                      else
+                      {
+                          int gender=Integer.parseInt(rs.getString(6));
+                          String phnoId=rs.getString(16);
+                          String mobnoId=rs.getString(17);
+                          //id of photoMedia from ownerContactPerson ...used on same page
+                          ss.setAttribute("contactInfoId",rs.getString(5));
+
+                     %>
+
                         <p>Basic Information</p>
-                            <div class="form-group form-group-default required">
-                                 <label>Title</label>
-                                 <select class="full-width" name="title" id="title" data-init-plugin="select2">
-                                     <option  value="<%out.print(rs.getString(2));%>"><%out.print(rs.getString(2));%></option>
-                                  <option value="Mr.">Mr.</option>
-                                  <option value="Mrs.">Mrs.</option>
-                            </select>
-                     
-                            </div>
-                            <div class="form-group-attached">
-                            <div class="row clearfix">
-                                <div class="col-sm-6">
-                                <div class="form-group form-group-default required">
-                                     <label>First name</label>
-                                     <input type="text"  value="<%out.print(rs.getString(3));%>" name="fname" id="fname" class="form-control"  required>
-                                </div>
-                                </div>
-                                <div class="col-sm-6">
-                                 <div class="form-group form-group-default">
-                                     <label>Last name</label>
-                                     <input type="text"  value="<%out.print(rs.getString(4));%>" name="lname" id="lname" class="form-control" >
-                                </div>
-                                </div>
-                                <div class="row">
-                        <div class="col-sm-12">
-                          <div class="form-group form-group-default">
-                            <label>Email</label>
-                            <input type="email" class="form-control"  value="<%out.print(rs.getString(11));%>" name="email"  id="email" placeholder="" required>
-                          </div>
+                        <div class="form-group form-group-default required">
+                             <label>Title</label>
+                             <select class="full-width" name="title" id="title" data-init-plugin="select2">
+                                 <option  value="<%out.print(rs.getString(2));%>"><%out.print(rs.getString(2));%></option>
+                              <option value="Mr.">Mr.</option>
+                              <option value="Mrs.">Mrs.</option>
+                             </select>
                         </div>
-                      </div>
+
+                        <div class="form-group-attached">
+                        <div class="row clearfix">
+                            <div class="col-sm-6">
+                            <div class="form-group form-group-default required">
+                                 <label>First name</label>
+                                 <input type="text"  value="<%out.print(rs.getString(3));%>" name="fname" id="fname" class="form-control"  required>
                             </div>
                             </div>
-                            <p>Other Information</p>
-                                   <div class="row">
+                            <div class="col-sm-6">
+                             <div class="form-group form-group-default">
+                                 <label>Last name</label>
+                                 <input type="text"  value="<%out.print(rs.getString(4));%>" name="lname" id="lname" class="form-control" >
+                            </div>
+                            </div>
+                            <div class="row">
+                            <div class="col-sm-12">
+                              <div class="form-group form-group-default">
+                                <label>Email</label>
+                                <input type="email" class="form-control"  value="<%out.print(rs.getString(11));%>" name="email"  id="email" placeholder="" required>
+                              </div>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+                                  
+                                  
+                        <p>Other Information</p>
+                        <div class="row">
                         <div class="col-sm-12">
-                          <div class="form-group form-group-default">
-                           <label>Gender</label></div>
-                                <div class="radio radio-success">
+                             <div class="form-group form-group-default">
+                                <label>Gender</label>
+                             </div>
+                                 <div class="radio radio-success">
                                     <% if(gender==0) { %> 
-                                    &nbsp;&nbsp;&nbsp;<input type="radio" checked="checked" value="0" name="gender" id="gender">
-                                <label for="male">Male</label>
-                                <input type="radio"  value="1" name="gender" id="gender">
-                                <label for="female">Female</label>
-                                <% }
+                                        &nbsp;&nbsp;&nbsp;<input type="radio" checked="checked" value="0" name="gender" id="gender">
+                                        <label for="male">Male</label>
+                                        <input type="radio"  value="1" name="gender" id="gender">
+                                        <label for="female">Female</label>
+                                     <% }
                                     else
                                     { %>
-                                    &nbsp;&nbsp;&nbsp;<input type="radio" value="0" name="gender" id="gender">
-                                <label for="male">Male</label>
-                                <input type="radio" checked="checked" value="1" name="gender" id="gender">
-                                <label for="female">Female</label>
+                                        &nbsp;&nbsp;&nbsp;<input type="radio" value="0" name="gender" id="gender">
+                                        <label for="male">Male</label>
+                                        <input type="radio" checked="checked" value="1" name="gender" id="gender">
+                                        <label for="female">Female</label>
                                    <%}%>
-     
-                          </div>
+                                </div>
                         </div>
-                      </div> 
+                        </div> 
                                  
                  
-                           <div class="row clearfix">
+                        <div class="row clearfix">
                           <div class="col-sm-12">
                             <div class="form-group form-group-default required">
                                 <label> Date of Birth</label>
@@ -550,148 +542,175 @@
                             </div>
                           </div>
                         </div>
-                             <div class="row clearfix">    
-                             <div class="col-sm-12">
-                                <div class="form-group form-group-default required">
-                                     <label>Designation</label>
-                                     <input type="text"  value="<%out.print(rs.getString(8));%>" class="form-control" name="designation" id="designation"  required>
-                                </div>
-                                </div>
-                      </div>
+                        <div class="row clearfix">    
+                            <div class="col-sm-12">
+                            <div class="form-group form-group-default required">
+                                 <label>Designation</label>
+                                 <input type="text"  value="<%out.print(rs.getString(8));%>" class="form-control" name="designation" id="designation"  required>
+                            </div>
+                            </div>
+                        </div>
                         <div class="form-group form-group-default input-group required">
-                              <span class="input-group-addon">
-                                            <select class="cs-select cs-skin-slide cs-transparent" id="phnNo" data-init-plugin="cs-select">
-                                             <%     
+                             <span class="input-group-addon">
+                             <select class="cs-select cs-skin-slide cs-transparent" name="phnNo" id="phnNo" data-init-plugin="cs-select">
+                             <%     
                                    Connection con8;
                                    con8=dbConnection.getConnection();
                                    Statement stat8=con8.createStatement();
                                    ResultSet rs8=stat8.executeQuery("select * from country where id='"+phnoId+"'");
-                             %>  
-                             <% 
-                                 while(rs8.next())
-                                { String id1=rs8.getString(1);
+                                   while(rs8.next())
+                                   { 
+                                        String id1=rs8.getString(1);
                              %>
                             
-                                    <option value="<%=id1 %>"><%out.print(rs8.getString(8));%></option>  
-                              <% 
-                                }
+                                   <option value="<%=id1 %>"><%out.print(rs8.getString(8));%></option>  
+                             <% 
+                                   }
                              %>
-                             
-                                
-                             <optgroup label="<b>Select Country :">
-                                          <%     
+                                   <optgroup label="<b>Select Country :">
+                             <%     
                                    Connection con7;
                                    con7=dbConnection.getConnection();
                                    Statement stat7=con7.createStatement();
                                    ResultSet rs7=stat7.executeQuery("select * from country ");
-                             %>  
-                             <% 
-                                 while(rs7.next())
-                                { String id2=rs7.getString(1);
+                                   while(rs7.next())
+                                   { 
+                                       String id2=rs7.getString(1);
                              %>
-                             </optgroup> 
-                                    <option value="<%=id2 %>"><%out.print(rs7.getString(8));%></option>  
+                                   </optgroup> 
+                                   <option value="<%=id2 %>"><%out.print(rs7.getString(8));%></option>  
                               <% 
-                                }
+                                   }
                              %>
-                             
-                             
-                                        </select>
-                                        </span>
+                              </select>
+                              </span>
                               <label>Telephone Number</label>
                               <input type="text" maxlength="10" minlength="10" value="<%out.print(rs.getString(9));%>" name="phoneno" id="phoneno" class="form-control" placeholder="" required>
-                            </div>
+                        </div>
                                         
-                     <div class="form-group form-group-default input-group required">
-                              <span class="input-group-addon">
-                                            <select class="cs-select cs-skin-slide cs-transparent" id="mobNo" data-init-plugin="cs-select">
-                                                <%     
+                        <div class="form-group form-group-default input-group required">
+                             <span class="input-group-addon">
+                             <select class="cs-select cs-skin-slide cs-transparent" name="mobNo" id="mobNo" data-init-plugin="cs-select">
+                             <%     
                                    Connection con2;
                                    con2=dbConnection.getConnection();
                                    Statement stat2=con2.createStatement();
                                    ResultSet rs2=stat2.executeQuery("select * from country where id='"+mobnoId+"'");
-                             %>  
-                             <% 
-                                 while(rs2.next())
-                                { String id1=rs2.getString(1);
+                                   while(rs2.next())
+                                   { 
+                                        String id1=rs2.getString(1);
                              %>
-                            
-                                    <option value="<%=id1 %>"><%out.print(rs2.getString(8));%></option>  
+                                   <option value="<%=id1 %>"><%out.print(rs2.getString(8));%></option>  
                               <% 
-                                }
+                                   }
                              %>
-                             
-                                
                              <optgroup label="<b>Select Country :">
-                                          <%     
+                             <%     
                                    Connection con3;
                                    con3=dbConnection.getConnection();
                                    Statement stat3=con3.createStatement();
                                    ResultSet rs3=stat3.executeQuery("select * from country ");
-                             %>  
-                             <% 
-                                 while(rs3.next())
-                                { String id2=rs3.getString(1);
+                                   while(rs3.next())
+                                   { 
+                                       String id2=rs3.getString(1);
                              %>
                              </optgroup> 
-                                    <option value="<%=id2 %>"><%out.print(rs3.getString(8));%></option>  
+                                   <option value="<%=id2 %>"><%out.print(rs3.getString(8));%></option>  
                               <% 
-                                }
+                                    }
                              %>
-                             
-                                        </select>
-                                        </span>
+                             </select>
+                             </span>
                               <label>Mobile Number</label>
                               <input type="text" maxlength="10" minlength="10" name="mobileno" id="mobileno" value="<%out.print(rs.getString(10));%>" class="form-control" placeholder="" required>
-                            </div>
-                            </div> 
+                        </div>
+                 </div> 
                             <div id="msgbox1" ></div>     
                             <br>
+                            
+                            
                             <button class="btn btn-primary btn-cons m-t-10" type="submit">Update</button>
                             <button class="btn btn-primary btn-cons m-t-10" onclick="document.location.href='/Exhibition/html/ownerProfile.jsp';">Cancel</button> 
-                      
-                                <%
-                                      }      
-                                    }
-                                    catch(Exception ee)
-                                   {
-                                    out.println("error"+ee);
-                                   }
-                                %>
-                    </form>
-                      </div>
-                    </div>
-                               
-                          </div>    
-                        </form>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- END PANEL -->
-              </div>
-          
+
+                            <%
+                                  }      
+                                }
+                                catch(Exception ee)
+                               {
+                                out.println("error"+ee);
+                               }
+                            %>
+                   
+             </div>
             </div>
-            </div>
-          </div>
-          <!-- END CONTAINER FLUID -->  
-          </div>
+              </div>    
         </div>
-        <!-- END PAGE CONTENT -->
-        
-        
-        
-        
-        <!-- START COPYRIGHT -->
-        <!-- START CONTAINER FLUID -->
-        <!-- START CONTAINER FLUID -->
-       
-        <!-- END COPYRIGHT -->
+                    
+               <!-- START PANEL -->   
+        <div class="col-sm-5">
+             <div class="panel-heading">
+             <div class="panel-title">
+                    Social Media Icon 
+             </div>
+            </div>
+             
+           <%
+            try
+            {
+                HttpSession ss=request.getSession();
+                String img_name="";
+                Class.forName("com.mysql.jdbc.Driver"); 
+                java.sql.Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/exhibition","root","12345");
+                Statement stat=con.createStatement();
+                //retrived id of photomediaId from ownerContactPerson from session from ownerProfileContactPersonUpdate.jsp
+                String photoMediaIdd=(String)ss.getAttribute("contactInfoId");
+                ResultSet rs=stat.executeQuery("select * from media  where id='"+photoMediaIdd+"'");
+             
+            if(!rs.next())
+            {
+                 out.println("Error");
+            }
+            else
+            {
+               img_name=rs.getString(2);
+               ss.setAttribute("mediaId1",rs.getString(1));
+            }
+           %>    
+
+             <img src='<%= img_name %>' id="profile" alt="Profile not uploaded" style="width:200px;height:200px"> 
+            <%   }
+              catch(Exception e)
+                {
+                   out.print("fsdaf" +e);
+                }
+            %>  
+            <script type="text/javascript">
+                function readProfile(input) {
+                if (input.files && input.files[0]) {
+                var reader3 = new FileReader();
+                reader3.onload = function (e) {
+                $('#profile')
+                .attr('src', e.target.result)
+                };
+                reader3.readAsDataURL(input.files[0]);
+                }
+                }
+            </script>
+            <input name="file" id="file" style="width:200px" type="file" onchange="readProfile(this);">
+        </div>
+             <!-- END PANEL -->   
+       </form>   
+                    
+        </div>
       </div>
-      <!-- END PAGE CONTENT WRAPPER -->
     </div>
-    <!-- END PAGE CONTAINER -->
-    <!--START QUICKVIEW -->
+    <!-- END PANEL -->
+  </div>
+          
+            
+        
+        
+        
     <div id="quickview" class="quickview-wrapper" data-pages="quickview">
       <!-- Nav tabs -->
       <ul class="nav nav-tabs">

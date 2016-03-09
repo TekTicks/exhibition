@@ -1,18 +1,28 @@
-<%@ page language="java" %>
-<HTML>
-<FORM ENCTYPE="multipart/form-data" ACTION="insertimage.jsp" METHOD=POST>
+<html>
+<head><title>Upload page</title></head></p> <p>
+<body>
+<form action="imageUpload.jsp" method="post" enctype="multipart/form-data" name="form1" id="form1">
 <center>
-<table border="0" bgcolor=#ccFDDEE>
+    
+    
+<b>Employee Name:
+<input type="text" name="cname">
+<br>
+<b>Employee Address:
+<input type="text" name="p_email">
+<br>
+
+<b>Employee Image 
+
+<input name="file" type="file" id="file">
+
 <tr>
-<center><td colspan="2" align="center"><B>UPLOAD THE FILE</B><center></td>
-</tr>
-<tr><td colspan="2" align="center"> </td></tr>
-<tr><td><b>Choose the file To Upload:</b></td>
-<td><INPUT NAME="file" TYPE="file"></td>
-</tr>
-<tr><td colspan="2" align="center"> </td></tr>
-<tr><td colspan="2" align="center"><input type="submit" value="Send File"> </td></tr>
-<table>
+<td align="center">
+<input type="submit" name="Submit" value="Submit"/>
+<input type="reset" name="Reset" value="Reset"/>
+
+
 </center>
-</FORM>
-</HTML>
+</form>
+</body>
+</html>

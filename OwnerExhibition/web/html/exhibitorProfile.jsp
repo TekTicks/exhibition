@@ -1,8 +1,3 @@
-
-
-<%@page import="java.sql.ResultSet"%>
-<%@page import="java.sql.Statement"%>
-<%@page import="java.sql.Connection"%>
 <%@page import="ownerPortal.dbConnection"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -10,7 +5,7 @@
   <head>
     <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
     <meta charset="utf-8" />
-    <title>exhibitor Profile</title>
+    <title>Owner Profile</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no" />
     <link rel="apple-touch-icon" href="pages/ico/60.png">
     <link rel="apple-touch-icon" sizes="76x76" href="pages/ico/76.png">
@@ -47,10 +42,42 @@
     <script src="pages/js/jquery-1.4.2.min.js"></script>
     <script src="pages/js/ownerloginValidation.js"></script>
     <link href="pages/css/ownerLoginAjax.css" rel="stylesheet" type="text/css" />  
+  
+    <script data-require="jquery@*" data-semver="2.0.3" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+    <script data-require="bootstrap@*" data-semver="3.1.1" src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
     
   </head>
 
   <body class="fixed-header ">
+     
+      
+      
+        <!-- delete Confirm Box Start -->
+        <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Confirm Delete</h4>
+                </div>
+            
+                <div class="modal-body">
+                    <p>Do you want to delete?</p>
+                    <p class="debug-url"></p>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-danger btn-ok">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+       
+       <!-- delete Confirm Box End -->  
+        
+        
     <nav class="page-sidebar" data-pages="sidebar">
       <!-- BEGIN SIDEBAR MENU TOP TRAY CONTENT-->
       <div class="sidebar-overlay-slide from-top" id="appMenu">
@@ -87,6 +114,7 @@
         </div>
       </div>
       <!-- END SIDEBAR MENU HEADER-->
+      
       <!-- START SIDEBAR MENU -->
       <div class="sidebar-menu">
         <!-- BEGIN SIDEBAR MENU ITEMS-->
@@ -116,7 +144,7 @@
               </li>
            
               <li class="">
-                <a href="ownerAdministrator.jsp">Add Administrator</a>
+                <a href="ownerAddAdministrator.jsp">Add Administrator</a>
                 <span class="icon-thumbnail">A</span>
               </li>
            </ul>
@@ -129,7 +157,7 @@
             <span class="bg-success icon-thumbnail"><i class="pg-home"></i></span>
             <ul class="sub-menu">
               <li class="">
-                <a href="ckvProfile.jsp">Add Exhibitors</a>
+                <a href="">Add Exhibitors</a>
                 <span class="icon-thumbnail">P</span>
               </li>
            
@@ -144,7 +172,7 @@
             <span class="bg-success icon-thumbnail"><i class="pg-home"></i></span>
             <ul class="sub-menu">
               <li class="">
-                <a href="ckvProfile.jsp">Add Exhibitors</a>
+                <a href="">Manage visitors</a>
                 <span class="icon-thumbnail">P</span>
               </li>
            
@@ -153,7 +181,7 @@
           </li>
           
              <li class="">
-            <a href="ckvNotification.jsp" class="detailed">
+            <a href="" class="detailed">
               <span class="title">Notification</span>
               <span class="details">12 New Notification</span>
             </a>
@@ -161,14 +189,14 @@
           </li>
         
            <li class="">
-            <a href="ckvNotification.jsp" class="detailed">
+            <a href="" class="detailed">
               <span class="title">Reports</span>
             </a>
             <span class="icon-thumbnail">R</span>
           </li>
           
            <li class="">
-            <a href="ckvNotification.jsp" class="detailed">
+            <a href="" class="detailed">
               <span class="title">Privacy</span>
             </a>
             <span class="icon-thumbnail">P</span>
@@ -396,66 +424,220 @@
               <ul class="nav nav-tabs nav-tabs-linetriangle nav-tabs-separator nav-stack-sm">
                
                 <li class="">
-                  <a data-toggle="tab" href="#tab1"><i class="fa fa-truck tab-icon"></i> <span>Exhibitor Profile</span></a>
+                  <a data-toggle="tab" href="#tab1"><i class="fa fa-truck tab-icon"></i> <span>Owner Profile</span></a>
                 </li>
                 
                 <li class="">
                   <a data-toggle="tab" href="#tab2"><i class="fa fa-truck tab-icon"></i> <span>Social Media</span></a>
                 </li>
                 
-                  <li class="">
-                  <a data-toggle="tab" href="#tab3"><i class="fa fa-truck tab-icon"></i> <span>Contact Info</span></a>
+                 
+                <li class="">
+                  <a data-toggle="tab" href="#tab3"><i class="fa fa-truck tab-icon"></i> <span>Contact Person</span></a>
                 </li>
-                
                
+             
               </ul>
               <!-- Tab panes -->
               <div class="tab-content">
 <!----------------------------------------------------------------------------------------------------------------------------------------------------->
-                <div class="tab-pane slide-left padding-20" id="tab1">
+                 <div class="tab-pane slide-left padding-20" id="tab1">
                   <div class="row row-same-height">
-                    <div class="col-md-5 b-r b-dashed b-grey ">
-                      <div class="padding-30 m-t-50">
-                        <div class="col-lg-7 col-md-6 col-md-height col-middle bg-white">
+                      
+                      <div class="col-md-7">
+                      <div class="padding-30">
+                      
+                      
+                    
                       <!-- START PANEL -->
+                     <form ENCTYPE="multipart/form-data" action="/Exhibition/html/exhibitorProfileDemo.jsp" method="post" role="form" name="form1" id="form1">
+                
+                            <% 
+                               try 
+                               {
+                                   HttpSession ss=request.getSession();
+                                   String userName=(String)ss.getAttribute("username");
+                                   String idd=(String)ss.getAttribute("ownerId");
+                                   String primContact=(String)ss.getAttribute("primContact1");
+                                   Connection con5;
+                                   con5=dbConnection.getConnection();
+                                   Statement stat5=con5.createStatement();
+                                   ResultSet rs5=stat5.executeQuery("select a.*,b.* from exhibitorProfile a, exhibitor b  where a.createdBy='"+1+"'");
+                            %>
+                            <%
+                             if(!rs5.next())
+                            {
+                             
+                            }
+                             else
+                                
+                            { 
+                                   String logoMediaID=rs5.getString(2);
+                                   String sm=rs5.getString(13);
+                                   String sm1=rs5.getString(14);
+                                   ss.setAttribute("logoMedia",logoMediaID);
+                            %>
+ 
+                            <div class="form-group form-group-default disabled">
+                               <label>User Name</label>
+                               <input type="email" name="uname" value="<%out.print(userName);%>" class="form-control" value="You can put anything here" disabled>
+                            </div>                  
+                            <div class="form-group form-group-default required">
+                              <label>Company Name</label>
+                              <input type="text"  value="<%out.print(rs5.getString(17));%>" name="cname" id="cname" class="form-control" required>
+                            </div>
+                         
+                          <div class="form-group form-group-default required">
+                              <label>Primary Email</label>
+                              <input type="email" name="p_email"  value="<%out.print(rs5.getString(4));%>" id="p_email" class="form-control" required>
+                            </div>
+                          
+                          <div class="form-group form-group-default required">
+                              <label>Secondary Email</label>
+                              <input type="email" name="s_email" value="<%out.print(rs5.getString(5));%>" id="s_email" class="form-control" required>
+                            </div>
+                            
+                            
+                           <div class="form-group form-group-default input-group required">
+                              <span class="input-group-addon">
+                            <select class="cs-select cs-skin-slide cs-transparent" name="ccodePrimary" id="ccodePrimary" data-init-plugin="cs-select" >
+                                
+                              <%     
+                                   Connection con2;
+                                   con2=dbConnection.getConnection();
+                                   Statement stat2=con2.createStatement();
+                                   ResultSet rs2=stat2.executeQuery("select * from country where id='"+sm+"'");
+                             %>  
+                             <% 
+                                 while(rs2.next())
+                                { String id1=rs2.getString(1);
+                             %>
+                            
+                                    <option value="<%=id1 %>"><%out.print(rs2.getString(8));%></option>  
+                              <% 
+                                }
+                             %>
+                               <optgroup label="<b>Select country :">
+                            <%     
+                               Connection con4;
+                               con4=dbConnection.getConnection();
+                               Statement stat4=con4.createStatement();
+                               ResultSet rs4=stat4.executeQuery("select * from country");
+                           %>  
+                            <% while(rs4.next())
+                            { String id2=rs4.getString(1);
+                           %>
+                          </optgroup>
+                              <option value="<%=id2 %>"><%out.print(rs4.getString(8));%></option>  
+                          <% 
+                            }
+                          %>
+                          </select>
+                          </span>
+                              <label>Primary Contact</label>
+                              <input type="text" name="p_contact"  value="<%out.print(rs5.getString(6));%>" id="p_contact" maxlength="10" minlength="10" class="form-control" placeholder="" >
+                          </div>
+                            
+                            
+                        <div class="form-group form-group-default input-group ">
+                        <span class="input-group-addon">
+                        <select class="cs-select cs-skin-slide cs-transparent" id="ccodeSecondary"  name="ccodeSecondary"  data-init-plugin="cs-select">
+
+                        <%     
+                           Connection con6;
+                           con6=dbConnection.getConnection();
+                           Statement stat6=con6.createStatement();
+                           ResultSet rs6=stat6.executeQuery("select * from country where id='"+sm1+"'");
+                         %>  
+                         <% 
+                             while(rs6.next())
+                            { String id=rs6.getString(1);
+                         %>
+
+                            <option value="<%=id %>"><%out.print(rs6.getString(8));%></option>  
+                          <% 
+                            }
+                         %>
+
+                           <optgroup label="<b>Select country :">
+                        <%     
+                           Connection con3;
+                           con3=dbConnection.getConnection();
+                           Statement stat3=con3.createStatement();
+                           ResultSet rs3=stat3.executeQuery("select * from country");
+                        %>  
+                        <% while(rs3.next())
+                           { 
+                               String id=rs3.getString(1);
+                        %>
+                           </optgroup>
+                           <option  value="<%=id %>"><%out.print(rs3.getString(8));%></option>                                     
+                        <% 
+                           }
+                        %>
+                        </select>
+                        </span>
+                        <label>Secondary Contact</label>
+                        <input type="text" name="s_contact" maxlength="10" minlength="10" value="<%out.print(rs5.getString(7));%>"  id="s_contact" class="form-control" placeholder="" >
+                        </div>
+                               
+                        <!--   
+                        <div class="form-group form-group-default disabled">
+                           <label>Mobile Number</label>
+                           <input type="email" class="form-control" value="<%out.print(primContact);%>" name="mobileno" id="mobileno" value="You can put anything here" disabled>
+                        </div> 
+                        -->
+                            
+                        <div class="form-group form-group-default required">
+                          <label>About</label>
+                          <textarea class="form-control" name="about"  id="about"  placeholder="Briefly Describe your Abilities" required><%out.print(rs5.getString(3));%></textarea>
+                        </div> 
+                              
+                        <div class="form-group form-group-default required">
+                          <label>Website</label>
+                          <input type="text" value="<%out.print(rs5.getString(8));%>" name="website" id="website"  class="form-control" required>
+                        </div>
+                            
+                            
                        
-               
-                <div class="panel panel-default">
-                  <div class="panel-heading">
-                    <div class="panel-title">
-                      Profile Photo
-                    </div>
-                    <div class="tools">
-                      <a class="collapse" href="javascript:;"></a>
-                      <a class="config" data-toggle="modal" href="#grid-config"></a>
-                      <a class="reload" href="javascript:;"></a>
-                      <a class="remove" href="javascript:;"></a>
-                    </div>
-                  </div>
-                  <div class="panel-body no-scroll no-padding">
-                    <form action="/" class="dropzone no-margin">
-                      <div class="fallback">
-                        <input name="file" type="file" multiple/>
-                      </div>
-                    </form>
-                  </div>
-                </div>
+                             <div id="msgbox1"></div>
+                        <br>
+                             <button class="btn btn-primary btn-cons m-t-10" type="submit">Submit</button>
+                             <button class="btn btn-primary btn-cons m-t-10" >Cancel</button> 
+                                   
+                                   
+                        <%
+                             }      
+                         }
+                        catch(Exception ee)
+                           {
+                               out.println("error"+ee);
+                           }
+                        %>
+                      
+
               </div>
              </div>
-            </div>
-             <!-- END PANEL -->
+            
                       
-        <script type="text/javascript">
+                      <!-- END PANEL -->
+                    <!--
+                      
+                                          <script type="text/javascript">
 	$(document).ready(function(){
 		$("#profile").submit(function(){
+
+			 //remove previous class and add new "myinfo" class
+	       // $("#msgbox").removeClass().addClass('myinfo').text('Validating Your Login ').fadeIn(1000);
+
 			
 			this.timer = setTimeout(function () {
 				$.ajax({
-		          	url: '/Exhibition/exhibitorProfileUpdate',
-		          	data:'p_email=' + $('#p_email').val()+'&s_email=' + $('#s_email').val() +'&p_contact=' + $('#p_contact').val()+'&s_contact=' + $('#s_contact').val()+'&about=' + $('#about').val() +'&website=' + $('#website').val()+'&ccodePrimary=' + $('#ccodePrimary').val()+'&ccodeSecondary=' + $('#ccodeSecondary').val(),
+		          	url: '/Exhibition/OwnerProfileUpdate',
+		          	data: 'cname='+ $('#cname').val() +'&p_email=' + $('#p_email').val()+'&s_email=' + $('#s_email').val() +'&p_contact=' + $('#p_contact').val()+'&s_contact=' + $('#s_contact').val()+'&about=' + $('#about').val() +'&website=' + $('#website').val()+'&industry=' + $('#industry').val()+'&ccodePrimary=' + $('#ccodePrimary').val()+'&ccodeSecondary=' + $('#ccodeSecondary').val(),
 		          	type: 'post',
 		   		success: function(msg){
-                                 
+                                 alert(msg);
                                 if(msg != 'error') // Message Sent, check and redirect
 				{
                                        
@@ -482,143 +664,64 @@
  		});		
 
 	});
-   </script> 
-        <div class="col-md-7">
-          <div class="padding-30">
-            <form action="" id="profile" method="post" role="form">
-                <% 
-                   try 
-                   {
-                        HttpSession ss=request.getSession();
-                        String userName=(String)ss.getAttribute("username");
-                        String idd=(String)ss.getAttribute("exhibitorId");
-                        String primContact1=(String)ss.getAttribute("mobileno");
-                        Connection con5;
-                        con5=dbConnection.getConnection();
-                        Statement stat5=con5.createStatement();
-                        ResultSet rs5=stat5.executeQuery("select  * from exhibitorProfile ");
-                %>
-                <%
-                        if(!rs5.next())
-                        {
+   </script> -->
 
-                        }
-                        else
-                        {
-                %>
+           <div class="col-md-5 b-r b-dashed b-grey ">
+                  <div class="padding-30 m-t-50">
+                    <div class="col-lg-7 col-md-6 col-md-height col-middle bg-white">         
+          <%
+            try {
+           String img_name="";
+             Class.forName("com.mysql.jdbc.Driver"); 
+             java.sql.Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/exhibition","root","12345");
+             Statement stat=con.createStatement();
+             
+             HttpSession ss=request.getSession();
+             String fileName=(String)ss.getAttribute("fileName");
+             String logId=(String)ss.getAttribute("logoMedia");
+                         
+            // ResultSet rs=stat.executeQuery("select * from media order By id desc limit 1");
+            ResultSet rs=stat.executeQuery("select * from media  where id='"+logId+"'");
+             
+            if(!rs.next())
+            {
+                 out.println("Error");
+            }
+            else
+            {
+               img_name=rs.getString(2);
+               ss.setAttribute("mediaId1",rs.getString(1));
+               //out.print(rs.getString(1));
+            }
+            %>    
 
-                        <div class="form-group form-group-default disabled">
-                            <label>User Name</label>
-                            <input type="email" name="uname" value="<%out.print(userName);%>" class="form-control" value="You can put anything here" disabled>
-                        </div>                  
-                       
-                        <div class="form-group form-group-default required">
-                            <label>Primary Email</label>
-                            <input type="email" name="p_email" value="<%out.print(rs5.getString(4));%>" id="p_email" class="form-control" required>
-                        </div>
-                        <div class="form-group form-group-default required">
-                            <label>Secondary Email</label>
-                            <input type="email" name="s_email" value="<%out.print(rs5.getString(5));%>" id="s_email" class="form-control" required>
-                        </div>
-                        <div class="form-group form-group-default input-group required">
-                            <span class="input-group-addon">
-                                <select class="cs-select cs-skin-slide cs-transparent" id="ccodePrimary" data-init-plugin="cs-select">
-                                   <optgroup label="<b>Select country :">
-                                <%     
-                                   Connection con4;
-                                   con4=dbConnection.getConnection();
-                                   Statement stat4=con4.createStatement();
-                                   ResultSet rs4=stat4.executeQuery("select * from country");
-                               %>  
-                                <% while(rs4.next())
-                                { 
-                               %>
-                              </optgroup>
-                              <option value=""><%out.print(rs4.getString(8));%></option>  
-                              <% 
-                                }
-                              %> 
-                                </select>
-                            </span>
-                            <label>Primary Contact</label>
-                            <input type="text" name="p_contact"  value="<%out.print(primContact1);%>"  id="p_contact" maxlength="10" minlength="10" class="form-control" placeholder="" required>
-                        </div>
-                        
-                        
-                        
-                        <div class="form-group form-group-default input-group ">
-                              <span class="input-group-addon">
-                            <select class="cs-select cs-skin-slide cs-transparent" id="ccodeSecondary"  data-init-plugin="cs-select">
-                                
-                                  <%     
-                                   Connection con6;
-                                   con6=dbConnection.getConnection();
-                                   Statement stat6=con6.createStatement();
-                                   ResultSet rs6=stat6.executeQuery("select * from country where id='"+1+"'");
-                             %>  
-                             <% 
-                                 while(rs6.next())
-                                { String id=rs6.getString(1);
-                             %>
-                            
-                                    <option value="<%=id %>"><%out.print(rs6.getString(8));%></option>  
-                              <% 
-                                }
-                             %>
-                                
-                                <optgroup label="<b>Select country :">
-                                <%     
-                                   Connection con3;
-                                   con3=dbConnection.getConnection();
-                                   Statement stat3=con3.createStatement();
-                                   ResultSet rs3=stat3.executeQuery("select * from country");
-                                %>  
-                                <% while(rs3.next())
-                                { String id=rs3.getString(1);
-                                %>
-                               </optgroup>
-                            <option  value="<%=id %>"><%out.print(rs3.getString(8));%></option>                                     
-                               <% 
-                                 }
-                               %>
-                            </select>
-                            </span>
-                                    <label>Secondary Contact</label>
-                                    <input type="text" name="s_contact" maxlength="10" minlength="10" value="<%out.print(rs5.getString(7));%>" id="s_contact" class="form-control" placeholder="">
-                        </div>
-                        
-                        
-                        
-                            <div class="form-group form-group-default disabled">
-                            <label>Mobile Number</label>
-                            <input type="email" class="form-control" name="mobileno"  value="<%out.print(primContact1);%>" id="mobileno" value="You can put anything here" disabled>
-                        </div> 
-                        <div class="form-group form-group-default required">
-                            <label>About</label>
-                            <textarea class="form-control" name="about" value="" id="about"  placeholder="Briefly Describe your Abilities" required><%out.print(rs5.getString(3));%></textarea>
-                        </div> 
-                        <div class="form-group form-group-default required">
-                            <label>Website</label>
-                            <input type="text"  name="website" id="website" value="<%out.print(rs5.getString(8));%>" class="form-control" required>
-                        </div>
-                        <br>
-                            <button class="btn btn-primary btn-cons m-t-10" type="submit">Submit</button>
-                            <button class="btn btn-primary btn-cons m-t-10" >Cancel</button> 
-                <%
-                    }      
-                 }
-                catch(Exception ee)
-                   {
-                       out.println("error"+ee);
-
-                   }
-                %>
+            <img src='<%= img_name %>' id="profile" alt="Profile not uploaded" style="width:200px;height:200px"> 
+            <%   }
+              catch(Exception e)
+                {
+                   out.print("fsdaf" +e);
+                }
+            %>  
+            <script type="text/javascript">
+                function readProfile(input) {
+                if (input.files && input.files[0]) {
+                var reader3 = new FileReader();
+                reader3.onload = function (e) {
+                $('#profile')
+                .attr('src', e.target.result)
+                };
+                reader3.readAsDataURL(input.files[0]);
+                }
+                }
+            </script>
+            <input name="file" id="file" style="width:200px" type="file" onchange="readProfile(this);">
             </form>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
+          </div>
                     
-                <div class="padding-20 bg-white">
+        <div class="padding-20 bg-white">
               <ul class="pager wizard">
                 <li class="next">
                   <button class="btn btn-primary btn-cons btn-animated from-left fa fa-truck pull-right" type="button">
@@ -641,54 +744,98 @@
                   </button>
                 </li>
               </ul>
-            </div>
-                    
         </div>
+
+    </div>
     <!----------------------------------------------------------------------------------------------------------------------------------------------------->
-        <div class="tab-pane slide-left padding-20" id="tab2">
+<div class="tab-pane slide-left padding-20" id="tab2">
                     
-              
-                    
+                 
+               <div class="container-fluid container-fixed-lg">
+            <!-- START PANEL -->
+            <div class="panel panel-transparent">
+              <div class="panel-heading">
+                <div class="panel-title">
                 </div>
+                <div class="pull-right">
+                  <div class="col-xs-12">
+                      <button id="show-modal" class="btn btn-primary btn-cons" onclick="document.location.href='/Exhibition/html/exhibitorProfileSocialMedia.jsp';"><i class="fa fa-plus"></i> Add 
+                    </button>
+                  </div>
+                </div>
+                <div class="clearfix"></div>
+              </div>
+              <div class="panel-body">
+                  
+
+               <table class="table table-hover demo-table-search" id="tableWithSearch">
+                     <%@page import="java.io.*;" %>
+                     <%@page import="java.sql.*;" %>
+                     <%@page import="java.sql.DriverManager;" %>
+                     <thead>
+                        <tr>
+                          <!--  <th>ID</th> -->
+                        <th>Date</th>
+                        <th>Social Media</th>        
+                        <th>Link</th>
+                        <th>Update/Delete.</th>
+                        </tr>
+                  </thead>
+                  <tbody>
+                    <%   
+                         HttpSession ss=request.getSession();
+                         String idd=(String)ss.getAttribute("ownerId");
+                         Connection con1;
+                         con1=dbConnection.getConnection();
+                         Statement stat1=con1.createStatement();
+                         ResultSet rs1=stat1.executeQuery("select a.*,b.* from socialMedia a,ownerSocialMedia b where a.id=b.socialMediaId and b.createdBy='"+idd+"'");
+                         int count1=0;
+                        
+                         while(rs1.next())
+                         {
+                            count1++;
+                            out.println("<tr>");
+                            //out.println("<td class='v-align-middle semi-bold'><p>"+rs1.getString(7)+"</p></td>");
+                            out.println("<td class='v-align-middle semi-bold'><p>"+rs1.getString(3)+"</p></td>");
+                            out.println("<td class='v-align-middle semi-bold'><p>"+rs1.getString(2)+"</p></td>");
+                            out.println("<td class='v-align-middle semi-bold'><p>"+rs1.getString(9)+"</p></td>");
+                            //out.println("<td class='v-align-middle semi-bold'><p>"+rs1.getString(14)+"</p></td>");
+                            String kv=rs1.getString(7);
+                            String kv1=rs1.getString(2);
+                            String kv2=rs1.getString(3);
+                            String kv3=rs1.getString(9);
+                            String kv4=rs1.getString(14);
                             
- <!----------------------------------------------------------------------------------------------------------------------------------------------------->
-    
-    
-    <div class="tab-pane slide-left padding-20" id="tab3">
-   
-    
-    
-                </div>
-                  
- 
-   <!----------------------------------------------------------------------------------------------------------------------------------------------------->
-        <div class="tab-pane slide-left padding-20" id="tab4">
-                    
-                  
-    
-                </div>
-                  
- 
-<!----------------------------------------------------------------------------------------------------------------------------------------------------->                  
-                <div class="tab-pane slide-left padding-20" id="tab5">
-                    
-                    <div class="row-xs-height">
-                                <div class="social-user-profile col-xs-height text-center col-top">
-                                  <div class="thumbnail-wrapper d48 circular bordered b-white">
-                                    <img alt="Avatar" width="55" height="55" data-src-retina="assets/img/profiles/avatar_small2x.jpg" data-src="assets/img/profiles/avatar.jpg" src="assets/img/profiles/avatar.jpg">
-                                  </div>
-                                  <br>
-                                  <i class="fa fa-check-circle text-success fs-16 m-t-10"></i>
-                                </div>
-                                <div class="col-xs-height p-l-20">
-                                  <h3 class="no-margin">David Nester</h3>
-                                  <p class="no-margin fs-16">is excited about the new pages design framework
-                                  </p>
-                                  <p class="hint-text m-t-5 small">San Fransisco Bay | CEO at Pages.inc
-                                  </p>
-                                </div>
-                              </div>
-                    <div class="padding-20 bg-white">
+                             HttpSession ss1=request.getSession();
+                                  ss1.setAttribute("id",kv);
+                                  ss1.setAttribute("date",kv2);
+                                  ss1.setAttribute("socialmedia1",kv1);
+                                  ss1.setAttribute("link1",kv3);
+                                  ss1.setAttribute("iconMediaId",kv4);
+                                  
+                            
+                           %>
+                          
+                             <td>
+                                 <div class="btn-group">
+                                  <!-- passing id of ownerSocailMedia from url-->
+                                 <button  type="button" class="btn btn-success" onclick="document.location.href='/Exhibition/html/ownerProfileSocialMediaEdit.jsp?myid=<%= kv %>';"><i class="fa fa-pencil"></i></button>
+                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#confirm-delete" data-href="/Exhibition/OwnerProfileSocialMediaDelete?myid=<%=kv%>"><i class="fa fa-trash-o"></i>                                 </button>
+                                 </div>
+                            </td><%
+                            out.println(" </tr>");
+                        }
+                       
+                   %>   
+                   </tbody>
+                </table>
+              </div>
+            </div>
+            <!-- END PANEL -->
+          </div>
+            
+            
+              <div class="padding-20 bg-white">
                   <ul class="pager wizard">
                     <li class="next">
                       <button class="btn btn-primary btn-cons btn-animated from-left fa fa-truck pull-right" type="button">
@@ -714,7 +861,140 @@
                 </div>
                     
                 </div>
-                
+                            
+ <!----------------------------------------------------------------------------------------------------------------------------------------------------->
+    
+    
+   
+ 
+   <!----------------------------------------------------------------------------------------------------------------------------------------------------->
+        <div class="tab-pane slide-left padding-20" id="tab3">
+                    
+                  
+    
+    <!-- START CONTAINER FLUID -->
+          <div class="container-fluid container-fixed-lg">
+            <!-- START PANEL -->
+            <div class="panel panel-transparent">
+              <div class="panel-heading">
+                <div class="panel-title">
+                </div>
+                <div class="pull-right">
+                  <div class="col-xs-12">
+                    <button id="show-modal" class="btn btn-primary btn-cons" onclick="document.location.href='/Exhibition/html/ownerProfileAddContactInfo.jsp';"><i class="fa fa-plus"></i> Add Address
+                    </button>
+                  </div>
+                </div>
+                <div class="clearfix"></div>
+              </div>
+              <div class="panel-body">
+               
+                  <table class="table table-hover demo-table-search" id="tableWithSearch">
+                     <%@page import="java.io.*;" %>
+                     <%@page import="java.sql.*;" %>
+                     <%@page import="java.sql.DriverManager;" %>
+                     <thead>
+                        <tr>
+                        <th>Name</th>
+                        <th>Designation</th>
+                        <th>Mobile No</th>        
+                        <th>Email Id</th>
+                        <th>Update/Delete.</th>
+                        </tr>
+                  </thead>
+                  <tbody>
+                    <%   
+                         HttpSession ss3=request.getSession();
+                         String idContactPerson=(String)ss3.getAttribute("ownerId");
+                         Connection con2;
+                         con2=dbConnection.getConnection();
+                         Statement stat2=con2.createStatement();
+                         ResultSet rs2=stat2.executeQuery("select * from ownerContactPerson where createdBy='"+idContactPerson+"'");
+                         int count2=0;
+                         while(rs2.next())
+                         {
+                            count2++;
+                            out.println("<tr>");
+                            out.println("<td class='v-align-middle semi-bold'><p>"+rs2.getString(3)+"</p></td>");
+                            out.println("<td><p> "+rs2.getString(8)+"</p></td>");
+                            out.println("<td><p> "+rs2.getString(10)+"</p></td>");
+                            out.println("<td><p> "+rs2.getString(11)+"</p></td>");
+                            // out.println("<td><p> "+rs2.getString(5)+"</p></td>");
+                           
+                           String id=rs2.getString(1);
+                            String title=rs2.getString(2);
+                            String fname=rs2.getString(3);
+                            String lname=rs2.getString(4);
+                             String photoMediaId=rs2.getString(5);
+                            String gender=rs2.getString(6);
+                            String dob=rs2.getString(7);
+                            String designation=rs2.getString(8);
+                            String phoneno=rs2.getString(9);
+                            String mobileno=rs2.getString(10);
+                            String Emailid=rs2.getString(11);
+                            
+                            //creating session    
+                            HttpSession ss1=request.getSession();
+                            ss1.setAttribute("id",id);
+                            ss1.setAttribute("title",title);
+                            ss1.setAttribute("fname",fname);
+                            ss1.setAttribute("lname",lname);
+                            ss1.setAttribute("photoMediaId",photoMediaId);
+                            ss1.setAttribute("gender",gender);
+                            ss1.setAttribute("dob",dob);
+                            ss1.setAttribute("designation",designation);
+                            ss1.setAttribute("phoneno",phoneno);
+                            ss1.setAttribute("mobileno",mobileno);
+                            ss1.setAttribute("Emailid",Emailid);
+
+                            
+                           %>
+                             <td>
+                                 <div class="btn-group">
+                                 <button type="button" class="btn btn-success" onclick="document.location.href='/Exhibition/html/ownerProfileContactPersonUpdate.jsp?contactPersonId=<%= id  %>';"><i class="fa fa-pencil"></i></button>
+                               <!--  <button type="button" class="btn btn-success" onclick="document.location.href='/Exhibition/ownerProfileContactPersonDelete?contactPersonId=<%= id %>';"><i class="fa fa-trash-o"></i>
+                                --><button type="button" class="btn btn-success" data-toggle="modal" data-target="#confirm-delete" data-href="/Exhibition/ownerProfileContactPersonDelete?contactPersonId=<%=id%>"><i class="fa fa-trash-o"></i>                                 </button>
+                               </button>
+                                 </div>
+                            </td><%
+                            out.println(" </tr>");
+                        }
+                   %>   
+                   </tbody>
+                </table>
+                   
+              </div>
+            </div>
+            <!-- END PANEL -->
+          </div>
+                   <div class="padding-20 bg-white">
+                  <ul class="pager wizard">
+                    <li class="next">
+                      <button class="btn btn-primary btn-cons btn-animated from-left fa fa-truck pull-right" type="button">
+                        <span>Next</span>
+                      </button>
+                    </li>
+                    <li class="next finish hidden">
+                      <button class="btn btn-primary btn-cons btn-animated from-left fa fa-cog pull-right" type="button">
+                        <span>Finish</span>
+                      </button>
+                    </li>
+                    <li class="previous first hidden">
+                      <button class="btn btn-default btn-cons btn-animated from-left fa fa-cog pull-right" type="button">
+                        <span>First</span>
+                      </button>
+                    </li>
+                    <li class="previous">
+                      <button class="btn btn-default btn-cons pull-right" type="button">
+                        <span>Previous</span>
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+                </div>
+                  
+ 
+<!----------------------------------------------------------------------------------------------------------------------------------------------------->                  
                 
               </div>
             </div>
@@ -2000,6 +2280,15 @@
       </div>
       <!-- END Overlay Content !-->
     </div>
+    
+    
+    <script>
+        $('#confirm-delete').on('show.bs.modal', function(e) {
+            $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+            
+            $('.debug-url').html('Delete URL: <strong>' + $(this).find('.btn-ok').attr('href') + '</strong>');
+        });
+    </script> 
     <!-- END OVERLAY -->
     <!-- BEGIN VENDOR JS -->
     <script src="assets/plugins/pace/pace.min.js" type="text/javascript"></script>
@@ -2035,74 +2324,6 @@
     <!-- BEGIN PAGE LEVEL JS -->
     <script src="assets/js/form_wizard.js" type="text/javascript"></script>
     <script src="assets/js/scripts.js" type="text/javascript"></script>
-        <script src="assets/js/datatables.js" type="text/javascript"></script>
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        <script src="assets/plugins/pace/pace.min.js" type="text/javascript"></script>
-    <script src="assets/plugins/jquery/jquery-1.11.1.min.js" type="text/javascript"></script>
-    <script src="assets/plugins/modernizr.custom.js" type="text/javascript"></script>
-    <script src="assets/plugins/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
-    <script src="assets/plugins/boostrapv3/js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="assets/plugins/jquery/jquery-easy.js" type="text/javascript"></script>
-    <script src="assets/plugins/jquery-unveil/jquery.unveil.min.js" type="text/javascript"></script>
-    <script src="assets/plugins/jquery-bez/jquery.bez.min.js"></script>
-    <script src="assets/plugins/jquery-ios-list/jquery.ioslist.min.js" type="text/javascript"></script>
-    <script src="assets/plugins/jquery-actual/jquery.actual.min.js"></script>
-    <script src="assets/plugins/jquery-scrollbar/jquery.scrollbar.min.js"></script>
-    <script type="text/javascript" src="assets/plugins/bootstrap-select2/select2.min.js"></script>
-    <script type="text/javascript" src="assets/plugins/classie/classie.js"></script>
-    <script src="assets/plugins/switchery/js/switchery.min.js" type="text/javascript"></script>
-    <script src="assets/plugins/jquery-datatable/media/js/jquery.dataTables.min.js" type="text/javascript"></script>
-    <script src="assets/plugins/jquery-datatable/extensions/TableTools/js/dataTables.tableTools.min.js" type="text/javascript"></script>
-    <script src="assets/plugins/jquery-datatable/media/js/dataTables.bootstrap.js" type="text/javascript"></script>
-    <script src="assets/plugins/jquery-datatable/extensions/Bootstrap/jquery-datatable-bootstrap.js" type="text/javascript"></script>
-    <script type="text/javascript" src="assets/plugins/datatables-responsive/js/datatables.responsive.js"></script>
-    <script type="text/javascript" src="assets/plugins/datatables-responsive/js/lodash.min.js"></script>
-    <!-- END VENDOR JS -->
-    <!-- BEGIN CORE TEMPLATE JS -->
-    <script src="pages/js/pages.min.js"></script>
-    <!-- END CORE TEMPLATE JS -->
-    <!-- BEGIN PAGE LEVEL JS -->
-    <script src="assets/js/datatables.js" type="text/javascript"></script>
-    <script src="assets/js/scripts.js" type="text/javascript"></script>
-    
-     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no" />
-    <link rel="apple-touch-icon" href="pages/ico/60.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="pages/ico/76.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="pages/ico/120.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="pages/ico/152.png">
-    <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-touch-fullscreen" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta content="" name="description" />
-    <meta content="" name="author" />
-    <link href="assets/plugins/pace/pace-theme-flash.css" rel="stylesheet" type="text/css" />
-    <link href="assets/plugins/boostrapv3/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="assets/plugins/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css" />
-    <link href="assets/plugins/jquery-scrollbar/jquery.scrollbar.css" rel="stylesheet" type="text/css" media="screen" />
-    <link href="assets/plugins/bootstrap-select2/select2.css" rel="stylesheet" type="text/css" media="screen" />
-    <link href="assets/plugins/switchery/css/switchery.min.css" rel="stylesheet" type="text/css" media="screen" />
-    <link href="assets/plugins/jquery-datatable/media/css/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="assets/plugins/jquery-datatable/extensions/FixedColumns/css/dataTables.fixedColumns.min.css" rel="stylesheet" type="text/css" />
-    <link href="assets/plugins/datatables-responsive/css/datatables.responsive.css" rel="stylesheet" type="text/css" media="screen" />
-    <link href="pages/css/pages-icons.css" rel="stylesheet" type="text/css">
-    <link class="main-stylesheet" href="pages/css/pages.css" rel="stylesheet" type="text/css" />
-    <!--[if lte IE 9]>
-	<link href="assets/plugins/codrops-dialogFx/dialog.ie.css" rel="stylesheet" type="text/css" media="screen" />
-	<![endif]-->
-    
-      <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script src="pages/js/jquery-1.4.2.min.js"></script>
-
     <!-- END PAGE LEVEL JS -->
   </body>
 </html>

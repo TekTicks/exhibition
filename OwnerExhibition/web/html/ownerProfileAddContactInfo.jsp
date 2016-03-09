@@ -389,32 +389,16 @@
           <!-- START CONTAINER FLUID -->
           <div class="container-fluid container-fixed-lg bg-white">
             <div class="row">
-              <div class="col-sm-5">
-                <!-- START PANEL -->
-                <div class="panel panel-transparent">
-                  <div class="panel-heading">
-                  </div>
-                    <br>
-                    <br>
-                  <div class="panel-body">
-                    <div class="panel-body text-center">
-                        <img class="image-responsive-height demo-mw-500" src="assets/img/demo/typography_hero.gif" alt="">
-                    </div>
-                  </div>
-                </div>
-                <!-- END PANEL -->
-              </div>
-                
-                
-              <div class="col-lg-7 col-md-6 ">
-                <!-- START PANEL -->
-                <div class="panel panel-transparent">
-                  <div class="panel-body">
+             
+                <form ENCTYPE="multipart/form-data" action="/Exhibition/html/ownerProfileContactInfoSave.jsp" method="post" role="form">
+                          <div class="col-lg-7 col-md-6 ">
+                             <!-- START PANEL -->
+                             <div class="panel panel-transparent">
+                                 <div class="panel-body">
                       
-                      
-             <div class="col-md-70">
+           
+                     <div class="col-md-70">
                       <div class="padding-30">
-                         <form action="/Exhibition/ownerProfileContactperson" method="post" role="form">
                         
                         <p>Basic Information</p>
                             <div class="form-group form-group-default required">
@@ -534,13 +518,71 @@
                       <br>
                        <button class="btn btn-primary btn-cons m-t-10" type="submit">Submit</button>
                                    <button class="btn btn-primary btn-cons m-t-10" onclick="document.location.href='/Exhibition/html/ownerProfile.jsp';">Cancel</button> 
-                    </form>
                       </div>
                     </div>
                                
                           </div>    
-                        </form>
                       </div>
+                                        
+                                        
+               <div class="col-sm-5">
+                <!-- START PANEL -->
+               <div class="panel-heading">
+              <div class="panel-title">
+                    Social Media Icon 
+              </div>
+              </div>
+             
+            <%
+            try
+            {
+                 String img_name="";
+                 Class.forName("com.mysql.jdbc.Driver"); 
+                 java.sql.Connection con1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/exhibition","root","12345");
+                 Statement stat1=con1.createStatement();
+
+                 HttpSession ss=request.getSession();
+                 String fileName=(String)ss.getAttribute("fileName");
+
+                ResultSet rs1=stat1.executeQuery("select * from media where link='"+fileName+"'");
+
+                 if(!rs1.next())
+                 {
+                     out.println("Error");
+                 }
+                 else
+                 {
+                   img_name=rs1.getString(2);
+                   ss.setAttribute("mediaId1",rs1.getString(1));
+                 }
+            %>    
+
+          <img src='' id="profile" alt="Profile not uploaded" style="width:200px;height:200px"> 
+            <%}
+              catch(Exception e)
+                {
+                   out.print("error" +e);
+                }
+            %>  
+    <script type="text/javascript">
+	function readProfile(input) {
+	if (input.files && input.files[0]) {
+	var reader3 = new FileReader();
+	reader3.onload = function (e) {
+	$('#profile')
+	.attr('src', e.target.result)
+	};
+	reader3.readAsDataURL(input.files[0]);
+	}
+	}
+   </script>
+   <input name="file" id="file" style="width:200px" type="file" onchange="readProfile(this);">
+        <!-- END PANEL -->
+              </div>
+                  </form>  
+                                        
+                                        
+                                        
                     </div>
                   </div>
                 </div>

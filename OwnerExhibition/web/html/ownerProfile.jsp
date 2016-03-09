@@ -1,5 +1,3 @@
-
-
 <%@page import="ownerPortal.dbConnection"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -54,7 +52,7 @@
      
       
       
-        <!-- delete Confirm Box  -->
+        <!-- delete Confirm Box Start -->
         <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -77,7 +75,7 @@
         </div>
     </div>
        
-        
+       <!-- delete Confirm Box End -->  
         
         
     <nav class="page-sidebar" data-pages="sidebar">
@@ -116,6 +114,7 @@
         </div>
       </div>
       <!-- END SIDEBAR MENU HEADER-->
+      
       <!-- START SIDEBAR MENU -->
       <div class="sidebar-menu">
         <!-- BEGIN SIDEBAR MENU ITEMS-->
@@ -158,7 +157,7 @@
             <span class="bg-success icon-thumbnail"><i class="pg-home"></i></span>
             <ul class="sub-menu">
               <li class="">
-                <a href="ckvProfile.jsp">Add Exhibitors</a>
+                <a href="">Add Exhibitors</a>
                 <span class="icon-thumbnail">P</span>
               </li>
            
@@ -173,7 +172,7 @@
             <span class="bg-success icon-thumbnail"><i class="pg-home"></i></span>
             <ul class="sub-menu">
               <li class="">
-                <a href="ckvProfile.jsp">Add Exhibitors</a>
+                <a href="">Manage visitors</a>
                 <span class="icon-thumbnail">P</span>
               </li>
            
@@ -182,7 +181,7 @@
           </li>
           
              <li class="">
-            <a href="ckvNotification.jsp" class="detailed">
+            <a href="" class="detailed">
               <span class="title">Notification</span>
               <span class="details">12 New Notification</span>
             </a>
@@ -190,14 +189,14 @@
           </li>
         
            <li class="">
-            <a href="ckvNotification.jsp" class="detailed">
+            <a href="" class="detailed">
               <span class="title">Reports</span>
             </a>
             <span class="icon-thumbnail">R</span>
           </li>
           
            <li class="">
-            <a href="ckvNotification.jsp" class="detailed">
+            <a href="" class="detailed">
               <span class="title">Privacy</span>
             </a>
             <span class="icon-thumbnail">P</span>
@@ -449,38 +448,226 @@
 <!----------------------------------------------------------------------------------------------------------------------------------------------------->
                 <div class="tab-pane slide-left padding-20" id="tab1">
                   <div class="row row-same-height">
-                    <div class="col-md-5 b-r b-dashed b-grey ">
-                      <div class="padding-30 m-t-50">
-                        <div class="col-lg-7 col-md-6 col-md-height col-middle bg-white">
+                      
+                      <div class="col-md-7">
+                      <div class="padding-30">
+                      
+                      
+                    
                       <!-- START PANEL -->
-                       
-               
-                <div class="panel panel-default">
-                  <div class="panel-heading">
-                    <div class="panel-title">
-                      Profile Photo
-                    </div>
-                    <div class="tools">
-                      <a class="collapse" href="javascript:;"></a>
-                      <a class="config" data-toggle="modal" href="#grid-config"></a>
-                      <a class="reload" href="javascript:;"></a>
-                      <a class="remove" href="javascript:;"></a>
-                    </div>
-                  </div>
-                  <div class="panel-body no-scroll no-padding">
-                    <form action="/" class="dropzone no-margin">
-                      <div class="fallback">
-                        <input name="file" type="file" multiple/>
-                      </div>
-                    </form>
-                  </div>
-                </div>
+                     <form ENCTYPE="multipart/form-data" action="/Exhibition/html/imageUpload.jsp" method="post" role="form" name="form1" id="form1">
+                
+                            <% 
+                               try 
+                               {
+                                   HttpSession ss=request.getSession();
+                                   String userName=(String)ss.getAttribute("username");
+                                   String idd=(String)ss.getAttribute("ownerId");
+                                   String primContact=(String)ss.getAttribute("primContact1");
+                                   Connection con5;
+                                   con5=dbConnection.getConnection();
+                                   Statement stat5=con5.createStatement();
+                                   ResultSet rs5=stat5.executeQuery("select a.*,b.* from ownerProfile a , ownerIndustry b where a.createdBy='"+idd+"'");
+                            %>
+                            <%
+                             if(!rs5.next())
+                            {
+                             
+                            }
+                             else
+                                
+                            { 
+                                   String logoMediaID=rs5.getString(3);
+                                   String sm=rs5.getString(13);
+                                   String sm1=rs5.getString(14);
+                                   String sm2=rs5.getString("industryId");
+                                   ss.setAttribute("logoMedia",logoMediaID);
+                            %>
+ 
+                            <div class="form-group form-group-default disabled">
+                               <label>User Name</label>
+                               <input type="email" name="uname" value="<%out.print(userName);%>" class="form-control" value="You can put anything here" disabled>
+                            </div>                  
+                            <div class="form-group form-group-default required">
+                              <label>Company Name</label>
+                              <input type="text" value="<%out.print(rs5.getString(2));%>" name="cname" id="cname" class="form-control" required>
+                            </div>
+                         
+                          <div class="form-group form-group-default required">
+                              <label>Primary Email</label>
+                              <input type="email" name="p_email"  value="<%out.print(rs5.getString(5));%>" id="p_email" class="form-control" required>
+                            </div>
+                          
+                          <div class="form-group form-group-default required">
+                              <label>Secondary Email</label>
+                              <input type="email" name="s_email" value="<%out.print(rs5.getString(6));%>" id="s_email" class="form-control" required>
+                            </div>
+                            
+                            
+                           <div class="form-group form-group-default input-group required">
+                              <span class="input-group-addon">
+                            <select class="cs-select cs-skin-slide cs-transparent" name="ccodePrimary" id="ccodePrimary" data-init-plugin="cs-select" disabled>
+                                
+                              <%     
+                                   Connection con2;
+                                   con2=dbConnection.getConnection();
+                                   Statement stat2=con2.createStatement();
+                                   ResultSet rs2=stat2.executeQuery("select * from country where id='"+sm+"'");
+                             %>  
+                             <% 
+                                 while(rs2.next())
+                                { 
+                             %>
+                            
+                                    <option value=""><%out.print(rs2.getString(8));%></option>  
+                              <% 
+                                }
+                             %>
+                               <optgroup label="<b>Select country :">
+                            <%     
+                               Connection con4;
+                               con4=dbConnection.getConnection();
+                               Statement stat4=con4.createStatement();
+                               ResultSet rs4=stat4.executeQuery("select * from country");
+                           %>  
+                            <% while(rs4.next())
+                            { 
+                           %>
+                          </optgroup>
+                              <option value="" ><%out.print(rs4.getString(8));%></option>  
+                          <% 
+                            }
+                          %>
+                          </select>
+                          </span>
+                              <label>Primary Contact</label>
+                              <input type="text" name="p_contact"  value="<%out.print(rs5.getString(7));%>" id="p_contact" maxlength="10" minlength="10" class="form-control" placeholder="" disabled>
+                          </div>
+                            
+                            
+                        <div class="form-group form-group-default input-group ">
+                        <span class="input-group-addon">
+                        <select class="cs-select cs-skin-slide cs-transparent" id="ccodeSecondary"  name="ccodeSecondary"  data-init-plugin="cs-select">
+
+                        <%     
+                           Connection con6;
+                           con6=dbConnection.getConnection();
+                           Statement stat6=con6.createStatement();
+                           ResultSet rs6=stat6.executeQuery("select * from country where id='"+sm1+"'");
+                         %>  
+                         <% 
+                             while(rs6.next())
+                            { String id=rs6.getString(1);
+                         %>
+
+                            <option value="<%=id %>"><%out.print(rs6.getString(8));%></option>  
+                          <% 
+                            }
+                         %>
+
+                           <optgroup label="<b>Select country :">
+                        <%     
+                           Connection con3;
+                           con3=dbConnection.getConnection();
+                           Statement stat3=con3.createStatement();
+                           ResultSet rs3=stat3.executeQuery("select * from country");
+                        %>  
+                        <% while(rs3.next())
+                           { 
+                               String id=rs3.getString(1);
+                        %>
+                           </optgroup>
+                           <option  value="<%=id %>"><%out.print(rs3.getString(8));%></option>                                     
+                        <% 
+                           }
+                        %>
+                        </select>
+                        </span>
+                        <label>Secondary Contact</label>
+                        <input type="text" name="s_contact" maxlength="10" minlength="10" value="<%out.print(rs5.getString(8));%>"  id="s_contact" class="form-control" placeholder="" >
+                        </div>
+                               
+                        <!--   
+                        <div class="form-group form-group-default disabled">
+                           <label>Mobile Number</label>
+                           <input type="email" class="form-control" value="<%out.print(primContact);%>" name="mobileno" id="mobileno" value="You can put anything here" disabled>
+                        </div> 
+                        -->
+                            
+                        <div class="form-group form-group-default required">
+                          <label>About</label>
+                          <textarea class="form-control" name="about"  id="about"  placeholder="Briefly Describe your Abilities" required><%out.print(rs5.getString(4));%></textarea>
+                        </div> 
+                              
+                        <div class="form-group form-group-default required">
+                          <label>Website</label>
+                          <input type="text" value="<%out.print(rs5.getString(9));%>" name="website" id="website"  class="form-control" required>
+                        </div>
+                            
+                            
+                        <div class="form-group form-group-default required">
+                             <label>Industry</label>
+                        <select class="full-width" id="industry" name="industry"data-init-plugin="select2">
+
+                        <%     
+                               Connection con8;
+                               con8=dbConnection.getConnection();
+                               Statement stat8=con8.createStatement();
+                               ResultSet rs8=stat8.executeQuery("select * from industry where id='"+sm2+"'");
+                        %>  
+                        <% 
+                             while(rs8.next())
+                            { 
+                                String id=rs8.getString(1);
+                        %>
+
+                                <option value="<%=id %>"><%out.print(rs8.getString(2));%></option>  
+                        <% 
+                            }
+                        %>
+                            <optgroup label="Select Industry :">
+                                      <%     
+                               Connection con7;
+                               con7=dbConnection.getConnection();
+                               Statement stat7=con7.createStatement();
+                               ResultSet rs7=stat7.executeQuery("select * from industry ");
+                        %>  
+                        <% 
+                             while(rs7.next())
+                            { 
+                                String id=rs7.getString(1);
+                        %>
+
+                                <option value="<%=id %>"><%out.print(rs7.getString(2));%></option>  
+                        <% 
+                            }
+                        %>
+
+                         </optgroup> 
+                        </select>
+                        </div>
+                             <div id="msgbox1"></div>
+                        <br>
+                             <button class="btn btn-primary btn-cons m-t-10" type="submit">Submit</button>
+                             <button class="btn btn-primary btn-cons m-t-10" >Cancel</button> 
+                                   
+                                   
+                        <%
+                             }      
+                         }
+                        catch(Exception ee)
+                           {
+                               out.println("error"+ee);
+                           }
+                        %>
+                      
+
               </div>
              </div>
-            </div>
+            
                       
                       <!-- END PANEL -->
-                    
+                    <!--
                       
                                           <script type="text/javascript">
 	$(document).ready(function(){
@@ -523,240 +710,91 @@
  		});		
 
 	});
-   </script> 
-                    <div class="col-md-7">
-                      <div class="padding-30">
-                        <form action="" id="profile" method="post" role="form">
-                            <% 
-                               try {
-                               HttpSession ss=request.getSession();
-                               String userName=(String)ss.getAttribute("username");
-                               String idd=(String)ss.getAttribute("ownerId");
-                               String primContact=(String)ss.getAttribute("primContact1");
-                               Connection con5;
-                               con5=dbConnection.getConnection();
-                               Statement stat5=con5.createStatement();
-                               ResultSet rs5=stat5.executeQuery("select a.*,b.* from ownerProfile a , ownerIndustry b where a.createdBy='"+idd+"'");
-                            %>
-                            <%
-                             if(!rs5.next())
-                            {
-                             
-                            }
-                             else
-                            { String sm=rs5.getString(13);
-                            String sm1=rs5.getString(14);
-                          String sm2=rs5.getString("industryId");
-                            %>
- 
-                            <div class="form-group form-group-default disabled">
-                               <label>User Name</label>
-                               <input type="email" name="uname" value="<%out.print(userName);%>" class="form-control" value="You can put anything here" disabled>
-                            </div>                  
-                            <div class="form-group form-group-default required">
-                              <label>Company Name</label>
-                              <input type="text" value="<%out.print(rs5.getString(2));%>" name="cname" id="cname" class="form-control" required>
-                            </div>
+   </script> -->
+
+           <div class="col-md-5 b-r b-dashed b-grey ">
+                  <div class="padding-30 m-t-50">
+                    <div class="col-lg-7 col-md-6 col-md-height col-middle bg-white">         
+          <%
+            try {
+           String img_name="";
+             Class.forName("com.mysql.jdbc.Driver"); 
+             java.sql.Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/exhibition","root","12345");
+             Statement stat=con.createStatement();
+             
+             HttpSession ss=request.getSession();
+             String fileName=(String)ss.getAttribute("fileName");
+             String logId=(String)ss.getAttribute("logoMedia");
                          
-                          <div class="form-group form-group-default required">
-                              <label>Primary Email</label>
-                              <input type="email" name="p_email"  value="<%out.print(rs5.getString(5));%>" id="p_email" class="form-control" required>
-                            </div>
-                          
-                          <div class="form-group form-group-default required">
-                              <label>Secondary Email</label>
-                              <input type="email" name="s_email" value="<%out.print(rs5.getString(6));%>" id="s_email" class="form-control" required>
-                            </div>
-                            
-                            
-                           <div class="form-group form-group-default input-group required">
-                              <span class="input-group-addon">
-                            <select class="cs-select cs-skin-slide cs-transparent" id="ccodePrimary" data-init-plugin="cs-select">
-                                
-                              <%     
-                                   Connection con2;
-                                   con2=dbConnection.getConnection();
-                                   Statement stat2=con2.createStatement();
-                                   ResultSet rs2=stat2.executeQuery("select * from country where id='"+sm+"'");
-                             %>  
-                             <% 
-                                 while(rs2.next())
-                                { 
-                             %>
-                            
-                                    <option value=""><%out.print(rs2.getString(8));%></option>  
-                              <% 
-                                }
-                             %>
-                               <optgroup label="<b>Select country :">
-                                <%     
-                                   Connection con4;
-                                   con4=dbConnection.getConnection();
-                                   Statement stat4=con4.createStatement();
-                                   ResultSet rs4=stat4.executeQuery("select * from country");
-                               %>  
-                                <% while(rs4.next())
-                                { 
-                               %>
-                              </optgroup>
-                              <option value=""><%out.print(rs4.getString(8));%></option>  
-                              <% 
-                                }
-                              %>
-                              </select>
-                             </span>
-                              <label>Primary Contact</label>
-                              <input type="text" name="p_contact"  value="<%out.print(rs5.getString(7));%>" id="p_contact" maxlength="10" minlength="10" class="form-control" placeholder="" required>
-                            </div>
-                            
-                            
-                            <div class="form-group form-group-default input-group ">
-                            <span class="input-group-addon">
-                            <select class="cs-select cs-skin-slide cs-transparent" id="ccodeSecondary"  data-init-plugin="cs-select">
-                                
-                                  <%     
-                                   Connection con6;
-                                   con6=dbConnection.getConnection();
-                                   Statement stat6=con6.createStatement();
-                                   ResultSet rs6=stat6.executeQuery("select * from country where id='"+sm1+"'");
-                             %>  
-                             <% 
-                                 while(rs6.next())
-                                { String id=rs6.getString(1);
-                             %>
-                            
-                                    <option value="<%=id %>"><%out.print(rs6.getString(8));%></option>  
-                              <% 
-                                }
-                             %>
-                                
-                                <optgroup label="<b>Select country :">
-                                <%     
-                                   Connection con3;
-                                   con3=dbConnection.getConnection();
-                                   Statement stat3=con3.createStatement();
-                                   ResultSet rs3=stat3.executeQuery("select * from country");
-                                %>  
-                                <% while(rs3.next())
-                                { String id=rs3.getString(1);
-                                %>
-                               </optgroup>
-                            <option  value="<%=id %>"><%out.print(rs3.getString(8));%></option>                                     
-                               <% 
-                                 }
-                               %>
-                            </select>
-                            </span>
-                              <label>Secondary Contact</label>
-                              <input type="text" name="s_contact" maxlength="10" minlength="10" value="<%out.print(rs5.getString(8));%>"  id="s_contact" class="form-control" placeholder="">
-                            </div>
-                               
-                           
-                            <div class="form-group form-group-default disabled">
-                               <label>Mobile Number</label>
-                               <input type="email" class="form-control" value="<%out.print(primContact);%>" name="mobileno" id="mobileno" value="You can put anything here" disabled>
-                            </div> 
-                            
-                             <div class="form-group form-group-default required">
-                              <label>About</label>
-                              <textarea class="form-control" name="about"  id="about"  placeholder="Briefly Describe your Abilities" required><%out.print(rs5.getString(4));%></textarea>
-                            </div> 
-                              
-                            <div class="form-group form-group-default required">
-                              <label>Website</label>
-                              <input type="text" value="<%out.print(rs5.getString(9));%>" name="website" id="website"  class="form-control" required>
-                            </div>
-                            
-                            
-                            <div class="form-group form-group-default required">
-                                 <label>Industry</label>
-                            <select class="full-width" id="industry" data-init-plugin="select2">
-                                
-                                      <%     
-                                   Connection con8;
-                                   con8=dbConnection.getConnection();
-                                   Statement stat8=con8.createStatement();
-                                   ResultSet rs8=stat8.executeQuery("select * from industry where id='"+sm2+"'");
-                             %>  
-                             <% 
-                                 while(rs8.next())
-                                { String id=rs8.getString(1);
-                             %>
-                            
-                                    <option value="<%=id %>"><%out.print(rs8.getString(2));%></option>  
-                              <% 
-                                }
-                             %>
-                             
-                                
-                                <optgroup label="Select Industry :">
-                                          <%     
-                                   Connection con7;
-                                   con7=dbConnection.getConnection();
-                                   Statement stat7=con7.createStatement();
-                                   ResultSet rs7=stat7.executeQuery("select * from industry ");
-                             %>  
-                             <% 
-                                 while(rs7.next())
-                                { String id=rs7.getString(1);
-                             %>
-                            
-                                    <option value="<%=id %>"><%out.print(rs7.getString(2));%></option>  
-                              <% 
-                                }
-                             %>
-                             
-                              </optgroup> 
-                            </select>
-                            </div>
-                               <div id="msgbox1"></div>
-                             <br>
-                             <button class="btn btn-primary btn-cons m-t-10" type="submit">Submit</button>
-                             <button class="btn btn-primary btn-cons m-t-10" >Cancel</button> 
-                                   
-                                   
-                                   <%
-                                          }      
-                         }
-                        catch(Exception ee)
-                           {
-                               out.println("error"+ee);
-                         
-                           }
-                           %>
-                        </form>
-                      </div>
-                    </div>
-                  </div>
+            // ResultSet rs=stat.executeQuery("select * from media order By id desc limit 1");
+            ResultSet rs=stat.executeQuery("select * from media  where id='"+logId+"'");
+             
+            if(!rs.next())
+            {
+                 out.println("Error");
+            }
+            else
+            {
+               img_name=rs.getString(2);
+               ss.setAttribute("mediaId1",rs.getString(1));
+               //out.print(rs.getString(1));
+            }
+            %>    
+
+            <img src='<%= img_name %>' id="profile" alt="Profile not uploaded" style="width:200px;height:200px"> 
+            <%   }
+              catch(Exception e)
+                {
+                   out.print("fsdaf" +e);
+                }
+            %>  
+            <script type="text/javascript">
+                function readProfile(input) {
+                if (input.files && input.files[0]) {
+                var reader3 = new FileReader();
+                reader3.onload = function (e) {
+                $('#profile')
+                .attr('src', e.target.result)
+                };
+                reader3.readAsDataURL(input.files[0]);
+                }
+                }
+            </script>
+            <input name="file" id="file" style="width:200px" type="file" onchange="readProfile(this);">
+            </form>
+              </div>
+            </div>
+          </div>
+          </div>
                     
-                    <div class="padding-20 bg-white">
-                  <ul class="pager wizard">
-                    <li class="next">
-                      <button class="btn btn-primary btn-cons btn-animated from-left fa fa-truck pull-right" type="button">
-                        <span>Next</span>
-                      </button>
-                    </li>
-                    <li class="next finish hidden">
-                      <button class="btn btn-primary btn-cons btn-animated from-left fa fa-cog pull-right" type="button">
-                        <span>Finish</span>
-                      </button>
-                    </li>
-                    <li class="previous first hidden">
-                      <button class="btn btn-default btn-cons btn-animated from-left fa fa-cog pull-right" type="button">
-                        <span>First</span>
-                      </button>
-                    </li>
-                    <li class="previous">
-                      <button class="btn btn-default btn-cons pull-right" type="button">
-                        <span>Previous</span>
-                      </button>
-                    </li>
-                  </ul>
-                </div>
-                    
-                </div>
+        <div class="padding-20 bg-white">
+              <ul class="pager wizard">
+                <li class="next">
+                  <button class="btn btn-primary btn-cons btn-animated from-left fa fa-truck pull-right" type="button">
+                    <span>Next</span>
+                  </button>
+                </li>
+                <li class="next finish hidden">
+                  <button class="btn btn-primary btn-cons btn-animated from-left fa fa-cog pull-right" type="button">
+                    <span>Finish</span>
+                  </button>
+                </li>
+                <li class="previous first hidden">
+                  <button class="btn btn-default btn-cons btn-animated from-left fa fa-cog pull-right" type="button">
+                    <span>First</span>
+                  </button>
+                </li>
+                <li class="previous">
+                  <button class="btn btn-default btn-cons pull-right" type="button">
+                    <span>Previous</span>
+                  </button>
+                </li>
+              </ul>
+        </div>
+
+    </div>
     <!----------------------------------------------------------------------------------------------------------------------------------------------------->
-        <div class="tab-pane slide-left padding-20" id="tab2">
+<div class="tab-pane slide-left padding-20" id="tab2">
                     
                  
                <div class="container-fluid container-fixed-lg">
@@ -775,16 +813,7 @@
               </div>
               <div class="panel-body">
                   
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-              
-              
-              
+
                <table class="table table-hover demo-table-search" id="tableWithSearch">
                      <%@page import="java.io.*;" %>
                      <%@page import="java.sql.*;" %>
@@ -816,7 +845,7 @@
                             out.println("<td class='v-align-middle semi-bold'><p>"+rs1.getString(3)+"</p></td>");
                             out.println("<td class='v-align-middle semi-bold'><p>"+rs1.getString(2)+"</p></td>");
                             out.println("<td class='v-align-middle semi-bold'><p>"+rs1.getString(9)+"</p></td>");
-                            out.println("<td class='v-align-middle semi-bold'><p>"+rs1.getString(14)+"</p></td>");
+                            //out.println("<td class='v-align-middle semi-bold'><p>"+rs1.getString(14)+"</p></td>");
                             String kv=rs1.getString(7);
                             String kv1=rs1.getString(2);
                             String kv2=rs1.getString(3);
@@ -835,8 +864,9 @@
                           
                              <td>
                                  <div class="btn-group">
+                                  <!-- passing id of ownerSocailMedia from url-->
                                  <button  type="button" class="btn btn-success" onclick="document.location.href='/Exhibition/html/ownerProfileSocialMediaEdit.jsp?myid=<%= kv %>';"><i class="fa fa-pencil"></i></button>
-   <button type="button" class="btn btn-success" data-toggle="modal" data-target="#confirm-delete" data-href="/Exhibition/OwnerProfileSocialMediaDelete?myid=<%=kv%>"><i class="fa fa-trash-o"></i>                                 </button>
+                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#confirm-delete" data-href="/Exhibition/OwnerProfileSocialMediaDelete?myid=<%=kv%>"><i class="fa fa-trash-o"></i>                                 </button>
                                  </div>
                             </td><%
                             out.println(" </tr>");
@@ -1034,7 +1064,7 @@
                          Connection con2;
                          con2=dbConnection.getConnection();
                          Statement stat2=con2.createStatement();
-                         ResultSet rs2=stat.executeQuery("select * from ownerContactPerson where createdBy='"+idContactPerson+"'");
+                         ResultSet rs2=stat2.executeQuery("select * from ownerContactPerson where createdBy='"+idContactPerson+"'");
                          int count2=0;
                          while(rs2.next())
                          {
@@ -1044,12 +1074,14 @@
                             out.println("<td><p> "+rs2.getString(8)+"</p></td>");
                             out.println("<td><p> "+rs2.getString(10)+"</p></td>");
                             out.println("<td><p> "+rs2.getString(11)+"</p></td>");
+                            // out.println("<td><p> "+rs2.getString(5)+"</p></td>");
                            
                            String id=rs2.getString(1);
                             String title=rs2.getString(2);
                             String fname=rs2.getString(3);
                             String lname=rs2.getString(4);
-                            String gender=rs2.getString(5);
+                             String photoMediaId=rs2.getString(5);
+                            String gender=rs2.getString(6);
                             String dob=rs2.getString(7);
                             String designation=rs2.getString(8);
                             String phoneno=rs2.getString(9);
@@ -1062,6 +1094,7 @@
                             ss1.setAttribute("title",title);
                             ss1.setAttribute("fname",fname);
                             ss1.setAttribute("lname",lname);
+                            ss1.setAttribute("photoMediaId",photoMediaId);
                             ss1.setAttribute("gender",gender);
                             ss1.setAttribute("dob",dob);
                             ss1.setAttribute("designation",designation);

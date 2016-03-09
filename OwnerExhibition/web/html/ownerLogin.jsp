@@ -47,7 +47,6 @@
 		            data: 'un='+ $('#login_id').val() +'&pw=' + $('#password').val(),
 		            type: 'post',
 		   	    success: function(msg){
-                                alert(msg);
                                 if(msg != 'ERROR') // Message Sent, check and redirect
 				{
                                        if(msg == 'emailinvalid')
@@ -118,29 +117,26 @@
             <div class="form-group form-group-default">
                 <label>Email</label>
                 <div class="controls">
-                <input type="email" name="login_id" id="login_id" placeholder="Enter Email Id" class="form-control" required>
-             </div>
+                    <input type="email" name="login_id" id="login_id" placeholder="Enter Email Id" class="form-control" required>
+                </div>
             </div>
               <div id="msgbox1"></div>
-            <!-- END Form Control-->
-            <!-- START Form Control-->
             <div class="form-group form-group-default">
               <label>Password</label>
               <div class="controls">
-              <input type="password" class="form-control" id="password" minlength="6" name="password"  placeholder="Enter Password" required>
+                 <input type="password" class="form-control" id="password" minlength="6" name="password"  placeholder="Enter Password" required>
               </div>
             </div>
-            <!-- END Form Control-->
             <div id="msgbox2"></div>
             <div id="msgbox3"></div><div id="msgbox6"></div><div id="msgbox7"></div>
             <!-- START Form Control-->
             <div class="row">
             <div class="col-md-6 no-padding">
-           </div>
+            </div>
             </div>
             <!-- END Form Control-->  
            
-                <a href="/Exhibition/html/ownerLoginEmailVerify.jsp" class="text-info small"><font size="2.5"><b>Forgot Password..?</font></a>
+            <a href="/Exhibition/html/ownerLoginEmailVerify.jsp" class="text-info small"><font size="2.5"><b>Forgot Password..?</font></a>
             
             <br>
             <br>

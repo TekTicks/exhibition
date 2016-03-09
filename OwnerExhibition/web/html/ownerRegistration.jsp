@@ -58,7 +58,7 @@
 		          	type: 'post',
                                 
 		   		success: function(msg){
-                                       alert(msg);
+                                      
                                 if(msg != 'ERROR') // Message Sent, check and redirect
 				{				// and direct to the success page
 					if(msg == 'invalidemail')	

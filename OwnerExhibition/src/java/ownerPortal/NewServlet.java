@@ -7,6 +7,9 @@ package ownerPortal;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -32,11 +35,26 @@ public class NewServlet extends HttpServlet {
             ArrayList<String> arr2 =new ArrayList<String>();
             ArrayList<String> arr3 =new ArrayList<String>();
             ArrayList<String> arr4 =new ArrayList<String>();
-            arr1.add("");
+            
+              String valajax=request.getParameter("valajax");              
+              Connection con2;
+              con2=dbConnection.getConnection();
+               Statement stat2=con2.createStatement();
+           ResultSet rs2=stat2.executeQuery("select * from state where id='"+valajax+"'");
+                   while(rs2.next())
+                     { 
+                         String idState=rs2.getString(2);
+                         String ids=rs2.getString(1);
+                          arr1.add("");
+                            arr1.add(idState);
+                            arr2.add(ids);
+                     }
+                            
+          /*  arr1.add("");
             arr1.add("New Delhi");
             arr1.add("Maharashtra");
-            arr1.add("Goa");
-            arr2.add("Kabul");
+            arr1.add("Goa");*/
+            /*arr2.add("Kabul");
             arr2.add("Karachi");
             arr2.add("Punjab");
             arr3.add("pune");
@@ -44,52 +62,46 @@ public class NewServlet extends HttpServlet {
             arr3.add("karjat");
             arr4.add("Delhi");
             arr4.add("Minto Road");
-            arr4.add("Janakpuri");
-            String valajax=request.getParameter("valajax");
-            if(valajax.equals("v1"))
+            arr4.add("Janakpuri");*/
+     //      String valajax=request.getParameter("valajax");
+            if(valajax.equals(valajax))
             {
                 response.getWriter().write("<label><b>&nbsp &nbsp  Select state<b></label><br>");
                 response.getWriter().write("&nbsp &nbsp<select  class=\"full-width\" data-init-plugin=\"select2\"> ");
                 //response.getWriter().write("DropDown 1:<select> ");
                 for(int i=0;i<arr1.size();i++)
                 {
-                     response.getWriter().write("<option>"+arr1.get(i)+"</option>");
+                     response.getWriter().write("<option value="+arr1.get(i)+">"+arr1.get(i)+"</option>");
                 }
                 
                 response.getWriter().write("</select> ");
             }
-             if(valajax.equals("v2"))
-            {
-                 response.getWriter().write("<label><b>&nbsp &nbsp Select state<b></label><br>");
-                response.getWriter().write("&nbsp &nbsp<select  class=\"full-width\" data-init-plugin=\"select2\"> ");
-                for(int i=0;i<arr2.size();i++)
-                {
-                     response.getWriter().write("<option>"+arr2.get(i)+"</option>");
-                }
-                
-                response.getWriter().write("</select> ");
-            }
-             
             
-             
-              if(valajax.equals("New Delhi"))
+            
+            
+            
+            String state=request.getParameter("state");  
+            Connection con3;
+              con3=dbConnection.getConnection();
+               Statement stat3=con3.createStatement();
+           ResultSet rs3=stat3.executeQuery("select * from city where cityName='"+state+"'");
+                   while(rs3.next())
+                     { 
+                         String idState1=rs3.getString(2);
+                          arr3.add("");
+                            arr3.add(idState1);
+                     }
+             if(valajax.equals("maharashtra"))
             {
-                
-                for(int i=0;i<arr4.size();i++)
-                {
-                     response.getWriter().write("<option>"+arr4.get(i)+"</option>");
-                }
-                
-            }
-               if(valajax.equals("Maharashtra"))
-            {
-      
+                response.getWriter().write("<label><b>&nbsp &nbsp  Select state<b></label><br>");
+                response.getWriter().write("&nbsp &nbsp<select  class=\"full-width\" data-init-plugin=\"select2\"> ");
+                //response.getWriter().write("DropDown 1:<select> ");
                 for(int i=0;i<arr3.size();i++)
                 {
                      response.getWriter().write("<option>"+arr3.get(i)+"</option>");
                 }
                 
-            
+                response.getWriter().write("</select> ");
             }
          }
         catch(Exception ee)
