@@ -34,84 +34,10 @@
     <!--[if lte IE 9]>
 	<link href="assets/plugins/codrops-dialogFx/dialog.ie.css" rel="stylesheet" type="text/css" media="screen" />
 	<![endif]-->
-      <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script src="pages/js/jquery-1.4.2.min.js"></script>
-   
-  <script type="text/javascript">
-	$(document).ready(function(){
-		$("#login").submit(function(){
-
-			 //remove previous class and add new "myinfo" class
-	       // $("#msgbox").removeClass().addClass('myinfo').text('Validating Your Login ').fadeIn(1000);
-
-			
-			this.timer = setTimeout(function () {
-				$.ajax({
-		          	url: '/Exhibition/exhibitionAdministratorSocialMedia',
-		          	data: 'EI='+ $('#exhibitionId').val() +'&link=' + $('#link').val(),
-		          	type: 'post',
-		   		success: function(msg){
-                                if(msg != 'error') // Message Sent, check and redirect
-				{
-                                       
-                                          $("#msgbox1").html('data inserted').addClass('myinfo').fadeTo(200,1,function()
-			             {
-			                 //redirect to secure page
-			              //document.location='/Exhibition/html/exhibitionAdminPersonal.jsp';
-			             });
-                                        
-                                    }
-                               else
-                            {
-                                $("#msgbox1").fadeTo(100,1,function() //start fading the messagebox
-		                {
-			                  //add message and change the class of the box and start fading
-			                 $(this).html('sorry').removeClass().addClass('myerror').fadeTo(300,1);
-                                        // document.location='/Exhibition/html/exhibitionAdminLog.jsp?user';
-                                 });
-                            }
-                                }
-				});
-			}, 200);
-			return false;
- 		});		
-
-	});
-   </script> 
-     <style>
-#exists{display:none}
-#cross{display:none}
-.myinfo
-{
-	margin: 5px auto;
-	background:#d6e3f5;
-	border: 1px #0010ac solid;
-	padding:5px;
-	color:#0010ac;
-	font-size:12px;
-	width:350px;
-	min-height:0px;
-	-moz-border-radius:4px;
-	-webkit-border-radius:4px;
-	text-align: center;
-}
-
-.myerror
-{
-	margin: 5px auto;
-	background:#FFDFDF;
-	border: 1px #FF0000 solid;
-	padding:5px;
-	color:#FF0000;
-	font-size:12px;
-	width:350px;
-	min-height:0px;
-	-moz-border-radius:4px;
-	-webkit-border-radius:4px;
-	text-align: center;
-}
-</style>
-
+     <script data-require="jquery@*" data-semver="2.0.3" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+    <script data-require="bootstrap@*" data-semver="3.1.1" src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script src="script.js"></script>
+     
   </head>
   <body class="fixed-header ">
     <!-- BEGIN SIDEBPANEL-->
@@ -203,34 +129,103 @@
             <span class=" arrow"></span></a>
             <span class="icon-thumbnail"><i class="pg-calender"></i></span>
               <ul class="sub-menu">
-                 <li class="">
-                <a href="/Exhibition/html/exhibitionAdministratorSector.jsp"> Add Sectors </a>
-                <span class="icon-thumbnail">c</span>
+                   <li>
+                <a href="#"><span class="title">Sectors</span>
+                <span class="arrow"></span></a>
+              
+                <ul class="sub-menu">
+                  <li>
+                    <a href="/Exhibition/html/exhibitionAdministratorAddSector.jsp">Add Sectors</a>
+                    <span class="icon-thumbnail">AS</span>
+                  </li>
+                  <li>
+                    <a href="/Exhibition/html/exhibitionAdministratorSector.jsp">Edit/Delete Sectors</a>
+                  <span class="icon-thumbnail">S</span>
+                  </li>
+                </ul>
               </li>
-              <li class="">
-                <a href="/Exhibition/html/exhibitionAdministratorTeam.jsp"> Add Exhibition Team</a>
-                <span class="icon-thumbnail">c</span>
+                <li>
+                <a href="#"><span class="title">Exhibition Team</span>
+                <span class="arrow"></span></a>
+              
+                <ul class="sub-menu">
+                  <li>
+                    <a href="/Exhibition/html/exhibitionAdministratorAddExhibitionTeam.jsp">Add Team</a>
+                    <span class="icon-thumbnail">AET</span>
+                  </li>
+                  <li>
+                    <a href="/Exhibition/html/exhibitionAdministratorTeam.jsp">Edit/Delete Team</a>
+                  <span class="icon-thumbnail">ET</span>
+                  </li>
+                </ul>
               </li>
-              <li class="">
-                <a href="/Exhibition/html/exhibitionAdministratorSocialMedia.jsp">Add Exhibition Social Media</a>
-                <span class="icon-thumbnail">L</span>
+              <li>
+                <a href="#"><span class="title"> Social Media</span>
+                <span class="arrow"></span></a>
+              
+                <ul class="sub-menu">
+                  <li>
+                    <a href="/Exhibition/html/exhibitionAdministratorAddExhibitionSocialMedia.jsp">Add Social Media</a>
+                    <span class="icon-thumbnail">ASM</span>
+                  </li>
+                  <li>
+                    <a href="/Exhibition/html/exhibitionAdministratorSocialMedia.jsp">Edit/Delete Social Media</a>
+                  <span class="icon-thumbnail">SM</span>
+                  </li>
+                </ul>
               </li>
+               <li>
+                <a href="#"><span class="title">Opportunity</span>
+                <span class="arrow"></span></a>
+              
+                <ul class="sub-menu">
+                  <li>
+                    <a href="/Exhibition/html/exhibitionAdministratorAddOpportunity.jsp">Add Opportunity</a>
+                    <span class="icon-thumbnail">AO</span>
+                  </li>
+                  <li>
+                    <a href="/Exhibition/html/exhibitionAdministratorOpportunity.jsp">Edit/Delete Opportunity</a>
+                  <span class="icon-thumbnail">O</span>
+                  </li>
+                </ul>
+              </li>
+              
+                <li>
+                <a href="#"><span class="title">FAQ</span>
+                <span class="arrow"></span></a>
+              
+                <ul class="sub-menu">
+                  <li>
+                    <a href="/Exhibition/html/exhibitionAdministratorAddFAQ.jsp">Add FAQ</a>
+                    <span class="icon-thumbnail">AF</span>
+                  </li>
+                  <li>
+                    <a href="/Exhibition/html/exhibitionAdministratorFAQ.jsp">Edit/Delete FAQ</a>
+                  <span class="icon-thumbnail">F</span>
+                  </li>
+                </ul>
+              </li>
+              
+                <li>
+                <a href="#"><span class="title">Facilities</span>
+                <span class="arrow"></span></a>
+              
+                <ul class="sub-menu">
+                  <li>
+                    <a href="/Exhibition/html/exhibitionAdministratorAddFacilities.jsp">Add Facilities</a>
+                    <span class="icon-thumbnail">AF</span>
+                  </li>
+                  <li>
+                    <a href="/Exhibition/html/exhibitionAdministratorFacilities.jsp">Edit/Delete Facilities</a>
+                  <span class="icon-thumbnail">F</span>
+                  </li>
+                </ul>
+              </li>
+            
               <li class="">
                 <a href="exhibitionAddress.jsp">Add Exhibition Address </a>
                 <span class="icon-thumbnail">M</span>
-              </li>
-               <li class="">
-                <a href="/Exhibition/html/exhibitionAdministratorOpportunity.jsp">Opportunities/Response </a>
-                <span class="icon-thumbnail">M</span>
-              </li>
-               <li class="">
-                <a href="/Exhibition/html/exhibitionAdministratorFAQ.jsp"> FAQ's </a>
-                <span class="icon-thumbnail">M</span>
-              </li>
-               <li class="">
-                <a href="/Exhibition/html/exhibitionAdministratorFacilities.jsp"> Facilities</a>
-                <span class="icon-thumbnail">M</span>
-              </li>
+              </li>  
                <li class="">
                 <a href="exhibitionBooth.jsp">Add Booths </a>
                 <span class="icon-thumbnail">M</span>
@@ -324,6 +319,32 @@
     <!-- END SIDEBAR -->
     <!-- END SIDEBPANEL-->
     <!-- START PAGE-CONTAINER -->
+     
+    <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Confirm Delete</h4>
+                </div>
+            
+                <div class="modal-body">
+                    <p>You are about to delete one track, this procedure is irreversible.</p>
+                    <p>Do you want to proceed?</p>
+                    <p class="debug-url"></p>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-success btn-ok" onclick="document.location.href='/Exhibition/exhibitionAdministratorSocialMediaDelete';">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    
     <div class="page-container ">
       <!-- START HEADER -->
       <div class="header ">
@@ -533,89 +554,12 @@
         <!-- START PAGE CONTENT -->
          <div class="content ">
          
-                  <div class="panel panel-transparent">
-              <div class="panel-heading">
-                <div class="panel-title">Social Media
-                </div>
-              </div>
-              <div class="panel-body">
-         
-                    <br>
-                    <div class="panel panel-transparent">
-                      <!-- Nav tabs -->
-                      <ul class="nav nav-tabs nav-tabs-linetriangle" data-init-reponsive-tabs="dropdownfx">
-                        <li class="active">
-                          <a data-toggle="tab" href="#home"><span>Add Social Media</span></a>
-                        </li>
-                        <li>
-                          <a data-toggle="tab" href="#profile"><span>View Social Media</span></a>
-                        </li>
-                     <!--   <li>
-                          <a data-toggle="tab" href="#messages"><span>Hello Three</span></a>
-                        </li> -->
-                      </ul>
-                      <!-- Tab panes -->
-                      <div class="tab-content">
-                        <div class="tab-pane active" id="home">
-                          <div class="row column-seperation">
-                              
-                            <div class="col-md-8">
-                             <div class="register-container full-height sm-p-t-30">
-      <div class="container-sm-height full-height">
-        <div class="row row-sm-height">
-          <div class="col-sm-12 col-sm-height col-middle">
                  
-                       <h1> Add Exhibition Social Media </font>
-                      </h1>  <br>
-                    
-                 <form id="login" name="login" class="" role="form" action="" method="post">
-                      
-                    
-                       
-                          <div class="form-group form-group-default required">
-                            <label>Exhibition ID</label>
-                            <input type="text"   id="exhibitionId" name="exhibitionId" class="form-control" required>
-                          </div>
-                       
-                        
-                      
-                      <div class="form-group form-group-default required">
-                        <label>Link</label>
-                        <input type="text" id="link" name="link" class="form-control" required>
-                      </div> <br>
-                      <div id="msgbox1"></div>       <button class="btn btn-success" type="submit">Add</button>
-                         <button class="btn btn-success" type="submit">Clear</button>
-                      
-                    </form>
-               
-        </div></div></div> </div> 
-                                
-                                
-                                
-                            </div>
-                            
-                          </div>
-                        </div>
-                        <div class="tab-pane" id="profile">
-                          <div class="row">
-                             <div class="tab-pane slide-left padding-20" id="tab2">
-                    
-                 
-               <div class="container-fluid container-fixed-lg">
+              <div class="container-fluid container-fixed-lg bg-white">
             <!-- START PANEL -->
             <div class="panel panel-transparent">
               <div class="panel-heading">
-                <div class="panel-title">
-                </div>
-            
-              </div>
-              <div class="panel-body">     
-        
-               <div class="container-fluid container-fixed-lg bg-white">
-            <!-- START PANEL -->
-            <div class="panel panel-transparent">
-              <div class="panel-heading">
-                <div class="panel-title">View Social Media
+                <div class="panel-title">View Sectors
                 </div>
                 <div class="pull-right">
                   <div class="col-xs-12">
@@ -631,12 +575,12 @@
                       <th>Exhibition Id</th>
                       <th>Link</th>
                       <th>Edit/Delete</th>
-                     <!-- <th>Status</th>
+                      <!-- <th>Status</th>
                       <th>Last Update</th> -->
                     </tr>
                   </thead>
-                  <tbody>                     
-                  <%   
+                  <tbody>
+                       <%   
                          Class.forName("com.mysql.jdbc.Driver"); 
                          Connection con;
                          con=exhibitionAdministratorOneTimeConnection.getConnection(); 
@@ -654,69 +598,44 @@
                                // HttpSession ss1=request.getSession(true);
                                // ss1.setAttribute("myid", exid);
                            %>
-                            <td>
+                             <td>
                                  <div class="btn-group">
+        
                                  <button type="button" class="btn btn-success" onclick="document.location.href='/Exhibition/html/exhibitionAdministratorSocialMediaEdit.jsp?myid=<%=exid%>';"><i class="fa fa-pencil"></i></button> 
-                                  <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                  <div class="modal-dialog">
-                                  <div class="modal-content">
-                                   <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                <h4 class="modal-title" id="myModalLabel">Confirm Delete</h4>
-                                    </div>
-                           <div class="modal-body">
-                           <p>You are about to delete one track, this procedure is irreversible.</p>
-                           <p>Do you want to proceed?</p>
-                            <p class="debug-url"></p>
-                </div>
-                
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-success" data-dismiss="modal" onclick="document.location.href='/Exhibition/html/exhibitionAdministratorSocialMedia.jsp';">Cancel</button>
-                    <a class="btn btn-success btn-ok" onclick="document.location.href='/Exhibition/exhibitionAdministratorSocialMediaDelete?myid=<%=exid%>';">Delete</a>
-                </div>
-            </div>
-        </div>
-    </div>
-                                 
+                                
                                  <button type="button" class="btn btn-success" data-href="/Exhibition/exhibitionAdministratorSocialMediaDelete?myid=<%=exid%>" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash-o"></i>
                                  </button>
-                          <script>
-                              
-        $('#confirm-delete').on('show.bs.modal', function(e)
-        {
-            $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
-            
-            $('.debug-url').html('Delete URL: <strong>' + $(this).find('.btn-ok').attr('href') + '</strong>');
-        });
-    </script>
                                  </div>
                             </td><%
                             out.println(" </tr>");
                         }
                        
-                   %>   
-                   </tbody>
+                   %>
+                   
+                    <script>
+        $('#confirm-delete').on('show.bs.modal', function(e) {
+            $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+            
+            $('.debug-url').html('Delete URL: <strong>' + $(this).find('.btn-ok').attr('href') + '</strong>');
+        });
+    </script>
+                  </tbody>
                 </table>
               </div>
             </div>
             <!-- END PANEL -->
           </div>
-          <!-- END CONTAINER FLUID -->
-          <!-- START CONTAINER FLUID -->
-         
-            <!-- END PANEL -->
-          </div> 
              
-            </div>
-  </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+             
+                   
+                     
+                 
+          
+                     
               
+              
+          
+       
           <!-- END CONTAINER FLUID -->
         </div> 
       
@@ -2035,6 +1954,28 @@
     <!-- BEGIN PAGE LEVEL JS -->
     <script src="assets/js/datatables.js" type="text/javascript"></script>
     <script src="assets/js/scripts.js" type="text/javascript"></script>
+       <script src="assets/plugins/pace/pace.min.js" type="text/javascript"></script>
+    <script src="assets/plugins/jquery/jquery-1.11.1.min.js" type="text/javascript"></script>
+    <script src="assets/plugins/modernizr.custom.js" type="text/javascript"></script>
+    <script src="assets/plugins/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
+    <script src="assets/plugins/boostrapv3/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="assets/plugins/jquery/jquery-easy.js" type="text/javascript"></script>
+    <script src="assets/plugins/jquery-unveil/jquery.unveil.min.js" type="text/javascript"></script>
+    <script src="assets/plugins/jquery-bez/jquery.bez.min.js"></script>
+    <script src="assets/plugins/jquery-ios-list/jquery.ioslist.min.js" type="text/javascript"></script>
+    <script src="assets/plugins/jquery-actual/jquery.actual.min.js"></script>
+    <script src="assets/plugins/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+    <script type="text/javascript" src="assets/plugins/bootstrap-select2/select2.min.js"></script>
+    <script type="text/javascript" src="assets/plugins/classie/classie.js"></script>
+    <script src="assets/plugins/switchery/js/switchery.min.js" type="text/javascript"></script>
+    <!-- END VENDOR JS -->
+    <!-- BEGIN CORE TEMPLATE JS -->
+    <script src="pages/js/pages.min.js"></script>
+    <!-- END CORE TEMPLATE JS -->
+    <!-- BEGIN PAGE LEVEL JS -->
+    <script src="assets/js/demo.js" type="text/javascript"></script>
+    <script src="assets/js/scripts.js" type="text/javascript"></script>
+    
     <!-- END PAGE LEVEL JS -->
   </body>
 </html>

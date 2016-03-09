@@ -39,97 +39,6 @@
     <!--[if lte IE 9]>
 	<link href="assets/plugins/codrops-dialogFx/dialog.ie.css" rel="stylesheet" type="text/css" media="screen" />
 	<![endif]-->
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script src="pages/js/jquery-1.4.2.min.js"></script>
-   <script type="text/javascript">
-	$(document).ready(function(){
-		$("#login").submit(function(){
-
-			 //remove previous class and add new "myinfo" class
-	       // $("#msgbox").removeClass().addClass('myinfo').text('Validating Your Login ').fadeIn(1000);
-
-			
-			this.timer = setTimeout(function () {
-				$.ajax({
-		          	url: '/Exhibition/exhibitionAdministratorContactInformationFirstTimeUse',
-		          	data: 'title='+ $('#title').val() +'&firstName=' + $('#firstName').val()+'&lastName=' + $('#lastName').val()+'&dateOfBirth=' + $('#dateOfBirth').val() +'&level=' + $('#level').val()+'&degination=' + $('#degination').val()+'&phoneNo=' + $('#phoneNo').val(),
-		          	type: 'post',
-		   		success: function(msg){
-                                  alert(msg);
-                                if(msg != 'mobileNoInvalid') // Message Sent, check and redirect
-				{
-                                        if(msg =='ok')
-                                        {
-                                          $("#msgbox1").html('data updated').addClass('myinfo').fadeTo(200,1,function()
-			             {
-			                 //redirect to secure page
-			              //document.location='/Exhibition/html/exhibitionAdminPersonal.jsp';
-			             });
-                                        
-                                    }
-                                
-				
-                                else
-                                {
-                                    $("#msgbox2").fadeTo(100,1,function() //start fading the messagebox
-		                {
-			                  //add message and change the class of the box and start fading
-			                 $(this).html('records are not updated..').removeClass().addClass('myerror').fadeTo(300,1);
-                                        // document.location='/Exhibition/html/exhibitionAdminLog.jsp?user';
-                                 });
-                                }
-                            }
-                            else
-                            {
-                                $("#msgbox2").fadeTo(100,1,function() //start fading the messagebox
-		                {
-			                  //add message and change the class of the box and start fading
-			                 $(this).html('MobileNo should be 10 digits only').removeClass().addClass('myerror').fadeTo(300,1);
-                                        // document.location='/Exhibition/html/exhibitionAdminLog.jsp?user';
-                                 });
-                            }
-                                }
-				});
-			}, 200);
-			return false;
- 		});		
-
-	});
-   </script> 
-  
-     <style>
-#exists{display:none}
-#cross{display:none}
-.myinfo
-{
-	margin: 5px auto;
-	background:#d6e3f5;
-	border: 1px #0010ac solid;
-	padding:5px;
-	color:#0010ac;
-	font-size:12px;
-	width:350px;
-	min-height:0px;
-	-moz-border-radius:4px;
-	-webkit-border-radius:4px;
-	text-align: center;
-}
-
-.myerror
-{
-	margin: 5px auto;
-	background:#FFDFDF;
-	border: 1px #FF0000 solid;
-	padding:5px;
-	color:#FF0000;
-	font-size:12px;
-	width:350px;
-	min-height:0px;
-	-moz-border-radius:4px;
-	-webkit-border-radius:4px;
-	text-align: center;
-}
-</style> 
 
   </head>
   <body class="fixed-header ">
@@ -173,7 +82,7 @@
       <!-- START SIDEBAR MENU -->
       <div class="sidebar-menu">
         <!-- BEGIN SIDEBAR MENU ITEMS-->
-        <ul class="menu-items">
+       <ul class="menu-items">
           <li class="m-t-30 ">
             <a href="index.html" class="detailed">
               <span class="title">Dashboard</span>
@@ -222,34 +131,103 @@
             <span class=" arrow"></span></a>
             <span class="icon-thumbnail"><i class="pg-calender"></i></span>
               <ul class="sub-menu">
-                 <li class="">
-                <a href="/Exhibition/html/exhibitionAdministratorSector.jsp"> Add Sectors </a>
-                <span class="icon-thumbnail">c</span>
+                   <li>
+                <a href="#"><span class="title">Sectors</span>
+                <span class="arrow"></span></a>
+              
+                <ul class="sub-menu">
+                  <li>
+                    <a href="/Exhibition/html/exhibitionAdministratorAddSector.jsp">Add Sectors</a>
+                    <span class="icon-thumbnail">AS</span>
+                  </li>
+                  <li>
+                    <a href="/Exhibition/html/exhibitionAdministratorSector.jsp">Edit/Delete Sectors</a>
+                  <span class="icon-thumbnail">S</span>
+                  </li>
+                </ul>
               </li>
-              <li class="">
-                <a href="/Exhibition/html/exhibitionAdministratorTeam.jsp"> Add Exhibition Team</a>
-                <span class="icon-thumbnail">c</span>
+                <li>
+                <a href="#"><span class="title">Exhibition Team</span>
+                <span class="arrow"></span></a>
+              
+                <ul class="sub-menu">
+                  <li>
+                    <a href="/Exhibition/html/exhibitionAdministratorAddExhibitionTeam.jsp">Add Team</a>
+                    <span class="icon-thumbnail">AET</span>
+                  </li>
+                  <li>
+                    <a href="/Exhibition/html/exhibitionAdministratorTeam.jsp">Edit/Delete Team</a>
+                  <span class="icon-thumbnail">ET</span>
+                  </li>
+                </ul>
               </li>
-              <li class="">
-                <a href="/Exhibition/html/exhibitionAdministratorSocialMedia.jsp">Add Exhibition Social Media</a>
-                <span class="icon-thumbnail">L</span>
+              <li>
+                <a href="#"><span class="title"> Social Media</span>
+                <span class="arrow"></span></a>
+              
+                <ul class="sub-menu">
+                  <li>
+                    <a href="/Exhibition/html/exhibitionAdministratorAddExhibitionSocialMedia.jsp">Add Social Media</a>
+                    <span class="icon-thumbnail">ASM</span>
+                  </li>
+                  <li>
+                    <a href="/Exhibition/html/exhibitionAdministratorSocialMedia.jsp">Edit/Delete Social Media</a>
+                  <span class="icon-thumbnail">SM</span>
+                  </li>
+                </ul>
               </li>
+               <li>
+                <a href="#"><span class="title">Opportunity</span>
+                <span class="arrow"></span></a>
+              
+                <ul class="sub-menu">
+                  <li>
+                    <a href="/Exhibition/html/exhibitionAdministratorAddOpportunity.jsp">Add Opportunity</a>
+                    <span class="icon-thumbnail">AO</span>
+                  </li>
+                  <li>
+                    <a href="/Exhibition/html/exhibitionAdministratorOpportunity.jsp">Edit/Delete Opportunity</a>
+                  <span class="icon-thumbnail">O</span>
+                  </li>
+                </ul>
+              </li>
+              
+                <li>
+                <a href="#"><span class="title">FAQ</span>
+                <span class="arrow"></span></a>
+              
+                <ul class="sub-menu">
+                  <li>
+                    <a href="/Exhibition/html/exhibitionAdministratorAddFAQ.jsp">Add FAQ</a>
+                    <span class="icon-thumbnail">AF</span>
+                  </li>
+                  <li>
+                    <a href="/Exhibition/html/exhibitionAdministratorFAQ.jsp">Edit/Delete FAQ</a>
+                  <span class="icon-thumbnail">F</span>
+                  </li>
+                </ul>
+              </li>
+              
+                <li>
+                <a href="#"><span class="title">Facilities</span>
+                <span class="arrow"></span></a>
+              
+                <ul class="sub-menu">
+                  <li>
+                    <a href="/Exhibition/html/exhibitionAdministratorAddFacilities.jsp">Add Facilities</a>
+                    <span class="icon-thumbnail">AF</span>
+                  </li>
+                  <li>
+                    <a href="/Exhibition/html/exhibitionAdministratorFacilities.jsp">Edit/Delete Facilities</a>
+                  <span class="icon-thumbnail">F</span>
+                  </li>
+                </ul>
+              </li>
+            
               <li class="">
                 <a href="exhibitionAddress.jsp">Add Exhibition Address </a>
                 <span class="icon-thumbnail">M</span>
-              </li>
-               <li class="">
-                <a href="/Exhibition/html/exhibitionAdministratorOpportunity.jsp">Opportunities/Response </a>
-                <span class="icon-thumbnail">M</span>
-              </li>
-               <li class="">
-                <a href="/Exhibition/html/exhibitionAdministratorFAQ.jsp"> FAQ's </a>
-                <span class="icon-thumbnail">M</span>
-              </li>
-               <li class="">
-                <a href="/Exhibition/html/exhibitionAdministratorFacilities.jsp"> Facilities</a>
-                <span class="icon-thumbnail">M</span>
-              </li>
+              </li>  
                <li class="">
                 <a href="exhibitionBooth.jsp">Add Booths </a>
                 <span class="icon-thumbnail">M</span>
@@ -565,30 +543,9 @@
   </p> --><p><h1><b>Add Contact Information ...!</b></h1></p>
           
            
-               <form role="form"   class="p-t-15" id="login" name="login" action="" method="">
+            <form action="/Exhibition/html/exhibitionAdministratorContactInfromationAddImageData.jsp" method="post" enctype="multipart/form-data" role="form" class="p-t-15" id="login" name="login"  >  
                     
-                   <div id="uploadFormLayer">
-                        <label><b>Upload Image File:</b></label><br><br>
-                       
-	<script type="text/javascript">
-									function readURL(input) {
-									if (input.files && input.files[0]) {
-									var reader = new FileReader();
-									reader.onload = function (e) {
-									$('#tempImg')
-									.attr('src', e.target.result)
-									.width(200)
-									.height(200);
-									$('#flag').val("1");
-									};
-									reader.readAsDataURL(input.files[0]);
-									}
-									}
-									</script>
-                                                                         <input name="userImage" type="file" class="inputFile" onchange="readURL(this);"  /> <br>
-									<input type="hidden" id="flag" name="flag">
-	<img id="tempImg"  src="" width="200" height="200"> 
-                   </div>   <br><br>
+                  
                     
                        <div class="row">
                 <div class="col-sm-12">
@@ -643,10 +600,29 @@
                         </div>
                 </div>   </div>
                    
-                    
+                       <div id="uploadFormLayer">
+                           <label><b>Upload Image File:</b></label>
+                           <input name="userImage" type="file" class="inputFile" onchange="readURL(this);"  /> <br>
+	<script type="text/javascript">
+									function readURL(input) {
+									if (input.files && input.files[0]) {
+									var reader = new FileReader();
+									reader.onload = function (e) {
+									$('#tempImg')
+									.attr('src', e.target.result)
+									.width(125)
+									.height(125);
+									$('#flag').val("1");
+									};
+									reader.readAsDataURL(input.files[0]);
+									}
+									}
+									</script>
+									<input type="hidden" id="flag" name="flag">
+	<img id="tempImg"  src="" width="125" height="125"> 
+ </div>  
                    
-                        
-                       <div id="msgbox1"> </div>  <div id="msgbox2"> </div> 
+                       
 
                              <button class="btn btn-primary btn-cons m-t-10" type="submit">Save </button>
                                <button class="btn btn-primary btn-cons m-t-10" type="submit">Cancel </button>

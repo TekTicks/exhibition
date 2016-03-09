@@ -1,20 +1,17 @@
- <%-- 
-    Document   : exhibitionSector
-    Created on : Jan 27, 2016, 5:15:09 PM
+<%-- 
+    Document   : deleteModerator
+    Created on : Jan 23, 2016, 6:03:54 PM
     Author     : Admin
 --%>
- 
- <%@page import="exhibitionAdministrator.exhibitionAdministratorOneTimeConnection"%>
-<%@page import="java.sql.ResultSet"%>
-<%@page import="java.sql.DriverManager"%>
-<%@page import="java.sql.Statement"%>
-<%@page import="java.sql.Connection"%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
   <head>
     <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
     <meta charset="utf-8" />
-    <title>Pages - Admin Dashboard UI Kit - Blank Page</title>
+    <title>Pages - Admin Dashboard UI Kit - Form Layouts</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no" />
     <link rel="apple-touch-icon" href="pages/ico/60.png">
     <link rel="apple-touch-icon" sizes="76x76" href="pages/ico/76.png">
@@ -32,18 +29,89 @@
     <link href="assets/plugins/jquery-scrollbar/jquery.scrollbar.css" rel="stylesheet" type="text/css" media="screen" />
     <link href="assets/plugins/bootstrap-select2/select2.css" rel="stylesheet" type="text/css" media="screen" />
     <link href="assets/plugins/switchery/css/switchery.min.css" rel="stylesheet" type="text/css" media="screen" />
-    <link href="assets/plugins/jquery-datatable/media/css/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="assets/plugins/jquery-datatable/extensions/FixedColumns/css/dataTables.fixedColumns.min.css" rel="stylesheet" type="text/css" />
-    <link href="assets/plugins/datatables-responsive/css/datatables.responsive.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="assets/plugins/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet" type="text/css" media="screen">
     <link href="pages/css/pages-icons.css" rel="stylesheet" type="text/css">
     <link class="main-stylesheet" href="pages/css/pages.css" rel="stylesheet" type="text/css" />
     <!--[if lte IE 9]>
 	<link href="assets/plugins/codrops-dialogFx/dialog.ie.css" rel="stylesheet" type="text/css" media="screen" />
 	<![endif]-->
-     <script data-require="jquery@*" data-semver="2.0.3" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
-    <script data-require="bootstrap@*" data-semver="3.1.1" src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-    <script src="script.js"></script>
-     
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="pages/js/jquery-1.4.2.min.js"></script>
+    <script type="text/javascript">
+	$(document).ready(function(){
+		$("#login").submit(function(){
+
+			 //remove previous class and add new "myinfo" class
+	       // $("#msgbox").removeClass().addClass('myinfo').text('Validating Your Login ').fadeIn(1000);
+
+			
+			this.timer = setTimeout(function () {
+				$.ajax({
+		          	url: '/Exhibition/exhibitionAdministratorSocialMedia',
+		          	data: 'EI='+ $('#exhibitionId').val() +'&link=' + $('#link').val(),
+		          	type: 'post',
+		   		success: function(msg){
+                                if(msg != 'error') // Message Sent, check and redirect
+				{
+                                       
+                                          $("#msgbox1").html('data inserted').addClass('myinfo').fadeTo(200,1,function()
+			             {
+			                 //redirect to secure page
+			              //document.location='/Exhibition/html/exhibitionAdminPersonal.jsp';
+			             });
+                                        
+                                    }
+                               else
+                            {
+                                $("#msgbox1").fadeTo(100,1,function() //start fading the messagebox
+		                {
+			                  //add message and change the class of the box and start fading
+			                 $(this).html('sorry').removeClass().addClass('myerror').fadeTo(300,1);
+                                        // document.location='/Exhibition/html/exhibitionAdminLog.jsp?user';
+                                 });
+                            }
+                                }
+				});
+			}, 200);
+			return false;
+ 		});		
+
+	});
+   </script> 
+     <style>
+#exists{display:none}
+#cross{display:none}
+.myinfo
+{
+	margin: 5px auto;
+	background:#d6e3f5;
+	border: 1px #0010ac solid;
+	padding:5px;
+	color:#0010ac;
+	font-size:12px;
+	width:350px;
+	min-height:0px;
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+	text-align: center;
+}
+
+.myerror
+{
+	margin: 5px auto;
+	background:#FFDFDF;
+	border: 1px #FF0000 solid;
+	padding:5px;
+	color:#FF0000;
+	font-size:12px;
+	width:350px;
+	min-height:0px;
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+	text-align: center;
+}
+</style>
+
   </head>
   <body class="fixed-header ">
     <!-- BEGIN SIDEBPANEL-->
@@ -86,7 +154,7 @@
       <!-- START SIDEBAR MENU -->
       <div class="sidebar-menu">
         <!-- BEGIN SIDEBAR MENU ITEMS-->
-        <ul class="menu-items">
+         <ul class="menu-items">
           <li class="m-t-30 ">
             <a href="index.html" class="detailed">
               <span class="title">Dashboard</span>
@@ -325,32 +393,6 @@
     <!-- END SIDEBAR -->
     <!-- END SIDEBPANEL-->
     <!-- START PAGE-CONTAINER -->
-     
-    <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-            
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel">Confirm Delete</h4>
-                </div>
-            
-                <div class="modal-body">
-                    <p>You are about to delete one track, this procedure is irreversible.</p>
-                    <p>Do you want to proceed?</p>
-                    <p class="debug-url"></p>
-                </div>
-                
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-success" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-success btn-ok" onclick="document.location.href='/Exhibition/exhibitionAdministratorFacilitiesDelete';">Delete</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    
-    
     <div class="page-container ">
       <!-- START HEADER -->
       <div class="header ">
@@ -421,9 +463,9 @@
                             </div>
                             <div class="more-details">
                               <div class="more-details-inner">
-                                <h5 class="semi-bold fs-16">?Apple?s Motivation - Innovation <br> 
+                                <h5 class="semi-bold fs-16">“Apple’s Motivation - Innovation <br> 
                                                             distinguishes between <br>
-                                                            A leader and a follower.?</h5>
+                                                            A leader and a follower.”</h5>
                                 <p class="small hint-text">
                                   Commented on john Smiths wall.
                                   <br> via pages framework.
@@ -556,101 +598,51 @@
       </div>
       <!-- END HEADER -->
       <!-- START PAGE CONTENT WRAPPER -->
-      <div class="page-content-wrapper ">
+  <div class="page-content-wrapper ">
         <!-- START PAGE CONTENT -->
-         <div class="content ">
+   <div class="content ">
+       
+            <div class="panel-body">
+   <div class="register-container full-height sm-p-t-30">
+      <div class="container-sm-height full-height">
+        <div class="row row-sm-height">
+          <div class="col-sm-12 col-sm-height col-middle">
+  <!--          <img src="assets/img/logo.png" alt="logo" data-src="assets/img/logo.png" data-src-retina="assets/img/logo_2x.png" width="78" height="22">
+            <h3>Pages makes it easy to enjoy what matters the most in your life</h3>
+            <p>
+              <small>
+        Create a pages account. If you have a facebook account, log into it for this process. Sign in with <a href="#" class="text-info">Facebook</a> or <a href="#" class="text-info">Google</a>
+    </small>
+  </p> --><p><h1><b>Add Exhibition Team..!</b></h1></p>
+          <br>
          
-                 
-              <div class="container-fluid container-fixed-lg bg-white">
-            <!-- START PANEL -->
-            <div class="panel panel-transparent">
-              <div class="panel-heading">
-                <div class="panel-title">View Opportunities
-                </div>
-                <div class="pull-right">
-                  <div class="col-xs-12">
-                    <input type="text" id="search-table" class="form-control pull-right" placeholder="Search">
-                  </div>
-                </div>
-                <div class="clearfix"></div>
-              </div>
-              <div class="panel-body">
-                <table class="table table-hover demo-table-search" id="tableWithSearch">
-                  <thead>
-                    <tr>
-                     <th>Exhibition ID</th>
-              <th>Description</th>
-              <th>Edit/Delete</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                       <%   
-                    Class.forName("com.mysql.jdbc.Driver"); 
-                    Connection con;
-                    con= exhibitionAdministratorOneTimeConnection.getConnection(); 
-                    Statement stat1=con.createStatement();
-                    ResultSet rs1=stat1.executeQuery("select * from exhibitionFacilities");
-                    int count1=0;
-                    %> 
-                    <%
-                     while(rs1.next())
-                     {
-                        count1++;
-                        out.println("<tr>");
-                        out.println("<td class='v-align-middle semi-bold'><p>"+rs1.getString(2)+"</p></td>");
-                        out.println("<td class='v-align-middle semi-bold'><p>"+rs1.getString(4)+"</p></td>");
-                        String idr=rs1.getString(1);    
-                         HttpSession idDe=request.getSession(true);
-                        idDe.setAttribute("myex_id", idr);  
-                       %>
-                            
-                             <td>
-                                 <div class="btn-group">
-        <button type="button" class="btn btn-success" onclick="exhibitionAdministratorFacilitiesEdit?myid=<%=idr%>"><i class="fa fa-pencil"></i></button> 
-                          <button  class="btn btn-success"  data-href="exhibitionAdministratorFacilitiesDelete?myid=<%=idr%>" data-toggle="modal" data-target="#confirm-delete" onclick=""><i class="fa fa-trash-o"></i>
-                                 </button>
-                               
-                                 </div>
-                            </td><%
-                            out.println(" </tr>");
-                        }
+               <form id="login" name="login" class="" role="form" action="" method="post">
+                      
+                    
                        
-                   %>
-                   
-                    <script>
-        $('#confirm-delete').on('show.bs.modal', function(e) {
-            $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
-            
-            $('.debug-url').html('Delete URL: <strong>' + $(this).find('.btn-ok').attr('href') + '</strong>');
-        });
-    </script>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-            <!-- END PANEL -->
+                          <div class="form-group form-group-default required">
+                            <label>Exhibition ID</label>
+                            <input type="text"   id="exhibitionId" name="exhibitionId" class="form-control" required>
+                          </div>
+                       
+                        
+                      
+                      <div class="form-group form-group-default required">
+                        <label>Link</label>
+                        <input type="text" id="link" name="link" class="form-control" required>
+                      </div> <br>
+                      <div id="msgbox1"></div>       <button class="btn btn-success" type="submit">Add</button>
+                         <button class="btn btn-success" type="submit">Clear</button>
+                      
+                    </form>
           </div>
-             
-             
-                   
-                     
-                 
-          
-                     
-              
-              
-          
-       
+        </div>
+      </div>
+    </div>
+    </div>
+     
           <!-- END CONTAINER FLUID -->
-        </div> 
-      
-          <!-- START JUMBOTRON -->
-  
-          <!-- END JUMBOTRON -->
-          <!-- START CONTAINER FLUID -->
-       
-          <!-- END CONTAINER FLUID -->
-       
+        </div>
         <!-- END PAGE CONTENT -->
         <!-- START COPYRIGHT -->
         <!-- START CONTAINER FLUID -->
@@ -664,7 +656,7 @@
               <span class="sm-block"><a href="#" class="m-l-10 m-r-10">Terms of use</a> | <a href="#" class="m-l-10">Privacy Policy</a></span>
             </p>
             <p class="small no-margin pull-right sm-pull-reset">
-              <a href="#">Hand-crafted</a> <span class="hint-text">&amp; Made with Love �</span>
+              <a href="#">Hand-crafted</a> <span class="hint-text">&amp; Made with Love ®</span>
             </p>
             <div class="clearfix"></div>
           </div>
@@ -942,7 +934,7 @@
                         </p>
                         <p class="p-l-10 col-xs-height col-middle col-xs-12 overflow-ellipsis fs-12">
                           <span class="text-master link">Jame Smith commented on your status<br></span>
-                          <span class="text-master">?Perfection Simplified - Company Revox"</span>
+                          <span class="text-master">“Perfection Simplified - Company Revox"</span>
                         </p>
                       </a>
                       <!-- END Alert Item!-->
@@ -957,7 +949,7 @@
                         </p>
                         <p class="p-l-10 col-xs-height col-middle col-xs-12 overflow-ellipsis fs-12">
                           <span class="text-master link">Jame Smith commented on your status<br></span>
-                          <span class="text-master">?Perfection Simplified - Company Revox"</span>
+                          <span class="text-master">“Perfection Simplified - Company Revox"</span>
                         </p>
                       </a>
                       <!-- END Alert Item!-->
@@ -1946,42 +1938,15 @@
     <script type="text/javascript" src="assets/plugins/bootstrap-select2/select2.min.js"></script>
     <script type="text/javascript" src="assets/plugins/classie/classie.js"></script>
     <script src="assets/plugins/switchery/js/switchery.min.js" type="text/javascript"></script>
-    <script src="assets/plugins/jquery-datatable/media/js/jquery.dataTables.min.js" type="text/javascript"></script>
-    <script src="assets/plugins/jquery-datatable/extensions/TableTools/js/dataTables.tableTools.min.js" type="text/javascript"></script>
-    <script src="assets/plugins/jquery-datatable/media/js/dataTables.bootstrap.js" type="text/javascript"></script>
-    <script src="assets/plugins/jquery-datatable/extensions/Bootstrap/jquery-datatable-bootstrap.js" type="text/javascript"></script>
-    <script type="text/javascript" src="assets/plugins/datatables-responsive/js/datatables.responsive.js"></script>
-    <script type="text/javascript" src="assets/plugins/datatables-responsive/js/lodash.min.js"></script>
+    <script src="assets/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
+    <script src="assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
     <!-- END VENDOR JS -->
     <!-- BEGIN CORE TEMPLATE JS -->
     <script src="pages/js/pages.min.js"></script>
     <!-- END CORE TEMPLATE JS -->
     <!-- BEGIN PAGE LEVEL JS -->
-    <script src="assets/js/datatables.js" type="text/javascript"></script>
+    <script src="assets/js/form_layouts.js" type="text/javascript"></script>
     <script src="assets/js/scripts.js" type="text/javascript"></script>
-       <script src="assets/plugins/pace/pace.min.js" type="text/javascript"></script>
-    <script src="assets/plugins/jquery/jquery-1.11.1.min.js" type="text/javascript"></script>
-    <script src="assets/plugins/modernizr.custom.js" type="text/javascript"></script>
-    <script src="assets/plugins/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
-    <script src="assets/plugins/boostrapv3/js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="assets/plugins/jquery/jquery-easy.js" type="text/javascript"></script>
-    <script src="assets/plugins/jquery-unveil/jquery.unveil.min.js" type="text/javascript"></script>
-    <script src="assets/plugins/jquery-bez/jquery.bez.min.js"></script>
-    <script src="assets/plugins/jquery-ios-list/jquery.ioslist.min.js" type="text/javascript"></script>
-    <script src="assets/plugins/jquery-actual/jquery.actual.min.js"></script>
-    <script src="assets/plugins/jquery-scrollbar/jquery.scrollbar.min.js"></script>
-    <script type="text/javascript" src="assets/plugins/bootstrap-select2/select2.min.js"></script>
-    <script type="text/javascript" src="assets/plugins/classie/classie.js"></script>
-    <script src="assets/plugins/switchery/js/switchery.min.js" type="text/javascript"></script>
-    <!-- END VENDOR JS -->
-    <!-- BEGIN CORE TEMPLATE JS -->
-    <script src="pages/js/pages.min.js"></script>
-    <!-- END CORE TEMPLATE JS -->
-    <!-- BEGIN PAGE LEVEL JS -->
-    <script src="assets/js/demo.js" type="text/javascript"></script>
-    <script src="assets/js/scripts.js" type="text/javascript"></script>
-    
     <!-- END PAGE LEVEL JS -->
   </body>
 </html>
-       
