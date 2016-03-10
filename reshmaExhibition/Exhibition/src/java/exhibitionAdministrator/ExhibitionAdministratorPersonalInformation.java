@@ -20,17 +20,12 @@ public class exhibitionAdministratorPersonalInformation extends HttpServlet
                         String mn=request.getParameter("mn");
                         String us=request.getParameter("us");
                         String pw=request.getParameter("pw");
-                        String le=request.getParameter("le");
+                        String le=request.getParameter("le"); 
                         Connection con;
                         con=exhibitionAdministratorOneTimeConnection.getConnection();
                         HttpSession ss=request.getSession(false);
                         String rs1 = (String) ss.getAttribute("emailValid");       // emailValid value fetch from exhibitionAdministratorLoginCheck.java file
-                        if (!(mn.length() == 10) )       // mobile no validation
-                        {
-                              out.print("mobileNoInvalid");
-                        }  
-                        else
-                        {
+                       
                               String query = "update exhibitionAdmin set mobileNo ='"+mn+"',userName ='"+us+"',password ='"+pw+"',level ='"+le+"' where email='"+rs1+"' ";
                               // data updated in exhibitionAdmin table
                               PreparedStatement ps=con.prepareStatement(query);
@@ -43,7 +38,7 @@ public class exhibitionAdministratorPersonalInformation extends HttpServlet
                               {
                                     out.print("wrong");
                               }
-                         }
+                        
                 }
                 catch(Exception ee)
                 {

@@ -17,7 +17,7 @@ public class exhibitionAdministratorOneTimeConnection
     }  
     public static Connection getConnection() throws SQLException    
     {
-          return DriverManager.getConnection("jdbc:mysql://localhost:3306/exhibition","root","123");
+          return DriverManager.getConnection("jdbc:mysql://localhost:3306/exhibition","root","12345");
     } 
 }
 

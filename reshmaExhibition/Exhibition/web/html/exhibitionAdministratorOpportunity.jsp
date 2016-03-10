@@ -165,7 +165,7 @@
               
                 <ul class="sub-menu">
                   <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorAddExhibitionSocialMedia.jsp">Add Social Media</a>
+                    <a href="/Exhibition/html/exhibitionAdministratorAddSocialMedia.jsp">Add Social Media</a>
                     <span class="icon-thumbnail">ASM</span>
                   </li>
                   <li>

@@ -15,10 +15,12 @@ public class exhibitionAdministratorTeamMember extends HttpServlet
           response.setContentType("text/html;charset=UTF-8");
           PrintWriter out = response.getWriter();
           try
-          {
+          { 
+                  
                     // value fetch from exhibitionAdministratorTeam.jsp 
                     HttpSession ss=request.getSession(false);
-                    String idValid = (String) ss.getAttribute("idValid");      
+                    String idValid = (String) ss.getAttribute("idValid");     
+                   
                     // value fetch from textbox of exhibitionAdministratorTeam.jsp             
                     String tagline=request.getParameter("tagline");
                     String title=request.getParameter("title");
@@ -26,8 +28,11 @@ public class exhibitionAdministratorTeamMember extends HttpServlet
                     String lastName=request.getParameter("lastName");
                     String gender=request.getParameter("gender");
                     String dateOfBirth=request.getParameter("dateOfBirth");
+                    out.print(dateOfBirth);
                     String degination=request.getParameter("degination");
+                    String phoneCountryId=request.getParameter("phoneCountryId");
                     String phoneNo=request.getParameter("phoneNo");
+                    String mobileCountryId=request.getParameter("mobileCountryId");
                     String mobileNo=request.getParameter("mobileNo");
                     String email=request.getParameter("email");
 
@@ -39,7 +44,7 @@ public class exhibitionAdministratorTeamMember extends HttpServlet
                     }
                     else
                     {
-                        String val = "insert into exhibitionTeam(tagline,title,firstName,lastName,gender,dateOfBirth,degination,phoneNo,mobileNo,email,createdBy,modifiedBy,modifiedByFlag)  values (?,?,?,?,?,?,?,?,?,?,(select id from owner where id=1), '"+idValid+"' ,(select id from roles where id=1))" ;
+                        String val = "insert into exhibitionTeam(tagline,title,firstName,lastName,gender,dateOfBirth,degination,phoneNo,mobileNo,email,phoneCountryId,mobileCountryId,createdBy,modifiedBy,modifiedByFlag)  values (?,?,?,?,?,?,?,?,?,?,?,?,(select id from owner where id=1), '"+idValid+"' ,(select id from roles where id=1))" ;
                         // data inserted in exhibitionTeam table
                         PreparedStatement ps = con.prepareStatement(val); 
                         ps.setString(1, tagline);
@@ -51,22 +56,24 @@ public class exhibitionAdministratorTeamMember extends HttpServlet
                         ps.setString(7, degination);
                         ps.setString(8, phoneNo);
                         ps.setString(9, mobileNo);
-                        ps.setString(10, email);      
+                        ps.setString(10, email);    
+                         ps.setString(11, phoneCountryId);
+                        ps.setString(12, mobileCountryId);   
                         int n=  ps.executeUpdate(); 
                         if(n>0)
                         {
-                              out.println("ok");
+                              out.print("ok");
                         }
                         else
                         {
-                              out.println("error");
+                              out.print("error");
                         }
                         con.close();
                     }
                  }
                   catch(Exception e)
            {
-             out.println("error" +e);
+             out.print("error" +e);
            }
     }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

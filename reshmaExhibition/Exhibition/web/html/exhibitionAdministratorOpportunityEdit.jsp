@@ -168,7 +168,7 @@
       <!-- START SIDEBAR MENU -->
       <div class="sidebar-menu">
         <!-- BEGIN SIDEBAR MENU ITEMS-->
-        <ul class="menu-items">
+          <ul class="menu-items">
           <li class="m-t-30 ">
             <a href="index.html" class="detailed">
               <span class="title">Dashboard</span>
@@ -253,7 +253,7 @@
               
                 <ul class="sub-menu">
                   <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorAddExhibitionSocialMedia.jsp">Add Social Media</a>
+                    <a href="/Exhibition/html/exhibitionAdministratorAddSocialMedia.jsp">Add Social Media</a>
                     <span class="icon-thumbnail">ASM</span>
                   </li>
                   <li>

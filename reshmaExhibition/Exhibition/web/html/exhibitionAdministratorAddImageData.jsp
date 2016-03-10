@@ -17,8 +17,12 @@
 <%    String exId = "";
       String title = "";
       String email = "";
+      String mobileCountryId = "";
       String mobile = "";
+      String contactCountryId = "";
       String contactNo = "";
+      
+      
     
 int count1 = 0;
 
@@ -46,11 +50,17 @@ String value2 = item.getString();
 String emm = item.getFieldName();
 String value3 = item.getString();
 
-String mbb = item.getFieldName();
+String mcid = item.getFieldName();
 String value4 = item.getString();
 
-String contno = item.getFieldName();
+String mbb = item.getFieldName();
 String value5 = item.getString();
+
+String ccid= item.getFieldName();
+String value6 = item.getString();
+
+String contno = item.getFieldName();
+String value7 = item.getString();
 
 
 if (ei.equals("exId")) {
@@ -68,13 +78,23 @@ email = value3;
 count1 = 1;
 }
 
+if (mcid.equals("mobileCountryId")) {
+mobileCountryId = value4;
+count1 = 1;
+}
+
 if (mbb.equals("mobile")) {
-mobile = value4;
+mobile = value5;
+count1 = 1;
+}
+
+if (ccid.equals("contactCountryId")) {
+contactCountryId = value6;
 count1 = 1;
 }
 
 if (contno.equals("contactNo")) {
-contactNo = value5;
+contactNo = value7;
 count1 = 1;
 }
 } else {
@@ -91,6 +111,8 @@ out.println(title);
 out.println(email);
 out.println(mobile);
 out.println(contactNo);
+out.println(mobileCountryId);
+out.println(contactCountryId);
 
 }
 } catch (Exception e) {
@@ -144,13 +166,16 @@ psmnt.setString(1, "");
   Connection con2;
  con2=exhibitionAdministratorOneTimeConnection.getConnection();
 
- PreparedStatement ps=con2.prepareStatement("insert into exhibitionOpportunity(exhibitionId,opportunityTitle,email,mobile,contactNo,mediaId,message,createdBy,modifiedBy,modifiedByFlag)  values (?,?,?,?,?,'"+iddsf+"','opportunity_message','"+idValid+"','"+idValid+"',(select id from roles where id=1))");
+ PreparedStatement ps=con2.prepareStatement("insert into exhibitionOpportunity(exhibitionId,opportunityTitle,email,mobile,contactNo,mediaId,message,mobileCountryId,contactCountryId,createdBy,modifiedBy,modifiedByFlag)  values (?,?,?,?,?,'"+iddsf+"','opportunity_message',?,?,'"+idValid+"','"+idValid+"',(select id from roles where id=1))");
                                  
                             ps.setString(1, exId);
                             ps.setString(2, title);
                             ps.setString(3, email);
                             ps.setString(4, mobile);
-                            ps.setString(5, contactNo);  
+                             ps.setString(5, contactNo);  
+                              ps.setString(6, mobileCountryId);
+                            ps.setString(7, contactCountryId);  
+                           
                           int n=  ps.executeUpdate();
                          
                         if(n>0)

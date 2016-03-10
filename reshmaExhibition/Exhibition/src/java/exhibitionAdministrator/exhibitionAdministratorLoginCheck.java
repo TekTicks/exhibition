@@ -25,9 +25,12 @@ public class exhibitionAdministratorLoginCheck extends HttpServlet
                         con=exhibitionAdministratorOneTimeConnection.getConnection();
                         Statement stat=con.createStatement();   
                         Statement st=con.createStatement();   
+                         
                         // email id and password is verified from exhibitionAdmin table
                         ResultSet rs=stat.executeQuery("select * from exhibitionAdmin where email='"+uname+"' or password='"+pass+"'");
-                        ResultSet rs1;    
+                        ResultSet rs1;  
+                         
+                        
                         int count=0; 
                         while(rs.next())
                         {
@@ -46,7 +49,11 @@ public class exhibitionAdministratorLoginCheck extends HttpServlet
                             ss.setAttribute("levelValid", le);           // levelValid variable is set using session object
                             count++;
                             String idR2=(String)ss.getAttribute("idValid"); 
-                            HttpSession oh=request.getSession(true);
+                             String val = "insert into exhibitionAdminContact(id)values('"+idR2+"')";
+                              PreparedStatement s=con.prepareStatement(val);  
+                                  int n1=  s.executeUpdate(); 
+                                  out.print(n1);
+                          /*  HttpSession oh=request.getSession(true);
                             rs1=st.executeQuery("select * from exhibitionAdminContact where id='"+idR2+"' "); 
                             while(rs1.next())
                             {
@@ -66,7 +73,7 @@ public class exhibitionAdministratorLoginCheck extends HttpServlet
                                 oh.setAttribute("deginationValid", degination); 
                                 String phoneNo=rs1.getString(9);
                                 oh.setAttribute("phoneNoValid", phoneNo); 
-                            }
+                            } */
                          
                        }           
                        if(count>0)

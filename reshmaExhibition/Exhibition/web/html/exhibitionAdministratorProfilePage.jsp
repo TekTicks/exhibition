@@ -12,8 +12,6 @@
 <%@ page import="java.util.Iterator"%>
 <%@ page import="java.util.List"%>
 <%@ page import="java.io.File"%>
- 
-
 <%@page import = "java.sql.ResultSet;"%>
 <%@page import ="java.sql.Statement;"%>
 <%@page import = "exhibitionAdministrator.exhibitionAdministratorOneTimeConnection;"%>
@@ -339,7 +337,7 @@
               
                 <ul class="sub-menu">
                   <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorAddExhibitionSocialMedia.jsp">Add Social Media</a>
+                    <a href="/Exhibition/html/exhibitionAdministratorAddSocialMedia.jsp">Add Social Media</a>
                     <span class="icon-thumbnail">ASM</span>
                   </li>
                   <li>
@@ -773,7 +771,7 @@
                         <div class="col-sm-9">
                             <input type="text" class="form-control" id="mobileNo" name="mobileNo" placeholder="mobile No " value="<%out.print(rs.getString("mobileNo"));%>" required>
                        </div>
-                       <div id="msgbox2"> </div>
+                      
                       </div>
                         <div class="form-group">
                         <label for="fname" class="col-sm-3 control-label">Email</label>

@@ -82,7 +82,7 @@
       <!-- START SIDEBAR MENU -->
       <div class="sidebar-menu">
         <!-- BEGIN SIDEBAR MENU ITEMS-->
-        <ul class="menu-items">
+         <ul class="menu-items">
           <li class="m-t-30 ">
             <a href="index.html" class="detailed">
               <span class="title">Dashboard</span>
@@ -167,7 +167,7 @@
               
                 <ul class="sub-menu">
                   <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorAddExhibitionSocialMedia.jsp">Add Social Media</a>
+                    <a href="/Exhibition/html/exhibitionAdministratorAddSocialMedia.jsp">Add Social Media</a>
                     <span class="icon-thumbnail">ASM</span>
                   </li>
                   <li>
@@ -543,7 +543,7 @@
                            <label>Exhibition</label>
                       <%    
                     try { 
-                           Class.forName("com.mysql.jdbc.Driver"); 
+                          // Class.forName("com.mysql.jdbc.Driver"); 
                            Connection con;
                            con= exhibitionAdministratorOneTimeConnection.getConnection(); 
                            Statement stat1=con.createStatement();
@@ -576,18 +576,87 @@
                         <label>Email</label>
                       <input type="email" class="form-control" id="email" name="email" required>
                       </div>          
-                         <div class="form-group">
+                         <div class="form-group">  
                         <label>Mobile No</label>
+                          <div class="row">
+                              
+                                 <div class="col-sm-4">
+                                 <%    
+                    try { 
+                         
+                           Connection con;
+                           con= exhibitionAdministratorOneTimeConnection.getConnection(); 
+                           Statement sta1=con.createStatement();
+                           ResultSet rsy=sta1.executeQuery("select * from country ");
+                           int cou1=0;
+                     %>
+                     
+                        <select class="full-width" data-init-plugin="select2" name="mobileCountryId" id="mobileCountryId">
+                            
+                         <% while(rsy.next())
+                         { 
+                           String r=rsy.getString(4);
+                           out.print(r);
+                         %>
+                        <option><%out.print(rsy.getString("countryCode"));%></option>
+                         <%   
+                         }
+                        } 
+                   catch(Exception e) 
+                      { 
+                      out.print("error" +e); 
+                      }
+                        %>  
+                         
+                        </select>
+                      </div>  
+                              
+                              
+                              <div class="col-sm-8">
                           <input type="text" class="form-control" id="mobile" name="mobile" required>
-                      </div>
+                              </div>
+                              
+                              </div> </div>
                         <div class="form-group">
                         <label>Contact No</label>
+                        <div class="row">
+                         <div class="col-sm-4">
+                                 <%    
+                    try { 
+                         
+                           Connection con;
+                           con= exhibitionAdministratorOneTimeConnection.getConnection(); 
+                           Statement sta1=con.createStatement();
+                           ResultSet rsy=sta1.executeQuery("select * from country ");
+                           int cou1=0;
+                     %>
+                     
+                        <select class="full-width" data-init-plugin="select2" name="contactCountryId" id="contactCountryId">
+                            
+                         <% while(rsy.next())
+                         { 
+                           String r=rsy.getString(4);
+                           out.print(r);
+                         %>
+                        <option><%out.print(rsy.getString("countryCode"));%></option>
+                         <%   
+                         }
+                        } 
+                   catch(Exception e) 
+                      { 
+                      out.print("error" +e); 
+                      }
+                        %>  
+                         
+                        </select>
+                      </div>  
+                        <div class="col-sm-8">
                           <input type="text" class="form-control" id="contactNo" name="contactNo" required>
-                        </div> 
+                        </div> </div></div> <br>
                         
                         <div id="uploadFormLayer">
 <label><b>Upload Image File:</b></label><br/>
-<input name="userImage" type="file" class="inputFile" onchange="readURL(this);"  />
+<input name="userImage" type="file" class="inputFile" onchange="readURL(this);"  /><br>
 	<script type="text/javascript">
 									function readURL(input) {
 									if (input.files && input.files[0]) {
@@ -606,7 +675,7 @@
 									<input type="hidden" id="flag" name="flag">
 	<img id="tempImg"  src="" width="125" height="125"> 
  </div>  
-                   
+                        <br>
  
                         <div id="msgbox1"></div>  <div id="msgbox2"></div>
                <button class="btn btn-primary btn-cons m-t-10" type="submit" onclik="document.location.hred='/Exhibition/exhibitionAdministratorOpportunity';"> Save </button>
