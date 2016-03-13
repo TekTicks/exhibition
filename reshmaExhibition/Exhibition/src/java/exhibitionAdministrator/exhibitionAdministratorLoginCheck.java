@@ -48,16 +48,12 @@ public class exhibitionAdministratorLoginCheck extends HttpServlet
                             String le=rs.getString("level");
                             ss.setAttribute("levelValid", le);           // levelValid variable is set using session object
                             count++;
-                            String idR2=(String)ss.getAttribute("idValid"); 
-                             String val = "insert into exhibitionAdminContact(id)values('"+idR2+"')";
-                              PreparedStatement s=con.prepareStatement(val);  
-                                  int n1=  s.executeUpdate(); 
-                                  out.print(n1);
-                          /*  HttpSession oh=request.getSession(true);
+                            String idR2=(String)ss.getAttribute("idValid");    
+                          HttpSession oh=request.getSession(true);
                             rs1=st.executeQuery("select * from exhibitionAdminContact where id='"+idR2+"' "); 
                             while(rs1.next())
                             {
-                                String title=rs1.getString(2);
+                                String title=rs1.getString(2); 
                                 oh.setAttribute("titleValid", title);  
                                 String firstName=rs1.getString(3);
                                 oh.setAttribute("firstNameValid", firstName);  
@@ -66,14 +62,17 @@ public class exhibitionAdministratorLoginCheck extends HttpServlet
                                 String gender=rs1.getString(5);
                                 oh.setAttribute("genderValid", gender); 
                                 String dateOfBirth=rs1.getString(6);
-                                oh.setAttribute("dateOfBirthValid", dateOfBirth); 
+                                out.print(dateOfBirth);
+                                oh.setAttribute("dateOfBirthValid", dateOfBirth);  
                                 String level=rs1.getString(7);
                                 oh.setAttribute("levelValid", level); 
                                 String degination=rs1.getString(8);
                                 oh.setAttribute("deginationValid", degination); 
                                 String phoneNo=rs1.getString(9);
                                 oh.setAttribute("phoneNoValid", phoneNo); 
-                            } */
+                                String countryId=rs1.getString(10);
+                                oh.setAttribute("countryId", countryId); 
+                            } 
                          
                        }           
                        if(count>0)
@@ -91,20 +90,16 @@ public class exhibitionAdministratorLoginCheck extends HttpServlet
                             {           
                                 // out.print("valid");   
                                   HttpSession oh=request.getSession(false);
-                                  String tt=(String)oh.getAttribute("titleValid");  
-                                  out.print(tt);
+                                  String tt12=(String)oh.getAttribute("titleValid");    
                                   String fN=(String)oh.getAttribute("firstNameValid");  
-                                 //out.print(fN);
                                   String lN=(String)oh.getAttribute("lastNameValid");  
-                                  //out.print(lN);
                                   String gn=(String)oh.getAttribute("genderValid");  
-                                  //out.print(gn);
                                   String dobV=(String)oh.getAttribute("dateOfBirthValid"); 
-                                  // out.print(dobV);
                                   String leV=(String)oh.getAttribute("levelValid");  
                                   String deV=(String)oh.getAttribute("deginationValid");  
                                   String pNV=(String)oh.getAttribute("phoneNoValid");    
-                                  if(tt.equals("")|| fN.equals("")|| lN.equals("")|| gn.equals("")|| dobV.equals("")||leV.equals("")|| deV.equals("")|| pNV.equals("")) 
+                                   String cid=(String)oh.getAttribute("countryId");    
+                                  if(tt12.equals("")|| fN.equals("")|| lN.equals("")|| dobV.equals("")||leV.equals("")|| deV.equals("")|| pNV.equals("")|| (cid.equals(""))) 
                                   { 
                                       out.print("firstVisitor");
                                   }
@@ -122,7 +117,7 @@ public class exhibitionAdministratorLoginCheck extends HttpServlet
                    
         catch(Exception ee)
         {
-           out.println("error"+ee.toString());
+           out.print("error"+ee.toString());
         }
     }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

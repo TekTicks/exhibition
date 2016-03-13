@@ -41,6 +41,7 @@
                                         data: 'un='+ $('#login_id').val() +'&pw=' + $('#password').val(),
                                         type: 'post',
                                         success: function(msg){  
+                                            alert(msg);
                                         if(msg != 'ERROR') // Message Sent, check and redirect
                                         {
                                             if(msg == 'emailinvalid')
@@ -61,24 +62,25 @@
                                             }
                                             else
                                             {
-                                                if(msg == 'firstVisitor' )
+                                                if(msg != 'secondVisitor' )
                                                 {
-                                                        $("#msgbox2").fadeTo(300,1,function() //start fading the messagebox
-                                                    {
-                                                        //add message and change the class of the box and start fading
-                                                         $(this).html('Login Verified..!').removeClass().addClass('myinfo').fadeTo(300,1);
-                                                         document.location='/Exhibition/html/exhibitionAdministratorContactInformationFirstTimeUse.jsp';
-                                                    });
+                                                      
+                                                    	$("#msgbox3").fadeTo(300,1,function() //start fading the messagebox
+                                                {
+                                                    //add message and change the class of the box and start fading
+                                                    $(this).html('Login Verified(first Vistor)..!').removeClass().addClass('myinfo').fadeTo(300,1);
+                                                  //document.location='/Exhibition/html/exhibitionAdministratorProfilePage.jsp';
+                                                });
                                                 } 
                                             else
                                             {
-                                           
-                                             	$("#msgbox2").fadeTo(300,1,function() //start fading the messagebox
-                                                {
-                                                    //add message and change the class of the box and start fading
-                                                    $(this).html('Login Verified..!').removeClass().addClass('myinfo').fadeTo(300,1);
-                                                    document.location='/Exhibition/html/exhibitionAdministratorProfilePage.jsp';
-                                                });
+                                             $("#msgbox3").fadeTo(300,1,function() //start fading the messagebox
+                                                    {
+                                                        //add message and change the class of the box and start fading
+                                                         $(this).html('Login Verified(second Visitor)..!').removeClass().addClass('myinfo').fadeTo(300,1);
+                                                       //  document.location='/Exhibition/html/exhibitionAdministratorContactInformationFirstTimeUse.jsp';
+                                                    });
+                                             
                                             }
                                         
                                     }
@@ -86,7 +88,7 @@
                                 } 
 				else
 				{
-					$("#msgbox2").fadeTo(300,1,function() //start fading the messagebox
+					$("#msgbox5").fadeTo(300,1,function() //start fading the messagebox
 		                {
 			                  //add message and change the class of the box and start fading
 			                 $(this).html('Sorry, Wrong Combination Of Username And Password.!').removeClass().addClass('myerror').fadeTo(300,1).fadeOut();
@@ -210,8 +212,8 @@
               </div>
               <div class="col-md-6 text-right">
               </div>
-            </div>
-            <!-- END Form Control-->
+            </div>     <div id="msgbox3"></div> <div id="msgbox4"></div> <div id="msgbox5"></div> 
+            <!-- END Form Control-->      
             <button class="btn btn-primary btn-cons m-t-10" name="login" id="login"  type="submit">Sign in</button>
             <button class="btn btn-primary btn-cons m-t-10" name="clear" id="clear"  type="button" value="Clear Form" onclick="clearForm(this.form);">Clear</button>
 

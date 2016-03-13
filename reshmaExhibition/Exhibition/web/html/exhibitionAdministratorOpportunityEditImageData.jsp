@@ -7,6 +7,7 @@
 <%@ page import="org.apache.commons.fileupload.servlet.ServletFileUpload"%>
 <%@ page import="org.apache.commons.fileupload.disk.DiskFileItemFactory"%>
 <%@ page import="org.apache.commons.fileupload.*"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%@page import="org.apache.commons.io.FilenameUtils"%>
 <%@page import="org.apache.commons.fileupload.FileItem"%>
@@ -101,11 +102,18 @@ try {
 String itemName = item.getName();
 File savedFile = new File("C:/Users/Admin/Documents/NetBeansProjects/Exhibition/web/html/images/" + itemName);
 item.write(savedFile);
-
-
+out.println(savedFile);
 if (count1 == 1) {
-HttpSession s4s=request.getSession();
-s4s.setAttribute("fileName",itemName);   
+HttpSession ss=request.getSession();
+ss.setAttribute("fileName",itemName);   
+out.println(exId);
+out.println(title);
+out.println(email);
+out.println(mobile);
+out.println(contactNo);
+out.println(mobileCountryId);
+out.println(contactCountryId);
+
 }
 } catch (Exception e) {
 e.printStackTrace();
@@ -116,25 +124,23 @@ Connection connection = null;
 String connectionURL = "jdbc:mysql://localhost:3306/exhibition";
 PreparedStatement psmnt = null;
 try{
-    String location="file:///C:/Users/Admin/Documents/NetBeansProjects/Exhibition/web/html/image/";
-      HttpSession ss=request.getSession();
-       String idValid=(String)ss.getAttribute("idValid");  
-         HttpSession s4s=request.getSession(false);
-      String fileName=(String)s4s.getAttribute("fileName");
     
-     String FileImage=location+fileName;
-       out.println(FileImage);
+      HttpSession ss=request.getSession();
+       String idValid=(String)ss.getAttribute("idValid");    
+       out.print(idValid);
+      String fileName=(String)ss.getAttribute("fileName");
+      out.println(fileName);
      // Class.forName("com.mysql.jdbc.Driver").newInstance();
       Connection con;
        con=exhibitionAdministratorOneTimeConnection.getConnection();
-psmnt = con.prepareStatement("insert into media(link,type) values('"+FileImage+"',?)");
+psmnt = con.prepareStatement("insert into media(link,type) values('"+fileName+"',?)");
 //psmnt.setString(1, );
 psmnt.setString(1, "");
  psmnt.executeUpdate();
                          Connection con5;
                        con5=exhibitionAdministratorOneTimeConnection.getConnection();
                                Statement stat5=con5.createStatement();
-                               ResultSet rs5=stat5.executeQuery("select * from media where link='"+FileImage+"'");
+                               ResultSet rs5=stat5.executeQuery("select * from media where link='"+fileName+"'");
                             
                            
                              if(!rs5.next())
@@ -180,7 +186,7 @@ psmnt.setString(1, "");
                         {
                              out.print("wrn");
                         }
-                           // response.sendRedirect("/Exhibition/html/exhibitionAdministratorOpportunityThankUPage.jsp");
+                            response.sendRedirect("/Exhibition/html/exhibitionAdministratorOpportunityThankUPage.jsp");
 }
 catch(Exception e){
     

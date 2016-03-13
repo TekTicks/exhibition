@@ -703,7 +703,7 @@
                            int cou1=0;
                      %>
                      
-                        <select class="form-control" data-init-plugin="select2" name="phoneCountryId" id="phoneCountryId">
+                        <select class="form-control" data-init-plugin="select2" name="mobileCountryId" id="mobileCountryId">
                             
                          <% while(ry.next())
                          { 
@@ -745,7 +745,7 @@
                            int cou1=0;
                      %>
                      
-                        <select class="form-control" data-init-plugin="select2" name="mobileCountryId" id="mobileCountryId">
+                        <select class="form-control" data-init-plugin="select2" name="phoneCountryId" id="phoneCountryId">
                             
                          <% while(rsy.next())
                          { 

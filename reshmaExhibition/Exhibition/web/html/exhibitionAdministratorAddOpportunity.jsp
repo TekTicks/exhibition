@@ -544,9 +544,9 @@
                       <%    
                     try { 
                           // Class.forName("com.mysql.jdbc.Driver"); 
-                           Connection con;
-                           con= exhibitionAdministratorOneTimeConnection.getConnection(); 
-                           Statement stat1=con.createStatement();
+                           Connection con1;
+                           con1= exhibitionAdministratorOneTimeConnection.getConnection(); 
+                           Statement stat1=con1.createStatement();
                            ResultSet rs1=stat1.executeQuery("select * from exhibitionAdmin");
                            int count1=0;
                      %>
@@ -584,21 +584,21 @@
                                  <%    
                     try { 
                          
-                           Connection con;
-                           con= exhibitionAdministratorOneTimeConnection.getConnection(); 
-                           Statement sta1=con.createStatement();
-                           ResultSet rsy=sta1.executeQuery("select * from country ");
+                           Connection con2;
+                           con2= exhibitionAdministratorOneTimeConnection.getConnection(); 
+                           Statement sta2=con2.createStatement();
+                           ResultSet rsy2=sta2.executeQuery("select * from country ");
                            int cou1=0;
                      %>
                      
                         <select class="full-width" data-init-plugin="select2" name="mobileCountryId" id="mobileCountryId">
                             
-                         <% while(rsy.next())
+                         <% while(rsy2.next())
                          { 
-                           String r=rsy.getString(4);
+                           String r=rsy2.getString(4);
                            out.print(r);
                          %>
-                        <option><%out.print(rsy.getString("countryCode"));%></option>
+                        <option><%out.print(rsy2.getString("countryCode"));%></option>
                          <%   
                          }
                         } 
@@ -624,21 +624,21 @@
                                  <%    
                     try { 
                          
-                           Connection con;
-                           con= exhibitionAdministratorOneTimeConnection.getConnection(); 
-                           Statement sta1=con.createStatement();
-                           ResultSet rsy=sta1.executeQuery("select * from country ");
+                           Connection con3;
+                           con3= exhibitionAdministratorOneTimeConnection.getConnection(); 
+                           Statement sta3=con3.createStatement();
+                           ResultSet rsy3=sta3.executeQuery("select * from country ");
                            int cou1=0;
                      %>
                      
                         <select class="full-width" data-init-plugin="select2" name="contactCountryId" id="contactCountryId">
                             
-                         <% while(rsy.next())
+                         <% while(rsy3.next())
                          { 
-                           String r=rsy.getString(4);
+                           String r=rsy3.getString(4);
                            out.print(r);
                          %>
-                        <option><%out.print(rsy.getString("countryCode"));%></option>
+                        <option><%out.print(rsy3.getString("countryCode"));%></option>
                          <%   
                          }
                         } 

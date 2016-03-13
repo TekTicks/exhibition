@@ -52,13 +52,13 @@
 			this.timer = setTimeout(function () {
 				$.ajax({
 		          	url: '/Exhibition/exhibitionAdministratorTeamMemberEdit',
-		          	data: 'firstName='+ $('#firstName').val() +'&lastName=' + $('#lastName').val()+'&tagline=' + $('#tagline').val() +'&title=' + $('#title').val()+'&gender=' + $('#gender').val() +'&degination=' + $('#degination').val()+'&dateOfBirth=' + $('#dateOfBirth').val()+'&phoneNo=' + $('#phoneNo').val()+'&mobileNo=' + $('#mobileNo').val()+'&email=' + $('#email').val(),
+		          	data: 'firstName='+ $('#firstName').val() +'&lastName=' + $('#lastName').val()+'&tagline=' + $('#tagline').val() +'&title=' + $('#title').val()+'&gender=' + $('#gender').val() +'&degination=' + $('#degination').val()+'&dateOfBirth=' + $('#datepicker-component2').val()+'&phoneNo=' + $('#phoneNo').val()+'&mobileNo=' + $('#mobileNo').val()+'&email=' + $('#email').val()+'&mobileCountryId=' + $('#mobileCountryId').val()+'&phoneCountryId=' + $('#phoneCountryId').val(),
 		          	type: 'post',
 		   		success: function(msg){
                                   alert(msg);
                                 if(msg != 'error') // Message Sent, check and redirect
 				{
-                                        if(msg=='ok')
+                                        if(msg !='wrong')
                                         {
                                           $("#msgbox1").html('data updated').addClass('myinfo').fadeTo(200,1,function()
 			             {
@@ -671,6 +671,10 @@
                                        ss1.setAttribute("dob1", dateOfBirth);
                                       String degination=rs.getString("degination");
                                        ss1.setAttribute("dn1", degination);
+                                      String phoneCountryId=rs.getString("phoneCountryId");   
+                                       ss1.setAttribute("phoneCountryId", phoneCountryId);
+                                      String mobileCountryId=rs.getString("mobileCountryId");
+                                       ss1.setAttribute("mobileCountryId", mobileCountryId);
                                       String phoneNo=rs.getString("phoneNo");
                                        ss1.setAttribute("pn1", phoneNo);
                                       String mobileNo=rs.getString("mobileNo");
@@ -735,7 +739,7 @@
                                 <label for="designation" class="col-sm-7 control-label">  Date Of Birth   </label>
                                 <div style="text-align:right;padding-right:5%;"> <span class="input-lg"> <i class="fa fa-calendar"></i> </span>
                                 </div>                             
-                    <input type="text" class="form-control" placeholder="Pick a date" id="datepicker-component2" name="dateOfBirth" value="<%out.print((String)ss1.getAttribute("dob1"));%>" required>
+                    <input type="text" class="form-control" data-date-format="yyyy-mm-dd" placeholder="Pick a date" id="datepicker-component2" name="dateOfBirth" value="<%out.print((String)ss1.getAttribute("dob1"));%>" required>
                      
                    
                     </div></div>
@@ -750,7 +754,41 @@
                 </div>
               </div>
                  <div class="row">
-                <div class="col-sm-12">
+                     <div class="col-sm-4">
+                         <div class="form-group form-group-default">
+                                 <label>Country Code</label>
+                   <%    
+                    try { 
+                         
+                           Connection con9;
+                           con9= exhibitionAdministratorOneTimeConnection.getConnection(); 
+                           Statement sa9=con9.createStatement();
+                           ResultSet ry9=sa9.executeQuery("select * from country ");
+                           int cou1=0;
+                     %>
+                     
+                        <select class="form-control" data-init-plugin="select2" name="phoneCountryId" id="phoneCountryId">
+                             <option> <%out.print((String)ss1.getAttribute("phoneCountryId"));%></option> 
+                       <optgroup label="Select id">
+                         <% while(ry9.next())
+                         { 
+                           String r=ry9.getString(4);
+                           out.print(r);
+                         %>
+                        <option><%out.print(ry9.getString("countryCode"));%></option>
+                         <%   
+                         }
+                        } 
+                   catch(Exception e) 
+                      { 
+                      out.print("error" +e); 
+                      }
+                        %>  
+                         
+                        </select>
+                         </div></div>
+                     
+                <div class="col-sm-8">
                   <div class="form-group form-group-default">
                     <label>Phone No</label>
                    <input type="text" id="phoneNo" name="phoneNo" class="form-control" value="<%out.print((String)ss1.getAttribute("pn1"));%>" required>
@@ -758,7 +796,40 @@
                 </div>
               </div>
                  <div class="row">
-                <div class="col-sm-12">
+                     <div class="col-sm-4">
+                        <div class="form-group form-group-default">
+                                 <label>Country Code</label>
+                   <%    
+                    try { 
+                         
+                           Connection con10;
+                           con10= exhibitionAdministratorOneTimeConnection.getConnection(); 
+                           Statement sa10=con10.createStatement();
+                           ResultSet ry10=sa10.executeQuery("select * from country ");
+                           int cou1=0;
+                     %>
+                     
+                        <select class="form-control" data-init-plugin="select2" name="mobileCountryId" id="mobileCountryId">
+                              <option> <%out.print((String)ss1.getAttribute("mobileCountryId"));%></option> 
+                       <optgroup label="Select id">
+                         <% while(ry10.next())
+                         { 
+                           String r=ry10.getString(4);
+                           out.print(r);
+                         %>
+                        <option><%out.print(ry10.getString("countryCode"));%></option>
+                         <%   
+                         }
+                        } 
+                   catch(Exception e) 
+                      { 
+                      out.print("error" +e); 
+                      }
+                        %>  
+                         
+                        </select>
+                        </div> </div>
+                <div class="col-sm-8">
                   <div class="form-group form-group-default">
                     <label>Mobile No</label>
                   <input type="text" id="mobileNo" name="mobileNo" class="form-control"  value="<%out.print((String)ss1.getAttribute("mn1"));%>" required>

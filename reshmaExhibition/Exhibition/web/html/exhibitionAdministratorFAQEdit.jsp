@@ -660,7 +660,7 @@
                      <label>Exhibition</label>
                      <%    
                       try { 
-                             Class.forName("com.mysql.jdbc.Driver"); 
+                            // Class.forName("com.mysql.jdbc.Driver"); 
                              Connection con;
                              con= exhibitionAdministratorOneTimeConnection.getConnection(); 
                              Statement stat1=con.createStatement();

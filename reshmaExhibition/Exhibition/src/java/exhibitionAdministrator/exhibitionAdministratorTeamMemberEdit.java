@@ -26,13 +26,17 @@ public class exhibitionAdministratorTeamMemberEdit extends HttpServlet
                     String title=request.getParameter("title");
                     String gender=request.getParameter("gender");
                     String dateOfBirth=request.getParameter("dateOfBirth"); 
+                  
                     String degination=request.getParameter("degination");
                     String phoneNo=request.getParameter("phoneNo"); 
                     String mobileNo=request.getParameter("mobileNo");
                     String email=request.getParameter("email");  
+                       String mobileCountryId=request.getParameter("mobileCountryId");
+                       out.print(mobileCountryId);
+                    String phoneCountryId=request.getParameter("phoneCountryId");  
                     Connection con;
                     con=exhibitionAdministratorOneTimeConnection.getConnection();
-                    String query = "update exhibitionTeam set tagline ='"+tagline+"',title ='"+title+"',firstName ='"+firstName+"',lastName ='"+lastName+"',gender ='"+gender+"',dateOfBirth ='"+dateOfBirth+"',degination ='"+degination+"',phoneNo ='"+phoneNo+"',mobileNo ='"+mobileNo+"',email ='"+email+"' where id='"+myex_id+"' ";
+                    String query = "update exhibitionTeam set tagline ='"+tagline+"',title ='"+title+"',firstName ='"+firstName+"',lastName ='"+lastName+"',gender ='"+gender+"',dateOfBirth ='"+dateOfBirth+"',degination ='"+degination+"',phoneNo ='"+phoneNo+"',mobileNo ='"+mobileNo+"',email ='"+email+"',mobileCountryId='"+mobileCountryId+"',phoneCountryId='"+phoneCountryId+"' where id='"+myex_id+"' ";
                     // data updated in exhibitionTeam table
                     PreparedStatement ps=con.prepareStatement(query);
                     int rs= ps.executeUpdate();
