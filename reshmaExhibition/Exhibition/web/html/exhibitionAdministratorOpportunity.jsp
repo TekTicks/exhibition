@@ -596,6 +596,8 @@
                             out.println("<td class='v-align-middle semi-bold'><p>"+rs1.getString(5)+"</p></td>");
                             out.println("<td class='v-align-middle semi-bold'><p>"+rs1.getString(7)+"</p></td>");
                             String idr=rs1.getString(1);
+                            HttpSession fs=request.getSession(true);
+                            fs.setAttribute("idr", idr);
                            %>
                              <td>
                                  <div class="btn-group">

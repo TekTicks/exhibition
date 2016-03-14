@@ -1,4 +1,3 @@
-
 <%@page import="exhibitionAdministrator.exhibitionAdministratorOneTimeConnection"%>
 <%-- 
     Document   : ckvRegister
@@ -11,7 +10,6 @@
 <!DOCTYPE html>
 <html>
   <head>
- 
     <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
     <meta charset="utf-8" />
     <title>Owner Registration Page</title>
@@ -38,6 +36,7 @@
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="pages/js/jquery-1.4.2.min.js"></script>
     <script src="pages/js/ownerRegValidation.js"></script>
+          <script src="assets/js/phoneNoValidation.js" type="text/javascript"></script>
   <!--  <script src="pages/js/ownerRegVerification.js"></script> -->
     
     <script>
@@ -142,8 +141,10 @@
                   </div>
                 </div>
                </div>
-                <div class="row"><div class="col-sm-3">
-                <div class="form-group form-group-default input-group">
+                <div class="row">
+                    <div class="col-sm-4">
+                <div class="form-group form-group-default">
+                     <label>Country Code </label>
                     <%
                       Connection con;
                       con=exhibitionAdministratorOneTimeConnection.getConnection();
@@ -152,27 +153,29 @@
                      %>  
                      
                
-                    <span class="input-group-addon">
-                    <select class="cs-select cs-skin-slide cs-transparent" id="prefix" data-init-plugin="cs-select">
+                    
+                         <select class="full-width" data-init-plugin="select2" name="mobileCountryId" id="prefix">
+                  
                      <%
                          while(rs1.next())
                          {
-                           String sm=rs1.getString(4);
+                           //String sm=rs1.getString(4);
                            String id=rs1.getString(1);
                         %>
-                          %>
-                             <optgroup label=''><option  value="<%=id %>"><%=sm %></option></optgroup>
+                        
+                             <option  value="<%=id %>"><%out.print(rs1.getString(4)); %></option>
                        
                         <%
                          }
                         %>
                     </select>
-                    </span>
+                   
                    
                   
                     </div></div>
-                    <div class="col-sm-9">
-                    <div class="form-group form-group-default"><label>Contact Number</label>  <input type="tel" name="phone" id="phone" maxlength="10" minlength="10" class="form-control" placeholder="" required><div id="msgbox2"></div><div id="msgbox3"></div><div id="msgbox6"></div><div id="msgbox7"></div><div id="msgbox13"></div>
+                    <div class="col-sm-8">
+                    <div class="form-group form-group-default"><label>Contact Number</label> 
+                        <input type="text" name="phone" id="phone"  onkeypress="return validate(event)" maxlength="10" minlength="10" class="form-control" placeholder="" required><div id="msgbox2"></div><div id="msgbox3"></div><div id="msgbox6"></div><div id="msgbox7"></div><div id="msgbox13"></div>
 
                     </div>    </div></div>
                 <div class="row">

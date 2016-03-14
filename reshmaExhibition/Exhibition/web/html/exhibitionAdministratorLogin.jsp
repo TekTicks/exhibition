@@ -32,7 +32,7 @@
 		$("#login_frm").submit(function()
                 {
                 	 //remove previous class and add new "myinfo" class
-                        $("#msgbox").removeClass().addClass('myinfo').text('Validating Your Login ').fadeIn(1000);		
+                      //  $("#msgbox").removeClass().addClass('myinfo').text('Validating Your Login ').fadeIn(1000);		
 			this.timer = setTimeout(function () 
                         {
 				$.ajax(
@@ -41,10 +41,10 @@
                                         data: 'un='+ $('#login_id').val() +'&pw=' + $('#password').val(),
                                         type: 'post',
                                         success: function(msg){  
-                                            alert(msg);
+                                           
                                         if(msg != 'ERROR') // Message Sent, check and redirect
-                                        {
-                                            if(msg == 'emailinvalid')
+                                        { 
+                                            if(msg == 'emIn')
                                             {  
                                              	$("#msgbox1").fadeTo(300,1,function() //start fading the messagebox
                                                 {
@@ -54,7 +54,7 @@
                                             }
                                             else if(msg == 'passwordinvalid')
                                             {
-                                               	$("#msgbox2").fadeTo(300,1,function() //start fading the messagebox
+                                               	$("#msgbox3").fadeTo(300,1,function() //start fading the messagebox
                                                 {
                                                      //add message and change the class of the box and start fading
                                                       $(this).html('Sorry, Wrong Password.!').removeClass().addClass('myerror').fadeTo(300,1).fadeOut();
@@ -62,33 +62,33 @@
                                             }
                                             else
                                             {
-                                                if(msg != 'secondVisitor' )
-                                                {
-                                                      
-                                                    	$("#msgbox3").fadeTo(300,1,function() //start fading the messagebox
+                                             
+                                                 if(msg != 'secondVisitor') 
+                                                 {
+                                                    	$("#msgbox2").fadeTo(300,1,function() //start fading the messagebox
                                                 {
                                                     //add message and change the class of the box and start fading
                                                     $(this).html('Login Verified(first Vistor)..!').removeClass().addClass('myinfo').fadeTo(300,1);
-                                                  //document.location='/Exhibition/html/exhibitionAdministratorProfilePage.jsp';
+                                            document.location='/Exhibition/html/exhibitionAdministratorContactInformationFirstTimeUse.jsp';
                                                 });
-                                                } 
+                                            }
                                             else
                                             {
-                                             $("#msgbox3").fadeTo(300,1,function() //start fading the messagebox
+                                             $("#msgbox2").fadeTo(300,1,function() //start fading the messagebox
                                                     {
                                                         //add message and change the class of the box and start fading
                                                          $(this).html('Login Verified(second Visitor)..!').removeClass().addClass('myinfo').fadeTo(300,1);
-                                                       //  document.location='/Exhibition/html/exhibitionAdministratorContactInformationFirstTimeUse.jsp';
+                                                             document.location='/Exhibition/html/exhibitionAdministratorProfilePage.jsp';
                                                     });
                                              
-                                            }
+                                            }  
                                         
                                     }
                                 
                                 } 
 				else
 				{
-					$("#msgbox5").fadeTo(300,1,function() //start fading the messagebox
+					$("#msgbox4").fadeTo(300,1,function() //start fading the messagebox
 		                {
 			                  //add message and change the class of the box and start fading
 			                 $(this).html('Sorry, Wrong Combination Of Username And Password.!').removeClass().addClass('myerror').fadeTo(300,1).fadeOut();
@@ -200,7 +200,7 @@
                         <input type="password" class="form-control" id="password" name="password"  placeholder="Credentials" required>
                         </div>
                     </div>
-                    <div id="msgbox2"></div> 
+                    <div id="msgbox3"></div> 
                     <!-- START Form Control-->
                     <div class="row">
                     <div class="col-md-6 no-padding">
@@ -212,8 +212,8 @@
               </div>
               <div class="col-md-6 text-right">
               </div>
-            </div>     <div id="msgbox3"></div> <div id="msgbox4"></div> <div id="msgbox5"></div> 
-            <!-- END Form Control-->      
+            </div>   <div id="msgbox2"></div> <div id="msgbox4"></div> 
+            <!-- END Form Control-->    
             <button class="btn btn-primary btn-cons m-t-10" name="login" id="login"  type="submit">Sign in</button>
             <button class="btn btn-primary btn-cons m-t-10" name="clear" id="clear"  type="button" value="Clear Form" onclick="clearForm(this.form);">Clear</button>
 

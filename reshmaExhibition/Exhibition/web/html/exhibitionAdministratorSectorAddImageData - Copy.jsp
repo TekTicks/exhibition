@@ -7,22 +7,16 @@
 <%@ page import="org.apache.commons.fileupload.servlet.ServletFileUpload"%>
 <%@ page import="org.apache.commons.fileupload.disk.DiskFileItemFactory"%>
 <%@ page import="org.apache.commons.fileupload.*"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%@page import="org.apache.commons.io.FilenameUtils"%>
 <%@page import="org.apache.commons.fileupload.FileItem"%>
 <%@ page import="java.io.*,java.sql.*,java.util.zip.*" %>
 
 
-<%    String exId = "";
-      String title = "";
-      String email = "";
-      String mobileCountryId = "";
-      String mobile = "";
-      String contactCountryId = "";
-      String contactNo = "";
-      
-      
-    
+<%    String sectorName = "";
+      String description = "";
+     
 int count1 = 0;
 
 boolean isMultipart = ServletFileUpload.isMultipartContent(request);
@@ -40,72 +34,36 @@ Iterator itr = items.iterator();
 while (itr.hasNext()) {
 FileItem item = (FileItem) itr.next();
 if (item.isFormField()) {
-String ei = item.getFieldName(); 
+String sn = item.getFieldName(); 
 String value1 = item.getString();
 
-String ttt = item.getFieldName();
+String de = item.getFieldName();
 String value2 = item.getString();
 
-String emm = item.getFieldName();
-String value3 = item.getString();
-
-String mcid = item.getFieldName();
-String value4 = item.getString();
-
-String mbb = item.getFieldName();
-String value5 = item.getString();
-
-String ccid= item.getFieldName();
-String value6 = item.getString();
-
-String contno = item.getFieldName();
-String value7 = item.getString();
 
 
-if (ei.equals("exId")) {
-exId = value1;
+if (sn.equals("sectorName")) {
+sectorName = value1;
 count1 = 1;
 }
 
-if (ttt.equals("title")) {
-title = value2;
+if (de.equals("sectorName")) {
+description = value2;
 count1 = 1;
 }
 
-if (emm.equals("email")) {
-email = value3;
-count1 = 1;
-}
-
-if (mcid.equals("mobileCountryId")) {
-mobileCountryId = value4;
-count1 = 1;
-}
-
-if (mbb.equals("mobile")) {
-mobile = value5;
-count1 = 1;
-}
-
-if (ccid.equals("contactCountryId")) {
-contactCountryId = value6;
-count1 = 1;
-}
-
-if (contno.equals("contactNo")) {
-contactNo = value7;
-count1 = 1;
-}
 } else {
 try {
 String itemName = item.getName();
 File savedFile = new File("C:/Users/Admin/Documents/NetBeansProjects/Exhibition/web/html/images/" + itemName);
 item.write(savedFile);
-
-
+out.println(savedFile);
 if (count1 == 1) {
-HttpSession s4s=request.getSession();
-s4s.setAttribute("fileName",itemName);   
+HttpSession ss=request.getSession();
+ss.setAttribute("fileName",itemName);   
+out.println(sectorName);
+out.println(description);
+
 }
 } catch (Exception e) {
 e.printStackTrace();
@@ -116,14 +74,12 @@ Connection connection = null;
 String connectionURL = "jdbc:mysql://localhost:3306/exhibition";
 PreparedStatement psmnt = null;
 try{
-
-      HttpSession ss=request.getSession();
-       String idValid=(String)ss.getAttribute("idValid");  
-         HttpSession s4s=request.getSession(false);
-      String fileName=(String)s4s.getAttribute("fileName");
     
-   
-     
+      HttpSession ss=request.getSession();
+       String idValid=(String)ss.getAttribute("idValid");    
+       out.print(idValid);
+      String fileName=(String)ss.getAttribute("fileName");
+      //out.println(fileName);
      // Class.forName("com.mysql.jdbc.Driver").newInstance();
       Connection con;
        con=exhibitionAdministratorOneTimeConnection.getConnection();
@@ -159,17 +115,11 @@ psmnt.setString(1, "");
  
   Connection con2;
  con2=exhibitionAdministratorOneTimeConnection.getConnection();
-
- PreparedStatement ps=con2.prepareStatement("insert into exhibitionOpportunity(exhibitionId,opportunityTitle,email,mobile,contactNo,mediaId,message,mobileCountryId,contactCountryId,createdBy,modifiedBy,modifiedByFlag)  values (?,?,?,?,?,'"+iddsf+"','opportunity_message',?,?,'"+idValid+"','"+idValid+"',(select id from roles where id=1))");
+out.print("dfdkjfks");
+ PreparedStatement ps=con2.prepareStatement("insert into exhibitionSector(sectorName,sectorMediaId,description,createdBy,modifiedBy)  values (?,'"+iddsf+"',?,'"+idValid+"','"+idValid+"')");
                                  
-                            ps.setString(1, exId);
-                            ps.setString(2, title);
-                            ps.setString(3, email);
-                            ps.setString(4, mobile);
-                             ps.setString(5, contactNo);  
-                              ps.setString(6, mobileCountryId);
-                            ps.setString(7, contactCountryId);  
-                           
+                            ps.setString(1, sectorName);
+                            ps.setString(2, description);  
                           int n=  ps.executeUpdate();
                          
                         if(n>0)
@@ -180,7 +130,7 @@ psmnt.setString(1, "");
                         {
                              out.print("wrn");
                         }
-                           // response.sendRedirect("/Exhibition/html/exhibitionAdministratorOpportunityThankUPage.jsp");
+                            response.sendRedirect("/Exhibition/html/exhibitionAdministratorOpportunityThankUPage.jsp");
 }
 catch(Exception e){
     

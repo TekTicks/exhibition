@@ -31,7 +31,7 @@ public class exhibitionAdministratorForgotPassword extends HttpServlet
                     out.print(m);
                     int mn= cpassword.length();  
                      out.print(mn);
-                    if  (!(password.equals(cpassword)) || (m < 6) || (mn < 6) )   //steps for mobile no validations
+                    if  (!(password.equals(cpassword)) )   //steps for mobile no validations
                     {
                         out.print("invalidPassword");
                     }

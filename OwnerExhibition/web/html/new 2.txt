@@ -1,0 +1,1479 @@
+CREATE TABLE `owner` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`userName` varchar(50) NOT NULL,
+	`password` varchar(200) NOT NULL,
+	`createdOn` TIMESTAMP NOT NULL,
+	`modifiedOn` TIMESTAMP NOT NULL,
+	`createdBy` INT NOT NULL,
+	`modifiedBy` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `ownerProfile` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`name` varchar(500) NOT NULL,
+	`logoMediaId` INT NOT NULL,
+	`about` TEXT NOT NULL,
+	`primEmail` varchar(200) NOT NULL,
+	`secEmail` varchar(200) NOT NULL,
+	`primContact` varchar(100) NOT NULL,
+	`secContact` varchar(100) NOT NULL,
+	`website` TEXT NOT NULL,
+	`createdOn` TIMESTAMP NOT NULL,
+	`modifiedOn` TIMESTAMP NOT NULL,
+	`createdBy` INT NOT NULL,
+	`countryId` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `ownerContactPerson` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`title` varchar(10) NOT NULL,
+	`firstName` varchar(100) NOT NULL,
+	`lastName` varchar(100) NOT NULL,
+	`photoMediaId` INT NOT NULL,
+	`gender` INT NOT NULL,
+	`dateOfBirth` DATE NOT NULL,
+	`degination` varchar(500) NOT NULL,
+	`phoneNo` varchar(100) NOT NULL,
+	`MobileNo` varchar(100) NOT NULL,
+	`email` varchar(100) NOT NULL,
+	`createdOn` TIMESTAMP NOT NULL,
+	`modifiedOn` TIMESTAMP NOT NULL,
+	`createdBy` INT NOT NULL,
+	`modifiedBy` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `ownerSocialMedia` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`socialMediaId` INT NOT NULL,
+	`link` TEXT NOT NULL,
+	`createdOn` TIMESTAMP NOT NULL,
+	`modifiedOn` TIMESTAMP NOT NULL,
+	`createdBy` INT NOT NULL,
+	`modifiedBy` INT NOT NULL,
+	`iconMediaId` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `ownerIndustry` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`industryId` INT NOT NULL,
+	`createdOn` TIMESTAMP NOT NULL,
+	`modifiedOn` TIMESTAMP NOT NULL,
+	`createdBy` INT NOT NULL,
+	`modifiedBy` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `ownerAddress` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`address1` TEXT NOT NULL,
+	`address2` TEXT NOT NULL,
+	`landmark` TEXT NOT NULL,
+	`pincode` varchar(10) NOT NULL,
+	`cityId` INT NOT NULL,
+	`mapLink` TEXT NOT NULL,
+	`createdOn` TIMESTAMP NOT NULL,
+	`modifiedOn` TIMESTAMP NOT NULL,
+	`createdBy` INT NOT NULL,
+	`modifiedBy` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `roles` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`roleName` varchar(50) NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `industry` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`industryName` varchar(500) NOT NULL,
+	`createdOn` TIMESTAMP NOT NULL,
+	`modifiedOn` TIMESTAMP NOT NULL,
+	`createdBy` INT NOT NULL,
+	`modifiedBy` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `socialMedia` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`socialMedia` varchar(500) NOT NULL,
+	`createdOn` TIMESTAMP NOT NULL,
+	`modifiedOn` TIMESTAMP NOT NULL,
+	`createdBy` INT NOT NULL,
+	`modifiedBy` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `continents` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`continentName` varchar(500) NOT NULL,
+	`createdOn` TIMESTAMP NOT NULL,
+	`modifiedOn` TIMESTAMP NOT NULL,
+	`createdBy` INT NOT NULL,
+	`modifiedBy` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `country` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`countryName` varchar(500) NOT NULL,
+	`continentId` INT NOT NULL,
+	`coutryCode` varchar(30) NOT NULL,
+	`createdOn` TIMESTAMP NOT NULL,
+	`modifiedOn` TIMESTAMP NOT NULL,
+	`createdBy` INT NOT NULL,
+	`modifiedBy` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `state` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`stateName` varchar(500) NOT NULL,
+	`countrytId` INT NOT NULL,
+	`createdOn` TIMESTAMP NOT NULL,
+	`modifiedOn` TIMESTAMP NOT NULL,
+	`createdBy` INT NOT NULL,
+	`modifiedBy` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `city` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`cityName` varchar(500) NOT NULL,
+	`citytId` INT NOT NULL,
+	`createdOn` TIMESTAMP NOT NULL,
+	`modifiedOn` TIMESTAMP NOT NULL,
+	`createdBy` INT NOT NULL,
+	`modifiedBy` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `PostType` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`postType` varchar(50) NOT NULL,
+	`createdOn` TIMESTAMP NOT NULL,
+	`modifiedOn` TIMESTAMP NOT NULL,
+	`createdBy` INT NOT NULL,
+	`modifiedBy` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `media` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`link` TEXT NOT NULL,
+	`type` varchar(50) NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `exhibition` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`name` TEXT NOT NULL,
+	`tagline` TEXT NOT NULL,
+	`location` TEXT NOT NULL,
+	`logoMediaId` INT NOT NULL,
+	`shortDescription` TEXT NOT NULL,
+	`longDescription` TEXT NOT NULL,
+	`startDate` DATE NOT NULL,
+	`endDate` DATE NOT NULL,
+	`address1` TEXT NOT NULL,
+	`address2` TEXT NOT NULL,
+	`pincode` varchar(10) NOT NULL,
+	`cityId` INT NOT NULL,
+	`maplink` TEXT NOT NULL,
+	`website` TEXT NOT NULL,
+	`mapLayoutId` INT NOT NULL,
+	`feedbackOn` varchar(200) NOT NULL,
+	`createdOn` TIMESTAMP NOT NULL,
+	`isCurrent` BINARY NOT NULL,
+	`modifiedOn` TIMESTAMP NOT NULL,
+	`createdBy` INT NOT NULL,
+	`modifiedBy` INT NOT NULL,
+	`modifiedByFlag` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `exhibitionAdmin` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`exhibitionId` INT NOT NULL,
+	`mobileNo` varchar(50) NOT NULL,
+	`email` varchar(200) NOT NULL,
+	`userName` varchar(50) NOT NULL,
+	`password` varchar(200) NOT NULL,
+	`level` INT NOT NULL,
+	`createdOn` TIMESTAMP NOT NULL,
+	`modifiedOn` TIMESTAMP NOT NULL,
+	`createdBy` INT NOT NULL,
+	`modifiedBy` INT NOT NULL,
+	`modifiedByFlag` INT NOT NULL,
+	`countryId` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `exhibitionAdminContact` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`title` varchar(10) ,
+	`firstName` varchar(100) ,
+	`lastName` varchar(100) ,
+	`gender` INT,
+	`dateOfBirth` DATE,
+	`level` INT,
+	`degination` varchar(500) ,
+	`phoneNo` varchar(50),
+	`createdOn` TIMESTAMP ,
+	`modifiedOn` TIMESTAMP ,
+	`createdBy` INT,
+	`modifiedBy` INT,
+	`modifiedByFlag` INT,
+	`photoMediaId` INT,
+	`countryId` INT,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `exhibitionOfficeAddress` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`exhibitionId` INT NOT NULL,
+	`title` TEXT(10) NOT NULL,
+	`address1` TEXT NOT NULL,
+	`address2` TEXT NOT NULL,
+	`landmark` TEXT NOT NULL,
+	`pincode` varchar(10) NOT NULL,
+	`cityId` INT NOT NULL,
+	`mapLink` TEXT NOT NULL,
+	`createdOn` TIMESTAMP NOT NULL,
+	`modifiedOn` TIMESTAMP NOT NULL,
+	`createdBy` INT NOT NULL,
+	`modifiedBy` INT NOT NULL,
+	`modifiedByFlag` INT NOT NULL,
+	`photoMediaId` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `exhibitionSector` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`sectorName` TEXT NOT NULL,
+	`sectorMediaId` TEXT NOT NULL,
+	`description` TEXT NOT NULL,
+	`createdOn` TIMESTAMP NOT NULL,
+	`modifiedOn` TIMESTAMP NOT NULL,
+	`createdBy` INT NOT NULL,
+	`modifiedBy` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `exhibitionFacilities` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`exhibitionId` INT NOT NULL,
+	`title` TEXT NOT NULL,
+	`description` TEXT NOT NULL,
+	`createdOn` TIMESTAMP NOT NULL,
+	`modifiedOn` TIMESTAMP NOT NULL,
+	`createdBy` INT NOT NULL,
+	`modifiedBy` INT NOT NULL,
+	`modifiedByFlag` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `exhibitionFAQ` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`exhibitionId` INT NOT NULL,
+	`title` TEXT NOT NULL,
+	`question` TEXT NOT NULL,
+	`answer` TEXT NOT NULL,
+	`createdOn` TIMESTAMP NOT NULL,
+	`modifiedOn` TIMESTAMP NOT NULL,
+	`createdBy` INT NOT NULL,
+	`modifiedBy` INT NOT NULL,
+	`modifiedByFlag` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `exhibitionOpportunityResponses` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`exhibitionId` INT NOT NULL,
+	`opportunityId` INT NOT NULL,
+	`name` TEXT NOT NULL,
+	`email` varchar(200) NOT NULL,
+	`contactNo` varchar(200) NOT NULL,
+	`message` TEXT NOT NULL,
+	`createdOn` TIMESTAMP NOT NULL,
+	`countryId` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `exhibitionOpportunity` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`exhibitionId` INT NOT NULL,
+	`opportunityTitle` TEXT NOT NULL,
+	`email` varchar(200) NOT NULL,
+	`mobile` varchar(200) NOT NULL,
+	`contactNo` varchar(200) NOT NULL,
+	`mediaId` INT NOT NULL,
+	`message` TEXT NOT NULL,
+	`createdOn` TIMESTAMP NOT NULL,
+	`modifiedOn` TIMESTAMP NOT NULL,
+	`createdBy` INT NOT NULL,
+	`modifiedBy` INT NOT NULL,
+	`modifiedByFlag` INT NOT NULL,
+	`mobileCountryId` INT NOT NULL,
+	`contactCountryId` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `exhibitionEventVenue` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`exhibitionId` INT NOT NULL,
+	`venueName` TEXT NOT NULL,
+	`description` TEXT NOT NULL,
+	`createdOn` TIMESTAMP NOT NULL,
+	`modifiedOn` TIMESTAMP NOT NULL,
+	`createdBy` INT NOT NULL,
+	`modifiedBy` INT NOT NULL,
+	`modifiedByFlag` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `exhibitionBooth` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`boothName` TEXT NOT NULL,
+	`boothMediaId` TEXT NOT NULL,
+	`description` TEXT NOT NULL,
+	`createdOn` TIMESTAMP NOT NULL,
+	`modifiedOn` TIMESTAMP NOT NULL,
+	`createdBy` INT NOT NULL,
+	`modifiedBy` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `exhibitionTeam` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`tagline` TEXT NOT NULL,
+	`title` varchar(10) NOT NULL,
+	`firstName` varchar(100) NOT NULL,
+	`lastName` varchar(100) NOT NULL,
+	`gender` INT NOT NULL,
+	`dateOfBirth` DATE NOT NULL,
+	`degination` varchar(500) NOT NULL,
+	`phoneNo` varchar(100) NOT NULL,
+	`mobileNo` varchar(100) NOT NULL,
+	`email` varchar(100) NOT NULL,
+	`createdOn` TIMESTAMP NOT NULL,
+	`modifiedOn` TIMESTAMP NOT NULL,
+	`createdBy` INT NOT NULL,
+	`modifiedBy` INT NOT NULL,
+	`modifiedByFlag` INT NOT NULL,
+	`phoneCountryId` INT NOT NULL,
+	`mobileCountrytId` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `exhibitionSocialMedia` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`exhibitionId` INT NOT NULL,
+	`socialMediaId` INT NOT NULL,
+	`link` TEXT NOT NULL,
+	`createdOn` TIMESTAMP NOT NULL,
+	`modifiedOn` TIMESTAMP NOT NULL,
+	`createdBy` INT NOT NULL,
+	`modifiedBy` INT NOT NULL,
+	`modifiedByFlag` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `exhibitionBannerMedia` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`exhibitionId` INT NOT NULL,
+	`mediaId` INT NOT NULL,
+	`isCover` INT NOT NULL,
+	`linkToPage` TEXT NOT NULL,
+	`createdOn` TIMESTAMP NOT NULL,
+	`modifiedOn` TIMESTAMP NOT NULL,
+	`createdBy` INT NOT NULL,
+	`modifiedBy` INT NOT NULL,
+	`modifiedByFlag` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `exhibitionTeamMemberSocialMedia` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`exhibitionId` INT NOT NULL,
+	`socialMediaId` INT NOT NULL,
+	`link` TEXT NOT NULL,
+	`createdOn` TIMESTAMP NOT NULL,
+	`modifiedOn` TIMESTAMP NOT NULL,
+	`createdBy` INT NOT NULL,
+	`modifiedBy` INT NOT NULL,
+	`modifiedByFlag` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `exhibitor_exhibitionBooth` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`exhibitionBoothId` INT NOT NULL,
+	`boothMapId` INT NOT NULL,
+	`createdOn` TIMESTAMP NOT NULL,
+	`modifiedOn` TIMESTAMP NOT NULL,
+	`createdBy` INT NOT NULL,
+	`modifiedBy` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `exhibitor_exhibitionSector` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`exhibitionSectorId` INT NOT NULL,
+	`createdOn` TIMESTAMP NOT NULL,
+	`modifiedOn` TIMESTAMP NOT NULL,
+	`createdBy` INT NOT NULL,
+	`modifiedBy` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `exhibitorProfile` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`logoMediaId` INT NOT NULL,
+	`about` TEXT NOT NULL,
+	`primEmail` varchar(200) NOT NULL,
+	`secEmail` varchar(200) NOT NULL,
+	`primContact` varchar(100) NOT NULL,
+	`secContact` varchar(100) NOT NULL,
+	`website` TEXT NOT NULL,
+	`createdOn` TIMESTAMP NOT NULL,
+	`modifiedOn` TIMESTAMP NOT NULL,
+	`createdBy` INT NOT NULL,
+	`modifiedBy` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `exhibitorContactInfo` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`title` TEXT NOT NULL,
+	`createdOn` TIMESTAMP NOT NULL,
+	`modifiedOn` TIMESTAMP NOT NULL,
+	`createdBy` INT NOT NULL,
+	`modifiedBy` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `exhibitorAddress` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`title` TEXT NOT NULL,
+	`primary` INT NOT NULL,
+	`address1` TEXT NOT NULL,
+	`address2` TEXT NOT NULL,
+	`landmark` TEXT NOT NULL,
+	`pincode` varchar(10) NOT NULL,
+	`cityId` INT NOT NULL,
+	`maplink` TEXT NOT NULL,
+	`createdOn` TIMESTAMP NOT NULL,
+	`modifiedOn` TIMESTAMP NOT NULL,
+	`createdBy` INT NOT NULL,
+	`modifiedBy` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `visitor` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`emailId` varchar(200) NOT NULL,
+	`mobileNo` varchar(100) NOT NULL,
+	`password` varchar(50) NOT NULL,
+	`otpVerified` BOOLEAN NOT NULL,
+	`gcmId` TEXT NOT NULL,
+	`createdOn` TIMESTAMP NOT NULL,
+	`modifiedOn` TIMESTAMP NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `visitorLikedExhibitor` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`exhibitorId` INT NOT NULL,
+	`flag` INT NOT NULL,
+	`createdOn` TIMESTAMP NOT NULL,
+	`createdBy` INT NOT NULL,
+	`modifiedOn` TIMESTAMP NOT NULL,
+	`modifiedBy` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `visitorVisitedExhibitor` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`exhibitorId` INT NOT NULL,
+	`flag` BINARY NOT NULL,
+	`createdOn` TIMESTAMP NOT NULL,
+	`createdBy` INT NOT NULL,
+	`modifiedOn` TIMESTAMP NOT NULL,
+	`modifiedBy` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `visitorNotes` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`exhibitorId` INT NOT NULL,
+	`notes` TEXT NOT NULL,
+	`flag` INT NOT NULL,
+	`createdOn` TIMESTAMP NOT NULL,
+	`modifiedOn` TIMESTAMP NOT NULL,
+	`createdBy` INT NOT NULL,
+	`modifiedBy` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `visitorMedia` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`mediaId` TIME NOT NULL,
+	`exhibitorId` INT NOT NULL,
+	`flag` INT NOT NULL,
+	`createdOn` TIMESTAMP NOT NULL,
+	`modifiedOn` TIMESTAMP NOT NULL,
+	`createdBy` INT NOT NULL,
+	`modifiedBy` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `exhibitorRepresentative` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`exhibitorAddressId` INT NOT NULL,
+	`primary` INT NOT NULL,
+	`firstName` varchar(100) NOT NULL,
+	`lastName` varchar(100) NOT NULL,
+	`degination` varchar(500) NOT NULL,
+	`emailId` varchar(200) NOT NULL,
+	`contactNo` varchar(50) NOT NULL,
+	`mobileNo` varchar(50) NOT NULL,
+	`createdOn` TIMESTAMP NOT NULL,
+	`modifiedOn` TIMESTAMP NOT NULL,
+	`createdBy` INT NOT NULL,
+	`modifiedBy` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `exhibitorRepresentativeSocialMedia` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`exhibitorRepresentativeId` INT NOT NULL,
+	`socialMediaId` INT NOT NULL,
+	`link` TEXT NOT NULL,
+	`createdOn` TIMESTAMP NOT NULL,
+	`modifiedOn` TIMESTAMP NOT NULL,
+	`createdBy` INT NOT NULL,
+	`modifiedBy` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `exhibitorSocialMedia` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`socialMediaId` INT NOT NULL,
+	`link` TEXT NOT NULL,
+	`createdOn` TIMESTAMP NOT NULL,
+	`modifiedOn` TIMESTAMP NOT NULL,
+	`createdBy` INT NOT NULL,
+	`modifiedBy` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `exhibitorProduct_exhibitorProductCategory` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`exhibitorRepresentativeId` INT NOT NULL,
+	`exhibitorProductCategoryId` INT NOT NULL,
+	`link` TEXT NOT NULL,
+	`createdOn` TIMESTAMP NOT NULL,
+	`modifiedOn` TIMESTAMP NOT NULL,
+	`createdBy` INT NOT NULL,
+	`modifiedBy` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `exhibitorProductCategory` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`categoryName` TEXT NOT NULL,
+	`description` TEXT NOT NULL,
+	`createdOn` TIMESTAMP NOT NULL,
+	`modifiedOn` TIMESTAMP NOT NULL,
+	`createdBy` INT NOT NULL,
+	`modifiedBy` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `exhibitorBrochures` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`brochureMediaId` INT NOT NULL,
+	`createdOn` TIMESTAMP NOT NULL,
+	`modifiedOn` TIMESTAMP NOT NULL,
+	`createdBy` INT NOT NULL,
+	`modifiedBy` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `exhibitorProductsMedia` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`mediaId` INT NOT NULL,
+	`exhibitorProductId` INT NOT NULL,
+	`createdOn` TIMESTAMP NOT NULL,
+	`modifiedOn` TIMESTAMP NOT NULL,
+	`createdBy` INT NOT NULL,
+	`modifiedBy` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `exhibitorProducts` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`productName` TEXT NOT NULL,
+	`description` TEXT NOT NULL,
+	`createdOn` TIMESTAMP NOT NULL,
+	`modifiedOn` TIMESTAMP NOT NULL,
+	`createdBy` INT NOT NULL,
+	`modifiedBy` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `exhibitor` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`firstLetter` varchar(1) NOT NULL,
+	`isMainExhibitor` INT NOT NULL,
+	`companyName` TEXT NOT NULL,
+	`mobileNo` varchar(50) NOT NULL,
+	`username` varchar(100) NOT NULL,
+	`email` varchar(200) NOT NULL,
+	`password` varchar(100) NOT NULL,
+	`createdOn` TIMESTAMP NOT NULL,
+	`modifiedOn` TIMESTAMP NOT NULL,
+	`createdBy` INT NOT NULL,
+	`modifiedBy` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `exhibitor_posts` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`postId` INT NOT NULL,
+	`exhibitorId` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `posts` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`postTypeId` INT NOT NULL,
+	`postTitle` TEXT NOT NULL,
+	`author` TEXT NOT NULL,
+	`source` TEXT NOT NULL,
+	`postDescription` TEXT NOT NULL,
+	`createdOn` TIMESTAMP NOT NULL,
+	`modifiedOn` TIMESTAMP NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `exhibitorContactInfo_exhibitorAddress` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`exhibitorContactInfoId` INT NOT NULL,
+	`exhibitorAddressId` INT NOT NULL,
+	`createdOn` TIMESTAMP NOT NULL,
+	`modifiedOn` TIMESTAMP NOT NULL,
+	`createdBy` INT NOT NULL,
+	`modifiedBy` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `posts_media` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`postsId` INT NOT NULL,
+	`mediaId` INT NOT NULL,
+	`thumbnail` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `exhibition_posts` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`postId` INT NOT NULL,
+	`exhibitionAdminId` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `exhibitionEvents_media` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`exhibitionEventsId` INT NOT NULL,
+	`mediaId` INT NOT NULL,
+	`thumbnail` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `exhibitionEvents` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`exhibitionId` INT NOT NULL,
+	`eventTitle` TEXT NOT NULL,
+	`description` TEXT NOT NULL,
+	`createdOn` TIMESTAMP NOT NULL,
+	`modifiedOn` TIMESTAMP NOT NULL,
+	`createdBy` INT NOT NULL,
+	`modifiedBy` INT NOT NULL,
+	`modifiedByFlag` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `exhibitionEventsDetail` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`exhibitionEventsId` INT NOT NULL,
+	`date` DATE NOT NULL,
+	`starttime` TIME NOT NULL,
+	`endtime` TIME NOT NULL,
+	`exhibitionEventVenueId` TIME NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `exhibitionSpeakers_exhibitionEvents` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`exhibitionEventsId` INT NOT NULL,
+	`exhibitionSpeakerId` INT NOT NULL,
+	`createdOn` TIMESTAMP NOT NULL,
+	`modifiedOn` TIMESTAMP NOT NULL,
+	`createdBy` INT NOT NULL,
+	`modifiedBy` INT NOT NULL,
+	`modifiedByFlag` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `exhibitionSpeakers` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`name` TEXT NOT NULL,
+	`description` TEXT NOT NULL,
+	`designation` TEXT NOT NULL,
+	`qualification` TEXT NOT NULL,
+	`profileMediaId` INT NOT NULL,
+	`createdOn` TIMESTAMP NOT NULL,
+	`modifiedOn` TIMESTAMP NOT NULL,
+	`createdBy` INT NOT NULL,
+	`modifiedBy` INT NOT NULL,
+	`modifiedByFlag` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `exhibitionAlbum` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`exhibitionId` INT NOT NULL,
+	`albumTitle` TEXT NOT NULL,
+	`description` TEXT NOT NULL,
+	`createdOn` TIMESTAMP NOT NULL,
+	`modifiedOn` TIMESTAMP NOT NULL,
+	`createdBy` INT NOT NULL,
+	`modifiedBy` INT NOT NULL,
+	`modifiedByFlag` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `exhibitionAlbum_media` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`exhibitionAlbumId` INT NOT NULL,
+	`mediaId` INT NOT NULL,
+	`caption` TEXT NOT NULL,
+	`createdOn` TIMESTAMP NOT NULL,
+	`modifiedOn` TIMESTAMP NOT NULL,
+	`createdBy` INT NOT NULL,
+	`modifiedBy` INT NOT NULL,
+	`modifiedByFlag` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `exhibitionSpeakersSocialMedia` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`exhibitionSpeakersId` INT NOT NULL,
+	`socialMediaId` INT NOT NULL,
+	`link` TEXT NOT NULL,
+	`createdOn` TIMESTAMP NOT NULL,
+	`modifiedOn` TIMESTAMP NOT NULL,
+	`createdBy` INT NOT NULL,
+	`modifiedBy` INT NOT NULL,
+	`modifiedByFlag` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `visitorProfile` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`name` TEXT NOT NULL,
+	`profilePic` INT NOT NULL,
+	`gender` INT NOT NULL,
+	`dateOfBirth` DATE NOT NULL,
+	`profession` TEXT NOT NULL,
+	`education` TEXT NOT NULL,
+	`createdOn` TIMESTAMP NOT NULL,
+	`modifiedOn` TIMESTAMP NOT NULL,
+	`createdBy` INT NOT NULL,
+	`modifiedBy` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `visitorNotifications` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`visitorId` INT NOT NULL,
+	`notificationId` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `notifications` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`title` TEXT NOT NULL,
+	`message` TEXT NOT NULL,
+	`notificationImageId` INT NOT NULL,
+	`createdOn` TIMESTAMP NOT NULL,
+	`createdBy` INT NOT NULL,
+	`createdByFlag` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `visitorBadges` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`visitorId` INT NOT NULL,
+	`exhibitionId` INT NOT NULL,
+	`badge` TEXT NOT NULL,
+	`createdOn` TIMESTAMP NOT NULL,
+	`createdBy` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `visitorAttendance` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`exhibitionId` INT NOT NULL,
+	`badgeId` INT NOT NULL,
+	`createdOn` TIMESTAMP NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `visitorActionLog` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`type` INT NOT NULL,
+	`typeId` INT NOT NULL,
+	`flag` INT NOT NULL,
+	`createdOn` TIMESTAMP NOT NULL,
+	`createdBy` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `visitorShareExhibitor` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`exhibitorId` INT NOT NULL,
+	`noOfShares` INT NOT NULL,
+	`createdOn` TIMESTAMP NOT NULL,
+	`createdBy` INT NOT NULL,
+	`modifiedOn` TIMESTAMP NOT NULL,
+	`modifiedBy` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `visitorBrochureDownload` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`brochureId` INT NOT NULL,
+	`optionChoosen` INT NOT NULL,
+	`createdOn` TIMESTAMP NOT NULL,
+	`createdBy` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `exhibitionEventPasses` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`eventsId` INT NOT NULL,
+	`passCategory` TEXT NOT NULL,
+	`description` TEXT NOT NULL,
+	`amount` FLOAT NOT NULL,
+	`noOfSeats` INT NOT NULL,
+	`noOfSeatsSold` INT NOT NULL,
+	`seatMapId` INT NOT NULL,
+	`createdOn` TIMESTAMP NOT NULL,
+	`modifiedOn` TIMESTAMP NOT NULL,
+	`createdBy` INT NOT NULL,
+	`modifiedBy` INT NOT NULL,
+	`modifiedByFlag` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `exhibitionEventPromos` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`promoCode` TEXT NOT NULL,
+	`eventPassId` INT NOT NULL,
+	`discount` FLOAT NOT NULL,
+	`validityStart` DATETIME NOT NULL,
+	`validityEnd` DATETIME NOT NULL,
+	`limit` INT NOT NULL,
+	`createdOn` TIMESTAMP NOT NULL,
+	`modifiedOn` TIMESTAMP NOT NULL,
+	`createdBy` INT NOT NULL,
+	`modifiedBy` INT NOT NULL,
+	`modifiedByFlag` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `visitorEventBooking` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`eventPassId` INT NOT NULL,
+	`modeOfPayment` varchar(200) NOT NULL,
+	`amountPaid` FLOAT NOT NULL,
+	`paymentGatewayResponse` TEXT NOT NULL,
+	`transactionNo` TEXT NOT NULL,
+	`receiptNo` TEXT NOT NULL,
+	`pass` TEXT NOT NULL,
+	`createdOn` TIMESTAMP NOT NULL,
+	`modifiedOn` TIMESTAMP NOT NULL,
+	`createdBy` INT NOT NULL,
+	`modifiedBy` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `visitorEventCancellation` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`visitorEventBookedId` INT NOT NULL,
+	`status` INT NOT NULL,
+	`amount` FLOAT NOT NULL,
+	`transactionNo` TEXT NOT NULL,
+	`reason` TEXT,
+	`createdOn` TIMESTAMP NOT NULL,
+	`modifiedOn` TIMESTAMP NOT NULL,
+	`createdBy` INT NOT NULL,
+	`modifiedBy` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `exhibitionPartners` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`exhibitionId` INT NOT NULL,
+	`title` TEXT NOT NULL,
+	`description` TEXT NOT NULL,
+	`partnerLogoId` INT NOT NULL,
+	`partnerWebsiteLink` TEXT NOT NULL,
+	`createdOn` TIMESTAMP NOT NULL,
+	`modifiedOn` TIMESTAMP NOT NULL,
+	`createdBy` INT NOT NULL,
+	`modifiedBy` INT NOT NULL,
+	`modifiedByFlag` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `feedback` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`subject` TEXT NOT NULL,
+	`message` TEXT NOT NULL,
+	`email` varchar(200) NOT NULL,
+	`exhibitionId` INT NOT NULL,
+	`createdOn` TIMESTAMP NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `exhibitionStats` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`title` TEXT NOT NULL,
+	`description` TEXT NOT NULL,
+	`statsMediaId` INT NOT NULL,
+	`createdOn` TIMESTAMP NOT NULL,
+	`modifiedOn` TIMESTAMP NOT NULL,
+	`createdBy` INT NOT NULL,
+	`modifiedBy` INT NOT NULL,
+	`modifiedByFlag` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `form` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`exhibitionId` INT NOT NULL,
+	`title` TEXT NOT NULL,
+	`description` TEXT,
+	`createdOn` TIMESTAMP NOT NULL,
+	`modifiedOn` TIMESTAMP NOT NULL,
+	`createdBy` INT NOT NULL,
+	`modifiedBy` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `formFieldOptions` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`fieldId` INT NOT NULL,
+	`optionName` TEXT NOT NULL,
+	`createdOn` TIMESTAMP NOT NULL,
+	`modifiedOn` TIMESTAMP NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `visitorRegistration` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`fieldId` INT NOT NULL,
+	`fieldValue` TEXT NOT NULL,
+	`formOptionId` INT NOT NULL,
+	`uploadMediaId` INT NOT NULL,
+	`createdOn` TIMESTAMP NOT NULL,
+	`createdBy` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE `formFields` (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`formId` INT NOT NULL,
+	`fieldType` varchar(200) NOT NULL,
+	`title` TEXT NOT NULL,
+	`hint` TEXT,
+	`isRequired` INT NOT NULL,
+	`placeholder` TEXT,
+	`createdOn` TIMESTAMP NOT NULL,
+	`modifiedOn` TIMESTAMP NOT NULL,
+	`createdBy` INT NOT NULL,
+	`modifiedBy` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+ALTER TABLE `ownerProfile` ADD CONSTRAINT `ownerProfile_fk0` FOREIGN KEY (`logoMediaId`) REFERENCES `media`(`id`);
+
+ALTER TABLE `ownerProfile` ADD CONSTRAINT `ownerProfile_fk1` FOREIGN KEY (`createdBy`) REFERENCES `owner`(`id`);
+
+ALTER TABLE `ownerProfile` ADD CONSTRAINT `ownerProfile_fk2` FOREIGN KEY (`countryId`) REFERENCES `country`(`id`);
+
+ALTER TABLE `ownerContactPerson` ADD CONSTRAINT `ownerContactPerson_fk0` FOREIGN KEY (`photoMediaId`) REFERENCES `media`(`id`);
+
+ALTER TABLE `ownerContactPerson` ADD CONSTRAINT `ownerContactPerson_fk1` FOREIGN KEY (`createdBy`) REFERENCES `owner`(`id`);
+
+ALTER TABLE `ownerContactPerson` ADD CONSTRAINT `ownerContactPerson_fk2` FOREIGN KEY (`modifiedBy`) REFERENCES `owner`(`id`);
+
+ALTER TABLE `ownerSocialMedia` ADD CONSTRAINT `ownerSocialMedia_fk0` FOREIGN KEY (`socialMediaId`) REFERENCES `socialMedia`(`id`);
+
+ALTER TABLE `ownerSocialMedia` ADD CONSTRAINT `ownerSocialMedia_fk1` FOREIGN KEY (`createdBy`) REFERENCES `owner`(`id`);
+
+ALTER TABLE `ownerSocialMedia` ADD CONSTRAINT `ownerSocialMedia_fk2` FOREIGN KEY (`modifiedBy`) REFERENCES `owner`(`id`);
+
+ALTER TABLE `ownerSocialMedia` ADD CONSTRAINT `ownerSocialMedia_fk3` FOREIGN KEY (`iconMediaId`) REFERENCES `media`(`id`);
+
+ALTER TABLE `ownerIndustry` ADD CONSTRAINT `ownerIndustry_fk0` FOREIGN KEY (`industryId`) REFERENCES `industry`(`id`);
+
+ALTER TABLE `ownerIndustry` ADD CONSTRAINT `ownerIndustry_fk1` FOREIGN KEY (`createdBy`) REFERENCES `owner`(`id`);
+
+ALTER TABLE `ownerIndustry` ADD CONSTRAINT `ownerIndustry_fk2` FOREIGN KEY (`modifiedBy`) REFERENCES `owner`(`id`);
+
+ALTER TABLE `ownerAddress` ADD CONSTRAINT `ownerAddress_fk0` FOREIGN KEY (`cityId`) REFERENCES `city`(`id`);
+
+ALTER TABLE `ownerAddress` ADD CONSTRAINT `ownerAddress_fk1` FOREIGN KEY (`createdBy`) REFERENCES `owner`(`id`);
+
+ALTER TABLE `ownerAddress` ADD CONSTRAINT `ownerAddress_fk2` FOREIGN KEY (`modifiedBy`) REFERENCES `owner`(`id`);
+
+ALTER TABLE `country` ADD CONSTRAINT `country_fk0` FOREIGN KEY (`continentId`) REFERENCES `continents`(`id`);
+
+ALTER TABLE `state` ADD CONSTRAINT `state_fk0` FOREIGN KEY (`countrytId`) REFERENCES `country`(`id`);
+
+ALTER TABLE `city` ADD CONSTRAINT `city_fk0` FOREIGN KEY (`citytId`) REFERENCES `state`(`id`);
+
+ALTER TABLE `exhibition` ADD CONSTRAINT `exhibition_fk0` FOREIGN KEY (`logoMediaId`) REFERENCES `media`(`id`);
+
+ALTER TABLE `exhibition` ADD CONSTRAINT `exhibition_fk1` FOREIGN KEY (`cityId`) REFERENCES `city`(`id`);
+
+ALTER TABLE `exhibition` ADD CONSTRAINT `exhibition_fk2` FOREIGN KEY (`mapLayoutId`) REFERENCES `media`(`id`);
+
+ALTER TABLE `exhibition` ADD CONSTRAINT `exhibition_fk3` FOREIGN KEY (`createdBy`) REFERENCES `owner`(`id`);
+
+ALTER TABLE `exhibition` ADD CONSTRAINT `exhibition_fk4` FOREIGN KEY (`modifiedByFlag`) REFERENCES `roles`(`id`);
+
+ALTER TABLE `exhibitionAdmin` ADD CONSTRAINT `exhibitionAdmin_fk0` FOREIGN KEY (`exhibitionId`) REFERENCES `exhibition`(`id`);
+
+ALTER TABLE `exhibitionAdmin` ADD CONSTRAINT `exhibitionAdmin_fk1` FOREIGN KEY (`createdBy`) REFERENCES `owner`(`id`);
+
+ALTER TABLE `exhibitionAdmin` ADD CONSTRAINT `exhibitionAdmin_fk2` FOREIGN KEY (`modifiedByFlag`) REFERENCES `roles`(`id`);
+
+ALTER TABLE `exhibitionAdmin` ADD CONSTRAINT `exhibitionAdmin_fk3` FOREIGN KEY (`countryId`) REFERENCES `country`(`id`);
+
+ALTER TABLE `exhibitionAdminContact` ADD CONSTRAINT `exhibitionAdminContact_fk0` FOREIGN KEY (`gender`) REFERENCES `media`(`id`);
+
+ALTER TABLE `exhibitionAdminContact` ADD CONSTRAINT `exhibitionAdminContact_fk1` FOREIGN KEY (`createdBy`) REFERENCES `exhibitionAdmin`(`id`);
+
+ALTER TABLE `exhibitionAdminContact` ADD CONSTRAINT `exhibitionAdminContact_fk2` FOREIGN KEY (`modifiedBy`) REFERENCES `exhibitionAdmin`(`id`);
+
+ALTER TABLE `exhibitionAdminContact` ADD CONSTRAINT `exhibitionAdminContact_fk3` FOREIGN KEY (`modifiedByFlag`) REFERENCES `roles`(`id`);
+
+ALTER TABLE `exhibitionAdminContact` ADD CONSTRAINT `exhibitionAdminContact_fk4` FOREIGN KEY (`photoMediaId`) REFERENCES `media`(`id`);
+
+ALTER TABLE `exhibitionAdminContact` ADD CONSTRAINT `exhibitionAdminContact_fk5` FOREIGN KEY (`countryId`) REFERENCES `country`(`id`);
+
+ALTER TABLE `exhibitionOfficeAddress` ADD CONSTRAINT `exhibitionOfficeAddress_fk0` FOREIGN KEY (`cityId`) REFERENCES `city`(`id`);
+
+ALTER TABLE `exhibitionOfficeAddress` ADD CONSTRAINT `exhibitionOfficeAddress_fk1` FOREIGN KEY (`createdBy`) REFERENCES `exhibitionAdmin`(`id`);
+
+ALTER TABLE `exhibitionOfficeAddress` ADD CONSTRAINT `exhibitionOfficeAddress_fk2` FOREIGN KEY (`modifiedBy`) REFERENCES `exhibitionAdmin`(`id`);
+
+ALTER TABLE `exhibitionOfficeAddress` ADD CONSTRAINT `exhibitionOfficeAddress_fk3` FOREIGN KEY (`modifiedByFlag`) REFERENCES `roles`(`id`);
+
+ALTER TABLE `exhibitionOfficeAddress` ADD CONSTRAINT `exhibitionOfficeAddress_fk4` FOREIGN KEY (`photoMediaId`) REFERENCES `media`(`id`);
+
+ALTER TABLE `exhibitionSector` ADD CONSTRAINT `exhibitionSector_fk0` FOREIGN KEY (`sectorMediaId`) REFERENCES `media`(`id`);
+
+ALTER TABLE `exhibitionSector` ADD CONSTRAINT `exhibitionSector_fk1` FOREIGN KEY (`createdBy`) REFERENCES `exhibitionAdmin`(`id`);
+
+ALTER TABLE `exhibitionSector` ADD CONSTRAINT `exhibitionSector_fk2` FOREIGN KEY (`modifiedBy`) REFERENCES `exhibitionAdmin`(`id`);
+
+ALTER TABLE `exhibitionFacilities` ADD CONSTRAINT `exhibitionFacilities_fk0` FOREIGN KEY (`exhibitionId`) REFERENCES `exhibition`(`id`);
+
+ALTER TABLE `exhibitionFacilities` ADD CONSTRAINT `exhibitionFacilities_fk1` FOREIGN KEY (`createdBy`) REFERENCES `exhibitionAdmin`(`id`);
+
+ALTER TABLE `exhibitionFacilities` ADD CONSTRAINT `exhibitionFacilities_fk2` FOREIGN KEY (`modifiedBy`) REFERENCES `exhibitionAdmin`(`id`);
+
+ALTER TABLE `exhibitionFacilities` ADD CONSTRAINT `exhibitionFacilities_fk3` FOREIGN KEY (`modifiedByFlag`) REFERENCES `roles`(`id`);
+
+ALTER TABLE `exhibitionFAQ` ADD CONSTRAINT `exhibitionFAQ_fk0` FOREIGN KEY (`exhibitionId`) REFERENCES `exhibition`(`id`);
+
+ALTER TABLE `exhibitionFAQ` ADD CONSTRAINT `exhibitionFAQ_fk1` FOREIGN KEY (`createdBy`) REFERENCES `exhibitionAdmin`(`id`);
+
+ALTER TABLE `exhibitionFAQ` ADD CONSTRAINT `exhibitionFAQ_fk2` FOREIGN KEY (`modifiedBy`) REFERENCES `exhibitionAdmin`(`id`);
+
+ALTER TABLE `exhibitionFAQ` ADD CONSTRAINT `exhibitionFAQ_fk3` FOREIGN KEY (`modifiedByFlag`) REFERENCES `roles`(`id`);
+
+ALTER TABLE `exhibitionOpportunityResponses` ADD CONSTRAINT `exhibitionOpportunityResponses_fk0` FOREIGN KEY (`exhibitionId`) REFERENCES `exhibition`(`id`);
+
+ALTER TABLE `exhibitionOpportunityResponses` ADD CONSTRAINT `exhibitionOpportunityResponses_fk1` FOREIGN KEY (`opportunityId`) REFERENCES `exhibitionOpportunity`(`id`);
+
+ALTER TABLE `exhibitionOpportunityResponses` ADD CONSTRAINT `exhibitionOpportunityResponses_fk2` FOREIGN KEY (`countryId`) REFERENCES `country`(`id`);
+
+ALTER TABLE `exhibitionOpportunity` ADD CONSTRAINT `exhibitionOpportunity_fk0` FOREIGN KEY (`exhibitionId`) REFERENCES `exhibition`(`id`);
+
+ALTER TABLE `exhibitionOpportunity` ADD CONSTRAINT `exhibitionOpportunity_fk1` FOREIGN KEY (`mediaId`) REFERENCES `media`(`id`);
+
+ALTER TABLE `exhibitionOpportunity` ADD CONSTRAINT `exhibitionOpportunity_fk2` FOREIGN KEY (`createdBy`) REFERENCES `exhibitionAdmin`(`id`);
+
+ALTER TABLE `exhibitionOpportunity` ADD CONSTRAINT `exhibitionOpportunity_fk3` FOREIGN KEY (`modifiedBy`) REFERENCES `exhibitionAdmin`(`id`);
+
+ALTER TABLE `exhibitionOpportunity` ADD CONSTRAINT `exhibitionOpportunity_fk4` FOREIGN KEY (`modifiedByFlag`) REFERENCES `roles`(`id`);
+
+ALTER TABLE `exhibitionOpportunity` ADD CONSTRAINT `exhibitionOpportunity_fk5` FOREIGN KEY (`mobileCountryId`) REFERENCES `country`(`id`);
+
+ALTER TABLE `exhibitionOpportunity` ADD CONSTRAINT `exhibitionOpportunity_fk6` FOREIGN KEY (`contactCountryId`) REFERENCES `country`(`id`);
+
+ALTER TABLE `exhibitionEventVenue` ADD CONSTRAINT `exhibitionEventVenue_fk0` FOREIGN KEY (`exhibitionId`) REFERENCES `exhibition`(`id`);
+
+ALTER TABLE `exhibitionEventVenue` ADD CONSTRAINT `exhibitionEventVenue_fk1` FOREIGN KEY (`createdBy`) REFERENCES `exhibitionAdmin`(`id`);
+
+ALTER TABLE `exhibitionEventVenue` ADD CONSTRAINT `exhibitionEventVenue_fk2` FOREIGN KEY (`modifiedBy`) REFERENCES `exhibitionAdmin`(`id`);
+
+ALTER TABLE `exhibitionEventVenue` ADD CONSTRAINT `exhibitionEventVenue_fk3` FOREIGN KEY (`modifiedByFlag`) REFERENCES `roles`(`id`);
+
+ALTER TABLE `exhibitionBooth` ADD CONSTRAINT `exhibitionBooth_fk0` FOREIGN KEY (`boothMediaId`) REFERENCES `media`(`id`);
+
+ALTER TABLE `exhibitionBooth` ADD CONSTRAINT `exhibitionBooth_fk1` FOREIGN KEY (`createdBy`) REFERENCES `exhibitionAdmin`(`id`);
+
+ALTER TABLE `exhibitionBooth` ADD CONSTRAINT `exhibitionBooth_fk2` FOREIGN KEY (`modifiedBy`) REFERENCES `exhibitionAdmin`(`id`);
+
+ALTER TABLE `exhibitionTeam` ADD CONSTRAINT `exhibitionTeam_fk0` FOREIGN KEY (`createdBy`) REFERENCES `owner`(`id`);
+
+ALTER TABLE `exhibitionTeam` ADD CONSTRAINT `exhibitionTeam_fk1` FOREIGN KEY (`modifiedByFlag`) REFERENCES `roles`(`id`);
+
+ALTER TABLE `exhibitionTeam` ADD CONSTRAINT `exhibitionTeam_fk2` FOREIGN KEY (`phoneCountryId`) REFERENCES `country`(`id`);
+
+ALTER TABLE `exhibitionTeam` ADD CONSTRAINT `exhibitionTeam_fk3` FOREIGN KEY (`mobileCountrytId`) REFERENCES `country`(`id`);
+
+ALTER TABLE `exhibitionSocialMedia` ADD CONSTRAINT `exhibitionSocialMedia_fk0` FOREIGN KEY (`socialMediaId`) REFERENCES `media`(`id`);
+
+ALTER TABLE `exhibitionSocialMedia` ADD CONSTRAINT `exhibitionSocialMedia_fk1` FOREIGN KEY (`createdBy`) REFERENCES `exhibitionAdmin`(`id`);
+
+ALTER TABLE `exhibitionSocialMedia` ADD CONSTRAINT `exhibitionSocialMedia_fk2` FOREIGN KEY (`modifiedBy`) REFERENCES `exhibitionAdmin`(`id`);
+
+ALTER TABLE `exhibitionSocialMedia` ADD CONSTRAINT `exhibitionSocialMedia_fk3` FOREIGN KEY (`modifiedByFlag`) REFERENCES `roles`(`id`);
+
+ALTER TABLE `exhibitionBannerMedia` ADD CONSTRAINT `exhibitionBannerMedia_fk0` FOREIGN KEY (`exhibitionId`) REFERENCES `exhibition`(`id`);
+
+ALTER TABLE `exhibitionBannerMedia` ADD CONSTRAINT `exhibitionBannerMedia_fk1` FOREIGN KEY (`mediaId`) REFERENCES `media`(`id`);
+
+ALTER TABLE `exhibitionBannerMedia` ADD CONSTRAINT `exhibitionBannerMedia_fk2` FOREIGN KEY (`createdBy`) REFERENCES `exhibitionAdmin`(`id`);
+
+ALTER TABLE `exhibitionBannerMedia` ADD CONSTRAINT `exhibitionBannerMedia_fk3` FOREIGN KEY (`modifiedBy`) REFERENCES `exhibitionAdmin`(`id`);
+
+ALTER TABLE `exhibitionBannerMedia` ADD CONSTRAINT `exhibitionBannerMedia_fk4` FOREIGN KEY (`modifiedByFlag`) REFERENCES `roles`(`id`);
+
+ALTER TABLE `exhibitionTeamMemberSocialMedia` ADD CONSTRAINT `exhibitionTeamMemberSocialMedia_fk0` FOREIGN KEY (`exhibitionId`) REFERENCES `exhibitionTeam`(`id`);
+
+ALTER TABLE `exhibitionTeamMemberSocialMedia` ADD CONSTRAINT `exhibitionTeamMemberSocialMedia_fk1` FOREIGN KEY (`socialMediaId`) REFERENCES `socialMedia`(`id`);
+
+ALTER TABLE `exhibitionTeamMemberSocialMedia` ADD CONSTRAINT `exhibitionTeamMemberSocialMedia_fk2` FOREIGN KEY (`createdBy`) REFERENCES `exhibitionAdmin`(`id`);
+
+ALTER TABLE `exhibitionTeamMemberSocialMedia` ADD CONSTRAINT `exhibitionTeamMemberSocialMedia_fk3` FOREIGN KEY (`modifiedBy`) REFERENCES `exhibitionAdmin`(`id`);
+
+ALTER TABLE `exhibitionTeamMemberSocialMedia` ADD CONSTRAINT `exhibitionTeamMemberSocialMedia_fk4` FOREIGN KEY (`modifiedByFlag`) REFERENCES `roles`(`id`);
+
+ALTER TABLE `exhibitor_exhibitionBooth` ADD CONSTRAINT `exhibitor_exhibitionBooth_fk0` FOREIGN KEY (`exhibitionBoothId`) REFERENCES `exhibitionBooth`(`id`);
+
+ALTER TABLE `exhibitor_exhibitionBooth` ADD CONSTRAINT `exhibitor_exhibitionBooth_fk1` FOREIGN KEY (`boothMapId`) REFERENCES `media`(`id`);
+
+ALTER TABLE `exhibitor_exhibitionBooth` ADD CONSTRAINT `exhibitor_exhibitionBooth_fk2` FOREIGN KEY (`createdBy`) REFERENCES `exhibitor`(`id`);
+
+ALTER TABLE `exhibitor_exhibitionBooth` ADD CONSTRAINT `exhibitor_exhibitionBooth_fk3` FOREIGN KEY (`modifiedBy`) REFERENCES `exhibitor`(`id`);
+
+ALTER TABLE `exhibitor_exhibitionSector` ADD CONSTRAINT `exhibitor_exhibitionSector_fk0` FOREIGN KEY (`exhibitionSectorId`) REFERENCES `exhibitionSector`(`id`);
+
+ALTER TABLE `exhibitor_exhibitionSector` ADD CONSTRAINT `exhibitor_exhibitionSector_fk1` FOREIGN KEY (`createdBy`) REFERENCES `exhibitor`(`id`);
+
+ALTER TABLE `exhibitor_exhibitionSector` ADD CONSTRAINT `exhibitor_exhibitionSector_fk2` FOREIGN KEY (`modifiedBy`) REFERENCES `exhibitor`(`id`);
+
+ALTER TABLE `exhibitorProfile` ADD CONSTRAINT `exhibitorProfile_fk0` FOREIGN KEY (`logoMediaId`) REFERENCES `media`(`id`);
+
+ALTER TABLE `exhibitorProfile` ADD CONSTRAINT `exhibitorProfile_fk1` FOREIGN KEY (`createdBy`) REFERENCES `exhibitor`(`id`);
+
+ALTER TABLE `exhibitorProfile` ADD CONSTRAINT `exhibitorProfile_fk2` FOREIGN KEY (`modifiedBy`) REFERENCES `exhibitor`(`id`);
+
+ALTER TABLE `exhibitorContactInfo` ADD CONSTRAINT `exhibitorContactInfo_fk0` FOREIGN KEY (`createdBy`) REFERENCES `exhibitor`(`id`);
+
+ALTER TABLE `exhibitorContactInfo` ADD CONSTRAINT `exhibitorContactInfo_fk1` FOREIGN KEY (`modifiedBy`) REFERENCES `exhibitor`(`id`);
+
+ALTER TABLE `exhibitorAddress` ADD CONSTRAINT `exhibitorAddress_fk0` FOREIGN KEY (`title`) REFERENCES `media`(`id`);
+
+ALTER TABLE `exhibitorAddress` ADD CONSTRAINT `exhibitorAddress_fk1` FOREIGN KEY (`cityId`) REFERENCES `city`(`id`);
+
+ALTER TABLE `exhibitorAddress` ADD CONSTRAINT `exhibitorAddress_fk2` FOREIGN KEY (`createdBy`) REFERENCES `exhibitor`(`id`);
+
+ALTER TABLE `exhibitorAddress` ADD CONSTRAINT `exhibitorAddress_fk3` FOREIGN KEY (`modifiedBy`) REFERENCES `exhibitor`(`id`);
+
+ALTER TABLE `visitorLikedExhibitor` ADD CONSTRAINT `visitorLikedExhibitor_fk0` FOREIGN KEY (`exhibitorId`) REFERENCES `exhibitor`(`id`);
+
+ALTER TABLE `visitorLikedExhibitor` ADD CONSTRAINT `visitorLikedExhibitor_fk1` FOREIGN KEY (`flag`) REFERENCES `visitor`(`id`);
+
+ALTER TABLE `visitorLikedExhibitor` ADD CONSTRAINT `visitorLikedExhibitor_fk2` FOREIGN KEY (`createdBy`) REFERENCES `visitor`(`id`);
+
+ALTER TABLE `visitorLikedExhibitor` ADD CONSTRAINT `visitorLikedExhibitor_fk3` FOREIGN KEY (`modifiedBy`) REFERENCES `visitor`(`id`);
+
+ALTER TABLE `visitorVisitedExhibitor` ADD CONSTRAINT `visitorVisitedExhibitor_fk0` FOREIGN KEY (`exhibitorId`) REFERENCES `exhibitor`(`id`);
+
+ALTER TABLE `visitorVisitedExhibitor` ADD CONSTRAINT `visitorVisitedExhibitor_fk1` FOREIGN KEY (`createdBy`) REFERENCES `visitor`(`id`);
+
+ALTER TABLE `visitorVisitedExhibitor` ADD CONSTRAINT `visitorVisitedExhibitor_fk2` FOREIGN KEY (`modifiedBy`) REFERENCES `visitor`(`id`);
+
+ALTER TABLE `visitorNotes` ADD CONSTRAINT `visitorNotes_fk0` FOREIGN KEY (`exhibitorId`) REFERENCES `exhibitor`(`id`);
+
+ALTER TABLE `visitorNotes` ADD CONSTRAINT `visitorNotes_fk1` FOREIGN KEY (`createdBy`) REFERENCES `visitor`(`id`);
+
+ALTER TABLE `visitorNotes` ADD CONSTRAINT `visitorNotes_fk2` FOREIGN KEY (`modifiedBy`) REFERENCES `visitor`(`id`);
+
+ALTER TABLE `visitorMedia` ADD CONSTRAINT `visitorMedia_fk0` FOREIGN KEY (`mediaId`) REFERENCES `media`(`id`);
+
+ALTER TABLE `visitorMedia` ADD CONSTRAINT `visitorMedia_fk1` FOREIGN KEY (`exhibitorId`) REFERENCES `exhibitor`(`id`);
+
+ALTER TABLE `visitorMedia` ADD CONSTRAINT `visitorMedia_fk2` FOREIGN KEY (`createdBy`) REFERENCES `visitor`(`id`);
+
+ALTER TABLE `visitorMedia` ADD CONSTRAINT `visitorMedia_fk3` FOREIGN KEY (`modifiedBy`) REFERENCES `visitor`(`id`);
+
+ALTER TABLE `exhibitorRepresentative` ADD CONSTRAINT `exhibitorRepresentative_fk0` FOREIGN KEY (`exhibitorAddressId`) REFERENCES `exhibitorAddress`(`id`);
+
+ALTER TABLE `exhibitorRepresentative` ADD CONSTRAINT `exhibitorRepresentative_fk1` FOREIGN KEY (`createdBy`) REFERENCES `exhibitor`(`id`);
+
+ALTER TABLE `exhibitorRepresentative` ADD CONSTRAINT `exhibitorRepresentative_fk2` FOREIGN KEY (`modifiedBy`) REFERENCES `exhibitor`(`id`);
+
+ALTER TABLE `exhibitorRepresentativeSocialMedia` ADD CONSTRAINT `exhibitorRepresentativeSocialMedia_fk0` FOREIGN KEY (`exhibitorRepresentativeId`) REFERENCES `exhibitorRepresentative`(`id`);
+
+ALTER TABLE `exhibitorRepresentativeSocialMedia` ADD CONSTRAINT `exhibitorRepresentativeSocialMedia_fk1` FOREIGN KEY (`socialMediaId`) REFERENCES `socialMedia`(`id`);
+
+ALTER TABLE `exhibitorRepresentativeSocialMedia` ADD CONSTRAINT `exhibitorRepresentativeSocialMedia_fk2` FOREIGN KEY (`createdBy`) REFERENCES `exhibitor`(`id`);
+
+ALTER TABLE `exhibitorRepresentativeSocialMedia` ADD CONSTRAINT `exhibitorRepresentativeSocialMedia_fk3` FOREIGN KEY (`modifiedBy`) REFERENCES `exhibitor`(`id`);
+
+ALTER TABLE `exhibitorSocialMedia` ADD CONSTRAINT `exhibitorSocialMedia_fk0` FOREIGN KEY (`socialMediaId`) REFERENCES `socialMedia`(`id`);
+
+ALTER TABLE `exhibitorSocialMedia` ADD CONSTRAINT `exhibitorSocialMedia_fk1` FOREIGN KEY (`createdBy`) REFERENCES `exhibitor`(`id`);
+
+ALTER TABLE `exhibitorSocialMedia` ADD CONSTRAINT `exhibitorSocialMedia_fk2` FOREIGN KEY (`modifiedBy`) REFERENCES `exhibitor`(`id`);
+
+ALTER TABLE `exhibitorProduct_exhibitorProductCategory` ADD CONSTRAINT `exhibitorProduct_exhibitorProductCategory_fk0` FOREIGN KEY (`exhibitorProductCategoryId`) REFERENCES `exhibitorProductCategory`(`id`);
+
+ALTER TABLE `exhibitorProduct_exhibitorProductCategory` ADD CONSTRAINT `exhibitorProduct_exhibitorProductCategory_fk1` FOREIGN KEY (`createdBy`) REFERENCES `exhibitor`(`id`);
+
+ALTER TABLE `exhibitorProduct_exhibitorProductCategory` ADD CONSTRAINT `exhibitorProduct_exhibitorProductCategory_fk2` FOREIGN KEY (`modifiedBy`) REFERENCES `exhibitor`(`id`);
+
+ALTER TABLE `exhibitorProductCategory` ADD CONSTRAINT `exhibitorProductCategory_fk0` FOREIGN KEY (`createdBy`) REFERENCES `exhibitor`(`id`);
+
+ALTER TABLE `exhibitorProductCategory` ADD CONSTRAINT `exhibitorProductCategory_fk1` FOREIGN KEY (`modifiedBy`) REFERENCES `exhibitor`(`id`);
+
+ALTER TABLE `exhibitorBrochures` ADD CONSTRAINT `exhibitorBrochures_fk0` FOREIGN KEY (`brochureMediaId`) REFERENCES `media`(`id`);
+
+ALTER TABLE `exhibitorBrochures` ADD CONSTRAINT `exhibitorBrochures_fk1` FOREIGN KEY (`createdBy`) REFERENCES `exhibitor`(`id`);
+
+ALTER TABLE `exhibitorBrochures` ADD CONSTRAINT `exhibitorBrochures_fk2` FOREIGN KEY (`modifiedBy`) REFERENCES `exhibitor`(`id`);
+
+ALTER TABLE `exhibitorProductsMedia` ADD CONSTRAINT `exhibitorProductsMedia_fk0` FOREIGN KEY (`mediaId`) REFERENCES `media`(`id`);
+
+ALTER TABLE `exhibitorProductsMedia` ADD CONSTRAINT `exhibitorProductsMedia_fk1` FOREIGN KEY (`createdBy`) REFERENCES `exhibitor`(`id`);
+
+ALTER TABLE `exhibitorProductsMedia` ADD CONSTRAINT `exhibitorProductsMedia_fk2` FOREIGN KEY (`modifiedBy`) REFERENCES `exhibitor`(`id`);
+
+ALTER TABLE `exhibitorProducts` ADD CONSTRAINT `exhibitorProducts_fk0` FOREIGN KEY (`createdBy`) REFERENCES `exhibitor`(`id`);
+
+ALTER TABLE `exhibitorProducts` ADD CONSTRAINT `exhibitorProducts_fk1` FOREIGN KEY (`modifiedBy`) REFERENCES `exhibitor`(`id`);
+
+ALTER TABLE `exhibitor` ADD CONSTRAINT `exhibitor_fk0` FOREIGN KEY (`createdBy`) REFERENCES `exhibitionAdmin`(`id`);
+
+ALTER TABLE `exhibitor` ADD CONSTRAINT `exhibitor_fk1` FOREIGN KEY (`modifiedBy`) REFERENCES `exhibitionAdmin`(`id`);
+
+ALTER TABLE `exhibitor_posts` ADD CONSTRAINT `exhibitor_posts_fk0` FOREIGN KEY (`postId`) REFERENCES `posts`(`id`);
+
+ALTER TABLE `exhibitor_posts` ADD CONSTRAINT `exhibitor_posts_fk1` FOREIGN KEY (`exhibitorId`) REFERENCES `exhibitor`(`id`);
+
+ALTER TABLE `posts` ADD CONSTRAINT `posts_fk0` FOREIGN KEY (`postTypeId`) REFERENCES `PostType`(`id`);
+
+ALTER TABLE `exhibitorContactInfo_exhibitorAddress` ADD CONSTRAINT `exhibitorContactInfo_exhibitorAddress_fk0` FOREIGN KEY (`exhibitorContactInfoId`) REFERENCES `exhibitorContactInfo`(`id`);
+
+ALTER TABLE `exhibitorContactInfo_exhibitorAddress` ADD CONSTRAINT `exhibitorContactInfo_exhibitorAddress_fk1` FOREIGN KEY (`exhibitorAddressId`) REFERENCES `exhibitorAddress`(`id`);
+
+ALTER TABLE `exhibitorContactInfo_exhibitorAddress` ADD CONSTRAINT `exhibitorContactInfo_exhibitorAddress_fk2` FOREIGN KEY (`createdBy`) REFERENCES `exhibitor`(`id`);
+
+ALTER TABLE `exhibitorContactInfo_exhibitorAddress` ADD CONSTRAINT `exhibitorContactInfo_exhibitorAddress_fk3` FOREIGN KEY (`modifiedBy`) REFERENCES `exhibitor`(`id`);
+
+ALTER TABLE `posts_media` ADD CONSTRAINT `posts_media_fk0` FOREIGN KEY (`postsId`) REFERENCES `posts`(`id`);
+
+ALTER TABLE `posts_media` ADD CONSTRAINT `posts_media_fk1` FOREIGN KEY (`mediaId`) REFERENCES `media`(`id`);
+
+ALTER TABLE `exhibition_posts` ADD CONSTRAINT `exhibition_posts_fk0` FOREIGN KEY (`postId`) REFERENCES `posts`(`id`);
+
+ALTER TABLE `exhibition_posts` ADD CONSTRAINT `exhibition_posts_fk1` FOREIGN KEY (`exhibitionAdminId`) REFERENCES `exhibitionAdmin`(`id`);
+
+ALTER TABLE `exhibitionEvents_media` ADD CONSTRAINT `exhibitionEvents_media_fk0` FOREIGN KEY (`exhibitionEventsId`) REFERENCES `exhibitionEvents`(`id`);
+
+ALTER TABLE `exhibitionEvents_media` ADD CONSTRAINT `exhibitionEvents_media_fk1` FOREIGN KEY (`mediaId`) REFERENCES `media`(`id`);
+
+ALTER TABLE `exhibitionEvents` ADD CONSTRAINT `exhibitionEvents_fk0` FOREIGN KEY (`exhibitionId`) REFERENCES `exhibition`(`id`);
+
+ALTER TABLE `exhibitionEvents` ADD CONSTRAINT `exhibitionEvents_fk1` FOREIGN KEY (`createdBy`) REFERENCES `exhibitionAdmin`(`id`);
+
+ALTER TABLE `exhibitionEvents` ADD CONSTRAINT `exhibitionEvents_fk2` FOREIGN KEY (`modifiedBy`) REFERENCES `exhibitionAdmin`(`id`);
+
+ALTER TABLE `exhibitionEvents` ADD CONSTRAINT `exhibitionEvents_fk3` FOREIGN KEY (`modifiedByFlag`) REFERENCES `roles`(`id`);
+
+ALTER TABLE `exhibitionEventsDetail` ADD CONSTRAINT `exhibitionEventsDetail_fk0` FOREIGN KEY (`exhibitionEventsId`) REFERENCES `exhibitionEvents`(`id`);
+
+ALTER TABLE `exhibitionEventsDetail` ADD CONSTRAINT `exhibitionEventsDetail_fk1` FOREIGN KEY (`exhibitionEventVenueId`) REFERENCES `exhibitionEventVenue`(`id`);
+
+ALTER TABLE `exhibitionSpeakers_exhibitionEvents` ADD CONSTRAINT `exhibitionSpeakers_exhibitionEvents_fk0` FOREIGN KEY (`exhibitionEventsId`) REFERENCES `exhibitionEvents`(`id`);
+
+ALTER TABLE `exhibitionSpeakers_exhibitionEvents` ADD CONSTRAINT `exhibitionSpeakers_exhibitionEvents_fk1` FOREIGN KEY (`exhibitionSpeakerId`) REFERENCES `exhibitionSpeakers`(`id`);
+
+ALTER TABLE `exhibitionSpeakers_exhibitionEvents` ADD CONSTRAINT `exhibitionSpeakers_exhibitionEvents_fk2` FOREIGN KEY (`createdBy`) REFERENCES `exhibitionAdmin`(`id`);
+
+ALTER TABLE `exhibitionSpeakers_exhibitionEvents` ADD CONSTRAINT `exhibitionSpeakers_exhibitionEvents_fk3` FOREIGN KEY (`modifiedBy`) REFERENCES `exhibitionAdmin`(`id`);
+
+ALTER TABLE `exhibitionSpeakers_exhibitionEvents` ADD CONSTRAINT `exhibitionSpeakers_exhibitionEvents_fk4` FOREIGN KEY (`modifiedByFlag`) REFERENCES `roles`(`id`);
+
+ALTER TABLE `exhibitionSpeakers` ADD CONSTRAINT `exhibitionSpeakers_fk0` FOREIGN KEY (`profileMediaId`) REFERENCES `media`(`id`);
+
+ALTER TABLE `exhibitionSpeakers` ADD CONSTRAINT `exhibitionSpeakers_fk1` FOREIGN KEY (`createdBy`) REFERENCES `exhibitionAdmin`(`id`);
+
+ALTER TABLE `exhibitionSpeakers` ADD CONSTRAINT `exhibitionSpeakers_fk2` FOREIGN KEY (`modifiedBy`) REFERENCES `exhibitionAdmin`(`id`);
+
+ALTER TABLE `exhibitionSpeakers` ADD CONSTRAINT `exhibitionSpeakers_fk3` FOREIGN KEY (`modifiedByFlag`) REFERENCES `roles`(`id`);
+
+ALTER TABLE `exhibitionAlbum` ADD CONSTRAINT `exhibitionAlbum_fk0` FOREIGN KEY (`exhibitionId`) REFERENCES `exhibition`(`id`);
+
+ALTER TABLE `exhibitionAlbum` ADD CONSTRAINT `exhibitionAlbum_fk1` FOREIGN KEY (`createdBy`) REFERENCES `exhibitionAdmin`(`id`);
+
+ALTER TABLE `exhibitionAlbum` ADD CONSTRAINT `exhibitionAlbum_fk2` FOREIGN KEY (`modifiedBy`) REFERENCES `exhibitionAdmin`(`id`);
+
+ALTER TABLE `exhibitionAlbum` ADD CONSTRAINT `exhibitionAlbum_fk3` FOREIGN KEY (`modifiedByFlag`) REFERENCES `roles`(`id`);
+
+ALTER TABLE `exhibitionAlbum_media` ADD CONSTRAINT `exhibitionAlbum_media_fk0` FOREIGN KEY (`exhibitionAlbumId`) REFERENCES `exhibitionAlbum`(`id`);
+
+ALTER TABLE `exhibitionAlbum_media` ADD CONSTRAINT `exhibitionAlbum_media_fk1` FOREIGN KEY (`mediaId`) REFERENCES `media`(`id`);
+
+ALTER TABLE `exhibitionAlbum_media` ADD CONSTRAINT `exhibitionAlbum_media_fk2` FOREIGN KEY (`createdBy`) REFERENCES `exhibitionAdmin`(`id`);
+
+ALTER TABLE `exhibitionAlbum_media` ADD CONSTRAINT `exhibitionAlbum_media_fk3` FOREIGN KEY (`modifiedBy`) REFERENCES `exhibitionAdmin`(`id`);
+
+ALTER TABLE `exhibitionAlbum_media` ADD CONSTRAINT `exhibitionAlbum_media_fk4` FOREIGN KEY (`modifiedByFlag`) REFERENCES `roles`(`id`);
+
+ALTER TABLE `exhibitionSpeakersSocialMedia` ADD CONSTRAINT `exhibitionSpeakersSocialMedia_fk0` FOREIGN KEY (`exhibitionSpeakersId`) REFERENCES `exhibitionSpeakers`(`id`);
+
+ALTER TABLE `exhibitionSpeakersSocialMedia` ADD CONSTRAINT `exhibitionSpeakersSocialMedia_fk1` FOREIGN KEY (`socialMediaId`) REFERENCES `socialMedia`(`id`);
+
+ALTER TABLE `exhibitionSpeakersSocialMedia` ADD CONSTRAINT `exhibitionSpeakersSocialMedia_fk2` FOREIGN KEY (`createdBy`) REFERENCES `exhibitionAdmin`(`id`);
+
+ALTER TABLE `exhibitionSpeakersSocialMedia` ADD CONSTRAINT `exhibitionSpeakersSocialMedia_fk3` FOREIGN KEY (`modifiedBy`) REFERENCES `exhibitionAdmin`(`id`);
+
+ALTER TABLE `exhibitionSpeakersSocialMedia` ADD CONSTRAINT `exhibitionSpeakersSocialMedia_fk4` FOREIGN KEY (`modifiedByFlag`) REFERENCES `roles`(`id`);
+
+ALTER TABLE `visitorProfile` ADD CONSTRAINT `visitorProfile_fk0` FOREIGN KEY (`profilePic`) REFERENCES `media`(`id`);
+
+ALTER TABLE `visitorProfile` ADD CONSTRAINT `visitorProfile_fk1` FOREIGN KEY (`createdBy`) REFERENCES `visitor`(`id`);
+
+ALTER TABLE `visitorProfile` ADD CONSTRAINT `visitorProfile_fk2` FOREIGN KEY (`modifiedBy`) REFERENCES `visitor`(`id`);
+
+ALTER TABLE `visitorNotifications` ADD CONSTRAINT `visitorNotifications_fk0` FOREIGN KEY (`visitorId`) REFERENCES `visitor`(`id`);
+
+ALTER TABLE `visitorNotifications` ADD CONSTRAINT `visitorNotifications_fk1` FOREIGN KEY (`notificationId`) REFERENCES `notifications`(`id`);
+
+ALTER TABLE `notifications` ADD CONSTRAINT `notifications_fk0` FOREIGN KEY (`notificationImageId`) REFERENCES `media`(`id`);
+
+ALTER TABLE `notifications` ADD CONSTRAINT `notifications_fk1` FOREIGN KEY (`createdBy`) REFERENCES `exhibitionAdmin`(`id`);
+
+ALTER TABLE `visitorBadges` ADD CONSTRAINT `visitorBadges_fk0` FOREIGN KEY (`visitorId`) REFERENCES `visitor`(`id`);
+
+ALTER TABLE `visitorBadges` ADD CONSTRAINT `visitorBadges_fk1` FOREIGN KEY (`exhibitionId`) REFERENCES `exhibition`(`id`);
+
+ALTER TABLE `visitorBadges` ADD CONSTRAINT `visitorBadges_fk2` FOREIGN KEY (`badge`) REFERENCES `visitor`(`id`);
+
+ALTER TABLE `visitorBadges` ADD CONSTRAINT `visitorBadges_fk3` FOREIGN KEY (`createdBy`) REFERENCES `visitor`(`id`);
+
+ALTER TABLE `visitorAttendance` ADD CONSTRAINT `visitorAttendance_fk0` FOREIGN KEY (`exhibitionId`) REFERENCES `exhibition`(`id`);
+
+ALTER TABLE `visitorAttendance` ADD CONSTRAINT `visitorAttendance_fk1` FOREIGN KEY (`badgeId`) REFERENCES `visitorBadges`(`id`);
+
+ALTER TABLE `visitorActionLog` ADD CONSTRAINT `visitorActionLog_fk0` FOREIGN KEY (`createdBy`) REFERENCES `visitor`(`id`);
+
+ALTER TABLE `visitorShareExhibitor` ADD CONSTRAINT `visitorShareExhibitor_fk0` FOREIGN KEY (`exhibitorId`) REFERENCES `exhibitor`(`id`);
+
+ALTER TABLE `visitorShareExhibitor` ADD CONSTRAINT `visitorShareExhibitor_fk1` FOREIGN KEY (`createdBy`) REFERENCES `visitor`(`id`);
+
+ALTER TABLE `visitorShareExhibitor` ADD CONSTRAINT `visitorShareExhibitor_fk2` FOREIGN KEY (`modifiedBy`) REFERENCES `visitor`(`id`);
+
+ALTER TABLE `visitorBrochureDownload` ADD CONSTRAINT `visitorBrochureDownload_fk0` FOREIGN KEY (`brochureId`) REFERENCES `exhibitorBrochures`(`id`);
+
+ALTER TABLE `visitorBrochureDownload` ADD CONSTRAINT `visitorBrochureDownload_fk1` FOREIGN KEY (`createdBy`) REFERENCES `visitor`(`id`);
+
+ALTER TABLE `exhibitionEventPasses` ADD CONSTRAINT `exhibitionEventPasses_fk0` FOREIGN KEY (`eventsId`) REFERENCES `exhibitionEvents`(`id`);
+
+ALTER TABLE `exhibitionEventPasses` ADD CONSTRAINT `exhibitionEventPasses_fk1` FOREIGN KEY (`seatMapId`) REFERENCES `media`(`id`);
+
+ALTER TABLE `exhibitionEventPasses` ADD CONSTRAINT `exhibitionEventPasses_fk2` FOREIGN KEY (`createdBy`) REFERENCES `exhibitionAdmin`(`id`);
+
+ALTER TABLE `exhibitionEventPasses` ADD CONSTRAINT `exhibitionEventPasses_fk3` FOREIGN KEY (`modifiedBy`) REFERENCES `exhibitionAdmin`(`id`);
+
+ALTER TABLE `exhibitionEventPromos` ADD CONSTRAINT `exhibitionEventPromos_fk0` FOREIGN KEY (`eventPassId`) REFERENCES `exhibitionEventPasses`(`id`);
+
+ALTER TABLE `exhibitionEventPromos` ADD CONSTRAINT `exhibitionEventPromos_fk1` FOREIGN KEY (`createdBy`) REFERENCES `exhibitionAdmin`(`id`);
+
+ALTER TABLE `exhibitionEventPromos` ADD CONSTRAINT `exhibitionEventPromos_fk2` FOREIGN KEY (`modifiedBy`) REFERENCES `exhibitionAdmin`(`id`);
+
+ALTER TABLE `visitorEventBooking` ADD CONSTRAINT `visitorEventBooking_fk0` FOREIGN KEY (`eventPassId`) REFERENCES `exhibitionEventPasses`(`id`);
+
+ALTER TABLE `visitorEventBooking` ADD CONSTRAINT `visitorEventBooking_fk1` FOREIGN KEY (`createdBy`) REFERENCES `visitor`(`id`);
+
+ALTER TABLE `visitorEventBooking` ADD CONSTRAINT `visitorEventBooking_fk2` FOREIGN KEY (`modifiedBy`) REFERENCES `visitor`(`id`);
+
+ALTER TABLE `visitorEventCancellation` ADD CONSTRAINT `visitorEventCancellation_fk0` FOREIGN KEY (`visitorEventBookedId`) REFERENCES `visitorEventBooking`(`id`);
+
+ALTER TABLE `visitorEventCancellation` ADD CONSTRAINT `visitorEventCancellation_fk1` FOREIGN KEY (`createdBy`) REFERENCES `visitor`(`id`);
+
+ALTER TABLE `visitorEventCancellation` ADD CONSTRAINT `visitorEventCancellation_fk2` FOREIGN KEY (`modifiedBy`) REFERENCES `exhibitionAdmin`(`id`);
+
+ALTER TABLE `exhibitionPartners` ADD CONSTRAINT `exhibitionPartners_fk0` FOREIGN KEY (`exhibitionId`) REFERENCES `exhibition`(`id`);
+
+ALTER TABLE `exhibitionPartners` ADD CONSTRAINT `exhibitionPartners_fk1` FOREIGN KEY (`partnerLogoId`) REFERENCES `media`(`id`);
+
+ALTER TABLE `exhibitionPartners` ADD CONSTRAINT `exhibitionPartners_fk2` FOREIGN KEY (`createdBy`) REFERENCES `exhibitionAdmin`(`id`);
+
+ALTER TABLE `exhibitionPartners` ADD CONSTRAINT `exhibitionPartners_fk3` FOREIGN KEY (`modifiedBy`) REFERENCES `exhibitionAdmin`(`id`);
+
+ALTER TABLE `exhibitionPartners` ADD CONSTRAINT `exhibitionPartners_fk4` FOREIGN KEY (`modifiedByFlag`) REFERENCES `roles`(`id`);
+
+ALTER TABLE `feedback` ADD CONSTRAINT `feedback_fk0` FOREIGN KEY (`exhibitionId`) REFERENCES `exhibition`(`id`);
+
+ALTER TABLE `exhibitionStats` ADD CONSTRAINT `exhibitionStats_fk0` FOREIGN KEY (`statsMediaId`) REFERENCES `media`(`id`);
+
+ALTER TABLE `exhibitionStats` ADD CONSTRAINT `exhibitionStats_fk1` FOREIGN KEY (`createdBy`) REFERENCES `exhibitionAdmin`(`id`);
+
+ALTER TABLE `exhibitionStats` ADD CONSTRAINT `exhibitionStats_fk2` FOREIGN KEY (`modifiedBy`) REFERENCES `exhibitionAdmin`(`id`);
+
+ALTER TABLE `form` ADD CONSTRAINT `form_fk0` FOREIGN KEY (`exhibitionId`) REFERENCES `exhibition`(`id`);
+
+ALTER TABLE `form` ADD CONSTRAINT `form_fk1` FOREIGN KEY (`createdBy`) REFERENCES `exhibitionAdmin`(`id`);
+
+ALTER TABLE `form` ADD CONSTRAINT `form_fk2` FOREIGN KEY (`modifiedBy`) REFERENCES `exhibitionAdmin`(`id`);
+
+ALTER TABLE `formFieldOptions` ADD CONSTRAINT `formFieldOptions_fk0` FOREIGN KEY (`fieldId`) REFERENCES `formFields`(`id`);
+
+ALTER TABLE `visitorRegistration` ADD CONSTRAINT `visitorRegistration_fk0` FOREIGN KEY (`fieldId`) REFERENCES `formFields`(`id`);
+
+ALTER TABLE `visitorRegistration` ADD CONSTRAINT `visitorRegistration_fk1` FOREIGN KEY (`createdBy`) REFERENCES `visitor`(`id`);
+
+ALTER TABLE `formFields` ADD CONSTRAINT `formFields_fk0` FOREIGN KEY (`formId`) REFERENCES `form`(`id`);
+
+ALTER TABLE `formFields` ADD CONSTRAINT `formFields_fk1` FOREIGN KEY (`createdBy`) REFERENCES `exhibitionAdmin`(`id`);
+
+ALTER TABLE `formFields` ADD CONSTRAINT `formFields_fk2` FOREIGN KEY (`modifiedBy`) REFERENCES `exhibitionAdmin`(`id`);

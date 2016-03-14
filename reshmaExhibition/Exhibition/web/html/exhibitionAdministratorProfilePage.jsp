@@ -43,10 +43,11 @@
     <link href="assets/plugins/switchery/css/switchery.min.css" rel="stylesheet" type="text/css" media="screen" />
     <link href="pages/css/pages-icons.css" rel="stylesheet" type="text/css">
     <link class="main-stylesheet" href="pages/css/pages.css" rel="stylesheet" type="text/css" />
+     <script src="assets/js/phoneNoValidation.js" type="text/javascript"></script>
     <!--[if lte IE 9]>
 	<link href="assets/plugins/codrops-dialogFx/dialog.ie.css" rel="stylesheet" type="text/css" media="screen" />
 	<![endif]-->
-      <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<!--      <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="pages/js/jquery-1.4.2.min.js"></script>
    
   <script type="text/javascript">
@@ -103,69 +104,8 @@
  		});		
 
 	});
-   </script> 
- 
-  <script type="text/javascript">
-	$(document).ready(function(){
-		$("#login_frm").submit(function(){
-
-			 //remove previous class and add new "myinfo" class
-	        //$("#msgbox").removeClass().addClass('myinfo').text('Validating Your Login ').fadeIn(1000);
-
-			
-			this.timer = setTimeout(function () {
-				$.ajax({
-		          	url: '/Exhibition/exhibitionAdministratorContactInformation',
-		          	data: 't1='+ $('#t1').val() +'&fn=' + $('#fn').val()+'&ln='+ $('#ln').val() +'&dob='+ $('#dob').val()+'&le=' + $('#le').val() +'&dn=' + $('#degination').val()+'&pn=' + $('#pn').val(),
-		          	type: 'post',
-		   		success: function(msg){
-                                alert(msg);
-                                 if(msg != 'error') // Message Sent, check and redirect
-				{
-                                     if(msg != 'dataupdateinvalid') {
-                                         
-                                          $("#msgbox3").html('data updated').addClass('myinfo').fadeTo(900,1,function()
-			             {
-			                 //redirect to secure page
-			             // document.location='/Exhibition/html/profilePage.jsp';
-			             });
-                                  
-                             }
-                                
-                            else
-				{
-				
-                                         $("#msgbox4").fadeTo(200,0.1,function() //start fading the messagebox
-		                {
-			                  //add message and change the class of the box and start fading
-			                 $(this).html('Sorry...data not updated').removeClass().addClass('myerror').fadeTo(900,1);
-                                         //document.location='/Exhibition/html/exhibitionAdminLog.jsp?user';
-                                 });
-                                        
-                                    }	
-                                
-				} 
-                                else
-                                {
-                                     $("#msgbox4").fadeTo(200,0.1,function() //start fading the messagebox
-		                {
-			                  //add message and change the class of the box and start fading
-			                 $(this).html('Error').removeClass().addClass('myerror').fadeTo(900,1);
-                                         //document.location='/Exhibition/html/exhibitionAdminLog.jsp?user';
-                                 });
-                                    
-                                }
-                                
-    }
-				
-				});
-			}, 200);
-			return false;
- 		});		
-
-	});
-   </script>   
-                   
+   </script>  -->
+            
     <style>
 #exists{display:none}
 #cross{display:none}
@@ -746,17 +686,17 @@
                   <!--  <h3>Create Moderator</h3> -->
                     <%
                           
-                           Connection con;
-                          con=exhibitionAdministratorOneTimeConnection.getConnection();
+                           Connection con3;
+                          con3=exhibitionAdministratorOneTimeConnection.getConnection();
                             HttpSession ss=request.getSession(false);
                     String rs3 = (String) ss.getAttribute("idValid");
                      //  HttpSession objcontact=request.getSession(true);
-                          Statement st=con.createStatement();
-                        ResultSet rs=st.executeQuery("select * from exhibitionAdmin where id='"+rs3+"'");
+                          Statement st3=con3.createStatement();
+                        ResultSet rs34=st3.executeQuery("select * from exhibitionAdmin where id='"+rs3+"'");
                           
                         int cot=0;
                         
-                        while(rs.next())
+                        while(rs34.next())
                         {
                   
                         %> 
@@ -769,14 +709,14 @@
                         <div class="form-group">
                         <label for="fname" class="col-sm-3 control-label">Mobile No</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="mobileNo" name="mobileNo" placeholder="mobile No " value="<%out.print(rs.getString("mobileNo"));%>" required>
+                            <input type="text" class="form-control" id="mobileNo" name="mobileNo" placeholder="mobile No " value="<%out.print(rs34.getString("mobileNo"));%>" required>
                        </div>
                       
                       </div>
                         <div class="form-group">
                         <label for="fname" class="col-sm-3 control-label">Email</label>
                         <div class="col-sm-9">
-                            <input type="email" class="form-control" id="email" placeholder="Email" name="email" value="<%out.print(rs.getString("email"));%>" required>
+                            <input type="email" class="form-control" id="email" placeholder="Email" name="email" value="<%out.print(rs34.getString("email"));%>" required>
                         </div>
                         
                        
@@ -784,19 +724,19 @@
                         <div class="form-group">
                         <label for="fname" class="col-sm-3 control-label">User Name</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="userName" placeholder="username" name="userName" value="<%out.print(rs.getString("userName"));%>" required>
+                            <input type="text" class="form-control" id="userName" placeholder="username" name="userName" value="<%out.print(rs34.getString("userName"));%>" required>
                         </div>
                       </div>
                            <div class="form-group">
                         <label for="fname" class="col-sm-3 control-label">Password</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="password" placeholder="password" name="password"  value="<%out.print(rs.getString("password"));%>" required >
+                            <input type="text" class="form-control" id="password" placeholder="password" name="password"  value="<%out.print(rs34.getString("password"));%>" required >
                         </div></div>
                     
                         <div class="form-group">
                         <label for="fname" class="col-sm-3 control-label">Level</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="level" placeholder="level" name="level" value="<%out.print(rs.getString("level"));%>" onkeyup="validate()" required>
+                            <input type="text" class="form-control" id="level" placeholder="level" name="level" value="<%out.print(rs34.getString("level"));%>" onkeyup="validate()" required>
                         </div>
                       </div>   
                         
@@ -838,7 +778,7 @@
                   <div class="row row-same-height">
                    
                        <div class="container-fluid container-fixed-lg">
-                             <form id="login_frm" name="login_frm" class="form-horizontal" role="form" autocomplete="off" action="" method="">
+                 <form  action="/Exhibition/html/exhibitionAdministratorContactInformationEditImage.jsp" id="login_frm"  name="login_frm" class="form-horizontal" role="form" autocomplete="off" action="" method="">
                             <div class="panel panel-default">
             <div class="row">
 <div class="col-md-6">
@@ -859,7 +799,7 @@
                       
                       <%
                           
-                         
+                           Connection con;
                           con=exhibitionAdministratorOneTimeConnection.getConnection();
                             
                     String rs1 = (String) ss.getAttribute("idValid");
@@ -872,20 +812,25 @@
                         
                         while(rst.next())
                         {
-                  
+                              HttpSession imageIcon=request.getSession(true);
+                           String contryIDD=rst.getString(16);
+                          String media=rst.getString(15);
+                         
+                          imageIcon.setAttribute("mediaId", media);
+                            imageIcon.setAttribute("contryIDD", contryIDD);
                         %>
                     
                   
                     
                         <div class="form-group">
-                        <label for="fname" class="col-sm-3 control-label">Title</label>
+                        <label class="col-sm-3 control-label">Title</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" id="t1" name="t1" placeholder="Title" value="<%out.print(rst.getString("title"));%>" required>
                        </div>
                        
                       </div>
                         <div class="form-group">
-                        <label for="fname" class="col-sm-3 control-label">First Name</label>
+                        <label class="col-sm-3 control-label">First Name</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" id="fn" placeholder="First Name" name="fn" value="<%out.print(rst.getString("firstName"));%>" required>
                         </div>
@@ -893,7 +838,7 @@
                        
                       </div>
                         <div class="form-group">
-                        <label for="fname" class="col-sm-3 control-label">Last Name</label>
+                        <label class="col-sm-3 control-label">Last Name</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" id="ln" placeholder="lastName" name="ln" value="<%out.print(rst.getString("lastName"));%>" required>
                         </div>
@@ -901,45 +846,100 @@
                           
                     
                         <div class="form-group">
-                        <label for="fname" class="col-sm-3 control-label">Date of Birth</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="dob" placeholder="DOB" name="dob" value="<%out.print(rst.getString("dateOfBirth"));%>" required>
-                        </div>
+                          
+                    
+                                <label class="col-sm-3 control-label">  Date Of Birth   </label>
+                                  <div class="col-sm-9">
+                                      <div class="icon">
+                                <div style="text-align:right;padding-right:5%; position:relative;">                           
+                    <input type="text" class="form-control" data-date-format="yyyy-mm-dd" placeholder="Pick a date" id="datepicker-component2" name="dateOfBirth" value="<%out.print(rst.getString("dateOfBirth"));%>" required>
+            <span class="input-lg"> <i class="fa fa-calendar"></i>       </span>   </div>   
+                                      </div> </div>
+                   
                       </div>   
                         
                          <div class="form-group">
-                        <label for="fname" class="col-sm-3 control-label">Level</label>
+                        <label class="col-sm-3 control-label">Level</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" id="le" placeholder="level" name="le" value="<%out.print(rst.getString("level"));%>" required>
                         </div>
                       </div>   
                           <div class="form-group">
-                        <label for="fname" class="col-sm-3 control-label">Designation</label>
+                        <label  class="col-sm-3 control-label">Designation</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" id="degination" placeholder="Designation" name="degination" value="<%out.print(rst.getString("degination"));%>"  required>
                         </div>
                       </div>   
                           <div class="form-group">
-                        <label for="fname" class="col-sm-3 control-label">Phone No</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="pn" placeholder="Phone No" name="pn" value="<%out.print(rst.getString("phoneNo"));%>" required>
+                        <label  class="col-sm-3 control-label">Phone No</label>
+                        <div class="col-sm-4">
+                             <%    
+                    try { 
+                           //  HttpSession imageIcon=request.getSession(false);
+                          String contryIDD1=(String)imageIcon.getAttribute("contryIDD");
+                           Connection con2;
+                           con2= exhibitionAdministratorOneTimeConnection.getConnection(); 
+                           Statement sta2=con2.createStatement();
+                           ResultSet rsy2=sta2.executeQuery("select * from country where id='"+contryIDD1+"' ");
+                           int cou1=0;
+                     %>
+                     
+                        <select class="full-width" data-init-plugin="select2" name="contactCountryId" id="contactCountryId">
+                         <% while(rsy2.next())
+                         { 
+                           String r=rsy2.getString(1);
+                          
+                         %>
+                        <option value="<%= r%>"><%out.print(rsy2.getString(4));%></option>
+                           <%   
+                         }
+                        } 
+                   catch(Exception e) 
+                      { 
+                      out.print("error" +e); 
+                      }
+                        %>  
+                         <optgroup label="Select id">
+                          <%   
+                        try { 
+                           //  HttpSession imageIcon=request.getSession(false);
+                        
+                           Connection con6;
+                           con6= exhibitionAdministratorOneTimeConnection.getConnection(); 
+                           Statement sta6=con6.createStatement();
+                           ResultSet rsy6=sta6.executeQuery("select * from country");
+                           int cou12=0;
+                        while(rsy6.next())
+                         { 
+                           String r=rsy6.getString(1);
+                          
+                         %>
+                        <option value="<%= r%>"><%out.print(rsy6.getString(4));%></option>
+                           <%   
+                               cou12++;
+                         }
+                        } 
+                   catch(Exception e) 
+                      { 
+                      out.print("error" +e); 
+                      }
+                        %>  
+                         
+                        </select>
+                        </div>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" onkeypress="return validate(event)" minlength="10" maxlength="10" id="phone" placeholder="Phone No" name="pn" value="<%out.print(rst.getString("phoneNo"));%>" required>
                         </div>
                       </div>   
                         
                         <br>     <div id="msgbox3"> </div>  <div id="msgbox4"> </div> 
                       <div class="row">
-                        <div class="col-sm-3">
-                      <!--    <p>I hereby certify that the information above is true and accurate. </p> -->
-                        </div>
-                        <div class="col-sm-6">
+                      
                             <button class="btn btn-success" name="login" id="name" type="submit" onclick="document.location.href='/Exhibition/exhibitionAdministratorContactInformation';"> Save</button>
                           <button class="btn btn-default">Cancel</button>
-                        </div>
+                        
                       </div>
-                    
-                     
-                      
-                         <%
+                      <%
                           co++;  
                           
                         }
@@ -947,6 +947,9 @@
                              
                       %>
                   
+                     
+                      
+                        
                   </div>
                 </div>
                   </div>
@@ -969,6 +972,22 @@
                     Social Media Icon 
                 </div>
                  </div>
+                               <%
+                          
+                           Connection con1;
+                          con1=exhibitionAdministratorOneTimeConnection.getConnection();
+                          
+                HttpSession imageIcon=request.getSession(false);
+                          String imageName=(String)imageIcon.getAttribute("mediaId");
+                          Statement st1=con1.createStatement();
+                        ResultSet rso=st1.executeQuery("select * from media where id='"+imageName+"'");
+                          
+                        int cy=0;
+                        
+                        while(rso.next())
+                        {
+                          
+                        %> 
              
    
  <div id="uploadFormLayer">
@@ -990,10 +1009,17 @@
 	}
 									</script>
 						<input type="hidden" id="flag" name="flag">
-	<img id="tempImg"  src="" width="200" height="200"> 
+	<img id="tempImg"  src="images/<%out.print(rso.getString("link"));%>" width="200" height="200"> 
  </div>  
             
-    
+     <%
+                          cy++;  
+                          
+                        }
+                        
+                             
+                      %>
+                  
  
         
 
@@ -2328,7 +2354,7 @@
     <script src="pages/js/pages.min.js"></script>
     <!-- END CORE TEMPLATE JS -->
     <!-- BEGIN PAGE LEVEL JS -->
-    <script src="assets/js/form_wizard.js" type="text/javascript"></script>
+    <script src="assets/js/form_elements.js" type="text/javascript"></script>
     <script src="assets/js/scripts.js" type="text/javascript"></script>
     <!-- END PAGE LEVEL JS -->
     

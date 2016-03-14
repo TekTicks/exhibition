@@ -49,7 +49,7 @@ public class exhibitionAdministratorLoginCheck extends HttpServlet
                             ss.setAttribute("levelValid", le);           // levelValid variable is set using session object
                             count++;
                             String idR2=(String)ss.getAttribute("idValid");    
-                          HttpSession oh=request.getSession(true);
+                            HttpSession oh=request.getSession(true);
                             rs1=st.executeQuery("select * from exhibitionAdminContact where id='"+idR2+"' "); 
                             while(rs1.next())
                             {
@@ -62,7 +62,6 @@ public class exhibitionAdministratorLoginCheck extends HttpServlet
                                 String gender=rs1.getString(5);
                                 oh.setAttribute("genderValid", gender); 
                                 String dateOfBirth=rs1.getString(6);
-                                out.print(dateOfBirth);
                                 oh.setAttribute("dateOfBirthValid", dateOfBirth);  
                                 String level=rs1.getString(7);
                                 oh.setAttribute("levelValid", level); 
@@ -80,7 +79,7 @@ public class exhibitionAdministratorLoginCheck extends HttpServlet
                            //HttpSession ss=request.getSession(false);
                             if( !uname.equals(ss.getAttribute("emailValid")) )         // textbox and table value of email compared 
                             {
-                                 out.print("emailinvalid");        
+                                 out.print("emIn");        
                             }
                             else if(! pass.equals(ss.getAttribute("passwordValid")))   //textbox and table value of password are checked
                             {
@@ -88,8 +87,8 @@ public class exhibitionAdministratorLoginCheck extends HttpServlet
                             } 
                             else  
                             {           
-                                // out.print("valid");   
-                                  HttpSession oh=request.getSession(false);
+                                 
+                               HttpSession oh=request.getSession(false);
                                   String tt12=(String)oh.getAttribute("titleValid");    
                                   String fN=(String)oh.getAttribute("firstNameValid");  
                                   String lN=(String)oh.getAttribute("lastNameValid");  
@@ -106,7 +105,7 @@ public class exhibitionAdministratorLoginCheck extends HttpServlet
                                   else
                                   {
                                       out.print("secondVisitor");
-                                  }
+                                  }  
                                } 
                            }
                            else
@@ -117,7 +116,7 @@ public class exhibitionAdministratorLoginCheck extends HttpServlet
                    
         catch(Exception ee)
         {
-           out.print("error"+ee.toString());
+           out.println("error"+ee.toString());
         }
     }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

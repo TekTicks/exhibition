@@ -1,15 +1,11 @@
 <%-- 
-    Document   : exhibitionSector
-    Created on : Jan 27, 2016, 5:15:09 PM
+    Document   : deleteModerator
+    Created on : Jan 23, 2016, 6:03:54 PM
     Author     : Admin
 --%>
 
-
-<%@page import="exhibitionAdministrator.exhibitionAdministratorOneTimeConnection"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
- <%@page import="java.io.*;" %>
-  <%@page import="java.sql.*;" %>
-  <%@page import="java.sql.DriverManager;" %>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -36,10 +32,85 @@
     <link href="assets/plugins/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet" type="text/css" media="screen">
     <link href="pages/css/pages-icons.css" rel="stylesheet" type="text/css">
     <link class="main-stylesheet" href="pages/css/pages.css" rel="stylesheet" type="text/css" />
-      <script src="assets/js/phoneNoValidation.js" type="text/javascript"></script>
     <!--[if lte IE 9]>
 	<link href="assets/plugins/codrops-dialogFx/dialog.ie.css" rel="stylesheet" type="text/css" media="screen" />
 	<![endif]-->
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="pages/js/jquery-1.4.2.min.js"></script>
+    <script type="text/javascript">
+	$(document).ready(function(){
+		$("#login").submit(function(){
+
+			 //remove previous class and add new "myinfo" class
+	       // $("#msgbox").removeClass().addClass('myinfo').text('Validating Your Login ').fadeIn(1000);
+
+			
+			this.timer = setTimeout(function () {
+				$.ajax({
+		          	url: '/Exhibition/exhibitionAdministratorSocialMedia',
+		          	data: 'EI='+ $('#exhibitionId').val() +'&link=' + $('#link').val(),
+		          	type: 'post',
+		   		success: function(msg){
+                                if(msg != 'error') // Message Sent, check and redirect
+				{
+                                       
+                                          $("#msgbox1").html('data inserted').addClass('myinfo').fadeTo(200,1,function()
+			             {
+			                 //redirect to secure page
+			              //document.location='/Exhibition/html/exhibitionAdminPersonal.jsp';
+			             });
+                                        
+                                    }
+                               else
+                            {
+                                $("#msgbox1").fadeTo(100,1,function() //start fading the messagebox
+		                {
+			                  //add message and change the class of the box and start fading
+			                 $(this).html('sorry').removeClass().addClass('myerror').fadeTo(300,1);
+                                        // document.location='/Exhibition/html/exhibitionAdminLog.jsp?user';
+                                 });
+                            }
+                                }
+				});
+			}, 200);
+			return false;
+ 		});		
+
+	});
+   </script> 
+     <style>
+#exists{display:none}
+#cross{display:none}
+.myinfo
+{
+	margin: 5px auto;
+	background:#d6e3f5;
+	border: 1px #0010ac solid;
+	padding:5px;
+	color:#0010ac;
+	font-size:12px;
+	width:350px;
+	min-height:0px;
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+	text-align: center;
+}
+
+.myerror
+{
+	margin: 5px auto;
+	background:#FFDFDF;
+	border: 1px #FF0000 solid;
+	padding:5px;
+	color:#FF0000;
+	font-size:12px;
+	width:350px;
+	min-height:0px;
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+	text-align: center;
+}
+</style>
 
   </head>
   <body class="fixed-header ">
@@ -83,7 +154,7 @@
       <!-- START SIDEBAR MENU -->
       <div class="sidebar-menu">
         <!-- BEGIN SIDEBAR MENU ITEMS-->
-       <ul class="menu-items">
+          <ul class="menu-items">
           <li class="m-t-30 ">
             <a href="index.html" class="detailed">
               <span class="title">Dashboard</span>
@@ -530,7 +601,8 @@
   <div class="page-content-wrapper ">
         <!-- START PAGE CONTENT -->
    <div class="content ">
-    <div class="panel-body">
+       
+            <div class="panel-body">
    <div class="register-container full-height sm-p-t-30">
       <div class="container-sm-height full-height">
         <div class="row row-sm-height">
@@ -541,145 +613,36 @@
               <small>
         Create a pages account. If you have a facebook account, log into it for this process. Sign in with <a href="#" class="text-info">Facebook</a> or <a href="#" class="text-info">Google</a>
     </small>
-  </p> --><p><h1><b>Add Contact Information ...!</b></h1></p>
-          
-           
-            <form action="/Exhibition/html/exhibitionAdministratorContactInfromationAddImageData.jsp" method="post" enctype="multipart/form-data" role="form" class="p-t-15" id="login" name="login"  >  
+  </p> --><p><h1><b>Add Exhibition Team..!</b></h1></p>
+          <br>
+         
+               <form id="login" name="login" class="" role="form" action="" method="post">
+                      
                     
-                  
-                    
-                       <div class="row">
-                <div class="col-sm-12">
-                  <div class="form-group form-group-default">
-                        <label>Title</label>
                        
-                            <input type="text" class="form-control" id="title" name="title" placeholder="Title" value="" required>
-                       </div>
+                          <div class="form-group form-group-default required">
+                            <label>Exhibition ID</label>
+                            <input type="text"   id="exhibitionId" name="exhibitionId" class="form-control" required>
+                          </div>
                        
-                </div> </div>
-                         <div class="row">
-                <div class="col-sm-12">
-                  <div class="form-group form-group-default">
-                        <label>First Name</label>
-                            <input type="text" class="form-control" id="firstName" placeholder="First Name" name="firstName" value="" required>
-                  </div> </div></div>
-                   
-                         <div class="row">
-                <div class="col-sm-12">
-                  <div class="form-group form-group-default">
-                        <label>Last Name</label>
-                            <input type="text" class="form-control" id="lastName" placeholder="lastName" name="lastName" value="" required>
-                        </div>
-                </div> </div>
-                           <div class="row">
-                <div class="col-sm-12">
-                  <div class="form-group form-group-default">
-                    
-                                <label for="designation" class="col-sm-7 control-label">  Date Of Birth   </label>
-                                <div style="text-align:right;padding-right:5%;"> <span class="input-lg"> <i class="fa fa-calendar"></i> </span>
-                                </div>                             
-                    <input type="text" class="form-control" data-date-format="yyyy-mm-dd" placeholder="Pick a date" id="datepicker-component2" name="dateOfBirth" value="" required>
-                     
-                   
-                    </div>
-                </div>  </div>
-                 
-                          <div class="row">
-                <div class="col-sm-12">
-                  <div class="form-group form-group-default">
-                        <label>Level</label>
-                            <input type="text" class="form-control" id="level" placeholder="level" name="level" value="" required>
-                        </div>
-                </div> </div>  
-                           <div class="row">
-                <div class="col-sm-12">
-                  <div class="form-group form-group-default">
-                        <label>Designation</label>
-                            <input type="text" class="form-control" id="degination" placeholder="Designation" name="degination" value=""  required>
-                        </div>
-                </div>  </div> 
-                           <div class="row">
-                               <div class="col-sm-4">
-                                    
-                  <div class="form-group form-group-default">
-                         <label>Country Code</label>
-                                 <%    
-                    try { 
-                         
-                           Connection con;
-                           con= exhibitionAdministratorOneTimeConnection.getConnection(); 
-                           Statement sta1=con.createStatement();
-                           ResultSet rsy=sta1.executeQuery("select * from country ");
-                           int cou1=0;
-                     %>
-                     
-                        <select class="full-width" data-init-plugin="select2" name="contactCountryId" id="contactCountryId">
-                           
-                       <optgroup label="Select id">
-                         <% while(rsy.next())
-                         { 
-                           String id1=rsy.getString(1);
-                         
-                         %>
-                        <option value="<%=id1%>"><%out.print(rsy.getString(4));%></option>
-                         <%   
-                         }
-                        } 
-                   catch(Exception e) 
-                      { 
-                      out.print("error" +e); 
-                      }
-                        %>  
-                         
-                        </select>
-                  </div>  </div>
                         
-                <div class="col-sm-8">
-                  <div class="form-group form-group-default">
-                        <label>Phone No</label>
-                        <input type="text" class="form-control" id="phone" placeholder="Phone No" minlength="10" maxlength="10"  onkeypress="return validate(event)" name="phone" value="" required>
-                        </div>
-                </div>   </div>
-                   
-                       <div id="uploadFormLayer">
-                           <label><b>Upload Image File:</b></label>
-                           <input name="userImage" type="file" class="inputFile" onchange="readURL(this);"  /> <br>
-	<script type="text/javascript">
-									function readURL(input) {
-									if (input.files && input.files[0]) {
-									var reader = new FileReader();
-									reader.onload = function (e) {
-									$('#tempImg')
-									.attr('src', e.target.result)
-									.width(125)
-									.height(125);
-									$('#flag').val("1");
-									};
-									reader.readAsDataURL(input.files[0]);
-									}
-									}
-									</script>
-									<input type="hidden" id="flag" name="flag">
-	<img id="tempImg"  src="" width="125" height="125"> 
- </div>  
-                   
-                       
-
-                             <button class="btn btn-primary btn-cons m-t-10" type="submit">Save </button>
-                               <button class="btn btn-primary btn-cons m-t-10" type="submit">Cancel </button>
-   
+                      
+                      <div class="form-group form-group-default required">
+                        <label>Link</label>
+                        <input type="text" id="link" name="link" class="form-control" required>
+                      </div> <br>
+                      <div id="msgbox1"></div>       <button class="btn btn-success" type="submit">Add</button>
+                         <button class="btn btn-success" type="submit">Clear</button>
+                      
                     </form>
-             
-      
-            
           </div>
         </div>
       </div>
     </div>
     </div>
+     
           <!-- END CONTAINER FLUID -->
         </div>
-                   
         <!-- END PAGE CONTENT -->
         <!-- START COPYRIGHT -->
         <!-- START CONTAINER FLUID -->
@@ -1961,7 +1924,7 @@
     </div>
     <!-- END OVERLAY -->
     <!-- BEGIN VENDOR JS -->
-     <script src="assets/plugins/pace/pace.min.js" type="text/javascript"></script>
+    <script src="assets/plugins/pace/pace.min.js" type="text/javascript"></script>
     <script src="assets/plugins/jquery/jquery-1.11.1.min.js" type="text/javascript"></script>
     <script src="assets/plugins/modernizr.custom.js" type="text/javascript"></script>
     <script src="assets/plugins/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
@@ -1975,24 +1938,14 @@
     <script type="text/javascript" src="assets/plugins/bootstrap-select2/select2.min.js"></script>
     <script type="text/javascript" src="assets/plugins/classie/classie.js"></script>
     <script src="assets/plugins/switchery/js/switchery.min.js" type="text/javascript"></script>
-    <script src="assets/plugins/bootstrap3-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
-    <script type="text/javascript" src="assets/plugins/jquery-autonumeric/autoNumeric.js"></script>
-    <script type="text/javascript" src="assets/plugins/dropzone/dropzone.min.js"></script>
-    <script type="text/javascript" src="assets/plugins/bootstrap-tag/bootstrap-tagsinput.min.js"></script>
-    <script type="text/javascript" src="assets/plugins/jquery-inputmask/jquery.inputmask.min.js"></script>
-    <script src="assets/plugins/boostrap-form-wizard/js/jquery.bootstrap.wizard.min.js" type="text/javascript"></script>
     <script src="assets/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
     <script src="assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
-    <script src="assets/plugins/summernote/js/summernote.min.js" type="text/javascript"></script>
-    <script src="assets/plugins/moment/moment.min.js"></script>
-    <script src="assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
-    <script src="assets/plugins/bootstrap-timepicker/bootstrap-timepicker.min.js"></script>
     <!-- END VENDOR JS -->
     <!-- BEGIN CORE TEMPLATE JS -->
     <script src="pages/js/pages.min.js"></script>
     <!-- END CORE TEMPLATE JS -->
     <!-- BEGIN PAGE LEVEL JS -->
-    <script src="assets/js/form_elements.js" type="text/javascript"></script>
+    <script src="assets/js/form_layouts.js" type="text/javascript"></script>
     <script src="assets/js/scripts.js" type="text/javascript"></script>
     <!-- END PAGE LEVEL JS -->
   </body>

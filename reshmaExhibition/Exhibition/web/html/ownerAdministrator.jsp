@@ -1,21 +1,18 @@
 <%-- 
-    Document   : exhibitionSector
-    Created on : Jan 27, 2016, 5:15:09 PM
+    Document   : ckvindex
+    Created on : Jan 22, 2016, 4:48:07 PM
     Author     : Admin
 --%>
 
 
 <%@page import="exhibitionAdministrator.exhibitionAdministratorOneTimeConnection"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
- <%@page import="java.io.*;" %>
-  <%@page import="java.sql.*;" %>
-  <%@page import="java.sql.DriverManager;" %>
 <!DOCTYPE html>
 <html>
   <head>
     <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
     <meta charset="utf-8" />
-    <title>Pages - Admin Dashboard UI Kit - Form Layouts</title>
+    <title>Pages - Admin Dashboard UI Kit - Form Wizard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no" />
     <link rel="apple-touch-icon" href="pages/ico/60.png">
     <link rel="apple-touch-icon" sizes="76x76" href="pages/ico/76.png">
@@ -33,22 +30,30 @@
     <link href="assets/plugins/jquery-scrollbar/jquery.scrollbar.css" rel="stylesheet" type="text/css" media="screen" />
     <link href="assets/plugins/bootstrap-select2/select2.css" rel="stylesheet" type="text/css" media="screen" />
     <link href="assets/plugins/switchery/css/switchery.min.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="assets/plugins/bootstrap-timepicker/bootstrap-timepicker.min.css" rel="stylesheet" type="text/css" media="screen">
+    <link href="assets/plugins/pace/pace-theme-flash.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/boostrapv3/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/jquery-scrollbar/jquery.scrollbar.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="assets/plugins/bootstrap-select2/select2.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="assets/plugins/switchery/css/switchery.min.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="assets/plugins/bootstrap3-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/bootstrap-tag/bootstrap-tagsinput.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/dropzone/css/dropzone.css" rel="stylesheet" type="text/css" />
     <link href="assets/plugins/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet" type="text/css" media="screen">
+    <link href="assets/plugins/summernote/css/summernote.css" rel="stylesheet" type="text/css" media="screen">
+    <link href="assets/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" media="screen">
     <link href="pages/css/pages-icons.css" rel="stylesheet" type="text/css">
     <link class="main-stylesheet" href="pages/css/pages.css" rel="stylesheet" type="text/css" />
-      <script src="assets/js/phoneNoValidation.js" type="text/javascript"></script>
-    <!--[if lte IE 9]>
-	<link href="assets/plugins/codrops-dialogFx/dialog.ie.css" rel="stylesheet" type="text/css" media="screen" />
-	<![endif]-->
-
+    
   </head>
   <body class="fixed-header ">
     <!-- BEGIN SIDEBPANEL-->
-    <nav class="page-sidebar" data-pages="sidebar">
-      <!-- BEGIN SIDEBAR MENU TOP TRAY CONTENT-->
-      <div class="sidebar-overlay-slide from-top" id="appMenu">
-        <div class="row">
-          <div class="col-xs-6 no-padding">
+        <nav class="page-sidebar" data-pages="sidebar">
+          <!-- BEGIN SIDEBAR MENU TOP TRAY CONTENT-->
+          <div class="sidebar-overlay-slide from-top" id="appMenu">
+           <div class="row">
+            <div class="col-xs-6 no-padding">
             <a href="#" class="p-l-40"><img src="assets/img/demo/social_app.svg" alt="socail">
             </a>
           </div>
@@ -83,242 +88,85 @@
       <!-- START SIDEBAR MENU -->
       <div class="sidebar-menu">
         <!-- BEGIN SIDEBAR MENU ITEMS-->
-       <ul class="menu-items">
-          <li class="m-t-30 ">
-            <a href="index.html" class="detailed">
-              <span class="title">Dashboard</span>
-              <span class="details">12 New Updates</span>
+        <ul class="menu-items">  
+            <li class="">
+            <a href="index.jsp" class="detailed">
+                 <span class="title">Dashboard</span>
+                 <span class="details">No items</span>
             </a>
             <span class="bg-success icon-thumbnail"><i class="pg-home"></i></span>
-          </li>
-          <li class="">
-            <a href="/Exhibition/html/exhibitionAdministratorProfilePage.jsp" class="detailed">
+            </li>
+            <li class="">
+            <a href="ownerProfile.jsp" class="detailed">
               <span class="title">Profile</span>
-          <!--  <span class="details">19 items</span>  -->
+              <span class="details">No items</span>
             </a>
-            <span class="icon-thumbnail">p</i></span>
-          </li>
-         
-             <li>
-            <a href="javascript:;"><span class="title">Manage Moderators</span>
+            <span class="icon-thumbnail">P</span>
+            </li>
+            <li>
+            <a href="javascript:;"><span class="title">Exhibitions</span>
             <span class=" arrow"></span></a>
-            <span class="icon-thumbnail"><i class="pg-calender"></i></span>
+            <span class="bg-success icon-thumbnail"><i class="pg-home"></i></span>
             <ul class="sub-menu">
-                 <li class="">
-                <a href="createModerator.jsp">Create Moderators</a>
-                <span class="icon-thumbnail">c</span>
-              </li>
-              <li class="">
-                <a href="assignRolesModerator.jsp">Assign Roles</a>
-                <span class="icon-thumbnail">c</span>
-              </li>
-              <li class="">
-                <a href="viewModerator.jsp">View Moderator</a>
-                <span class="icon-thumbnail">c</span>
-              </li>
-              <li class="">
-                <a href="editModerator.jsp">Edit Moderator</a>
-                <span class="icon-thumbnail">L</span>
-              </li>
-              <li class="">
-                <a href="deleteModerator.jsp">Delete Moderator </a>
-                <span class="icon-thumbnail">M</span>
-              </li>
-             
-            </ul>
-          </li>
-         <li>
-            <a href="javascript:;"><span class="title">Manage Exhibition</span>
-            <span class=" arrow"></span></a>
-            <span class="icon-thumbnail"><i class="pg-calender"></i></span>
-              <ul class="sub-menu">
-                   <li>
-                <a href="#"><span class="title">Sectors</span>
-                <span class="arrow"></span></a>
-              
-                <ul class="sub-menu">
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorAddSector.jsp">Add Sectors</a>
-                    <span class="icon-thumbnail">AS</span>
-                  </li>
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorSector.jsp">Edit/Delete Sectors</a>
-                  <span class="icon-thumbnail">S</span>
-                  </li>
-                </ul>
-              </li>
-                <li>
-                <a href="#"><span class="title">Exhibition Team</span>
-                <span class="arrow"></span></a>
-              
-                <ul class="sub-menu">
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorAddExhibitionTeam.jsp">Add Team</a>
-                    <span class="icon-thumbnail">AET</span>
-                  </li>
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorTeam.jsp">Edit/Delete Team</a>
-                  <span class="icon-thumbnail">ET</span>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <a href="#"><span class="title"> Social Media</span>
-                <span class="arrow"></span></a>
-              
-                <ul class="sub-menu">
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorAddSocialMedia.jsp">Add Social Media</a>
-                    <span class="icon-thumbnail">ASM</span>
-                  </li>
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorSocialMedia.jsp">Edit/Delete Social Media</a>
-                  <span class="icon-thumbnail">SM</span>
-                  </li>
-                </ul>
-              </li>
-               <li>
-                <a href="#"><span class="title">Opportunity</span>
-                <span class="arrow"></span></a>
-              
-                <ul class="sub-menu">
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorAddOpportunity.jsp">Add Opportunity</a>
-                    <span class="icon-thumbnail">AO</span>
-                  </li>
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorOpportunity.jsp">Edit/Delete Opportunity</a>
-                  <span class="icon-thumbnail">O</span>
-                  </li>
-                </ul>
-              </li>
-              
-                <li>
-                <a href="#"><span class="title">FAQ</span>
-                <span class="arrow"></span></a>
-              
-                <ul class="sub-menu">
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorAddFAQ.jsp">Add FAQ</a>
-                    <span class="icon-thumbnail">AF</span>
-                  </li>
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorFAQ.jsp">Edit/Delete FAQ</a>
-                  <span class="icon-thumbnail">F</span>
-                  </li>
-                </ul>
-              </li>
-              
-                <li>
-                <a href="#"><span class="title">Facilities</span>
-                <span class="arrow"></span></a>
-              
-                <ul class="sub-menu">
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorAddFacilities.jsp">Add Facilities</a>
-                    <span class="icon-thumbnail">AF</span>
-                  </li>
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorFacilities.jsp">Edit/Delete Facilities</a>
-                  <span class="icon-thumbnail">F</span>
-                  </li>
-                </ul>
-              </li>
-            
-              <li class="">
-                <a href="exhibitionAddress.jsp">Add Exhibition Address </a>
-                <span class="icon-thumbnail">M</span>
-              </li>  
-               <li class="">
-                <a href="exhibitionBooth.jsp">Add Booths </a>
-                <span class="icon-thumbnail">M</span>
-              </li>
-               <li class="">
-                <a href="exhibitionEvent.jsp">Exhibition Event</a>
-                <span class="icon-thumbnail">M</span>
-              </li>
-               <li class="">
-                <a href="exhibitionSpeaker.jsp"> Exhibition Speakers  </a>
-                <span class="icon-thumbnail">M</span>
-              </li>
-               <li class="">
-                <a href="photoVideo.jsp">Photos/Videos/Blogs</a>
-                <span class="icon-thumbnail">M</span>
-              </li>
                 <li class="">
-                <a href="news.jsp">News</a>
-                <span class="icon-thumbnail">M</span>
-              </li>
-              <li class="">
-                <a href="exhibitionRegistrationPage.jsp">Create Exhibition Registration Page</a>
-                <span class="icon-thumbnail">M</span>
-              </li>
+                <a href="ownerExhibition.jsp">Add Exhibitions</a>
+                <span class="icon-thumbnail">P</span>
+                </li>
+               
+                <li class="">
+                <a href="ownerAdministrator.jsp">Add Administrator</a>
+                <span class="icon-thumbnail">Mv</span>
+                </li>
             </ul>
-              
-          </li>
-           
-           <li>
-            <a href="javascript:;"><span class="title">Manage Exhibitor</span>
-            <span class=" arrow"></span></a>
-            <span class="icon-thumbnail"><i class="pg-calender"></i></span>
-            <ul class="sub-menu">
-                 <li class="">
-                <a href="createExhibitor.jsp"> Create Exhibitor </a>
-                <span class="icon-thumbnail">c</span>
-              </li>
-              <li class="">
-                <a href="viewExhibitor.jsp">View Exhibitor</a>
-                <span class="icon-thumbnail">c</span>
-              </li>
-              <li class="">
-                <a href="editExhibitor.jsp">Edit Exhibitor</a>
-                <span class="icon-thumbnail">L</span>
-              </li>
-              <li class="">
-                <a href="deleteExhibitor.jsp">Delete Exhibitor </a>
-                <span class="icon-thumbnail">M</span>
-              </li>
-              
-            </ul>
-          </li>
-      
-          <li>
-            <a href="javascript:;"><span class="title">Manage Visitors</span>
-            <span class=" arrow"></span></a>
-            <span class="icon-thumbnail"><i class="pg-calender"></i></span>
-            <ul class="sub-menu">
-              <li class="">
-                <a href="viewVisitor.jsp">View Visitors</a>
-                <span class="icon-thumbnail">c</span>
-              </li>
-              <li class="">
-                <a href="editVisitor.jsp">Edit visitors</a>
-                <span class="icon-thumbnail">L</span>
-              </li>
-              <li class="">
-                <a href="deleteVisitor.jsp">Delete Visitors </a>
-                <span class="icon-thumbnail">M</span>
-              </li>
-             
-            </ul>
-          </li>
-           <li class="">
-            <a href="notification.jsp">
-              <span class="title">Manage Notification</span>
-            </a>
-            <span class="icon-thumbnail"><i class="pg-layouts"></i></span>
-          </li>
-          <li class="">
-            <a href="report.jsp"><span class="title">Reports</span>
-            </a>
-            <span class="icon-thumbnail"><i class="pg-layouts2"></i></span> 
+            </li> 
+            <li>
+                <a href="javascript:;"><span class="title">Exhibitors</span>
+                <span class=" arrow"></span></a>
+                <span class="bg-success icon-thumbnail"><i class="pg-home"></i></span>
+                <ul class="sub-menu">
+                <li class="">
+                <a href="ckvProfile.jsp">View Exhibitors</a>
+                <span class="icon-thumbnail">P</span>
+                </li>  
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;"><span class="title">Visitors</span>
+                <span class=" arrow"></span></a>
+                <span class="bg-success icon-thumbnail"><i class="pg-home"></i></span>
+                <ul class="sub-menu">
+                <li class="">
+                <a href="ckvProfile.jsp">View Visitors</a>
+                <span class="icon-thumbnail">P</span>
+                </li>
+                </ul>
+            </li>
+            <li class="">
+                <a href="ckvNotification.jsp" class="detailed">
+                <span class="title">Notification</span>
+                <span class="details">12 New Notification</span>
+                </a>
+                <span class="icon-thumbnail">N</span>
+            </li>
+            <li class="">
+                <a href="ckvNotification.jsp" class="detailed">
+                <span class="title">Reports</span>
+                </a>
+                <span class="icon-thumbnail">R</span>
+            </li>
+            <li class="">
+                <a href="ckvNotification.jsp" class="detailed">
+                <span class="title">Privacy</span>
+                </a>
+           `    <span class="icon-thumbnail">P</span>
+            </li>
+        </ul>
         
-          </li>
-          </ul>
         <div class="clearfix"></div>
       </div>
       <!-- END SIDEBAR MENU -->
     </nav>
+    
     <!-- END SIDEBAR -->
     <!-- END SIDEBPANEL-->
     <!-- START PAGE-CONTAINER -->
@@ -526,178 +374,138 @@
         </div>
       </div>
       <!-- END HEADER -->
-      <!-- START PAGE CONTENT WRAPPER -->
-  <div class="page-content-wrapper ">
-        <!-- START PAGE CONTENT -->
-   <div class="content ">
-    <div class="panel-body">
-   <div class="register-container full-height sm-p-t-30">
-      <div class="container-sm-height full-height">
-        <div class="row row-sm-height">
-          <div class="col-sm-12 col-sm-height col-middle">
-  <!--          <img src="assets/img/logo.png" alt="logo" data-src="assets/img/logo.png" data-src-retina="assets/img/logo_2x.png" width="78" height="22">
-            <h3>Pages makes it easy to enjoy what matters the most in your life</h3>
-            <p>
-              <small>
-        Create a pages account. If you have a facebook account, log into it for this process. Sign in with <a href="#" class="text-info">Facebook</a> or <a href="#" class="text-info">Google</a>
-    </small>
-  </p> --><p><h1><b>Add Contact Information ...!</b></h1></p>
-          
-           
-            <form action="/Exhibition/html/exhibitionAdministratorContactInfromationAddImageData.jsp" method="post" enctype="multipart/form-data" role="form" class="p-t-15" id="login" name="login"  >  
-                    
-                  
-                    
-                       <div class="row">
-                <div class="col-sm-12">
-                  <div class="form-group form-group-default">
-                        <label>Title</label>
-                       
-                            <input type="text" class="form-control" id="title" name="title" placeholder="Title" value="" required>
-                       </div>
-                       
-                </div> </div>
-                         <div class="row">
-                <div class="col-sm-12">
-                  <div class="form-group form-group-default">
-                        <label>First Name</label>
-                            <input type="text" class="form-control" id="firstName" placeholder="First Name" name="firstName" value="" required>
-                  </div> </div></div>
-                   
-                         <div class="row">
-                <div class="col-sm-12">
-                  <div class="form-group form-group-default">
-                        <label>Last Name</label>
-                            <input type="text" class="form-control" id="lastName" placeholder="lastName" name="lastName" value="" required>
-                        </div>
-                </div> </div>
-                           <div class="row">
-                <div class="col-sm-12">
-                  <div class="form-group form-group-default">
-                    
-                                <label for="designation" class="col-sm-7 control-label">  Date Of Birth   </label>
-                                <div style="text-align:right;padding-right:5%;"> <span class="input-lg"> <i class="fa fa-calendar"></i> </span>
-                                </div>                             
-                    <input type="text" class="form-control" data-date-format="yyyy-mm-dd" placeholder="Pick a date" id="datepicker-component2" name="dateOfBirth" value="" required>
-                     
-                   
-                    </div>
-                </div>  </div>
-                 
-                          <div class="row">
-                <div class="col-sm-12">
-                  <div class="form-group form-group-default">
-                        <label>Level</label>
-                            <input type="text" class="form-control" id="level" placeholder="level" name="level" value="" required>
-                        </div>
-                </div> </div>  
-                           <div class="row">
-                <div class="col-sm-12">
-                  <div class="form-group form-group-default">
-                        <label>Designation</label>
-                            <input type="text" class="form-control" id="degination" placeholder="Designation" name="degination" value=""  required>
-                        </div>
-                </div>  </div> 
-                           <div class="row">
-                               <div class="col-sm-4">
-                                    
-                  <div class="form-group form-group-default">
-                         <label>Country Code</label>
-                                 <%    
-                    try { 
-                         
-                           Connection con;
-                           con= exhibitionAdministratorOneTimeConnection.getConnection(); 
-                           Statement sta1=con.createStatement();
-                           ResultSet rsy=sta1.executeQuery("select * from country ");
-                           int cou1=0;
-                     %>
-                     
-                        <select class="full-width" data-init-plugin="select2" name="contactCountryId" id="contactCountryId">
-                           
-                       <optgroup label="Select id">
-                         <% while(rsy.next())
-                         { 
-                           String id1=rsy.getString(1);
-                         
-                         %>
-                        <option value="<%=id1%>"><%out.print(rsy.getString(4));%></option>
-                         <%   
-                         }
-                        } 
-                   catch(Exception e) 
-                      { 
-                      out.print("error" +e); 
-                      }
-                        %>  
-                         
-                        </select>
-                  </div>  </div>
-                        
-                <div class="col-sm-8">
-                  <div class="form-group form-group-default">
-                        <label>Phone No</label>
-                        <input type="text" class="form-control" id="phone" placeholder="Phone No" minlength="10" maxlength="10"  onkeypress="return validate(event)" name="phone" value="" required>
-                        </div>
-                </div>   </div>
-                   
-                       <div id="uploadFormLayer">
-                           <label><b>Upload Image File:</b></label>
-                           <input name="userImage" type="file" class="inputFile" onchange="readURL(this);"  /> <br>
-	<script type="text/javascript">
-									function readURL(input) {
-									if (input.files && input.files[0]) {
-									var reader = new FileReader();
-									reader.onload = function (e) {
-									$('#tempImg')
-									.attr('src', e.target.result)
-									.width(125)
-									.height(125);
-									$('#flag').val("1");
-									};
-									reader.readAsDataURL(input.files[0]);
-									}
-									}
-									</script>
-									<input type="hidden" id="flag" name="flag">
-	<img id="tempImg"  src="" width="125" height="125"> 
- </div>  
-                   
-                       
-
-                             <button class="btn btn-primary btn-cons m-t-10" type="submit">Save </button>
-                               <button class="btn btn-primary btn-cons m-t-10" type="submit">Cancel </button>
-   
-                    </form>
-             
       
+      
+      <!-- START PAGE CONTENT WRAPPER -->
+      <div class="page-content-wrapper ">
+        <!-- START PAGE CONTENT -->
+        <div class="content ">
+          <!-- START CONTAINER FLUID -->
+          <div class="container-fluid container-fixed-lg bg-white">
+            <div class="row">
+             <div class="tab-pane slide-left padding-20" id="tab2">
+                    
+                 
+               <div class="container-fluid container-fixed-lg">
+            <!-- START PANEL -->
+            <div class="panel panel-transparent">
+              <div class="panel-heading">
+                <div class="panel-title">
+                </div>
+                <div class="pull-right">
+                  <div class="col-xs-12">
+                      <button id="show-modal" class="btn btn-primary btn-cons btn-animated from-left fa fa-arrow-right" onclick="document.location.href='/Exhibition/html/ownerAddAdministrator.jsp';"><i class="fa fa-plus"></i> 
+                          <span>Add Administrator</span>
+                      </button>
+                  </div>
+                </div>
+                <div class="clearfix"></div>
+              </div>
+              <div class="panel-body">
+                  
+              
+                
+              
+               <table class="table table-hover demo-table-search" id="tableWithSearch">
+                     <%@page import="java.io.*;" %>
+                     <%@page import="java.sql.*;" %>
+                     <%@page import="java.sql.DriverManager;" %>
+                     <thead>
+                        <tr>
+                          <!--  <th>ID</th> -->
+                        <th>Date</th>
+                        <th>UserName</th>           
+                        <th>Email</th>
+                        <th>Mobile No</th>
+                        <th>Exhibition</th>
+                        <th>Update/Delete.</th>
+                        </tr>
+                  </thead>
+                  <tbody>
+                    <%   
+                         HttpSession ss=request.getSession();
+                         //String idd=(String)ss.getAttribute("ownerId");
+                         Connection con1;
+                          con1=exhibitionAdministratorOneTimeConnection.getConnection();
+                         Statement stat1=con1.createStatement();
+                         ResultSet rs1=stat1.executeQuery("select a.*,b.* from exhibitionAdmin a,exhibition b where a.exhibitionId=b.id");
+                         int count1=0;
+                        
+                         while(rs1.next())
+                         {
+                            count1++;
+                            
+                           out.println("<tr >");
+                           out.println("<td class='v-align-middle semi-bold'><p>"+rs1.getString(8)+"</p></td>");
+                           out.println("<td class='v-align-middle semi-bold'><p>"+rs1.getString(5)+"</p></td>");
+                           out.println("<td class='v-align-middle semi-bold'><p>"+rs1.getString(4)+"</p></td>");
+                           out.println("<td class='v-align-middle semi-bold'><p>"+rs1.getString(3)+"</p></td>");
+                           out.println("<td class='v-align-middle semi-bold'><p>"+rs1.getString("name")+"</p></td>");
+                           String adminId=rs1.getString(1);
+                           String exhAdminId=rs1.getString(2);
+                           HttpSession ss1=request.getSession();
+                           ss1.setAttribute("exhAdminId",exhAdminId); 
+                  %>
+                          
+                             <td>
+                                 <div class="btn-group">
+                                 <button  type="button" class="btn btn-success" onclick="document.location.href='/Exhibition/html/ownerAdminUpdate.jsp?adminId=<%= adminId %>';"><i class="fa fa-pencil"></i></button>
+                                 <button type="button" class="btn btn-success" id="btnToggleSlideUpSize" ><i class="fa fa-trash-o"></i>
+                                 </button>
+                                 </div>
+                            </td>
+                            
+                            
+                            <%
+                            out.println(" </tr>");  %>
+                           
+                       <div class="modal fade slide-up disable-scroll" id="modalSlideUp" tabindex="-1" role="dialog" aria-hidden="false">
+                      <div class="modal-dialog">
+                      <div class="modal-content-wrapper">
+                      <div class="modal-content">
+                      <div class="modal-body text-center m-t-20">
+                     <h4 class="no-margin p-b-10">Do you really want to delete this row ?</h4>
+                     <button type="button" class="btn btn-primary btn-cons" data-dismiss="modal">Continue</button>
+                      <button type="button" type="button" class="btn btn-primary btn-cons" data-dismiss="modal">Cancel</button>
+                       </div>
+                    </div>
+                    </div> 
+                      </div>
+                    </div>
+                            
+                            <%
+                        }
+                       
+                   %>   
+                   </tbody>
+                </table>
+              </div>
+            </div>
+            <!-- END PANEL -->
+          </div>
             
+            
+                </div>
+                  </div>
+                </div>
+                <!-- END PANEL -->
+              </div>
+          
+            </div>
+            </div>
+          </div>
+          <!-- END CONTAINER FLUID -->  
           </div>
         </div>
-      </div>
-    </div>
-    </div>
-          <!-- END CONTAINER FLUID -->
-        </div>
-                   
         <!-- END PAGE CONTENT -->
+        
+        
+        
+        
         <!-- START COPYRIGHT -->
         <!-- START CONTAINER FLUID -->
         <!-- START CONTAINER FLUID -->
-        <div class="container-fluid container-fixed-lg footer">
-          <div class="copyright sm-text-center">
-            <p class="small no-margin pull-left sm-pull-reset">
-              <span class="hint-text">Copyright &copy; 2014 </span>
-              <span class="font-montserrat">REVOX</span>.
-              <span class="hint-text">All rights reserved. </span>
-              <span class="sm-block"><a href="#" class="m-l-10 m-r-10">Terms of use</a> | <a href="#" class="m-l-10">Privacy Policy</a></span>
-            </p>
-            <p class="small no-margin pull-right sm-pull-reset">
-              <a href="#">Hand-crafted</a> <span class="hint-text">&amp; Made with Love ®</span>
-            </p>
-            <div class="clearfix"></div>
-          </div>
-        </div>
+       
         <!-- END COPYRIGHT -->
       </div>
       <!-- END PAGE CONTENT WRAPPER -->
@@ -1961,7 +1769,7 @@
     </div>
     <!-- END OVERLAY -->
     <!-- BEGIN VENDOR JS -->
-     <script src="assets/plugins/pace/pace.min.js" type="text/javascript"></script>
+    <script src="assets/plugins/pace/pace.min.js" type="text/javascript"></script>
     <script src="assets/plugins/jquery/jquery-1.11.1.min.js" type="text/javascript"></script>
     <script src="assets/plugins/modernizr.custom.js" type="text/javascript"></script>
     <script src="assets/plugins/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
@@ -1992,7 +1800,72 @@
     <script src="pages/js/pages.min.js"></script>
     <!-- END CORE TEMPLATE JS -->
     <!-- BEGIN PAGE LEVEL JS -->
-    <script src="assets/js/form_elements.js" type="text/javascript"></script>
+    <script src="assets/js/form_wizard.js" type="text/javascript"></script>
+    <script src="assets/js/scripts.js" type="text/javascript"></script>
+    
+    
+    
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no" />
+    <link rel="apple-touch-icon" href="pages/ico/60.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="pages/ico/76.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="pages/ico/120.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="pages/ico/152.png">
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+    <link href="assets/plugins/pace/pace-theme-flash.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/boostrapv3/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/jquery-scrollbar/jquery.scrollbar.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="assets/plugins/bootstrap-select2/select2.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="assets/plugins/switchery/css/switchery.min.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="pages/css/pages-icons.css" rel="stylesheet" type="text/css">
+    <link class="main-stylesheet" href="pages/css/pages.css" rel="stylesheet" type="text/css" />
+    <!--[if lte IE 9]>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+         <script src="assets/plugins/pace/pace.min.js" type="text/javascript"></script>
+    <script src="assets/plugins/jquery/jquery-1.11.1.min.js" type="text/javascript"></script>
+    <script src="assets/plugins/modernizr.custom.js" type="text/javascript"></script>
+    <script src="assets/plugins/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
+    <script src="assets/plugins/boostrapv3/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="assets/plugins/jquery/jquery-easy.js" type="text/javascript"></script>
+    <script src="assets/plugins/jquery-unveil/jquery.unveil.min.js" type="text/javascript"></script>
+    <script src="assets/plugins/jquery-bez/jquery.bez.min.js"></script>
+    <script src="assets/plugins/jquery-ios-list/jquery.ioslist.min.js" type="text/javascript"></script>
+    <script src="assets/plugins/jquery-actual/jquery.actual.min.js"></script>
+    <script src="assets/plugins/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+    <script type="text/javascript" src="assets/plugins/bootstrap-select2/select2.min.js"></script>
+    <script type="text/javascript" src="assets/plugins/classie/classie.js"></script>
+    <script src="assets/plugins/switchery/js/switchery.min.js" type="text/javascript"></script>
+    <!-- END VENDOR JS -->
+    <!-- BEGIN CORE TEMPLATE JS -->
+    <script src="pages/js/pages.min.js"></script>
+    <!-- END CORE TEMPLATE JS -->
+    <!-- BEGIN PAGE LEVEL JS -->
+    <script src="assets/js/demo.js" type="text/javascript"></script>
     <script src="assets/js/scripts.js" type="text/javascript"></script>
     <!-- END PAGE LEVEL JS -->
   </body>

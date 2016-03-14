@@ -64,13 +64,12 @@ public class ownerAddAdministrator extends HttpServlet {
                           Connection con6;
              con6=exhibitionAdministratorOneTimeConnection.getConnection();
                         String idL=(String)idC.getAttribute("idCopy");
-                        out.print(idL);
-                         String query="insert into exhibitionAdminContact(id,title,firstName,lastName,gender,dateOfBirth,level,degination,phoneNo,createdBy,modifiedBy,modifiedByFlag,photoMediaId,countryId)values('"+idL+"','','','',NULL,0,0,'','',0,0,0,0,0)";
+                         String query="insert into exhibitionAdminContact(id,title,firstName,lastName,gender,dateOfBirth,level,degination,phoneNo,createdBy,modifiedBy,modifiedByFlag,photoMediaId,countryId)values('"+idL+"','','','','0',0,0,'','',0,0,0,0,0)";
                          PreparedStatement pt=con6.prepareStatement(query);
                          pt.executeUpdate();
                     
             //Redirected to ownerAdministrator page
-          //response.sendRedirect("/Exhibition/html/ownerAdministrator.jsp");
+         response.sendRedirect("/Exhibition/html/ownerAdministrator.jsp");
            }
         catch(Exception ee)
         {
