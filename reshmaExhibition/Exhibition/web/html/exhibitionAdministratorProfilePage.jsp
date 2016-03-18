@@ -47,9 +47,9 @@
     <!--[if lte IE 9]>
 	<link href="assets/plugins/codrops-dialogFx/dialog.ie.css" rel="stylesheet" type="text/css" media="screen" />
 	<![endif]-->
-<!--      <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="pages/js/jquery-1.4.2.min.js"></script>
-   
+    
   <script type="text/javascript">
 	$(document).ready(function(){
 		$("#login").submit(function(){
@@ -104,7 +104,7 @@
  		});		
 
 	});
-   </script>  -->
+   </script> 
             
     <style>
 #exists{display:none}
@@ -138,8 +138,7 @@
 	-webkit-border-radius:4px;
 	text-align:left;
 }
-</style>
-
+</style> 
 
   
 <script type="text/javascript">
@@ -242,96 +241,35 @@
             <span class="icon-thumbnail"><i class="pg-calender"></i></span>
               <ul class="sub-menu">
                    <li>
-                <a href="#"><span class="title">Sectors</span>
-                <span class="arrow"></span></a>
-              
-                <ul class="sub-menu">
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorAddSector.jsp">Add Sectors</a>
-                    <span class="icon-thumbnail">AS</span>
-                  </li>
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorSector.jsp">Edit/Delete Sectors</a>
+                       <a href="/Exhibition/html/exhibitionAdministratorSector.jsp"><span class="title">Sectors</span></a>
                   <span class="icon-thumbnail">S</span>
-                  </li>
-                </ul>
               </li>
                 <li>
-                <a href="#"><span class="title">Exhibition Team</span>
-                <span class="arrow"></span></a>
-              
-                <ul class="sub-menu">
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorAddExhibitionTeam.jsp">Add Team</a>
-                    <span class="icon-thumbnail">AET</span>
-                  </li>
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorTeam.jsp">Edit/Delete Team</a>
-                  <span class="icon-thumbnail">ET</span>
-                  </li>
-                </ul>
+                    <a href="/Exhibition/html/exhibitionAdministratorTeam.jsp"><span class="title">Exhibition Team</span></a>
+                  <span class="icon-thumbnail">T</span>
               </li>
               <li>
-                <a href="#"><span class="title"> Social Media</span>
-                <span class="arrow"></span></a>
-              
-                <ul class="sub-menu">
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorAddSocialMedia.jsp">Add Social Media</a>
-                    <span class="icon-thumbnail">ASM</span>
-                  </li>
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorSocialMedia.jsp">Edit/Delete Social Media</a>
-                  <span class="icon-thumbnail">SM</span>
-                  </li>
-                </ul>
+                <a href="/Exhibition/html/exhibitionAdministratorSocialMedia.jsp"><span class="title"> Social Media</span>
+               </a>
+                <span class="icon-thumbnail">SM</span>
               </li>
                <li>
-                <a href="#"><span class="title">Opportunity</span>
-                <span class="arrow"></span></a>
-              
-                <ul class="sub-menu">
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorAddOpportunity.jsp">Add Opportunity</a>
-                    <span class="icon-thumbnail">AO</span>
-                  </li>
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorOpportunity.jsp">Edit/Delete Opportunity</a>
-                  <span class="icon-thumbnail">O</span>
-                  </li>
-                </ul>
+                <a href="/Exhibition/html/exhibitionAdministratorOpportunity.jsp"><span class="title">Opportunity</span>
+               </a>
+                <span class="icon-thumbnail">O</span>
               </li>
               
                 <li>
-                <a href="#"><span class="title">FAQ</span>
-                <span class="arrow"></span></a>
-              
-                <ul class="sub-menu">
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorAddFAQ.jsp">Add FAQ</a>
-                    <span class="icon-thumbnail">AF</span>
-                  </li>
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorFAQ.jsp">Edit/Delete FAQ</a>
-                  <span class="icon-thumbnail">F</span>
-                  </li>
-                </ul>
+                <a href="/Exhibition/html/exhibitionAdministratorFAQ.jsp"><span class="title">FAQ</span>
+               </a>
+                 <span class="icon-thumbnail">F</span>
+               
               </li>
               
                 <li>
-                <a href="#"><span class="title">Facilities</span>
-                <span class="arrow"></span></a>
-              
-                <ul class="sub-menu">
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorAddFacilities.jsp">Add Facilities</a>
-                    <span class="icon-thumbnail">AF</span>
-                  </li>
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorFacilities.jsp">Edit/Delete Facilities</a>
-                  <span class="icon-thumbnail">F</span>
-                  </li>
-                </ul>
+                <a href="/Exhibition/html/exhibitionAdministratorFacilities.jsp"><span class="title">Facilities</span>
+                </a>
+                 <span class="icon-thumbnail">EF</span>
               </li>
             
               <li class="">
@@ -359,7 +297,7 @@
                 <span class="icon-thumbnail">M</span>
               </li>
               <li class="">
-                <a href="exhibitionRegistrationPage.jsp">Create Exhibition Registration Page</a>
+                <a href="/Exhibition/html/exhibitorRegister.jsp">Create Exhibition Registration Page</a>
                 <span class="icon-thumbnail">M</span>
               </li>
             </ul>
@@ -702,21 +640,21 @@
                         %> 
                     
                     
-                    <form id="login" name="login" class="form-horizontal" role="form" autocomplete="off" action="" method="">
+                        <form id="login" name="login"  class="form-horizontal" role="form" autocomplete="off" action="" method="">
                   
                     
                      
                         <div class="form-group">
                         <label for="fname" class="col-sm-3 control-label">Mobile No</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="mobileNo" name="mobileNo" placeholder="mobile No " value="<%out.print(rs34.getString("mobileNo"));%>" required>
+                            <input type="text" class="form-control" id="mobileNo" name="mobileNo" maxlength="10" onkeypress="return validate(event)"  placeholder="mobile No " value="<%out.print(rs34.getString("mobileNo"));%>" required>
                        </div>
                       
                       </div>
                         <div class="form-group">
                         <label for="fname" class="col-sm-3 control-label">Email</label>
                         <div class="col-sm-9">
-                            <input type="email" class="form-control" id="email" placeholder="Email" name="email" value="<%out.print(rs34.getString("email"));%>" required>
+                            <input type="email" class="form-control" id="email" placeholder="Email" name="email" value="<%out.print(rs34.getString("email"));%>" disabled>
                         </div>
                         
                        
@@ -730,7 +668,7 @@
                            <div class="form-group">
                         <label for="fname" class="col-sm-3 control-label">Password</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="password" placeholder="password" name="password"  value="<%out.print(rs34.getString("password"));%>" required >
+                            <input type="text" class="form-control" id="password" placeholder="password" name="password"  value="<%out.print(rs34.getString("password"));%>" disabled >
                         </div></div>
                     
                         <div class="form-group">
@@ -778,7 +716,7 @@
                   <div class="row row-same-height">
                    
                        <div class="container-fluid container-fixed-lg">
-                 <form  action="/Exhibition/html/exhibitionAdministratorContactInformationEditImage.jsp" id="login_frm"  name="login_frm" class="form-horizontal" role="form" autocomplete="off" action="" method="">
+                 <form  action="/Exhibition/html/exhibitionAdministratorContactInformationEditImage.jsp" enctype="multipart/form-data" id="login_frm"  name="login_frm" class="form-horizontal" role="form" autocomplete="off" method="post">
                             <div class="panel panel-default">
             <div class="row">
 <div class="col-md-6">
@@ -928,56 +866,17 @@
                         </select>
                         </div>
                         <div class="col-sm-5">
-                            <input type="text" class="form-control" onkeypress="return validate(event)" minlength="10" maxlength="10" id="phone" placeholder="Phone No" name="pn" value="<%out.print(rst.getString("phoneNo"));%>" required>
+                            <input type="text" class="form-control" onkeypress="return validate(event)" minlength="10" maxlength="10" id="phone" placeholder="Phone No" name="contactNo" value="<%out.print(rst.getString("phoneNo"));%>" required>
                         </div>
                       </div>   
                         
-                        <br>     <div id="msgbox3"> </div>  <div id="msgbox4"> </div> 
-                      <div class="row">
-                      
-                            <button class="btn btn-success" name="login" id="name" type="submit" onclick="document.location.href='/Exhibition/exhibitionAdministratorContactInformation';"> Save</button>
-                          <button class="btn btn-default">Cancel</button>
                         
-                      </div>
-                      <%
-                          co++;  
-                          
-                        }
-                        
-                             
-                      %>
-                  
-                     
-                      
-                        
-                  </div>
-                </div>
-                  </div>
-                </div>
-                
-          
-                    
-                  <div class="col-md-6">
-                      <div class="padding-30 m-t-50">
-                          <div class="row">
-                              <div class="col-sm-10">
-                        <h2>Your Contact Details ..</h2>
-                        <p> Social Media..</p>
-                              </div></div>
-                           <div class="col-sm-10">
-                              
-                                
-             <div class="panel-heading">
-              <div class="panel-title">
-                    Social Media Icon 
-                </div>
-                 </div>
                                <%
                           
                            Connection con1;
                           con1=exhibitionAdministratorOneTimeConnection.getConnection();
                           
-                HttpSession imageIcon=request.getSession(false);
+              //  HttpSession imageIcon=request.getSession(false);
                           String imageName=(String)imageIcon.getAttribute("mediaId");
                           Statement st1=con1.createStatement();
                         ResultSet rso=st1.executeQuery("select * from media where id='"+imageName+"'");
@@ -1020,6 +919,48 @@
                              
                       %>
                   
+                        
+                        
+                        <br>     <div id="msgbox3"> </div>  <div id="msgbox4"> </div> 
+                      <div class="row">
+                      
+                            <button class="btn btn-success" name="login" id="name" type="submit" onclick="document.location.href='/Exhibition/exhibitionAdministratorContactInformation';"> Save</button>
+                          <button class="btn btn-default">Cancel</button>
+                        
+                      </div>
+                      <%
+                          co++;  
+                          
+                        }
+                        
+                             
+                      %>
+                  
+                     
+                      
+                        
+                  </div>
+                </div>
+                  </div>
+                </div>
+                
+          
+                    
+                  <div class="col-md-6">
+                      <div class="padding-30 m-t-50">
+                          <div class="row">
+                              <div class="col-sm-10">
+                        <h2>Your Contact Details ..</h2>
+                        <p> Social Media..</p>
+                              </div></div>
+                           <div class="col-sm-10">
+                              
+                                
+             <div class="panel-heading">
+              <div class="panel-title">
+                    Social Media Icon 
+                </div>
+                 </div>
  
         
 

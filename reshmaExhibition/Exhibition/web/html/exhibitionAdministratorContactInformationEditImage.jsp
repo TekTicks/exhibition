@@ -14,7 +14,8 @@
 <%@ page import="java.io.*,java.sql.*,java.util.zip.*" %>
 
 
-<%    String t1 = "";
+<% 
+      String t1 = "";
       String fn = "";
       String ln = "";
       String dateOfBirth = "";
@@ -22,7 +23,6 @@
       String degination = "";
       String contactNo = "";
      String  contactCountryId="";
-      
     
 int count1 = 0;
 
@@ -41,9 +41,10 @@ Iterator itr = items.iterator();
 while (itr.hasNext()) {
 FileItem item = (FileItem) itr.next();
 if (item.isFormField()) {
-String title = item.getFieldName(); 
-String value1 = item.getString();
 
+String title = item.getFieldName(); 
+String value1 = item.getString();    
+    
 String firstName = item.getFieldName();
 String value2 = item.getString();
 
@@ -87,24 +88,35 @@ dateOfBirth = value4;
 count1 = 1;
 }
 
+if (level.equals("le")) {
+le = value5;
+count1 = 1;
+}
+
+if (deg.equals("degination")) {
+degination = value6;
+count1 = 1;
+}
+
 if (contno.equals("contactNo")) {
 contactNo = value7;
 count1 = 1;
 }
+
 if (cci.equals("contactCountryId")) {
 contactCountryId = value8;
 count1 = 1;
 }
-
 } else {
 try {
 String itemName = item.getName();
 File savedFile = new File("C:/Users/Admin/Documents/NetBeansProjects/Exhibition/web/html/images/" + itemName);
 item.write(savedFile);
-out.println(savedFile);
 if (count1 == 1) {
 HttpSession ss=request.getSession();
 ss.setAttribute("fileName",itemName);   
+out.print("My date" +contactNo);
+
 
 }
 } catch (Exception e) {
@@ -119,8 +131,10 @@ try{
     
       HttpSession ss=request.getSession();
        String idValid=(String)ss.getAttribute("idValid");    
-       out.print(idValid);
+      
+       // HttpSession ss=request.getSession();
       String fileName=(String)ss.getAttribute("fileName");
+     
      // Class.forName("com.mysql.jdbc.Driver").newInstance();
       Connection con;
        con=exhibitionAdministratorOneTimeConnection.getConnection();
@@ -152,25 +166,24 @@ psmnt.setString(1, "");
  
  
  String iddsf=(String)ss.getAttribute("logoMediaID");
- out.print(iddsf);
+
  
   Connection con2;
  con2=exhibitionAdministratorOneTimeConnection.getConnection();
  String val="update exhibitionAdminContact set title='"+t1+"' , firstName='"+fn+"', lastName='"+ln+"',dateOfBirth='"+dateOfBirth+"' , level='"+le+"',degination='"+degination+"',phoneNo='"+contactNo+"',photoMediaId='"+iddsf+"',countryId='"+contactCountryId+"' where id='"+idValid+"' ";
  PreparedStatement ps=con2.prepareStatement(val);
-                                 
-                        
+                          
                           int n=  ps.executeUpdate();
                          
                         if(n>0)
                         {
-                            out.print("data updated");
+                            out.print("ok");
                         }
                         else
                         {
                              out.print("wrn");
                         }
-                          //response.sendRedirect("/Exhibition/html/exhibitionAdministratorOpportunityThankUPage.jsp");
+                          response.sendRedirect("/Exhibition/html/exhibitionAdministratorProfilePage.jsp");
 }
 catch(Exception e){
     
@@ -182,13 +195,6 @@ catch(Exception e){
 
 
 
-
-
-%>
-</td></tr></table>
-</center>
-
-<%
 
 
 %>

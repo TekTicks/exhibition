@@ -17,26 +17,27 @@ public class exhibitionAdministratorTeamMemberEdit extends HttpServlet
                 try
                 {
                     // data fetch from exhibitionAdministratorTeam.jsp
-                    HttpSession ss1=request.getSession(false);
-                    String myex_id=(String)ss1.getAttribute("myid");
+                    HttpSession ssy=request.getSession(false);
+                    String rr=(String) ssy.getAttribute("myid");
+                    //out.print(rr);
                     // values fetch from textbox of exhibitionAdministratorTeam.jsp
                     String firstName=request.getParameter("firstName");
                     String lastName=request.getParameter("lastName"); 
                     String tagline=request.getParameter("tagline");
                     String title=request.getParameter("title");
-                    String gender=request.getParameter("gender");
+                    String gender=request.getParameter("optionyes");
+                    out.print(gender);
                     String dateOfBirth=request.getParameter("dateOfBirth"); 
-                  
                     String degination=request.getParameter("degination");
-                    String phoneNo=request.getParameter("phoneNo"); 
+                    String phoneNo=request.getParameter("phone"); 
                     String mobileNo=request.getParameter("mobileNo");
                     String email=request.getParameter("email");  
                        String mobileCountryId=request.getParameter("mobileCountryId");
-                       out.print(mobileCountryId);
+                      // out.print(mobileCountryId);
                     String phoneCountryId=request.getParameter("phoneCountryId");  
                     Connection con;
                     con=exhibitionAdministratorOneTimeConnection.getConnection();
-                    String query = "update exhibitionTeam set tagline ='"+tagline+"',title ='"+title+"',firstName ='"+firstName+"',lastName ='"+lastName+"',gender ='"+gender+"',dateOfBirth ='"+dateOfBirth+"',degination ='"+degination+"',phoneNo ='"+phoneNo+"',mobileNo ='"+mobileNo+"',email ='"+email+"',mobileCountryId='"+mobileCountryId+"',phoneCountryId='"+phoneCountryId+"' where id='"+myex_id+"' ";
+                    String query = "update exhibitionTeam set tagline ='"+tagline+"',title ='"+title+"',firstName ='"+firstName+"',lastName ='"+lastName+"',gender ='"+gender+"',dateOfBirth ='"+dateOfBirth+"',degination ='"+degination+"',phoneNo ='"+phoneNo+"',mobileNo ='"+mobileNo+"',email ='"+email+"',mobileCountrytId='"+mobileCountryId+"',phoneCountryId='"+phoneCountryId+"' where id='"+rr+"' ";
                     // data updated in exhibitionTeam table
                     PreparedStatement ps=con.prepareStatement(query);
                     int rs= ps.executeUpdate();

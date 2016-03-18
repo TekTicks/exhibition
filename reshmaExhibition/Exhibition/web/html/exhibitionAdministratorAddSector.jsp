@@ -129,96 +129,35 @@
             <span class="icon-thumbnail"><i class="pg-calender"></i></span>
               <ul class="sub-menu">
                    <li>
-                <a href="#"><span class="title">Sectors</span>
-                <span class="arrow"></span></a>
-              
-                <ul class="sub-menu">
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorAddSector.jsp">Add Sectors</a>
-                    <span class="icon-thumbnail">AS</span>
-                  </li>
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorSector.jsp">Edit/Delete Sectors</a>
+                       <a href="/Exhibition/html/exhibitionAdministratorSector.jsp"><span class="title">Sectors</span></a>
                   <span class="icon-thumbnail">S</span>
-                  </li>
-                </ul>
               </li>
                 <li>
-                <a href="#"><span class="title">Exhibition Team</span>
-                <span class="arrow"></span></a>
-              
-                <ul class="sub-menu">
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorAddExhibitionTeam.jsp">Add Team</a>
-                    <span class="icon-thumbnail">AET</span>
-                  </li>
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorTeam.jsp">Edit/Delete Team</a>
-                  <span class="icon-thumbnail">ET</span>
-                  </li>
-                </ul>
+                    <a href="/Exhibition/html/exhibitionAdministratorTeam.jsp"><span class="title">Exhibition Team</span></a>
+                  <span class="icon-thumbnail">T</span>
               </li>
               <li>
-                <a href="#"><span class="title"> Social Media</span>
-                <span class="arrow"></span></a>
-              
-                <ul class="sub-menu">
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorAddSocialMedia.jsp">Add Social Media</a>
-                    <span class="icon-thumbnail">ASM</span>
-                  </li>
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorSocialMedia.jsp">Edit/Delete Social Media</a>
-                  <span class="icon-thumbnail">SM</span>
-                  </li>
-                </ul>
+                <a href="/Exhibition/html/exhibitionAdministratorSocialMedia.jsp"><span class="title"> Social Media</span>
+               </a>
+                <span class="icon-thumbnail">SM</span>
               </li>
                <li>
-                <a href="#"><span class="title">Opportunity</span>
-                <span class="arrow"></span></a>
-              
-                <ul class="sub-menu">
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorAddOpportunity.jsp">Add Opportunity</a>
-                    <span class="icon-thumbnail">AO</span>
-                  </li>
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorOpportunity.jsp">Edit/Delete Opportunity</a>
-                  <span class="icon-thumbnail">O</span>
-                  </li>
-                </ul>
+                <a href="/Exhibition/html/exhibitionAdministratorOpportunity.jsp"><span class="title">Opportunity</span>
+               </a>
+                <span class="icon-thumbnail">O</span>
               </li>
               
                 <li>
-                <a href="#"><span class="title">FAQ</span>
-                <span class="arrow"></span></a>
-              
-                <ul class="sub-menu">
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorAddFAQ.jsp">Add FAQ</a>
-                    <span class="icon-thumbnail">AF</span>
-                  </li>
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorFAQ.jsp">Edit/Delete FAQ</a>
-                  <span class="icon-thumbnail">F</span>
-                  </li>
-                </ul>
+                <a href="/Exhibition/html/exhibitionAdministratorFAQ.jsp"><span class="title">FAQ</span>
+               </a>
+                 <span class="icon-thumbnail">F</span>
+               
               </li>
               
                 <li>
-                <a href="#"><span class="title">Facilities</span>
-                <span class="arrow"></span></a>
-              
-                <ul class="sub-menu">
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorAddFacilities.jsp">Add Facilities</a>
-                    <span class="icon-thumbnail">AF</span>
-                  </li>
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorFacilities.jsp">Edit/Delete Facilities</a>
-                  <span class="icon-thumbnail">F</span>
-                  </li>
-                </ul>
+                <a href="/Exhibition/html/exhibitionAdministratorFacilities.jsp"><span class="title">Facilities</span>
+                </a>
+                 <span class="icon-thumbnail">EF</span>
               </li>
             
               <li class="">

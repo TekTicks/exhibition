@@ -19,19 +19,15 @@ public class exhibitionAdministratorForgotPassword extends HttpServlet
                     // value fetch from textbox of exhibitionAdministratorForgotPassword.jsp file
                    
                     String password=request.getParameter("un"); 
-                     out.print(password);
                     String cpassword=request.getParameter("pw");
-                     out.print(cpassword);
                     HttpSession ss=request.getSession(false);
                     String mob = (String)ss.getAttribute("MN");  // value fetch from exhibitionAdministratorMobileNo.jsp file
-                     out.print(mob);
                      Connection con;
                      con=exhibitionAdministratorOneTimeConnection.getConnection();
                     int m= password.length();
-                    out.print(m);
                     int mn= cpassword.length();  
-                     out.print(mn);
-                    if  (!(password.equals(cpassword)) )   //steps for mobile no validations
+                     
+                    if  (!(password.equals(cpassword)) && (m<6) && (mn<6))   //steps for mobile no validations
                     {
                         out.print("invalidPassword");
                     }

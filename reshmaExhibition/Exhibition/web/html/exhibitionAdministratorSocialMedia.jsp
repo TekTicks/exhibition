@@ -130,96 +130,35 @@
             <span class="icon-thumbnail"><i class="pg-calender"></i></span>
               <ul class="sub-menu">
                    <li>
-                <a href="#"><span class="title">Sectors</span>
-                <span class="arrow"></span></a>
-              
-                <ul class="sub-menu">
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorAddSector.jsp">Add Sectors</a>
-                    <span class="icon-thumbnail">AS</span>
-                  </li>
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorSector.jsp">Edit/Delete Sectors</a>
+                       <a href="/Exhibition/html/exhibitionAdministratorSector.jsp"><span class="title">Sectors</span></a>
                   <span class="icon-thumbnail">S</span>
-                  </li>
-                </ul>
               </li>
                 <li>
-                <a href="#"><span class="title">Exhibition Team</span>
-                <span class="arrow"></span></a>
-              
-                <ul class="sub-menu">
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorAddExhibitionTeam.jsp">Add Team</a>
-                    <span class="icon-thumbnail">AET</span>
-                  </li>
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorTeam.jsp">Edit/Delete Team</a>
-                  <span class="icon-thumbnail">ET</span>
-                  </li>
-                </ul>
+                    <a href="/Exhibition/html/exhibitionAdministratorTeam.jsp"><span class="title">Exhibition Team</span></a>
+                  <span class="icon-thumbnail">T</span>
               </li>
               <li>
-                <a href="#"><span class="title"> Social Media</span>
-                <span class="arrow"></span></a>
-              
-                <ul class="sub-menu">
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorAddSocialMedia.jsp">Add Social Media</a>
-                    <span class="icon-thumbnail">ASM</span>
-                  </li>
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorSocialMedia.jsp">Edit/Delete Social Media</a>
-                  <span class="icon-thumbnail">SM</span>
-                  </li>
-                </ul>
+                <a href="/Exhibition/html/exhibitionAdministratorSocialMedia.jsp"><span class="title"> Social Media</span>
+               </a>
+                <span class="icon-thumbnail">SM</span>
               </li>
                <li>
-                <a href="#"><span class="title">Opportunity</span>
-                <span class="arrow"></span></a>
-              
-                <ul class="sub-menu">
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorAddOpportunity.jsp">Add Opportunity</a>
-                    <span class="icon-thumbnail">AO</span>
-                  </li>
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorOpportunity.jsp">Edit/Delete Opportunity</a>
-                  <span class="icon-thumbnail">O</span>
-                  </li>
-                </ul>
+                <a href="/Exhibition/html/exhibitionAdministratorOpportunity.jsp"><span class="title">Opportunity</span>
+               </a>
+                <span class="icon-thumbnail">O</span>
               </li>
               
                 <li>
-                <a href="#"><span class="title">FAQ</span>
-                <span class="arrow"></span></a>
-              
-                <ul class="sub-menu">
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorAddFAQ.jsp">Add FAQ</a>
-                    <span class="icon-thumbnail">AF</span>
-                  </li>
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorFAQ.jsp">Edit/Delete FAQ</a>
-                  <span class="icon-thumbnail">F</span>
-                  </li>
-                </ul>
+                <a href="/Exhibition/html/exhibitionAdministratorFAQ.jsp"><span class="title">FAQ</span>
+               </a>
+                 <span class="icon-thumbnail">F</span>
+               
               </li>
               
                 <li>
-                <a href="#"><span class="title">Facilities</span>
-                <span class="arrow"></span></a>
-              
-                <ul class="sub-menu">
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorAddFacilities.jsp">Add Facilities</a>
-                    <span class="icon-thumbnail">AF</span>
-                  </li>
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorFacilities.jsp">Edit/Delete Facilities</a>
-                  <span class="icon-thumbnail">F</span>
-                  </li>
-                </ul>
+                <a href="/Exhibition/html/exhibitionAdministratorFacilities.jsp"><span class="title">Facilities</span>
+                </a>
+                 <span class="icon-thumbnail">EF</span>
               </li>
             
               <li class="">
@@ -558,8 +497,14 @@
               <div class="container-fluid container-fixed-lg bg-white">
             <!-- START PANEL -->
             <div class="panel panel-transparent">
-              <div class="panel-heading">
-                <div class="panel-title">View Sectors
+                <div class="panel-heading"><br>
+                 <div class="panel-title"> <h4> View Social Media </h4>
+                </div>
+                    <div class="pull-right">
+                  <div class="col-xs-12">
+                      <button id="show-modal" class="btn btn-primary btn-cons" onclick="document.location.href='/Exhibition/html/exhibitionAdministratorAddSocialMedia.jsp';"><i class="fa fa-plus"></i> Add 
+                    </button>
+                  </div>
                 </div>
                 <div class="pull-right">
                   <div class="col-xs-12">
@@ -573,6 +518,7 @@
                   <thead>
                     <tr>
                       <th>Exhibition Id</th>
+                      <th>social Media Id</th>
                       <th>Link</th>
                       <th>Edit/Delete</th>
                       <!-- <th>Status</th>
@@ -581,7 +527,7 @@
                   </thead>
                   <tbody>
                        <%   
-                         Class.forName("com.mysql.jdbc.Driver"); 
+                       
                          Connection con;
                          con=exhibitionAdministratorOneTimeConnection.getConnection(); 
                          Statement stat1=con.createStatement();
@@ -592,6 +538,7 @@
                                count1++;
                                out.println("<tr>");
                                out.println("<td class='v-align-middle semi-bold'><p>"+rs1.getString(2)+"</p></td>");
+                                 out.println("<td class='v-align-middle semi-bold'><p>"+rs1.getString(3)+"</p></td>");
                                out.println("<td class='v-align-middle semi-bold'><p>"+rs1.getString(4)+"</p></td>");
                                 // exhibitionAdministrator.personalInformation.id1=id1;
                                String exid=rs1.getString(1);

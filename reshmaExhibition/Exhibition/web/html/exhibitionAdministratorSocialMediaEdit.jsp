@@ -5,6 +5,7 @@
 --%>
 
 
+<%@page import="exhibitionAdministrator.exhibitionAdministratorOneTimeConnection"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
  <%@page import="java.io.*;" %>
   <%@page import="java.sql.*;" %>
@@ -51,7 +52,7 @@
 			this.timer = setTimeout(function () {
 				$.ajax({
 		          	url: '/Exhibition/exhibitionAdministratorSocialMediaEdit',
-		          	data: 'EI='+ $('#exhibitionId').val() +'&link=' + $('#link').val(),
+		          	data: 'EI='+ $('#exhibitionId').val() +'&link=' + $('#link').val()+'&url=' + $('#url').val(),
 		          	type: 'post',
 		   		success: function(msg){
                                     alert(msg);
@@ -172,7 +173,7 @@
       <!-- START SIDEBAR MENU -->
       <div class="sidebar-menu">
         <!-- BEGIN SIDEBAR MENU ITEMS-->
-        <ul class="menu-items">
+         <ul class="menu-items">
           <li class="m-t-30 ">
             <a href="index.html" class="detailed">
               <span class="title">Dashboard</span>
@@ -222,96 +223,35 @@
             <span class="icon-thumbnail"><i class="pg-calender"></i></span>
               <ul class="sub-menu">
                    <li>
-                <a href="#"><span class="title">Sectors</span>
-                <span class="arrow"></span></a>
-              
-                <ul class="sub-menu">
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorAddSector.jsp">Add Sectors</a>
-                    <span class="icon-thumbnail">AS</span>
-                  </li>
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorSector.jsp">Edit/Delete Sectors</a>
+                       <a href="/Exhibition/html/exhibitionAdministratorSector.jsp"><span class="title">Sectors</span></a>
                   <span class="icon-thumbnail">S</span>
-                  </li>
-                </ul>
               </li>
                 <li>
-                <a href="#"><span class="title">Exhibition Team</span>
-                <span class="arrow"></span></a>
-              
-                <ul class="sub-menu">
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorAddExhibitionTeam.jsp">Add Team</a>
-                    <span class="icon-thumbnail">AET</span>
-                  </li>
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorTeam.jsp">Edit/Delete Team</a>
-                  <span class="icon-thumbnail">ET</span>
-                  </li>
-                </ul>
+                    <a href="/Exhibition/html/exhibitionAdministratorTeam.jsp"><span class="title">Exhibition Team</span></a>
+                  <span class="icon-thumbnail">T</span>
               </li>
               <li>
-                <a href="#"><span class="title"> Social Media</span>
-                <span class="arrow"></span></a>
-              
-                <ul class="sub-menu">
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorAddSocialMedia.jsp">Add Social Media</a>
-                    <span class="icon-thumbnail">ASM</span>
-                  </li>
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorSocialMedia.jsp">Edit/Delete Social Media</a>
-                  <span class="icon-thumbnail">SM</span>
-                  </li>
-                </ul>
+                <a href="/Exhibition/html/exhibitionAdministratorSocialMedia.jsp"><span class="title"> Social Media</span>
+               </a>
+                <span class="icon-thumbnail">SM</span>
               </li>
                <li>
-                <a href="#"><span class="title">Opportunity</span>
-                <span class="arrow"></span></a>
-              
-                <ul class="sub-menu">
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorAddOpportunity.jsp">Add Opportunity</a>
-                    <span class="icon-thumbnail">AO</span>
-                  </li>
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorOpportunity.jsp">Edit/Delete Opportunity</a>
-                  <span class="icon-thumbnail">O</span>
-                  </li>
-                </ul>
+                <a href="/Exhibition/html/exhibitionAdministratorOpportunity.jsp"><span class="title">Opportunity</span>
+               </a>
+                <span class="icon-thumbnail">O</span>
               </li>
               
                 <li>
-                <a href="#"><span class="title">FAQ</span>
-                <span class="arrow"></span></a>
-              
-                <ul class="sub-menu">
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorAddFAQ.jsp">Add FAQ</a>
-                    <span class="icon-thumbnail">AF</span>
-                  </li>
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorFAQ.jsp">Edit/Delete FAQ</a>
-                  <span class="icon-thumbnail">F</span>
-                  </li>
-                </ul>
+                <a href="/Exhibition/html/exhibitionAdministratorFAQ.jsp"><span class="title">FAQ</span>
+               </a>
+                 <span class="icon-thumbnail">F</span>
+               
               </li>
               
                 <li>
-                <a href="#"><span class="title">Facilities</span>
-                <span class="arrow"></span></a>
-              
-                <ul class="sub-menu">
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorAddFacilities.jsp">Add Facilities</a>
-                    <span class="icon-thumbnail">AF</span>
-                  </li>
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorFacilities.jsp">Edit/Delete Facilities</a>
-                  <span class="icon-thumbnail">F</span>
-                  </li>
-                </ul>
+                <a href="/Exhibition/html/exhibitionAdministratorFacilities.jsp"><span class="title">Facilities</span>
+                </a>
+                 <span class="icon-thumbnail">EF</span>
               </li>
             
               <li class="">
@@ -644,8 +584,8 @@
                        String myex_id=request.getParameter("myid");
                        
                        ss1.setAttribute("myex_id", myex_id);
-                          Class.forName("com.mysql.jdbc.Driver"); 
-                         Connection con1 = DriverManager.getConnection("jdbc:mysql://localhost:3306/exhibition","root","123"); 
+                           Connection con1;
+                           con1= exhibitionAdministratorOneTimeConnection.getConnection(); 
                          Statement stat1=con1.createStatement();
                        
                          String query="select * from exhibitionSocialMedia where id= '"+myex_id+" '";
@@ -655,11 +595,90 @@
                         
                          while(rs.next())
                          {
-                             String exhibitionId=rs.getString("exhibitionId");
-                             ss1.setAttribute("ei", exhibitionId);
-                                      String link=rs.getString("link");
-                                       ss1.setAttribute("link", link);
-                                     
+                           String ur=rs.getString(3);
+                           ss1.setAttribute("ur",ur);
+                          %>
+                          
+                   
+           
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group form-group-default">
+                    <label>Exhibition ID</label>
+                    <input type="text" id="exhibitionId" name="exhibitionId" class="form-control" value="<%out.print(rs.getString("exhibitionId"));%>" required>
+                  </div>
+                </div>
+              </div>
+                  <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group form-group-default">
+                    <label>URL</label>
+                     <select class="form-control" data-init-plugin="select2" name="url" id="url">
+                            <%
+                              try { 
+                         // HttpSession CM =request.getSession(false);
+                        
+                           Connection con9;
+                           con9= exhibitionAdministratorOneTimeConnection.getConnection(); 
+                           Statement sa9=con9.createStatement();
+                           ResultSet ry9=sa9.executeQuery("select * from media where id='"+ur+"' ");
+                           int cou1=0;
+                         while(ry9.next())
+                         { 
+                            String iddd=ry9.getString(1);
+                         %>
+                     
+                       
+                               <option value="<%= iddd%>"><%out.print(ry9.getString(2));%></option>
+                               <%   
+                                   cou1++;
+                         }
+                        } 
+                   catch(Exception e) 
+                      { 
+                      out.print("error" +e); 
+                      }
+                        %>  
+                        <optgroup> Select url </optgroup>
+                         <%
+                              try { 
+                         // HttpSession CM =request.getSession(false);
+                        
+                           Connection con2;
+                           con2= exhibitionAdministratorOneTimeConnection.getConnection(); 
+                           Statement sa2=con2.createStatement();
+                           ResultSet ry2=sa2.executeQuery("select * from media");
+                           int co=0;
+                         while(ry2.next())
+                         { 
+                            String iddd=ry2.getString(1);
+                         %>
+                     
+                       
+                               <option value="<%= iddd%>"><%out.print(ry2.getString(2));%></option>
+                               <%   
+                                   co++;
+                         }
+                        } 
+                   catch(Exception e) 
+                      { 
+                      out.print("error" +e); 
+                      }
+                        %>  
+                     </select>
+                         </div>
+                </div>
+                  </div>
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group form-group-default">
+                    <label>Link</label>
+                    <input type="text" id="link" name="link" class="form-control" value="<%out.print(rs.getString("link"));%>" required>
+                  </div>
+                </div>
+              </div>
+       
+                  <%
                              count++;
                          }              
                       }    
@@ -668,31 +687,10 @@
                         out.print("error");
                     }
                    %>  
-                       <%@ page import="javax.servlet.http.HttpSession.*;" %>
-                      <%@ page session="false" %>
-                      <% HttpSession ss1=request.getSession(false);%> 
-                   
-           
-              <div class="row">
-                <div class="col-sm-12">
-                  <div class="form-group form-group-default">
-                    <label>Exhibition ID</label>
-                    <input type="text" id="exhibitionId" name="exhibitionId" class="form-control" value="<%out.print((String)ss1.getAttribute("ei"));%>" required>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-sm-12">
-                  <div class="form-group form-group-default">
-                    <label>Link</label>
-                    <input type="text" id="link" name="link" class="form-control" value="<%out.print((String)ss1.getAttribute("link"));%>" required>
-                  </div>
-                </div>
-              </div>
-       
              
        <div id="msgbox1"></div>      <div id="msgbox2"></div>       
        <button class="btn btn-primary btn-cons m-t-10" type="submit"> Update </button>
+        <button class="btn btn-primary btn-cons m-t-10" type="submit" onclick="document.location.href='/Exhibition/html/exhibitionAdministratorSocialMedia.jsp';"> Cancel </button>
             </form>
           </div>
         </div>

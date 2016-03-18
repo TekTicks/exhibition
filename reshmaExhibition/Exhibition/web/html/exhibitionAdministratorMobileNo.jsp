@@ -31,7 +31,7 @@
     <link href="pages/css/ie9.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="pages/js/jquery-1.4.2.min.js"></script>
-
+ <script src="assets/js/phoneNoValidation.js" type="text/javascript"></script>
     <script type="text/javascript">
 	$(document).ready(function(){
 		$("#login_frm").submit(function(){
@@ -158,7 +158,7 @@
             <div class="form-group form-group-default">
             
               <div class="controls">
-                <input type="text" name="mobileNO" id="mobileNo" placeholder="Enter Mobile No" class="form-control" onKeyup="phoneCheck()" required >
+                  <input type="text" name="mobileNO" onkeypress="return validate(event)"  maxlength="10" id="mobileNo" placeholder="Enter Mobile No" class="form-control" onKeyup="phoneCheck()" required >
               </div>	<div id="msgbox1"></div>
               <div id="msgbox2"></div>
                  <div id="msgbox3"></div>             	

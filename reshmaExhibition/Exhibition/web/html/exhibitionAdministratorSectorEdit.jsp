@@ -4,9 +4,20 @@
     Author     : Admin
 --%>
 
-
+<%@ page import="exhibitionAdministrator.*;" %>
+<%@ page import="org.apache.commons.fileupload.servlet.ServletFileUpload" %>
+<%@ page import="org.apache.commons.fileupload.disk.DiskFileItemFactory"%>
+<%@ page import="org.apache.commons.fileupload.*"%>
+<%@ page import="java.util.*, java.io.*" %>
+<%@ page import="java.util.Iterator"%>
+<%@ page import="java.util.List"%>
+<%@ page import="java.io.File"%>
+<%@page import = "java.sql.ResultSet;"%>
+<%@page import ="java.sql.Statement;"%>
+<%@page import = "exhibitionAdministrator.exhibitionAdministratorOneTimeConnection;"%>
+<%@page import = "java.sql.Connection;"%>
+<%@page contentType = "text/html" pageEncoding="UTF-8"%>
 <%@page import="exhibitionAdministrator.exhibitionAdministratorOneTimeConnection"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
  <%@page import="java.io.*;" %>
   <%@page import="java.sql.*;" %>
   <%@page import="java.sql.DriverManager;" %>
@@ -39,99 +50,7 @@
     <!--[if lte IE 9]>
 	<link href="assets/plugins/codrops-dialogFx/dialog.ie.css" rel="stylesheet" type="text/css" media="screen" />
 	<![endif]-->
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script src="pages/js/jquery-1.4.2.min.js"></script>
-   <script type="text/javascript">
-	$(document).ready(function(){
-		$("#login").submit(function(){
-
-			 //remove previous class and add new "myinfo" class
-	       // $("#msgbox").removeClass().addClass('myinfo').text('Validating Your Login ').fadeIn(1000);
-
-			
-			this.timer = setTimeout(function () {
-				$.ajax({
-		          	url: '/Exhibition/exhibitionAdministratorSectorEdit',
-		          	data: 'sectorName='+ $('#sectorName').val() +'&description=' + $('#description').val(),
-		          	type: 'post',
-		   		success: function(msg){
-                                    alert(msg);
-                                if(msg != 'error') // Message Sent, check and redirect
-				{
-                                        if(msg !='wrong')
-                                        {
-                                        $("#msgbox1").html('data updated').addClass('myinfo').fadeTo(200,1,function()
-			             {
-			                 //redirect to secure page
-			              //document.location='/Exhibition/html/exhibitionAdminPersonal.jsp';
-			             });
-                                     
-                                        
-                                    }
-                                else
-                                {
-                                    
-                                 
-                                       $("#msgbox2").fadeTo(100,1,function() //start fading the messagebox
-		                {
-			                  //add message and change the class of the box and start fading
-			                 $(this).html('records are not updated..').removeClass().addClass('myerror').fadeTo(300,1);
-                                        // document.location='/Exhibition/html/exhibitionAdminLog.jsp?user';
-                                 });
-                                }
-                            }
-                            else
-                            {
-                                $("#msgbox2").fadeTo(100,1,function() //start fading the messagebox
-		                {
-			                  //add message and change the class of the box and start fading
-			                 $(this).html('MobileNo should be 10 digits only').removeClass().addClass('myerror').fadeTo(300,1);
-                                        // document.location='/Exhibition/html/exhibitionAdminLog.jsp?user';
-                                 });
-                            }
-                                }
-				});
-			}, 200);
-			return false;
- 		});		
-
-	});
-   </script> 
   
-     <style>
-#exists{display:none}
-#cross{display:none}
-.myinfo
-{
-	margin: 5px auto;
-	background:#d6e3f5;
-	border: 1px #0010ac solid;
-	padding:5px;
-	color:#0010ac;
-	font-size:12px;
-	width:350px;
-	min-height:0px;
-	-moz-border-radius:4px;
-	-webkit-border-radius:4px;
-	text-align: center;
-}
-
-.myerror
-{
-	margin: 5px auto;
-	background:#FFDFDF;
-	border: 1px #FF0000 solid;
-	padding:5px;
-	color:#FF0000;
-	font-size:12px;
-	width:350px;
-	min-height:0px;
-	-moz-border-radius:4px;
-	-webkit-border-radius:4px;
-	text-align: center;
-}
-</style> 
-
   </head>
   <body class="fixed-header ">
     <!-- BEGIN SIDEBPANEL-->
@@ -224,96 +143,35 @@
             <span class="icon-thumbnail"><i class="pg-calender"></i></span>
               <ul class="sub-menu">
                    <li>
-                <a href="#"><span class="title">Sectors</span>
-                <span class="arrow"></span></a>
-              
-                <ul class="sub-menu">
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorAddSector.jsp">Add Sectors</a>
-                    <span class="icon-thumbnail">AS</span>
-                  </li>
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorSector.jsp">Edit/Delete Sectors</a>
+                       <a href="/Exhibition/html/exhibitionAdministratorSector.jsp"><span class="title">Sectors</span></a>
                   <span class="icon-thumbnail">S</span>
-                  </li>
-                </ul>
               </li>
                 <li>
-                <a href="#"><span class="title">Exhibition Team</span>
-                <span class="arrow"></span></a>
-              
-                <ul class="sub-menu">
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorAddExhibitionTeam.jsp">Add Team</a>
-                    <span class="icon-thumbnail">AET</span>
-                  </li>
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorTeam.jsp">Edit/Delete Team</a>
-                  <span class="icon-thumbnail">ET</span>
-                  </li>
-                </ul>
+                    <a href="/Exhibition/html/exhibitionAdministratorTeam.jsp"><span class="title">Exhibition Team</span></a>
+                  <span class="icon-thumbnail">T</span>
               </li>
               <li>
-                <a href="#"><span class="title"> Social Media</span>
-                <span class="arrow"></span></a>
-              
-                <ul class="sub-menu">
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorAddSocialMedia.jsp">Add Social Media</a>
-                    <span class="icon-thumbnail">ASM</span>
-                  </li>
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorSocialMedia.jsp">Edit/Delete Social Media</a>
-                  <span class="icon-thumbnail">SM</span>
-                  </li>
-                </ul>
+                <a href="/Exhibition/html/exhibitionAdministratorSocialMedia.jsp"><span class="title"> Social Media</span>
+               </a>
+                <span class="icon-thumbnail">SM</span>
               </li>
                <li>
-                <a href="#"><span class="title">Opportunity</span>
-                <span class="arrow"></span></a>
-              
-                <ul class="sub-menu">
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorAddOpportunity.jsp">Add Opportunity</a>
-                    <span class="icon-thumbnail">AO</span>
-                  </li>
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorOpportunity.jsp">Edit/Delete Opportunity</a>
-                  <span class="icon-thumbnail">O</span>
-                  </li>
-                </ul>
+                <a href="/Exhibition/html/exhibitionAdministratorOpportunity.jsp"><span class="title">Opportunity</span>
+               </a>
+                <span class="icon-thumbnail">O</span>
               </li>
               
                 <li>
-                <a href="#"><span class="title">FAQ</span>
-                <span class="arrow"></span></a>
-              
-                <ul class="sub-menu">
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorAddFAQ.jsp">Add FAQ</a>
-                    <span class="icon-thumbnail">AF</span>
-                  </li>
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorFAQ.jsp">Edit/Delete FAQ</a>
-                  <span class="icon-thumbnail">F</span>
-                  </li>
-                </ul>
+                <a href="/Exhibition/html/exhibitionAdministratorFAQ.jsp"><span class="title">FAQ</span>
+               </a>
+                 <span class="icon-thumbnail">F</span>
+               
               </li>
               
                 <li>
-                <a href="#"><span class="title">Facilities</span>
-                <span class="arrow"></span></a>
-              
-                <ul class="sub-menu">
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorAddFacilities.jsp">Add Facilities</a>
-                    <span class="icon-thumbnail">AF</span>
-                  </li>
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorFacilities.jsp">Edit/Delete Facilities</a>
-                  <span class="icon-thumbnail">F</span>
-                  </li>
-                </ul>
+                <a href="/Exhibition/html/exhibitionAdministratorFacilities.jsp"><span class="title">Facilities</span>
+                </a>
+                 <span class="icon-thumbnail">EF</span>
               </li>
             
               <li class="">
@@ -635,8 +493,7 @@
   </p> --><p><h1><b>Update Exhibition Sectors..!</b></h1></p>
           <br>
          
-               <form role="form"   class="p-t-15" id="login" name="login" action="" method="">
-           
+                              <form  action="/Exhibition/html/exhibitionAdministratorSectorEditImage.jsp" enctype="multipart/form-data" id="login_frm"  name="login_frm" class="form-horizontal" role="form" autocomplete="off" method="post">
                   
                      
                    
@@ -646,26 +503,90 @@
                       String myex_id=request.getParameter("myid");
                       
                       ss1.setAttribute("myex_id" , myex_id);
-                      
-                      
-                       
-                          Class.forName("com.mysql.jdbc.Driver"); 
-                        Connection con;
-              con=exhibitionAdministratorOneTimeConnection.getConnection(); 
-                         Statement stat1=con.createStatement();
-                       
-                         String query="select * from exhibitionSector where id= '"+myex_id+" '";
-                         ResultSet rs=stat1.executeQuery(query);  
+                        Connection con3;
+              con3=exhibitionAdministratorOneTimeConnection.getConnection(); 
+                         Statement stat13=con3.createStatement();      
+                         ResultSet rs3=stat13.executeQuery("select * from exhibitionSector where id='"+myex_id+"'");  
                          
                          int count=0;
                         
-                         while(rs.next())
-                         {
-                             String sectorName=rs.getString("sectorName");
-                             ss1.setAttribute("sn", sectorName);
-                                      String description=rs.getString("description");
-                                       ss1.setAttribute("dn", description);
-                                     
+                         while(rs3.next())
+                         {  
+                             HttpSession IJ=request.getSession(true);
+                            String Im= rs3.getString("sectorMediaId");
+                            IJ.setAttribute("IM", Im);
+                             %>
+                           
+                   
+           
+              <div class="row">
+                <div class="col-sm-10">
+                  <div class="form-group form-group-default">
+                    <label>Sector Name</label>
+                    <input type="text" id="sectorName" name="sectorName" class="form-control" value="<%out.print(rs3.getString("sectorName"));%>" required>
+                  </div>
+                </div>
+              </div> <br>
+              <div class="row">
+                <div class="col-sm-10">
+                  <div class="form-group form-group-default">
+                    <label>Description</label>
+                    <input type="text" id="sectorDescription" name="sectorDescription" class="form-control" value="<%out.print(rs3.getString("description"));%>" required>
+                  </div>
+                </div>
+              </div>
+                  <br>
+                  
+                   <%
+                          
+                           Connection con1;
+                          con1=exhibitionAdministratorOneTimeConnection.getConnection();
+                          
+              //  HttpSession imageIcon=request.getSession(false);
+                          String imageName=(String)IJ.getAttribute("IM");
+                          Statement st1=con1.createStatement();
+                        ResultSet rso=st1.executeQuery("select * from media where id='"+imageName+"'");
+                          
+                        int cy=0;
+                        
+                        while(rso.next())
+                        {
+                          
+                        %> 
+             
+   
+ <div id="uploadFormLayer">
+     <label><b>Upload Image File:</b></label><br> <br>
+     <input name="userImage" type="file" class="inputFile" onchange="readURL(this);"  /> <br> 
+	<script type="text/javascript">
+	function readURL(input) {
+	if (input.files && input.files[0]) {
+	var reader = new FileReader();
+	reader.onload = function (e) {
+	$('#tempImg')
+	.attr('src', e.target.result)
+	.width(200)
+	.height(200);
+	$('#flag').val("1");
+	};
+	reader.readAsDataURL(input.files[0]);
+	}
+	}
+									</script>
+						<input type="hidden" id="flag" name="flag">
+	<img id="tempImg"  src="images/<%out.print(rso.getString("link"));%>" width="200" height="200"> 
+ </div>  
+            
+     <%
+                          cy++;  
+                          
+                        }
+                        
+                             
+                      %>
+                  
+       
+                 <%
                              count++;
                          }              
                       }    
@@ -674,31 +595,13 @@
                         out.print("error");
                     }
                    %>  
-                       <%@ page import="javax.servlet.http.HttpSession.*;" %>
-                      <%@ page session="false" %>
-                      <% HttpSession ss1=request.getSession(false);%> 
-                   
-           
-              <div class="row">
-                <div class="col-sm-12">
-                  <div class="form-group form-group-default">
-                    <label>Sector Name</label>
-                    <input type="text" id="sectorName" name="sectorName" class="form-control" value="<%out.print((String)ss1.getAttribute("sn"));%>" required>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-sm-12">
-                  <div class="form-group form-group-default">
-                    <label>Description</label>
-                    <input type="text" id="sectorName" name="sectorNAme" class="form-control" value="<%out.print((String)ss1.getAttribute("dn"));%>" required>
-                  </div>
-                </div>
-              </div>
-       
+                  
+                       
              
-       <div id="msgbox1"></div>      <div id="msgbox2"></div>       
+        
        <button class="btn btn-primary btn-cons m-t-10" type="submit"> Update </button>
+          <button class="btn btn-primary btn-cons m-t-10" type="submit" onclick="document.location.href='/Exhibition/html/exhibitionAdministratorSector.jsp';"> Cancel </button>
+                 
             </form>
           </div>
         </div>

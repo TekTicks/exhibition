@@ -40,6 +40,8 @@
 	<![endif]-->
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="pages/js/jquery-1.4.2.min.js"></script>
+         <script src="assets/js/phoneNoValidation.js" type="text/javascript"></script>
+         
     <script type="text/javascript">
 	$(document).ready(function(){
 		$("#login").submit(function(){
@@ -48,13 +50,13 @@
 			this.timer = setTimeout(function () {
 				$.ajax({
 		          	url: '/Exhibition/exhibitionAdministratorTeamMember',
-		          	data: 'tagline=' + $('#tagline').val() +'&title=' + $('#title').val() +'&firstName=' + $('#firstName').val()+'&lastName=' + $('#lastName').val()+'&gender=' + $('#gender').val() +'&dateOfBirth=' + $('#datepicker-component2').val() +'&degination=' + $('#degination').val()+'&phoneCountryId=' + $('#phoneCountryId').val()+'&phoneNo=' + $('#phoneNo').val() +'&mobileCountryId=' + $('#mobileCountryId').val()+'&mobileNo=' + $('#mobileNo').val()+'&email=' + $('#email').val(),
+		          	data: 'tagline=' + $('#tagline').val() +'&title=' + $('#title').val() +'&firstName=' + $('#firstName').val()+'&lastName=' + $('#lastName').val()+'&gender=' + $('#gender').val() +'&dateOfBirth=' + $('#datepicker-component2').val() +'&degination=' + $('#degination').val()+'&phoneCountryId=' + $('#phoneCountryId').val()+'&phoneNo=' + $('#phone').val() +'&mobileCountryId=' + $('#mobileCountryId').val()+'&mobileNo=' + $('#mobileNo').val()+'&email=' + $('#email').val(),
 		          	type: 'post',
 		   		success: function(msg){ 
                                     alert(msg);
-                                if(msg != 'mobileNoInvalid') // Message Sent, check and redirect
+                                if(msg != 'error') // Message Sent, check and redirect
 				{
-                                        if(msg !='error')
+                                        if(msg !='wrong')
                                         {
                                           $("#msgbox1").html('data inserted').addClass('myinfo').fadeTo(200,1,function()
 			             {
@@ -77,7 +79,7 @@
                                 $("#msgbox2").fadeTo(100,1,function() //start fading the messagebox
 		                {
 			                  //add message and change the class of the box and start fading
-			                 $(this).html('sorry mobile no should be 10 digits...').removeClass().addClass('myerror').fadeTo(300,1);
+			                 $(this).html('sorry ').removeClass().addClass('myerror').fadeTo(300,1);
                                         // document.location='/Exhibition/html/exhibitionAdminLog.jsp?user';
                                  });
                             }
@@ -165,7 +167,7 @@
       <!-- START SIDEBAR MENU -->
       <div class="sidebar-menu">
         <!-- BEGIN SIDEBAR MENU ITEMS-->
-          <ul class="menu-items">
+            <ul class="menu-items">
           <li class="m-t-30 ">
             <a href="index.html" class="detailed">
               <span class="title">Dashboard</span>
@@ -215,96 +217,35 @@
             <span class="icon-thumbnail"><i class="pg-calender"></i></span>
               <ul class="sub-menu">
                    <li>
-                <a href="#"><span class="title">Sectors</span>
-                <span class="arrow"></span></a>
-              
-                <ul class="sub-menu">
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorAddSector.jsp">Add Sectors</a>
-                    <span class="icon-thumbnail">AS</span>
-                  </li>
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorSector.jsp">Edit/Delete Sectors</a>
+                       <a href="/Exhibition/html/exhibitionAdministratorSector.jsp"><span class="title">Sectors</span></a>
                   <span class="icon-thumbnail">S</span>
-                  </li>
-                </ul>
               </li>
                 <li>
-                <a href="#"><span class="title">Exhibition Team</span>
-                <span class="arrow"></span></a>
-              
-                <ul class="sub-menu">
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorAddExhibitionTeam.jsp">Add Team</a>
-                    <span class="icon-thumbnail">AET</span>
-                  </li>
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorTeam.jsp">Edit/Delete Team</a>
-                  <span class="icon-thumbnail">ET</span>
-                  </li>
-                </ul>
+                    <a href="/Exhibition/html/exhibitionAdministratorTeam.jsp"><span class="title">Exhibition Team</span></a>
+                  <span class="icon-thumbnail">T</span>
               </li>
               <li>
-                <a href="#"><span class="title"> Social Media</span>
-                <span class="arrow"></span></a>
-              
-                <ul class="sub-menu">
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorAddSocialMedia.jsp">Add Social Media</a>
-                    <span class="icon-thumbnail">ASM</span>
-                  </li>
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorSocialMedia.jsp">Edit/Delete Social Media</a>
-                  <span class="icon-thumbnail">SM</span>
-                  </li>
-                </ul>
+                <a href="/Exhibition/html/exhibitionAdministratorSocialMedia.jsp"><span class="title"> Social Media</span>
+               </a>
+                <span class="icon-thumbnail">SM</span>
               </li>
                <li>
-                <a href="#"><span class="title">Opportunity</span>
-                <span class="arrow"></span></a>
-              
-                <ul class="sub-menu">
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorAddOpportunity.jsp">Add Opportunity</a>
-                    <span class="icon-thumbnail">AO</span>
-                  </li>
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorOpportunity.jsp">Edit/Delete Opportunity</a>
-                  <span class="icon-thumbnail">O</span>
-                  </li>
-                </ul>
+                <a href="/Exhibition/html/exhibitionAdministratorOpportunity.jsp"><span class="title">Opportunity</span>
+               </a>
+                <span class="icon-thumbnail">O</span>
               </li>
               
                 <li>
-                <a href="#"><span class="title">FAQ</span>
-                <span class="arrow"></span></a>
-              
-                <ul class="sub-menu">
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorAddFAQ.jsp">Add FAQ</a>
-                    <span class="icon-thumbnail">AF</span>
-                  </li>
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorFAQ.jsp">Edit/Delete FAQ</a>
-                  <span class="icon-thumbnail">F</span>
-                  </li>
-                </ul>
+                <a href="/Exhibition/html/exhibitionAdministratorFAQ.jsp"><span class="title">FAQ</span>
+               </a>
+                 <span class="icon-thumbnail">F</span>
+               
               </li>
               
                 <li>
-                <a href="#"><span class="title">Facilities</span>
-                <span class="arrow"></span></a>
-              
-                <ul class="sub-menu">
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorAddFacilities.jsp">Add Facilities</a>
-                    <span class="icon-thumbnail">AF</span>
-                  </li>
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorFacilities.jsp">Edit/Delete Facilities</a>
-                  <span class="icon-thumbnail">F</span>
-                  </li>
-                </ul>
+                <a href="/Exhibition/html/exhibitionAdministratorFacilities.jsp"><span class="title">Facilities</span>
+                </a>
+                 <span class="icon-thumbnail">EF</span>
               </li>
             
               <li class="">
@@ -627,7 +568,7 @@
   </p> --><p><h1><b>Add Exhibition Team..!</b></h1></p>
           <br>
          
-                <form role="form"   class="p-t-15" id="login" name="login" action="" method="post">
+                <form role="form"   class="p-t-15" id="login" name="login" action="" method="">
                 
               <div class="row">
                 <div class="col-sm-6">
@@ -659,14 +600,27 @@
                   </div>
                 </div>
               </div>
-              <div class="row">
+              <!-- <div class="row">
                 <div class="col-sm-12">
                   <div class="form-group form-group-default">
                     <label>Gender</label>
                     <input type="text" id="gender" name="gender" class="form-control" value="" required>
                   </div>
                 </div>
-              </div>
+              </div>  -->
+              
+              <div class="col-sm-9">
+					  <div class="form-group">
+                        <label>Your gender</label>
+                        <span class="help"></span>
+						<div>
+						<input type="radio" value="0" name="optionyes" id="gender">
+                            <label for="male">Male</label>
+                            <input type="radio" value="1" name="optionyes" id="gender">
+                            <label for="female">Female</label>
+                           </div> 
+                          </div>
+                        </div>
                  
                   <div class="row">
                 <div class="col-sm-12">
@@ -707,10 +661,10 @@
                             
                          <% while(ry.next())
                          { 
-                           String r=ry.getString(4);
-                           out.print(r);
+                           String r1=ry.getString(1);
+                         
                          %>
-                        <option><%out.print(ry.getString("countryCode"));%></option>
+                        <option value="<%= r1%>"><%out.print(ry.getString(4));%></option>
                          <%   
                          }
                         } 
@@ -726,7 +680,7 @@
                 <div class="col-sm-8">
                   <div class="form-group form-group-default">
                     <label>Phone No</label>
-                   <input type="text" id="phoneNo" name="phoneNo" class="form-control" value="" required>
+                   <input type="text" id="phone" onkeypress="return validate(event)" maxlength=10 minlength=10 name="phone" class="form-control" value="" required>
                   </div>
                 </div>
               </div>
@@ -749,10 +703,10 @@
                             
                          <% while(rsy.next())
                          { 
-                           String r=rsy.getString(4);
-                           out.print(r);
+                           String r4=rsy.getString(1);
+                           
                          %>
-                        <option><%out.print(rsy.getString("countryCode"));%></option>
+                        <option value="<%= r4%>"><%out.print(rsy.getString(4));%></option>
                          <%   
                          }
                         } 
@@ -768,7 +722,7 @@
                 <div class="col-sm-8">
                   <div class="form-group form-group-default">
                     <label>Mobile No</label>
-                  <input type="text" id="mobileNo" name="mobileNo" class="form-control"  value="" required>
+                    <input type="text" id="mobileNo" onkeypress="return validate(event)"  maxlength="10"  name="mobileNo" class="form-control"  value="" required>
                   </div>
                 </div>
               </div>

@@ -49,7 +49,7 @@
                                              	$("#msgbox1").fadeTo(300,1,function() //start fading the messagebox
                                                 {
                                                 //add message and change the class of the box and start fading
-                                                    $(this).html('Sorry, Invalid Email.!').removeClass().addClass('myerror').fadeTo(300,1).fadeOut();
+                                                    $(this).html('Sorry, Invalid Email.!').removeClass().addClass('myerror').fadeTo(300,1);
                                                 });
                                             }
                                             else if(msg == 'passwordinvalid')
@@ -57,7 +57,7 @@
                                                	$("#msgbox3").fadeTo(300,1,function() //start fading the messagebox
                                                 {
                                                      //add message and change the class of the box and start fading
-                                                      $(this).html('Sorry, Wrong Password.!').removeClass().addClass('myerror').fadeTo(300,1).fadeOut();
+                                                      $(this).html('Sorry, Wrong Password.!').removeClass().addClass('myerror').fadeTo(300,1);
                                                 });
                                             }
                                             else
@@ -78,7 +78,7 @@
                                                     {
                                                         //add message and change the class of the box and start fading
                                                          $(this).html('Login Verified(second Visitor)..!').removeClass().addClass('myinfo').fadeTo(300,1);
-                                                             document.location='/Exhibition/html/exhibitionAdministratorProfilePage.jsp';
+                                                           document.location='/Exhibition/html/exhibitionAdministratorProfilePage.jsp';
                                                     });
                                              
                                             }  
@@ -91,7 +91,7 @@
 					$("#msgbox4").fadeTo(300,1,function() //start fading the messagebox
 		                {
 			                  //add message and change the class of the box and start fading
-			                 $(this).html('Sorry, Wrong Combination Of Username And Password.!').removeClass().addClass('myerror').fadeTo(300,1).fadeOut();
+			                 $(this).html('Sorry, Wrong Combination Of Username And Password.!').removeClass().addClass('myerror').fadeTo(300,1);
                                        //  document.location='/Exhibition/html/exhibitionAdministratorLogin.jsp?user';
                                  });
                                 }

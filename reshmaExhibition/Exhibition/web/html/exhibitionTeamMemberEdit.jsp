@@ -39,8 +39,10 @@
     <!--[if lte IE 9]>
 	<link href="assets/plugins/codrops-dialogFx/dialog.ie.css" rel="stylesheet" type="text/css" media="screen" />
 	<![endif]-->
+     <script src="assets/js/phoneNoValidation.js" type="text/javascript"></script>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="pages/js/jquery-1.4.2.min.js"></script>
+<!--
    <script type="text/javascript">
 	$(document).ready(function(){
 		$("#login").submit(function(){
@@ -52,7 +54,7 @@
 			this.timer = setTimeout(function () {
 				$.ajax({
 		          	url: '/Exhibition/exhibitionAdministratorTeamMemberEdit',
-		          	data: 'firstName='+ $('#firstName').val() +'&lastName=' + $('#lastName').val()+'&tagline=' + $('#tagline').val() +'&title=' + $('#title').val()+'&gender=' + $('#gender').val() +'&degination=' + $('#degination').val()+'&dateOfBirth=' + $('#datepicker-component2').val()+'&phoneNo=' + $('#phoneNo').val()+'&mobileNo=' + $('#mobileNo').val()+'&email=' + $('#email').val()+'&mobileCountryId=' + $('#mobileCountryId').val()+'&phoneCountryId=' + $('#phoneCountryId').val(),
+		          	data: 'firstName='+ $('#firstName').val() +'&lastName=' + $('#lastName').val()+'&tagline=' + $('#tagline').val() +'&title=' + $('#title').val()+'&optionyes1=' + $('#optionyes').val() +'&degination=' + $('#degination').val()+'&dateOfBirth=' + $('#datepicker-component2').val()+'&phoneNo=' + $('#phone').val()+'&mobileNo=' + $('#mobileNo').val()+'&email=' + $('#email').val()+'&mobileCountryId=' + $('#mobileCountryId').val()+'&phoneCountryId=' + $('#phoneCountryId').val(),
 		          	type: 'post',
 		   		success: function(msg){
                                   alert(msg);
@@ -95,7 +97,8 @@
  		});		
 
 	});
-   </script> 
+   </script>  -->
+  
   
      <style>
 #exists{display:none}
@@ -223,96 +226,35 @@
             <span class="icon-thumbnail"><i class="pg-calender"></i></span>
               <ul class="sub-menu">
                    <li>
-                <a href="#"><span class="title">Sectors</span>
-                <span class="arrow"></span></a>
-              
-                <ul class="sub-menu">
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorAddSector.jsp">Add Sectors</a>
-                    <span class="icon-thumbnail">AS</span>
-                  </li>
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorSector.jsp">Edit/Delete Sectors</a>
+                       <a href="/Exhibition/html/exhibitionAdministratorSector.jsp"><span class="title">Sectors</span></a>
                   <span class="icon-thumbnail">S</span>
-                  </li>
-                </ul>
               </li>
                 <li>
-                <a href="#"><span class="title">Exhibition Team</span>
-                <span class="arrow"></span></a>
-              
-                <ul class="sub-menu">
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorAddExhibitionTeam.jsp">Add Team</a>
-                    <span class="icon-thumbnail">AET</span>
-                  </li>
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorTeam.jsp">Edit/Delete Team</a>
-                  <span class="icon-thumbnail">ET</span>
-                  </li>
-                </ul>
+                    <a href="/Exhibition/html/exhibitionAdministratorTeam.jsp"><span class="title">Exhibition Team</span></a>
+                  <span class="icon-thumbnail">T</span>
               </li>
               <li>
-                <a href="#"><span class="title"> Social Media</span>
-                <span class="arrow"></span></a>
-              
-                <ul class="sub-menu">
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorAddSocialMedia.jsp">Add Social Media</a>
-                    <span class="icon-thumbnail">ASM</span>
-                  </li>
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorSocialMedia.jsp">Edit/Delete Social Media</a>
-                  <span class="icon-thumbnail">SM</span>
-                  </li>
-                </ul>
+                <a href="/Exhibition/html/exhibitionAdministratorSocialMedia.jsp"><span class="title"> Social Media</span>
+               </a>
+                <span class="icon-thumbnail">SM</span>
               </li>
                <li>
-                <a href="#"><span class="title">Opportunity</span>
-                <span class="arrow"></span></a>
-              
-                <ul class="sub-menu">
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorAddOpportunity.jsp">Add Opportunity</a>
-                    <span class="icon-thumbnail">AO</span>
-                  </li>
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorOpportunity.jsp">Edit/Delete Opportunity</a>
-                  <span class="icon-thumbnail">O</span>
-                  </li>
-                </ul>
+                <a href="/Exhibition/html/exhibitionAdministratorOpportunity.jsp"><span class="title">Opportunity</span>
+               </a>
+                <span class="icon-thumbnail">O</span>
               </li>
               
                 <li>
-                <a href="#"><span class="title">FAQ</span>
-                <span class="arrow"></span></a>
-              
-                <ul class="sub-menu">
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorAddFAQ.jsp">Add FAQ</a>
-                    <span class="icon-thumbnail">AF</span>
-                  </li>
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorFAQ.jsp">Edit/Delete FAQ</a>
-                  <span class="icon-thumbnail">F</span>
-                  </li>
-                </ul>
+                <a href="/Exhibition/html/exhibitionAdministratorFAQ.jsp"><span class="title">FAQ</span>
+               </a>
+                 <span class="icon-thumbnail">F</span>
+               
               </li>
               
                 <li>
-                <a href="#"><span class="title">Facilities</span>
-                <span class="arrow"></span></a>
-              
-                <ul class="sub-menu">
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorAddFacilities.jsp">Add Facilities</a>
-                    <span class="icon-thumbnail">AF</span>
-                  </li>
-                  <li>
-                    <a href="/Exhibition/html/exhibitionAdministratorFacilities.jsp">Edit/Delete Facilities</a>
-                  <span class="icon-thumbnail">F</span>
-                  </li>
-                </ul>
+                <a href="/Exhibition/html/exhibitionAdministratorFacilities.jsp"><span class="title">Facilities</span>
+                </a>
+                 <span class="icon-thumbnail">EF</span>
               </li>
             
               <li class="">
@@ -641,13 +583,11 @@
                    
                    <% 
                       try { 
-                           HttpSession ss1=request.getSession(true);
+                            HttpSession ss1=request.getSession(true);
                        String myex_id=request.getParameter("myid");
                        
-                        
-                          Class.forName("com.mysql.jdbc.Driver"); 
                           Connection con;
-                con=exhibitionAdministratorOneTimeConnection.getConnection(); 
+                       con=exhibitionAdministratorOneTimeConnection.getConnection(); 
                          Statement stat1=con.createStatement();
                        
                          String query="select * from exhibitionTeam where id= '"+myex_id+" '";
@@ -657,53 +597,27 @@
                         
                          while(rs.next())
                          {
-                             String fn=rs.getString("firstName");
-                             ss1.setAttribute("fn1", fn);
-                                      String lastName=rs.getString("lastName");
-                                       ss1.setAttribute("ln1", lastName);
-                                      String tagline=rs.getString("tagline");
-                                       ss1.setAttribute("tn1", tagline);
-                                      String title=rs.getString("title");
-                                       ss1.setAttribute("tt1", title);
-                                      String gender=rs.getString("gender");
-                                       ss1.setAttribute("gn1", gender);
-                                      String dateOfBirth=rs.getString("dateOfBirth");
-                                       ss1.setAttribute("dob1", dateOfBirth);
-                                      String degination=rs.getString("degination");
-                                       ss1.setAttribute("dn1", degination);
-                                      String phoneCountryId=rs.getString("phoneCountryId");   
-                                       ss1.setAttribute("phoneCountryId", phoneCountryId);
-                                      String mobileCountryId=rs.getString("mobileCountryId");
-                                       ss1.setAttribute("mobileCountryId", mobileCountryId);
-                                      String phoneNo=rs.getString("phoneNo");
-                                       ss1.setAttribute("pn1", phoneNo);
-                                      String mobileNo=rs.getString("mobileNo");
-                                       ss1.setAttribute("mn1", mobileNo);
-                                       String email=rs.getString("email");
-                                        ss1.setAttribute("em1", email);
-                             count++;
-                         }              
-                      }    
-                    catch (Exception e)
-                    {
-                        out.print("error");
-                    }
-                   %>  
-                       <%@ page import="javax.servlet.http.HttpSession.*;" %>
-                      <%@ page session="false" %>
-                      <% HttpSession ss1=request.getSession(false);%> 
+                            HttpSession CM=request.getSession(true);
+                             String phoneCountryId=rs.getString(17);   
+                             CM.setAttribute("phoneCountryId", phoneCountryId);
+                             String mobileCountryId=rs.getString(18);
+                             CM.setAttribute("mobileCountryId", mobileCountryId);
+                            
+                                     %>
+                                 
+                      
                    
               <div class="row">
                 <div class="col-sm-6">
                   <div class="form-group form-group-default">
                     <label>First Name</label>
-                    <input type="text" id="firstName" name="firstName" class="form-control" value="<%out.print((String)ss1.getAttribute("fn1"));%>" required>
+                    <input type="text" id="firstName" name="firstName" class="form-control" value="<%out.print(rs.getString("firstName"));%>" required>
                   </div>
                 </div>
                 <div class="col-sm-6">
                   <div class="form-group form-group-default">
                     <label>Last Name</label>
-                    <input type="text" id="lastName" name="lastName" class="form-control"  value="<%out.print((String)ss1.getAttribute("ln1"));%>"  required>
+                    <input type="text" id="lastName" name="lastName" class="form-control"  value="<%out.print(rs.getString("lastName"));%>"  required>
                   </div>
                 </div>
               </div>
@@ -711,7 +625,7 @@
                 <div class="col-sm-12">
                   <div class="form-group form-group-default">
                     <label>Tag line</label>
-                    <input type="text" id="tagline" name="tagline" class="form-control" value="<%out.print((String)ss1.getAttribute("tn1"));%>" required>
+                    <input type="text" id="tagline" name="tagline" class="form-control" value="<%out.print(rs.getString("tagline"));%>" required>
                   </div>
                 </div>
               </div>
@@ -719,18 +633,31 @@
                 <div class="col-sm-12">
                   <div class="form-group form-group-default">
                     <label>Title</label>
-                   <input type="text" id="title" name="title" class="form-control" value="<%out.print((String)ss1.getAttribute("tt1"));%>" required>
+                   <input type="text" id="title" name="title" class="form-control" value="<%out.print(rs.getString("title"));%>" required>
                   </div>
                 </div>
               </div>
-              <div class="row">
-                <div class="col-sm-12">
-                  <div class="form-group form-group-default">
-                    <label>Gender</label>
-                    <input type="text" id="gender" name="gender" class="form-control" value="<%out.print((String)ss1.getAttribute("gn1"));%>" required>
-                  </div>
-                </div>
-              </div>
+             <div class="col-sm-9">
+					  <div class="form-group">
+                        <label>Your gender</label>
+                        <span class="help"></span>
+						<div>
+						<input type="radio" value="1" name="optionyes" id="optionyes" <%Integer d1=rs.getInt("gender");
+                                         
+                                                       if(d1.equals(0))
+                                                       {
+                                                        out.println("checked=\"checked\"");        
+                                                       }
+                                                       %> >
+                            <label for="male">Male</label>
+                            <input type="radio" value="0" name="optionyes" id="optionyes" <%Integer d=rs.getInt("gender"); 
+                                   if(d.equals(1)) { 
+                              out.println("checked=\"checked\"");     
+                              }%>>
+                            <label for="female">Female</label>
+                           </div> 
+                          </div>
+                        </div>
                  
                   <div class="row">
                 <div class="col-sm-12">
@@ -739,7 +666,7 @@
                                 <label for="designation" class="col-sm-7 control-label">  Date Of Birth   </label>
                                 <div style="text-align:right;padding-right:5%;"> <span class="input-lg"> <i class="fa fa-calendar"></i> </span>
                                 </div>                             
-                    <input type="text" class="form-control" data-date-format="yyyy-mm-dd" placeholder="Pick a date" id="datepicker-component2" name="dateOfBirth" value="<%out.print((String)ss1.getAttribute("dob1"));%>" required>
+                    <input type="text" class="form-control" data-date-format="yyyy-mm-dd" placeholder="Pick a date" id="datepicker-component2" name="dateOfBirth" value="<%out.print(rs.getString("dateOfBirth"));%>" required>
                      
                    
                     </div></div>
@@ -749,7 +676,7 @@
                 <div class="col-sm-12">
                   <div class="form-group form-group-default">
                     <label>Designation</label>
-                  <input type="text" id="degination" name="degination" class="form-control" value="<%out.print((String)ss1.getAttribute("dn1"));%>" required>
+                  <input type="text" id="degination" name="degination" class="form-control" value="<%out.print(rs.getString("degination"));%>" required>
                   </div>
                 </div>
               </div>
@@ -759,24 +686,22 @@
                                  <label>Country Code</label>
                    <%    
                     try { 
-                         
+                         // HttpSession CM =request.getSession(false);
+                         String PHC =(String) CM.getAttribute("phoneCountryId");
                            Connection con9;
                            con9= exhibitionAdministratorOneTimeConnection.getConnection(); 
                            Statement sa9=con9.createStatement();
-                           ResultSet ry9=sa9.executeQuery("select * from country ");
+                           ResultSet ry9=sa9.executeQuery("select * from country where id='"+PHC+"'");
                            int cou1=0;
-                     %>
+                         while(ry9.next())
+                         { 
+                          String R=ry9.getString(1);
+                         %>
                      
                         <select class="form-control" data-init-plugin="select2" name="phoneCountryId" id="phoneCountryId">
-                             <option> <%out.print((String)ss1.getAttribute("phoneCountryId"));%></option> 
-                       <optgroup label="Select id">
-                         <% while(ry9.next())
-                         { 
-                           String r=ry9.getString(4);
-                           out.print(r);
-                         %>
-                        <option><%out.print(ry9.getString("countryCode"));%></option>
-                         <%   
+                               <option value="<%= R%>"><%out.print(ry9.getString(4));%></option>
+                               <%   
+                                   cou1++;
                          }
                         } 
                    catch(Exception e) 
@@ -784,6 +709,30 @@
                       out.print("error" +e); 
                       }
                         %>  
+                       <optgroup label="Select Country">
+                         <%    
+                    try { 
+                           Connection con5;
+                           con5= exhibitionAdministratorOneTimeConnection.getConnection(); 
+                           Statement sa5=con5.createStatement();
+                           ResultSet ry5=sa5.executeQuery("select * from country");
+                           int cou1=0;
+                         while(ry5.next())
+                         { 
+                          String R2=ry5.getString(1);
+                         %>
+                               <option value="<%= R2%>"><%out.print(ry5.getString(4));%></option>
+                               <%   
+                                   cou1++;
+                         }
+                        } 
+                   catch(Exception e) 
+                      { 
+                      out.print("error" +e); 
+                      }
+                        %>  
+                      
+                         
                          
                         </select>
                          </div></div>
@@ -791,7 +740,7 @@
                 <div class="col-sm-8">
                   <div class="form-group form-group-default">
                     <label>Phone No</label>
-                   <input type="text" id="phoneNo" name="phoneNo" class="form-control" value="<%out.print((String)ss1.getAttribute("pn1"));%>" required>
+                    <input type="text" id="phone" name="phone" onkeypress="return validate(event)" maxlength="10" class="form-control" value="<%out.print(rs.getString("phoneNo"));%>" required>
                   </div>
                 </div>
               </div>
@@ -801,24 +750,21 @@
                                  <label>Country Code</label>
                    <%    
                     try { 
-                         
+                          String CCM=(String)CM.getAttribute("mobileCountryId");
                            Connection con10;
                            con10= exhibitionAdministratorOneTimeConnection.getConnection(); 
                            Statement sa10=con10.createStatement();
-                           ResultSet ry10=sa10.executeQuery("select * from country ");
-                           int cou1=0;
-                     %>
-                     
-                        <select class="form-control" data-init-plugin="select2" name="mobileCountryId" id="mobileCountryId">
-                              <option> <%out.print((String)ss1.getAttribute("mobileCountryId"));%></option> 
-                       <optgroup label="Select id">
-                         <% while(ry10.next())
+                           ResultSet ry10=sa10.executeQuery("select * from country where id='"+CCM+"' ");
+                           int co1=0;
+                       while(ry10.next())
                          { 
-                           String r=ry10.getString(4);
-                           out.print(r);
+                           String r2=ry10.getString(1);
+                         
                          %>
-                        <option><%out.print(ry10.getString("countryCode"));%></option>
-                         <%   
+                        <select class="form-control" data-init-plugin="select2" name="mobileCountryId" id="mobileCountryId">
+                              <option value="<%= r2%>"> <%out.print(ry10.getString(4));%></option> 
+                                 <%   
+                                     co1++;
                          }
                         } 
                    catch(Exception e) 
@@ -826,13 +772,39 @@
                       out.print("error" +e); 
                       }
                         %>  
+                       <optgroup label="Select id">
+                          <%    
+                    try { 
+                      
+                           Connection con0;
+                           con0= exhibitionAdministratorOneTimeConnection.getConnection(); 
+                           Statement sa0=con0.createStatement();
+                           ResultSet ry0=sa0.executeQuery("select * from country");
+                           int co=0;
+                       while(ry0.next())
+                         { 
+                           String r2=ry0.getString(1);
+                         
+                         %>
+                              <option value="<%= r2%>"> <%out.print(ry0.getString(4));%></option> 
+                                 <%   
+                                     co++;
+                         }
+                        } 
+                   catch(Exception e) 
+                      { 
+                      out.print("error" +e); 
+                      }
+                        %>  
+                      
+                      
                          
                         </select>
                         </div> </div>
                 <div class="col-sm-8">
                   <div class="form-group form-group-default">
                     <label>Mobile No</label>
-                  <input type="text" id="mobileNo" name="mobileNo" class="form-control"  value="<%out.print((String)ss1.getAttribute("mn1"));%>" required>
+                  <input type="text" id="mobileNo" name="mobileNo" maxlength="10" onkeypress="return validate(event)" class="form-control"  value="<%out.print(rs.getString("mobileNo"));%>" required>
                   </div>
                 </div>
               </div>
@@ -840,13 +812,24 @@
                 <div class="col-sm-12">
                   <div class="form-group form-group-default">
                     <label>Email</label>
-                     <input type="email" id="email" name="email" class="form-control"  value="<%out.print((String)ss1.getAttribute("em1"));%>" required>
+                     <input type="email" id="email" name="email" class="form-control"  value="<%out.print(rs.getString("email"));%>" required>
                   </div>
                 </div>
               </div>
+                  
+                      <%
+                             count++;
+                         }              
+                      }    
+                    catch (Exception e)
+                    {
+                        out.print("error");
+                    }
+                   %>  
              
        <div id="msgbox1"></div>      <div id="msgbox2"></div>       
        <button class="btn btn-primary btn-cons m-t-10" type="submit">Update </button>
+        <button class="btn btn-primary btn-cons m-t-10" type="submit" onclick="document.location.href='/Exhibition/html/exhibitionAdministratorTeamMember.jsp';"> Cancel </button>
             </form>
           </div>
         </div>
@@ -2137,6 +2120,60 @@
     </div>
     <!-- END OVERLAY -->
     <!-- BEGIN VENDOR JS -->
+    
+     <script type="text/javascript">
+$(document).ready(function (e) {
+	$("#login").on('submit',(function(e) {
+		$.ajax({
+        	url: '/Exhibition/exhibitionAdministratorTeamMemberEdit',
+			type: "POST",
+			data:  new FormData(this),
+			success: function(msg)
+                        
+		    {
+                         alert(msg);
+				  if(msg != 'error') // Message Sent, check and redirect
+				{
+                                        if(msg !='wrong')
+                                        {
+                                          $("#msgbox1").html('data updated').addClass('myinfo').fadeTo(200,1,function()
+			             {
+			                 //redirect to secure page
+			              //document.location='/Exhibition/html/exhibitionAdminPersonal.jsp';
+			             });
+                                        
+                                    }
+                                
+				
+                                else
+                                {
+                                    $("#msgbox2").fadeTo(100,1,function() //start fading the messagebox
+		                {
+			                  //add message and change the class of the box and start fading
+			                 $(this).html('records are not updated..').removeClass().addClass('myerror').fadeTo(300,1);
+                                        // document.location='/Exhibition/html/exhibitionAdminLog.jsp?user';
+                                 });
+                                }
+                            }
+                            else
+                            {
+                                $("#msgbox2").fadeTo(100,1,function() //start fading the messagebox
+		                {
+			                  //add message and change the class of the box and start fading
+			                 $(this).html('MobileNo should be 10 digits only').removeClass().addClass('myerror').fadeTo(300,1);
+                                        // document.location='/Exhibition/html/exhibitionAdminLog.jsp?user';
+                                 });
+                            }
+		    },
+		  	error: function() 
+	    	{
+	    	} 	        
+	   });
+	}));
+});
+</script>	
+   
+   
     <script src="assets/plugins/pace/pace.min.js" type="text/javascript"></script>
     <script src="assets/plugins/jquery/jquery-1.11.1.min.js" type="text/javascript"></script>
     <script src="assets/plugins/modernizr.custom.js" type="text/javascript"></script>

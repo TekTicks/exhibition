@@ -171,7 +171,7 @@ psmnt.setString(1, "");
                         {
                              out.print("wrn");
                         }
-                            response.sendRedirect("/Exhibition/html/exhibitionAdministratorOpportunityThankUPage.jsp");
+                         response.sendRedirect("/Exhibition/html/exhibitionAdministratorOpportunity.jsp");
 }
 catch(Exception e){
     
@@ -186,10 +186,4 @@ catch(Exception e){
 
 
 %>
-</td></tr></table>
-</center>
 
-<%
-
-
-%>

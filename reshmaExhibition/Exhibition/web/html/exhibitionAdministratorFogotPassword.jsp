@@ -151,12 +151,12 @@
              <div class="form-group form-group-default">
             
               <div class="controls">
-             <input type="password" class="form-control" id="newpassword" name="newpassword" placeholder="Enter New Password" >
+             <input type="password" class="form-control" minlength="6" id="newpassword" name="newpassword" placeholder="Enter New Password" >
             </div>  	</div>
            <div class="form-group form-group-default">
             
               <div class="controls">
-              <input type="password" class="form-control" id="confirmpassword" name="confirmpassword" placeholder="Confirm Password" >
+              <input type="password" class="form-control" minlength="6"  id="confirmpassword" name="confirmpassword" placeholder="Confirm Password" >
             </div>	 </div>
             <div id="msgbox1"></div>
             

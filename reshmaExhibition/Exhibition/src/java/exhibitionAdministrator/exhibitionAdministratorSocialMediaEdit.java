@@ -22,10 +22,11 @@ public class exhibitionAdministratorSocialMediaEdit extends HttpServlet
                     // value fetch from exhibitionAdministratorSocialMedia.jsp
                     out.print(myex_id);
                      String exhibitionId=request.getParameter("EI");
-                    String link=request.getParameter("link");      
+                    String link=request.getParameter("link");    
+                    String url=request.getParameter("url");  
                     Connection con;
                     con=exhibitionAdministratorOneTimeConnection.getConnection();
-                    String query = "update exhibitionSocialMedia set exhibitionId ='"+exhibitionId+"' , link ='"+link+"' where id='"+myex_id+"' ";
+                    String query = "update exhibitionSocialMedia set exhibitionId ='"+exhibitionId+"' , link ='"+link+"' , socialMediaId='"+url+"' where id='"+myex_id+"' ";
                     // data updated in exhibitionSocialMedia table
                     PreparedStatement ps=con.prepareStatement(query);
                     int rs= ps.executeUpdate();

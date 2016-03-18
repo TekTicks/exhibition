@@ -14,9 +14,11 @@
 <%@ page import="java.io.*,java.sql.*,java.util.zip.*" %>
 
 
-<%    String sectorName = "";
-      String description = "";
-     
+<% 
+      String sectorName = "";
+      String sectorDescription = "";
+    
+    
 int count1 = 0;
 
 boolean isMultipart = ServletFileUpload.isMultipartContent(request);
@@ -34,12 +36,12 @@ Iterator itr = items.iterator();
 while (itr.hasNext()) {
 FileItem item = (FileItem) itr.next();
 if (item.isFormField()) {
+
 String sn = item.getFieldName(); 
-String value1 = item.getString();
-
-String de = item.getFieldName();
+String value1 = item.getString();    
+    
+String sd = item.getFieldName();
 String value2 = item.getString();
-
 
 
 if (sn.equals("sectorName")) {
@@ -47,8 +49,8 @@ sectorName = value1;
 count1 = 1;
 }
 
-if (de.equals("description")) {
-description = value2;
+if (sd.equals("sectorDescription")) {
+sectorDescription = value2;
 count1 = 1;
 }
 
@@ -57,13 +59,9 @@ try {
 String itemName = item.getName();
 File savedFile = new File("C:/Users/Admin/Documents/NetBeansProjects/Exhibition/web/html/images/" + itemName);
 item.write(savedFile);
-out.println(savedFile);
 if (count1 == 1) {
 HttpSession ss=request.getSession();
 ss.setAttribute("fileName",itemName);   
-out.println(sectorName);
-out.println(description);
-
 }
 } catch (Exception e) {
 e.printStackTrace();
@@ -75,11 +73,12 @@ String connectionURL = "jdbc:mysql://localhost:3306/exhibition";
 PreparedStatement psmnt = null;
 try{
     
-      HttpSession ss=request.getSession();
-       String idValid=(String)ss.getAttribute("idValid");    
-       out.print(idValid);
+      HttpSession ss1=request.getSession();
+       String idValid=(String)ss1.getAttribute("myex_id");    
+      
+     HttpSession ss=request.getSession();
       String fileName=(String)ss.getAttribute("fileName");
-      //out.println(fileName);
+     
      // Class.forName("com.mysql.jdbc.Driver").newInstance();
       Connection con;
        con=exhibitionAdministratorOneTimeConnection.getConnection();
@@ -111,15 +110,13 @@ psmnt.setString(1, "");
  
  
  String iddsf=(String)ss.getAttribute("logoMediaID");
- out.print(iddsf);
+
  
   Connection con2;
  con2=exhibitionAdministratorOneTimeConnection.getConnection();
-out.print("dfdkjfks");
- PreparedStatement ps=con2.prepareStatement("insert into exhibitionSector(sectorName,sectorMediaId,description,createdBy,modifiedBy)  values (?,'"+iddsf+"',?,'"+idValid+"','"+idValid+"')");
-                                 
-                            ps.setString(1, sectorName);
-                            ps.setString(2, description);  
+ String val="update exhibitionSector set sectorName='"+sectorName+"' , description='"+sectorDescription+"', sectorMediaId='"+iddsf+"' where id='"+idValid+"' ";
+ PreparedStatement ps=con2.prepareStatement(val);
+                          
                           int n=  ps.executeUpdate();
                          
                         if(n>0)
@@ -130,7 +127,7 @@ out.print("dfdkjfks");
                         {
                              out.print("wrn");
                         }
-                            response.sendRedirect("/Exhibition/html/exhibitionAdministratorSector.jsp");
+                         response.sendRedirect("/Exhibition/html/exhibitionAdministratorSector.jsp");
 }
 catch(Exception e){
     
@@ -142,13 +139,6 @@ catch(Exception e){
 
 
 
-
-
-%>
-</td></tr></table>
-</center>
-
-<%
 
 
 %>
