@@ -278,8 +278,8 @@
                 <a href="news.jsp">News</a>
                 <span class="icon-thumbnail">M</span>
               </li>
-              <li class="">
-                <a href="exhibitionRegistrationPage.jsp">Create Exhibition Registration Page</a>
+               <li class="">
+                <a href="/Exhibition/html/exhibitorView.jsp">View Exhibitor</a>
                 <span class="icon-thumbnail">M</span>
               </li>
             </ul>
@@ -577,17 +577,12 @@
                    <% 
                       try { 
                           
-                            HttpSession obj=request.getSession(true);
-                            
-                        String idr=request.getParameter("idr");
-                        
+                         HttpSession obj=request.getSession(true);  
+                         String idr=request.getParameter("idr");
                          obj.setAttribute("myid", idr);
-                         
-                          Class.forName("com.mysql.jdbc.Driver"); 
                          Connection con;
-                      con=exhibitionAdministratorOneTimeConnection.getConnection(); 
+                         con=exhibitionAdministratorOneTimeConnection.getConnection(); 
                          Statement stat1=con.createStatement();
-                       
                          String query="select * from exhibitionFacilities where id= '"+idr+"'";
                          ResultSet rs=stat1.executeQuery(query);  
                          

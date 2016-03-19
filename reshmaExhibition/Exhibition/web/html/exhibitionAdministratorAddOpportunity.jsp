@@ -187,8 +187,8 @@
                 <a href="news.jsp">News</a>
                 <span class="icon-thumbnail">M</span>
               </li>
-              <li class="">
-                <a href="exhibitionRegistrationPage.jsp">Create Exhibition Registration Page</a>
+               <li class="">
+                <a href="/Exhibition/html/exhibitorView.jsp">View Exhibitor</a>
                 <span class="icon-thumbnail">M</span>
               </li>
             </ul>
@@ -560,7 +560,7 @@
                           
                               <div class="col-sm-8">
                                    
-                          <input type="text" class="form-control" onkeypress="return validate(event)" maxlength=10 min=10 id="mobile" name="mobile" required>
+                          <input type="text" class="form-control" maxlength=10 minlength=10 onkeypress="return validate(event)"  id="mobile" name="mobile" required>
                               </div>
                               
                               </div> </div>
@@ -605,7 +605,7 @@
                       </div>  
                         
                         <div class="col-sm-8"> 
-                            <input type="text" class="form-control" onkeypress="return validate(event)" maxlength="10" minlength="10" id="contactNo" name="contactNo" required>
+                            <input type="text" class="form-control" maxlength="10" minlength="10" onkeypress="return validate(event)"  id="contactNo" name="contactNo" required>
                         </div> </div><br>
                         
                         <div id="uploadFormLayer">

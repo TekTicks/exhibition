@@ -55,7 +55,7 @@
 		          	data: 'EI='+ $('#exhibitionId').val() +'&link=' + $('#link').val() +'&url=' + $('#url').val(),
 		          	type: 'post',
 		   		success: function(msg){
-                                    alert(msg);
+                                  
                                 if(msg != 'error') // Message Sent, check and redirect
 				{
                                        
@@ -264,8 +264,8 @@
                 <a href="news.jsp">News</a>
                 <span class="icon-thumbnail">M</span>
               </li>
-              <li class="">
-                <a href="exhibitionRegistrationPage.jsp">Create Exhibition Registration Page</a>
+               <li class="">
+                <a href="/Exhibition/html/exhibitorView.jsp">View Exhibitor</a>
                 <span class="icon-thumbnail">M</span>
               </li>
             </ul>
@@ -605,7 +605,7 @@
                         <input type="text" id="link" name="link" class="form-control" required>
                       </div> <br>
                       <div id="msgbox1"></div>       <button class="btn btn-success" type="submit">Add</button>
-                         <button class="btn btn-success" type="submit">Clear</button>
+                         <button class="btn btn-success" type="submit" onclick="document.location.href='/Exhibition/html/exhibitionAdministratorSocialMedia.jsp';"> cancel</button>
                       
                     </form>
           </div>

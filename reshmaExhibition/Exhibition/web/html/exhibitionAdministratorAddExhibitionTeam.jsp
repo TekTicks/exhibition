@@ -41,7 +41,7 @@
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="pages/js/jquery-1.4.2.min.js"></script>
          <script src="assets/js/phoneNoValidation.js" type="text/javascript"></script>
-         
+         <!--
     <script type="text/javascript">
 	$(document).ready(function(){
 		$("#login").submit(function(){
@@ -123,7 +123,7 @@
 	-webkit-border-radius:4px;
 	text-align: center;
 }
-</style>
+</style>  -->
 
   </head>
   <body class="fixed-header ">
@@ -273,7 +273,7 @@
                 <span class="icon-thumbnail">M</span>
               </li>
               <li class="">
-                <a href="exhibitionRegistrationPage.jsp">Create Exhibition Registration Page</a>
+                <a href="/Exhibition/html/exhibitorView.jsp">View Exhibitor</a>
                 <span class="icon-thumbnail">M</span>
               </li>
             </ul>
@@ -568,7 +568,7 @@
   </p> --><p><h1><b>Add Exhibition Team..!</b></h1></p>
           <br>
          
-                <form role="form"   class="p-t-15" id="login" name="login" action="" method="">
+                <form role="form"   class="p-t-15" id="login" name="login" action="/Exhibition/exhibitionAdministratorTeamMember" method="post">
                 
               <div class="row">
                 <div class="col-sm-6">
@@ -680,7 +680,7 @@
                 <div class="col-sm-8">
                   <div class="form-group form-group-default">
                     <label>Phone No</label>
-                   <input type="text" id="phone" onkeypress="return validate(event)" maxlength=10 minlength=10 name="phone" class="form-control" value="" required>
+                   <input type="text" id="phone" maxlength=10 minlength=10 onkeypress="return validate(event)"  name="phone" class="form-control" value="" required>
                   </div>
                 </div>
               </div>
@@ -722,7 +722,7 @@
                 <div class="col-sm-8">
                   <div class="form-group form-group-default">
                     <label>Mobile No</label>
-                    <input type="text" id="mobileNo" onkeypress="return validate(event)"  maxlength="10"  name="mobileNo" class="form-control"  value="" required>
+                    <input type="text" id="mobileNo" maxlength=10 minlength=10 onkeypress="return validate(event)"   name="mobileNo" class="form-control"  value="" required>
                   </div>
                 </div>
               </div>

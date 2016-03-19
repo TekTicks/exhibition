@@ -52,7 +52,7 @@
 		          	data: 'exId=' + $('#exId').val() +'&title=' + $('#title').val() +'&que=' + $('#que').val()+'&ans=' + $('#ans').val(),
 		          	type: 'post',
 		   		success: function(msg){ 
-                                    alert(msg);
+                                
                                 if(msg != 'error') // Message Sent, check and redirect
 				{
                                         if(msg !='wrn')
@@ -271,8 +271,8 @@
                 <a href="news.jsp">News</a>
                 <span class="icon-thumbnail">M</span>
               </li>
-              <li class="">
-                <a href="exhibitionRegistrationPage.jsp">Create Exhibition Registration Page</a>
+               <li class="">
+                <a href="/Exhibition/html/exhibitorView.jsp">View Exhibitor</a>
                 <span class="icon-thumbnail">M</span>
               </li>
             </ul>
@@ -613,7 +613,7 @@
                     <div id="msgbox1"></div> 
                     <div id="msgbox2"></div>       
                   <button class="btn btn-primary btn-cons m-t-10" type="submit"> Save </button>
-                 <button class="btn btn-primary btn-cons m-t-10" type="submit"> Cancel </button>
+                 <button class="btn btn-primary btn-cons m-t-10" type="submit" onclick="document.location.href='/Exhibition/html/exhibitionAdministratorFAQ.jsp';"> Cancel </button>
                 </form>
           </div>
         </div>

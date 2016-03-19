@@ -44,76 +44,39 @@
 			
 			this.timer = setTimeout(function () {
 				$.ajax({   
-		          	url: '/Exhibition/exhibitorRegister',
-		          	data: 'companyName='+ $('#companyName').val() +'&userName=' + $('#userName').val()+'&email=' + $('#email').val() +'&password=' + $('#password').val()+'&cpassword=' + $('#cpassword').val()+'&countryId=' + $('#countryId').val()+'&phone=' + $('#phone').val() +'&exId=' + $('#exId').val(),
+		          	url: '/Exhibition/exhibitorEdit',
+		          	data: 'companyName='+ $('#companyName').val()+'&exId=' + $('#exId').val()+'&userName=' + $('#userName').val(),
 		          	type: 'post',
 		   		success: function(msg){
                                   alert(msg);
                                 if(msg != 'error') // Message Sent, check and redirect
 				{
-                                        if(msg == 'passwordInvalid')
+                                        if(msg != 'wrong')
                                         {
                                          $("#msgbox1").fadeTo(300,1,function() //start fading the messagebox
                                        {
                                             //add message and change the class of the box and start fading
-                                             $(this).html('Password invalid..!').removeClass().addClass('myinfo').fadeTo(300,1).fadeout();
+                                             $(this).html('data updated..!').removeClass().addClass('myinfo').fadeTo(300,1).fadeout();
                                           //  document.location='/Exhibition/html/exhibitionAdministratorContactInformationFirstTimeUse.jsp';
-                                     });
-                                        
+                                     });   
                                     }
-                                   else if(msg == 'emailInvalid')
-                                        {
-                                         $("#msgbox2").fadeTo(300,1,function() //start fading the messagebox
-                                       {
-                                            //add message and change the class of the box and start fading
-                                             $(this).html('email invalid.!').removeClass().addClass('myinfo').fadeTo(300,1).fadeout();
-                                          //  document.location='/Exhibition/html/exhibitionAdministratorContactInformationFirstTimeUse.jsp';
-                                     });
-                                        
-                                    }
-                                 else if(msg == 'mobileNoInvalid')
-                                        {
-                                         $("#msgbox3").fadeTo(300,1,function() //start fading the messagebox
-                                       {
-                                            //add message and change the class of the box and start fading
-                                             $(this).html('mobileNo invalid..!').removeClass().addClass('myinfo').fadeTo(300,1).fadeout();
-                                          //  document.location='/Exhibition/html/exhibitionAdministratorContactInformationFirstTimeUse.jsp';
-                                     });
-                                        
-                                    }
-				
                                 else 
                                 { 
-                                    
-                                    
-                                     if(msg != 'wrn')
-                                        {
-                                         $("#msgbox4").fadeTo(300,1,function() //start fading the messagebox
-                                       {
-                                            //add message and change the class of the box and start fading
-                                             $(this).html('records saved..!').removeClass().addClass('myinfo').fadeTo(300,1).fadeout();
-                                          //  document.location='/Exhibition/html/exhibitionAdministratorContactInformationFirstTimeUse.jsp';
-                                     });
-                                        
-                                    }
-                                    else {
-                                 $("#msgbox4").fadeTo(300,1,function() //start fading the messagebox
+                                 $("#msgbox2").fadeTo(300,1,function() //start fading the messagebox
                                                 {
                                                 //add message and change the class of the box and start fading
                                                     $(this).html('Records are not updated.!').removeClass().addClass('myerror').fadeTo(300,1).fadeOut();
                                                 });
-                                }
                                  }
                                 }
                             else
                             {
-                               $("#msgbox4").fadeTo(300,1,function() //start fading the messagebox
+                               $("#msgbox2").fadeTo(300,1,function() //start fading the messagebox
                                                 {
                                                 //add message and change the class of the box and start fading
                                                     $(this).html('sorry sql exceptions are there!').removeClass().addClass('myerror').fadeTo(300,1).fadeOut();
                                                 });
                                 }
-                            
                                 }
 				});
 			}, 200);
@@ -155,7 +118,7 @@
 	-webkit-border-radius:4px;
 	text-align:left;
 }
-</style> 
+</style>   
 
     <script type="text/javascript">
     window.onload = function()
@@ -178,12 +141,33 @@
         Create a pages account. If you have a facebook account, log into it for this process. Sign in with <a href="#" class="text-info">Facebook</a> or <a href="#" class="text-info">Google</a>
     </small>
             </p>
-            <form id="form-register" name="form-register" class="p-t-15" role="form" action="/Exhibition/exhibitorRegister" method="post">
-             <div class="row">
+            <form id="form-register" name="form-register" class="p-t-15" role="form" action="" method="">
+                <% 
+                      try { 
+                          String m;
+                          HttpSession ss1=request.getSession(true);
+                          String myex_id=request.getParameter("exid");
+                          ss1.setAttribute("myid",myex_id);
+                          Connection con;
+                         con=exhibitionAdministratorOneTimeConnection.getConnection(); 
+                         Statement stat1=con.createStatement();
+                         String query="select * from exhibitor where id= '"+myex_id+" '";
+                         ResultSet rs=stat1.executeQuery(query);  
+                         int count=0;
+                         while(rs.next())
+                         {
+                            HttpSession CM=request.getSession(true);
+                             String phoneCountryId=rs.getString("countryId");   
+                             CM.setAttribute("phoneCountryId", phoneCountryId);
+                          
+                            
+                                     %>
+                
+                <div class="row">
                 <div class="col-sm-12">
                   <div class="form-group form-group-default">
                     <label> Company Name</label>
-                    <input type="text" name="companyName" id="companyName" placeholder="comapny name" class="form-control" required>
+                    <input type="text" name="companyName" id="companyName" placeholder="comapny name" value="<%out.print(rs.getString("companyName"));%>" class="form-control" required>
                   </div>
                 </div>
               </div>
@@ -191,7 +175,7 @@
                 <div class="col-sm-12">
                   <div class="form-group form-group-default">
                     <label> User Name</label>
-                    <input type="email" name="userName" id="userName" placeholder="username as email" class="form-control" required>
+                    <input type="email" name="userName" id="userName" placeholder="username as email" value="<%out.print(rs.getString("username"));%>" class="form-control" required>
                   </div>
                 </div>
               </div>
@@ -199,7 +183,7 @@
                 <div class="col-sm-12">
                   <div class="form-group form-group-default">
                     <label> Email</label>
-                    <input type="email" name="email" id="email" placeholder="email id" class="form-control" required>
+                    <input type="email" name="email" id="email" placeholder="email id" value="<%out.print(rs.getString("email"));%>"  class="form-control" disabled>
                   </div>
                 </div>
               </div> <div id="msgbox1"></div>
@@ -207,43 +191,35 @@
                 <div class="col-sm-12">
                   <div class="form-group form-group-default">
                     <label>Password</label>
-                    <input type="password" name="password" id="password" placeholder="Minimum of 6 Charactors" class="form-control" required>
+                    <input type="password" name="password" id="password" placeholder="Minimum of 6 Charactors" value="<%out.print(rs.getString("password"));%>" class="form-control" disabled>
                   </div>
                 </div>
               </div> 
-                 <div class="row">
-                <div class="col-sm-12">
-                  <div class="form-group form-group-default">
-                    <label>Confirm Password</label>
-                    <input type="password" name="cpassword"  id="cpassword" placeholder="Minimum of 6 Charactors" class="form-control" required>
-                  </div>
-                </div>
-              </div><div id="msgbox2"></div>
-              
-              <div class="row">    
-                   <div class="form-group form-group-default">
-                     
-                    <div class="col-sm-4">
-                        <label>Country Code</label>
+                
+                <div class="row">
+                    
+                    <div class="col-sm-4"> 
+                         <div class="form-group form-group-default">
+                    <label>Country Code</label>
                      <%    
                     try { 
-                         
-                           Connection con;
-                           con= exhibitionAdministratorOneTimeConnection.getConnection(); 
-                           Statement sta1=con.createStatement();
-                           ResultSet rsy=sta1.executeQuery("select * from country ");
+                        
+                        String im =(String)CM.getAttribute("phoneCountryId");
+                           Connection con1;
+                           con1= exhibitionAdministratorOneTimeConnection.getConnection(); 
+                           Statement sta2=con1.createStatement();
+                           ResultSet rsy2=sta2.executeQuery("select * from country where id='"+im+"' ");
                            int cou1=0;
-                     %>
-                      
-                        <select class="cs-select cs-skin-slide cs-transparent" data-init-plugin="select2" name="countryId" id="countryId">  
-                       <optgroup label="Select id">
-                         <% while(rsy.next())
+                           
+                      while(rsy2.next())
                          { 
-                           String id1=rsy.getString(1);
+                           String id1=rsy2.getString(1);
                          
                          %>
-                        <option class="" value="<%=id1%>"> <%out.print(rsy.getString(4));%> </option>
-                         <%   
+                    
+                         <select class="full-width" data-init-plugin="select2" name="countryId" id="countryId" disabled>
+                           <option class="full-width" value="<%=id1%>"><%out.print(rsy2.getString(4));%></option>
+                            <%   
                          }
                         } 
                    catch(Exception e) 
@@ -251,22 +227,63 @@
                       out.print("error" +e); 
                       }
                         %>  
+                       <optgroup label="Select id">
+                        
+                      <%    
+                    try { 
+                           Connection con5;
+                           con5= exhibitionAdministratorOneTimeConnection.getConnection(); 
+                           Statement sa5=con5.createStatement();
+                           ResultSet ry5=sa5.executeQuery("select * from country");
+                           int cou1=0;
+                         while(ry5.next())
+                         { 
+                          String R2=ry5.getString(1);
+                         %>
+                               <option value="<%= R2%>"><%out.print(ry5.getString(4));%></option>
+                               <%   
+                                   cou1++;
+                         }
+                        } 
+                   catch(Exception e) 
+                      { 
+                      out.print("error" +e); 
+                      }
+                        %>  
+                        
                          
-                        </select> </div>
-                          <div class="col-sm-4">
-                    <label> Mobile No</label>
-                    <input type="text" name="phone" id="phone" onkeypress="return validate(event)" maxlength="10" placeholder="mobile no" class="form-control" required>
-                  </div>
-                   </div> </div>
-             <div id="msgbox3"></div>
-               <div class="form-group form-group-default">
-                           <label>Is Main Exhibitor</label>
-                        <select class="full-width" data-init-plugin="select2" name="exId" id="exId">   
-                        <option value="1">Yes</option>
-                        <option value="0">No</option>
                         </select>
-                      </div>  
-             
+                         </div> </div>
+                <div class="col-sm-8">
+                  <div class="form-group form-group-default">
+                    <label> Mobile No</label>
+                    <input type="text" name="phone" id="phone" onkeypress="return validate(event)" maxlength="10" placeholder="mobile no" class="form-control" value="<%out.print(rs.getString("mobileNo"));%>"  disabled>
+                  </div>
+                </div>
+              </div><div id="msgbox3"></div>
+                 
+              
+              <div class="form-group form-group-default">
+                     <%
+                          String mn=rs.getString("isMainExhibitor");
+                          if("0".equals(mn))
+                          {
+                              mn="yes"; 
+                          }
+                          else
+                          {
+                              mn="no";
+                          }
+                      %>
+                     
+                           <label>Is Main Exhibitor</label>
+                        <select class="full-width" data-init-plugin="select2"  name="exId" id="exId">   
+                            <option class="full-width" value="<%out.print(rs.getString("isMainExhibitor"));%>" ><%= mn%></option>
+                              <optgroup label="Select options">
+                                   <option class="full-width" value="1">yes</option>
+                                     <option class="full-width" value="0">no</option>
+                        </select>
+                      </div>
               
               <div class="row m-t-10">
                 <div class="col-md-6">
@@ -275,10 +292,19 @@
                 <div class="col-md-6 text-right">
                   <a href="#" class="text-info small">Help? Contact Support</a>
                 </div>
-              </div><div id="msgbox4"></div>
+              </div> <div id="msgbox1"></div><div id="msgbox2"></div>
                         <button class="btn btn-primary btn-cons m-t-10" type="submit">Create a new account</button>
-                          <button class="btn btn-primary btn-cons m-t-10" type="submit" onclick="document.location.href='/Exhibition/html/exhibitorView.jsp';">Cancel</button>
+                          <button class="btn btn-primary btn-cons m-t-10" type="submit" onclick="document.location.href='/Exhibition/html/exhibitorEdit.jsp';">Cancel</button>
                           <br><br><br>
+                          <%
+                             count++;
+                         }              
+                      }    
+                    catch (Exception e)
+                    {
+                        out.print("error");
+                    }
+                   %>  
             </form>
           </div>
         </div>

@@ -186,8 +186,8 @@
                 <a href="news.jsp">News</a>
                 <span class="icon-thumbnail">M</span>
               </li>
-              <li class="">
-                <a href="exhibitionRegistrationPage.jsp">Create Exhibition Registration Page</a>
+                <li class="">
+                <a href="/Exhibition/html/exhibitorView.jsp">View Exhibitor</a>
                 <span class="icon-thumbnail">M</span>
               </li>
             </ul>
@@ -605,7 +605,7 @@
                               
                               
                               <div class="col-sm-8">
-                                  <input type="text" class="form-control" onkeypress="return validate(event)" maxlength="10" id="mobile" value="<%out.print(rs.getString("mobile"));%>" name="mobile" value="" required>
+                                  <input type="text" class="form-control" maxlength="10" minlength="10"  onkeypress="return validate(event)"  id="mobile" value="<%out.print(rs.getString("mobile"));%>" name="mobile" value="" required>
                               </div>
                               
                               </div> </div>
@@ -671,7 +671,7 @@
                         </select>
                       </div>  
                         <div class="col-sm-8">
-                          <input type="text" class="form-control" id="contactNo" maxlength="10" onkeypress="return validate(event)" value="<%out.print(rs.getString("contactNo"));%>" name="contactNo" required>
+                            <input type="text" class="form-control" id="contactNo" maxlength="10" minlength="10" onkeypress="return validate(event)" value="<%out.print(rs.getString("contactNo"));%>" name="contactNo" required>
                         </div> </div></div> <br>
                      <div id="uploadFormLayer">    
               <label><b>Upload Image File:</b></label><br/>
@@ -720,7 +720,14 @@
     
                         
                         <br>
-                        <%
+                       
+ 
+                        <div id="msgbox1"></div>  <div id="msgbox2"></div>
+               <button class="btn btn-primary btn-cons m-t-10" type="submit"> Save </button>
+                 <button class="btn btn-primary btn-cons m-t-10" type="submit" onclick="document.location.href='/Exhibition/html/exhibitionAdministratorOpportunity.jsp';"> Cancel </button> 
+                 
+                 
+                  <%
                              count++;
                              }              
                           }    
@@ -729,12 +736,9 @@
                         out.print("error1" +e);
                     }
                    %>       
- 
-                        <div id="msgbox1"></div>  <div id="msgbox2"></div>
-               <button class="btn btn-primary btn-cons m-t-10" type="submit" onclik="document.location.hred='/Exhibition/exhibitionAdministratorOpportunity';"> Save </button>
-                 <button class="btn btn-primary btn-cons m-t-10" type="submit" onclick="document.location.href='0/Exhibition/html/exhibitionAdministratorOpportunity.jsp';> Cancel </button> 
-                 <br>
-               </form>
+               
+       
+            </form>
                       
                      </div>
                      </div>
@@ -748,7 +752,8 @@
         <!-- START COPYRIGHT -->
         <!-- START CONTAINER FLUID -->
         <!-- START CONTAINER FLUID -->
-        <div class="container-fluid container-fixed-lg footer">
+            
+            <div class="container-fluid container-fixed-lg footer">
           <div class="copyright sm-text-center">
             <p class="small no-margin pull-left sm-pull-reset">
               <span class="hint-text">Copyright &copy; 2014 </span>

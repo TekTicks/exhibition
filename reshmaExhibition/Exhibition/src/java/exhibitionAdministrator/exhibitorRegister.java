@@ -21,32 +21,21 @@ public class exhibitorRegister extends HttpServlet
                        HttpSession sst=request.getSession(true);
                         //values fetch from textbox of exhibitorRegister.jsp file
                         String CN=request.getParameter("companyName"); 
-                          //out.print(CN);
                         String UN=request.getParameter("userName");
-                         // out.print(UN);
                         String EM=request.getParameter("email");
-                         // out.print(EM);
                         String PASS=request.getParameter("password");
-                        //  out.print(PASS);
                         String CPASS=request.getParameter("cpassword");
-                        //  out.print(CPASS);
                         String CI=request.getParameter("countryId");
-                        //  out.print(CI);
-                        String MN=request.getParameter("mobileNo");
-                        //  out.print(MN);
-                        out.print(request.getParameter("checkbox2"));
-                       // out.print(IME);
+                        String MN=request.getParameter("phone");
+                        String m= request.getParameter("exId"); 
                         char x=EM.charAt(0);
-                    
                         Connection con;
                         con=exhibitionAdministratorOneTimeConnection.getConnection(); 
-                       
-                         HttpSession ss=request.getSession(false);
+                        HttpSession ss=request.getSession(false);
                         String idValid=(String)ss.getAttribute("idValid");
-                        //out.print(idValid);
                        // value fetch from exhibitionAdminLoginCheck.java file
-                         Statement stat=con.createStatement();   
-                       ResultSet rs=stat.executeQuery("select * from exhibitor");
+                        Statement stat=con.createStatement();   
+                        ResultSet rs=stat.executeQuery("select * from exhibitor");
                         int len=0;
                         while(rs.next())
                         {
@@ -55,38 +44,33 @@ public class exhibitorRegister extends HttpServlet
                               sst.setAttribute("emailId1",em);
                               String mb=rs.getString(5);
                               sst.setAttribute("mobileNo",mb);
-                            len++;
-                        }
-                         
-                        String em1=(String)sst.getAttribute("emailId1");
-                        String mb1=(String)sst.getAttribute("mobileNo");
+                         len++; 
+                       } 
                         if(!(CPASS.equals(PASS)))
                         {
                             out.print("passwordInvalid");
                         }
-                            else if((em1.equals(EM))) 
+                            else if((sst.getAttribute("emailId1").equals(EM))) 
                             {
                                 out.print("emailInvalid");
                              }
-                            else if((mb1.equals(MN))) 
+                            else if((sst.getAttribute("mobileNo").equals(MN))) 
                             {
                                 out.print("mobileNoInvalid");
                              }
-                        
                        else
                         {
                           
-                        String val = "insert into exhibitor(firstLetter,isMainExhibitor,companyName,mobileNo,username,email,password,createdBy,modifiedBy,countryId)  values ('"+x+"',1,?,?,?,?,?,'"+idValid+"','"+idValid+"',?)" ;
+                        String val = "insert into exhibitor(firstLetter,isMainExhibitor,companyName,mobileNo,username,email,password,createdBy,modifiedBy,countryId)  values ('"+x+"',?,?,?,?,?,?,'"+idValid+"','"+idValid+"',?)" ;
                         //data inserted in exhibitionFAQ table
                         PreparedStatement ps = con.prepareStatement(val);  
-                      // ps.setString(1, IME);
+                        ps.setString(1, m);
                         ps.setString(2, CN);
                         ps.setString(3, MN);
                         ps.setString(4, UN);
-                         ps.setString(5, EM);
+                        ps.setString(5, EM);
                         ps.setString(6, PASS);
                         ps.setString(7, CI);
-                        
                         int n=  ps.executeUpdate(); 
                         out.print(n);
                         if(n>0)
@@ -97,16 +81,11 @@ public class exhibitorRegister extends HttpServlet
                         {
                               out.print("wrn");
                         }
-                        
-                            
-                           
-                       } 
-                        }
-                           
-                  
+                        } 
+                        } 
                  catch(Exception e)
                  {
-                        out.print("error");
+                        out.print("error" +e);
                  }
     }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

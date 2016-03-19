@@ -54,8 +54,7 @@
 		          	url: '/Exhibition/exhibitionAdministratorSocialMediaEdit',
 		          	data: 'EI='+ $('#exhibitionId').val() +'&link=' + $('#link').val()+'&url=' + $('#url').val(),
 		          	type: 'post',
-		   		success: function(msg){
-                                    alert(msg);
+		   		success: function(msg){   
                                 if(msg != 'error') // Message Sent, check and redirect
 				{
                                         if(msg != 'wrong')
@@ -278,8 +277,8 @@
                 <a href="news.jsp">News</a>
                 <span class="icon-thumbnail">M</span>
               </li>
-              <li class="">
-                <a href="exhibitionRegistrationPage.jsp">Create Exhibition Registration Page</a>
+                <li class="">
+                <a href="/Exhibition/html/exhibitorView.jsp">View Exhibitor</a>
                 <span class="icon-thumbnail">M</span>
               </li>
             </ul>

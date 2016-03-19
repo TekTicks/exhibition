@@ -191,8 +191,8 @@
                 <a href="news.jsp">News</a>
                 <span class="icon-thumbnail">M</span>
               </li>
-              <li class="">
-                <a href="exhibitionRegistrationPage.jsp">Create Exhibition Registration Page</a>
+                 <li class="">
+                <a href="/Exhibition/html/exhibitorView.jsp">View Exhibitor</a>
                 <span class="icon-thumbnail">M</span>
               </li>
             </ul>
@@ -545,14 +545,13 @@
                         out.println("<td class='v-align-middle semi-bold'><p>"+rs1.getString(2)+"</p></td>");
                         out.println("<td class='v-align-middle semi-bold'><p>"+rs1.getString(4)+"</p></td>");
                         String idr=rs1.getString(1);    
-                         HttpSession idDe=request.getSession(true);
-                        idDe.setAttribute("myex_id", idr);  
+                         
                        %>
                             
                              <td>
                                  <div class="btn-group">
-        <button type="button" class="btn btn-success" onclick="exhibitionAdministratorFacilitiesEdit?myid=<%=idr%>"><i class="fa fa-pencil"></i></button> 
-                          <button  class="btn btn-success"  data-href="exhibitionAdministratorFacilitiesDelete?myid=<%=idr%>" data-toggle="modal" data-target="#confirm-delete" onclick=""><i class="fa fa-trash-o"></i>
+        <button type="button" class="btn btn-success" onclick="document.location.href='/Exhibition/html/exhibitionAdministratorFacilitiesEdit.jsp?idr=<%= idr%>';"><i class="fa fa-pencil"></i></button> 
+                          <button  class="btn btn-success"  data-href="/Exhibition/exhibitionAdministratorFacilitiesDelete?idr=<%=idr%>"  data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash-o"></i>
                                  </button>
                                
                                  </div>

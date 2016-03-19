@@ -63,8 +63,7 @@
 		          	url: '/Exhibition/exhibitionAdministratorPersonalInformation',
 		          	data: 'mn='+ $('#mobileNo').val() +'&us=' + $('#userName').val()+'&pw=' + $('#password').val() +'&le=' + $('#level').val(),
 		          	type: 'post',
-		   		success: function(msg){
-                                  alert(msg);
+		   		success: function(msg){  
                                 if(msg != 'mobileNoInvalid') // Message Sent, check and redirect
 				{
                                         if(msg =='ok')
@@ -296,8 +295,8 @@
                 <a href="news.jsp">News</a>
                 <span class="icon-thumbnail">M</span>
               </li>
-              <li class="">
-                <a href="/Exhibition/html/exhibitorRegister.jsp">Create Exhibition Registration Page</a>
+                <li class="">
+                <a href="/Exhibition/html/exhibitorView.jsp">View Exhibitor</a>
                 <span class="icon-thumbnail">M</span>
               </li>
             </ul>
@@ -602,7 +601,7 @@
                     <div class="col-md-5 b-r b-dashed b-grey sm-b-b">
                       <div class="padding-30 m-t-50">
                       
-                        <h2> Welcome David Nest </h2>
+                     
                         <p>Your Personal Information wil be displayed here soon...</p>
                         <p class="small hint-text">Thank you..</p>
                       </div>
@@ -647,7 +646,7 @@
                         <div class="form-group">
                         <label for="fname" class="col-sm-3 control-label">Mobile No</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="mobileNo" name="mobileNo" maxlength="10" onkeypress="return validate(event)"  placeholder="mobile No " value="<%out.print(rs34.getString("mobileNo"));%>" required>
+                            <input type="text" class="form-control" id="mobileNo" name="mobileNo" maxlength="10" minlength=10 onkeypress="return validate(event)"  placeholder="mobile No " value="<%out.print(rs34.getString("mobileNo"));%>" required>
                        </div>
                       
                       </div>
@@ -717,9 +716,11 @@
                    
                        <div class="container-fluid container-fixed-lg">
                  <form  action="/Exhibition/html/exhibitionAdministratorContactInformationEditImage.jsp" enctype="multipart/form-data" id="login_frm"  name="login_frm" class="form-horizontal" role="form" autocomplete="off" method="post">
-                            <div class="panel panel-default">
+                         
+                     
+                     <div class="panel panel-default">
             <div class="row">
-<div class="col-md-6">
+      <div class="col-md-6">
                 <!-- START PANEL -->
                
                   <div class="panel-heading">
@@ -761,22 +762,20 @@
                   
                     
                         <div class="form-group">
-                        <label class="col-sm-3 control-label">Title</label>
+                        <label class="col-sm-3 control-label">&nbsp &nbsp &nbsp Title</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" id="t1" name="t1" placeholder="Title" value="<%out.print(rst.getString("title"));%>" required>
                        </div>
                        
                       </div>
                         <div class="form-group">
-                        <label class="col-sm-3 control-label">First Name</label>
+                        <label class="col-sm-3 control-label">&nbsp &nbsp &nbsp First Name</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" id="fn" placeholder="First Name" name="fn" value="<%out.print(rst.getString("firstName"));%>" required>
-                        </div>
-                        
+                        </div>  </div>
                        
-                      </div>
                         <div class="form-group">
-                        <label class="col-sm-3 control-label">Last Name</label>
+                        <label class="col-sm-3 control-label">&nbsp &nbsp &nbsp Last Name</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" id="ln" placeholder="lastName" name="ln" value="<%out.print(rst.getString("lastName"));%>" required>
                         </div>
@@ -785,31 +784,31 @@
                     
                         <div class="form-group">
                           
-                    
-                                <label class="col-sm-3 control-label">  Date Of Birth   </label>
-                                  <div class="col-sm-9">
-                                      <div class="icon">
-                                <div style="text-align:right;padding-right:5%; position:relative;">                           
+                         
+                                <label class="col-sm-3 control-label"> &nbsp &nbsp &nbsp Date Of Birth   </label>
+                               
+                                  <div class="col-sm-8">
+                                <div style="text-align:right;padding-right:1%; position:relative;">                           
                     <input type="text" class="form-control" data-date-format="yyyy-mm-dd" placeholder="Pick a date" id="datepicker-component2" name="dateOfBirth" value="<%out.print(rst.getString("dateOfBirth"));%>" required>
-            <span class="input-lg"> <i class="fa fa-calendar"></i>       </span>   </div>   
-                                      </div> </div>
-                   
-                      </div>   
+                                </div>   
+                                      </div>
+            <div class="col-sm-1">  <span class="input-lg"> <i class="fa fa-calendar"></i>  </span></div>
+                         </div> 
                         
                          <div class="form-group">
-                        <label class="col-sm-3 control-label">Level</label>
+                        <label class="col-sm-3 control-label">&nbsp &nbsp &nbspLevel</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" id="le" placeholder="level" name="le" value="<%out.print(rst.getString("level"));%>" required>
                         </div>
                       </div>   
                           <div class="form-group">
-                        <label  class="col-sm-3 control-label">Designation</label>
+                        <label  class="col-sm-3 control-label">&nbsp &nbsp &nbsp Designation</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" id="degination" placeholder="Designation" name="degination" value="<%out.print(rst.getString("degination"));%>"  required>
                         </div>
                       </div>   
                           <div class="form-group">
-                        <label  class="col-sm-3 control-label">Phone No</label>
+                        <label  class="col-sm-3 control-label">&nbsp &nbsp &nbsp Phone No</label>
                         <div class="col-sm-4">
                              <%    
                     try { 
@@ -866,75 +865,21 @@
                         </select>
                         </div>
                         <div class="col-sm-5">
-                            <input type="text" class="form-control" onkeypress="return validate(event)" minlength="10" maxlength="10" id="phone" placeholder="Phone No" name="contactNo" value="<%out.print(rst.getString("phoneNo"));%>" required>
+                            <input type="text" class="form-control" maxlength="10" minlength="10"  onkeypress="return validate(event)" id="phone" placeholder="Phone No" name="contactNo" value="<%out.print(rst.getString("phoneNo"));%>" required>
                         </div>
                       </div>   
                         
                         
-                               <%
-                          
-                           Connection con1;
-                          con1=exhibitionAdministratorOneTimeConnection.getConnection();
-                          
-              //  HttpSession imageIcon=request.getSession(false);
-                          String imageName=(String)imageIcon.getAttribute("mediaId");
-                          Statement st1=con1.createStatement();
-                        ResultSet rso=st1.executeQuery("select * from media where id='"+imageName+"'");
-                          
-                        int cy=0;
-                        
-                        while(rso.next())
-                        {
-                          
-                        %> 
-             
-   
- <div id="uploadFormLayer">
-     <label><b>Upload Image File:</b></label><br> <br>
-     <input name="userImage" type="file" class="inputFile" onchange="readURL(this);"  /> <br> 
-	<script type="text/javascript">
-	function readURL(input) {
-	if (input.files && input.files[0]) {
-	var reader = new FileReader();
-	reader.onload = function (e) {
-	$('#tempImg')
-	.attr('src', e.target.result)
-	.width(200)
-	.height(200);
-	$('#flag').val("1");
-	};
-	reader.readAsDataURL(input.files[0]);
-	}
-	}
-									</script>
-						<input type="hidden" id="flag" name="flag">
-	<img id="tempImg"  src="images/<%out.print(rso.getString("link"));%>" width="200" height="200"> 
- </div>  
-            
-     <%
-                          cy++;  
-                          
-                        }
-                        
-                             
-                      %>
                   
                         
                         
                         <br>     <div id="msgbox3"> </div>  <div id="msgbox4"> </div> 
                       <div class="row">
                       
-                            <button class="btn btn-success" name="login" id="name" type="submit" onclick="document.location.href='/Exhibition/exhibitionAdministratorContactInformation';"> Save</button>
+                            <button class="btn btn-success" name="login" id="name" type="submit"> Save</button>
                           <button class="btn btn-default">Cancel</button>
                         
                       </div>
-                      <%
-                          co++;  
-                          
-                        }
-                        
-                             
-                      %>
                   
                      
                       
@@ -961,13 +906,71 @@
                     Social Media Icon 
                 </div>
                  </div>
- 
+                               
+                               <%
+                          
+                           Connection con1;
+                          con1=exhibitionAdministratorOneTimeConnection.getConnection();
+                          
+              //  HttpSession imageIcon=request.getSession(false);
+                          String imageName=(String)imageIcon.getAttribute("mediaId");
+                          Statement st1=con1.createStatement();
+                        ResultSet rso=st1.executeQuery("select * from media where id='"+imageName+"'");
+                          
+                        int cy=0;
+                        
+                        while(rso.next())
+                        {
+                          
+                        %> 
+             
+   
+
+            
+    
+  <div id="uploadFormLayer">
+     <label><b>Upload Image File:</b></label><br> <br>
+     <input name="userImage" type="file" class="inputFile" onchange="readURL(this);"  /> <br> 
+	<script type="text/javascript">
+	function readURL(input) {
+	if (input.files && input.files[0]) {
+	var reader = new FileReader();
+	reader.onload = function (e) {
+	$('#tempImg')
+	.attr('src', e.target.result)
+	.width(200)
+	.height(200);
+	$('#flag').val("1");
+	};
+	reader.readAsDataURL(input.files[0]);
+	}
+	}
+									</script>
+						<input type="hidden" id="flag" name="flag">
+	<img id="tempImg"  src="images/<%out.print(rso.getString("link"));%>" width="200" height="200"> 
+ </div>  
         
 
                            </div> </div>
                            </div>
                       </div>
-                  </div> </form>
+ 
+                  </div> 
+               <%
+                          cy++;  
+                          
+                        }
+                        
+                             
+                      %>
+                     <%
+                          co++;  
+                          
+                        }
+                        
+                             
+                      %>
+                  </form>
           </div>
                       
                     </div>

@@ -54,7 +54,7 @@
 		          	data: 'exId='+ $('#exId').val() +'&title=' + $('#title').val()+'&que=' + $('#que').val() +'&ans=' + $('#ans').val(),
 		          	type: 'post',
 		   		success: function(msg){
-                                  alert(msg);
+                                
                                 if(msg != 'error') // Message Sent, check and redirect
 				{
                                         if(msg !='wrong')
@@ -273,8 +273,8 @@
                 <a href="news.jsp">News</a>
                 <span class="icon-thumbnail">M</span>
               </li>
-              <li class="">
-                <a href="exhibitionRegistrationPage.jsp">Create Exhibition Registration Page</a>
+               <li class="">
+                <a href="/Exhibition/html/exhibitorView.jsp">View Exhibitor</a>
                 <span class="icon-thumbnail">M</span>
               </li>
             </ul>
@@ -565,56 +565,41 @@
                    <% 
                       try { 
                              HttpSession obj=request.getSession(true);
-                             String idr=request.getParameter("idr");
-                             obj.setAttribute("myid", idr);
-                             Class.forName("com.mysql.jdbc.Driver"); 
+                             String idr1=request.getParameter("idr");
+                             obj.setAttribute("myid", idr1);
                              Connection con;
                              con=exhibitionAdministratorOneTimeConnection.getConnection(); 
                              Statement stat1=con.createStatement();
-                             String query="select * from exhibitionFAQ where id= '"+idr+"'";
+                             String query="select * from exhibitionFAQ where id= '"+idr1+"'";
                              ResultSet rs=stat1.executeQuery(query);  
                              int count=0;
                              while(rs.next())
                              {
-                             String exId=rs.getString("exhibitionId");
-                             obj.setAttribute("exId", exId);
-                             String title=rs.getString("title");
-                             obj.setAttribute("title", title);
-                             String que=rs.getString("question");
-                             obj.setAttribute("que", que);
-                             String ans=rs.getString("answer");
-                             obj.setAttribute("ans", ans);     
-                             count++;
-                             }              
-                          }    
-                    catch (Exception e)
-                    {
-                        out.print("error");
-                    }
-                   %>  
-                      <%@ page import="javax.servlet.http.HttpSession.*;" %>
-                      <%@ page session="false" %> 
-                      <% HttpSession obj=request.getSession(false);%> 
+                            %>
+                            
+                     
                      <div class="form-group ">
                      <label>Exhibition</label>
                      <%    
                       try { 
-                            // Class.forName("com.mysql.jdbc.Driver"); 
-                             Connection con;
-                             con= exhibitionAdministratorOneTimeConnection.getConnection(); 
-                             Statement stat1=con.createStatement();
-                             ResultSet rs1=stat1.executeQuery("select * from exhibitionAdmin");
-                             int count1=0;
+                           
+                             Connection con1=null;
+                             con1= exhibitionAdministratorOneTimeConnection.getConnection(); 
+                             Statement stat2=con1.createStatement();
+                             ResultSet rs2=stat2.executeQuery("select * from exhibitionAdmin");
+                             int leng=0;
                     %>
                            
                        <select class="full-width" data-init-plugin="select2" name="exId" id="exId">
-                       <option> <%out.print((String)obj.getAttribute("exId"));%></option> 
+                       <option> <%out.print(rs.getString("exhibitionId"));%></option> 
                        <optgroup label="Select id">
-                    <% while(rs1.next())
+                         
+                    <% while(rs2.next())
                         {
                     %>
-                      <option><%out.print(rs1.getString(1));%></option>
-                    <%     
+                      <option><%out.print(rs2.getString(1));%></option>
+                    <%  
+                        leng++;
                         }
                         } 
                   catch(Exception e) 
@@ -627,22 +612,31 @@
                        </div>   
                       <div class="form-group">
                         <label>Title</label>
-                        <input type="text" class="form-control" id="title" name="title" value="<% out.print((String)obj.getAttribute("title"));%>" required>
+                        <input type="text" class="form-control" id="title" name="title" value="<% out.print(rs.getString("title"));%>" required>
                       </div>         
                        <div class="form-group">
                         <label>Questions</label>
-                        <textarea class="form-control" id="que" name="que"> <%out.print((String)obj.getAttribute("que"));%> </textarea>
+                        <textarea class="form-control" id="que" name="que"> <%out.print(rs.getString("question"));%> </textarea>
                       </div>          
                       <div class="form-group">
                         <label>Answers</label>
-                        <textarea class="form-control" id="ans" name="ans"><%out.print((String)obj.getAttribute("ans"));%> </textarea>
+                        <textarea class="form-control" id="ans" name="ans"><%out.print(rs.getString("answer"));%> </textarea>
                       </div>  
              
                       <div id="msgbox1"></div>  
                       <div id="msgbox2"></div>       
                       <button class="btn btn-primary btn-cons m-t-10" type="submit"> Update </button>
                        <button class="btn btn-primary btn-cons m-t-10" type="submit" onclick="document.location.href='/Exhibition/html/exhibitionAdministratorFAQ.jsp';"> Cancel </button>
-                     </form>
+                 <%
+                             count++;
+                             }              
+                          }    
+                    catch (Exception e)
+                    {
+                        out.print("error");
+                    }
+                   %>         
+             </form>
                      </div>
                      </div>
                      </div>

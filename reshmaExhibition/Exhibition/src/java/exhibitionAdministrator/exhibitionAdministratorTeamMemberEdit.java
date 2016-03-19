@@ -49,6 +49,7 @@ public class exhibitionAdministratorTeamMemberEdit extends HttpServlet
                     {
                           out.print("wrong");
                     }       
+                    response.sendRedirect("/Exhibition/html/exhibitionAdministratorTeam.jsp");
                }
                catch(Exception e)
                {

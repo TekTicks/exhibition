@@ -26,12 +26,12 @@ public class exhibitionAdministratorTeamMember extends HttpServlet
                     String title=request.getParameter("title");
                     String firstName=request.getParameter("firstName");
                     String lastName=request.getParameter("lastName");
-                    Integer gender=Integer.parseInt(request.getParameter("gender"));
-                    out.print(gender);
+                 String gender= request.getParameter("optionyes");
+                   
                     String dateOfBirth=request.getParameter("dateOfBirth");
                     String degination=request.getParameter("degination");
                     String phoneCountryId=request.getParameter("phoneCountryId");
-                    String phoneNo=request.getParameter("phoneNo");
+                    String phoneNo=request.getParameter("phone");
                     String mobileCountryId=request.getParameter("mobileCountryId");
                    // out.print(mobileCountryId);
                     String mobileNo=request.getParameter("mobileNo");
@@ -47,7 +47,7 @@ public class exhibitionAdministratorTeamMember extends HttpServlet
                         ps.setString(2, title);
                         ps.setString(3, firstName);
                         ps.setString(4, lastName);
-                        ps.setInt(5,gender);
+                        ps.setString(5,gender);
                         ps.setString(6, dateOfBirth);
                         ps.setString(7, degination);
                         ps.setString(8, phoneNo);
@@ -65,6 +65,7 @@ public class exhibitionAdministratorTeamMember extends HttpServlet
                               out.print("wrong");
                         }
                         con.close();
+                        response.sendRedirect("/Exhibition/html/exhibitionAdministratorTeam.jsp");
                   
                  }
                   catch(Exception e)
