@@ -1,0 +1,23 @@
+#exists{display:none}
+#cross{display:none}
+.myinfo
+{
+	margin: 5px auto;
+	padding:5px;
+	color:#0010ac;
+	font-size:12px;
+	width:500px;
+	min-height:0px;
+	text-align: left;
+}
+
+.myerror
+{
+	margin: 5px auto;
+	padding:5px;
+	font-size:12px;
+	width:500px;
+	min-height:0px;
+	color:#FF0000;
+	text-align: left;
+}
